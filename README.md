@@ -33,10 +33,10 @@ cd FreeBSD-Electron
 make install clean
 ```
 
-### Platform
+## Platform
 - Built on FreeBSD 12 amd64.
 
-### Credits
+## Credits
 - Chromium patches by [FreeBSD/Chromium Team](https://wiki.freebsd.org/Chromium)
 - Electron patches by @prash-wghats at [Electron-VSCode-Atom-For-FreeBSD](https://github.com/prash-wghats/Electron-VSCode-Atom-For-FreeBSD)
 - Porting works by @freebsd-electron at [electron-port](https://github.com/freebsd-electron/electron-port)
