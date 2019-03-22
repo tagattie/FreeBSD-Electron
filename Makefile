@@ -2,9 +2,9 @@
 
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.1.0
+DISTVERSION=	4.1.1
 CATEGORIES=	devel
-MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/${DISTVERSIONPREFIX}${DISTVERSION}/:chromium \
+MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v4.1.0/:chromium \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node
 		# https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
