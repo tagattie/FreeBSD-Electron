@@ -17,12 +17,12 @@ COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-FETCH_DEPENDS=	npm:www/npm
+FETCH_DEPENDS=	npm:www/npm-node10
 PATCH_DEPENDS=	gpatch:devel/patch
 BUILD_DEPENDS=	gn:devel/chromium-gn \
 		yasm:devel/yasm \
-		node:www/node \
-		npm:www/npm
+		node:www/node10 \
+		npm:www/npm-node10
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libsnappy.so:archivers/snappy \
 		libFLAC.so:audio/flac \
