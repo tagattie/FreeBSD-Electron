@@ -1,5 +1,5 @@
 # Electron port for FreeBSD
-This repository contains a port of electron for FreeBSD. The port is largely based on:
+This repository contains an experimental port of electron for FreeBSD. The port is largely based on:
 
 - chromium patch files from [www/chromium port](https://www.freshports.org/www/chromium/)
 - electron patch files by [@prash-wghats](https://github.com/prash-wghats/)
@@ -8,7 +8,7 @@ This repository contains a port of electron for FreeBSD. The port is largely bas
 A package file is available at the releases page. To install, download the file (with .txz extension) and run the command:
 
 ``` shell
-pkg install electron-4.1.0.txz
+pkg install electron-<version>.txz
 ```
 
 ## Run
