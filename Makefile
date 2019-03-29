@@ -18,7 +18,7 @@ LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 FETCH_DEPENDS=	npm:www/npm-node10
-PATCH_DEPENDS=	gpatch:devel/patch
+PATCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	gn:devel/chromium-gn \
 		yasm:devel/yasm \
 		node:www/node10 \

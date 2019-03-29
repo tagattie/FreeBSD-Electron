@@ -1,26 +1,21 @@
 #! /bin/sh
 
-PATCH_CMD=gpatch
-PATCH_FLAGS="-b"
+PATH=/bin:/usr/bin:/usr/local/bin
+
+PATCH_CMD="git apply"
+#PATCH_FLAGS="--numstat --check" # for debugging
+PATCH_FLAGS="--verbose --reject"
 
 WRKSRC=$1
-PATCHDIR=${WRKSRC}/electron/patches/common
+PATCH_CONF=${WRKSRC}/electron/patches/common/config.json
 
-for p in ${PATCHDIR}/chromium/*.patch; do
-    ${PATCH_CMD} ${PATCH_FLAGS} -d ${WRKSRC} -p1 < ${p}
-done
-for p in ${PATCHDIR}/boringssl/*.patch; do
-	${PATCH_CMD} ${PATCH_FLAGS} -d ${WRKSRC}/third_party/boringssl/src -p1 < ${p}
-done
-for p in ${PATCHDIR}/ffmpeg/*.patch; do
-	${PATCH_CMD} ${PATCH_FLAGS} -d ${WRKSRC}/third_party/ffmpeg -p1 < ${p}
-done
-for p in ${PATCHDIR}/skia/*.patch; do
-	${PATCH_CMD} ${PATCH_FLAGS} -d ${WRKSRC}/third_party/skia -p1 < ${p}
-done
-for p in ${PATCHDIR}/webrtc/*.patch; do
-	${PATCH_CMD} ${PATCH_FLAGS} -d ${WRKSRC}/third_party/webrtc -p1 < ${p}
-done
-for p in ${PATCHDIR}/v8/*.patch; do
-	${PATCH_CMD} ${PATCH_FLAGS} -d ${WRKSRC}/v8 -p1 < ${p}
+PATCHD_REPOD_PAIRS=$(cat ${PATCH_CONF} | \
+                         sed -e '1d; $d; /^$/d; s/[",]//g; s/:  */:/')
+for prp in ${PATCHD_REPOD_PAIRS}; do
+    pd=$(echo ${prp} | awk -F: '{print $1}' | sed -e 's/src/./')
+    rd=$(echo ${prp} | awk -F: '{print $2}' | sed -e 's/src/./')
+    (cd "${WRKSRC}/${rd}" && \
+         for p in `cat "${WRKSRC}/${pd}/.patches"`; do
+             ${PATCH_CMD} ${PATCH_FLAGS} "${WRKSRC}/${pd}/${p}"
+         done)
 done
