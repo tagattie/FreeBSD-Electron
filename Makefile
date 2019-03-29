@@ -2,7 +2,7 @@
 
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.1.1
+DISTVERSION=	4.1.2
 CATEGORIES=	devel
 MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v4.1.0/:chromium \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node
