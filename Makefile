@@ -128,7 +128,7 @@ post-fetch:
 	${RM} -r ${TMPDIR}/npm-cache
 	${MKDIR} ${TMPDIR}/npm-cache
 	${CP} ${FILESDIR}/package.json ${FILESDIR}/package-lock.json ${TMPDIR}/npm-cache
-	cd ${TMPDIR}/npm-cache && npm install --verbose
+	cd ${TMPDIR}/npm-cache && npm install --verbose --no-progress
 
 post-extract:
 	${MV} ${WRKDIR}/${PKGNAME}/chromium-${CHROMIUM_VER} ${WRKSRC}
