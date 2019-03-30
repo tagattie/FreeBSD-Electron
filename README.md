@@ -18,7 +18,7 @@ electron
 ```
 
 ## Build
-If you would like to build artifacts for yourself, be sure you have the port tree on your machine. If not, run the following commands:
+If you would like to build artifacts for yourself, be sure you have the ports tree on your machine. If not, run the following commands:
 
 ``` shell
 portsnap fetch
