@@ -5,11 +5,10 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=	4.1.2
 CATEGORIES=	devel
 MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v4.1.0/:chromium \
-		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node
-		# https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
+		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
+		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
 		${CHROMIUM_NODE_MODULES_HASH}:chromium_node
-		# ${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts
 
 MAINTAINER=	maintainer@example.com
 COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
@@ -50,7 +49,7 @@ GH_TUPLE=	electron:node:8bc5d171a0873c0ba49f9433798bc8b67399788c:node
 
 CHROMIUM_VER=	69.0.3497.128
 CHROMIUM_NODE_MODULES_HASH=	050c85d20f7cedd7f5c39533c1ba89dcdfa56a08
-# CHROMIUM_TEST_FONTS_HASH=	a22de844e32a3f720d219e3911c3da3478039f89
+CHROMIUM_TEST_FONTS_HASH=	a22de844e32a3f720d219e3911c3da3478039f89
 
 NO_WRKSUBDIR=	yes
 WRKSRC_SUBDIR=	src
@@ -89,7 +88,7 @@ MAKE_ARGS=	-C out/${BUILDTYPE}
 MAKE_ENV+=	C_INCLUDE_PATH=${LOCALBASE}/include \
 		CPLUS_INCLUDE_PATH=${LOCALBASE}/include
 
-OPTIONS_DEFINE=	CUPS DEBUG DIST DRIVER KERBEROS
+OPTIONS_DEFINE=	CUPS DEBUG DIST DRIVER KERBEROS TEST
 DIST_DESC=	Build distribution zip files
 DRIVER_DESC=	Install chromedriver
 OPTIONS_GROUP=	AUDIO
@@ -121,6 +120,10 @@ PULSEAUDIO_LIB_DEPENDS=	libpulse.so:audio/pulseaudio
 PULSEAUDIO_VARS=	GN_ARGS+=use_pulseaudio=true
 PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 
+.include "Makefile.tests"
+TEST_DISTFILES=		${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts
+TEST_ALL_TARGET=	${TEST_TARGETS}
+
 post-fetch:
 	${RM} -r ${TMPDIR}/npm-cache
 	${MKDIR} ${TMPDIR}/npm-cache
@@ -141,8 +144,10 @@ post-extract:
 	# ${MV} ${WRKDIR}/${PKGNAME}/${GH_PROJECT_requests}-${GH_TAGNAME_requests} \
 	# 	${WRKSRC}/electron/vendor/${GH_PROJECT_requests}
 	${MV} ${WRKDIR}/${PKGNAME}/node_modules ${WRKSRC}/third_party/node
-	# ${MV} ${WRKDIR}/${PKGNAME}/test_fonts ${WRKSRC}/third_party/test_fonts
 	${MV} ${TMPDIR}/npm-cache/node_modules ${WRKSRC}/electron
+
+post-extract-TEST-on:
+	${MV} ${WRKDIR}/${PKGNAME}/test_fonts ${WRKSRC}/third_party/test_fonts
 
 pre-patch:
 	${SH} ${FILESDIR}/apply-electron-patches.sh ${WRKSRC}
@@ -197,5 +202,11 @@ do-install:
 
 post-install-DRIVER-on:
 	${INSTALL_PROGRAM} ${WRKSRC}/out/${BUILDTYPE}/chromedriver ${STAGEDIR}${DATADIR}
+
+do-test-TEST-on:
+.for t in ${TEST_ALL_TARGET}
+	cd ${WRKSRC}/out/${BUILDTYPE} && ${SETENV} LC_ALL=en_US.UTF-8 \
+		./${t} --gtest_filter=-${EXCLUDE_${t}:ts:} || ${TRUE}
+.endfor
 
 .include <bsd.port.mk>
