@@ -9,13 +9,12 @@ PATCH_FLAGS="--verbose --reject"
 WRKSRC=$1
 PATCH_CONF=${WRKSRC}/electron/patches/common/config.json
 
-PATCHD_REPOD_PAIRS=$(cat ${PATCH_CONF} | \
-                         sed -e '1d; $d; /^$/d; s/[",]//g; s/:  */:/')
+PATCHD_REPOD_PAIRS=$(sed -e '1d; $d; /^$/d; s/[",]//g; s/:  */:/' "${PATCH_CONF}")
 for prp in ${PATCHD_REPOD_PAIRS}; do
-    pd=$(echo ${prp} | awk -F: '{print $1}' | sed -e 's/src/./')
-    rd=$(echo ${prp} | awk -F: '{print $2}' | sed -e 's/src/./')
+    pd=$(echo "${prp}" | awk -F: '{print $1}' | sed -e 's/src/./')
+    rd=$(echo "${prp}" | awk -F: '{print $2}' | sed -e 's/src/./')
     (cd "${WRKSRC}/${rd}" && \
-         for p in `cat "${WRKSRC}/${pd}/.patches"`; do
+         while read -r p; do
              ${PATCH_CMD} ${PATCH_FLAGS} "${WRKSRC}/${pd}/${p}"
-         done)
+         done < "${WRKSRC}/${pd}/.patches")
 done
