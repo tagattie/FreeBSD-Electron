@@ -1,6 +1,6 @@
---- services/network/network_service.cc.orig	2019-03-16 09:15:20 UTC
+--- services/network/network_service.cc.orig	2019-04-06 12:09:25 UTC
 +++ services/network/network_service.cc
-@@ -38,7 +38,7 @@
+@@ -39,7 +39,7 @@
  #include "third_party/boringssl/src/include/openssl/cpu.h"
  #endif
  
@@ -9,7 +9,7 @@
  #include "components/os_crypt/key_storage_config_linux.h"
  #include "components/os_crypt/os_crypt.h"
  #endif
-@@ -371,7 +371,7 @@ void NetworkService::UpdateSignedTreeHead(const net::c
+@@ -379,7 +379,7 @@ void NetworkService::UpdateSignedTreeHead(const net::c
    sth_distributor_->NewSTHObserved(sth);
  }
  
