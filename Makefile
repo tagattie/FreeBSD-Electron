@@ -112,6 +112,7 @@ DEBUG_VARS=	BUILDTYPE=Debug \
 DEBUG_VARS_OFF=	BUILDTYPE=Release
 
 DIST_ALL_TARGET=	dist.zip chromedriver.zip mksnapshot.zip
+DIST_IMPLIES=		DRIVER
 
 DRIVER_ALL_TARGET=	chromedriver
 
