@@ -2,7 +2,7 @@
 
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.1.4
+DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
 CATEGORIES=	devel
 MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v4.1.0/:chromium \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
@@ -43,12 +43,14 @@ USES=		dos2unix gettext-tools gnome jpeg localbase:ldflags ninja \
 
 USE_GITHUB=	yes
 GH_TUPLE=	electron:node:8bc5d171a0873c0ba49f9433798bc8b67399788c:node
+GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
 		# boto:boto:f7574aa6cc2c819430c1f05e9a1a1a666ef8169b:boto \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
 CHROMIUM_VER=	69.0.3497.128
 CHROMIUM_NODE_MODULES_HASH=	050c85d20f7cedd7f5c39533c1ba89dcdfa56a08
+ELECTRON_VER=	5.0.0-beta.8
 CHROMIUM_TEST_FONTS_HASH=	a22de844e32a3f720d219e3911c3da3478039f89
 
 NO_WRKSUBDIR=	yes
@@ -131,23 +133,23 @@ post-fetch:
 	cd ${TMPDIR}/npm-cache && npm install --verbose --no-progress
 
 post-extract:
-	${MV} ${WRKDIR}/${PKGNAME}/chromium-${CHROMIUM_VER} ${WRKSRC}
-	${MV} ${WRKDIR}/${PKGNAME}/${PKGNAME} ${WRKSRC}/electron
-	${MV} ${WRKDIR}/${PKGNAME}/${GH_PROJECT_node}-${GH_TAGNAME_node} \
+	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/chromium-${CHROMIUM_VER} ${WRKSRC}
+	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${PORTNAME}-${ELECTRON_VER} ${WRKSRC}/electron
+	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_node}-${GH_TAGNAME_node} \
 		${WRKSRC}/third_party/${GH_ACCOUNT_node}_${GH_PROJECT_node}
 	# ${RMDIR} ${WRKSRC}/electron/vendor/${GH_PROJECT_boto}
-	# ${MV} ${WRKDIR}/${PKGNAME}/${GH_PROJECT_boto}-${GH_TAGNAME_boto} \
+	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_boto}-${GH_TAGNAME_boto} \
 	# 	${WRKSRC}/electron/vendor/${GH_PROJECT_boto}
-	# ${MV} ${WRKDIR}/${PKGNAME}/${GH_PROJECT_pyyaml}-${GH_TAGNAME_pyyaml} \
+	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_pyyaml}-${GH_TAGNAME_pyyaml} \
 	# 	${WRKSRC}/electron/vendor/${GH_PROJECT_pyyaml}
 	# ${RMDIR} ${WRKSRC}/electron/vendor/${GH_PROJECT_requests}
-	# ${MV} ${WRKDIR}/${PKGNAME}/${GH_PROJECT_requests}-${GH_TAGNAME_requests} \
+	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_requests}-${GH_TAGNAME_requests} \
 	# 	${WRKSRC}/electron/vendor/${GH_PROJECT_requests}
-	${MV} ${WRKDIR}/${PKGNAME}/node_modules ${WRKSRC}/third_party/node
+	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/node_modules ${WRKSRC}/third_party/node
 	${MV} ${TMPDIR}/npm-cache/node_modules ${WRKSRC}/electron
 
 post-extract-TEST-on:
-	${MV} ${WRKDIR}/${PKGNAME}/test_fonts ${WRKSRC}/third_party/test_fonts
+	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/test_fonts ${WRKSRC}/third_party/test_fonts
 
 pre-patch:
 	${SH} ${FILESDIR}/apply-electron-patches.sh ${WRKSRC}
