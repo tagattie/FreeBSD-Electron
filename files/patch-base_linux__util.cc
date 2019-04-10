@@ -1,6 +1,6 @@
---- base/linux_util.cc.orig	2019-03-15 06:36:56 UTC
+--- base/linux_util.cc.orig	2019-04-08 08:18:04 UTC
 +++ base/linux_util.cc
-@@ -111,12 +111,14 @@ char g_linux_distro[kDistroSize] =
+@@ -90,12 +90,14 @@ char g_linux_distro[kDistroSize] =
      "CrOS";
  #elif defined(OS_ANDROID)
      "Android";

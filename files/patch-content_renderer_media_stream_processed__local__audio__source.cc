@@ -1,7 +1,16 @@
---- content/renderer/media/stream/processed_local_audio_source.cc.orig	2019-03-15 06:37:23 UTC
+--- content/renderer/media/stream/processed_local_audio_source.cc.orig	2019-04-08 08:32:55 UTC
 +++ content/renderer/media/stream/processed_local_audio_source.cc
-@@ -267,7 +267,7 @@ void ProcessedLocalAudioSource::Capture(const media::A
-                                         bool key_pressed) {
+@@ -35,7 +35,7 @@ void* const kProcessedLocalAudioSourceIdentifier =
+     const_cast<void**>(&kProcessedLocalAudioSourceIdentifier);
+ 
+ bool ApmInAudioServiceEnabled() {
+-#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX)
++#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD)
+   return base::FeatureList::IsEnabled(features::kWebRtcApmInAudioService);
+ #else
+   return false;
+@@ -355,7 +355,7 @@ void ProcessedLocalAudioSource::CaptureUsingProcessor(
+     bool key_pressed) {
  #if defined(OS_WIN) || defined(OS_MACOSX)
    DCHECK_LE(volume, 1.0);
 -#elif (defined(OS_LINUX) && !defined(OS_CHROMEOS)) || defined(OS_OPENBSD)

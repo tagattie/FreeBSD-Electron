@@ -1,24 +1,15 @@
---- chrome/common/pref_names.h.orig	2019-03-15 06:37:09 UTC
+--- chrome/common/pref_names.h.orig	2019-04-08 08:32:47 UTC
 +++ chrome/common/pref_names.h
-@@ -166,7 +166,7 @@ extern const char kSearchSuggestEnabled[];
- extern const char kContextualSearchEnabled[];
- #endif  // defined(OS_ANDROID)
- #if defined(OS_MACOSX) || defined(OS_WIN) || \
--    (defined(OS_LINUX) && !defined(OS_CHROMEOS))
-+  (defined(OS_LINUX) && !defined(OS_CHROMEOS)) || defined(OS_BSD)
- extern const char kConfirmToQuitEnabled[];
- #endif
- #if defined(OS_MACOSX)
-@@ -294,7 +294,7 @@ extern const char kForceYouTubeRestrict[];
- extern const char kForceSessionSync[];
+@@ -300,7 +300,7 @@ extern const char kMdHistoryMenuPromoShown[];
+ extern const char kForceGoogleSafeSearch[];
+ extern const char kForceYouTubeRestrict[];
  extern const char kAllowedDomainsForApps[];
- extern const char kSafeSitesFilterBehavior[];
 -#if defined(OS_LINUX) && !defined(OS_CHROMEOS)
-+#if (defined(OS_LINUX) && !defined(OS_CHROMEOS)) || defined(OS_BSD)
++#if (defined(OS_LINUX) || defined(OS_BSD)) && !defined(OS_CHROMEOS)
  extern const char kUsesSystemTheme[];
  #endif
  extern const char kCurrentThemePackFilename[];
-@@ -327,7 +327,7 @@ extern const char kDefaultBrowserSettingEnabled[];
+@@ -333,7 +333,7 @@ extern const char kDefaultBrowserSettingEnabled[];
  #if defined(OS_MACOSX)
  extern const char kShowUpdatePromotionInfoBar[];
  #endif
@@ -27,7 +18,7 @@
  extern const char kUseCustomChromeFrame[];
  #endif
  #if BUILDFLAG(ENABLE_PLUGINS)
-@@ -474,7 +474,7 @@ extern const char kAppWindowPlacement[];
+@@ -487,7 +487,7 @@ extern const char kAppWindowPlacement[];
  extern const char kDownloadDefaultDirectory[];
  extern const char kDownloadExtensionsToOpen[];
  extern const char kDownloadDirUpgraded[];

@@ -1,4 +1,4 @@
---- third_party/crashpad/crashpad/util/posix/drop_privileges.cc.orig	2019-03-15 06:26:36 UTC
+--- third_party/crashpad/crashpad/util/posix/drop_privileges.cc.orig	2019-04-08 08:19:07 UTC
 +++ third_party/crashpad/crashpad/util/posix/drop_privileges.cc
 @@ -23,7 +23,7 @@ void DropPrivileges() {
    gid_t gid = getgid();

@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/first_run_dialog.cc.orig	2019-03-15 06:37:06 UTC
+--- chrome/browser/ui/views/first_run_dialog.cc.orig	2019-04-08 08:18:10 UTC
 +++ chrome/browser/ui/views/first_run_dialog.cc
 @@ -37,8 +37,10 @@
  namespace {

@@ -1,6 +1,6 @@
---- chrome/browser/media/webrtc/webrtc_event_log_uploader.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/media/webrtc/webrtc_event_log_uploader.cc.orig	2019-04-08 08:32:44 UTC
 +++ chrome/browser/media/webrtc/webrtc_event_log_uploader.cc
-@@ -29,7 +29,7 @@ constexpr size_t kExpectedMimeOverheadBytes = 1000;  /
+@@ -36,7 +36,7 @@ constexpr size_t kExpectedMimeOverheadBytes = 1000;  /
  const char kProduct[] = "Chrome";
  #elif defined(OS_MACOSX)
  const char kProduct[] = "Chrome_Mac";

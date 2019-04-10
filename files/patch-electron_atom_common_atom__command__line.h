@@ -1,4 +1,4 @@
---- electron/atom/common/atom_command_line.h.orig	2019-03-16 12:51:16 UTC
+--- electron/atom/common/atom_command_line.h.orig	2019-04-04 16:09:31 UTC
 +++ electron/atom/common/atom_command_line.h
 @@ -21,7 +21,7 @@ class AtomCommandLine {
  

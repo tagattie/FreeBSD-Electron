@@ -1,9 +1,9 @@
---- headless/lib/browser/headless_content_browser_client.h.orig	2019-03-15 06:37:24 UTC
+--- headless/lib/browser/headless_content_browser_client.h.orig	2019-04-08 08:18:21 UTC
 +++ headless/lib/browser/headless_content_browser_client.h
-@@ -32,7 +32,7 @@ class HeadlessContentBrowserClient : public content::C
-       content::BrowserContext* context,
-       content::StoragePartition* partition,
-       storage::OptionalQuotaSettingsCallback callback) override;
+@@ -34,7 +34,7 @@ class HeadlessContentBrowserClient : public content::C
+       ::storage::OptionalQuotaSettingsCallback callback) override;
+   content::GeneratedCodeCacheSettings GetGeneratedCodeCacheSettings(
+       content::BrowserContext* context) override;
 -#if defined(OS_POSIX) && !defined(OS_MACOSX)
 +#if defined(OS_POSIX) && !defined(OS_MACOSX) && !defined(OS_BSD)
    void GetAdditionalMappedFilesForChildProcess(

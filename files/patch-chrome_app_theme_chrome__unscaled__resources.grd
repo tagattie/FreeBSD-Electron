@@ -1,6 +1,6 @@
---- chrome/app/theme/chrome_unscaled_resources.grd.orig	2019-03-15 06:37:00 UTC
+--- chrome/app/theme/chrome_unscaled_resources.grd.orig	2019-04-08 08:32:43 UTC
 +++ chrome/app/theme/chrome_unscaled_resources.grd
-@@ -88,7 +88,7 @@
+@@ -100,7 +100,7 @@
          <include name="IDR_PROFILE_AVATAR_2X_25" file="default_200_percent/common/profile_avatar_sun_cloud.png" type="BINDATA" />
          <include name="IDR_PROFILE_AVATAR_2X_26" file="default_200_percent/common/profile_avatar_placeholder.png" type="BINDATA" />
        </if>

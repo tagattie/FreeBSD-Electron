@@ -1,4 +1,4 @@
---- services/network/network_sandbox_hook_linux.cc.orig	2019-03-15 06:37:32 UTC
+--- services/network/network_sandbox_hook_linux.cc.orig	2019-04-08 08:18:26 UTC
 +++ services/network/network_sandbox_hook_linux.cc
 @@ -14,6 +14,7 @@ using sandbox::syscall_broker::MakeBrokerCommandSet;
  namespace network {
@@ -11,8 +11,8 @@
 @@ -32,6 +33,7 @@ bool NetworkPreSandboxHook(service_manager::SandboxLin
        service_manager::SandboxLinux::PreSandboxHook(), options);
  
-   instance->EngageNamespaceSandbox(false /* from_zygote */);
-+#endif
+   instance->EngageNamespaceSandboxIfPossible();
++#endif // defined(OS_BSD)
    return true;
  }
  

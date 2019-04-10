@@ -1,4 +1,4 @@
---- chrome/browser/extensions/api/settings_private/prefs_util.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/extensions/api/settings_private/prefs_util.cc.orig	2019-04-08 08:32:44 UTC
 +++ chrome/browser/extensions/api/settings_private/prefs_util.cc
 @@ -127,7 +127,7 @@ const PrefsUtil::TypedPrefMap& PrefsUtil::GetWhitelist
        settings_api::PrefType::PREF_TYPE_BOOLEAN;

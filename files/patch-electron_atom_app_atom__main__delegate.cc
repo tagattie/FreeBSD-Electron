@@ -1,11 +1,20 @@
---- electron/atom/app/atom_main_delegate.cc.orig	2019-03-16 12:34:08 UTC
+--- electron/atom/app/atom_main_delegate.cc.orig	2019-04-04 16:09:31 UTC
 +++ electron/atom/app/atom_main_delegate.cc
-@@ -102,7 +102,7 @@ bool AtomMainDelegate::BasicStartupComplete(int* exit_
-   logging::SetLogItems(true, false, true, false);
+@@ -8,7 +8,7 @@
+ #include <memory>
+ #include <string>
  
-   // Enable convient stack printing.
--#if defined(DEBUG) && defined(OS_LINUX)
-+#if defined(DEBUG) && (defined(OS_LINUX) || defined(OS_BSD))
-   bool enable_stack_dumping = true;
- #else
-   bool enable_stack_dumping = env->HasVar("ELECTRON_ENABLE_STACK_DUMPING");
+-#if defined(OS_LINUX)
++#if defined(OS_LINUX) || defined(OS_BSD)
+ #include <glib.h>  // for g_setenv()
+ #endif
+ 
+@@ -200,7 +200,7 @@ void AtomMainDelegate::PostEarlyInitialization(bool is
+         ui::ResourceBundle::GetSharedInstance().GetLocaleFilePath(locale, true);
+     if (!locale_file_path.empty()) {
+       custom_locale = locale;
+-#if defined(OS_LINUX)
++#if defined(OS_LINUX) || defined(OS_BSD)
+       /* When built with USE_GLIB, libcc's GetApplicationLocaleInternal() uses
+        * glib's g_get_language_names(), which keys off of getenv("LC_ALL") */
+       g_setenv("LC_ALL", custom_locale.c_str(), TRUE);

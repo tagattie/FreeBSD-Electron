@@ -1,4 +1,4 @@
---- base/security_unittest.cc.orig	2019-03-15 06:36:56 UTC
+--- base/security_unittest.cc.orig	2019-04-08 08:32:37 UTC
 +++ base/security_unittest.cc
 @@ -59,7 +59,7 @@ NOINLINE Type HideValueFromCompiler(volatile Type valu
  // FAILS_ is too clunky.

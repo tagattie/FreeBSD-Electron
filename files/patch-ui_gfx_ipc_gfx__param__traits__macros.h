@@ -1,4 +1,4 @@
---- ui/gfx/ipc/gfx_param_traits_macros.h.orig	2019-03-15 06:38:28 UTC
+--- ui/gfx/ipc/gfx_param_traits_macros.h.orig	2019-04-08 08:33:23 UTC
 +++ ui/gfx/ipc/gfx_param_traits_macros.h
 @@ -18,7 +18,7 @@
  #include "ui/gfx/selection_bound.h"
@@ -10,7 +10,7 @@
  #endif
  
 @@ -51,7 +51,7 @@ IPC_STRUCT_TRAITS_BEGIN(gfx::GpuMemoryBufferHandle)
-   IPC_STRUCT_TRAITS_MEMBER(handle)
+   IPC_STRUCT_TRAITS_MEMBER(region)
    IPC_STRUCT_TRAITS_MEMBER(offset)
    IPC_STRUCT_TRAITS_MEMBER(stride)
 -#if defined(OS_LINUX)

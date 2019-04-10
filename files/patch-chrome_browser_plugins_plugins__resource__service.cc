@@ -1,6 +1,6 @@
---- chrome/browser/plugins/plugins_resource_service.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/plugins/plugins_resource_service.cc.orig	2019-04-08 08:32:45 UTC
 +++ chrome/browser/plugins/plugins_resource_service.cc
-@@ -62,7 +62,7 @@ GURL GetPluginsServerURL() {
+@@ -63,7 +63,7 @@ GURL GetPluginsServerURL() {
    filename = "plugins_win.json";
  #elif defined(OS_CHROMEOS)
    filename = "plugins_chromeos.json";

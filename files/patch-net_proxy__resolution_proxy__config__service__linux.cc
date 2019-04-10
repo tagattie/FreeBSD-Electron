@@ -1,4 +1,4 @@
---- net/proxy_resolution/proxy_config_service_linux.cc.orig	2019-03-15 06:37:30 UTC
+--- net/proxy_resolution/proxy_config_service_linux.cc.orig	2019-04-08 08:33:01 UTC
 +++ net/proxy_resolution/proxy_config_service_linux.cc
 @@ -6,7 +6,9 @@
  
@@ -10,7 +10,7 @@
  #include <unistd.h>
  
  #include <map>
-@@ -493,6 +495,7 @@ int StringToIntOrDefault(base::StringPiece value, int 
+@@ -495,6 +497,7 @@ int StringToIntOrDefault(base::StringPiece value, int 
    return default_value;
  }
  
@@ -18,7 +18,7 @@
  // This is the KDE version that reads kioslaverc and simulates gsettings.
  // Doing this allows the main Delegate code, as well as the unit tests
  // for it, to stay the same - and the settings map fairly well besides.
-@@ -982,6 +985,7 @@ class SettingGetterImplKDE : public ProxyConfigService
+@@ -986,6 +989,7 @@ class SettingGetterImplKDE : public ProxyConfigService
  
    DISALLOW_COPY_AND_ASSIGN(SettingGetterImplKDE);
  };

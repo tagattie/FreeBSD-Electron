@@ -1,8 +1,8 @@
---- third_party/webrtc/rtc_base/network.h.orig	2019-03-15 06:42:01 UTC
+--- third_party/webrtc/rtc_base/network.h.orig	2019-04-08 08:23:51 UTC
 +++ third_party/webrtc/rtc_base/network.h
-@@ -24,6 +24,10 @@
- #include "rtc_base/networkmonitor.h"
- #include "rtc_base/sigslot.h"
+@@ -25,6 +25,10 @@
+ #include "rtc_base/network_monitor.h"
+ #include "rtc_base/third_party/sigslot/sigslot.h"
  
 +#if defined(WEBRTC_BSD)
 +#include <sys/types.h>

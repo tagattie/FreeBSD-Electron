@@ -1,8 +1,8 @@
---- electron/atom/browser/ui/views/submenu_button.cc.orig	2019-03-16 12:44:12 UTC
+--- electron/atom/browser/ui/views/submenu_button.cc.orig	2019-04-04 16:09:31 UTC
 +++ electron/atom/browser/ui/views/submenu_button.cc
-@@ -26,7 +26,7 @@ SubmenuButton::SubmenuButton(const base::string16& tit
-                         menu_button_listener,
-                         false),
+@@ -25,7 +25,7 @@ SubmenuButton::SubmenuButton(const base::string16& tit
+     : views::MenuButton(gfx::RemoveAcceleratorChar(title, '&', NULL, NULL),
+                         menu_button_listener),
        background_color_(background_color) {
 -#if defined(OS_LINUX)
 +#if defined(OS_LINUX) || defined(OS_BSD)

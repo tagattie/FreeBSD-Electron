@@ -1,4 +1,4 @@
---- third_party/libXNVCtrl/NVCtrl.c.orig	2019-03-15 06:26:36 UTC
+--- third_party/libXNVCtrl/NVCtrl.c.orig	2019-04-08 08:19:07 UTC
 +++ third_party/libXNVCtrl/NVCtrl.c
 @@ -27,10 +27,6 @@
   * libXNVCtrl library properly protects the Display connection.

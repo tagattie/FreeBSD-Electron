@@ -1,4 +1,4 @@
---- third_party/angle/third_party/vulkan-validation-layers/src/layers/vk_loader_platform.h.orig	2019-03-15 06:30:51 UTC
+--- third_party/angle/third_party/vulkan-validation-layers/src/layers/vk_loader_platform.h.orig	2019-04-08 08:23:49 UTC
 +++ third_party/angle/third_party/vulkan-validation-layers/src/layers/vk_loader_platform.h
 @@ -31,7 +31,7 @@
  #include "vulkan/vk_platform.h"

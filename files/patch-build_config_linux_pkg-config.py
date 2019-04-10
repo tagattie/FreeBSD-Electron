@@ -1,4 +1,4 @@
---- build/config/linux/pkg-config.py.orig	2019-03-15 06:36:56 UTC
+--- build/config/linux/pkg-config.py.orig	2019-04-08 08:18:04 UTC
 +++ build/config/linux/pkg-config.py
 @@ -57,8 +57,12 @@ def SetConfigPath(options):
      print "You must specify an architecture via -a if using a sysroot."

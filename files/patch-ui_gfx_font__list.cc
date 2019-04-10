@@ -1,4 +1,4 @@
---- ui/gfx/font_list.cc.orig	2019-03-15 06:26:44 UTC
+--- ui/gfx/font_list.cc.orig	2019-04-08 08:19:17 UTC
 +++ ui/gfx/font_list.cc
 @@ -24,7 +24,7 @@ base::LazyInstance<scoped_refptr<gfx::FontListImpl>>::
  bool g_default_impl_initialized = false;

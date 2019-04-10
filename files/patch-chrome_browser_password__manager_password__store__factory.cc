@@ -1,8 +1,8 @@
---- chrome/browser/password_manager/password_store_factory.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/password_manager/password_store_factory.cc.orig	2019-04-08 08:32:45 UTC
 +++ chrome/browser/password_manager/password_store_factory.cc
-@@ -283,7 +283,7 @@ PasswordStoreFactory::BuildServiceInstanceFor(
-   password_manager_util::CleanUserDataInBlacklistedCredentials(
-       ps.get(), profile->GetPrefs(), 60);
+@@ -300,7 +300,7 @@ PasswordStoreFactory::BuildServiceInstanceFor(
+   password_manager_util::RemoveUselessCredentials(ps, profile->GetPrefs(), 60,
+                                                   network_context_getter);
  
 -#if defined(OS_WIN) || defined(OS_MACOSX) || \
 +#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_BSD) || \

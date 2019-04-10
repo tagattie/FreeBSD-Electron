@@ -1,4 +1,4 @@
---- components/metrics/drive_metrics_provider_linux.cc.orig	2019-03-15 06:25:41 UTC
+--- components/metrics/drive_metrics_provider_linux.cc.orig	2019-04-08 08:18:17 UTC
 +++ components/metrics/drive_metrics_provider_linux.cc
 @@ -4,7 +4,13 @@
  

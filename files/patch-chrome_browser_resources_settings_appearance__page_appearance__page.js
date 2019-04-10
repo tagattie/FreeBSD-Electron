@@ -1,4 +1,4 @@
---- chrome/browser/resources/settings/appearance_page/appearance_page.js.orig	2019-03-15 06:37:05 UTC
+--- chrome/browser/resources/settings/appearance_page/appearance_page.js.orig	2019-04-08 08:18:09 UTC
 +++ chrome/browser/resources/settings/appearance_page/appearance_page.js
 @@ -120,7 +120,7 @@ Polymer({
      'defaultFontSizeChanged_(prefs.webkit.webprefs.default_font_size.value)',
@@ -9,7 +9,7 @@
      // NOTE: this pref only exists on Linux.
      'useSystemThemePrefChanged_(prefs.extensions.theme.use_system.value)',
      // </if>
-@@ -221,7 +221,7 @@ Polymer({
+@@ -223,7 +223,7 @@ Polymer({
      this.browserProxy_.useDefaultTheme();
    },
  
@@ -18,7 +18,7 @@
    /**
     * @param {boolean} useSystemTheme
     * @private
-@@ -289,10 +289,10 @@ Polymer({
+@@ -292,10 +292,10 @@ Polymer({
      }
  
      let i18nId;

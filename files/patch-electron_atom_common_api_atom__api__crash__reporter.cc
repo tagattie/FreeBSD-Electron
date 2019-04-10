@@ -1,6 +1,6 @@
---- electron/atom/common/api/atom_api_crash_reporter.cc.orig	2019-03-16 12:35:09 UTC
+--- electron/atom/common/api/atom_api_crash_reporter.cc.orig	2019-04-04 16:09:31 UTC
 +++ electron/atom/common/api/atom_api_crash_reporter.cc
-@@ -33,15 +33,23 @@ struct Converter<CrashReporter::UploadReportResult> {
+@@ -35,15 +35,23 @@ struct Converter<CrashReporter::UploadReportResult> {
  namespace {
  
  void AddExtraParameter(const std::string& key, const std::string& value) {
@@ -24,7 +24,7 @@
  }
  
  void Initialize(v8::Local<v8::Object> exports,
-@@ -49,6 +57,7 @@ void Initialize(v8::Local<v8::Object> exports,
+@@ -51,6 +59,7 @@ void Initialize(v8::Local<v8::Object> exports,
                  v8::Local<v8::Context> context,
                  void* priv) {
    mate::Dictionary dict(context->GetIsolate(), exports);
@@ -32,7 +32,7 @@
    auto reporter = base::Unretained(CrashReporter::GetInstance());
    dict.SetMethod("start", base::Bind(&CrashReporter::Start, reporter));
    dict.SetMethod("addExtraParameter", &AddExtraParameter);
-@@ -60,6 +69,7 @@ void Initialize(v8::Local<v8::Object> exports,
+@@ -62,6 +71,7 @@ void Initialize(v8::Local<v8::Object> exports,
                   base::Bind(&CrashReporter::SetUploadToServer, reporter));
    dict.SetMethod("getUploadToServer",
                   base::Bind(&CrashReporter::GetUploadToServer, reporter));

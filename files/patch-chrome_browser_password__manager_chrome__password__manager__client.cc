@@ -1,8 +1,8 @@
---- chrome/browser/password_manager/chrome_password_manager_client.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/password_manager/chrome_password_manager_client.cc.orig	2019-04-08 08:32:45 UTC
 +++ chrome/browser/password_manager/chrome_password_manager_client.cc
-@@ -76,7 +76,11 @@
- #include "net/base/url_util.h"
+@@ -80,7 +80,11 @@
  #include "net/cert/cert_status_flags.h"
+ #include "services/identity/public/cpp/identity_manager.h"
  #include "services/metrics/public/cpp/ukm_recorder.h"
 +#if defined(OS_BSD)
 +#include <re2/re2.h>

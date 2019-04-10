@@ -1,7 +1,7 @@
---- components/feature_engagement/public/event_constants.cc.orig	2019-03-15 06:37:14 UTC
+--- components/feature_engagement/public/event_constants.cc.orig	2019-04-08 08:18:17 UTC
 +++ components/feature_engagement/public/event_constants.cc
-@@ -24,9 +24,9 @@ const char kIncognitoWindowSessionTimeMet[] =
- 
+@@ -26,9 +26,9 @@ const char kReopenTabConditionsMet[] = "reopen_tab_con
+ const char kTabReopened[] = "tab_reopened";
  #endif  // BUILDFLAG(ENABLE_DESKTOP_IN_PRODUCT_HELP)
  
 -#if defined(OS_WIN) || defined(OS_LINUX) || defined(OS_IOS)

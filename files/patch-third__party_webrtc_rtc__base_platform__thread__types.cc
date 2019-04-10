@@ -1,4 +1,4 @@
---- third_party/webrtc/rtc_base/platform_thread_types.cc.orig	2019-03-15 06:30:53 UTC
+--- third_party/webrtc/rtc_base/platform_thread_types.cc.orig	2019-04-08 08:23:51 UTC
 +++ third_party/webrtc/rtc_base/platform_thread_types.cc
 @@ -11,7 +11,9 @@
  #include "rtc_base/platform_thread_types.h"

@@ -1,4 +1,4 @@
---- extensions/browser/api/networking_private/networking_private_delegate_factory.cc.orig	2019-03-15 06:25:45 UTC
+--- extensions/browser/api/networking_private/networking_private_delegate_factory.cc.orig	2019-04-08 08:18:20 UTC
 +++ extensions/browser/api/networking_private/networking_private_delegate_factory.cc
 @@ -11,7 +11,7 @@
  

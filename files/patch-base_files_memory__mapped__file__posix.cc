@@ -1,4 +1,4 @@
---- base/files/memory_mapped_file_posix.cc.orig	2019-03-15 06:36:56 UTC
+--- base/files/memory_mapped_file_posix.cc.orig	2019-04-08 08:32:37 UTC
 +++ base/files/memory_mapped_file_posix.cc
 @@ -110,6 +110,8 @@ bool MemoryMappedFile::MapFileRegionToMemory(
        // Only Android API>=21 supports the fallocate call. Older versions need

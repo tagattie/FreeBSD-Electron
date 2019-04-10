@@ -1,6 +1,6 @@
---- chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc.orig	2019-03-15 06:37:04 UTC
+--- chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc.orig	2019-04-08 08:32:45 UTC
 +++ chrome/browser/profiles/chrome_browser_main_extra_parts_profiles.cc
-@@ -305,7 +305,7 @@ void ChromeBrowserMainExtraPartsProfiles::
+@@ -326,7 +326,7 @@ void ChromeBrowserMainExtraPartsProfiles::
  #if !defined(OS_ANDROID)
    MediaGalleriesPreferencesFactory::GetInstance();
  #endif

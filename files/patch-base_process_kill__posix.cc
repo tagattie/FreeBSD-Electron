@@ -1,6 +1,6 @@
---- base/process/kill_posix.cc.orig	2019-03-15 06:36:56 UTC
+--- base/process/kill_posix.cc.orig	2019-04-08 08:18:04 UTC
 +++ base/process/kill_posix.cc
-@@ -167,7 +167,7 @@ void EnsureProcessTerminated(Process process) {
+@@ -168,7 +168,7 @@ void EnsureProcessTerminated(Process process) {
        0, new BackgroundReaper(std::move(process), TimeDelta::FromSeconds(2)));
  }
  

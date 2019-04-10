@@ -1,6 +1,6 @@
---- electron/atom/common/node_bindings.cc.orig	2019-03-16 12:52:04 UTC
+--- electron/atom/common/node_bindings.cc.orig	2019-04-04 16:09:31 UTC
 +++ electron/atom/common/node_bindings.cc
-@@ -207,7 +207,7 @@ void NodeBindings::Initialize() {
+@@ -210,7 +210,7 @@ void NodeBindings::Initialize() {
    node::g_standalone_mode = browser_env_ == BROWSER;
    node::g_upstream_node_mode = false;
  

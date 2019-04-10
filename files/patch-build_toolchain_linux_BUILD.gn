@@ -1,4 +1,4 @@
---- build/toolchain/linux/BUILD.gn.orig	2019-03-15 06:36:56 UTC
+--- build/toolchain/linux/BUILD.gn.orig	2019-04-08 08:32:38 UTC
 +++ build/toolchain/linux/BUILD.gn
 @@ -14,7 +14,6 @@ clang_toolchain("clang_arm") {
  }

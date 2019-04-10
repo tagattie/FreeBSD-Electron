@@ -1,6 +1,6 @@
---- third_party/googletest/src/googletest/src/gtest-port.cc.orig	2019-03-15 06:40:20 UTC
+--- third_party/googletest/src/googletest/src/gtest-port.cc.orig	2019-04-08 08:34:16 UTC
 +++ third_party/googletest/src/googletest/src/gtest-port.cc
-@@ -52,6 +52,11 @@
+@@ -55,6 +55,11 @@
  # include <mach/vm_map.h>
  #endif  // GTEST_OS_MAC
  
@@ -12,7 +12,7 @@
  #if GTEST_OS_QNX
  # include <devctl.h>
  # include <fcntl.h>
-@@ -126,6 +131,28 @@ size_t GetThreadCount() {
+@@ -129,6 +134,28 @@ size_t GetThreadCount() {
    } else {
      return 0;
    }

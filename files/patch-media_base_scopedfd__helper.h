@@ -1,4 +1,4 @@
---- media/base/scopedfd_helper.h.orig	2019-03-15 06:25:46 UTC
+--- media/base/scopedfd_helper.h.orig	2019-04-08 08:18:23 UTC
 +++ media/base/scopedfd_helper.h
 @@ -14,14 +14,14 @@ namespace media {
  // since the only current user is V4L2 we are limiting the scope to OS_LINUX so

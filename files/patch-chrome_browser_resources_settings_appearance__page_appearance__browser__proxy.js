@@ -1,4 +1,4 @@
---- chrome/browser/resources/settings/appearance_page/appearance_browser_proxy.js.orig	2019-03-15 06:25:33 UTC
+--- chrome/browser/resources/settings/appearance_page/appearance_browser_proxy.js.orig	2019-04-08 08:18:09 UTC
 +++ chrome/browser/resources/settings/appearance_page/appearance_browser_proxy.js
 @@ -35,7 +35,7 @@ cr.define('settings', function() {
  

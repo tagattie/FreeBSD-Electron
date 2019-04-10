@@ -1,6 +1,6 @@
---- media/capture/video/fake_video_capture_device_factory.cc.orig	2019-03-15 06:37:27 UTC
+--- media/capture/video/fake_video_capture_device_factory.cc.orig	2019-04-08 08:32:59 UTC
 +++ media/capture/video/fake_video_capture_device_factory.cc
-@@ -200,7 +200,7 @@ void FakeVideoCaptureDeviceFactory::GetDeviceDescripto
+@@ -204,7 +204,7 @@ void FakeVideoCaptureDeviceFactory::GetDeviceDescripto
    for (const auto& entry : devices_config_) {
      device_descriptors->emplace_back(
          base::StringPrintf("fake_device_%d", entry_index), entry.device_id,

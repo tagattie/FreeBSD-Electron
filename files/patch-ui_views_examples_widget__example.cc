@@ -1,4 +1,4 @@
---- ui/views/examples/widget_example.cc.orig	2019-03-15 06:26:45 UTC
+--- ui/views/examples/widget_example.cc.orig	2019-04-08 08:33:23 UTC
 +++ ui/views/examples/widget_example.cc
 @@ -79,7 +79,7 @@ void WidgetExample::CreateExampleView(View* container)
    BuildButton(container, "Popup widget", POPUP);

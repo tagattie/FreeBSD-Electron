@@ -1,4 +1,4 @@
---- third_party/crc32c/src/src/crc32c_arm64_linux_check.h.orig	2019-03-15 06:27:10 UTC
+--- third_party/crc32c/src/src/crc32c_arm64_linux_check.h.orig	2019-04-08 08:19:55 UTC
 +++ third_party/crc32c/src/src/crc32c_arm64_linux_check.h
 @@ -29,6 +29,8 @@ extern "C" unsigned long getauxval(unsigned long type)
  namespace crc32c {

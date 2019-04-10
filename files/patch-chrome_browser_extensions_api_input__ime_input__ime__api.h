@@ -1,4 +1,4 @@
---- chrome/browser/extensions/api/input_ime/input_ime_api.h.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/extensions/api/input_ime/input_ime_api.h.orig	2019-04-08 08:18:07 UTC
 +++ chrome/browser/extensions/api/input_ime/input_ime_api.h
 @@ -31,7 +31,7 @@
  

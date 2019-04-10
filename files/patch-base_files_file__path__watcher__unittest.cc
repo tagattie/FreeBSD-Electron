@@ -1,6 +1,6 @@
---- base/files/file_path_watcher_unittest.cc.orig	2019-03-15 06:36:56 UTC
+--- base/files/file_path_watcher_unittest.cc.orig	2019-04-08 08:18:04 UTC
 +++ base/files/file_path_watcher_unittest.cc
-@@ -438,7 +438,7 @@ TEST_F(FilePathWatcherTest, WatchDirectory) {
+@@ -436,7 +436,7 @@ TEST_F(FilePathWatcherTest, WatchDirectory) {
    VLOG(1) << "Waiting for file1 creation";
    ASSERT_TRUE(WaitForEvents());
  

@@ -1,6 +1,6 @@
---- components/gcm_driver/gcm_client_impl.cc.orig	2019-03-15 06:37:14 UTC
+--- components/gcm_driver/gcm_client_impl.cc.orig	2019-04-08 08:18:17 UTC
 +++ components/gcm_driver/gcm_client_impl.cc
-@@ -151,6 +151,9 @@ void ToCheckinProtoVersion(
+@@ -150,6 +150,9 @@ void ToCheckinProtoVersion(
      case GCMClient::PLATFORM_CROS:
        platform = checkin_proto::ChromeBuildProto_Platform_PLATFORM_CROS;
        break;

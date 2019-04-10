@@ -1,6 +1,6 @@
---- chrome/browser/download/download_prefs.h.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/download/download_prefs.h.orig	2019-04-08 08:32:44 UTC
 +++ chrome/browser/download/download_prefs.h
-@@ -99,7 +99,7 @@ class DownloadPrefs {
+@@ -101,7 +101,7 @@ class DownloadPrefs {
    // Disables auto-open based on file extension.
    void DisableAutoOpenBasedOnExtension(const base::FilePath& file_name);
  
@@ -9,7 +9,7 @@
    // Store the user preference to disk. If |should_open| is true, also disable
    // the built-in PDF plugin. If |should_open| is false, enable the PDF plugin.
    void SetShouldOpenPdfInSystemReader(bool should_open);
-@@ -143,7 +143,7 @@ class DownloadPrefs {
+@@ -145,7 +145,7 @@ class DownloadPrefs {
                     AutoOpenCompareFunctor> AutoOpenSet;
    AutoOpenSet auto_open_;
  

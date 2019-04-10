@@ -1,4 +1,4 @@
---- chrome/browser/extensions/api/image_writer_private/removable_storage_provider.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/extensions/api/image_writer_private/removable_storage_provider.cc.orig	2019-04-08 08:32:44 UTC
 +++ chrome/browser/extensions/api/image_writer_private/removable_storage_provider.cc
 @@ -20,6 +20,7 @@ static base::LazyInstance<scoped_refptr<StorageDeviceL
  

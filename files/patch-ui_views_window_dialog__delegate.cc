@@ -1,6 +1,6 @@
---- ui/views/window/dialog_delegate.cc.orig	2019-03-15 06:38:29 UTC
+--- ui/views/window/dialog_delegate.cc.orig	2019-04-08 08:33:23 UTC
 +++ ui/views/window/dialog_delegate.cc
-@@ -65,7 +65,7 @@ Widget::InitParams DialogDelegate::GetDialogWidgetInit
+@@ -64,7 +64,7 @@ Widget::InitParams DialogDelegate::GetDialogWidgetInit
    params.bounds = bounds;
    DialogDelegate* dialog = delegate->AsDialogDelegate();
  

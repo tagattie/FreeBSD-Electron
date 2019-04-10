@@ -1,6 +1,6 @@
---- ui/views/style/platform_style.cc.orig	2019-03-15 06:38:29 UTC
+--- ui/views/style/platform_style.cc.orig	2019-04-08 08:19:19 UTC
 +++ ui/views/style/platform_style.cc
-@@ -19,7 +19,7 @@
+@@ -18,7 +18,7 @@
  
  #if defined(OS_CHROMEOS)
  #include "ui/views/controls/scrollbar/overlay_scroll_bar.h"

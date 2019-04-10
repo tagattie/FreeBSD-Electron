@@ -1,6 +1,6 @@
---- ui/events/devices/x11/device_data_manager_x11.cc.orig	2019-03-15 06:38:27 UTC
+--- ui/events/devices/x11/device_data_manager_x11.cc.orig	2019-04-08 08:19:16 UTC
 +++ ui/events/devices/x11/device_data_manager_x11.cc
-@@ -829,6 +829,8 @@ void DeviceDataManagerX11::SetDisabledKeyboardAllowedK
+@@ -828,6 +828,8 @@ void DeviceDataManagerX11::SetDisabledKeyboardAllowedK
  }
  
  void DeviceDataManagerX11::DisableDevice(int deviceid) {
@@ -9,7 +9,7 @@
    blocked_devices_.set(deviceid, true);
    // TODO(rsadam@): Support blocking touchscreen devices.
    std::vector<InputDevice> keyboards = GetKeyboardDevices();
-@@ -840,6 +842,7 @@ void DeviceDataManagerX11::DisableDevice(int deviceid)
+@@ -838,6 +840,7 @@ void DeviceDataManagerX11::DisableDevice(int deviceid)
      keyboards.erase(it);
      DeviceDataManager::OnKeyboardDevicesUpdated(keyboards);
    }

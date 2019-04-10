@@ -1,4 +1,4 @@
---- third_party/blink/renderer/platform/heap/stack_frame_depth.cc.orig	2019-03-15 06:26:13 UTC
+--- third_party/blink/renderer/platform/heap/stack_frame_depth.cc.orig	2019-04-08 08:33:06 UTC
 +++ third_party/blink/renderer/platform/heap/stack_frame_depth.cc
 @@ -15,6 +15,11 @@
  extern "C" void* __libc_stack_end;  // NOLINT

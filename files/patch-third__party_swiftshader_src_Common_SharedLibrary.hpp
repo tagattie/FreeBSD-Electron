@@ -1,6 +1,6 @@
---- third_party/swiftshader/src/Common/SharedLibrary.hpp.orig	2019-03-15 06:41:56 UTC
+--- third_party/swiftshader/src/Common/SharedLibrary.hpp.orig	2019-04-08 08:23:02 UTC
 +++ third_party/swiftshader/src/Common/SharedLibrary.hpp
-@@ -115,7 +115,7 @@ void *loadLibrary(const std::string &libraryDirectory,
+@@ -97,7 +97,7 @@ void *loadLibrary(const std::string &libraryDirectory,
  
  	inline void *getLibraryHandle(const char *path)
  	{

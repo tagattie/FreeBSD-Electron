@@ -1,6 +1,6 @@
---- media/audio/audio_manager.cc.orig	2019-03-15 06:37:27 UTC
+--- media/audio/audio_manager.cc.orig	2019-04-08 08:18:22 UTC
 +++ media/audio/audio_manager.cc
-@@ -94,7 +94,7 @@ class AudioManagerHelper : public base::PowerObserver 
+@@ -48,7 +48,7 @@ class AudioManagerHelper {
    }
  #endif
  
@@ -9,7 +9,7 @@
    void set_app_name(const std::string& app_name) { app_name_ = app_name; }
    const std::string& app_name() const { return app_name_; }
  #endif
-@@ -229,7 +229,7 @@ class AudioManagerHelper : public base::PowerObserver 
+@@ -59,7 +59,7 @@ class AudioManagerHelper {
    std::unique_ptr<base::win::ScopedCOMInitializer> com_initializer_for_testing_;
  #endif
  
@@ -18,8 +18,8 @@
    std::string app_name_;
  #endif
  
-@@ -311,7 +311,7 @@ void AudioManager::StartHangMonitorIfNeeded(
-   GetHelper()->StartHangTimer(std::move(task_runner));
+@@ -128,7 +128,7 @@ std::unique_ptr<AudioManager> AudioManager::CreateForT
+   return Create(std::move(audio_thread), GetHelper()->fake_log_factory());
  }
  
 -#if defined(OS_LINUX)

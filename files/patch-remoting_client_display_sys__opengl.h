@@ -1,4 +1,4 @@
---- remoting/client/display/sys_opengl.h.orig	2019-03-15 06:25:51 UTC
+--- remoting/client/display/sys_opengl.h.orig	2019-04-08 08:18:26 UTC
 +++ remoting/client/display/sys_opengl.h
 @@ -9,7 +9,7 @@
  

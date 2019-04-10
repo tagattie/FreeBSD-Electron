@@ -1,6 +1,6 @@
---- device/usb/BUILD.gn.orig	2019-03-15 06:37:23 UTC
+--- device/usb/BUILD.gn.orig	2019-04-08 08:32:56 UTC
 +++ device/usb/BUILD.gn
-@@ -109,10 +109,17 @@ static_library("usb") {
+@@ -112,10 +112,17 @@ static_library("usb") {
      ]
    }
  

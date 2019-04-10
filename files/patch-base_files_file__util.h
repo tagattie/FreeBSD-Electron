@@ -1,4 +1,4 @@
---- base/files/file_util.h.orig	2019-03-15 06:36:56 UTC
+--- base/files/file_util.h.orig	2019-04-08 08:32:37 UTC
 +++ base/files/file_util.h
 @@ -445,7 +445,7 @@ BASE_EXPORT bool VerifyPathControlledByAdmin(const bas
  // the directory |path|, in the number of FilePath::CharType, or -1 on failure.

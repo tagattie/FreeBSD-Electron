@@ -1,4 +1,4 @@
---- third_party/angle/src/gpu_info_util/SystemInfo_x11.cpp.orig	2019-03-15 06:40:10 UTC
+--- third_party/angle/src/gpu_info_util/SystemInfo_x11.cpp.orig	2019-04-08 08:20:00 UTC
 +++ third_party/angle/src/gpu_info_util/SystemInfo_x11.cpp
 @@ -8,6 +8,8 @@
  
@@ -10,7 +10,7 @@
  
  #include "common/debug.h"
 @@ -18,8 +20,43 @@
- #error SystemInfo_x11.cpp compiled without GPU_INFO_USE_X11
+ #    error SystemInfo_x11.cpp compiled without GPU_INFO_USE_X11
  #endif
  
 +#define GLX_RENDERER_VENDOR_ID_MESA	0x8183

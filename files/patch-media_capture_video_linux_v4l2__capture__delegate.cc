@@ -1,4 +1,4 @@
---- media/capture/video/linux/v4l2_capture_delegate.cc.orig	2019-03-15 06:37:27 UTC
+--- media/capture/video/linux/v4l2_capture_delegate.cc.orig	2019-04-08 08:32:59 UTC
 +++ media/capture/video/linux/v4l2_capture_delegate.cc
 @@ -4,8 +4,10 @@
  
@@ -11,7 +11,7 @@
  #include <poll.h>
  #include <sys/fcntl.h>
  #include <sys/ioctl.h>
-@@ -23,10 +25,10 @@
+@@ -24,10 +26,10 @@
  
  using media::mojom::MeteringMode;
  

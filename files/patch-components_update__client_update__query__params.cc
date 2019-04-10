@@ -1,4 +1,4 @@
---- components/update_client/update_query_params.cc.orig	2019-03-15 06:37:19 UTC
+--- components/update_client/update_query_params.cc.orig	2019-04-08 08:32:52 UTC
 +++ components/update_client/update_query_params.cc
 @@ -38,6 +38,8 @@ const char kOs[] =
      "fuchsia";

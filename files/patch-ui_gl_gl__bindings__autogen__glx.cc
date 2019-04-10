@@ -1,4 +1,4 @@
---- ui/gl/gl_bindings_autogen_glx.cc.orig	2019-03-15 06:26:44 UTC
+--- ui/gl/gl_bindings_autogen_glx.cc.orig	2019-04-08 08:19:17 UTC
 +++ ui/gl/gl_bindings_autogen_glx.cc
 @@ -115,6 +115,8 @@ void DriverGLX::InitializeExtensionBindings() {
  

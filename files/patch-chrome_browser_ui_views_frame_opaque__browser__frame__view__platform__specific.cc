@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/frame/opaque_browser_frame_view_platform_specific.cc.orig	2019-03-15 06:37:07 UTC
+--- chrome/browser/ui/views/frame/opaque_browser_frame_view_platform_specific.cc.orig	2019-04-08 08:32:47 UTC
 +++ chrome/browser/ui/views/frame/opaque_browser_frame_view_platform_specific.cc
 @@ -10,7 +10,7 @@ bool OpaqueBrowserFrameViewPlatformSpecific::IsUsingSy
    return false;

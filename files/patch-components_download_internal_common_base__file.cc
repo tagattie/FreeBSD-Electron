@@ -1,4 +1,4 @@
---- components/download/internal/common/base_file.cc.orig	2019-03-15 06:37:14 UTC
+--- components/download/internal/common/base_file.cc.orig	2019-04-08 08:32:49 UTC
 +++ components/download/internal/common/base_file.cc
 @@ -446,7 +446,7 @@ DownloadInterruptReason BaseFile::LogInterruptReason(
    return reason;

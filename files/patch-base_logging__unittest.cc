@@ -1,4 +1,4 @@
---- base/logging_unittest.cc.orig	2019-03-15 06:36:56 UTC
+--- base/logging_unittest.cc.orig	2019-04-08 08:32:37 UTC
 +++ base/logging_unittest.cc
 @@ -420,7 +420,7 @@ void CheckCrashTestSighandler(int, siginfo_t* info, vo
    // need the arch-specific boilerplate below, which is inspired by breakpad.

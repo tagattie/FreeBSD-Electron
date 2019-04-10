@@ -1,4 +1,4 @@
---- electron/atom/common/node_bindings_linux.cc.orig	2019-03-16 12:52:40 UTC
+--- electron/atom/common/node_bindings_linux.cc.orig	2019-04-04 16:09:31 UTC
 +++ electron/atom/common/node_bindings_linux.cc
 @@ -4,17 +4,31 @@
  

@@ -1,4 +1,4 @@
---- device/usb/usb_context.cc.orig	2019-03-15 06:25:44 UTC
+--- device/usb/usb_context.cc.orig	2019-04-08 08:18:20 UTC
 +++ device/usb/usb_context.cc
 @@ -58,7 +58,9 @@ void UsbContext::UsbEventHandler::Run() {
  

@@ -1,6 +1,6 @@
---- ui/native_theme/native_theme.h.orig	2019-03-15 06:38:28 UTC
+--- ui/native_theme/native_theme.h.orig	2019-04-08 08:33:23 UTC
 +++ ui/native_theme/native_theme.h
-@@ -47,7 +47,7 @@ class NATIVE_THEME_EXPORT NativeTheme {
+@@ -48,7 +48,7 @@ class NATIVE_THEME_EXPORT NativeTheme {
    // The part to be painted / sized.
    enum Part {
      kCheckbox,

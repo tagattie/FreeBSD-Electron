@@ -1,6 +1,6 @@
---- chrome/browser/media/webrtc/webrtc_log_uploader.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/media/webrtc/webrtc_log_uploader.cc.orig	2019-04-08 08:32:44 UTC
 +++ chrome/browser/media/webrtc/webrtc_log_uploader.cc
-@@ -346,6 +346,8 @@ void WebRtcLogUploader::SetupMultipart(
+@@ -391,6 +391,8 @@ void WebRtcLogUploader::SetupMultipart(
    const char product[] = "Chrome_Android";
  #elif defined(OS_CHROMEOS)
    const char product[] = "Chrome_ChromeOS";

@@ -1,4 +1,4 @@
---- third_party/crashpad/crashpad/build/crashpad_buildconfig.gni.orig	2019-03-15 06:38:19 UTC
+--- third_party/crashpad/crashpad/build/crashpad_buildconfig.gni.orig	2019-04-08 08:19:06 UTC
 +++ third_party/crashpad/crashpad/build/crashpad_buildconfig.gni
 @@ -38,7 +38,7 @@ crashpad_is_standalone = crashpad_dependencies == "sta
  if (crashpad_is_in_chromium) {

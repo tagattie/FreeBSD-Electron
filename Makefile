@@ -4,7 +4,7 @@ PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
 CATEGORIES=	devel
-MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v4.1.0/:chromium \
+MASTER_SITES=	LOCAL:chromium \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
@@ -28,9 +28,11 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libopus.so:audio/opus \
 		libnotify.so:devel/libnotify \
 		libpci.so:devel/libpci \
+		libre2.so:devel/re2 \
 		libdrm.so:graphics/libdrm \
 		libwebp.so:graphics/webp \
 		libavcodec.so:multimedia/ffmpeg \
+		libvpx.so:multimedia/libvpx \
 		libopenh264.so:multimedia/openh264 \
 		libfreetype.so:print/freetype2 \
 		libharfbuzz.so:print/harfbuzz \
@@ -42,15 +44,15 @@ USES=		dos2unix gettext-tools gnome jpeg localbase:ldflags ninja \
 		pkgconfig python:2.7,build tar:xz
 
 USE_GITHUB=	yes
-GH_TUPLE=	electron:node:8bc5d171a0873c0ba49f9433798bc8b67399788c:node
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
+GH_TUPLE=	electron:node:f807d72614d4b8973d71548328be213532b46b1b:node
 		# boto:boto:f7574aa6cc2c819430c1f05e9a1a1a666ef8169b:boto \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-CHROMIUM_VER=	69.0.3497.128
-CHROMIUM_NODE_MODULES_HASH=	050c85d20f7cedd7f5c39533c1ba89dcdfa56a08
 ELECTRON_VER=	5.0.0-beta.8
+CHROMIUM_VER=	73.0.3683.104
+CHROMIUM_NODE_MODULES_HASH=	c0e0f34498afb3f363cc37cd2e9c1a020cb020d9
 CHROMIUM_TEST_FONTS_HASH=	a22de844e32a3f720d219e3911c3da3478039f89
 
 NO_WRKSUBDIR=	yes
@@ -60,6 +62,9 @@ DOS2UNIX_FILES=	third_party/skia/third_party/vulkanmemoryallocator/include/vk_me
 BINARY_ALIAS=	python=${PYTHON_CMD}
 
 USE_GNOME=	atk pango gtk30 libxml2 libxslt
+USE_JAVA=	yes
+JAVA_VERSION=	1.8
+JAVA_BUILD=	yes
 
 GN_ARGS+=	clang_use_chrome_plugins=false \
 		enable_hangout_services_extension=true \
@@ -73,7 +78,6 @@ GN_ARGS+=	clang_use_chrome_plugins=false \
 		use_allocator="none" \
 		use_allocator_shim=false \
 		use_aura=true \
-		use_bundled_fontconfig=false \
 		use_custom_libcxx=false \
 		use_gnome_keyring=false \
 		use_jumbo_build=true \
@@ -81,6 +85,8 @@ GN_ARGS+=	clang_use_chrome_plugins=false \
 		use_sysroot=false \
 		use_system_freetype=true \
 		use_system_harfbuzz=true \
+		use_system_lcms2=true \
+		use_system_libdrm=true \
 		use_system_libjpeg=true \
 		extra_cxxflags="${CXXFLAGS}" \
 		extra_ldflags="${LDFLAGS}"
@@ -168,8 +174,9 @@ pre-configure:
 	#./build/linux/unbundle/remove_bundled_libraries.py [list of preserved]
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${PYTHON_CMD} \
 		./build/linux/unbundle/replace_gn_files.py --system-libraries \
-		ffmpeg flac freetype harfbuzz-ng libdrm libusb libwebp libxml \
-		libxslt openh264 opus snappy yasm || ${FALSE}
+		ffmpeg flac fontconfig freetype harfbuzz-ng libdrm libjpeg \
+		libusb libvpx libwebp libxml libxslt openh264 opus re2 snappy \
+		yasm || ${FALSE}
 
 do-configure:
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} gn gen out/${BUILDTYPE} \
@@ -177,6 +184,9 @@ do-configure:
 	# Setup nodejs dependency
 	${MKDIR} ${WRKSRC}/third_party/node/freebsd/node-freebsd-x64/bin
 	${LN} -sf ${LOCALBASE}/bin/node ${WRKSRC}/third_party/node/freebsd/node-freebsd-x64/bin/node
+	# Setup java dependency
+	${MKDIR} ${WRKDIR}/bin
+	${LN} -sf ${LOCALBASE}/openjdk8/bin/java ${WRKDIR}/bin/java
 
 # do-build:
 # 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ninja -C out/${BUILDTYPE} ${ALL_TARGET}

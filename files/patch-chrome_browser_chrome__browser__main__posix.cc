@@ -1,6 +1,6 @@
---- chrome/browser/chrome_browser_main_posix.cc.orig	2019-03-15 06:37:01 UTC
+--- chrome/browser/chrome_browser_main_posix.cc.orig	2019-04-08 08:32:43 UTC
 +++ chrome/browser/chrome_browser_main_posix.cc
-@@ -139,7 +139,7 @@ void ChromeBrowserMainPartsPosix::PostMainMessageLoopS
+@@ -142,7 +142,7 @@ void ChromeBrowserMainPartsPosix::PostMainMessageLoopS
  void ChromeBrowserMainPartsPosix::ShowMissingLocaleMessageBox() {
  #if defined(OS_CHROMEOS)
    NOTREACHED();  // Should not ever happen on ChromeOS.

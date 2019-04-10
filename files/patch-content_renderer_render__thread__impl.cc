@@ -1,6 +1,6 @@
---- content/renderer/render_thread_impl.cc.orig	2019-04-06 12:09:25 UTC
+--- content/renderer/render_thread_impl.cc.orig	2019-04-09 12:48:19 UTC
 +++ content/renderer/render_thread_impl.cc
-@@ -198,12 +198,21 @@
+@@ -191,12 +191,21 @@
  #include "mojo/public/cpp/bindings/message_dumper.h"
  #endif
  
@@ -22,7 +22,7 @@
  using base::ThreadRestrictions;
  using blink::WebDocument;
  using blink::WebFrame;
-@@ -977,7 +986,7 @@ void RenderThreadImpl::Init(
+@@ -926,7 +935,7 @@ void RenderThreadImpl::Init() {
    DCHECK(parsed_num_raster_threads) << string_value;
    DCHECK_GT(num_raster_threads, 0);
  
@@ -31,7 +31,7 @@
    categorized_worker_pool_->SetBackgroundingCallback(
        main_thread_scheduler_->DefaultTaskRunner(),
        base::BindOnce(
-@@ -1018,7 +1027,7 @@ void RenderThreadImpl::Init(
+@@ -967,7 +976,7 @@ void RenderThreadImpl::Init() {
    GetConnector()->BindInterface(mojom::kBrowserServiceName,
                                  mojo::MakeRequest(&storage_partition_service_));
  
@@ -40,7 +40,7 @@
    render_message_filter()->SetThreadPriority(
        ChildProcess::current()->io_thread_id(), base::ThreadPriority::DISPLAY);
  #endif
-@@ -1448,11 +1457,11 @@ media::GpuVideoAcceleratorFactories* RenderThreadImpl:
+@@ -1337,11 +1346,11 @@ media::GpuVideoAcceleratorFactories* RenderThreadImpl:
         gpu::kGpuFeatureStatusEnabled);
    const bool enable_gpu_memory_buffers =
        !is_gpu_compositing_disabled_ &&

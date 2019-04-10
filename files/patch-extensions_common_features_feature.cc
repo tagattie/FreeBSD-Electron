@@ -1,4 +1,4 @@
---- extensions/common/features/feature.cc.orig	2019-03-15 06:25:45 UTC
+--- extensions/common/features/feature.cc.orig	2019-04-08 08:18:20 UTC
 +++ extensions/common/features/feature.cc
 @@ -26,6 +26,8 @@ Feature::Platform Feature::GetCurrentPlatform() {
    return MACOSX_PLATFORM;

@@ -1,4 +1,4 @@
---- third_party/sfntly/src/cpp/src/sfntly/table/core/cmap_table.cc.orig	2019-03-15 06:29:31 UTC
+--- third_party/sfntly/src/cpp/src/sfntly/table/core/cmap_table.cc.orig	2019-04-08 08:22:32 UTC
 +++ third_party/sfntly/src/cpp/src/sfntly/table/core/cmap_table.cc
 @@ -439,7 +439,7 @@ CMapTable::CMapFormat0::Builder::Builder(
  }

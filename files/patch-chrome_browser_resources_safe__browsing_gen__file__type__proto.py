@@ -1,4 +1,4 @@
---- chrome/browser/resources/safe_browsing/gen_file_type_proto.py.orig	2019-03-15 06:37:05 UTC
+--- chrome/browser/resources/safe_browsing/gen_file_type_proto.py.orig	2019-04-08 08:32:46 UTC
 +++ chrome/browser/resources/safe_browsing/gen_file_type_proto.py
 @@ -31,6 +31,7 @@ def PlatformTypes():
      "android": download_file_types_pb2.DownloadFileType.PLATFORM_ANDROID,

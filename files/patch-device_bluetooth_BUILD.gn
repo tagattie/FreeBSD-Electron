@@ -1,6 +1,6 @@
---- device/bluetooth/BUILD.gn.orig	2019-03-15 06:37:23 UTC
+--- device/bluetooth/BUILD.gn.orig	2019-04-08 08:32:55 UTC
 +++ device/bluetooth/BUILD.gn
-@@ -266,7 +266,7 @@ component("bluetooth") {
+@@ -277,7 +277,7 @@ component("bluetooth") {
      ]
    }
  

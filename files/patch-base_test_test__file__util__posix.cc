@@ -1,7 +1,7 @@
---- base/test/test_file_util_posix.cc.orig	2019-03-15 06:36:56 UTC
+--- base/test/test_file_util_posix.cc.orig	2019-04-08 08:18:04 UTC
 +++ base/test/test_file_util_posix.cc
-@@ -79,7 +79,7 @@ bool DieFileDie(const FilePath& file, bool recurse) {
-   return DeleteFile(file, recurse);
+@@ -85,7 +85,7 @@ void SyncPageCacheToDisk() {
+   sync();
  }
  
 -#if !defined(OS_LINUX) && !defined(OS_MACOSX) && !defined(OS_ANDROID)

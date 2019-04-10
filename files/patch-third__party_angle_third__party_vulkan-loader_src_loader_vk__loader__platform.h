@@ -1,4 +1,4 @@
---- third_party/angle/third_party/vulkan-loader/src/loader/vk_loader_platform.h.orig	2019-03-15 06:41:41 UTC
+--- third_party/angle/third_party/vulkan-loader/src/loader/vk_loader_platform.h.orig	2019-04-08 08:34:43 UTC
 +++ third_party/angle/third_party/vulkan-loader/src/loader/vk_loader_platform.h
 @@ -31,7 +31,7 @@
  #include "vulkan/vk_platform.h"

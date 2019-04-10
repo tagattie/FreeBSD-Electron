@@ -1,4 +1,4 @@
---- third_party/crashpad/crashpad/util/posix/symbolic_constants_posix.cc.orig	2019-03-15 06:38:19 UTC
+--- third_party/crashpad/crashpad/util/posix/symbolic_constants_posix.cc.orig	2019-04-08 08:19:07 UTC
 +++ third_party/crashpad/crashpad/util/posix/symbolic_constants_posix.cc
 @@ -64,7 +64,7 @@ constexpr const char* kSignalNames[] = {
      "INFO",
@@ -16,5 +16,5 @@
 -#if defined(OS_LINUX) || defined(OS_ANDROID)
 +#if defined(OS_LINUX) || defined(OS_ANDROID) || defined(OS_BSD)
  // NSIG is 64 to account for real-time signals.
- static_assert(arraysize(kSignalNames) == 32, "kSignalNames length");
+ static_assert(base::size(kSignalNames) == 32, "kSignalNames length");
  #else

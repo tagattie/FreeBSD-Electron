@@ -1,6 +1,6 @@
---- third_party/crashpad/crashpad/util/misc/metrics.cc.orig	2019-03-15 06:38:19 UTC
+--- third_party/crashpad/crashpad/util/misc/metrics.cc.orig	2019-04-08 08:19:06 UTC
 +++ third_party/crashpad/crashpad/util/misc/metrics.cc
-@@ -24,7 +24,7 @@
+@@ -25,7 +25,7 @@
  #define METRICS_OS_NAME "Win"
  #elif defined(OS_ANDROID)
  #define METRICS_OS_NAME "Android"

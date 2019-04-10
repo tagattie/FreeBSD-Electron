@@ -1,4 +1,4 @@
---- base/native_library_unittest.cc.orig	2019-03-15 06:25:27 UTC
+--- base/native_library_unittest.cc.orig	2019-04-08 08:18:04 UTC
 +++ base/native_library_unittest.cc
 @@ -120,7 +120,7 @@ TEST(NativeLibraryTest, LoadLibrary) {
  // Android dlopen() requires further investigation, as it might vary across

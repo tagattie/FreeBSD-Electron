@@ -1,4 +1,4 @@
---- ui/webui/resources/js/icon.js.orig	2019-03-15 06:38:29 UTC
+--- ui/webui/resources/js/icon.js.orig	2019-04-08 08:19:20 UTC
 +++ ui/webui/resources/js/icon.js
 @@ -14,7 +14,7 @@ cr.define('cr.icon', function() {
        // supports SCALE_FACTOR_100P on all non-iOS platforms.

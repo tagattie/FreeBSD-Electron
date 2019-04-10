@@ -1,4 +1,4 @@
---- media/formats/common/offset_byte_queue.cc.orig	2019-03-15 06:25:46 UTC
+--- media/formats/common/offset_byte_queue.cc.orig	2019-04-08 08:18:23 UTC
 +++ media/formats/common/offset_byte_queue.cc
 @@ -46,13 +46,13 @@ void OffsetByteQueue::PeekAt(int64_t offset, const uin
    *size = tail() - offset;

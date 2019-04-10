@@ -1,4 +1,4 @@
---- third_party/skia/src/core/SkCpu.cpp.orig	2019-03-15 06:31:12 UTC
+--- third_party/skia/src/core/SkCpu.cpp.orig	2019-04-08 08:24:20 UTC
 +++ third_party/skia/src/core/SkCpu.cpp
 @@ -74,6 +74,8 @@
      #include <sys/auxv.h>

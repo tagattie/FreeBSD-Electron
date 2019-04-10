@@ -1,10 +1,10 @@
---- base/process/launch_posix.cc.orig	2019-03-15 06:36:56 UTC
+--- base/process/launch_posix.cc.orig	2019-04-08 08:32:37 UTC
 +++ base/process/launch_posix.cc
-@@ -65,6 +65,7 @@
- #include "base/feature_list.h"
- #else
- extern char** environ;
-+#pragma weak environ
+@@ -64,6 +64,7 @@
+ #error "macOS should use launch_mac.cc"
  #endif
+ 
++#pragma weak environ
+ extern char** environ;
  
  namespace base {

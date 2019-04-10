@@ -1,14 +1,14 @@
---- components/plugins/renderer/plugin_placeholder.cc.orig	2019-03-15 06:37:14 UTC
+--- components/plugins/renderer/plugin_placeholder.cc.orig	2019-04-08 08:18:18 UTC
 +++ components/plugins/renderer/plugin_placeholder.cc
-@@ -11,7 +11,11 @@
- #include "gin/object_template_builder.h"
- #include "third_party/blink/public/web/web_element.h"
+@@ -17,7 +17,11 @@
  #include "third_party/blink/public/web/web_plugin_container.h"
+ #include "third_party/blink/public/web/web_script_source.h"
+ #include "third_party/blink/public/web/web_serialized_script_value.h"
 +#if defined(OS_BSD)
 +#include <re2/re2.h>
 +#else
  #include "third_party/re2/src/re2/re2.h"
-+#endif
++#endif // defined(OS_BSD)
  
  namespace plugins {
  

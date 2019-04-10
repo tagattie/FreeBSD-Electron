@@ -1,8 +1,8 @@
---- chrome/browser/ui/views/tabs/new_tab_button.cc.orig	2019-03-15 06:37:07 UTC
+--- chrome/browser/ui/views/tabs/new_tab_button.cc.orig	2019-04-08 08:32:47 UTC
 +++ chrome/browser/ui/views/tabs/new_tab_button.cc
-@@ -94,7 +94,7 @@ NewTabButton::NewTabButton(TabStrip* tab_strip, views:
-       tab_strip_(tab_strip),
-       is_incognito_(tab_strip->IsIncognito()) {
+@@ -63,7 +63,7 @@ const gfx::Size NewTabButton::kButtonSize{28, 28};
+ NewTabButton::NewTabButton(TabStrip* tab_strip, views::ButtonListener* listener)
+     : views::ImageButton(listener), tab_strip_(tab_strip) {
    set_animate_on_state_change(true);
 -#if defined(OS_LINUX) && !defined(OS_CHROMEOS)
 +#if (defined(OS_LINUX) || defined(OS_BSD)) && !defined(OS_CHROMEOS)

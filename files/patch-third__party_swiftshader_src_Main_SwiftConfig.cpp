@@ -1,4 +1,4 @@
---- third_party/swiftshader/src/Main/SwiftConfig.cpp.orig	2019-03-15 06:41:56 UTC
+--- third_party/swiftshader/src/Main/SwiftConfig.cpp.orig	2019-04-08 08:23:02 UTC
 +++ third_party/swiftshader/src/Main/SwiftConfig.cpp
 @@ -762,7 +762,11 @@ namespace sw
  		struct stat status;
@@ -7,7 +7,7 @@
 +#if !defined(__FreeBSD__)
  		bool noConfig = stat("SwiftShader.ini", &status) != 0;
 +#else
-+                bool noConfig = false;
++               bool noConfig = false;
 +#endif
  		newConfig = !noConfig && abs((int)status.st_mtime - lastModified) > 1;
  

@@ -1,6 +1,6 @@
---- build/toolchain/gcc_toolchain.gni.orig	2019-03-15 06:36:56 UTC
+--- build/toolchain/gcc_toolchain.gni.orig	2019-04-08 08:32:38 UTC
 +++ build/toolchain/gcc_toolchain.gni
-@@ -25,6 +25,11 @@ analyzer_wrapper =
+@@ -47,6 +47,11 @@ analyzer_wrapper =
      rebase_path("//build/toolchain/clang_static_analyzer_wrapper.py",
                  root_build_dir) + " --mode=clang"
  
@@ -12,7 +12,7 @@
  # This template defines a toolchain for something that works like gcc
  # (including clang).
  #
-@@ -604,13 +609,23 @@ template("clang_toolchain") {
+@@ -610,13 +615,23 @@ template("clang_toolchain") {
    }
  
    gcc_toolchain(target_name) {

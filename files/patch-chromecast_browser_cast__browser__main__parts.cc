@@ -1,6 +1,6 @@
---- chromecast/browser/cast_browser_main_parts.cc.orig	2019-03-15 06:37:10 UTC
+--- chromecast/browser/cast_browser_main_parts.cc.orig	2019-04-08 08:32:48 UTC
 +++ chromecast/browser/cast_browser_main_parts.cc
-@@ -68,7 +68,7 @@
+@@ -66,7 +66,7 @@
  #include "ui/compositor/compositor_switches.h"
  #include "ui/gl/gl_switches.h"
  
@@ -9,7 +9,7 @@
  #include <fontconfig/fontconfig.h>
  #include <signal.h>
  #include <sys/prctl.h>
-@@ -241,7 +241,7 @@ const DefaultCommandLineSwitch kDefaultSwitches[] = {
+@@ -244,7 +244,7 @@ const DefaultCommandLineSwitch kDefaultSwitches[] = {
      {cc::switches::kDisableThreadedAnimation, ""},
  #endif  // defined(OS_ANDROID)
  #endif  // BUILDFLAG(IS_CAST_AUDIO_ONLY)
@@ -18,7 +18,7 @@
  #if defined(ARCH_CPU_X86_FAMILY)
      // This is needed for now to enable the x11 Ozone platform to work with
      // current Linux/NVidia OpenGL drivers.
-@@ -399,7 +399,7 @@ void CastBrowserMainParts::PostMainMessageLoopStart() 
+@@ -393,7 +393,7 @@ void CastBrowserMainParts::PostMainMessageLoopStart() 
  }
  
  void CastBrowserMainParts::ToolkitInitialized() {

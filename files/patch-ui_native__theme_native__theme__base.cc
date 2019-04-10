@@ -1,4 +1,4 @@
---- ui/native_theme/native_theme_base.cc.orig	2019-03-15 06:26:44 UTC
+--- ui/native_theme/native_theme_base.cc.orig	2019-04-08 08:33:23 UTC
 +++ ui/native_theme/native_theme_base.cc
 @@ -172,7 +172,7 @@ void NativeThemeBase::Paint(cc::PaintCanvas* canvas,
      case kCheckbox:

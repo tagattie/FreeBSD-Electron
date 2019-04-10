@@ -1,4 +1,4 @@
---- services/service_manager/embedder/set_process_title_linux.cc.orig	2019-03-15 06:25:51 UTC
+--- services/service_manager/embedder/set_process_title_linux.cc.orig	2019-04-08 08:18:26 UTC
 +++ services/service_manager/embedder/set_process_title_linux.cc
 @@ -49,6 +49,8 @@
  extern char** environ;

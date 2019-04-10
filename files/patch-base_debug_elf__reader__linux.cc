@@ -1,4 +1,4 @@
---- base/debug/elf_reader_linux.cc.orig	2019-03-15 06:36:56 UTC
+--- base/debug/elf_reader_linux.cc.orig	2019-04-08 08:32:37 UTC
 +++ base/debug/elf_reader_linux.cc
 @@ -41,8 +41,10 @@ Optional<std::string> ElfSegmentBuildIDNoteAsString(co
    const void* section_end = segment.data() + segment.size_bytes();

@@ -1,6 +1,6 @@
---- content/browser/media/media_internals.cc.orig	2019-03-15 06:37:20 UTC
+--- content/browser/media/media_internals.cc.orig	2019-04-08 08:32:54 UTC
 +++ content/browser/media/media_internals.cc
-@@ -724,7 +724,7 @@ void MediaInternals::UpdateVideoCaptureDeviceCapabilit
+@@ -763,7 +763,7 @@ void MediaInternals::UpdateVideoCaptureDeviceCapabilit
      device_dict->SetString("name", descriptor.GetNameAndModel());
      device_dict->Set("formats", std::move(format_list));
  #if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || \

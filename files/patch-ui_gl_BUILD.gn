@@ -1,7 +1,7 @@
---- ui/gl/BUILD.gn.orig	2019-03-15 06:38:28 UTC
+--- ui/gl/BUILD.gn.orig	2019-04-09 12:48:20 UTC
 +++ ui/gl/BUILD.gn
-@@ -209,7 +209,7 @@ component("gl") {
-       }
+@@ -212,7 +212,7 @@ jumbo_component("gl") {
+       ]
      }
  
 -    if (is_posix && !is_fuchsia && !is_mac) {

@@ -1,8 +1,8 @@
---- content/browser/renderer_host/render_message_filter.h.orig	2019-03-15 06:37:20 UTC
+--- content/browser/renderer_host/render_message_filter.h.orig	2019-04-08 08:18:19 UTC
 +++ content/browser/renderer_host/render_message_filter.h
-@@ -110,14 +110,14 @@ class CONTENT_EXPORT RenderMessageFilter
-       const url::Origin& cache_storage_origin,
-       const std::string& cache_storage_cache_name) override;
+@@ -87,14 +87,14 @@ class CONTENT_EXPORT RenderMessageFilter
+                               mojom::WidgetPtr widget,
+                               CreateFullscreenWidgetCallback callback) override;
    void HasGpuProcess(HasGpuProcessCallback callback) override;
 -#if defined(OS_LINUX)
 +#if defined(OS_LINUX) || defined(OS_BSD)

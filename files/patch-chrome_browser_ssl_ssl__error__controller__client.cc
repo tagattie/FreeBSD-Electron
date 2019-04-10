@@ -1,6 +1,6 @@
---- chrome/browser/ssl/ssl_error_controller_client.cc.orig	2019-03-15 06:37:06 UTC
+--- chrome/browser/ssl/ssl_error_controller_client.cc.orig	2019-04-08 08:32:46 UTC
 +++ chrome/browser/ssl/ssl_error_controller_client.cc
-@@ -77,7 +77,7 @@ void LaunchDateAndTimeSettingsImpl() {
+@@ -78,7 +78,7 @@ void LaunchDateAndTimeSettingsImpl() {
  #if defined(OS_ANDROID)
    chrome::android::OpenDateAndTimeSettings();
  

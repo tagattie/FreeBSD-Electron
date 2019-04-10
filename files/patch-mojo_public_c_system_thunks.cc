@@ -1,4 +1,4 @@
---- mojo/public/c/system/thunks.cc.orig	2019-03-15 06:37:28 UTC
+--- mojo/public/c/system/thunks.cc.orig	2019-04-08 08:18:24 UTC
 +++ mojo/public/c/system/thunks.cc
 @@ -16,7 +16,7 @@
  #include "build/build_config.h"
@@ -18,7 +18,7 @@
  PROTECTED_MEMORY_SECTION
  base::ProtectedMemory<MojoGetSystemThunksFunction> g_get_thunks;
  #endif
-@@ -63,7 +63,7 @@ namespace mojo {
+@@ -65,7 +65,7 @@ namespace mojo {
  class CoreLibraryInitializer {
   public:
    CoreLibraryInitializer(const MojoInitializeOptions* options) {
@@ -27,7 +27,7 @@
      bool application_provided_path = false;
      base::Optional<base::FilePath> library_path;
      if (options && options->struct_size >= sizeof(*options) &&
-@@ -82,7 +82,7 @@ class CoreLibraryInitializer {
+@@ -84,7 +84,7 @@ class CoreLibraryInitializer {
  
      if (!library_path) {
        // Default to looking for the library in the current working directory.
@@ -36,7 +36,7 @@
        const base::FilePath::CharType kDefaultLibraryPathValue[] =
            FILE_PATH_LITERAL("./libmojo_core.so");
  #elif defined(OS_WIN)
-@@ -132,7 +132,7 @@ class CoreLibraryInitializer {
+@@ -147,7 +147,7 @@ class CoreLibraryInitializer {
    ~CoreLibraryInitializer() = default;
  
   private:

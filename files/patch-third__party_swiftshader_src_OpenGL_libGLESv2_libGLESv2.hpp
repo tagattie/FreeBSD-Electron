@@ -1,4 +1,4 @@
---- third_party/swiftshader/src/OpenGL/libGLESv2/libGLESv2.hpp.orig	2019-03-15 06:41:56 UTC
+--- third_party/swiftshader/src/OpenGL/libGLESv2/libGLESv2.hpp.orig	2019-04-08 08:23:02 UTC
 +++ third_party/swiftshader/src/OpenGL/libGLESv2/libGLESv2.hpp
 @@ -286,7 +286,7 @@ class LibGLESv2 (private)
  				#endif

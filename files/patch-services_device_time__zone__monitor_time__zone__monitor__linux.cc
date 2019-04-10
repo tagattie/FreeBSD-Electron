@@ -1,6 +1,6 @@
---- services/device/time_zone_monitor/time_zone_monitor_linux.cc.orig	2019-03-15 06:37:32 UTC
+--- services/device/time_zone_monitor/time_zone_monitor_linux.cc.orig	2019-04-08 08:33:02 UTC
 +++ services/device/time_zone_monitor/time_zone_monitor_linux.cc
-@@ -89,7 +89,11 @@ class TimeZoneMonitorLinuxImpl
+@@ -104,7 +104,11 @@ class TimeZoneMonitorLinuxImpl
      // false positives are harmless, assuming the false positive rate is
      // reasonable.
      const char* const kFilesToWatch[] = {
@@ -10,5 +10,5 @@
          "/etc/localtime", "/etc/timezone", "/etc/TZ",
 +#endif
      };
- 
-     for (size_t index = 0; index < arraysize(kFilesToWatch); ++index) {
+     for (size_t index = 0; index < base::size(kFilesToWatch); ++index) {
+       file_path_watchers_.push_back(std::make_unique<base::FilePathWatcher>());

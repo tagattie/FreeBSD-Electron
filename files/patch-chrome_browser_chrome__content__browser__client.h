@@ -1,9 +1,9 @@
---- chrome/browser/chrome_content_browser_client.h.orig	2019-03-15 06:37:01 UTC
+--- chrome/browser/chrome_content_browser_client.h.orig	2019-04-08 08:32:43 UTC
 +++ chrome/browser/chrome_content_browser_client.h
-@@ -326,12 +326,12 @@ class ChromeContentBrowserClient : public content::Con
+@@ -363,12 +363,12 @@ class ChromeContentBrowserClient : public content::Con
    void OverridePageVisibilityState(
        content::RenderFrameHost* render_frame_host,
-       blink::mojom::PageVisibilityState* visibility_state) override;
+       content::PageVisibilityState* visibility_state) override;
 -#if defined(OS_POSIX) && !defined(OS_MACOSX)
 +#if defined(OS_POSIX) && !defined(OS_MACOSX) && !defined(OS_BSD)
    void GetAdditionalMappedFilesForChildProcess(

@@ -1,6 +1,6 @@
---- services/device/hid/hid_connection_freebsd.h.orig	2019-03-16 09:17:07 UTC
+--- services/device/hid/hid_connection_freebsd.h.orig	2019-04-09 12:48:48 UTC
 +++ services/device/hid/hid_connection_freebsd.h
-@@ -0,0 +1,70 @@
+@@ -0,0 +1,68 @@
 +// Copyright (c) 2014 The Chromium Authors. All rights reserved.
 +// Use of this source code is governed by a BSD-style license that can be
 +// found in the LICENSE file.
@@ -50,8 +50,6 @@
 +                                ReadCallback callback) override;
 +  void PlatformSendFeatureReport(scoped_refptr<base::RefCountedBytes> buffer,
 +                                 WriteCallback callback) override;
-+  void ProcessInputReport(scoped_refptr<base::RefCountedBytes> buffer,
-+                          size_t size);
 +
 +  // |helper_| lives on the sequence to which |blocking_task_runner_| posts
 +  // tasks so all calls must be posted there including this object's

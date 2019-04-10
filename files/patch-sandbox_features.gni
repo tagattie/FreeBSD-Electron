@@ -1,4 +1,4 @@
---- sandbox/features.gni.orig	2019-03-15 06:25:51 UTC
+--- sandbox/features.gni.orig	2019-04-08 08:18:26 UTC
 +++ sandbox/features.gni
 @@ -12,6 +12,6 @@ use_seccomp_bpf =
      (is_linux || is_android) &&

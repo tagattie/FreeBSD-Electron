@@ -1,6 +1,6 @@
---- third_party/angle/third_party/vulkan-loader/src/loader/loader.c.orig	2019-03-15 06:41:41 UTC
+--- third_party/angle/third_party/vulkan-loader/src/loader/loader.c.orig	2019-04-08 08:34:43 UTC
 +++ third_party/angle/third_party/vulkan-loader/src/loader/loader.c
-@@ -213,7 +213,7 @@ void *loader_device_heap_realloc(const struct loader_d
+@@ -215,7 +215,7 @@ void *loader_device_heap_realloc(const struct loader_d
  }
  
  // Environment variables

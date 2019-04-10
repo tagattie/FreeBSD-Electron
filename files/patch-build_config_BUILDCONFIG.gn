@@ -1,4 +1,4 @@
---- build/config/BUILDCONFIG.gn.orig	2019-03-16 09:15:20 UTC
+--- build/config/BUILDCONFIG.gn.orig	2019-04-09 12:48:19 UTC
 +++ build/config/BUILDCONFIG.gn
 @@ -134,10 +134,10 @@ declare_args() {
    is_official_build = false
@@ -20,11 +20,11 @@
 -  if (host_os == "linux") {
 -    if (target_os != "linux") {
 +  if (host_os == "linux" || host_os == "freebsd") {
-+    if (target_os != "linux" || target_os != "freebsd") {
-       # TODO(dpranke) - is_clang normally applies only to the target
-       # build, and there is no way to indicate that you want to override
-       # it for both the target build *and* the host build. Do we need to
-@@ -230,7 +230,7 @@ if (target_os == "android") {
++    if (target_os != "linux" && target_os != "freebsd") {
+       host_toolchain = "//build/toolchain/linux:clang_$host_cpu"
+     } else if (is_clang) {
+       host_toolchain = "//build/toolchain/linux:clang_$host_cpu"
+@@ -227,7 +227,7 @@ if (target_os == "android") {
    assert(host_os == "linux" || host_os == "mac",
           "Android builds are only supported on Linux and Mac hosts.")
    _default_toolchain = "//build/toolchain/android:android_clang_$target_cpu"
@@ -33,87 +33,16 @@
    # See comments in build/toolchain/cros/BUILD.gn about board compiles.
    if (is_clang) {
      _default_toolchain = "//build/toolchain/linux:clang_$target_cpu"
-@@ -304,6 +304,7 @@ if (current_os == "win" || current_os == "winuwp") {
-   is_nacl = false
-   is_posix = false
-   is_win = true
-+  is_bsd = false
- } else if (current_os == "mac") {
-   is_aix = false
-   is_android = false
-@@ -315,6 +316,7 @@ if (current_os == "win" || current_os == "winuwp") {
-   is_nacl = false
-   is_posix = true
-   is_win = false
-+  is_bsd = false
- } else if (current_os == "android") {
-   is_aix = false
-   is_android = true
-@@ -326,6 +328,7 @@ if (current_os == "win" || current_os == "winuwp") {
-   is_nacl = false
-   is_posix = true
-   is_win = false
-+  is_bsd = false
- } else if (current_os == "chromeos") {
-   is_aix = false
-   is_android = false
-@@ -337,6 +340,7 @@ if (current_os == "win" || current_os == "winuwp") {
-   is_nacl = false
-   is_posix = true
-   is_win = false
-+  is_bsd = false
- } else if (current_os == "nacl") {
-   # current_os == "nacl" will be passed by the nacl toolchain definition.
-   # It is not set by default or on the command line. We treat is as a
-@@ -351,6 +355,7 @@ if (current_os == "win" || current_os == "winuwp") {
-   is_nacl = true
-   is_posix = true
-   is_win = false
-+  is_bsd = false
- } else if (current_os == "fuchsia") {
-   is_aix = false
-   is_android = false
-@@ -362,6 +367,7 @@ if (current_os == "win" || current_os == "winuwp") {
-   is_nacl = false
-   is_posix = false
-   is_win = false
-+  is_bsd = false
- } else if (current_os == "ios") {
-   is_aix = false
-   is_android = false
-@@ -373,6 +379,7 @@ if (current_os == "win" || current_os == "winuwp") {
-   is_nacl = false
-   is_posix = true
-   is_win = false
-+  is_bsd = false
- } else if (current_os == "linux") {
-   is_aix = false
-   is_android = false
-@@ -384,6 +391,7 @@ if (current_os == "win" || current_os == "winuwp") {
-   is_nacl = false
-   is_posix = true
-   is_win = false
-+  is_bsd = false
- } else if (current_os == "aix") {
-   is_aix = true
-   is_android = false
-@@ -395,6 +403,19 @@ if (current_os == "win" || current_os == "winuwp") {
-   is_nacl = false
-   is_posix = true
-   is_win = false
-+  is_bsd = false
-+} else if (current_os == "freebsd") {
-+  is_aix = false
-+  is_android = false
-+  is_chromeos = false
-+  is_fuchsia = false
-+  is_ios = false
-+  is_linux = true
-+  is_mac = false
-+  is_nacl = false
-+  is_posix = true
-+  is_win = false
-+  is_bsd = true
- }
+@@ -294,10 +294,11 @@ is_android = current_os == "android"
+ is_chromeos = current_os == "chromeos"
+ is_fuchsia = current_os == "fuchsia"
+ is_ios = current_os == "ios"
+-is_linux = current_os == "chromeos" || current_os == "linux"
++is_linux = current_os == "chromeos" || current_os == "linux" || current_os == "freebsd"
+ is_mac = current_os == "mac"
+ is_nacl = current_os == "nacl"
+ is_win = current_os == "win" || current_os == "winuwp"
++is_bsd = current_os == "freebsd"
  
- # =============================================================================
+ is_posix = !is_win && !is_fuchsia
+ 

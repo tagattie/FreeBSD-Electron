@@ -1,4 +1,4 @@
---- electron/atom/browser/relauncher_linux.cc.orig	2019-03-16 12:14:15 UTC
+--- electron/atom/browser/relauncher_linux.cc.orig	2019-04-04 16:09:31 UTC
 +++ electron/atom/browser/relauncher_linux.cc
 @@ -6,8 +6,10 @@
  

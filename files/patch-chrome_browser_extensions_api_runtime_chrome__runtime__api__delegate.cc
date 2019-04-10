@@ -1,6 +1,6 @@
---- chrome/browser/extensions/api/runtime/chrome_runtime_api_delegate.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/extensions/api/runtime/chrome_runtime_api_delegate.cc.orig	2019-04-08 08:32:44 UTC
 +++ chrome/browser/extensions/api/runtime/chrome_runtime_api_delegate.cc
-@@ -271,6 +271,8 @@ bool ChromeRuntimeAPIDelegate::GetPlatformInfo(Platfor
+@@ -296,6 +296,8 @@ bool ChromeRuntimeAPIDelegate::GetPlatformInfo(Platfor
      info->os = extensions::api::runtime::PLATFORM_OS_CROS;
    } else if (strcmp(os, "linux") == 0) {
      info->os = extensions::api::runtime::PLATFORM_OS_LINUX;

@@ -1,6 +1,6 @@
---- electron/atom/browser/atom_browser_main_parts_posix.cc.orig	2019-03-16 12:41:31 UTC
+--- electron/atom/browser/atom_browser_main_parts_posix.cc.orig	2019-04-04 16:09:31 UTC
 +++ electron/atom/browser/atom_browser_main_parts_posix.cc
-@@ -180,6 +180,9 @@ void AtomBrowserMainParts::HandleShutdownSignals() {
+@@ -182,6 +182,9 @@ void AtomBrowserMainParts::HandleShutdownSignals() {
      g_pipe_pid = getpid();
      g_shutdown_pipe_read_fd = pipefd[0];
      g_shutdown_pipe_write_fd = pipefd[1];
@@ -10,7 +10,7 @@
  #if !defined(ADDRESS_SANITIZER) && !defined(KEEP_SHADOW_STACKS)
      const size_t kShutdownDetectorThreadStackSize = PTHREAD_STACK_MIN * 2;
  #else
-@@ -187,6 +190,7 @@ void AtomBrowserMainParts::HandleShutdownSignals() {
+@@ -189,6 +192,7 @@ void AtomBrowserMainParts::HandleShutdownSignals() {
      // shadow stacks) bloat the stack frames, so we need to increase the stack
      // size to avoid hitting the guard page.
      const size_t kShutdownDetectorThreadStackSize = PTHREAD_STACK_MIN * 4;

@@ -1,4 +1,4 @@
---- third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h.orig	2019-03-15 06:26:35 UTC
+--- third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h.orig	2019-04-08 08:19:06 UTC
 +++ third_party/cacheinvalidation/src/google/cacheinvalidation/include/types.h
 @@ -334,6 +334,8 @@ class Status {
       */

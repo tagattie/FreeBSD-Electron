@@ -1,4 +1,4 @@
---- base/process/kill.h.orig	2019-03-15 06:25:27 UTC
+--- base/process/kill.h.orig	2019-04-08 08:18:04 UTC
 +++ base/process/kill.h
 @@ -111,7 +111,7 @@ BASE_EXPORT TerminationStatus GetTerminationStatus(Pro
  BASE_EXPORT TerminationStatus GetKnownDeadTerminationStatus(

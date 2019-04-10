@@ -1,8 +1,8 @@
---- electron/BUILD.gn.orig	2019-03-16 09:51:23 UTC
+--- electron/BUILD.gn.orig	2019-04-04 16:09:31 UTC
 +++ electron/BUILD.gn
-@@ -307,6 +307,15 @@ static_library("electron_lib") {
-     "//extensions/common/url_pattern.h",
-   ]
+@@ -334,6 +334,15 @@ static_library("electron_lib") {
+   sources = filenames.lib_sources
+   set_sources_assignment_filter(sources_assignment_filter)
  
 +  if (is_bsd) {
 +    sources -= [
@@ -16,8 +16,8 @@
    if (is_component_build) {
      defines += [ "NODE_SHARED_MODE" ]
    }
-@@ -376,7 +385,7 @@ static_library("electron_lib") {
-     sources += filenames.lib_sources_win
+@@ -404,7 +413,7 @@ static_library("electron_lib") {
+   if (is_win) {
      libs += [ "dwmapi.lib" ]
    }
 -  if (is_linux || is_win) {
@@ -25,3 +25,12 @@
      deps += [ "//third_party/breakpad:client" ]
      include_dirs += [ "//third_party/breakpad" ]
    }
+@@ -924,7 +933,7 @@ dist_zip("electron_dist_zip") {
+     ":licenses",
+     ":electron_version",
+   ]
+-  if (is_linux) {
++  if (is_linux && !is_bsd) {
+     data_deps += [ "//sandbox/linux:chrome_sandbox" ]
+   }
+   outputs = [

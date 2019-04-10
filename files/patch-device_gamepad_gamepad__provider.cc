@@ -1,6 +1,6 @@
---- device/gamepad/gamepad_provider.cc.orig	2019-03-15 06:37:23 UTC
+--- device/gamepad/gamepad_provider.cc.orig	2019-04-08 08:32:56 UTC
 +++ device/gamepad/gamepad_provider.cc
-@@ -187,7 +187,7 @@ void GamepadProvider::Initialize(std::unique_ptr<Gamep
+@@ -164,7 +164,7 @@ void GamepadProvider::Initialize(std::unique_ptr<Gamep
      monitor->AddDevicesChangedObserver(this);
  
    polling_thread_.reset(new base::Thread("Gamepad polling thread"));

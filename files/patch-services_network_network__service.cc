@@ -1,16 +1,16 @@
---- services/network/network_service.cc.orig	2019-04-06 12:09:25 UTC
+--- services/network/network_service.cc.orig	2019-04-08 08:33:02 UTC
 +++ services/network/network_service.cc
-@@ -39,7 +39,7 @@
+@@ -61,7 +61,7 @@
  #include "third_party/boringssl/src/include/openssl/cpu.h"
  #endif
  
 -#if defined(OS_LINUX) && !defined(OS_CHROMEOS) && !defined(IS_CHROMECAST)
 +#if (defined(OS_LINUX) && !defined(OS_CHROMEOS) && !defined(IS_CHROMECAST)) || defined(OS_BSD)
  #include "components/os_crypt/key_storage_config_linux.h"
- #include "components/os_crypt/os_crypt.h"
  #endif
-@@ -379,7 +379,7 @@ void NetworkService::UpdateSignedTreeHead(const net::c
-   sth_distributor_->NewSTHObserved(sth);
+ 
+@@ -605,7 +605,7 @@ void NetworkService::OnCertDBChanged() {
+   net::CertDatabase::GetInstance()->NotifyObserversCertDBChanged();
  }
  
 -#if defined(OS_LINUX) && !defined(OS_CHROMEOS)

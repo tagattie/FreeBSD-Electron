@@ -1,6 +1,6 @@
---- chrome/browser/memory_details_linux.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/memory_details_linux.cc.orig	2019-04-08 08:32:44 UTC
 +++ chrome/browser/memory_details_linux.cc
-@@ -70,8 +70,10 @@ ProcessData GetProcessDataMemoryInformation(
+@@ -72,8 +72,10 @@ ProcessData GetProcessDataMemoryInformation(
  
      std::unique_ptr<base::ProcessMetrics> metrics(
          base::ProcessMetrics::CreateProcessMetrics(pid));

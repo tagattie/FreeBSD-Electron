@@ -1,4 +1,4 @@
---- services/device/hid/hid_service.cc.orig	2019-03-15 06:37:32 UTC
+--- services/device/hid/hid_service.cc.orig	2019-04-08 08:18:26 UTC
 +++ services/device/hid/hid_service.cc
 @@ -16,6 +16,8 @@
  

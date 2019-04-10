@@ -1,4 +1,4 @@
---- third_party/swiftshader/third_party/llvm-subzero/lib/Support/Unix/Process.inc.orig	2019-03-15 06:30:14 UTC
+--- third_party/swiftshader/third_party/llvm-subzero/lib/Support/Unix/Process.inc.orig	2019-04-08 08:23:16 UTC
 +++ third_party/swiftshader/third_party/llvm-subzero/lib/Support/Unix/Process.inc
 @@ -35,7 +35,7 @@
  // DragonFlyBSD, OpenBSD, and Bitrig have deprecated <malloc.h> for

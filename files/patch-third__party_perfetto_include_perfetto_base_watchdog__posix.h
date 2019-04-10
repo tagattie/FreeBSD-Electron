@@ -1,6 +1,6 @@
---- third_party/perfetto/include/perfetto/base/watchdog_posix.h.orig	2019-03-15 06:40:52 UTC
+--- third_party/perfetto/include/perfetto/base/watchdog_posix.h.orig	2019-04-08 08:22:17 UTC
 +++ third_party/perfetto/include/perfetto/base/watchdog_posix.h
-@@ -45,7 +45,7 @@ class Watchdog {
+@@ -46,7 +46,7 @@ class Watchdog {
      Timer(const Timer&) = delete;
      Timer& operator=(const Timer&) = delete;
  

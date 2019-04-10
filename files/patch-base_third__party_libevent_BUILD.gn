@@ -1,4 +1,4 @@
---- base/third_party/libevent/BUILD.gn.orig	2019-03-15 06:25:28 UTC
+--- base/third_party/libevent/BUILD.gn.orig	2019-04-08 08:18:04 UTC
 +++ base/third_party/libevent/BUILD.gn
 @@ -43,13 +43,20 @@ static_library("libevent") {
        "mac/event-config.h",

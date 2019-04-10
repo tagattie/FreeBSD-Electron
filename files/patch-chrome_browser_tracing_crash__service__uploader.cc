@@ -1,6 +1,6 @@
---- chrome/browser/tracing/crash_service_uploader.cc.orig	2019-03-15 06:37:06 UTC
+--- chrome/browser/tracing/crash_service_uploader.cc.orig	2019-04-08 08:32:46 UTC
 +++ chrome/browser/tracing/crash_service_uploader.cc
-@@ -158,6 +158,8 @@ void TraceCrashServiceUploader::DoCompressOnBackground
+@@ -162,6 +162,8 @@ void TraceCrashServiceUploader::DoCompressOnBackground
    const char product[] = "Chrome_Linux";
  #elif defined(OS_ANDROID)
    const char product[] = "Chrome_Android";

@@ -1,4 +1,4 @@
---- net/dns/host_resolver_proc.cc.orig	2019-03-15 06:37:29 UTC
+--- net/dns/host_resolver_proc.cc.orig	2019-04-08 08:33:00 UTC
 +++ net/dns/host_resolver_proc.cc
 @@ -195,7 +195,7 @@ int SystemHostResolverCall(const std::string& host,
    // current process during that time.

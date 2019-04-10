@@ -1,8 +1,8 @@
---- third_party/pdfium/fxjs/cjs_publicmethods.cpp.orig	2019-03-15 06:41:33 UTC
+--- third_party/pdfium/fxjs/cjs_publicmethods.cpp.orig	2019-04-08 08:34:28 UTC
 +++ third_party/pdfium/fxjs/cjs_publicmethods.cpp
-@@ -72,6 +72,103 @@ const wchar_t* const kFullMonths[] = {L"January", L"Fe
-                                       L"July",    L"August",   L"September",
-                                       L"October", L"November", L"December"};
+@@ -85,6 +85,103 @@ constexpr const wchar_t* kDateFormats[] = {L"m/d",
+ constexpr const wchar_t* kTimeFormats[] = {L"HH:MM", L"h:MM tt", L"HH:MM:ss",
+                                            L"h:MM:ss tt"};
  
 +#if defined(__FreeBSD__)
 +/*

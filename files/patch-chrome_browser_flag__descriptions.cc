@@ -1,6 +1,6 @@
---- chrome/browser/flag_descriptions.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/flag_descriptions.cc.orig	2019-04-08 08:32:44 UTC
 +++ chrome/browser/flag_descriptions.cc
-@@ -3411,7 +3411,7 @@ extern const char kEnableContinueReadingDescription[] 
+@@ -3656,13 +3656,13 @@ const char kWakeOnPacketsDescription[] =
  
  // Random platform combinations -----------------------------------------------
  
@@ -9,16 +9,14 @@
  
  const char kEnableInputImeApiName[] = "Enable Input IME API";
  const char kEnableInputImeApiDescription[] =
-@@ -3425,7 +3425,7 @@ const char kWarnBeforeQuittingFlagDescription[] =
- 
- #endif  // !defined(OS_CHROMEOS)
+     "Enable the use of chrome.input.ime API.";
  
 -#endif  // defined(OS_WIN) || defined(OS_LINUX)
 +#endif  // defined(OS_WIN) || defined(OS_LINUX) || defined(OS_BSD)
  
  #if defined(OS_WIN) || defined(OS_MACOSX)
  
-@@ -3438,13 +3438,13 @@ const char kAutomaticTabDiscardingDescription[] =
+@@ -3675,13 +3675,13 @@ const char kAutomaticTabDiscardingDescription[] =
  
  #endif  // defined(OS_WIN) || defined(OS_MACOSX)
  
@@ -32,5 +30,5 @@
 -#endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX)
 +#endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD)
  
- const char kExperimentalUiName[] = "Use all upcoming UI features";
- const char kExperimentalUiDescription[] = "Use all upcoming UI features.";
+ #if defined(OS_MACOSX) || defined(OS_CHROMEOS)
+ 

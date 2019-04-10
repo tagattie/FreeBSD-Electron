@@ -1,4 +1,4 @@
---- third_party/pdfium/core/fxge/fx_ge_linux.cpp.orig	2019-03-15 06:41:33 UTC
+--- third_party/pdfium/core/fxge/fx_ge_linux.cpp.orig	2019-04-08 08:34:28 UTC
 +++ third_party/pdfium/core/fxge/fx_ge_linux.cpp
 @@ -146,9 +146,8 @@ std::unique_ptr<SystemFontInfoIface> SystemFontInfoIfa
      const char** pUserPaths) {

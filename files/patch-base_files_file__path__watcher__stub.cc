@@ -1,4 +1,4 @@
---- base/files/file_path_watcher_stub.cc.orig	2019-03-15 06:25:27 UTC
+--- base/files/file_path_watcher_stub.cc.orig	2019-04-08 08:18:04 UTC
 +++ base/files/file_path_watcher_stub.cc
 @@ -1,14 +1,15 @@
 -// Copyright (c) 2012 The Chromium Authors. All rights reserved.

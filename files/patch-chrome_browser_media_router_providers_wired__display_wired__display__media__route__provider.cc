@@ -1,4 +1,4 @@
---- chrome/browser/media/router/providers/wired_display/wired_display_media_route_provider.cc.orig	2019-03-15 06:37:03 UTC
+--- chrome/browser/media/router/providers/wired_display/wired_display_media_route_provider.cc.orig	2019-04-08 08:32:44 UTC
 +++ chrome/browser/media/router/providers/wired_display/wired_display_media_route_provider.cc
 @@ -111,6 +111,12 @@ void WiredDisplayMediaRouteProvider::CreateRoute(
      bool incognito,
@@ -12,10 +12,10 @@
 +#else
    base::Optional<Display> display = GetDisplayBySinkId(sink_id);
    if (!display) {
-     std::move(callback).Run(base::nullopt, std::string("Display not found"),
-@@ -135,6 +141,7 @@ void WiredDisplayMediaRouteProvider::CreateRoute(
-   presentation.receiver()->Start(presentation_id, GURL(media_source));
-   std::move(callback).Run(route, base::nullopt, RouteRequestResult::OK);
+     std::move(callback).Run(base::nullopt, nullptr,
+@@ -137,6 +143,7 @@ void WiredDisplayMediaRouteProvider::CreateRoute(
+   std::move(callback).Run(route, nullptr, base::nullopt,
+                           RouteRequestResult::OK);
    NotifyRouteObservers();
 +#endif
  }

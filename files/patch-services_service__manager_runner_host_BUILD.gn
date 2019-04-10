@@ -1,6 +1,6 @@
---- services/service_manager/runner/host/BUILD.gn.orig	2019-03-15 06:37:32 UTC
+--- services/service_manager/runner/host/BUILD.gn.orig	2019-04-08 08:33:03 UTC
 +++ services/service_manager/runner/host/BUILD.gn
-@@ -31,7 +31,7 @@ source_set("lib") {
+@@ -30,7 +30,7 @@ source_set("lib") {
      "//mojo/public/cpp/system",
    ]
  
