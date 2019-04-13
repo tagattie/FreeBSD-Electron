@@ -1,4 +1,5 @@
 bin/electron
+%%DATADIR%%/LICENSES.chromium.html
 %%DATADIR%%/chrome_100_percent.pak
 %%DATADIR%%/chrome_200_percent.pak
 %%DRIVER%%%%DATADIR%%/chromedriver
@@ -65,10 +66,9 @@ bin/electron
 %%DATADIR%%/resources.pak
 %%DATADIR%%/resources/default_app.asar
 %%DATADIR%%/resources/electron.asar
-%%DATADIR%%/shell_resources.pak
 %%DATADIR%%/snapshot_blob.bin
 %%DATADIR%%/swiftshader/libEGL.so
 %%DATADIR%%/swiftshader/libGLESv2.so
 %%DATADIR%%/v8_context_snapshot.bin
 %%DATADIR%%/v8_context_snapshot_generator
-%%DATADIR%%/views_mus_resources.pak
+%%DATADIR%%/version
