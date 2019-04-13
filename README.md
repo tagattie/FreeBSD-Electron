@@ -5,10 +5,10 @@ This repository contains an experimental port of electron for FreeBSD. The port 
 - electron patch files by [@prash-wghats](https://github.com/prash-wghats/)
 
 ## Get
-A package file is available at the releases page. To install, download the file (with .txz extension) and run the command:
+A package file is available at the releases page. To install, download the file (with .txz extension) and run the command (for example):
 
 ``` shell
-pkg install electron-<version>.txz
+pkg install electron-4.1.4-freebsd12.txz
 ```
 
 ## Run
@@ -34,7 +34,7 @@ make install clean
 ```
 
 ## Platform
-- Built on FreeBSD 12 amd64.
+- Built on FreeBSD 11 and 12 amd64.
 
 ## Credits
 - Chromium patches by [FreeBSD/Chromium Team](https://wiki.freebsd.org/Chromium)
