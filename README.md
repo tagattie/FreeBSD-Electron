@@ -8,7 +8,7 @@ This repository contains an experimental port of electron for FreeBSD. The port 
 A package file is available at the releases page. To install, download the file (with .txz extension) and run the command (for example):
 
 ``` shell
-pkg install electron-4.1.4-freebsd12.txz
+pkg install electron-4.1.4-freebsd12-amd64.txz
 ```
 
 ## Run
