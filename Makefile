@@ -60,6 +60,7 @@ DOS2UNIX_FILES=	third_party/skia/third_party/vulkanmemoryallocator/include/vk_me
 BINARY_ALIAS=	python=${PYTHON_CMD}
 
 USE_GNOME=	atk pango gtk30 libxml2 libxslt
+USE_LDCONFIG=	${DATADIR}
 
 GN_ARGS+=	clang_use_chrome_plugins=false \
 		enable_hangout_services_extension=true \
