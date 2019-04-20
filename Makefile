@@ -76,6 +76,8 @@ USE_JAVA=	yes
 JAVA_VERSION=	1.8
 JAVA_BUILD=	yes
 
+USE_LDCONFIG=	${DATADIR}
+
 GN_ARGS+=	clang_use_chrome_plugins=false \
 		enable_hangout_services_extension=true \
 		enable_nacl=false \
