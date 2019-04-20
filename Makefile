@@ -18,16 +18,21 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 FETCH_DEPENDS=	npm:www/npm-node10
 PATCH_DEPENDS=	git:devel/git
-BUILD_DEPENDS=	gn:devel/chromium-gn \
+BUILD_DEPENDS=	${LOCALBASE}/bin/ar:devel/binutils \
+		gn:devel/chromium-gn \
+		gperf:devel/gperf \
 		yasm:devel/yasm \
+		${LOCALBASE}/include/linux/videodev2.h:multimedia/v4l_compat \
 		node:www/node10 \
 		npm:www/npm-node10
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libsnappy.so:archivers/snappy \
 		libFLAC.so:audio/flac \
 		libopus.so:audio/opus \
+		libdbus-1.so:devel/dbus \
 		libnotify.so:devel/libnotify \
 		libpci.so:devel/libpci \
+		libnspr4.so:devel/nspr \
 		libre2.so:devel/re2 \
 		libdrm.so:graphics/libdrm \
 		libwebp.so:graphics/webp \
@@ -36,12 +41,14 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libopenh264.so:multimedia/openh264 \
 		libfreetype.so:print/freetype2 \
 		libharfbuzz.so:print/harfbuzz \
+		libsecret-1.so:security/libsecret \
 		libnss3.so:security/nss \
+		libexpat.so:textproc/expat2 \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	xdg-open:devel/xdg-utils
 
-USES=		dos2unix gettext-tools gnome jpeg localbase:ldflags ninja \
-		pkgconfig python:2.7,build tar:xz
+USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
+		ninja pkgconfig python:2.7,build tar:xz
 
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
@@ -61,7 +68,10 @@ WRKSRC_SUBDIR=	src
 DOS2UNIX_FILES=	third_party/skia/third_party/vulkanmemoryallocator/include/vk_mem_alloc.h
 BINARY_ALIAS=	python=${PYTHON_CMD}
 
-USE_GNOME=	atk pango gtk30 libxml2 libxslt
+USE_XORG=	x11 xcb xcomposite xcursor xdamage xext xfixes xi xrandr \
+		xrender xscrnsaver xtst
+USE_GL=		gl glesv2
+USE_GNOME=	atk cairo pango gdkpixbuf2 gtk30 libxml2 libxslt
 USE_JAVA=	yes
 JAVA_VERSION=	1.8
 JAVA_BUILD=	yes
