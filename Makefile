@@ -52,13 +52,13 @@ USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
-GH_TUPLE=	electron:node:f807d72614d4b8973d71548328be213532b46b1b:node
+GH_TUPLE=	electron:node:696d8fb66d6f65fc82869d390e0d2078970b1eb4:node
 		# boto:boto:f7574aa6cc2c819430c1f05e9a1a1a666ef8169b:boto \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	5.0.0-beta.8
-CHROMIUM_VER=	73.0.3683.104
+ELECTRON_VER=	5.0.0-beta.9
+CHROMIUM_VER=	73.0.3683.117
 CHROMIUM_NODE_MODULES_HASH=	c0e0f34498afb3f363cc37cd2e9c1a020cb020d9
 CHROMIUM_TEST_FONTS_HASH=	a22de844e32a3f720d219e3911c3da3478039f89
 
@@ -227,6 +227,8 @@ do-install:
 .for f in default_app.asar electron.asar
 	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/resources/${f} ${STAGEDIR}${DATADIR}/resources
 .endfor
+	cd ${WRKSRC}/out/${BUILDTYPE}/resources/inspector && \
+		${COPYTREE_SHARE} . ${STAGEDIR}${DATADIR}/resources/inspector
 	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin
 
 post-install-DRIVER-on:
