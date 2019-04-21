@@ -205,8 +205,20 @@ do-configure:
 
 do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/*.pak ${STAGEDIR}${DATADIR}
-.for f in icudtl.dat mksnapshot natives_blob.bin snapshot_blob.bin v8_context_snapshot.bin v8_context_snapshot_generator
+.for f in electron mksnapshot v8_context_snapshot_generator
+	${INSTALL_PROGRAM} ${WRKSRC}/out/${BUILDTYPE}/${f} ${STAGEDIR}${DATADIR}
+.endfor
+.for f in libEGL.so libGLESv2.so libVkICD_mock_icd.so
+	${INSTALL_LIB} ${WRKSRC}/out/${BUILDTYPE}/${f} ${STAGEDIR}${DATADIR}
+.endfor
+	${MKDIR} ${STAGEDIR}${DATADIR}/swiftshader
+.for f in libEGL.so libGLESv2.so
+	${INSTALL_LIB} ${WRKSRC}/out/${BUILDTYPE}/swiftshader/${f} ${STAGEDIR}${DATADIR}/swiftshader
+.endfor
+.for f in LICENSES.chromium.html icudtl.dat natives_blob.bin snapshot_blob.bin v8_context_snapshot.bin version
+	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/${f} ${STAGEDIR}${DATADIR}
+.endfor
+.for f in chrome_100_percent.pak chrome_200_percent.pak resources.pak
 	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/${f} ${STAGEDIR}${DATADIR}
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}/locales
@@ -214,14 +226,6 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}/resources
 .for f in default_app.asar electron.asar
 	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/resources/${f} ${STAGEDIR}${DATADIR}/resources
-.endfor
-	${INSTALL_PROGRAM} ${WRKSRC}/out/${BUILDTYPE}/electron ${STAGEDIR}${DATADIR}
-.for f in libEGL.so libGLESv2.so libVkICD_mock_icd.so
-	${INSTALL_LIB} ${WRKSRC}/out/${BUILDTYPE}/${f} ${STAGEDIR}${DATADIR}
-.endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}/swiftshader
-.for f in libEGL.so libGLESv2.so
-	${INSTALL_LIB} ${WRKSRC}/out/${BUILDTYPE}/swiftshader/${f} ${STAGEDIR}${DATADIR}/swiftshader
 .endfor
 	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin
 
