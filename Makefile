@@ -53,6 +53,7 @@ USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
 GH_TUPLE=	electron:node:696d8fb66d6f65fc82869d390e0d2078970b1eb4:node
+# See ${WRKSRC}/electron/DEPS for GH_TAGNAME_node
 		# boto:boto:f7574aa6cc2c819430c1f05e9a1a1a666ef8169b:boto \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
