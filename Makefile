@@ -52,15 +52,15 @@ USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
-GH_TUPLE=	electron:node:696d8fb66d6f65fc82869d390e0d2078970b1eb4:node
 # See ${WRKSRC}/electron/DEPS for GH_TAGNAME_node
+GH_TUPLE=	electron:node:a86a4a160dc520c61a602c949a32a1bc4c0fc633:node
 		# boto:boto:f7574aa6cc2c819430c1f05e9a1a1a666ef8169b:boto \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	5.0.0-beta.9
+ELECTRON_VER=	5.0.0
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=	73.0.3683.117
+CHROMIUM_VER=	73.0.3683.119
 # See ${WRKSRC}/third_party/node/node_modules.tar.gz.sha1 for CHROMIUM_NODE_MODULES_HASH
 CHROMIUM_NODE_MODULES_HASH=	c0e0f34498afb3f363cc37cd2e9c1a020cb020d9
 # See ${WRKSRC}/third_party/test_fonts/test_fonts.tar.gz.sha1 for CHROMIUM_TEST_FONTS_HASH
