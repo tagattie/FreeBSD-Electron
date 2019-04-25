@@ -49,8 +49,8 @@ USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 		ninja pkgconfig python:2.7,build tar:xz
 
 USE_GITHUB=	yes
-GH_TUPLE=	electron:node:8bc5d171a0873c0ba49f9433798bc8b67399788c:node
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
+GH_TUPLE=	electron:node:8bc5d171a0873c0ba49f9433798bc8b67399788c:node
 		# boto:boto:f7574aa6cc2c819430c1f05e9a1a1a666ef8169b:boto \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
