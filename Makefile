@@ -14,7 +14,7 @@ MAINTAINER=	maintainer@example.com
 COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
 
 LICENSE=	MIT
-LICENSE_FILE=	${WRKSRC}/LICENSE
+LICENSE_FILE=	${WRKSRC}/electron/LICENSE
 
 FETCH_DEPENDS=	npm:www/npm-node10
 PATCH_DEPENDS=	git:devel/git
