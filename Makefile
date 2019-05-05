@@ -219,7 +219,7 @@ do-install:
 .for f in libEGL.so libGLESv2.so
 	${INSTALL_LIB} ${WRKSRC}/out/${BUILDTYPE}/swiftshader/${f} ${STAGEDIR}${DATADIR}/swiftshader
 .endfor
-.for f in LICENSES.chromium.html icudtl.dat natives_blob.bin snapshot_blob.bin v8_context_snapshot.bin version
+.for f in LICENSE LICENSES.chromium.html icudtl.dat natives_blob.bin snapshot_blob.bin v8_context_snapshot.bin version
 	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/${f} ${STAGEDIR}${DATADIR}
 .endfor
 .for f in chrome_100_percent.pak chrome_200_percent.pak resources.pak

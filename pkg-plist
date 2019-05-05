@@ -1,4 +1,5 @@
 bin/electron
+%%DATADIR%%/LICENSE
 %%DATADIR%%/LICENSES.chromium.html
 %%DATADIR%%/chrome_100_percent.pak
 %%DATADIR%%/chrome_200_percent.pak
