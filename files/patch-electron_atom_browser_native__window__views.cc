@@ -1,4 +1,4 @@
---- electron/atom/browser/native_window_views.cc.orig	2019-04-04 16:09:31 UTC
+--- electron/atom/browser/native_window_views.cc.orig	2019-05-03 20:33:57 UTC
 +++ electron/atom/browser/native_window_views.cc
 @@ -289,7 +289,7 @@ NativeWindowViews::NativeWindowViews(const mate::Dicti
    last_normal_bounds_ = GetBounds();
@@ -18,7 +18,7 @@
    aura::Window* window = GetNativeWindow();
    if (window)
      window->RemovePreTargetHandler(this);
-@@ -1217,7 +1217,7 @@ void NativeWindowViews::OnWidgetBoundsChanged(views::W
+@@ -1220,7 +1220,7 @@ void NativeWindowViews::OnWidgetBoundsChanged(views::W
  }
  
  void NativeWindowViews::OnWidgetDestroying(views::Widget* widget) {
@@ -27,7 +27,7 @@
    aura::Window* window = GetNativeWindow();
    if (window)
      window->RemovePreTargetHandler(this);
-@@ -1310,7 +1310,7 @@ void NativeWindowViews::OnWidgetMove() {
+@@ -1313,7 +1313,7 @@ void NativeWindowViews::OnWidgetMove() {
  void NativeWindowViews::HandleKeyboardEvent(
      content::WebContents*,
      const content::NativeWebKeyboardEvent& event) {
@@ -36,7 +36,7 @@
    if (event.windows_key_code == ui::VKEY_BROWSER_BACK)
      NotifyWindowExecuteAppCommand(kBrowserBackward);
    else if (event.windows_key_code == ui::VKEY_BROWSER_FORWARD)
-@@ -1322,7 +1322,7 @@ void NativeWindowViews::HandleKeyboardEvent(
+@@ -1325,7 +1325,7 @@ void NativeWindowViews::HandleKeyboardEvent(
    root_view_->HandleKeyEvent(event);
  }
  
