@@ -8,7 +8,8 @@ MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v5.
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
-		${CHROMIUM_NODE_MODULES_HASH}:chromium_node
+		${CHROMIUM_NODE_MODULES_HASH}:chromium_node \
+		electron-npm-modules-${ELECTRON_VER}.tar.xz:prefetch
 
 MAINTAINER=	maintainer@example.com
 COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
@@ -149,11 +150,24 @@ PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 TEST_DISTFILES=		${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts
 TEST_ALL_TARGET=	${TEST_TARGETS}
 
-post-fetch:
-	${RM} -r ${TMPDIR}/npm-cache
-	${MKDIR} ${TMPDIR}/npm-cache
-	${CP} ${FILESDIR}/package.json ${FILESDIR}/package-lock.json ${TMPDIR}/npm-cache
-	cd ${TMPDIR}/npm-cache && npm install --verbose --no-progress
+NPM_TIMESTAMP=	1557238990
+
+pre-fetch:
+	if [ ! -f ${DISTDIR}/electron-npm-modules-${ELECTRON_VER}.tar.xz ]; \
+		then ${MKDIR} ${WRKDIR}/npm-cache; \
+		${CP} ${FILESDIR}/package.json \
+			${FILESDIR}/package-lock.json ${WRKDIR}/npm-cache; \
+		cd ${WRKDIR}/npm-cache && \
+		HOME=${WRKDIR} npm ci --verbose --no-progress && \
+		${MV} node_modules npm_modules; \
+		mtree -cbnSp npm_modules | mtree -C | sed \
+			-e 's:time=[0-9.]*:time=${NPM_TIMESTAMP}.000000000:' \
+			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:^\.:./npm_modules:' > npm_modules.mtree; \
+		tar cJf ${DISTDIR}/electron-npm-modules-${ELECTRON_VER}.tar.xz \
+			@npm_modules.mtree; \
+		${RM} -r ${WRKDIR}/npm-cache; \
+	fi
 
 post-extract:
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/chromium-${CHROMIUM_VER} ${WRKSRC}
@@ -169,7 +183,7 @@ post-extract:
 	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_requests}-${GH_TAGNAME_requests} \
 	# 	${WRKSRC}/electron/vendor/${GH_PROJECT_requests}
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/node_modules ${WRKSRC}/third_party/node
-	${MV} ${TMPDIR}/npm-cache/node_modules ${WRKSRC}/electron
+	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/npm_modules ${WRKSRC}/electron/node_modules
 
 post-extract-TEST-on:
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/test_fonts ${WRKSRC}/third_party/test_fonts
