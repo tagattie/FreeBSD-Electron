@@ -100,7 +100,7 @@ GN_ARGS+=	clang_use_chrome_plugins=false \
 		extra_cxxflags="${CXXFLAGS}" \
 		extra_ldflags="${LDFLAGS}"
 
-ALL_TARGET=	electron
+ALL_TARGET=	electron licenses version
 MAKE_ARGS=	-C out/${BUILDTYPE}
 MAKE_ENV+=	C_INCLUDE_PATH=${LOCALBASE}/include \
 		CPLUS_INCLUDE_PATH=${LOCALBASE}/include
@@ -110,7 +110,7 @@ DIST_DESC=	Build distribution zip files
 DRIVER_DESC=	Install chromedriver
 OPTIONS_GROUP=	AUDIO
 OPTIONS_GROUP_AUDIO=	ALSA PULSEAUDIO
-OPTIONS_DEFAULT=	CUPS DIST DRIVER KERBEROS ALSA
+OPTIONS_DEFAULT=	CUPS DRIVER KERBEROS ALSA
 OPTIONS_SUB=	yes
 
 ALSA_LIB_DEPENDS=	libasound.so:audio/alsa-lib
