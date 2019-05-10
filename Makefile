@@ -157,7 +157,7 @@ pre-fetch:
 			-e 's:time=[0-9.]*:time=${NPM_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:^\.:./npm_modules:' > npm_modules.mtree; \
-		tar cJf ${DISTDIR}/electron-npm-modules-${ELECTRON_VER}.tar.xz \
+		${TAR} cJf ${DISTDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} \
 			@npm_modules.mtree; \
 		${RM} -r ${WRKDIR}/npm-cache; \
 	fi
