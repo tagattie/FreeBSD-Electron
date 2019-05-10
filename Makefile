@@ -151,7 +151,7 @@ pre-fetch:
 		${CP} ${FILESDIR}/package.json \
 			${FILESDIR}/package-lock.json ${WRKDIR}/npm-cache; \
 		cd ${WRKDIR}/npm-cache && \
-		HOME=${WRKDIR} npm ci --verbose --no-progress && \
+		${SETENV} HOME=${WRKDIR} npm ci --verbose --no-progress && \
 		${MV} node_modules npm_modules; \
 		${MTREE_CMD} -cbnSp npm_modules | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${NPM_TIMESTAMP}.000000000:' \
