@@ -153,7 +153,7 @@ TEST_ALL_TARGET=	${TEST_TARGETS}
 NPM_TIMESTAMP=	1557238990
 
 pre-fetch:
-	if [ ! -f ${DISTDIR}/electron-npm-modules-${ELECTRON_VER}.tar.xz ]; \
+	if [ ! -f ${DISTDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} ]; \
 		then ${MKDIR} ${WRKDIR}/npm-cache; \
 		${CP} ${FILESDIR}/package.json \
 			${FILESDIR}/package-lock.json ${WRKDIR}/npm-cache; \
