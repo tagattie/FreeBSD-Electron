@@ -153,7 +153,7 @@ pre-fetch:
 		cd ${WRKDIR}/npm-cache && \
 		HOME=${WRKDIR} npm ci --verbose --no-progress && \
 		${MV} node_modules npm_modules; \
-		mtree -cbnSp npm_modules | mtree -C | sed \
+		${MTREE_CMD} -cbnSp npm_modules | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${NPM_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:^\.:./npm_modules:' > npm_modules.mtree; \
