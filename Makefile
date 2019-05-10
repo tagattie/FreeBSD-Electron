@@ -9,7 +9,7 @@ MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v4.
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
 		${CHROMIUM_NODE_MODULES_HASH}:chromium_node \
-		electron-npm-modules-${ELECTRON_VER}.tar.xz:prefetch
+		electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX}:prefetch
 
 MAINTAINER=	maintainer@example.com
 COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
