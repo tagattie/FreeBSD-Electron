@@ -156,6 +156,7 @@ pre-fetch:
 		${MTREE_CMD} -cbnSp npm_modules | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${NPM_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./npm_modules:' > npm_modules.mtree; \
 		${TAR} cJf ${DISTDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} \
 			@npm_modules.mtree; \
