@@ -142,6 +142,7 @@ PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 .include "Makefile.tests"
 TEST_DISTFILES=		${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts
 TEST_ALL_TARGET=	${TEST_TARGETS}
+TEST_ALL_TARGET+=	third_party/electron_node:headers
 
 NPM_TIMESTAMP=	1557649485
 
@@ -241,9 +242,17 @@ post-install-DRIVER-on:
 	${INSTALL_PROGRAM} ${WRKSRC}/out/${BUILDTYPE}/chromedriver ${STAGEDIR}${DATADIR}
 
 do-test-TEST-on:
-.for t in ${TEST_ALL_TARGET}
-	cd ${WRKSRC}/out/${BUILDTYPE} && ${SETENV} LC_ALL=en_US.UTF-8 \
-		./${t} --gtest_filter=-${EXCLUDE_${t}:ts:} || ${TRUE}
+	# chromium unit tests
+# .for t in ${TEST_ALL_TARGET}
+# 	cd ${WRKSRC}/out/${BUILDTYPE} && ${SETENV} LC_ALL=en_US.UTF-8 \
+# 		./${t} --gtest_filter=-${EXCLUDE_${t}:ts:} || ${TRUE}
+# .endfor
+	# electron unit tests
+	# (Xvfb or something similar is necessary for headless testing)
+.for t in ${TEST_MODULES}
+	cd ${WRKSRC}/electron && \
+		${SETENV} ${TEST_ENV} ELECTRON_OUT_DIR=${BUILDTYPE} \
+		npm run test -- --ci -g '${t} module' || ${TRUE}
 .endfor
 
 .include <bsd.port.mk>
