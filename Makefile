@@ -249,7 +249,8 @@ do-test-TEST-on:
 # 		./${t} --gtest_filter=-${EXCLUDE_${t}:ts:} || ${TRUE}
 # .endfor
 	# electron unit tests
-	# (Xvfb or something similar is necessary for headless testing)
+	# Note 1: "npm install" will run before actual tests are executed
+	# Note 2: Xvfb or something similar is necessary for headless testing
 .for t in ${TEST_MODULES}
 	cd ${WRKSRC}/electron && \
 		${SETENV} ${TEST_ENV} ELECTRON_OUT_DIR=${BUILDTYPE} \
