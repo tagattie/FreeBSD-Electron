@@ -254,7 +254,7 @@ do-test-TEST-on:
 .for t in ${TEST_MODULES}
 	cd ${WRKSRC}/electron && \
 		${SETENV} ${TEST_ENV} ELECTRON_OUT_DIR=${BUILDTYPE} \
-		npm run test -- --ci -g '${t} module' || ${TRUE}
+		npm run test -- --ci -g '${t}' || ${TRUE}
 .endfor
 
 .include <bsd.port.mk>
