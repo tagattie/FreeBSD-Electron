@@ -47,6 +47,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libexpat.so:textproc/expat2 \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	xdg-open:devel/xdg-utils
+TEST_DEPENDS=	npm:www/npm
 
 USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 		ninja pkgconfig python:2.7,build tar:xz
