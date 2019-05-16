@@ -32,6 +32,7 @@ TEST_TARGETS=	base_unittests \
 
 TEST_MODULES=	electron\ module \
 		app\ module \
+		default\ behavior \
 		autoUpdater\ module \
 		BrowserView\ module \
 		BrowserWindow\ with\ affinity\ module \
@@ -60,6 +61,7 @@ TEST_MODULES=	electron\ module \
 		screen\ module \
 		session\ module \
 		shell\ module \
+		renderer\ nodeIntegrationInSubFrames \
 		systemPreferences\ module \
 		TouchBar\ module \
 		tray\ module \
@@ -70,9 +72,13 @@ TEST_MODULES=	electron\ module \
 		webRequest\ module \
 		asar\ package \
 		chromium\ feature \
+		font\ fallback \
+		feature-string\ parsing \
 		modules\ support \
 		node\ feature \
 		security\ warnings \
+		bump-version\ utils \
+		bump-version\ script \
 		<webview>\ tag
 
 #		crashReporter\ module \
