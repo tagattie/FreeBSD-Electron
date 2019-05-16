@@ -264,6 +264,7 @@ do-test-TEST-on:
 	# electron unit tests
 	# Note 1: "npm install" will run before actual tests are executed
 	# Note 2: Xvfb or something similar is necessary for headless testing
+	# **Note 3: unit test won't run yet. (robotjs doesn't build with node 12).**
 .for t in ${TEST_MODULES}
 	cd ${WRKSRC}/electron && \
 		${SETENV} ${TEST_ENV} ELECTRON_OUT_DIR=${BUILDTYPE} \
