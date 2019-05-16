@@ -7,6 +7,7 @@ CATEGORIES=	devel
 MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v5.0.1/:chromium \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
+PKGNAMESUFFIX=	5
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
 		${CHROMIUM_NODE_MODULES_HASH}:chromium_node \
 		electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX}:prefetch
