@@ -29,3 +29,38 @@ TEST_TARGETS=	base_unittests \
 #		ui_base_unittests \
 #		url_ipc_unittests \
 #		unittests \
+
+TEST_MODULES=	electron \
+		app \
+		autoUpdater \
+		BrowserView \
+		BrowserWindow \
+		CallbacksRegistry \
+		clipboard \
+		debugger \
+		dialog \
+		globalShortcut \
+		ipc\ main \
+		ipc\ renderer \
+		Menu \
+		nativeImage \
+		netLog \
+		net \
+		Notification \
+		powerMonitor \
+		powerSaveBlocker \
+		process \
+		protocol \
+		remote \
+		screen \
+		session \
+		shell \
+		systemPreferences \
+		TouchBar \
+		tray \
+		webContents \
+		webFrame \
+		webRequest
+
+#		crashReporter \
+#		inAppPurchase \
