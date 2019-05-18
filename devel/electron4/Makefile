@@ -51,6 +51,8 @@ TEST_DEPENDS=	npm:www/npm-node10
 USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 		ninja pkgconfig python:2.7,build tar:xz
 
+CONFLICTS_INSTALL=	electron5
+
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
 # See ${WRKSRC}/electron/DEPS for GH_TAGNAME_node

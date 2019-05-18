@@ -3,7 +3,7 @@
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
-CATEGORIES=	devel
+CATEGORIES=	devel java
 MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v5.0.1/:chromium \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
@@ -52,6 +52,8 @@ TEST_DEPENDS=	npm:www/npm
 
 USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 		ninja pkgconfig python:2.7,build tar:xz
+
+CONFLICTS_INSTALL=	electron4
 
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
