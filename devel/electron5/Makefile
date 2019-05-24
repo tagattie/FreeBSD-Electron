@@ -126,6 +126,10 @@ OPTIONS_GROUP_AUDIO=	ALSA PULSEAUDIO
 OPTIONS_DEFAULT=	CUPS DRIVER KERBEROS ALSA
 OPTIONS_SUB=	yes
 
+.if make(makesum)
+.MAKEFLAGS:	WITH="${OPTIONS_DEFINE}"
+.endif
+
 ALSA_LIB_DEPENDS=	libasound.so:audio/alsa-lib
 ALSA_RUN_DEPENDS=	${LOCALBASE}/lib/alsa-lib/libasound_module_pcm_oss.so:audio/alsa-plugins
 ALSA_VARS=	GN_ARGS+=use_alsa=true
