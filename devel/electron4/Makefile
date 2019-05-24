@@ -11,6 +11,7 @@ PKGNAMESUFFIX=	4
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
 		${CHROMIUM_NODE_MODULES_HASH}:chromium_node \
 		electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX}:prefetch
+DIST_SUBDIR=	${PORTNAME}
 
 MAINTAINER=	tagattie@yandex.com
 COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
@@ -151,7 +152,7 @@ TEST_ALL_TARGET+=	third_party/electron_node:headers
 NPM_TIMESTAMP=	1558165815
 
 pre-fetch:
-	if [ ! -f ${DISTDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} ]; \
+	if [ ! -f ${_DISTDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} ]; \
 		then ${MKDIR} ${WRKDIR}/npm-cache; \
 		${CP} ${FILESDIR}/package.json \
 			${FILESDIR}/package-lock.json ${WRKDIR}/npm-cache; \
@@ -163,7 +164,7 @@ pre-fetch:
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./npm_modules:' > npm_modules.mtree; \
-		${TAR} cJf ${DISTDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} \
+		${TAR} cJf ${_DISTDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} \
 			@npm_modules.mtree; \
 		${RM} -r ${WRKDIR}/npm-cache; \
 	fi
