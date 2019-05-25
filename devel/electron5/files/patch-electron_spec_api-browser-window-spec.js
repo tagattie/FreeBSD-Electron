@@ -1,6 +1,6 @@
---- electron/spec/api-browser-window-spec.js.orig	2019-05-16 02:01:31 UTC
+--- electron/spec/api-browser-window-spec.js.orig	2019-05-22 18:33:35 UTC
 +++ electron/spec/api-browser-window-spec.js
-@@ -1247,7 +1247,7 @@ describe('BrowserWindow module', () => {
+@@ -1268,7 +1268,7 @@ describe('BrowserWindow module', () => {
  
    describe('enableLargerThanScreen" option', () => {
      before(function () {
@@ -9,7 +9,7 @@
          this.skip()
        }
      })
-@@ -2279,7 +2279,7 @@ describe('BrowserWindow module', () => {
+@@ -2300,7 +2300,7 @@ describe('BrowserWindow module', () => {
        w.loadFile(path.join(fixtures, 'pages', 'visibilitychange.html'))
      })
      it('visibilityState changes when window is minimized', function (done) {
@@ -18,7 +18,7 @@
          // FIXME(alexeykuzmin): Skip the test instead of marking it as passed.
          // afterEach hook won't be run if a test is skipped dynamically.
          // If afterEach isn't run current window won't be destroyed
-@@ -2471,7 +2471,7 @@ describe('BrowserWindow module', () => {
+@@ -2492,7 +2492,7 @@ describe('BrowserWindow module', () => {
    describe('beginFrameSubscription method', () => {
      before(function () {
        // FIXME These specs crash on Linux when run in a docker container
@@ -27,7 +27,7 @@
          this.skip()
        }
      })
-@@ -2717,7 +2717,7 @@ describe('BrowserWindow module', () => {
+@@ -2738,7 +2738,7 @@ describe('BrowserWindow module', () => {
      // - `.skip()` called in the 'beforeEach' hook prevents 'afterEach'
      //     hook from being called.
      // Not implemented on Linux.
