@@ -163,7 +163,8 @@ TEST_ALL_TARGET+=	third_party/electron_node:headers
 NPM_TIMESTAMP=	1558776082
 
 pre-fetch:
-	if [ ! -f ${_DISTDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} ]; \
+	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
+	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} ]; \
 		then ${MKDIR} ${WRKDIR}/npm-cache; \
 		${CP} ${FILESDIR}/package.json \
 			${FILESDIR}/package-lock.json ${WRKDIR}/npm-cache; \
@@ -175,7 +176,7 @@ pre-fetch:
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./npm_modules:' > npm_modules.mtree; \
-		${TAR} cJf ${_DISTDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} \
+		${TAR} cJf ${DISTDIR}/${DIST_SUBDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} \
 			@npm_modules.mtree; \
 		${RM} -r ${WRKDIR}/npm-cache; \
 	fi
