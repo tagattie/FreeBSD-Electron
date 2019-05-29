@@ -1,4 +1,15 @@
 # Electron port for FreeBSD
+
+## Now It's Official
+Electron is officially available in the FreeBSD ports tree. For more information, please see the following URLs:
+
+- https://www.freshports.org/devel/electron4/
+- https://www.freshports.org/devel/electron5/ (to appear)
+
+This repository will continue to serve as a pre-official development repository.
+
+---
+
 This repository contains an experimental port of electron for FreeBSD. The port is largely based on:
 
 - chromium patch files from [www/chromium port](https://www.freshports.org/www/chromium/)
