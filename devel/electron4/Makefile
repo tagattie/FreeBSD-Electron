@@ -62,7 +62,7 @@ GH_TUPLE=	electron:node:8bc5d171a0873c0ba49f9433798bc8b67399788c:node
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	4.2.2
+ELECTRON_VER=	4.2.3
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
 CHROMIUM_VER=	69.0.3497.128
 # See ${WRKSRC}/third_party/node/node_modules.tar.gz.sha1 for CHROMIUM_NODE_MODULES_HASH
@@ -153,7 +153,7 @@ TEST_DISTFILES=		${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts
 TEST_ALL_TARGET=	${TEST_TARGETS}
 TEST_ALL_TARGET+=	third_party/electron_node:headers
 
-NPM_TIMESTAMP=	1558165815
+NPM_TIMESTAMP=	1559393663
 
 pre-fetch:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
