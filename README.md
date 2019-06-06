@@ -40,7 +40,7 @@ Clone this repository with git command and build/install electron (an external w
 
 ``` shell
 git clone https://github.com/tagattie/FreeBSD-Electron
-cd FreeBSD-Electron
+cd FreeBSD-Electron/devel/electron4
 export WKRDIR=~/wrkdir
 make install clean
 ```
