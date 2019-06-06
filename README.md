@@ -36,11 +36,12 @@ portsnap fetch
 portsnap extract
 ```
 
-Clone this repository with git command and build/install electron:
+Clone this repository with git command and build/install electron (an external working directory is currently needed, defined with the WRKDIR enviroment variable):
 
 ``` shell
 git clone https://github.com/tagattie/FreeBSD-Electron
 cd FreeBSD-Electron
+export WKRDIR=~/wrkdir
 make install clean
 ```
 
