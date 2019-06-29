@@ -59,12 +59,12 @@ CONFLICTS_INSTALL=	electron4
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
 # See ${WRKSRC}/electron/DEPS for GH_TAGNAME_node
-GH_TUPLE=	electron:node:a86a4a160dc520c61a602c949a32a1bc4c0fc633:node
+GH_TUPLE=	electron:node:0a300f60bce0c8f0cb3d846fcb0e1f55f26013ee:node
 		# boto:boto:f7574aa6cc2c819430c1f05e9a1a1a666ef8169b:boto \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	5.0.5
+ELECTRON_VER=	5.0.6
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
 CHROMIUM_VER=	73.0.3683.121
 # See ${WRKSRC}/third_party/node/node_modules.tar.gz.sha1 for CHROMIUM_NODE_MODULES_HASH
@@ -162,7 +162,7 @@ TEST_ALL_TARGET+=	third_party/electron_node:headers
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
 
-NPM_TIMESTAMP=	1561091989
+NPM_TIMESTAMP=	1561701956
 
 pre-fetch:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}

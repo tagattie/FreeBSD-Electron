@@ -1,4 +1,4 @@
---- electron/spec/api-app-spec.js.orig	2019-05-16 01:54:46 UTC
+--- electron/spec/api-app-spec.js.orig	2019-06-26 20:05:00 UTC
 +++ electron/spec/api-app-spec.js
 @@ -129,7 +129,7 @@ describe('app module', () => {
    describe('app.getLocaleCountryCode()', () => {
@@ -44,7 +44,7 @@
      })
  
      beforeEach(() => {
-@@ -643,7 +644,7 @@ describe('app module', () => {
+@@ -665,7 +666,7 @@ describe('app module', () => {
      let w = null
  
      before(function () {
@@ -53,7 +53,7 @@
          this.skip()
        }
      })
-@@ -837,7 +838,7 @@ describe('app module', () => {
+@@ -859,7 +860,7 @@ describe('app module', () => {
      // doesn't affect nested `describe`s.
      beforeEach(function () {
        // FIXME Get these specs running on Linux CI
@@ -62,7 +62,7 @@
          this.skip()
        }
      })
-@@ -989,7 +990,7 @@ describe('app module', () => {
+@@ -1011,7 +1012,7 @@ describe('app module', () => {
  
      it('succeeds with complete GPUInfo', async () => {
        const completeInfo = await getGPUInfo('complete')
