@@ -286,4 +286,20 @@ do-test-TEST-on:
 		npm run test -- --ci -g '${t}' || ${TRUE}
 .endfor
 
-.include <bsd.port.mk>
+PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
+
+.include <bsd.port.pre.mk>
+
+.if ${ARCH} == "amd64"
+PLIST_SUB+=	AMD64=""
+.else
+PLIST_SUB+=	AMD64="@comment "
+.endif
+
+.if ${ARCH} == "i386"
+PLIST_SUB+=	I386=""
+.else
+PLIST_SUB+=	I386="@comment "
+.endif
+
+.include <bsd.port.post.mk>
