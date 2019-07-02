@@ -116,7 +116,7 @@ DIST_DESC=	Build distribution zip files
 DRIVER_DESC=	Install chromedriver
 OPTIONS_GROUP=	AUDIO
 OPTIONS_GROUP_AUDIO=	ALSA PULSEAUDIO
-OPTIONS_DEFAULT=	CUPS DRIVER KERBEROS ALSA
+OPTIONS_DEFAULT=	CUPS DIST DRIVER KERBEROS ALSA
 OPTIONS_SUB=	yes
 
 .if make(makesum)
@@ -231,6 +231,11 @@ post-build:
 post-build-DIST-on:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		${MAKE_CMD} ${MAKE_ARGS} ${POST_BUILD_DIST_TARGETS}
+	cd ${WRKSRC}/out/${BUILDTYPE} && \
+		${CP} chromedriver.zip chromedriver-v${ELECTRON_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip && \
+		${CP} dist.zip electron-v${ELECTRON_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip && \
+		${CP} mksnapshot.zip mksnapshot-v${ELECTRON_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip && \
+		${SHA256} -r *-v${ELECTRON_VER}-freebsd-*.zip | ${SED} -e 's/ / */' > SHASUMS256.txt
 
 do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
@@ -257,6 +262,11 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/resources/${f} ${STAGEDIR}${DATADIR}/resources
 .endfor
 	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin
+
+post-install-DIST-on:
+	${MKDIR} ${STAGEDIR}${DATADIR}/releases
+	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/SHASUMS256.txt ${STAGEDIR}${DATADIR}/releases
+	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/*-v${ELECTRON_VER}-freebsd-*.zip ${STAGEDIR}${DATADIR}/releases
 
 post-install-DRIVER-on:
 	${INSTALL_PROGRAM} ${WRKSRC}/out/${BUILDTYPE}/chromedriver ${STAGEDIR}${DATADIR}
