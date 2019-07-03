@@ -157,6 +157,22 @@ POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
 
 NPM_TIMESTAMP=	1561192435
 
+PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
+
+.include <bsd.port.pre.mk>
+
+.if ${ARCH} == "amd64"
+PLIST_SUB+=	AMD64=""
+.else
+PLIST_SUB+=	AMD64="@comment "
+.endif
+
+.if ${ARCH} == "i386"
+PLIST_SUB+=	I386=""
+.else
+PLIST_SUB+=	I386="@comment "
+.endif
+
 pre-fetch:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
 	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} ]; \
@@ -285,21 +301,5 @@ do-test-TEST-on:
 		${SETENV} ${TEST_ENV} ELECTRON_OUT_DIR=${BUILDTYPE} \
 		npm run test -- --ci -g '${t}' || ${TRUE}
 .endfor
-
-PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
-
-.include <bsd.port.pre.mk>
-
-.if ${ARCH} == "amd64"
-PLIST_SUB+=	AMD64=""
-.else
-PLIST_SUB+=	AMD64="@comment "
-.endif
-
-.if ${ARCH} == "i386"
-PLIST_SUB+=	I386=""
-.else
-PLIST_SUB+=	I386="@comment "
-.endif
 
 .include <bsd.port.post.mk>
