@@ -164,6 +164,22 @@ POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
 
 NPM_TIMESTAMP=	1561701956
 
+PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
+
+.include <bsd.port.pre.mk>
+
+.if ${ARCH} == "amd64"
+PLIST_SUB+=	AMD64=""
+.else
+PLIST_SUB+=	AMD64="@comment "
+.endif
+
+.if ${ARCH} == "i386"
+PLIST_SUB+=	I386=""
+.else
+PLIST_SUB+=	I386="@comment "
+.endif
+
 pre-fetch:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
 	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/electron-npm-modules-${ELECTRON_VER}${EXTRACT_SUFX} ]; \
@@ -242,6 +258,11 @@ post-build:
 post-build-DIST-on:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		${MAKE_CMD} ${MAKE_ARGS} ${POST_BUILD_DIST_TARGETS}
+	cd ${WRKSRC}/out/${BUILDTYPE} && \
+		${CP} chromedriver.zip chromedriver-v${ELECTRON_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip && \
+		${CP} dist.zip electron-v${ELECTRON_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip && \
+		${CP} mksnapshot.zip mksnapshot-v${ELECTRON_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip && \
+		${SHA256} -r *-v${ELECTRON_VER}-freebsd-*.zip | ${SED} -e 's/ / */' > SHASUMS256.txt
 
 do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
@@ -271,6 +292,11 @@ do-install:
 		${COPYTREE_SHARE} . ${STAGEDIR}${DATADIR}/resources/inspector
 	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin
 
+post-install-DIST-on:
+	${MKDIR} ${STAGEDIR}${DATADIR}/releases
+	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/SHASUMS256.txt ${STAGEDIR}${DATADIR}/releases
+	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/*-v${ELECTRON_VER}-freebsd-*.zip ${STAGEDIR}${DATADIR}/releases
+
 post-install-DRIVER-on:
 	${INSTALL_PROGRAM} ${WRKSRC}/out/${BUILDTYPE}/chromedriver ${STAGEDIR}${DATADIR}
 
@@ -290,4 +316,4 @@ do-test-TEST-on:
 		npm run test -- --ci -g '${t}' || ${TRUE}
 .endfor
 
-.include <bsd.port.mk>
+.include <bsd.port.post.mk>
