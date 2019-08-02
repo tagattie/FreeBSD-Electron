@@ -1,4 +1,4 @@
---- electron/atom/app/atom_main_delegate.cc.orig	2019-04-04 16:09:31 UTC
+--- electron/atom/app/atom_main_delegate.cc.orig	2019-07-23 18:38:39 UTC
 +++ electron/atom/app/atom_main_delegate.cc
 @@ -8,7 +8,7 @@
  #include <memory>
@@ -9,7 +9,7 @@
  #include <glib.h>  // for g_setenv()
  #endif
  
-@@ -200,7 +200,7 @@ void AtomMainDelegate::PostEarlyInitialization(bool is
+@@ -213,7 +213,7 @@ void AtomMainDelegate::PostEarlyInitialization(bool is
          ui::ResourceBundle::GetSharedInstance().GetLocaleFilePath(locale, true);
      if (!locale_file_path.empty()) {
        custom_locale = locale;

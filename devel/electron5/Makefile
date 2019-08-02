@@ -59,12 +59,12 @@ CONFLICTS_INSTALL=	electron4
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
 # See ${WRKSRC}/electron/DEPS for GH_TAGNAME_node
-GH_TUPLE=	electron:node:0a300f60bce0c8f0cb3d846fcb0e1f55f26013ee:node
+GH_TUPLE=	electron:node:666c67e078bddc32f25409f4a929c1e9b5f47373:node
 		# boto:boto:f7574aa6cc2c819430c1f05e9a1a1a666ef8169b:boto \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	5.0.6
+ELECTRON_VER=	5.0.8
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
 CHROMIUM_VER=	73.0.3683.121
 # See ${WRKSRC}/third_party/node/node_modules.tar.gz.sha1 for CHROMIUM_NODE_MODULES_HASH
@@ -162,7 +162,7 @@ TEST_ALL_TARGET+=	third_party/electron_node:headers
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
 
-NPM_TIMESTAMP=	1561701956
+NPM_TIMESTAMP=	1564574429
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
 
@@ -288,8 +288,6 @@ do-install:
 .for f in default_app.asar electron.asar
 	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/resources/${f} ${STAGEDIR}${DATADIR}/resources
 .endfor
-	cd ${WRKSRC}/out/${BUILDTYPE}/resources/inspector && \
-		${COPYTREE_SHARE} . ${STAGEDIR}${DATADIR}/resources/inspector
 	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin
 
 post-install-DIST-on:
