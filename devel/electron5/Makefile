@@ -64,7 +64,7 @@ GH_TUPLE=	electron:node:666c67e078bddc32f25409f4a929c1e9b5f47373:node
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	5.0.8
+ELECTRON_VER=	5.0.10
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
 CHROMIUM_VER=	73.0.3683.121
 # See ${WRKSRC}/third_party/node/node_modules.tar.gz.sha1 for CHROMIUM_NODE_MODULES_HASH
@@ -162,7 +162,7 @@ TEST_ALL_TARGET+=	third_party/electron_node:headers
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
 
-NPM_TIMESTAMP=	1564574429
+NPM_TIMESTAMP=	1566387873
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
 
