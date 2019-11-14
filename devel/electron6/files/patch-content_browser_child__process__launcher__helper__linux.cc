@@ -1,4 +1,4 @@
---- content/browser/child_process_launcher_helper_linux.cc.orig	2019-09-16 10:03:40 UTC
+--- content/browser/child_process_launcher_helper_linux.cc.orig	2019-11-13 10:42:36 UTC
 +++ content/browser/child_process_launcher_helper_linux.cc
 @@ -17,7 +17,9 @@
  #include "content/public/common/sandboxed_process_launcher_delegate.h"

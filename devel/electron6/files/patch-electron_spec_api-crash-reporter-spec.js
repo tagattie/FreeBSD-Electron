@@ -1,4 +1,4 @@
---- electron/spec/api-crash-reporter-spec.js.orig	2019-09-11 17:30:11 UTC
+--- electron/spec/api-crash-reporter-spec.js.orig	2019-11-05 00:13:02 UTC
 +++ electron/spec/api-crash-reporter-spec.js
 @@ -16,7 +16,7 @@ describe('crashReporter module', () => {
    if (process.mas || process.env.DISABLE_CRASH_REPORTER_TESTS) return
@@ -81,7 +81,7 @@
          // FIXME(alexeykuzmin): Skip the test.
          // this.skip()
          return
-@@ -436,7 +436,7 @@ const startServer = ({ callback, processType, done }) 
+@@ -446,7 +446,7 @@ const startServer = ({ callback, processType, done }) 
    server.listen(port, '127.0.0.1', () => {
      port = server.address().port
      remote.process.port = port

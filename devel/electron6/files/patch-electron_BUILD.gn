@@ -1,4 +1,4 @@
---- electron/BUILD.gn.orig	2019-09-11 17:30:11 UTC
+--- electron/BUILD.gn.orig	2019-11-05 00:13:02 UTC
 +++ electron/BUILD.gn
 @@ -535,6 +535,15 @@ static_library("electron_lib") {
    sources = filenames.lib_sources
@@ -42,7 +42,7 @@
  
    if (enable_pdf) {
      deps += [ "//pdf" ]
-@@ -1322,7 +1343,7 @@ dist_zip("electron_dist_zip") {
+@@ -1320,7 +1341,7 @@ dist_zip("electron_dist_zip") {
      ":licenses",
      ":electron_version",
    ]

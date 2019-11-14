@@ -21,15 +21,15 @@ COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/electron/LICENSE
 
-FETCH_DEPENDS=	yarn:www/yarn
-EXTRACT_DEPENDS=	yarn:www/yarn
+FETCH_DEPENDS=	yarn:www/yarn-node12
+EXTRACT_DEPENDS=	yarn:www/yarn-node12
 PATCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	${LOCALBASE}/bin/ar:devel/binutils \
 		gperf:devel/gperf \
 		yasm:devel/yasm \
 		${LOCALBASE}/include/linux/videodev2.h:multimedia/v4l_compat \
-		node:www/node \
-		npm:www/npm
+		node:www/node12 \
+		npm:www/npm-node12
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libsnappy.so:archivers/snappy \
 		libFLAC.so:audio/flac \
@@ -51,7 +51,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libexpat.so:textproc/expat2 \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	xdg-open:devel/xdg-utils
-TEST_DEPENDS=	yarn:www/yarn
+TEST_DEPENDS=	yarn:www/yarn-node12
 
 USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 		ninja pkgconfig python:2.7,build tar:xz
@@ -65,7 +65,7 @@ GH_TUPLE=	nodejs:node:v${NODE_VER}:node
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	6.0.9
+ELECTRON_VER=	6.1.4
 # Official chromium version containing "gn" which is known to work
 CHROMIUM_OFFICIAL_VER=	76.0.3809.132
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
@@ -167,7 +167,7 @@ TEST_ALL_TARGET+=	third_party/electron_node:headers
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
 
-YARN_TIMESTAMP=	1568625228
+YARN_TIMESTAMP=	1573637891
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
 
