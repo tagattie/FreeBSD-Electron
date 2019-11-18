@@ -1,6 +1,8 @@
 TIMESTAMP = 1566388006
 SHA256 (electron/chromium-73.0.3683.121.tar.xz) = 1adbc4b118c55cb24ca82e87bfa251dc5d6e46a1f946719b961c15c499e007df
 SIZE (electron/chromium-73.0.3683.121.tar.xz) = 1447269608
+SHA256 (electron/chromium-76.0.3809.132.tar.xz) = d54e4640b5e399d170dffbc5bcff65157eb1b29314b94b5d808f727d9ce45241
+SIZE (electron/chromium-76.0.3809.132.tar.xz) = 728899912
 SHA256 (electron/c0e0f34498afb3f363cc37cd2e9c1a020cb020d9) = 656d38e92fc26271822cc07add8993e926b367da135d349f88f30d3b7f5f3719
 SIZE (electron/c0e0f34498afb3f363cc37cd2e9c1a020cb020d9) = 4436810
 SHA256 (electron/electron-npm-modules-5.0.10.tar.xz) = 34a40d4501a356b1c9d42b9bf52ce6c934ae9a17691b487299f9c3bedd65e15b
