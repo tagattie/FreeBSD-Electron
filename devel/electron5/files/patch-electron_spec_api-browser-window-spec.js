@@ -1,4 +1,4 @@
---- electron/spec/api-browser-window-spec.js.orig	2019-08-19 21:30:51 UTC
+--- electron/spec/api-browser-window-spec.js.orig	2019-12-17 03:11:25 UTC
 +++ electron/spec/api-browser-window-spec.js
 @@ -1174,7 +1174,7 @@ describe('BrowserWindow module', () => {
    describe('BrowserWindow.setOpacity(opacity)', () => {
@@ -6,6 +6,15 @@
        before(function () {
 -        if (process.platform === 'linux') {
 +        if (process.platform === 'linux' || process.platform === 'freebsd') {
+           this.skip()
+         }
+       })
+@@ -1206,7 +1206,7 @@ describe('BrowserWindow module', () => {
+ 
+     describe('Linux', () => {
+       before(function () {
+-        if (process.platform !== 'linux') {
++        if (process.platform !== 'linux' && process.platform !== 'freebsd') {
            this.skip()
          }
        })

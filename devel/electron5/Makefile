@@ -65,7 +65,7 @@ GH_TUPLE=	electron:node:666c67e078bddc32f25409f4a929c1e9b5f47373:node
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	5.0.12
+ELECTRON_VER=	5.0.13
 # Official chromium version containing "gn" which is known to work
 CHROMIUM_OFFICIAL_VER=	76.0.3809.132
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
@@ -164,9 +164,9 @@ TEST_ALL_TARGET=	${TEST_TARGETS}
 TEST_ALL_TARGET+=	third_party/electron_node:headers
 
 POST_BUILD_TARGETS=	licenses version
-POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
+POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mksnapshot_zip
 
-NPM_TIMESTAMP=	1574075819
+NPM_TIMESTAMP=	1576733942
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
 

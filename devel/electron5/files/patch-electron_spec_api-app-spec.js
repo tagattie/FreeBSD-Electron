@@ -1,4 +1,4 @@
---- electron/spec/api-app-spec.js.orig	2019-06-26 20:05:00 UTC
+--- electron/spec/api-app-spec.js.orig	2019-12-17 03:11:25 UTC
 +++ electron/spec/api-app-spec.js
 @@ -129,7 +129,7 @@ describe('app module', () => {
    describe('app.getLocaleCountryCode()', () => {
@@ -27,15 +27,16 @@
          this.skip()
        }
      })
-@@ -483,6 +483,7 @@ describe('app module', () => {
+@@ -482,7 +482,7 @@ describe('app module', () => {
+   describe('app.setBadgeCount', () => {
      const platformIsNotSupported =
          (process.platform === 'win32') ||
-         (process.platform === 'linux' && !app.isUnityRunning())
-+        (process.platform === 'freebsd')
+-        (process.platform === 'linux' && !app.isUnityRunning())
++        (process.platform === 'linux' && !app.isUnityRunning()) || (process.platform === 'freebsd')
      const platformIsSupported = !platformIsNotSupported
  
      const expectedBadgeCount = 42
-@@ -536,7 +537,7 @@ describe('app module', () => {
+@@ -536,7 +536,7 @@ describe('app module', () => {
      ]
  
      before(function () {
@@ -44,7 +45,7 @@
      })
  
      beforeEach(() => {
-@@ -665,7 +666,7 @@ describe('app module', () => {
+@@ -665,7 +665,7 @@ describe('app module', () => {
      let w = null
  
      before(function () {
@@ -53,7 +54,7 @@
          this.skip()
        }
      })
-@@ -859,7 +860,7 @@ describe('app module', () => {
+@@ -859,7 +859,7 @@ describe('app module', () => {
      // doesn't affect nested `describe`s.
      beforeEach(function () {
        // FIXME Get these specs running on Linux CI
@@ -62,7 +63,7 @@
          this.skip()
        }
      })
-@@ -1011,7 +1012,7 @@ describe('app module', () => {
+@@ -1011,7 +1011,7 @@ describe('app module', () => {
  
      it('succeeds with complete GPUInfo', async () => {
        const completeInfo = await getGPUInfo('complete')
@@ -71,3 +72,12 @@
          // For linux and macOS complete info is same as basic info
          await verifyBasicGPUInfo(completeInfo)
          const basicInfo = await getGPUInfo('basic')
+@@ -1039,7 +1039,7 @@ describe('app module', () => {
+     const socketPath = process.platform === 'win32' ? '\\\\.\\pipe\\electron-mixed-sandbox' : '/tmp/electron-mixed-sandbox'
+ 
+     beforeEach(function (done) {
+-      if (process.platform === 'linux' && (process.arch === 'arm64' || process.arch === 'arm')) {
++      if ((process.platform === 'linux' || process.platform === 'freebsd') && (process.arch === 'arm64' || process.arch === 'arm')) {
+         // Our ARM tests are run on VSTS rather than CircleCI, and the Docker
+         // setup on VSTS disallows syscalls that Chrome requires for setting up
+         // sandboxing.

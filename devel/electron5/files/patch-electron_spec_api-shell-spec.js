@@ -1,4 +1,4 @@
---- electron/spec/api-shell-spec.js.orig	2019-06-14 21:14:47 UTC
+--- electron/spec/api-shell-spec.js.orig	2019-12-17 03:11:25 UTC
 +++ electron/spec/api-shell-spec.js
 @@ -35,7 +35,7 @@ describe('shell module', () => {
        await closeWindow(w)
@@ -20,6 +20,15 @@
        }
  
        // Ensure an external window is activated via a new window's blur event
+@@ -64,7 +68,7 @@ describe('shell module', () => {
+ 
+       shell.openExternal(url).then(() => {
+         promiseResolved = true
+-        if (blurEventEmitted || process.platform === 'linux') {
++        if (blurEventEmitted || process.platform === 'linux' || process.platform === 'freebsd') {
+           done()
+         }
+       })
 @@ -75,6 +79,10 @@ describe('shell module', () => {
        if (process.platform === 'linux') {
          process.env.DE = 'generic'
