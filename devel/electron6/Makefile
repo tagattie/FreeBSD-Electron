@@ -51,7 +51,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libexpat.so:textproc/expat2 \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	xdg-open:devel/xdg-utils
-TEST_DEPENDS=	yarn:www/yarn-node12
+TEST_DEPENDS=	npm:www/npm-node12
 
 USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 		ninja pkgconfig python:2.7,build tar:xz xorg
@@ -65,7 +65,7 @@ GH_TUPLE=	nodejs:node:v${NODE_VER}:node
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	6.1.6
+ELECTRON_VER=	6.1.7
 # Official chromium version containing "gn" which is known to work
 CHROMIUM_OFFICIAL_VER=	76.0.3809.132
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
@@ -96,6 +96,7 @@ USE_LDCONFIG=	${DATADIR}
 GN_ARGS+=	clang_use_chrome_plugins=false \
 		enable_hangout_services_extension=true \
 		enable_nacl=false \
+		enable_one_click_signin=true \
 		enable_remoting=false \
 		fieldtrial_testing_like_official_build=true \
 		is_clang=true \
@@ -165,9 +166,9 @@ TEST_ALL_TARGET=	${TEST_TARGETS}
 TEST_ALL_TARGET+=	third_party/electron_node:headers
 
 POST_BUILD_TARGETS=	licenses version
-POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
+POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mksnapshot_zip
 
-YARN_TIMESTAMP=	1576123123
+YARN_TIMESTAMP=	1576819964
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
 
@@ -322,11 +323,8 @@ do-test-TEST-on:
 	# electron unit tests
 	# Note 1: "npm install" will run before actual tests are executed
 	# Note 2: Xvfb or something similar is necessary for headless testing
-	# **Note 3: unit test won't run yet. (robotjs doesn't build with node 12).**
-.for t in ${TEST_MODULES}
 	cd ${WRKSRC}/electron && \
 		${SETENV} ${TEST_ENV} ELECTRON_OUT_DIR=${BUILDTYPE} \
-		npm run test -- --ci -g '${t}' || ${TRUE}
-.endfor
+		npm run test -- --ci
 
 .include <bsd.port.post.mk>
