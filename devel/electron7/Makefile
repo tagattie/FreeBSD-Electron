@@ -67,7 +67,7 @@ GH_TUPLE=	nodejs:node:v${NODE_VER}:node \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	7.1.5
+ELECTRON_VER=	7.1.7
 # Official chromium version containing "gn" which is known to work
 CHROMIUM_OFFICIAL_VER=	78.0.3904.108
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
@@ -171,7 +171,7 @@ TEST_ALL_TARGET+=	third_party/electron_node:headers
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mksnapshot_zip
 
-YARN_TIMESTAMP=	1576474228
+YARN_TIMESTAMP=	1577082232
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
 
