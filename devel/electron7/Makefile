@@ -50,7 +50,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libexpat.so:textproc/expat2 \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	xdg-open:devel/xdg-utils
-TEST_DEPENDS=	${PYTHON_PKGNAMEPREFIX}python-dbusmock>0:devel/py-python-dbusmock@${PY_FLAVOR} \
+TEST_DEPENDS=	git:devel/git \
+		${PYTHON_PKGNAMEPREFIX}python-dbusmock>0:devel/py-python-dbusmock@${PY_FLAVOR} \
 		npm:www/npm-node12
 
 USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
@@ -327,7 +328,7 @@ do-test-TEST-on:
 	# Note 1: "npm install" will run before actual tests are executed
 	# Note 2: Xvfb or something similar is necessary for headless testing
 	cd ${WRKSRC}/electron && \
-		${SETENV} ${TEST_ENV} ELECTRON_OUT_DIR=${BUILDTYPE} \
+		${SETENV} ${TEST_ENV} ELECTRON_OUT_DIR=${BUILDTYPE} LOCAL_GIT_DIRECTORY=${LOCALBASE} \
 		npm run test -- --ci
 
 .include <bsd.port.post.mk>
