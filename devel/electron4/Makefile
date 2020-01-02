@@ -150,7 +150,7 @@ PULSEAUDIO_VARS=	GN_ARGS+=use_pulseaudio=true
 PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 
 POST_BUILD_TARGETS=	licenses version
-POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
+POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mksnapshot_zip
 
 NPM_TIMESTAMP=	1573298347
 
