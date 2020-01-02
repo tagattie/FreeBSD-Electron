@@ -53,8 +53,6 @@ TEST_DEPENDS=	npm:www/npm-node10
 USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 		ninja pkgconfig python:2.7,build tar:xz xorg
 
-CONFLICTS_INSTALL=	electron5
-
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
 # See ${WRKSRC}/electron/DEPS for GH_TAGNAME_node
@@ -75,6 +73,8 @@ CHROMIUM_TEST_FONTS_HASH=	a22de844e32a3f720d219e3911c3da3478039f89
 
 NO_WRKSUBDIR=	yes
 WRKSRC_SUBDIR=	src
+
+DATADIR=	${PREFIX}/share/${PORTNAME}${PKGNAMESUFFIX}
 
 DOS2UNIX_FILES=	third_party/skia/third_party/vulkanmemoryallocator/include/vk_mem_alloc.h
 BINARY_ALIAS=	python=${PYTHON_CMD}
@@ -161,7 +161,8 @@ POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
 
 NPM_TIMESTAMP=	1573298347
 
-PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
+PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
+		PKGNAMESUFFIX=${PKGNAMESUFFIX}
 
 .include <bsd.port.pre.mk>
 
@@ -288,7 +289,7 @@ do-install:
 .for f in default_app.asar electron.asar
 	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/resources/${f} ${STAGEDIR}${DATADIR}/resources
 .endfor
-	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin
+	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin/electron${PKGNAMESUFFIX}
 
 post-install-DIST-on:
 	${MKDIR} ${STAGEDIR}${DATADIR}/releases
