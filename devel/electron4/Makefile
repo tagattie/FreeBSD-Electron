@@ -110,7 +110,7 @@ GN_ARGS+=	clang_use_chrome_plugins=false \
 		extra_ldflags="${LDFLAGS}"
 GN_BOOTSTRAP_FLAGS=	--no-clean --no-rebuild --skip-generate-buildfiles
 
-ALL_TARGET=	electron
+ALL_TARGET=	electron third_party/electron_node:headers
 MAKE_ARGS=	-C out/${BUILDTYPE}
 MAKE_ENV+=	C_INCLUDE_PATH=${LOCALBASE}/include \
 		CPLUS_INCLUDE_PATH=${LOCALBASE}/include
@@ -154,7 +154,6 @@ PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 .include "Makefile.tests"
 TEST_DISTFILES=		${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts
 TEST_ALL_TARGET=	${TEST_TARGETS}
-TEST_ALL_TARGET+=	third_party/electron_node:headers
 
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	dist.zip chromedriver.zip mksnapshot.zip
@@ -289,6 +288,7 @@ do-install:
 .for f in default_app.asar electron.asar
 	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/resources/${f} ${STAGEDIR}${DATADIR}/resources
 .endfor
+	cd ${WRKSRC}/out/${BUILDTYPE}/gen && ${COPYTREE_SHARE} node_headers ${STAGEDIR}${DATADIR}
 	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin/electron${PKGNAMESUFFIX}
 
 post-install-DIST-on:
