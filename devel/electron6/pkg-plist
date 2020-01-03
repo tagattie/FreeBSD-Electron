@@ -106,6 +106,13 @@ bin/electron%%PKGNAMESUFFIX%%
 %%DATADIR%%/node_headers/include/node/v8config.h
 %%DATADIR%%/node_headers/include/node/zconf.h
 %%DATADIR%%/node_headers/include/node/zlib.h
+%%DIST%%%%DATADIR%%/releases/SHASUMS256.txt
+%%DIST%%%%AMD64%%%%DATADIR%%/releases/chromedriver-v%%ELECTRON_VER%%-freebsd-x64.zip
+%%DIST%%%%I386%%%%DATADIR%%/releases/chromedriver-v%%ELECTRON_VER%%-freebsd-ia32.zip
+%%DIST%%%%AMD64%%%%DATADIR%%/releases/electron-v%%ELECTRON_VER%%-freebsd-x64.zip
+%%DIST%%%%I386%%%%DATADIR%%/releases/electron-v%%ELECTRON_VER%%-freebsd-ia32.zip
+%%DIST%%%%AMD64%%%%DATADIR%%/releases/mksnapshot-v%%ELECTRON_VER%%-freebsd-x64.zip
+%%DIST%%%%I386%%%%DATADIR%%/releases/mksnapshot-v%%ELECTRON_VER%%-freebsd-ia32.zip
 %%DATADIR%%/resources.pak
 %%DATADIR%%/resources/default_app.asar
 %%DATADIR%%/resources/electron.asar
