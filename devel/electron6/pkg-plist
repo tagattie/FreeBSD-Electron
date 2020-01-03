@@ -3,7 +3,7 @@ bin/electron%%PKGNAMESUFFIX%%
 %%DATADIR%%/LICENSES.chromium.html
 %%DATADIR%%/chrome_100_percent.pak
 %%DATADIR%%/chrome_200_percent.pak
-%%DATADIR%%/chromedriver
+%%DRIVER%%%%DATADIR%%/chromedriver
 %%DATADIR%%/electron
 %%DATADIR%%/icudtl.dat
 %%DATADIR%%/libEGL.so
