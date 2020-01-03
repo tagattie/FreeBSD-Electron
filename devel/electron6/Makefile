@@ -168,7 +168,6 @@ YARN_TIMESTAMP=	1576819964
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
 		PKGNAMESUFFIX=${PKGNAMESUFFIX}
 
-.include "Makefile.tests"
 .include <bsd.port.pre.mk>
 
 .if ${ARCH} == "amd64"
