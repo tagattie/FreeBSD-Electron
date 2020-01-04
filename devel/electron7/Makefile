@@ -122,7 +122,7 @@ GN_ARGS+=	clang_use_chrome_plugins=false \
 		extra_ldflags="${LDFLAGS}"
 GN_BOOTSTRAP_FLAGS=	--no-clean --no-rebuild --skip-generate-buildfiles
 
-ALL_TARGET=	electron
+ALL_TARGET=	electron third_party/electron_node:headers
 MAKE_ARGS=	-C out/${BUILDTYPE}
 MAKE_ENV+=	C_INCLUDE_PATH=${LOCALBASE}/include \
 		CPLUS_INCLUDE_PATH=${LOCALBASE}/include
@@ -166,7 +166,6 @@ PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 .include "Makefile.tests"
 TEST_DISTFILES=		${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts
 TEST_ALL_TARGET=	${TEST_TARGETS}
-TEST_ALL_TARGET+=	third_party/electron_node:headers
 
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mksnapshot_zip
