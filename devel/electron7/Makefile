@@ -32,6 +32,7 @@ BUILD_DEPENDS=	${LOCALBASE}/bin/ar:devel/binutils \
 		node:www/node12 \
 		npm:www/npm-node12
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
+		libatspi.so:accessibility/at-spi2-core \
 		libsnappy.so:archivers/snappy \
 		libFLAC.so:audio/flac \
 		libopus.so:audio/opus \
