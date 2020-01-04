@@ -3,7 +3,7 @@ bin/electron%%PKGNAMESUFFIX%%
 %%DATADIR%%/LICENSES.chromium.html
 %%DATADIR%%/chrome_100_percent.pak
 %%DATADIR%%/chrome_200_percent.pak
-%%DATADIR%%/chromedriver
+%%DRIVER%%%%DATADIR%%/chromedriver
 %%DATADIR%%/electron
 %%DATADIR%%/icudtl.dat
 %%DATADIR%%/libEGL.so
@@ -106,6 +106,13 @@ bin/electron%%PKGNAMESUFFIX%%
 %%DATADIR%%/node_headers/include/node/v8config.h
 %%DATADIR%%/node_headers/include/node/zconf.h
 %%DATADIR%%/node_headers/include/node/zlib.h
+%%DIST%%%%DATADIR%%/releases/SHASUMS256.txt
+%%DIST%%%%AMD64%%%%DATADIR%%/releases/chromedriver-v%%ELECTRON_VER%%-freebsd-x64.zip
+%%DIST%%%%I386%%%%DATADIR%%/releases/chromedriver-v%%ELECTRON_VER%%-freebsd-ia32.zip
+%%DIST%%%%AMD64%%%%DATADIR%%/releases/electron-v%%ELECTRON_VER%%-freebsd-x64.zip
+%%DIST%%%%I386%%%%DATADIR%%/releases/electron-v%%ELECTRON_VER%%-freebsd-ia32.zip
+%%DIST%%%%AMD64%%%%DATADIR%%/releases/mksnapshot-v%%ELECTRON_VER%%-freebsd-x64.zip
+%%DIST%%%%I386%%%%DATADIR%%/releases/mksnapshot-v%%ELECTRON_VER%%-freebsd-ia32.zip
 %%DATADIR%%/resources.pak
 %%DATADIR%%/resources/default_app.asar
 %%DATADIR%%/snapshot_blob.bin
