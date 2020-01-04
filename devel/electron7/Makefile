@@ -12,6 +12,7 @@ PKGNAMESUFFIX=	${ELECTRON_VER:C/^([0-9]+)\..+$$/\1/}
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
 		chromium-${CHROMIUM_OFFICIAL_VER}${EXTRACT_SUFX}:chromium_official \
 		${CHROMIUM_NODE_MODULES_HASH}:chromium_node \
+		${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts \
 		electron-yarn-cache-${ELECTRON_VER}${EXTRACT_SUFX}:prefetch
 DIST_SUBDIR=	${PORTNAME}
 
@@ -127,17 +128,13 @@ MAKE_ARGS=	-C out/${BUILDTYPE}
 MAKE_ENV+=	C_INCLUDE_PATH=${LOCALBASE}/include \
 		CPLUS_INCLUDE_PATH=${LOCALBASE}/include
 
-OPTIONS_DEFINE=	CUPS DEBUG DIST DRIVER KERBEROS TEST
+OPTIONS_DEFINE=	CUPS DEBUG DIST DRIVER KERBEROS
 DIST_DESC=	Build distribution zip files
 DRIVER_DESC=	Install chromedriver
 OPTIONS_GROUP=	AUDIO
 OPTIONS_GROUP_AUDIO=	ALSA PULSEAUDIO
 OPTIONS_DEFAULT=	CUPS DRIVER KERBEROS ALSA
 OPTIONS_SUB=	yes
-
-.if make(makesum)
-.MAKEFLAGS:	WITH="${OPTIONS_DEFINE}"
-.endif
 
 ALSA_LIB_DEPENDS=	libasound.so:audio/alsa-lib
 ALSA_RUN_DEPENDS=	${LOCALBASE}/lib/alsa-lib/libasound_module_pcm_oss.so:audio/alsa-plugins
@@ -162,10 +159,6 @@ KERBEROS_VARS_OFF=	GN_ARGS+=use_kerberos=false
 PULSEAUDIO_LIB_DEPENDS=	libpulse.so:audio/pulseaudio
 PULSEAUDIO_VARS=	GN_ARGS+=use_pulseaudio=true
 PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
-
-.include "Makefile.tests"
-TEST_DISTFILES=		${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts
-TEST_ALL_TARGET=	${TEST_TARGETS}
 
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mksnapshot_zip
@@ -231,8 +224,6 @@ post-extract:
 	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_requests}-${GH_TAGNAME_requests} \
 	# 	${WRKSRC}/electron/vendor/${GH_PROJECT_requests}
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/node_modules ${WRKSRC}/third_party/node
-
-post-extract-TEST-on:
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/test_fonts ${WRKSRC}/third_party/test_fonts
 
 pre-patch:
@@ -319,13 +310,7 @@ post-install-DIST-on:
 post-install-DRIVER-on:
 	${INSTALL_PROGRAM} ${WRKSRC}/out/${BUILDTYPE}/chromedriver ${STAGEDIR}${DATADIR}
 
-do-test-TEST-on:
-	# chromium unit tests
-# .for t in ${TEST_ALL_TARGET}
-# 	cd ${WRKSRC}/out/${BUILDTYPE} && ${SETENV} LC_ALL=en_US.UTF-8 \
-# 		./${t} --gtest_filter=-${EXCLUDE_${t}:ts:} || ${TRUE}
-# .endfor
-	# electron unit tests
+do-test:
 	# Note 1: "npm install" will run before actual tests are executed
 	# Note 2: Xvfb or something similar is necessary for headless testing
 	cd ${WRKSRC}/electron && \
