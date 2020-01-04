@@ -8,7 +8,7 @@ MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v7.
 		https://commondatastorage.googleapis.com/chromium-browser-official/:chromium_official \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
-PKGNAMESUFFIX=	7
+PKGNAMESUFFIX=	${ELECTRON_VER:C/^([0-9]+)\..+$$/\1/}
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
 		chromium-${CHROMIUM_OFFICIAL_VER}${EXTRACT_SUFX}:chromium_official \
 		${CHROMIUM_NODE_MODULES_HASH}:chromium_node \
@@ -57,8 +57,6 @@ TEST_DEPENDS=	git:devel/git \
 USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 		ninja pkgconfig python:2.7,build,test tar:xz xorg
 
-CONFLICTS_INSTALL=	electron4 electron5 electron6
-
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
 GH_TUPLE=	nodejs:node:v${NODE_VER}:node \
@@ -83,6 +81,8 @@ NAN_VER=	2ee313aaca52e2b478965ac50eb5082520380d1b
 
 NO_WRKSUBDIR=	yes
 WRKSRC_SUBDIR=	src
+
+DATADIR=	${PREFIX}/share/${PORTNAME}${PKGNAMESUFFIX}
 
 DOS2UNIX_FILES=	third_party/skia/third_party/vulkanmemoryallocator/include/vk_mem_alloc.h
 BINARY_ALIAS=	python=${PYTHON_CMD}
@@ -173,7 +173,8 @@ POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mk
 
 YARN_TIMESTAMP=	1577082232
 
-PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER}
+PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
+		PKGNAMESUFFIX=${PKGNAMESUFFIX}
 
 .include <bsd.port.pre.mk>
 
@@ -308,7 +309,8 @@ do-install:
 .for f in default_app.asar
 	${INSTALL_DATA} ${WRKSRC}/out/${BUILDTYPE}/resources/${f} ${STAGEDIR}${DATADIR}/resources
 .endfor
-	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin
+	cd ${WRKSRC}/out/${BUILDTYPE}/gen && ${COPYTREE_SHARE} node_headers ${STAGEDIR}${DATADIR}
+	${RLN} ${STAGEDIR}${DATADIR}/electron ${STAGEDIR}${PREFIX}/bin/electron${PKGNAMESUFFIX}
 
 post-install-DIST-on:
 	${MKDIR} ${STAGEDIR}${DATADIR}/releases
