@@ -186,11 +186,11 @@ pre-fetch:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
 	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/electron-yarn-cache-${ELECTRON_VER}${EXTRACT_SUFX} ]; \
 		then ${MKDIR} ${WRKDIR}; \
-		${SED} -e 's|$${WRKDIR}|${WRKDIR}|' \
-			${FILESDIR}/yarnrc-offline-mirror >> ${WRKDIR}/.yarnrc; \
+		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
+			${WRKDIR}/.yarnrc; \
 		${CP} ${FILESDIR}/package.json ${FILESDIR}/yarn.lock ${WRKDIR}; \
 		cd ${WRKDIR} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			yarn --frozen-lockfile; \
+			yarn --frozen-lockfile --ignore-scripts; \
 		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${YARN_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
@@ -212,7 +212,7 @@ post-extract:
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_node}-${NODE_VER} \
 		${WRKSRC}/third_party/electron_node
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/yarn-offline-cache ${WRKDIR}
-	${SED} -e 's|$${WRKDIR}|${WRKDIR}|' ${FILESDIR}/yarnrc-offline-mirror >> ${WRKSRC}/electron/.yarnrc
+	${ECHO_CMD} 'yarn-offline-mirror "../../../yarn-offline-cache"' >> ${WRKSRC}/electron/.yarnrc
 	cd ${WRKSRC}/electron && \
 		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache yarn --frozen-lockfile --offline
 	# ${RMDIR} ${WRKSRC}/electron/vendor/${GH_PROJECT_boto}
