@@ -67,7 +67,6 @@ GH_TUPLE=	nodejs:node:v${NODE_VER}:node \
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	7.1.7
 # Official chromium version containing "gn" which is known to work
 CHROMIUM_OFFICIAL_VER=	78.0.3904.108
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
@@ -169,6 +168,7 @@ YARN_TIMESTAMP=	1577082232
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
 		PKGNAMESUFFIX=${PKGNAMESUFFIX}
 
+.include "Makefile.version"
 .include <bsd.port.pre.mk>
 
 .if ${ARCH} == "amd64"
