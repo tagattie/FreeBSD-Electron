@@ -67,7 +67,6 @@ GH_TUPLE=	electron:node:666c67e078bddc32f25409f4a929c1e9b5f47373:node
 		# yaml:pyyaml:3.12:pyyaml \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
-ELECTRON_VER=	5.0.13
 # Official chromium version containing "gn" which is known to work
 CHROMIUM_OFFICIAL_VER=	76.0.3809.132
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
@@ -166,6 +165,7 @@ NPM_TIMESTAMP=	1576733942
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
 		PKGNAMESUFFIX=${PKGNAMESUFFIX}
 
+.include "Makefile.version"
 .include "Makefile.tests"
 .include <bsd.port.pre.mk>
 
