@@ -1,0 +1,11 @@
+bin/bitwarden-desktop
+share/applications/bitwarden-desktop.desktop
+%%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/electron.asar
+share/icons/hicolor/128x128/apps/bitwarden.png
+share/icons/hicolor/16x16/apps/bitwarden.png
+share/icons/hicolor/256x256/apps/bitwarden.png
+share/icons/hicolor/32x32/apps/bitwarden.png
+share/icons/hicolor/48x48/apps/bitwarden.png
+share/icons/hicolor/512x512/apps/bitwarden.png
+share/icons/hicolor/64x64/apps/bitwarden.png

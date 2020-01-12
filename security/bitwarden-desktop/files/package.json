@@ -1,0 +1,289 @@
+{
+  "name": "bitwarden",
+  "productName": "Bitwarden",
+  "description": "A secure and free password manager for all of your devices.",
+  "version": "0.0.0",
+  "keywords": [
+    "bitwarden",
+    "password",
+    "vault",
+    "password manager"
+  ],
+  "author": "8bit Solutions LLC <hello@bitwarden.com> (https://bitwarden.com)",
+  "homepage": "https://bitwarden.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/bitwarden/desktop"
+  },
+  "license": "GPL-3.0",
+  "scripts": {
+    "start": "cross-env ELECTRON_IS_DEV=0 ELECTRON_NO_UPDATER=1 electron ./build",
+    "sub:init": "git submodule update --init --recursive",
+    "sub:update": "git submodule update --remote",
+    "sub:pull": "git submodule foreach git pull origin master",
+    "sub:commit": "npm run sub:pull && git commit -am \"update submodule\"",
+    "postinstall": "./node_modules/.bin/electron-rebuild && npm run sub:init && gulp postinstall",
+    "symlink:win": "rm -rf ./jslib && cmd /c mklink /J .\\jslib ..\\jslib",
+    "lint": "tslint src/**/*.ts || true",
+    "lint:fix": "tslint src/**/*.ts --fix",
+    "build": "concurrently -n Main,Rend -c yellow,cyan \"npm run build:main\" \"npm run build:renderer\"",
+    "build:main": "webpack --config webpack.main.js",
+    "build:renderer": "gulp prebuild:renderer && webpack --config webpack.renderer.js",
+    "build:renderer:watch": "gulp prebuild:renderer && webpack --config webpack.renderer.js --watch",
+    "electron": "npm run build:main && concurrently -k -n Main,Rend -c yellow,cyan \"electron --inspect=5858 ./build --watch\" \"npm run build:renderer:watch\"",
+    "clean:dist": "rimraf ./dist/*",
+    "clean:l10n": "git push origin --delete l10n_master",
+    "pack:lin": "npm run clean:dist && electron-builder --linux --x64 -p never",
+    "pack:mac": "npm run clean:dist && electron-builder --mac -p never",
+    "pack:mac:mas": "npm run clean:dist && electron-builder --mac mas -p never",
+    "pack:mac:masdev": "npm run clean:dist && electron-builder --mac mas-dev -p never",
+    "pack:win": "npm run clean:dist && electron-builder --win --x64 --ia32 -p never -c.win.certificateSubjectName=\"8bit Solutions LLC\"",
+    "pack:win:ci": "npm run clean:dist && electron-builder --win --x64 --ia32 -p never",
+    "dist:lin": "npm run build && npm run pack:lin",
+    "dist:mac": "npm run build && npm run pack:mac",
+    "dist:mac:mas": "npm run build && npm run pack:mac:mas && gulp pkgMas",
+    "dist:mac:masdev": "npm run build && npm run pack:mac:masdev",
+    "dist:win": "npm run build && npm run pack:win",
+    "dist:win:ci": "npm run build && npm run pack:win:ci",
+    "publish:lin": "npm run build && npm run clean:dist && electron-builder --linux --x64 -p always",
+    "publish:mac": "npm run build && npm run clean:dist && electron-builder --mac -p always",
+    "publish:mac:mas": "dist:mac:mas && npm run upload:mas",
+    "publish:win": "npm run build && npm run clean:dist && electron-builder --win --x64 --ia32 -p always -c.win.certificateSubjectName=\"8bit Solutions LLC\"",
+    "upload:mas": "xcrun altool --upload-app --type osx --file \"./dist/mas/Bitwarden-mas-signed.pkg\" --username $APPLE_ID_USERNAME --password $APPLE_ID_PASSWORD"
+  },
+  "build": {
+    "appId": "com.bitwarden.desktop",
+    "copyright": "Copyright © 2015-2019 8bit Solutions LLC",
+    "directories": {
+      "buildResources": "resources",
+      "output": "dist",
+      "app": "build"
+    },
+    "afterSign": "scripts/after-sign.js",
+    "mac": {
+      "electronUpdaterCompatibility": ">=0.0.1",
+      "category": "public.app-category.productivity",
+      "extraFiles": [
+        "PlugIns/"
+      ],
+      "darkModeSupport": true,
+      "gatekeeperAssess": false,
+      "hardenedRuntime": true,
+      "entitlements": "resources/entitlements.mac.plist",
+      "entitlementsInherit": "resources/entitlements.mac.plist",
+      "extendInfo": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "CFBundleLocalizations": [
+          "en",
+          "cs",
+          "da",
+          "de",
+          "es",
+          "et",
+          "fi",
+          "fr",
+          "hr",
+          "hu",
+          "id",
+          "it",
+          "ja",
+          "nb",
+          "nl",
+          "pl",
+          "pt-BR",
+          "pt-PT",
+          "ro",
+          "ru",
+          "sk",
+          "sv",
+          "tr",
+          "uk",
+          "vi",
+          "zh-Hans",
+          "zh-Hant"
+        ],
+        "CFBundleDevelopmentRegion": "en"
+      },
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "electronUpdaterCompatibility": ">=0.0.1",
+      "target": [
+        "portable",
+        "nsis-web",
+        "appx"
+      ]
+    },
+    "linux": {
+      "category": "Utility",
+      "synopsis": "A secure and free password manager for all of your devices.",
+      "target": [
+        "deb",
+        "freebsd",
+        "rpm",
+        "AppImage",
+        "snap"
+      ]
+    },
+    "dmg": {
+      "icon": "dmg.icns",
+      "contents": [
+        {
+          "x": 150,
+          "y": 185,
+          "type": "file"
+        },
+        {
+          "x": 390,
+          "y": 180,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ],
+      "window": {
+        "width": 540,
+        "height": 380
+      }
+    },
+    "mas": {
+      "entitlements": "resources/entitlements.mas.plist",
+      "entitlementsInherit": "resources/entitlements.mas.inherit.plist",
+      "hardenedRuntime": false
+    },
+    "nsisWeb": {
+      "oneClick": false,
+      "perMachine": true,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "${productName}-Installer-${version}.${ext}",
+      "uninstallDisplayName": "${productName}",
+      "deleteAppDataOnUninstall": true
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable-${version}.${ext}"
+    },
+    "appx": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "backgroundColor": "#3c8dbc",
+      "applicationId": "bitwardendesktop",
+      "identityName": "8bitSolutionsLLC.bitwardendesktop",
+      "publisher": "CN=14D52771-DE3C-4886-B8BF-825BA7690418",
+      "publisherDisplayName": "8bit Solutions LLC",
+      "languages": [
+        "en-US"
+      ]
+    },
+    "deb": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}",
+      "depends": [
+        "gconf2",
+        "gconf-service",
+        "libnotify4",
+        "libxtst6",
+        "libnss3",
+        "libsecret-1-0",
+        "libxss1"
+      ]
+    },
+    "appImage": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "rpm": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "freebsd": {
+      "artifactName": "${productName}-${version}-${arch}.${ext}"
+    },
+    "snap": {
+      "confinement": "strict",
+      "plugs": [
+        "default",
+        "password-manager-service"
+      ],
+      "stagePackages": [
+        "default"
+      ],
+      "publish": [
+        "github"
+      ]
+    }
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "^7.2.11",
+    "@ngtools/webpack": "^7.2.2",
+    "@types/lunr": "^2.1.6",
+    "@types/node-forge": "^0.7.5",
+    "@types/papaparse": "^4.5.3",
+    "@types/semver": "^5.5.0",
+    "@types/webcrypto": "^0.0.28",
+    "@types/webpack": "^4.4.11",
+    "@types/zxcvbn": "4.4.0",
+    "clean-webpack-plugin": "^0.1.19",
+    "concurrently": "^4.0.1",
+    "copy-webpack-plugin": "^4.2.0",
+    "cross-env": "^5.2.0",
+    "css-loader": "^1.0.0",
+    "del": "^3.0.0",
+    "electron": "5.0.8",
+    "electron-builder": "21.1.5",
+    "electron-notarize": "^0.1.1",
+    "electron-rebuild": "^1.8.5",
+    "electron-reload": "^1.4.1",
+    "extract-text-webpack-plugin": "next",
+    "file-loader": "^2.0.0",
+    "font-awesome": "4.7.0",
+    "gulp": "^4.0.0",
+    "gulp-google-webfonts": "^2.0.0",
+    "html-loader": "^0.5.5",
+    "html-webpack-plugin": "^3.2.0",
+    "ngx-infinite-scroll": "7.0.1",
+    "node-abi": "^2.9.0",
+    "node-loader": "^0.6.0",
+    "node-sass": "^4.11.0",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^7.1.0",
+    "ts-loader": "^5.3.3",
+    "tslint": "^5.12.1",
+    "tslint-loader": "^3.5.4",
+    "typescript": "3.2.4",
+    "webpack": "^4.29.0",
+    "webpack-cli": "^3.2.1",
+    "webpack-merge": "^4.2.1",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "dependencies": {
+    "@angular/animations": "7.2.1",
+    "@angular/cdk": "7.2.1",
+    "@angular/common": "7.2.1",
+    "@angular/compiler": "7.2.1",
+    "@angular/core": "7.2.1",
+    "@angular/forms": "7.2.1",
+    "@angular/http": "7.2.1",
+    "@angular/platform-browser": "7.2.1",
+    "@angular/platform-browser-dynamic": "7.2.1",
+    "@angular/router": "7.2.1",
+    "@angular/upgrade": "7.2.1",
+    "@aspnet/signalr": "1.1.4",
+    "@aspnet/signalr-protocol-msgpack": "1.1.0",
+    "angular2-toaster": "6.1.0",
+    "angulartics2": "6.3.0",
+    "big-integer": "1.6.36",
+    "core-js": "2.6.2",
+    "desktop-idle": "1.1.2",
+    "duo_web_sdk": "git+https://github.com/duosecurity/duo_web_sdk.git",
+    "electron-log": "2.2.17",
+    "electron-store": "1.3.0",
+    "electron-updater": "4.1.2",
+    "keytar": "4.13.0",
+    "lunr": "2.3.3",
+    "node-forge": "0.7.6",
+    "nord": "0.2.1",
+    "papaparse": "4.6.0",
+    "rxjs": "6.3.3",
+    "sweetalert": "2.1.2",
+    "zone.js": "0.8.28",
+    "zxcvbn": "4.4.2"
+  }
+}
