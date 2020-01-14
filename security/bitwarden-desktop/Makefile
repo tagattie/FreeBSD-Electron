@@ -19,10 +19,8 @@ FETCH_DEPENDS=	git:devel/git \
 BUILD_DEPENDS=	zip:archivers/zip \
 		app-builder:devel/app-builder \
 		electron${ELECTRON_VER_MAJOR}:devel/electron${ELECTRON_VER_MAJOR} \
-		node:www/node10 \
 		npm:www/npm-node10
 LIB_DEPENDS=	libpcre.so:devel/pcre \
-		libgcrypt.so:security/libgcrypt \
 		libsecret-1.so:security/libsecret
 RUN_DEPENDS=	electron${ELECTRON_VER_MAJOR}:devel/electron${ELECTRON_VER_MAJOR}
 
@@ -47,18 +45,14 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
+NPM_TIMESTAMP=	1578569112
+
 .include <bsd.port.pre.mk>
 .include "${PORTSDIR}/devel/electron5/Makefile.version"
 
 SYSTEM_ELECTRON_VER=	${ELECTRON_VER}
 ELECTRON_VER_MAJOR=	${ELECTRON_VER:C/^([0-9]+)\..+$/\1/}
 PKG_ELECTRON_VER=	5.0.8
-# PKG_ELECTRON_VER!=	${AWK} '/devDependencies/,/}/' ${FILESDIR}/package.json | \
-# 			${GREP} -e '"electron":[[:space:]]*"[\^~]\?[0-9]' | \
-# 			${AWK} -F ':[[:space:]]*' '{print $$NF}' | \
-# 			${SED} -e 's/[",^~]//g'
-
-NPM_TIMESTAMP=	1578569112
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PORTNAME}-npm-modules-${DISTVERSION}${EXTRACT_SUFX} ]; \
