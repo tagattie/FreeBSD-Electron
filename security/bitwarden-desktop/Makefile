@@ -55,25 +55,33 @@ ELECTRON_VER_MAJOR=	${ELECTRON_VER:C/^([0-9]+)\..+$/\1/}
 PKG_ELECTRON_VER=	5.0.8
 
 pre-fetch:
-	if [ ! -f ${DISTDIR}/${PORTNAME}-npm-modules-${DISTVERSION}${EXTRACT_SUFX} ]; \
-		then ${MKDIR} ${WRKDIR}; \
-		${CP} ${FILESDIR}/package.json ${FILESDIR}/package-lock.json \
-			${WRKDIR}; \
-		cd ${WRKDIR} && \
-		${SETENV} HOME=${WRKDIR} npm ci --ignore-scripts --verbose --no-progress; \
-		${MTREE_CMD} -cbnSp node_modules | ${MTREE_CMD} -C | ${SED} \
+	${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
+	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${PORTNAME}-npm-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
+		${MKDIR} ${WRKDIR}/npm-cache; \
+		${CP} -r ${FILESDIR}/packagejsons/* ${WRKDIR}/npm-cache; \
+		for dir in `${FIND} ${WRKDIR}/npm-cache -type f -name package.json -exec dirname {} ';'`; do \
+			cd $${dir} && \
+			${SETENV} HOME=${WRKDIR} npm ci --ignore-scripts --verbose --no-progress && \
+			${RM} package.json package-lock.json; \
+		done; \
+		cd ${WRKDIR}; \
+		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${NPM_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./node_modules:' > node_modules.mtree; \
+			-e 's:^\.:./npm-cache:' > npm-cache.mtree; \
 		${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PORTNAME}-npm-modules-${DISTVERSION}${EXTRACT_SUFX} \
-			@node_modules.mtree; \
+			-f ${DISTDIR}/${DIST_SUBDIR}/${PORTNAME}-npm-modules-${DISTVERSION}${EXTRACT_SUFX} \
+			@npm-cache.mtree; \
 		${RM} -r ${WRKDIR}; \
 	fi
 
 post-extract:
-	${MV} ${WRKDIR}/node_modules ${WRKSRC}
+	cd ${FILESDIR}/packagejsons && \
+	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
+		echo $${dir}; \
+		${MV} ${WRKDIR}/npm-cache/$${dir}/node_modules ${WRKSRC}/$${dir}; \
+	done
 	${MV} ${WRKDIR}/css ${WRKSRC}/src
 
 post-patch:
