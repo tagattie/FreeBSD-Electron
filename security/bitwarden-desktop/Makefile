@@ -97,7 +97,7 @@ pre-build:
 	cd ${WRKDIR}/.cache/electron && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${PKG_ELECTRON_VER}
-	# rebuild native node modules
+	# rebuild native modules for node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		npm_config_build_from_source=true \
 		npm_config_nodedir=${LOCALBASE} \
@@ -115,12 +115,10 @@ do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run clean:dist
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		USE_SYSTEM_APP_BUILDER=true \
-		npm_config_build_from_source=true \
-		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
 		npx electron-builder --linux --dir \
+		--config.npmRebuild=false \
 		--config.electronVersion=${SYSTEM_ELECTRON_VER} \
-		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} \
-		--config.buildDependenciesFromSource=true
+		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
