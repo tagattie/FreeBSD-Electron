@@ -79,7 +79,6 @@ pre-fetch:
 post-extract:
 	cd ${FILESDIR}/packagejsons && \
 	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		echo $${dir}; \
 		${MV} ${WRKDIR}/npm-cache/$${dir}/node_modules ${WRKSRC}/$${dir}; \
 	done
 	${MV} ${WRKDIR}/css ${WRKSRC}/src
