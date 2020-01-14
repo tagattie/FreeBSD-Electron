@@ -97,10 +97,14 @@ pre-build:
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${PKG_ELECTRON_VER}
 	# rebuild native modules for node
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+	cd ${FILESDIR}/packagejsons && \
+	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
+		cd ${WRKSRC}/$${dir} && \
+		${SETENV} ${MAKE_ENV} \
 		npm_config_build_from_source=true \
 		npm_config_nodedir=${LOCALBASE} \
-		npm rebuild --verbose --no-progress
+		npm rebuild --verbose --no-progress; \
+	done
 	# manually run npm postinstall
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		npm_config_build_from_source=true \
