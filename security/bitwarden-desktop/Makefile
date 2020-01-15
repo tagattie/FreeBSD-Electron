@@ -77,6 +77,17 @@ pre-fetch:
 	fi
 
 post-extract:
+	# copy package.json and package-lock.json from FILESDIR to WRKSRC
+	cd ${FILESDIR}/packagejsons && \
+	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
+		for f in package.json package-lock.json; do \
+			if [ -f ${WRKSRC}/$${dir}/$${f} ]; then \
+				${MV} -f ${WRKSRC}/$${dir}/$${f} ${WRKSRC}/$${dir}/$${f}.bak; \
+			fi; \
+			${CP} -f $${dir}/$${f} ${WRKSRC}/$${dir}; \
+		done; \
+	done
+	# move pre-fetched node modules to appopriate locations
 	cd ${FILESDIR}/packagejsons && \
 	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
 		${MV} ${WRKDIR}/npm-cache/$${dir}/node_modules ${WRKSRC}/$${dir}; \
