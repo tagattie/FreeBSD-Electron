@@ -163,7 +163,7 @@ POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mk
 NPM_TIMESTAMP=	1576733942
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
-		PKGNAMESUFFIX=${PKGNAMESUFFIX}
+		ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 .include "Makefile.version"
 .include "Makefile.tests"
