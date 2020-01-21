@@ -9,7 +9,7 @@ MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v4.
 		https://commondatastorage.googleapis.com/chromium-browser-official/:chromium_official \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
-PKGNAMESUFFIX=	${ELECTRON_VER:C/^([0-9]+)\..+$$/\1/}
+PKGNAMESUFFIX=	${ELECTRON_VER_MAJOR}
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
 		chromium-${CHROMIUM_OFFICIAL_VER}${EXTRACT_SUFX}:chromium_official \
 		${CHROMIUM_NODE_MODULES_HASH}:chromium_node \
