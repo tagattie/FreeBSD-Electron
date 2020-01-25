@@ -36,8 +36,6 @@ USE_ELECTRON=	7
 USE_ELECTRON_HELPER=	fetch extract build
 
 PREFETCH_TIMESTAMP=	1579580332
-SYSTEM_ELECTRON_VER=	${ELECTRON_VER}
-PKG_ELECTRON_VER=	7.1.9
 
 post-extract:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run copyLib
@@ -48,17 +46,15 @@ pre-build:
 		${SETENV} ${MAKE_ENV} ${NODE_CMD} compile.js && \
 		${SETENV} ${MAKE_ENV} ${NODE_CMD} compile-package-info.js && \
 		${SETENV} ${MAKE_ENV} \
-		npm_config_build_from_source=true \
 		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
-		${NPX_CMD} electron-rebuild -f --version ${SYSTEM_ELECTRON_VER}
+		${NPX_CMD} electron-rebuild -f --version ${ELECTRON_VER}
 
 do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run tsc
 	cd ${WRKSRC}/ElectronClient/app && ${SETENV} ${MAKE_ENV} \
-		USE_SYSTEM_APP_BUILDER=true \
 		${NPX_CMD} electron-builder --linux --dir \
 		--config.npmRebuild=false \
-		--config.electronVersion=${SYSTEM_ELECTRON_VER} \
+		--config.electronVersion=${ELECTRON_VER} \
 		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 
 do-install:
