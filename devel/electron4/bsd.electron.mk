@@ -136,6 +136,8 @@ BUILD_DEPENDS+= npm:www/npm-node${_NODE_VERSION}
 .   endif
 
 MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
+MAKE_ENV+=	SASS_FORCE_BUILD=true		# always rebuild native node-sass module
+MAKE_ENV+=	USE_SYSTEM_APP_BUILDER=true	# always use system app-builder for electron-builder
 MAKE_ENV+=	XDG_CACHE_HOME=${WRKDIR}/.cache
 MAKE_ENV+=	npm_config_build_from_source=true
 
