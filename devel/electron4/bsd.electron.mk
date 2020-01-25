@@ -135,12 +135,15 @@ BUILD_DEPENDS+= npm:www/npm-node${_NODE_VERSION}
 .	endif
 .   endif
 
+MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
 REBUILD_NPM_CONFIG_ENV+=	npm_config_build_from_source=true \
 		npm_config_nodedir=${LOCALBASE}
 
+.if ${_ELECTRON_VERSION} < 6
 .if !defined(PKG_ELECTRON_VER)
 IGNORE=	does not define electron version specified in the source. \
 	Check package-lock.json or yarn.lock for this value
+.endif
 .endif
 .endif
 
@@ -244,6 +247,7 @@ post-extract-yarn:
 .if ${_ELECTRON_HELPERS:Mbuild}
 pre-build: pre-build-electron-zip pre-build-npm-rebuild
 pre-build-electron-zip:
+.if ${_ELECTRON_VERSION} < 6
 	# This is only to pacify electron-download and the zip file will not
 	# be used for actual packaging.
 	@${ECHO_MSG} "===>  Preparing distribution files of electron"
@@ -258,6 +262,9 @@ pre-build-electron-zip:
 	@cd ${WRKDIR}/.cache/electron && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${PKG_ELECTRON_VER}
+.else
+	@${DO_NADA}
+.endif
 
 pre-build-npm-rebuild:
 	@${ECHO_MSG} "===>  Rebuilding native node modules for node"
