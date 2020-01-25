@@ -137,8 +137,7 @@ BUILD_DEPENDS+= npm:www/npm-node${_NODE_VERSION}
 
 MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
 MAKE_ENV+=	XDG_CACHE_HOME=${WRKDIR}/.cache
-REBUILD_NPM_CONFIG_ENV+=	npm_config_build_from_source=true \
-		npm_config_nodedir=${LOCALBASE}
+MAKE_ENV+=	npm_config_build_from_source=true
 
 .if ${_ELECTRON_VERSION} < 6
 .if !defined(PKG_ELECTRON_VER)
@@ -272,7 +271,8 @@ pre-build-npm-rebuild:
 	@cd ${PKGJSONSDIR} && \
 	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
 		cd ${WRKSRC}/$${dir} && \
-		${SETENV} ${MAKE_ENV} ${REBUILD_NPM_CONFIG_ENV} \
+		${SETENV} ${MAKE_ENV} \
+		npm_config_nodedir=${LOCALBASE} \
 		${NPM_CMD} rebuild --no-progress; \
 	done
 .endif
