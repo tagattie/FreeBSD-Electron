@@ -38,9 +38,7 @@ USE_ELECTRON=	4
 USE_ELECTRON_HELPER=	fetch extract build
 
 PREFETCH_TIMESTAMP=	1579333031
-SYSTEM_ELECTRON_VER=	${ELECTRON_VER}
 PKG_ELECTRON_VER=	4.2.11
-REBUILD_NPM_CONFIG_ENV+=	SASS_FORCE_BUILD=true
 
 post-extract:
 	if [ -f ${FILESDIR}/config.json ]; then \
@@ -62,14 +60,12 @@ do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} build
 	# rebuild native modules for electron using electron-rebuild
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		npm_config_build_from_source=true \
 		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
-		${NPX_CMD} electron-rebuild -f --version ${SYSTEM_ELECTRON_VER}
+		${NPX_CMD} electron-rebuild -f --version ${ELECTRON_VER}
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		USE_SYSTEM_APP_BUILDER=true \
 		${NPX_CMD} electron-builder --linux --dir \
 		--config.npmRebuild=false \
-		--config.electronVersion=${SYSTEM_ELECTRON_VER} \
+		--config.electronVersion=${ELECTRON_VER} \
 		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 
 do-install:
