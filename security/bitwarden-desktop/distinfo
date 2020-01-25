@@ -1,8 +1,8 @@
-TIMESTAMP = 1578745228
-SHA256 (bitwarden-desktop-npm-modules-1.16.6.tar.gz) = a993fbe4c04e4b34b7f0409c67ea4f813d8dba0eafb4b8fdea7f4ee3835a80fe
-SIZE (bitwarden-desktop-npm-modules-1.16.6.tar.gz) = 104240519
+TIMESTAMP = 1579416678
 SHA256 (bitwarden-desktop-webfonts-1.16.6.tar.gz) = b1a90278950cd49696326f0c5f7be166d70c3dcb92050ff826b439685851efa1
 SIZE (bitwarden-desktop-webfonts-1.16.6.tar.gz) = 550630
+SHA256 (bitwarden-desktop-node-modules-1.16.6.tar.gz) = 96b2b045421e708afb7fa245063f0ae7bf79b47825ab7fd45fde12e5d83e18da
+SIZE (bitwarden-desktop-node-modules-1.16.6.tar.gz) = 104244565
 SHA256 (bitwarden-desktop-v1.16.6_GH0.tar.gz) = 8af78b4fdda0b75dc7effc887dcdcafa647ad344966a75a081131f4c58534323
 SIZE (bitwarden-desktop-v1.16.6_GH0.tar.gz) = 4202009
 SHA256 (bitwarden-jslib-53d08067df953e7a66ebf0b972e6443e1f275d86_GH0.tar.gz) = d4b75821c3d5f3bc7afa6a2310f209cf906ceab495089545dbd1080540099eb7
