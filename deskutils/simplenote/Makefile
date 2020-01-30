@@ -14,8 +14,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 BUILD_DEPENDS=	app-builder:devel/app-builder2 \
 		git:devel/git
 
-USES=		desktop-file-utils gmake gnome localbase:ldflags \
-		python:2.7,build xorg
+USES=		desktop-file-utils electron:4 gmake gnome localbase:ldflags \
+		node:10,build python:2.7,build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Automattic
@@ -33,12 +33,11 @@ PORTDOCS=	RELEASE-NOTES.txt
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	10:npm
-USE_ELECTRON=	4
-USE_ELECTRON_HELPER=	fetch extract build
+USE_NODE=	npm
+USE_ELECTRON=	prefetch extract prebuild
 
 PREFETCH_TIMESTAMP=	1579333031
-PKG_ELECTRON_VER=	4.2.11
+UPSTREAM_ELECTRON_VER=	4.2.11
 
 post-extract:
 	if [ -f ${FILESDIR}/config.json ]; then \
@@ -85,5 +84,4 @@ do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
-.include "${.CURDIR}/../../devel/electron4/bsd.electron.mk"
 .include <bsd.port.mk>
