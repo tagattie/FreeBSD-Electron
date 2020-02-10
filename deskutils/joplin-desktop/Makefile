@@ -1,16 +1,18 @@
 # $FreeBSD$
 
-PORTNAME=	joplin-desktop
+PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.178
+DISTVERSION=	1.0.184
 CATEGORIES=	deskutils
+PKGNAMESUFFIX=	-desktop
 
 MAINTAINER=	tagattie@yandex.com
-COMMENT=	Open source note taking and to-do application with synchronisation capabilities
+COMMENT=	Note taking and to-do application with synchronisation capabilities
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+FETCH_DEPENDS=	git:devel/git
 EXTRACT_DEPENDS=	rsync:net/rsync
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
@@ -19,23 +21,22 @@ USES=		desktop-file-utils electron:7 gnome localbase:ldflags \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
-GH_PROJECT=	${PORTNAME:S/-desktop//}
 
 INSTALLS_ICONS=	yes
 
 BINARY_ALIAS=	python=${PYTHON_CMD}
 
-SUB_FILES=	joplin-desktop
+SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}
 SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 PORTDOCS=	BUILD.md CONTRIBUTING.md README.md SECURITY.md
 
-OPTIONS_DEFINE= DOCS
+OPTIONS_DEFINE=	DOCS
 
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild
 
-PREFETCH_TIMESTAMP=	1579580332
+PREFETCH_TIMESTAMP=	1581308289
 
 post-extract:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run copyLib
@@ -58,8 +59,8 @@ do-build:
 		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
+	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}${PKGNAMESUFFIX}.desktop \
 		${STAGEDIR}${PREFIX}/share/applications
 .for size in 16 24 32 48 72 96 128 144 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
