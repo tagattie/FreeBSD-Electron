@@ -14,7 +14,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 EXTRACT_DEPENDS=	rsync:net/rsync
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils gnome localbase:ldflags python:2.7,build
+USES=		desktop-file-utils electron:7 gnome localbase:ldflags \
+		node:10,build python:2.7,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
@@ -31,9 +32,8 @@ PORTDOCS=	BUILD.md CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE= DOCS
 
-USE_NODE=	10:npm
-USE_ELECTRON=	7
-USE_ELECTRON_HELPER=	fetch extract build
+USE_NODE=	npm
+USE_ELECTRON=	prefetch extract prebuild
 
 PREFETCH_TIMESTAMP=	1579580332
 
@@ -75,5 +75,4 @@ do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
-.include "${.CURDIR}/../../devel/electron4/bsd.electron.mk"
 .include <bsd.port.mk>
