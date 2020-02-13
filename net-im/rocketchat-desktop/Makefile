@@ -13,13 +13,15 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		${LOCALBASE}/libdata/pkgconfig/vips.pc:graphics/vips
 
-USES=		electron:7 node:12,build python:2.7,build
+USES=		electron:7 gnome node:12,build python:2.7,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	RocketChat
 GH_PROJECT=	Rocket.Chat.Electron
 
 BINARY_ALIAS=	python=${PYTHON_CMD}
+
+INSTALLS_ICONS=	yes
 
 SUB_FILES=	rocketchat-desktop
 SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
