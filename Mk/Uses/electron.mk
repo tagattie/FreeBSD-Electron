@@ -73,6 +73,20 @@
 #		NOTE: The generated files are just used to prevent download and
 #		will not be used for other purposes. This is ugly but necessary.
 #
+#	build:		Prepare an application in a distributable directory tree
+#			using the specified node module as an argument.
+#
+#		Valid arguments are:
+#
+#			builder: Uses electron-builder for application
+#				 packaging.
+#
+#			packager: Use electron-packager for application
+#				  packaging.
+#
+#		If you use this feature, one of builder or packager must be
+#		specified.
+#
 # MAINTAINER:	tagattie@yandex.com
 
 .if !defined(_INCLUDE_USES_ELECTRON_MK)
@@ -82,7 +96,8 @@ _INCLUDE_USES_ELECTRON_MK=	yes
 .include "${USESDIR}/node.mk"
 
 _VALID_ELECTRON_VERSIONS=	4 5 6 7
-_VALID_ELECTRON_FEATURES=	prefetch extract prebuild
+_VALID_ELECTRON_FEATURES=	prefetch extract prebuild build
+_VALID_ELECTRON_FEATURE_BUILDS=	builder packager
 
 _ELECTRON_BASE_CMD=	electron
 
@@ -122,7 +137,7 @@ IGNORE= uses unknown USES=electron arguments: ${_ELECTRON_ARGS}
 
 # Detect features used with USE_ELECTRON
 .for var in ${USE_ELECTRON}
-.   if empty(_VALID_ELECTRON_FEATURES:M${var})
+.   if empty(_VALID_ELECTRON_FEATURES:M${var:C/\:.*//})
 _INVALID_ELECTRON_FEATURES+=	${var}
 .   endif
 .endfor
@@ -132,8 +147,15 @@ IGNORE=	uses unknown USE_ELECTRON features: ${_INVALID_ELECTRON_FEATURES}
 
 # Make each individual feature available as _ELECTRON_FEATURE_<FEATURENAME>
 .for var in ${USE_ELECTRON}
-_ELECTRON_FEATURE_${var:tu}=	${var}
+_ELECTRON_FEATURE_${var:C/\:.*//:tu}=	${var}
 .endfor
+
+# Detect builder used with USE_ELECTRON=builder
+.if ${_VALID_ELECTRON_FEATURE_BUILDS:M${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}}
+_ELECTRON_FEATURE_BUILD:=	${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}
+.else
+IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_BUILD}
+.endif
 
 # Setup dependencies
 .for stage in BUILD RUN TEST
@@ -333,6 +355,31 @@ electron-rebuild-native-node-modules-for-electron:
 	done
 
 .endif # _ELECTRON_FEATURE_PREBUILD
+
+.if defined(_ELECTRON_FEATURE_BUILD)
+.   if ${_ELECTRON_FEATURE_BUILD} == builder
+.	if ${NODE_PKG_MANAGER} == npm
+MAKE_CMD=	${NPX_CMD} electron-builder
+.	elif ${NODE_PKG_MANAGER} == yarn
+MAKE_CMD=	${YARN_CMD} run electron-builder
+.	endif
+MAKE_FLAGS=	--linux --dir \
+		--config.npmRebuild=false \
+		--config.electronVersion=${ELECTRON_VER} \
+		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
+MAKEFILE=
+_MAKE_JOBS=
+MAKE_ARGS=
+ALL_TARGET=
+.   elif ${_ELECTRON_FEATURE_BUILD} == packager
+.	if ${NODE_PKG_MANAGER} == npm
+MAKE_CMD=	${NPX_CMD} electron-packager
+.	elif ${NODE_PKG_MANAGER} == yarn
+MAKE_CMD=	${YARN_CMD} run electron-packager
+.	endif
+# MAKE_FLAGS=	TBD # FIXME
+.   endif
+.endif
 
 MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
 MAKE_ENV+=	PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1	# don't download chromium for puppeteer
