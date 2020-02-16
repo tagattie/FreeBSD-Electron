@@ -268,9 +268,9 @@ IGNORE=	does not specify the electron version used in the upstream source. Pleas
 .	endif
 .   endif
 
-_USES_build+=	490:electron-generate-electron-zip \
-		491:electron-generate-chromedriver-zip \
-		492:electron-rebuild-native-node-modules
+_USES_build+=	290:electron-generate-electron-zip \
+		290:electron-generate-chromedriver-zip \
+		291:electron-rebuild-native-node-modules-for-node
 electron-generate-electron-zip:
 .   if ${ELECTRON_VERSION} < 6
 	# This is only to pacify @electron/get and the zip file generated will
@@ -311,7 +311,7 @@ electron-generate-chromedriver-zip:
 	@${DO_NADA}
 .   endif
 
-electron-rebuild-native-node-modules:
+electron-rebuild-native-node-modules-for-node:
 	@${ECHO_MSG} "===>  Rebuilding native node modules for node"
 	@cd ${PKGJSONSDIR} && \
 	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
