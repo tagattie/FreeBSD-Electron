@@ -270,7 +270,8 @@ IGNORE=	does not specify the electron version used in the upstream source. Pleas
 
 _USES_build+=	290:electron-generate-electron-zip \
 		290:electron-generate-chromedriver-zip \
-		291:electron-rebuild-native-node-modules-for-node
+		291:electron-rebuild-native-node-modules-for-node \
+		490:electron-rebuild-native-node-modules-for-electron
 electron-generate-electron-zip:
 .   if ${ELECTRON_VERSION} < 6
 	# This is only to pacify @electron/get and the zip file generated will
@@ -315,9 +316,19 @@ electron-rebuild-native-node-modules-for-node:
 	@${ECHO_MSG} "===>  Rebuilding native node modules for node"
 	@cd ${PKGJSONSDIR} && \
 	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		cd ${WRKSRC}/$${dir} && \
-		${SETENV} ${MAKE_ENV} \
+		cd ${WRKSRC}/$${dir} && ${SETENV} ${MAKE_ENV} \
 		npm_config_nodedir=${LOCALBASE} \
+		${NPM_CMD} rebuild --no-progress; \
+	done
+
+electron-rebuild-native-node-modules-for-electron:
+	@${ECHO_MSG} "===>  Rebuilding native node modules for electron"
+	@cd ${PKGJSONSDIR} && \
+	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
+		cd ${WRKSRC}/$${dir} && ${SETENV} ${MAKE_ENV} \
+		npm_config_runtime=electron \
+		npm_config_target=${ELECTRON_VER} \
+		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
 		${NPM_CMD} rebuild --no-progress; \
 	done
 
