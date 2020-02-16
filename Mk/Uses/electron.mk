@@ -359,26 +359,34 @@ electron-rebuild-native-node-modules-for-electron:
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
 .	if ${NODE_PKG_MANAGER} == npm
-MAKE_CMD=	${NPX_CMD} electron-builder
+ELECTRON_MAKE_CMD=	${NPX_CMD} electron-builder
 .	elif ${NODE_PKG_MANAGER} == yarn
-MAKE_CMD=	${YARN_CMD} run electron-builder
+ELECTRON_MAKE_CMD=	${YARN_CMD} run electron-builder
 .	endif
-MAKE_FLAGS=	--linux --dir \
-		--config.npmRebuild=false \
-		--config.electronVersion=${ELECTRON_VER} \
-		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
-MAKEFILE=
-_MAKE_JOBS=
-MAKE_ARGS=
-ALL_TARGET=
+ELECTRON_MAKE_FLAGS=	--linux --dir \
+			--config.npmRebuild=false \
+			--config.electronVersion=${ELECTRON_VER} \
+			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
 .	if ${NODE_PKG_MANAGER} == npm
-MAKE_CMD=	${NPX_CMD} electron-packager
+ELECTRON_MAKE_CMD=	${NPX_CMD} electron-packager
 .	elif ${NODE_PKG_MANAGER} == yarn
-MAKE_CMD=	${YARN_CMD} run electron-packager
+ELECTRON_MAKE_CMD=	${YARN_CMD} run electron-packager
 .	endif
-# MAKE_FLAGS=	TBD # FIXME
+# ELECTRON_MAKE_FLAGS=	TBD # FIXME
 .   endif
+DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
+.if !target(do-build)
+do-build:
+	@cd ${BUILD_WRKSRC} && \
+	if ! ${DO_MAKE_BUILD}; then \
+		if [ -n "${BUILD_FAIL_MESSAGE}" ]; then \
+			${ECHO_MSG} "===>  Build command failed unexpectedly."; \
+			(${ECHO_CMD} "${BUILD_FAIL_MESSAGE}") | ${FMT_80}; \
+		fi; \
+		${FALSE}; \
+	fi
+.endif
 .endif
 
 MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
