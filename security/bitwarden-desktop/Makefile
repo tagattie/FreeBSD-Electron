@@ -18,12 +18,12 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre.so:devel/pcre \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils gnome localbase:ldflags pkgconfig \
-		python:2.7,build xorg
+USES=		desktop-file-utils electron:5 gnome localbase:ldflags \
+		node:10,build pkgconfig python:2.7,build xorg
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	${PORTNAME:S/-desktop//}
-GH_PROJECT=	${PORTNAME:S/bitwarden-//}
+GH_ACCOUNT=	bitwarden
+GH_PROJECT=	desktop
 GH_TUPLE=	bitwarden:jslib:53d08067df953e7a66ebf0b972e6443e1f275d86:jslib/jslib
 
 USE_XORG=	x11 xau xcb xdmcp xext xscrnsaver
@@ -32,19 +32,18 @@ INSTALLS_ICONS=	yes
 
 BINARY_ALIAS=	python=${PYTHON_CMD}
 
-SUB_FILES=	bitwarden-desktop
+SUB_FILES=	${PORTNAME}
 SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	10:npm
-USE_ELECTRON=	5
-USE_ELECTRON_HELPER=	fetch extract build
+USE_NODE=	npm
+USE_ELECTRON=	prefetch extract prebuild
 
 PREFETCH_TIMESTAMP=	1578569112
-PKG_ELECTRON_VER=	5.0.8
+UPSTREAM_ELECTRON_VER=	5.0.8
 
 post-extract:
 	${MV} ${WRKDIR}/css ${WRKSRC}/src
@@ -86,5 +85,4 @@ do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
-.include "${.CURDIR}/../../devel/electron4/bsd.electron.mk"
 .include <bsd.port.mk>
