@@ -359,9 +359,9 @@ electron-rebuild-native-node-modules-for-electron:
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
 .	if ${NODE_PKG_MANAGER} == npm
-ELECTRON_MAKE_CMD=	${NPX_CMD} electron-builder
+_ELECTRON_MAKE_CMD=	${NPX_CMD} electron-builder
 .	elif ${NODE_PKG_MANAGER} == yarn
-ELECTRON_MAKE_CMD=	${YARN_CMD} run electron-builder
+_ELECTRON_MAKE_CMD=	${YARN_CMD} run electron-builder
 .	endif
 ELECTRON_MAKE_FLAGS=	--linux --dir \
 			--config.npmRebuild=false \
@@ -369,13 +369,13 @@ ELECTRON_MAKE_FLAGS=	--linux --dir \
 			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
 .	if ${NODE_PKG_MANAGER} == npm
-ELECTRON_MAKE_CMD=	${NPX_CMD} electron-packager
+_ELECTRON_MAKE_CMD=	${NPX_CMD} electron-packager
 .	elif ${NODE_PKG_MANAGER} == yarn
-ELECTRON_MAKE_CMD=	${YARN_CMD} run electron-packager
+_ELECTRON_MAKE_CMD=	${YARN_CMD} run electron-packager
 .	endif
 # ELECTRON_MAKE_FLAGS=	TBD # FIXME
 .   endif
-DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
+DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 ALL_TARGET=	# empty
 .endif
 
