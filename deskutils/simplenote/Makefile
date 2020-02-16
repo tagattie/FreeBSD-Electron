@@ -26,7 +26,7 @@ INSTALLS_ICONS=	yes
 
 BINARY_ALIAS=	python=${PYTHON_CMD}
 
-SUB_FILES=	simplenote
+SUB_FILES=	${PORTNAME}
 SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 PORTDOCS=	RELEASE-NOTES.txt
@@ -34,7 +34,7 @@ PORTDOCS=	RELEASE-NOTES.txt
 OPTIONS_DEFINE=	DOCS
 
 USE_NODE=	npm
-USE_ELECTRON=	prefetch extract prebuild
+USE_ELECTRON=	prefetch extract prebuild build:builder
 
 PREFETCH_TIMESTAMP=	1580359898
 UPSTREAM_ELECTRON_VER=	4.2.11
@@ -56,17 +56,8 @@ post-patch:
 	${REINPLACE_CMD} -e 's/needflag = NULL/needflag = FLAG_NULL/' \
 		${WRKSRC}/node_modules/@paulcbetts/spellchecker/vendor/hunspell/src/hunspell/affentry.hxx
 
-do-build:
+pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} build
-	# rebuild native modules for electron using electron-rebuild
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
-		${NPX_CMD} electron-rebuild -f --version ${ELECTRON_VER}
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		${NPX_CMD} electron-builder --linux --dir \
-		--config.npmRebuild=false \
-		--config.electronVersion=${ELECTRON_VER} \
-		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
