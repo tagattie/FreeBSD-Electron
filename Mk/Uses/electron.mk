@@ -376,17 +376,7 @@ ELECTRON_MAKE_CMD=	${YARN_CMD} run electron-packager
 # ELECTRON_MAKE_FLAGS=	TBD # FIXME
 .   endif
 DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
-.if !target(do-build)
-do-build:
-	@cd ${BUILD_WRKSRC} && \
-	if ! ${DO_MAKE_BUILD}; then \
-		if [ -n "${BUILD_FAIL_MESSAGE}" ]; then \
-			${ECHO_MSG} "===>  Build command failed unexpectedly."; \
-			(${ECHO_CMD} "${BUILD_FAIL_MESSAGE}") | ${FMT_80}; \
-		fi; \
-		${FALSE}; \
-	fi
-.endif
+ALL_TARGET=	# empty
 .endif
 
 MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
