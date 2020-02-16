@@ -262,14 +262,6 @@ BUILD_DEPENDS+= ${NODE_PKG_MANAGER}:${${NODE_PKG_MANAGER:tu}_PORTDIR}
 BUILD_DEPENDS+=	npm:${NPM_PORTDIR}	# npm is needed for node-gyp
 .   endif
 
-MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
-MAKE_ENV+=	PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1	# don't download chromium for puppeteer
-MAKE_ENV+=	SASS_FORCE_BUILD=true		# always rebuild native node-sass module
-MAKE_ENV+=	USE_SYSTEM_7ZA=true		# always use system 7za
-MAKE_ENV+=	USE_SYSTEM_APP_BUILDER=true	# always use system app-builder for electron-builder
-MAKE_ENV+=	XDG_CACHE_HOME=${WRKDIR}/.cache
-MAKE_ENV+=	npm_config_build_from_source=true
-
 .   if ${ELECTRON_VERSION} < 6
 .	if !defined(UPSTREAM_ELECTRON_VER)
 IGNORE=	does not specify the electron version used in the upstream source. Please refer to package-lock.json or yarn.lock for this value and set this appropriately.
@@ -330,4 +322,13 @@ electron-rebuild-native-node-modules:
 	done
 
 .endif # _ELECTRON_FEATURE_PREBUILD
+
+MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
+MAKE_ENV+=	PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1	# don't download chromium for puppeteer
+MAKE_ENV+=	SASS_FORCE_BUILD=true		# always rebuild native node-sass module
+MAKE_ENV+=	USE_SYSTEM_7ZA=true		# always use system 7za
+MAKE_ENV+=	USE_SYSTEM_APP_BUILDER=true	# always use system app-builder for electron-builder
+MAKE_ENV+=	XDG_CACHE_HOME=${WRKDIR}/.cache
+MAKE_ENV+=	npm_config_build_from_source=true
+
 .endif # _INCLUDE_USES_ELECTRON_MK
