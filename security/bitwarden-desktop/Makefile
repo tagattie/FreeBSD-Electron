@@ -40,7 +40,7 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 OPTIONS_DEFINE=	DOCS
 
 USE_NODE=	npm
-USE_ELECTRON=	prefetch extract prebuild
+USE_ELECTRON=	prefetch extract prebuild build:builder
 
 PREFETCH_TIMESTAMP=	1578569112
 UPSTREAM_ELECTRON_VER=	5.0.8
@@ -53,20 +53,8 @@ post-patch:
 		${WRKSRC}/node_modules/desktop-idle/binding.gyp
 
 pre-build:
-	# manually run npm postinstall
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
-		${NPX_CMD} electron-rebuild -f --version ${ELECTRON_VER}
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPX_CMD} gulp postinstall
-
-do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run clean:dist
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		${NPX_CMD} electron-builder --linux --dir \
-		--config.npmRebuild=false \
-		--config.electronVersion=${ELECTRON_VER} \
-		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
