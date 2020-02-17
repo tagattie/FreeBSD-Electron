@@ -151,10 +151,12 @@ _ELECTRON_FEATURE_${var:C/\:.*//:tu}=	${var}
 .endfor
 
 # Detect builder used with USE_ELECTRON=builder
-.if ${_VALID_ELECTRON_FEATURE_BUILDS:M${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}}
+.if defined(_ELECTRON_FEATURE_BUILD)
+.   if ${_VALID_ELECTRON_FEATURE_BUILDS:M${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}}
 _ELECTRON_FEATURE_BUILD:=	${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}
-.else
+.   else
 IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_BUILD}
+.   endif
 .endif
 
 # Setup dependencies
