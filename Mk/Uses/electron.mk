@@ -236,7 +236,7 @@ electron-fetch-node-modules:
 
 .if defined(_ELECTRON_FEATURE_EXTRACT)
 .   if ${NODE_PKG_MANAGER} == npm
-_USES_extract+=	690:electron-install-node-modules
+_USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
 	@${ECHO_MSG} "===>  Copying package.json and package-lock.json to WRKSRC"
 	@cd ${PKGJSONSDIR} && \
@@ -255,7 +255,7 @@ electron-install-node-modules:
 	done
 .   elif ${NODE_PKG_MANAGER} == yarn
 EXTRACT_DEPENDS+= ${NODE_PKG_MANAGER}:${${NODE_PKG_MANAGER:tu}_PORTDIR}
-_USES_extract+=	690:electron-install-node-modules
+_USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
 	@${ECHO_MSG} "===>  Copying package.json and yarn.lock to WRKSRC"
 	@cd ${PKGJSONSDIR} && \
