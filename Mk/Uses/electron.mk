@@ -297,7 +297,8 @@ _USES_build+=	290:electron-generate-electron-zip \
 		291:electron-rebuild-native-node-modules-for-node \
 		490:electron-rebuild-native-node-modules-for-electron
 electron-generate-electron-zip:
-.   if ${ELECTRON_VERSION} < 6
+.   if ${_ELECTRON_FEATURE_BUILD} == builder
+.	if ${ELECTRON_VERSION} < 6
 	# This is only to pacify @electron/get and the zip file generated will
 	# not be used for actual packaging.
 	@${ECHO_MSG} "===>  Preparing distribution files of electron"
@@ -313,8 +314,23 @@ electron-generate-electron-zip:
 	@cd ${WRKDIR}/.cache/electron && \
 		${SHA256} -r electron-*.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}
-.   else
+.	else
 	@${DO_NADA}
+.	endif
+.   elif ${_ELECTRON_FEATURE_BUILD} == packager
+	@${ECHO_MSG} "===>  Preparing distribution files of electron"
+	@${RM} -r ${WRKDIR}/electron-dist
+	@${MKDIR} ${WRKDIR}/electron-dist
+	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
+		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
+	@cd ${WRKDIR}/electron-dist && \
+		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
+	@${MKDIR} ${WRKDIR}/.cache/electron
+	@cd ${WRKDIR}/electron-dist && \
+		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/electron-v${ELECTRON_VER}-linux-x64.zip .
+	@cd ${WRKDIR}/.cache/electron && \
+		${SHA256} -r electron-*.zip | \
+		${SED} -e 's/ / */' > SHASUMS256.txt-${ELECTRON_VER}
 .   endif
 
 electron-generate-chromedriver-zip:
@@ -365,19 +381,25 @@ _ELECTRON_MAKE_CMD=	${NPX_CMD} electron-builder
 .	elif ${NODE_PKG_MANAGER} == yarn
 _ELECTRON_MAKE_CMD=	${YARN_CMD} run electron-builder
 .	endif
-ELECTRON_MAKE_FLAGS=	--linux --dir \
+ELECTRON_MAKE_FLAGS+=	--linux --dir \
 			--config.npmRebuild=false \
 			--config.electronVersion=${ELECTRON_VER} \
 			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
+DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
 .	if ${NODE_PKG_MANAGER} == npm
 _ELECTRON_MAKE_CMD=	${NPX_CMD} electron-packager
 .	elif ${NODE_PKG_MANAGER} == yarn
 _ELECTRON_MAKE_CMD=	${YARN_CMD} run electron-packager
 .	endif
-# ELECTRON_MAKE_FLAGS=	TBD # FIXME
+ELECTRON_MAKE_FLAGS+=	--platform=linux \
+			--no-download \
+			--electron-version=${ELECTRON_VER} \
+			--electron-zip-dir=${WRKDIR}/.cache/electron \
+			--prune \
+			--overwrite
+DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
 .   endif
-DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 ALL_TARGET=	# empty
 .endif
 
