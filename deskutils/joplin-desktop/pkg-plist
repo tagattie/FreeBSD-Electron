@@ -12,7 +12,6 @@ share/icons/hicolor/512x512/apps/joplin.png
 share/icons/hicolor/72x72/apps/joplin.png
 share/icons/hicolor/96x96/apps/joplin.png
 %%DATADIR%%/resources/app/ElectronAppWrapper.js
-%%DATADIR%%/resources/app/ElectronAppWrapper.js.orig
 %%DATADIR%%/resources/app/InteropServiceHelper.js
 %%DATADIR%%/resources/app/app.js
 %%DATADIR%%/resources/app/bridge.js
@@ -63,7 +62,6 @@ share/icons/hicolor/96x96/apps/joplin.png
 %%DATADIR%%/resources/app/gui/NoteStatusBar.jsx
 %%DATADIR%%/resources/app/gui/NoteStatusBar.min.js
 %%DATADIR%%/resources/app/gui/NoteText.jsx
-%%DATADIR%%/resources/app/gui/NoteText.jsx.orig
 %%DATADIR%%/resources/app/gui/NoteText.min.js
 %%DATADIR%%/resources/app/gui/NoteTextViewer.jsx
 %%DATADIR%%/resources/app/gui/NoteTextViewer.min.js
@@ -4289,7 +4287,6 @@ share/icons/hicolor/96x96/apps/joplin.png
 %%DATADIR%%/resources/app/node_modules/forever-agent/index.js
 %%DATADIR%%/resources/app/node_modules/forever-agent/package.json
 %%DATADIR%%/resources/app/node_modules/form-data/License
-%%DATADIR%%/resources/app/node_modules/form-data/README.md.bak
 %%DATADIR%%/resources/app/node_modules/form-data/lib/browser.js
 %%DATADIR%%/resources/app/node_modules/form-data/lib/form_data.js
 %%DATADIR%%/resources/app/node_modules/form-data/lib/populate.js
@@ -9965,7 +9962,6 @@ share/icons/hicolor/96x96/apps/joplin.png
 %%DATADIR%%/resources/app/node_modules/sqlite3/CONTRIBUTING.md
 %%DATADIR%%/resources/app/node_modules/sqlite3/Dockerfile
 %%DATADIR%%/resources/app/node_modules/sqlite3/LICENSE
-%%DATADIR%%/resources/app/node_modules/sqlite3/bin/freebsd-x64-75/sqlite3.node
 %%DATADIR%%/resources/app/node_modules/sqlite3/build/Release/node_sqlite3.node
 %%DATADIR%%/resources/app/node_modules/sqlite3/build/Release/obj/gen/sqlite-autoconf-3300100/INSTALL
 %%DATADIR%%/resources/app/node_modules/sqlite3/build/Release/obj/gen/sqlite-autoconf-3300100/Makefile.am
