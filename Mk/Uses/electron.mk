@@ -297,7 +297,8 @@ _USES_build+=	290:electron-generate-electron-zip \
 		291:electron-rebuild-native-node-modules-for-node \
 		490:electron-rebuild-native-node-modules-for-electron
 electron-generate-electron-zip:
-.   if ${_ELECTRON_FEATURE_BUILD} == builder
+.   if !defined(_ELECTRON_FEATURE_BUILD) || \
+       (defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == builder)
 .	if ${ELECTRON_VERSION} < 6
 	# This is only to pacify @electron/get and the zip file generated will
 	# not be used for actual packaging.
@@ -317,7 +318,7 @@ electron-generate-electron-zip:
 .	else
 	@${DO_NADA}
 .	endif
-.   elif ${_ELECTRON_FEATURE_BUILD} == packager
+.   elif defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == packager
 	@${ECHO_MSG} "===>  Preparing distribution files of electron"
 	@${RM} -r ${WRKDIR}/electron-dist
 	@${MKDIR} ${WRKDIR}/electron-dist
