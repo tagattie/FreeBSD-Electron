@@ -1,6 +1,6 @@
---- electron/lib/browser/init.ts.orig	2019-12-13 19:48:14 UTC
+--- electron/lib/browser/init.ts.orig	2020-02-20 17:38:02 UTC
 +++ electron/lib/browser/init.ts
-@@ -163,7 +163,7 @@ const mainStartupScript = packageJson.main || 'index.j
+@@ -165,7 +165,7 @@ const mainStartupScript = packageJson.main || 'index.j
  const KNOWN_XDG_DESKTOP_VALUES = ['Pantheon', 'Unity:Unity7', 'pop:GNOME']
  
  function currentPlatformSupportsAppIndicator () {

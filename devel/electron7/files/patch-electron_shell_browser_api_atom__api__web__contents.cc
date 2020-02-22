@@ -1,4 +1,4 @@
---- electron/shell/browser/api/atom_api_web_contents.cc.orig	2019-12-13 19:48:14 UTC
+--- electron/shell/browser/api/atom_api_web_contents.cc.orig	2020-02-20 17:38:02 UTC
 +++ electron/shell/browser/api/atom_api_web_contents.cc
 @@ -104,11 +104,11 @@
  #include "ui/base/cocoa/defaults_utils.h"
@@ -14,7 +14,7 @@
  #include "third_party/blink/public/mojom/renderer_preferences.mojom.h"
  #include "ui/gfx/font_render_params.h"
  #endif
-@@ -458,7 +458,7 @@ void WebContents::InitWithSessionAndOptions(
+@@ -482,7 +482,7 @@ void WebContents::InitWithSessionAndOptions(
    auto* prefs = web_contents()->GetMutableRendererPrefs();
    prefs->accept_languages = g_browser_process->GetApplicationLocale();
  
@@ -23,7 +23,7 @@
    // Update font settings.
    static const base::NoDestructor<gfx::FontRenderParams> params(
        gfx::GetFontRenderParams(gfx::FontRenderParamsQuery(), nullptr));
-@@ -475,7 +475,7 @@ void WebContents::InitWithSessionAndOptions(
+@@ -499,7 +499,7 @@ void WebContents::InitWithSessionAndOptions(
    base::TimeDelta interval;
    if (ui::TextInsertionCaretBlinkPeriod(&interval))
      prefs->caret_blink_interval = interval;

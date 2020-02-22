@@ -1,6 +1,6 @@
---- electron/script/spec-runner.js.orig	2019-12-13 19:48:14 UTC
+--- electron/script/spec-runner.js.orig	2020-02-20 17:38:02 UTC
 +++ electron/script/spec-runner.js
-@@ -114,7 +114,7 @@ async function runElectronTests () {
+@@ -115,7 +115,7 @@ async function runElectronTests () {
  async function runRemoteBasedElectronTests () {
    let exe = path.resolve(BASE, utils.getElectronExec())
    const runnerArgs = ['electron/spec', ...unknownArgs.slice(2)]
