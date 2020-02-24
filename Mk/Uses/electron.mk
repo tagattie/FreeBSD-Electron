@@ -23,69 +23,76 @@
 # USE_ELECTRON:		A list of additional features and functionalities to
 #			enable. Supported features are:
 #
-# NOTE: Roughly speaking, these features are for doing "npm install" or "yarn
-# install" divided into multiple phases.
-#
 #	prefetch:	Downloads node modules the port uses according to the
 #			pre-stored package.json (and package-lock.json or
-#			yarn.lock depending on node package manager used) in
-#			PKGJSONSDIR. Downloaded modules are archived into a
+#			yarn.lock depending on the node package manager used) in
+#			PKGJSONSDIR. Downloaded node modules are archived into a
 #			single tar file as one of the DISTFILES.
 #
-#			If the port uses this feature, the following variable
-#			must be specified.
+#		If the port uses this feature, the following variable must be
+#		specified.
 #
 #		PREFETCH_TIMESTAMP:
-#			A timestamp given to every directory or file in the tar
-#			archive. This is necessary for reproducibility of the
-#			archive.
+#			A timestamp given to every directory, file or link in
+#			the tar archive. This is necessary for reproducibility
+#			of the archive file. You can use "date '+%s'" command to
+#			acquire this value.
 #
 #	extract:	Installs the pre-fetched node modules into the port's
 #			working source directory.
 #
-#	prebuild:	Rebuilds native node modules against the installed Node
-#			so that the Node can execute the native modules.
+#	prebuild:	Rebuilds native node modules against the version of Node
+#			installed before pre-build phase so that Node can
+#			execute the native modules.
+#			In addition the feature rebuilds native node modules
+#			against the version of Electron installed before
+#			do-build phase so that the native modules can be
+#			executed with Electron.
 #
-#			If the port uses this feature and the electron major
-#			version is less than 6, the following variable must be
-#			specified.
+#		If the port uses this feature and the major version of Electron
+#		is less than 6, the following variable must be specified.
 #
 #		UPSTREAM_ELECTRON_VER:
-#			An electron version which is specified in
-#			package-lock.json or yarn.lock in the source archive.
-#			The build process will generate a zip file and a
-#			checksum file from locally installed electron to prevent
-#			@electron/get tries to download electron's binary
-#			distribution during build phase.
+#			An electron version which is usually specified in
+#			package-lock.json or yarn.lock in the source directory.
+#			The build process will generate a zip archive and a
+#			checksum file from locally installed Electron to prevent
+#			@electron/get from attempting to download binary
+#			distribution file of Electron from GitHub during build
+#			phase.
 #
-#			If the port uses this feature and the port depends on
-#			chromedriver distribution, the following variable must
-#			be specified.
+#		If the port uses this feature and the port depends on
+#		chromedriver, the following variable must be specified.
 #
 #		UPSTREAM_CHROMEDRIVER_VER:
-#			A chromedriver version which is specified in
-#			package-lock.json or yarn.lock in the source archive.
-#			The build process will generate a zip file and a
-#			checksum file from locally installed electron to prevent
-#			@electron/get tries to download chromedriver's binary
-#			distribution during build phase.
+#			A chromedriver version which is usually specified in
+#			package-lock.json or yarn.lock in the source directory.
+#			The build process will generate a zip archive and a
+#			checksum file from locally installed Electron to prevent
+#			@electron/get from attempting to download binary
+#			distribution file of chromedriver from GitHub during build
+#			phase.
 #
-#		NOTE: The generated files are just used to prevent download and
-#		will not be used for other purposes. This is ugly but necessary.
+#		NOTE: The generated zip and checksum files are just for
+#		preventing download and will not be used for other purposes.
+#		This is ugly but seems necessary.
 #
-#	build:		Prepare an application in a distributable directory tree
-#			using the specified node module as an argument.
+#	build:		Prepares an Electron application in a distributable
+#			format using the specified node module as an argument.
 #
-#		Valid arguments are:
+#		If you use this feature, one of the following argument must be
+#		specified. Valid arguments are:
 #
-#			builder: Uses electron-builder for application
-#				 packaging.
+#		builder:	Uses electron-builder for packaging.
 #
-#			packager: Use electron-packager for application
-#				  packaging.
+#		packager:	Uses electron-packager for packaging.
 #
-#		If you use this feature, one of builder or packager must be
+#		If you use this feature, the following variable can be
 #		specified.
+#
+#		ELECTRON_MAKE_FLAGS:
+#			Additional flags to pass to the specified packaging
+#			module. The default flags are defined in this file.
 #
 # MAINTAINER:	tagattie@yandex.com
 
