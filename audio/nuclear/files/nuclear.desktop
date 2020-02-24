@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Nuclear
+Comment=Streaming music player that finds music sources automatically.
+Icon=nuclear
+Exec=nuclear %U
+Categories=Audio;AudioVideo;Network;Player;Music;
+Terminal=false
+StartupWMClass=nuclear
+Name[es]=Reproductor de música Nuclear
+Comment[es]=Reproductor que retransmite música desde fuentes encontradas automáticamente.
