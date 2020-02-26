@@ -199,7 +199,7 @@ electron-fetch-node-modules:
 		cd ${PKGJSONSDIR} && \
 		for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
 			cd ${WRKDIR}/npm-cache/$${dir} && \
-			${SETENV} HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts --no-progress && \
+			${SETENV} LANG=C HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts --no-progress && \
 			${RM} package.json package-lock.json; \
 		done; \
 		cd ${WRKDIR} && \
