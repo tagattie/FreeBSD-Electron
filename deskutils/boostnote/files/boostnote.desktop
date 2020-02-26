@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Boost Note
+Comment=An intuitive and stylish markdown note app for developers
+Icon=boostnote
+Exec=boostnote %U
+Categories=Utility;
+Terminal=false
+StartupWMClass=Boost Note
