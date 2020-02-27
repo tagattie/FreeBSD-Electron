@@ -1,5 +1,5 @@
---- ElectronClient/app/ElectronAppWrapper.js.orig	2020-01-21 05:47:21 UTC
-+++ ElectronClient/app/ElectronAppWrapper.js
+--- ElectronClient/ElectronAppWrapper.js.orig	2020-02-26 10:59:51 UTC
++++ ElectronClient/ElectronAppWrapper.js
 @@ -71,7 +71,7 @@ class ElectronAppWrapper {
  
  		// Linux icon workaround for bug https://github.com/electron-userland/electron-builder/issues/2098

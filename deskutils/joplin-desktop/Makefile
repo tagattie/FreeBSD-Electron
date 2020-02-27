@@ -2,7 +2,7 @@
 
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.184
+DISTVERSION=	1.0.185
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 
@@ -13,11 +13,11 @@ LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 FETCH_DEPENDS=	git:devel/git
-EXTRACT_DEPENDS=	rsync:net/rsync
-BUILD_DEPENDS=	app-builder:devel/app-builder
+BUILD_DEPENDS=	app-builder:devel/app-builder \
+		rsync:net/rsync
 
 USES=		desktop-file-utils electron:7 gnome localbase:ldflags \
-		node:10,build python:2.7,build
+		node:12,build python:2.7,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
@@ -36,18 +36,13 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1581308289
+PREFETCH_TIMESTAMP=	1582702267
 
-BUILD_WRKSRC=	${WRKSRC}/ElectronClient/app
-
-post-extract:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run copyLib
+BUILD_WRKSRC=	${WRKSRC}/ElectronClient
 
 pre-build:
-	cd ${BUILD_WRKSRC} && \
-		${SETENV} ${MAKE_ENV} ${NODE_CMD} compile.js && \
-		${SETENV} ${MAKE_ENV} ${NODE_CMD} compile-package-info.js
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run tsc
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} ${STAGEDIR}${PREFIX}/bin
@@ -55,11 +50,11 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/applications
 .for size in 16 24 32 48 72 96 128 144 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
-	${INSTALL_DATA} ${WRKSRC}/ElectronClient/app/build/icons/${size}x${size}.png \
+	${INSTALL_DATA} ${WRKSRC}/ElectronClient/build/icons/${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/ElectronClient/app/dist/linux-unpacked && \
+	cd ${WRKSRC}/ElectronClient/dist/linux-unpacked && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	# clean up backup files
 	${FIND} ${STAGEDIR}${DATADIR} -type f \( -name '*.bak' -o -name '*.orig' \) -delete
