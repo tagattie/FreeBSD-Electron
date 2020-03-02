@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=YouTube Music Desktop
+Comment=A Desktop App for YouTube Music
+Icon=ytmdesktop
+Exec=ytmdesktop
+Categories=AudioVideo;
+Terminal=false
+StartupWMClass=YouTube Music Desktop
