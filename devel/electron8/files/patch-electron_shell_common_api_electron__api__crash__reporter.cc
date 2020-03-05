@@ -1,0 +1,18 @@
+--- electron/shell/common/api/electron_api_crash_reporter.cc.orig	2020-03-02 19:30:38 UTC
++++ electron/shell/common/api/electron_api_crash_reporter.cc
+@@ -40,6 +40,7 @@ void Initialize(v8::Local<v8::Object> exports,
+                 v8::Local<v8::Value> unused,
+                 v8::Local<v8::Context> context,
+                 void* priv) {
++#if !defined(OS_BSD)
+   auto reporter = base::Unretained(CrashReporter::GetInstance());
+   gin_helper::Dictionary dict(context->GetIsolate(), exports);
+   dict.SetMethod("start", base::BindRepeating(&CrashReporter::Start, reporter));
+@@ -60,6 +61,7 @@ void Initialize(v8::Local<v8::Object> exports,
+   dict.SetMethod(
+       "getUploadToServer",
+       base::BindRepeating(&CrashReporter::GetUploadToServer, reporter));
++#endif
+ }
+ 
+ }  // namespace
