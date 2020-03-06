@@ -1,4 +1,4 @@
---- electron/shell/app/atom_main_delegate.cc.orig	2019-12-13 19:48:14 UTC
+--- electron/shell/app/atom_main_delegate.cc.orig	2020-02-28 00:07:16 UTC
 +++ electron/shell/app/atom_main_delegate.cc
 @@ -8,7 +8,7 @@
  #include <memory>
@@ -18,7 +18,7 @@
    // Check for --no-sandbox parameter when running as root.
    if (getuid() == 0 && IsSandboxEnabled(command_line))
      LOG(FATAL) << "Running as root without --"
-@@ -230,7 +230,7 @@ void AtomMainDelegate::PostEarlyInitialization(bool is
+@@ -245,7 +245,7 @@ void AtomMainDelegate::PostEarlyInitialization(bool is
          ui::ResourceBundle::GetSharedInstance().GetLocaleFilePath(locale, true);
      if (!locale_file_path.empty()) {
        custom_locale = locale;
