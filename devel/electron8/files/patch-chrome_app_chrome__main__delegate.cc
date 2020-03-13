@@ -1,4 +1,4 @@
---- chrome/app/chrome_main_delegate.cc.orig	2020-03-03 07:02:20 UTC
+--- chrome/app/chrome_main_delegate.cc.orig	2020-03-11 11:34:52 UTC
 +++ chrome/app/chrome_main_delegate.cc
 @@ -100,7 +100,7 @@
  #include "chrome/app/shutdown_signal_handlers_posix.h"
@@ -9,7 +9,7 @@
  #include "components/nacl/common/nacl_paths.h"
  #include "components/nacl/zygote/nacl_fork_delegate_linux.h"
  #endif
-@@ -142,12 +142,12 @@
+@@ -142,7 +142,7 @@
  #include "v8/include/v8.h"
  #endif
  
@@ -18,12 +18,6 @@
  #include "base/environment.h"
  #endif
  
- #if defined(OS_MACOSX) || defined(OS_WIN) || defined(OS_ANDROID) || \
--    defined(OS_LINUX)
-+    defined(OS_LINUX) || defined(OS_BSD)
- #include "chrome/browser/policy/policy_path_parser.h"
- #include "components/crash/content/app/crashpad.h"
- #endif
 @@ -246,7 +246,7 @@ bool UseHooks() {
  
  #endif  // defined(OS_WIN)
@@ -148,12 +142,3 @@
    AdjustLinuxOOMScore(process_type);
  #endif
  #if defined(OS_WIN)
-@@ -1103,7 +1103,7 @@ int ChromeMainDelegate::RunProcess(
-     // This entry is not needed on Linux, where the NaCl loader
-     // process is launched via nacl_helper instead.
- #if BUILDFLAG(ENABLE_NACL) && !defined(CHROME_MULTIPLE_DLL_BROWSER) && \
--    !defined(OS_LINUX)
-+    !defined(OS_LINUX) && !defined(OS_BSD)
-     {switches::kNaClLoaderProcess, NaClMain},
- #else
-     {"<invalid>", NULL},  // To avoid constant array of size 0

@@ -4,7 +4,7 @@ PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
 CATEGORIES=	devel java
-MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v8.0.3/:chromium \
+MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v8.1.1/:chromium \
 		https://commondatastorage.googleapis.com/chromium-browser-official/:chromium_official \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
@@ -42,6 +42,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libnspr4.so:devel/nspr \
 		libre2.so:devel/re2 \
 		libdrm.so:graphics/libdrm \
+		libpng.so:graphics/png \
 		libwebp.so:graphics/webp \
 		libavcodec.so:multimedia/ffmpeg \
 		libopenh264.so:multimedia/openh264 \
@@ -68,9 +69,9 @@ GH_TUPLE=	nodejs:node:v${NODE_VER}:node \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
 # Official chromium version containing "gn" which is known to work
-CHROMIUM_OFFICIAL_VER=	80.0.3987.122
+CHROMIUM_OFFICIAL_VER=	80.0.3987.132
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=	80.0.3987.134
+CHROMIUM_VER=	80.0.3987.141
 # See ${WRKSRC}/third_party/node/node_modules.tar.gz.sha1 for CHROMIUM_NODE_MODULES_HASH
 CHROMIUM_NODE_MODULES_HASH=	a9603a3dc03fa41af9cc5c8ac28d23d1f98dfe3c
 # See ${WRKSRC}/third_party/test_fonts/test_fonts.tar.gz.sha1 for CHROMIUM_TEST_FONTS_HASH
@@ -162,7 +163,7 @@ PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mksnapshot_zip
 
-YARN_TIMESTAMP=	1583225313
+YARN_TIMESTAMP=	1583989772
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
 		ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
@@ -228,8 +229,8 @@ post-extract:
 
 pre-patch:
 	${SH} ${FILESDIR}/apply-electron-patches.sh ${WRKSRC}
-	${FIND} ${WRKSRC} -type f -name '*.orig' -print -delete
-	${FIND} ${WRKSRC} -type f -name '*~' -print -delete
+	# ${FIND} ${WRKSRC} -type f -name '*.orig' -print -delete
+	# ${FIND} ${WRKSRC} -type f -name '*~' -print -delete
 
 pre-configure:
 	# cd ${WRKSRC}/electron/vendor/${GH_PROJECT_boto} && \
@@ -242,8 +243,8 @@ pre-configure:
 	#./build/linux/unbundle/remove_bundled_libraries.py [list of preserved]
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${PYTHON_CMD} \
 		./build/linux/unbundle/replace_gn_files.py --system-libraries \
-		ffmpeg flac freetype harfbuzz-ng libdrm libusb libwebp libxslt \
-		openh264 opus snappy yasm || ${FALSE}
+		ffmpeg flac fontconfig freetype harfbuzz-ng libdrm libpng \
+		libusb libwebp libxml libxslt openh264 opus snappy yasm || ${FALSE}
 
 do-configure:
 	# GN generator bootstrapping and generating ninja files

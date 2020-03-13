@@ -1,6 +1,6 @@
---- electron/spec-main/chromium-spec.ts.orig	2020-03-03 10:54:28 UTC
+--- electron/spec-main/chromium-spec.ts.orig	2020-03-09 23:26:54 UTC
 +++ electron/spec-main/chromium-spec.ts
-@@ -1136,11 +1136,11 @@ describe('font fallback', () => {
+@@ -1150,11 +1150,11 @@ describe('font fallback', () => {
        expect(fonts[0].familyName).to.equal('Arial')
      else if (process.platform === 'darwin')
        expect(fonts[0].familyName).to.equal('Helvetica')

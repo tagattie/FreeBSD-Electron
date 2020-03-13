@@ -1,4 +1,4 @@
---- electron/spec-main/api-browser-window-spec.ts.orig	2020-03-02 19:30:38 UTC
+--- electron/spec-main/api-browser-window-spec.ts.orig	2020-03-09 23:26:54 UTC
 +++ electron/spec-main/api-browser-window-spec.ts
 @@ -928,7 +928,7 @@ describe('BrowserWindow module', () => {
            w.setPosition(pos[0], pos[1])
@@ -18,7 +18,7 @@
          it(`checks normal bounds when minimized`, (done) => {
            const bounds = w.getBounds()
            w.once('minimize', () => {
-@@ -1408,7 +1408,7 @@ describe('BrowserWindow module', () => {
+@@ -1433,7 +1433,7 @@ describe('BrowserWindow module', () => {
    describe('BrowserWindow.setOpacity(opacity)', () => {
      afterEach(closeAllWindows)
  
@@ -27,7 +27,7 @@
        it('make window with initial opacity', () => {
          const w = new BrowserWindow({ show: false, opacity: 0.5 })
          expect(w.getOpacity()).to.equal(0.5)
-@@ -1434,7 +1434,7 @@ describe('BrowserWindow module', () => {
+@@ -1459,7 +1459,7 @@ describe('BrowserWindow module', () => {
        })
      })
  
@@ -36,7 +36,7 @@
        it('sets 1 regardless of parameter', () => {
          const w = new BrowserWindow({ show: false })
          w.setOpacity(0)
-@@ -2227,7 +2227,7 @@ describe('BrowserWindow module', () => {
+@@ -2252,7 +2252,7 @@ describe('BrowserWindow module', () => {
          expect(test.version).to.equal(process.version)
          expect(test.versions).to.deep.equal(process.versions)
  
@@ -45,7 +45,7 @@
            expect(test.creationTime).to.be.null('creation time')
            expect(test.systemMemoryInfo).to.be.null('system memory info')
          } else {
-@@ -2735,7 +2735,7 @@ describe('BrowserWindow module', () => {
+@@ -2760,7 +2760,7 @@ describe('BrowserWindow module', () => {
      })
    })
  
@@ -54,7 +54,7 @@
      afterEach(closeAllWindows)
      it('emits an event when window is maximized', (done) => {
        const w = new BrowserWindow({show: false})
-@@ -3237,7 +3237,7 @@ describe('BrowserWindow module', () => {
+@@ -3302,7 +3302,7 @@ describe('BrowserWindow module', () => {
      })
    })
  

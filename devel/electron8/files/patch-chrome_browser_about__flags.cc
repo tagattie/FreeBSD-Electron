@@ -1,4 +1,4 @@
---- chrome/browser/about_flags.cc.orig	2020-03-03 07:02:24 UTC
+--- chrome/browser/about_flags.cc.orig	2020-03-11 11:34:55 UTC
 +++ chrome/browser/about_flags.cc
 @@ -166,7 +166,7 @@
  #include "ui/gl/gl_switches.h"
@@ -18,16 +18,7 @@
  const FeatureEntry::FeatureParam kOmniboxDocumentProviderServerScoring[] = {
      {"DocumentUseServerScore", "true"},
      {"DocumentUseClientScore", "false"},
-@@ -842,7 +842,7 @@ const FeatureEntry::FeatureVariation kOmniboxDocumentP
-      base::size(kOmniboxDocumentProviderClientScoring), nullptr},
-     {"server and client scores", kOmniboxDocumentProviderServerAndClientScoring,
-      base::size(kOmniboxDocumentProviderServerAndClientScoring), nullptr}};
--#endif  // defined(OS_LINUX) || defined(OS_MACOSX) || defined(OS_WIN)
-+#endif  // defined(OS_LINUX) || defined(OS_MACOSX) || defined(OS_WIN) || defined(OS_BSD)
- 
- const FeatureEntry::FeatureParam kOmniboxOnFocusSuggestionsParamSERP[] = {
-     {"ZeroSuggestVariant:6:*", "RemoteSendUrl"}};
-@@ -956,14 +956,14 @@ const FeatureEntry::FeatureVariation kOmniboxMaxURLMat
+@@ -956,7 +956,7 @@ const FeatureEntry::FeatureVariation kOmniboxMaxURLMat
      {"6 matches", kOmniboxMaxURLMatches6, base::size(kOmniboxMaxURLMatches6),
       nullptr}};
  
@@ -36,14 +27,6 @@
      defined(OS_CHROMEOS)
  const FeatureEntry::FeatureParam kTranslateBubbleUITab[] = {
      {language::kTranslateUIBubbleKey, language::kTranslateUIBubbleTabValue}};
- 
- const FeatureEntry::FeatureVariation kTranslateBubbleUIVariations[] = {
-     {"Tab", kTranslateBubbleUITab, base::size(kTranslateBubbleUITab), nullptr}};
--#endif  // OS_LINUX || OS_MACOSX || OS_WIN || OS_CHROMEOS
-+#endif  // OS_LINUX || OS_MACOSX || OS_WIN || OS_CHROMEOS || OS_BSD
- 
- const FeatureEntry::FeatureParam kMarkHttpAsDangerous[] = {
-     {security_state::features::kMarkHttpAsFeatureParameterName,
 @@ -1981,13 +1981,13 @@ const FeatureEntry kFeatureEntries[] = {
       flag_descriptions::kCloudPrintXpsDescription, kOsWin,
       SINGLE_VALUE_TYPE(switches::kEnableCloudPrintXps)},
@@ -77,14 +60,7 @@
  
  #if BUILDFLAG(ENABLE_NATIVE_NOTIFICATIONS) && !defined(OS_CHROMEOS)
      {"enable-native-notifications",
-@@ -2113,13 +2113,13 @@ const FeatureEntry kFeatureEntries[] = {
-      flag_descriptions::kTerminalSystemAppSplitsDescription, kOsCrOS,
-      FEATURE_VALUE_TYPE(features::kTerminalSystemAppSplits)},
- #endif  // OS_CHROMEOS
--#if defined(OS_CHROMEOS) || defined(OS_LINUX)
-+#if defined(OS_CHROMEOS) || defined(OS_LINUX) || defined(OS_BSD)
- #if BUILDFLAG(USE_TCMALLOC)
-     {"dynamic-tcmalloc-tuning", flag_descriptions::kDynamicTcmallocName,
+@@ -2119,7 +2119,7 @@ const FeatureEntry kFeatureEntries[] = {
       flag_descriptions::kDynamicTcmallocDescription, kOsCrOS | kOsLinux,
       FEATURE_VALUE_TYPE(performance_manager::features::kDynamicTcmallocTuning)},
  #endif  // BUILDFLAG(USE_TCMALLOC)
@@ -136,21 +112,6 @@
  
  #if !defined(OS_ANDROID)
      {"chrome-colors", flag_descriptions::kChromeColorsName,
-@@ -3832,12 +3832,12 @@ const FeatureEntry kFeatureEntries[] = {
-      FEATURE_VALUE_TYPE(kClickToCallDetectionV2)},
- #endif  // BUILDFLAG(ENABLE_CLICK_TO_CALL)
- 
--#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || \
-+#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD) || \
-     defined(OS_CHROMEOS)
-     {"remote-copy-receiver", flag_descriptions::kRemoteCopyReceiverName,
-      flag_descriptions::kRemoteCopyReceiverDescription, kOsDesktop,
-      FEATURE_VALUE_TYPE(kRemoteCopyReceiver)},
--#endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) ||
-+#endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD) ||
-         // defined(OS_CHROMEOS)
- 
-     {"shared-clipboard-receiver",
 @@ -3965,13 +3965,13 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(printing::features::kEnableCustomMacPaperSizes)},
  #endif

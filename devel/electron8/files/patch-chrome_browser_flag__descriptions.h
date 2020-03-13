@@ -1,4 +1,4 @@
---- chrome/browser/flag_descriptions.h.orig	2020-03-03 07:02:28 UTC
+--- chrome/browser/flag_descriptions.h.orig	2020-03-11 11:35:00 UTC
 +++ chrome/browser/flag_descriptions.h
 @@ -20,9 +20,9 @@
  #include "ui/android/buildflags.h"
@@ -12,15 +12,7 @@
  
  // This file declares strings used in chrome://flags. These messages are not
  // translated, because instead of end-users they target Chromium developers and
-@@ -2292,14 +2292,14 @@ extern const char kZeroStateFilesDescription[];
- 
- #endif  // #if defined(OS_CHROMEOS)
- 
--#if defined(OS_CHROMEOS) || defined(OS_LINUX)
-+#if defined(OS_CHROMEOS) || defined(OS_LINUX) || defined(OS_BSD)
- 
- #if BUILDFLAG(USE_TCMALLOC)
- extern const char kDynamicTcmallocName[];
+@@ -2299,7 +2299,7 @@ extern const char kDynamicTcmallocName[];
  extern const char kDynamicTcmallocDescription[];
  #endif  // BUILDFLAG(USE_TCMALLOC)
  
@@ -44,19 +36,8 @@
  
  #if BUILDFLAG(ENABLE_CLICK_TO_CALL)
  
-@@ -2335,16 +2335,16 @@ extern const char kClickToCallDetectionV2Description[]
- 
- #endif  // BUILDFLAG(ENABLE_CLICK_TO_CALL)
- 
--#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || \
-+#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD) || \
-     defined(OS_CHROMEOS)
- 
- extern const char kRemoteCopyReceiverName[];
- extern const char kRemoteCopyReceiverDescription[];
- 
--#endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) ||
-+#endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD) ||
+@@ -2344,7 +2344,7 @@ extern const char kRemoteCopyReceiverDescription[];
+ #endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) ||
          // defined(OS_CHROMEOS)
  
 -#if defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX)
@@ -64,12 +45,3 @@
  
  extern const char kDirectManipulationStylusName[];
  extern const char kDirectManipulationStylusDescription[];
-@@ -2355,7 +2355,7 @@ extern const char kAnimatedAvatarButtonDescription[];
- extern const char kProfileMenuRevampName[];
- extern const char kProfileMenuRevampDescription[];
- 
--#endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX)
-+#endif  // defined(OS_WIN) || defined(OS_MACOSX) || defined(OS_LINUX) || defined(OS_BSD)
- 
- #if defined(OS_MACOSX) || defined(OS_CHROMEOS)
- 

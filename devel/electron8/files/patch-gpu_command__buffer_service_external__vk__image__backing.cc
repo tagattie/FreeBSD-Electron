@@ -1,4 +1,4 @@
---- gpu/command_buffer/service/external_vk_image_backing.cc.orig	2020-03-03 07:03:03 UTC
+--- gpu/command_buffer/service/external_vk_image_backing.cc.orig	2020-03-11 11:35:36 UTC
 +++ gpu/command_buffer/service/external_vk_image_backing.cc
 @@ -26,7 +26,7 @@
  #include "ui/gl/buildflags.h"
@@ -44,15 +44,6 @@
    GrVkImageInfo image_info;
    bool result = backend_texture_.getVkImageInfo(&image_info);
    DCHECK(result);
-@@ -615,7 +615,7 @@ GLuint ExternalVkImageBacking::ProduceGLTextureInterna
- #elif defined(OS_FUCHSIA)
-   NOTIMPLEMENTED_LOG_ONCE();
-   return 0;
--#else  // !defined(OS_LINUX) && !defined(OS_FUCHSIA)
-+#else  // !defined(OS_LINUX) && !defined(OS_BSD) && !defined(OS_FUCHSIA)
- #error Unsupported OS
- #endif
- }
 @@ -629,7 +629,7 @@ ExternalVkImageBacking::ProduceGLTexture(SharedImageMa
      return nullptr;
    }
@@ -62,15 +53,6 @@
    if (!texture_) {
      GLuint texture_service_id = ProduceGLTextureInternal();
      if (!texture_service_id)
-@@ -660,7 +660,7 @@ ExternalVkImageBacking::ProduceGLTexture(SharedImageMa
- #elif defined(OS_FUCHSIA)
-   NOTIMPLEMENTED_LOG_ONCE();
-   return nullptr;
--#else  // !defined(OS_LINUX) && !defined(OS_FUCHSIA)
-+#else  // !defined(OS_LINUX) && !defined(OS_BSD) && !defined(OS_FUCHSIA)
- #error Unsupported OS
- #endif
- }
 @@ -675,7 +675,7 @@ ExternalVkImageBacking::ProduceGLTexturePassthrough(
      return nullptr;
    }
@@ -80,15 +62,6 @@
    if (!texture_passthrough_) {
      GLuint texture_service_id = ProduceGLTextureInternal();
      if (!texture_service_id)
-@@ -695,7 +695,7 @@ ExternalVkImageBacking::ProduceGLTexturePassthrough(
- #elif defined(OS_FUCHSIA)
-   NOTIMPLEMENTED_LOG_ONCE();
-   return nullptr;
--#else  // !defined(OS_LINUX) && !defined(OS_FUCHSIA)
-+#else  // !defined(OS_LINUX) && !defined(OS_BSD) && !defined(OS_FUCHSIA)
- #error Unsupported OS
- #endif
- }
 @@ -713,7 +713,7 @@ ExternalVkImageBacking::ProduceSkia(
                                                               tracker);
  }
