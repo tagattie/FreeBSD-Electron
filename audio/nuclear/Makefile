@@ -25,8 +25,7 @@ INSTALLS_ICONS=	yes
 
 BINARY_ALIAS=	python=${PYTHON_CMD}
 
-SUB_FILES=	nuclear
-SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
+SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CONTRIBUTING.md LEGAL.md README.md
 
@@ -47,7 +46,7 @@ pre-fetch:
 		cd ${WRKDIR}/npm-cache && \
 			${SETENV} HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts; \
 		cd ${WRKDIR}/npm-cache && \
-			${SETENV} HOME=${WRKDIR} ${NPX_CMD} lerna bootstrap --concurrency 1 --ignore-scripts; \
+			${SETENV} HOME=${WRKDIR} ${NPX_CMD} lerna bootstrap --ignore-scripts --ci; \
 		cd ${WRKDIR}/npm-cache/packages && \
 			for dir in *; do \
 				${RM} $${dir}/package.json $${dir}/package-lock.json; \
