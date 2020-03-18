@@ -6,6 +6,6 @@ Name=Museeks
 Comment=A simple, clean and cross-platform music player, written with Node.js, Electron and React.js.
 Icon=museeks
 Exec=museeks %U
-Categories=Audio;
+Categories=Audio;AudioVideo;
 Terminal=false
 StartupWMClass=Museeks
