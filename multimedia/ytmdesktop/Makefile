@@ -13,7 +13,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		electron:7 gnome node:12,build python:2.7,build
+USES=		desktop-file-utils electron:7 gnome node:12,build \
+		python:2.7,build
 
 USE_GITHUB=	yes
 
