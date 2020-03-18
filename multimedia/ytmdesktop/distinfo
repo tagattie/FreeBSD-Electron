@@ -1,5 +1,5 @@
-TIMESTAMP = 1582793794
-SHA256 (ytmdesktop-node-modules-1.8.2.tar.gz) = a9b51163dc684332398c544288491eefc047df7d2b11745085e113a738005603
-SIZE (ytmdesktop-node-modules-1.8.2.tar.gz) = 73589561
-SHA256 (ytmdesktop-ytmdesktop-v1.8.2_GH0.tar.gz) = 3ecdcebccc4c5f8866f6918d46567fa2c5b65b29838d1a6631a36f919f487bca
-SIZE (ytmdesktop-ytmdesktop-v1.8.2_GH0.tar.gz) = 585778
+TIMESTAMP = 1584512355
+SHA256 (ytmdesktop-node-modules-1.9.0.tar.gz) = e87f0d465e635a511e294c2a364c05dfb69572e294d10fdce1b02d461cae5f9a
+SIZE (ytmdesktop-node-modules-1.9.0.tar.gz) = 73589895
+SHA256 (ytmdesktop-ytmdesktop-v1.9.0_GH0.tar.gz) = a2f2c66e376052550fa3194abed3d3edc334254fd23cf20d761e936c6bc5f875
+SIZE (ytmdesktop-ytmdesktop-v1.9.0_GH0.tar.gz) = 588835

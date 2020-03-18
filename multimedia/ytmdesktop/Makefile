@@ -2,7 +2,7 @@
 
 PORTNAME=	ytmdesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.8.2
+DISTVERSION=	1.9.0
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@yandex.com
@@ -13,18 +13,24 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		electron:7 node:12,build python:2.7,build
+USES=		electron:7 gnome node:12,build python:2.7,build
 
 USE_GITHUB=	yes
+
+INSTALLS_ICONS=	yes
 
 BINARY_ALIAS=	python=${PYTHON_CMD}
 
 SUB_FILES=	${PORTNAME}
 
+PORTDOCS=	CONTRIBUTING.md README.md
+
+OPTIONS_DEFINE=	DOCS
+
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1582793516
+PREFETCH_TIMESTAMP=	1584511772
 ELECTRON_MAKE_FLAGS+=	--config electron-builder64.yml
 
 pre-build:
@@ -49,5 +55,9 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/dist/linux-unpacked && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+
+do-install-DOCS-on:
+	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>
