@@ -184,14 +184,14 @@ _${_NODE_FEATURE:tu}_BUILD_DEP=	yes
 # Setup dependencies
 .for stage in BUILD RUN TEST
 .   if defined(_NODE_${stage}_DEP)
-${stage}_DEPENDS+=	${_NODE_BASE_CMD}:${_NODE_PORTDIR}
+${stage}_DEPENDS+=	${_NODE_PKGNAME}>0:${_NODE_PORTDIR}
 .   endif
 .endfor
 
 .for feat in ${_VALID_NODE_FEATURES}
 .   for stage in FETCH EXTRACT BUILD RUN TEST
 .	if defined(_${feat:tu}_${stage}_DEP)
-${stage}_DEPENDS+=	${_${feat:tu}_BASE_CMD}:${_${feat:tu}_PORTDIR}
+${stage}_DEPENDS+=	${_${feat:tu}_PKGNAME}>0:${_${feat:tu}_PORTDIR}
 .	endif
 .   endfor
 .endfor

@@ -187,7 +187,7 @@ DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 IGNORE= does not specify timestamp for pre-fetched modules
 .   endif
 
-FETCH_DEPENDS+= ${NODE_PKG_MANAGER}:${${NODE_PKG_MANAGER:tu}_PORTDIR}
+FETCH_DEPENDS+= ${${NODE_PKG_MANAGER:tu}_PKGNAME}>0:${${NODE_PKG_MANAGER:tu}_PORTDIR}
 _USES_fetch+=	490:electron-fetch-node-modules
 .   if ${NODE_PKG_MANAGER} == npm
 electron-fetch-node-modules:
@@ -261,7 +261,7 @@ electron-install-node-modules:
 		${MV} ${WRKDIR}/npm-cache/$${dir}/node_modules ${WRKSRC}/$${dir}; \
 	done
 .   elif ${NODE_PKG_MANAGER} == yarn
-EXTRACT_DEPENDS+= ${NODE_PKG_MANAGER}:${${NODE_PKG_MANAGER:tu}_PORTDIR}
+EXTRACT_DEPENDS+= ${${NODE_PKG_MANAGER:tu}_PKGNAME}>0:${${NODE_PKG_MANAGER:tu}_PORTDIR}
 _USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
 	@${ECHO_MSG} "===>  Copying package.json and yarn.lock to WRKSRC"
@@ -288,9 +288,9 @@ electron-install-node-modules:
 BUILD_DEPENDS+=	zip:archivers/zip
 ZIP_CMD?=	${LOCALBASE}/bin/zip
 
-BUILD_DEPENDS+= ${NODE_PKG_MANAGER}:${${NODE_PKG_MANAGER:tu}_PORTDIR}
+BUILD_DEPENDS+= ${${NODE_PKG_MANAGER:tu}_PKGNAME}>0:${${NODE_PKG_MANAGER:tu}_PORTDIR}
 .   if ${NODE_PKG_MANAGER} == yarn
-BUILD_DEPENDS+=	npm:${NPM_PORTDIR}	# npm is needed for node-gyp
+BUILD_DEPENDS+=	${NPM_PKGNAME}>0:${NPM_PORTDIR}	# npm is needed for node-gyp
 .   endif
 
 .   if ${ELECTRON_VERSION} < 6
