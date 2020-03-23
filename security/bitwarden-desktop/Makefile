@@ -2,7 +2,7 @@
 
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.16.6
+DISTVERSION=	1.17.1
 CATEGORIES=	security
 MASTER_SITES=	https://github.com/tagattie/freebsd-ports/releases/download/${PORTNAME}-${DISTVERSION}/:webfonts
 DISTFILES=	${PORTNAME}-webfonts-${DISTVERSION}${EXTRACT_SUFX}:webfonts
@@ -18,13 +18,13 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre.so:devel/pcre \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:5 gnome localbase:ldflags \
+USES=		desktop-file-utils electron:6 gnome localbase:ldflags \
 		node:10,build pkgconfig python:2.7,build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
 GH_PROJECT=	desktop
-GH_TUPLE=	bitwarden:jslib:53d08067df953e7a66ebf0b972e6443e1f275d86:jslib/jslib
+GH_TUPLE=	bitwarden:jslib:0a30c7eb1ecbac500e6c55a7d4024d98efa982bc:jslib/jslib
 
 USE_XORG=	x11 xau xcb xdmcp xext xscrnsaver
 USE_GNOME=	glib20
@@ -33,7 +33,6 @@ INSTALLS_ICONS=	yes
 BINARY_ALIAS=	python=${PYTHON_CMD}
 
 SUB_FILES=	${PORTNAME}
-SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
@@ -42,8 +41,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1578569112
-UPSTREAM_ELECTRON_VER=	5.0.8
+PREFETCH_TIMESTAMP=	1584942273
 
 post-extract:
 	${MV} ${WRKDIR}/css ${WRKSRC}/src
@@ -53,7 +51,6 @@ post-patch:
 		${WRKSRC}/node_modules/desktop-idle/binding.gyp
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPX_CMD} gulp postinstall
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
 
 do-install:
@@ -72,5 +69,11 @@ do-install:
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
+
+# helper target for port maintainer(s)
+make-webfonts:
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPX_CMD} gulp webfonts
+	cd ${WRKSRC}/src && ${TAR} -czf \
+		${WRKDIR}/${PORTNAME}-webfonts-${DISTVERSION}${EXTRACT_SUFX} css
 
 .include <bsd.port.mk>
