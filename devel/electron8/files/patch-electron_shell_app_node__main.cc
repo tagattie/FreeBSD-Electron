@@ -1,6 +1,6 @@
---- electron/shell/app/node_main.cc.orig	2020-03-02 19:30:38 UTC
+--- electron/shell/app/node_main.cc.orig	2020-04-30 17:03:43 UTC
 +++ electron/shell/app/node_main.cc
-@@ -31,7 +31,7 @@
+@@ -42,7 +42,7 @@ bool AllowWasmCodeGenerationCallback(v8::Local<v8::Con
  
  namespace electron {
  
@@ -9,7 +9,7 @@
  void AddExtraParameter(const std::string& key, const std::string& value) {
    crash_reporter::CrashReporter::GetInstance()->AddExtraParameter(key, value);
  }
-@@ -103,7 +103,7 @@ int NodeMain(int argc, char* argv[]) {
+@@ -119,7 +119,7 @@ int NodeMain(int argc, char* argv[]) {
          gin::Dictionary::CreateEmpty(gin_env.isolate());
      reporter.SetMethod("start", &crash_reporter::CrashReporter::StartInstance);
  

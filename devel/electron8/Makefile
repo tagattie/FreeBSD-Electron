@@ -4,7 +4,7 @@ PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
 CATEGORIES=	devel java
-MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v8.1.1/:chromium \
+MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v8.2.5/:chromium \
 		https://commondatastorage.googleapis.com/chromium-browser-official/:chromium_official \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
@@ -22,15 +22,15 @@ COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/electron/LICENSE
 
-FETCH_DEPENDS=	yarn:www/yarn-node12
-EXTRACT_DEPENDS=	yarn:www/yarn-node12
+FETCH_DEPENDS=	yarn-node12>0:www/yarn-node12
+EXTRACT_DEPENDS=	yarn-node12>0:www/yarn-node12
 PATCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	${LOCALBASE}/bin/ar:devel/binutils \
 		gperf:devel/gperf \
 		yasm:devel/yasm \
 		${LOCALBASE}/include/linux/videodev2.h:multimedia/v4l_compat \
-		node:www/node12 \
-		npm:www/npm-node12
+		node12>0:www/node12 \
+		npm-node12>0:www/npm-node12
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 		libatspi.so:accessibility/at-spi2-core \
 		libsnappy.so:archivers/snappy \
@@ -55,7 +55,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
 RUN_DEPENDS=	xdg-open:devel/xdg-utils
 TEST_DEPENDS=	git:devel/git \
 		${PYTHON_PKGNAMEPREFIX}python-dbusmock>0:devel/py-python-dbusmock@${PY_FLAVOR} \
-		npm:www/npm-node12
+		npm-node12>0:www/npm-node12
 
 USES=		bison dos2unix gettext-tools gl gnome jpeg localbase:ldflags \
 		ninja pkgconfig python:2.7,build,test tar:xz xorg
@@ -69,9 +69,9 @@ GH_TUPLE=	nodejs:node:v${NODE_VER}:node \
 		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
 # Official chromium version containing "gn" which is known to work
-CHROMIUM_OFFICIAL_VER=	80.0.3987.132
+CHROMIUM_OFFICIAL_VER=	80.0.3987.163
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=	80.0.3987.141
+CHROMIUM_VER=	80.0.3987.165
 # See ${WRKSRC}/third_party/node/node_modules.tar.gz.sha1 for CHROMIUM_NODE_MODULES_HASH
 CHROMIUM_NODE_MODULES_HASH=	a9603a3dc03fa41af9cc5c8ac28d23d1f98dfe3c
 # See ${WRKSRC}/third_party/test_fonts/test_fonts.tar.gz.sha1 for CHROMIUM_TEST_FONTS_HASH
@@ -163,7 +163,7 @@ PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mksnapshot_zip
 
-YARN_TIMESTAMP=	1583989772
+YARN_TIMESTAMP=	1588502971
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
 		ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}

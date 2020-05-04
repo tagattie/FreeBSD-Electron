@@ -1,4 +1,4 @@
---- electron/spec-main/api-app-spec.ts.orig	2020-03-02 19:30:38 UTC
+--- electron/spec-main/api-app-spec.ts.orig	2020-04-30 17:03:43 UTC
 +++ electron/spec-main/api-app-spec.ts
 @@ -130,7 +130,7 @@ describe('app module', () => {
    describe('app.getLocaleCountryCode()', () => {
@@ -53,7 +53,7 @@
        'win32': path.resolve(homedir(), 'AppData', app.name),
      }
  
-@@ -751,7 +752,7 @@ describe('app module', () => {
+@@ -769,7 +770,7 @@ describe('app module', () => {
      let w: BrowserWindow
  
      before(function () {
@@ -62,7 +62,7 @@
          this.skip()
        }
        session.fromPartition('empty-certificate').setCertificateVerifyProc((req, cb) => { cb(0) })
-@@ -908,7 +909,7 @@ describe('app module', () => {
+@@ -926,7 +927,7 @@ describe('app module', () => {
        // We can't expect particular app names here, but these protocols should
        // at least have _something_ registered. Except on our Linux CI
        // environment apparently.
@@ -71,7 +71,7 @@
          this.skip()
        }
  
-@@ -982,7 +983,7 @@ describe('app module', () => {
+@@ -1000,7 +1001,7 @@ describe('app module', () => {
      // doesn't affect nested `describe`s.
      beforeEach(function () {
        // FIXME Get these specs running on Linux CI
@@ -80,7 +80,7 @@
          this.skip()
        }
      })
-@@ -1052,7 +1053,7 @@ describe('app module', () => {
+@@ -1070,7 +1071,7 @@ describe('app module', () => {
            expect(entry.memory).to.have.property('privateBytes').that.is.greaterThan(0)
          }
  
@@ -89,7 +89,7 @@
            expect(entry.sandboxed).to.be.a('boolean')
          }
  
-@@ -1119,7 +1120,7 @@ describe('app module', () => {
+@@ -1137,7 +1138,7 @@ describe('app module', () => {
  
      it('succeeds with complete GPUInfo', async () => {
        const completeInfo = await getGPUInfo('complete')
@@ -98,7 +98,7 @@
          // For linux and macOS complete info is same as basic info
          await verifyBasicGPUInfo(completeInfo)
          const basicInfo = await getGPUInfo('basic')
-@@ -1147,7 +1148,7 @@ describe('app module', () => {
+@@ -1165,7 +1166,7 @@ describe('app module', () => {
      const socketPath = process.platform === 'win32' ? '\\\\.\\pipe\\electron-mixed-sandbox' : '/tmp/electron-mixed-sandbox'
  
      beforeEach(function (done) {

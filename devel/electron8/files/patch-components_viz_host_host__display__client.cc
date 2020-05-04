@@ -1,8 +1,8 @@
---- components/viz/host/host_display_client.cc.orig	2020-03-03 07:02:59 UTC
+--- components/viz/host/host_display_client.cc.orig	2020-05-03 11:07:18 UTC
 +++ components/viz/host/host_display_client.cc
-@@ -56,7 +56,7 @@ void HostDisplayClient::CreateLayeredWindowUpdater(
- }
+@@ -64,7 +64,7 @@ void HostDisplayClient::CreateLayeredWindowUpdater(
  #endif
+ }
  
 -#if defined(OS_LINUX) && !defined(OS_CHROMEOS)
 +#if (defined(OS_LINUX) && !defined(OS_CHROMEOS)) || defined(OS_BSD)

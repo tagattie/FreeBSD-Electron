@@ -1,6 +1,6 @@
---- ui/compositor/compositor.h.orig	2020-03-03 07:04:28 UTC
+--- ui/compositor/compositor.h.orig	2020-05-03 11:07:18 UTC
 +++ ui/compositor/compositor.h
-@@ -417,7 +417,7 @@ class COMPOSITOR_EXPORT Compositor : public cc::LayerT
+@@ -430,7 +430,7 @@ class COMPOSITOR_EXPORT Compositor : public cc::LayerT
    void OnFirstSurfaceActivation(const viz::SurfaceInfo& surface_info) override;
    void OnFrameTokenChanged(uint32_t frame_token) override;
  

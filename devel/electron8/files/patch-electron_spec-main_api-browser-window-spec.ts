@@ -1,4 +1,4 @@
---- electron/spec-main/api-browser-window-spec.ts.orig	2020-03-09 23:26:54 UTC
+--- electron/spec-main/api-browser-window-spec.ts.orig	2020-04-30 17:03:43 UTC
 +++ electron/spec-main/api-browser-window-spec.ts
 @@ -928,7 +928,7 @@ describe('BrowserWindow module', () => {
            w.setPosition(pos[0], pos[1])
@@ -63,3 +63,14 @@
      // Not implemented on Linux.
      afterEach(closeAllWindows)
  
+@@ -4001,8 +4001,8 @@ describe('BrowserWindow module', () => {
+   })
+ 
+   const features = process.electronBinding('features')
+-  const skip = features.isOffscreenRenderingEnabled() && 
+-    (process.platform !== 'linux' || process.arch !== 'ia32')
++  const skip = features.isOffscreenRenderingEnabled() &&
++    ((process.platform !== 'linux' && process.platform !== 'freebsd') || process.arch !== 'ia32')
+   ifdescribe(skip)('offscreen rendering', () => {
+     let w: BrowserWindow
+     beforeEach(function () {

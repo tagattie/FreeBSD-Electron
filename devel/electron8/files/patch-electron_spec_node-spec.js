@@ -1,7 +1,7 @@
---- electron/spec/node-spec.js.orig	2020-03-02 19:30:38 UTC
+--- electron/spec/node-spec.js.orig	2020-04-30 17:03:43 UTC
 +++ electron/spec/node-spec.js
 @@ -147,7 +147,7 @@ describe('node feature', () => {
-     })
+     });
  
      describe('child_process.exec', () => {
 -      (process.platform === 'linux' ? it : it.skip)('allows executing a setuid binary from non-sandboxed renderer', () => {

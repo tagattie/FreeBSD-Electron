@@ -1,6 +1,6 @@
---- electron/spec-main/api-tray-spec.ts.orig	2020-03-02 19:30:38 UTC
+--- electron/spec-main/api-tray-spec.ts.orig	2020-04-30 17:03:43 UTC
 +++ electron/spec-main/api-tray-spec.ts
-@@ -56,7 +56,7 @@ describe('tray module', () => {
+@@ -63,7 +63,7 @@ describe('tray module', () => {
    describe('tray.getBounds()', () => {
      afterEach(() => { tray.destroy() })
  
