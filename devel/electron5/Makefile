@@ -22,6 +22,8 @@ COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/electron/LICENSE
 
+ONLY_FOR_ARCHS=	amd64
+
 FETCH_DEPENDS=	npm-node12>0:www/npm-node12
 PATCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	${LOCALBASE}/bin/ar:devel/binutils \
