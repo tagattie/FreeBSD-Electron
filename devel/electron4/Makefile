@@ -3,7 +3,7 @@
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
-PORTREVISION=	3
+PORTREVISION=	4
 CATEGORIES=	devel
 MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v4.1.0/:chromium \
 		https://commondatastorage.googleapis.com/chromium-browser-official/:chromium_official \
@@ -60,9 +60,6 @@ USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
 # See ${WRKSRC}/electron/DEPS for GH_TAGNAME_node
 GH_TUPLE=	electron:node:8bc5d171a0873c0ba49f9433798bc8b67399788c:node
-		# boto:boto:f7574aa6cc2c819430c1f05e9a1a1a666ef8169b:boto \
-		# yaml:pyyaml:3.12:pyyaml \
-		# kennethreitz:requests:e4d59bedfd3c7f4f254f4f5d036587bcd8152458:requests
 
 # Official chromium version containing "gn" which is known to work
 CHROMIUM_OFFICIAL_VER=	76.0.3809.132
@@ -200,14 +197,6 @@ post-extract:
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${PORTNAME}-${ELECTRON_VER} ${WRKSRC}/electron
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_node}-${GH_TAGNAME_node} \
 		${WRKSRC}/third_party/${GH_ACCOUNT_node}_${GH_PROJECT_node}
-	# ${RMDIR} ${WRKSRC}/electron/vendor/${GH_PROJECT_boto}
-	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_boto}-${GH_TAGNAME_boto} \
-	# 	${WRKSRC}/electron/vendor/${GH_PROJECT_boto}
-	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_pyyaml}-${GH_TAGNAME_pyyaml} \
-	# 	${WRKSRC}/electron/vendor/${GH_PROJECT_pyyaml}
-	# ${RMDIR} ${WRKSRC}/electron/vendor/${GH_PROJECT_requests}
-	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_requests}-${GH_TAGNAME_requests} \
-	# 	${WRKSRC}/electron/vendor/${GH_PROJECT_requests}
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/node_modules ${WRKSRC}/third_party/node
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/test_fonts ${WRKSRC}/third_party/test_fonts
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/npm_modules ${WRKSRC}/electron/node_modules
@@ -218,10 +207,6 @@ pre-patch:
 	# ${FIND} ${WRKSRC} -type f -name '*~' -print -delete
 
 pre-configure:
-	# cd ${WRKSRC}/electron/vendor/${GH_PROJECT_boto} && \
-	# 	${PYTHON_CMD} setup.py build
-	# cd ${WRKSRC}/electron/vendor/${GH_PROJECT_requests} && \
-	# 	${PYTHON_CMD} setup.py build
 	# We used to remove bundled libraries to be sure that chromium uses
 	# system libraries and not shipped ones.
 	# cd ${WRKSRC} && ${PYTHON_CMD} \
@@ -241,9 +226,6 @@ do-configure:
 	# Setup nodejs dependency
 	${MKDIR} ${WRKSRC}/third_party/node/freebsd/node-freebsd-x64/bin
 	${LN} -sf ${LOCALBASE}/bin/node ${WRKSRC}/third_party/node/freebsd/node-freebsd-x64/bin/node
-
-# do-build:
-# 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ninja -C out/${BUILDTYPE} ${ALL_TARGET}
 
 post-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
