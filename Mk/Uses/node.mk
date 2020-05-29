@@ -56,7 +56,7 @@
 #		NOTE: If the port specifies none of them, we assume the port
 #		requires the package manager at build time only.
 #
-# MAINTAINER:	tagattie@yandex.com
+# MAINTAINER:	tagattie@FreeBSD.org
 
 .if !defined(_INCLUDE_USES_NODE_MK)
 _INCLUDE_USES_NODE_MK=	yes

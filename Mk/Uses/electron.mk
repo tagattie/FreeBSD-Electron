@@ -94,7 +94,7 @@
 #			Additional flags to pass to the specified packaging
 #			module. The default flags are defined in this file.
 #
-# MAINTAINER:	tagattie@yandex.com
+# MAINTAINER:	tagattie@FreeBSD.org
 
 .if !defined(_INCLUDE_USES_ELECTRON_MK)
 _INCLUDE_USES_ELECTRON_MK=	yes
