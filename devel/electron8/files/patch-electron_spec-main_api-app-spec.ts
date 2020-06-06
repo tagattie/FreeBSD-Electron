@@ -1,4 +1,4 @@
---- electron/spec-main/api-app-spec.ts.orig	2020-04-30 17:03:43 UTC
+--- electron/spec-main/api-app-spec.ts.orig	2020-06-01 16:32:39 UTC
 +++ electron/spec-main/api-app-spec.ts
 @@ -130,7 +130,7 @@ describe('app module', () => {
    describe('app.getLocaleCountryCode()', () => {
@@ -18,7 +18,7 @@
          this.skip()
          return
        }
-@@ -546,7 +546,7 @@ describe('app module', () => {
+@@ -536,7 +536,7 @@ describe('app module', () => {
    describe('app.badgeCount', () => {
      const platformIsNotSupported =
          (process.platform === 'win32') ||
@@ -27,7 +27,7 @@
      const platformIsSupported = !platformIsNotSupported
  
      const expectedBadgeCount = 42
-@@ -580,7 +580,7 @@ describe('app module', () => {
+@@ -570,7 +570,7 @@ describe('app module', () => {
      ]
  
      before(function () {
@@ -36,7 +36,7 @@
      })
  
      beforeEach(() => {
-@@ -656,7 +656,7 @@ describe('app module', () => {
+@@ -646,7 +646,7 @@ describe('app module', () => {
    })
  
    describe('accessibilitySupportEnabled property', () => {
@@ -45,7 +45,7 @@
  
      it('returns whether the Chrome has accessibility APIs enabled', () => {
        expect(app.accessibilitySupportEnabled).to.be.a('boolean')
-@@ -693,6 +693,7 @@ describe('app module', () => {
+@@ -683,6 +683,7 @@ describe('app module', () => {
      const logsPaths = {
        'darwin': path.resolve(homedir(), 'Library', 'Logs'),
        'linux': path.resolve(homedir(), 'AppData', app.name),
@@ -53,7 +53,7 @@
        'win32': path.resolve(homedir(), 'AppData', app.name),
      }
  
-@@ -769,7 +770,7 @@ describe('app module', () => {
+@@ -759,7 +760,7 @@ describe('app module', () => {
      let w: BrowserWindow
  
      before(function () {
@@ -62,7 +62,7 @@
          this.skip()
        }
        session.fromPartition('empty-certificate').setCertificateVerifyProc((req, cb) => { cb(0) })
-@@ -926,7 +927,7 @@ describe('app module', () => {
+@@ -916,7 +917,7 @@ describe('app module', () => {
        // We can't expect particular app names here, but these protocols should
        // at least have _something_ registered. Except on our Linux CI
        // environment apparently.
@@ -71,7 +71,7 @@
          this.skip()
        }
  
-@@ -1000,7 +1001,7 @@ describe('app module', () => {
+@@ -990,7 +991,7 @@ describe('app module', () => {
      // doesn't affect nested `describe`s.
      beforeEach(function () {
        // FIXME Get these specs running on Linux CI
@@ -80,7 +80,7 @@
          this.skip()
        }
      })
-@@ -1070,7 +1071,7 @@ describe('app module', () => {
+@@ -1060,7 +1061,7 @@ describe('app module', () => {
            expect(entry.memory).to.have.property('privateBytes').that.is.greaterThan(0)
          }
  
@@ -89,7 +89,7 @@
            expect(entry.sandboxed).to.be.a('boolean')
          }
  
-@@ -1137,7 +1138,7 @@ describe('app module', () => {
+@@ -1127,7 +1128,7 @@ describe('app module', () => {
  
      it('succeeds with complete GPUInfo', async () => {
        const completeInfo = await getGPUInfo('complete')
@@ -98,7 +98,7 @@
          // For linux and macOS complete info is same as basic info
          await verifyBasicGPUInfo(completeInfo)
          const basicInfo = await getGPUInfo('basic')
-@@ -1165,7 +1166,7 @@ describe('app module', () => {
+@@ -1155,7 +1156,7 @@ describe('app module', () => {
      const socketPath = process.platform === 'win32' ? '\\\\.\\pipe\\electron-mixed-sandbox' : '/tmp/electron-mixed-sandbox'
  
      beforeEach(function (done) {
