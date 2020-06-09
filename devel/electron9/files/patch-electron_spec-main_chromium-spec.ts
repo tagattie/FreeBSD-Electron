@@ -1,6 +1,6 @@
---- electron/spec-main/chromium-spec.ts.orig	2020-05-18 21:17:08 UTC
+--- electron/spec-main/chromium-spec.ts.orig	2020-06-02 18:14:21 UTC
 +++ electron/spec-main/chromium-spec.ts
-@@ -1077,10 +1077,10 @@ describe('font fallback', () => {
+@@ -1243,10 +1243,10 @@ describe('font fallback', () => {
      const fonts = await getRenderedFonts(html);
      expect(fonts).to.be.an('array');
      expect(fonts).to.have.length(1);

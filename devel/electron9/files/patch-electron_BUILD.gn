@@ -1,6 +1,6 @@
---- electron/BUILD.gn.orig	2020-05-18 21:17:08 UTC
+--- electron/BUILD.gn.orig	2020-06-05 18:55:50 UTC
 +++ electron/BUILD.gn
-@@ -336,7 +336,7 @@ source_set("electron_lib") {
+@@ -337,7 +337,7 @@ source_set("electron_lib") {
      "//chrome/app/resources:platform_locale_settings",
      "//chrome/services/printing/public/mojom",
      "//components/certificate_transparency",
@@ -9,7 +9,7 @@
      "//components/language/core/browser",
      "//components/net_log",
      "//components/network_hints/browser",
-@@ -459,7 +459,7 @@ source_set("electron_lib") {
+@@ -460,7 +460,7 @@ source_set("electron_lib") {
      ]
    }
  
@@ -18,7 +18,7 @@
      deps += [ "//components/crash/content/browser" ]
    }
  
-@@ -1053,7 +1053,7 @@ if (is_mac) {
+@@ -1064,7 +1064,7 @@ if (is_mac) {
        ":electron_app_manifest",
        ":electron_lib",
        ":packed_resources",
