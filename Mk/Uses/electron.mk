@@ -318,7 +318,7 @@ electron-generate-electron-zip:
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
 	@${MKDIR} ${WRKDIR}/.cache/electron
 	@cd ${WRKDIR}/electron-dist && \
-		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/electron-v${UPSTREAM_ELECTRON_VER}-freebsd-x64.zip .
+		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/electron-v${UPSTREAM_ELECTRON_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
 	@cd ${WRKDIR}/.cache/electron && \
 		${SHA256} -r electron-*.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}
@@ -335,7 +335,7 @@ electron-generate-electron-zip:
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
 	@${MKDIR} ${WRKDIR}/.cache/electron
 	@cd ${WRKDIR}/electron-dist && \
-		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/electron-v${ELECTRON_VER}-linux-x64.zip .
+		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/electron-v${ELECTRON_VER}-linux-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
 	@cd ${WRKDIR}/.cache/electron && \
 		${SHA256} -r electron-*.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${ELECTRON_VER}
@@ -352,7 +352,7 @@ electron-generate-chromedriver-zip:
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
 	@${MKDIR} ${WRKDIR}/.cache/electron
 	@cd ${WRKDIR}/electron-dist && \
-		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-x64.zip .
+		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
 	@cd ${WRKDIR}/.cache/electron && \
 		${SHA256} -r chromedriver-*.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_CHROMEDRIVER_VER}
