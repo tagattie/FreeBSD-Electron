@@ -5,7 +5,7 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=	1.15.1
 CATEGORIES=	deskutils
 
-MAINTAINER=	tagattie@yandex.com
+MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Simplenote React app packaged via Electron
 
 LICENSE=	GPLv2
