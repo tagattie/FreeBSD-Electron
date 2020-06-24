@@ -1,6 +1,6 @@
---- electron/BUILD.gn.orig	2020-04-30 17:03:43 UTC
+--- electron/BUILD.gn.orig	2020-06-18 16:52:13 UTC
 +++ electron/BUILD.gn
-@@ -469,6 +469,15 @@ source_set("electron_lib") {
+@@ -470,6 +470,15 @@ source_set("electron_lib") {
    sources = filenames.lib_sources
    set_sources_assignment_filter(sources_assignment_filter)
  
@@ -16,7 +16,7 @@
    if (is_component_build) {
      defines += [ "NODE_SHARED_MODE" ]
    }
-@@ -553,6 +562,12 @@ source_set("electron_lib") {
+@@ -564,6 +573,12 @@ source_set("electron_lib") {
        "shell/browser/ui/gtk_util.h",
      ]
    }
@@ -29,7 +29,7 @@
    if (is_win) {
      libs += [ "dwmapi.lib" ]
      deps += [
-@@ -1325,7 +1340,7 @@ dist_zip("electron_dist_zip") {
+@@ -1336,7 +1351,7 @@ dist_zip("electron_dist_zip") {
      ":licenses",
      ":electron_version",
    ]

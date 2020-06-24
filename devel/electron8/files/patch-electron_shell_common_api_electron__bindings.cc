@@ -1,6 +1,6 @@
---- electron/shell/common/api/electron_bindings.cc.orig	2020-03-02 19:30:38 UTC
+--- electron/shell/common/api/electron_bindings.cc.orig	2020-06-18 16:52:13 UTC
 +++ electron/shell/common/api/electron_bindings.cc
-@@ -289,7 +289,7 @@ void ElectronBindings::DidReceiveMemoryDump(
+@@ -287,7 +287,7 @@ void ElectronBindings::DidReceiveMemoryDump(
      if (base::GetCurrentProcId() == dump.pid()) {
        mate::Dictionary dict = mate::Dictionary::CreateEmpty(isolate);
        const auto& osdump = dump.os_dump();

@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_app.cc.orig	2020-03-02 19:30:38 UTC
+--- electron/shell/browser/api/electron_api_app.cc.orig	2020-06-18 16:52:13 UTC
 +++ electron/shell/browser/api/electron_api_app.cc
 @@ -604,7 +604,7 @@ void App::OnWillFinishLaunching() {
  }
@@ -27,7 +27,7 @@
      auto memory_info = process_metric.second->GetMemoryInfo();
  
      mate::Dictionary memory_dict = mate::Dictionary::CreateEmpty(isolate);
-@@ -1485,7 +1485,7 @@ void App::BuildPrototype(v8::Isolate* isolate,
+@@ -1477,7 +1477,7 @@ void App::BuildPrototype(v8::Isolate* isolate,
        .SetMethod("getJumpListSettings", &App::GetJumpListSettings)
        .SetMethod("setJumpList", &App::SetJumpList)
  #endif
