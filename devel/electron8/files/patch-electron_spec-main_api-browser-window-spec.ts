@@ -1,6 +1,6 @@
---- electron/spec-main/api-browser-window-spec.ts.orig	2020-06-18 16:52:13 UTC
+--- electron/spec-main/api-browser-window-spec.ts.orig	2020-11-18 20:39:37 UTC
 +++ electron/spec-main/api-browser-window-spec.ts
-@@ -926,7 +926,7 @@ describe('BrowserWindow module', () => {
+@@ -964,7 +964,7 @@ describe('BrowserWindow module', () => {
            w.setPosition(pos[0], pos[1])
          })
        })
@@ -9,8 +9,8 @@
          it(`checks normal bounds when maximized`, (done) => {
            const bounds = w.getBounds()
            w.once('maximize', () => {
-@@ -949,7 +949,7 @@ describe('BrowserWindow module', () => {
-           w.maximize()
+@@ -1007,7 +1007,7 @@ describe('BrowserWindow module', () => {
+           expectBoundsEqual(w.getNormalBounds(), bounds)
          })
        })
 -      ifdescribe(process.platform !== 'linux')(`Minimized state`, () => {
@@ -18,7 +18,7 @@
          it(`checks normal bounds when minimized`, (done) => {
            const bounds = w.getBounds()
            w.once('minimize', () => {
-@@ -1455,7 +1455,7 @@ describe('BrowserWindow module', () => {
+@@ -1533,7 +1533,7 @@ describe('BrowserWindow module', () => {
    describe('BrowserWindow.setOpacity(opacity)', () => {
      afterEach(closeAllWindows)
  
@@ -27,7 +27,7 @@
        it('make window with initial opacity', () => {
          const w = new BrowserWindow({ show: false, opacity: 0.5 })
          expect(w.getOpacity()).to.equal(0.5)
-@@ -1481,7 +1481,7 @@ describe('BrowserWindow module', () => {
+@@ -1559,7 +1559,7 @@ describe('BrowserWindow module', () => {
        })
      })
  
@@ -36,7 +36,7 @@
        it('sets 1 regardless of parameter', () => {
          const w = new BrowserWindow({ show: false })
          w.setOpacity(0)
-@@ -2274,7 +2274,7 @@ describe('BrowserWindow module', () => {
+@@ -2352,7 +2352,7 @@ describe('BrowserWindow module', () => {
          expect(test.version).to.equal(process.version)
          expect(test.versions).to.deep.equal(process.versions)
  
@@ -45,7 +45,7 @@
            expect(test.creationTime).to.be.null('creation time')
            expect(test.systemMemoryInfo).to.be.null('system memory info')
          } else {
-@@ -2782,7 +2782,7 @@ describe('BrowserWindow module', () => {
+@@ -2860,7 +2860,7 @@ describe('BrowserWindow module', () => {
      })
    })
  
@@ -54,7 +54,7 @@
      afterEach(closeAllWindows)
      it('emits an event when window is maximized', (done) => {
        const w = new BrowserWindow({show: false})
-@@ -3336,7 +3336,7 @@ describe('BrowserWindow module', () => {
+@@ -3423,7 +3423,7 @@ describe('BrowserWindow module', () => {
      })
    })
  
@@ -63,7 +63,7 @@
      // Not implemented on Linux.
      afterEach(closeAllWindows)
  
-@@ -4039,7 +4039,7 @@ describe('BrowserWindow module', () => {
+@@ -4126,7 +4126,7 @@ describe('BrowserWindow module', () => {
    })
  
    const skip = features.isOffscreenRenderingEnabled() &&

@@ -9,8 +9,7 @@ MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v8.
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
 PKGNAMESUFFIX=	${ELECTRON_VER_MAJOR}
-DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
-		chromium-${CHROMIUM_OFFICIAL_VER}${EXTRACT_SUFX}:chromium_official \
+DISTFILES=	chromium-${CHROMIUM_OFFICIAL_VER}${EXTRACT_SUFX}:chromium_official \
 		${CHROMIUM_NODE_MODULES_HASH}:chromium_node \
 		${CHROMIUM_TEST_FONTS_HASH}:chromium_testfonts \
 		electron-yarn-cache-${ELECTRON_VER}${EXTRACT_SUFX}:prefetch
@@ -68,7 +67,7 @@ GH_TUPLE=	nodejs:node:v${NODE_VER}:node \
 # Official chromium version containing "gn" which is known to work
 CHROMIUM_OFFICIAL_VER=	80.0.3987.163
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=	80.0.3987.165
+CHROMIUM_VER=	80.0.3987.163
 # See ${WRKSRC}/third_party/node/node_modules.tar.gz.sha1 for CHROMIUM_NODE_MODULES_HASH
 CHROMIUM_NODE_MODULES_HASH=	a9603a3dc03fa41af9cc5c8ac28d23d1f98dfe3c
 # See ${WRKSRC}/third_party/test_fonts/test_fonts.tar.gz.sha1 for CHROMIUM_TEST_FONTS_HASH
@@ -160,7 +159,7 @@ PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip electron_mksnapshot_zip
 
-YARN_TIMESTAMP=	1592910373
+YARN_TIMESTAMP=	1610263942
 
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
 		ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
@@ -201,9 +200,9 @@ pre-fetch:
 
 post-extract:
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/chromium-${CHROMIUM_VER} ${WRKSRC}
-	${RM} -r ${WRKSRC}/tools/gn
-	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/chromium-${CHROMIUM_OFFICIAL_VER}/tools/gn \
-		${WRKSRC}/tools/gn
+	# ${RM} -r ${WRKSRC}/tools/gn
+	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/chromium-${CHROMIUM_OFFICIAL_VER}/tools/gn \
+	# 	${WRKSRC}/tools/gn
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${PORTNAME}-${ELECTRON_VER} ${WRKSRC}/electron
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_nan}-${NAN_VER} \
 		${WRKSRC}/third_party/nan
@@ -213,7 +212,7 @@ post-extract:
 	${ECHO_CMD} 'yarn-offline-mirror "../../../yarn-offline-cache"' >> ${WRKSRC}/electron/.yarnrc
 	cd ${WRKSRC}/electron && \
 		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache yarn --frozen-lockfile --offline
-	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/node_modules ${WRKSRC}/third_party/node
+	# ${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/node_modules ${WRKSRC}/third_party/node
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/test_fonts ${WRKSRC}/third_party/test_fonts
 
 pre-patch:
