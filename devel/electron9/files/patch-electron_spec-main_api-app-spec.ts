@@ -1,4 +1,4 @@
---- electron/spec-main/api-app-spec.ts.orig	2020-06-02 18:14:21 UTC
+--- electron/spec-main/api-app-spec.ts.orig	2020-12-11 21:16:23 UTC
 +++ electron/spec-main/api-app-spec.ts
 @@ -122,7 +122,7 @@ describe('app module', () => {
    describe('app.getLocaleCountryCode()', () => {
@@ -18,7 +18,7 @@
          this.skip();
          return;
        }
-@@ -530,7 +530,7 @@ describe('app module', () => {
+@@ -549,7 +549,7 @@ describe('app module', () => {
    describe('app.badgeCount', () => {
      const platformIsNotSupported =
          (process.platform === 'win32') ||
@@ -27,7 +27,7 @@
      const platformIsSupported = !platformIsNotSupported;
  
      const expectedBadgeCount = 42;
-@@ -586,7 +586,7 @@ describe('app module', () => {
+@@ -605,7 +605,7 @@ describe('app module', () => {
      ];
  
      before(function () {
@@ -36,7 +36,7 @@
      });
  
      beforeEach(() => {
-@@ -661,7 +661,7 @@ describe('app module', () => {
+@@ -680,7 +680,7 @@ describe('app module', () => {
      });
    });
  
@@ -45,7 +45,7 @@
      it('with properties', () => {
        it('can set accessibility support enabled', () => {
          expect(app.accessibilitySupportEnabled).to.eql(false);
-@@ -759,7 +759,7 @@ describe('app module', () => {
+@@ -778,7 +778,7 @@ describe('app module', () => {
      let w: BrowserWindow;
  
      before(function () {
@@ -54,7 +54,7 @@
          this.skip();
        }
        session.fromPartition('empty-certificate').setCertificateVerifyProc((req, cb) => { cb(0); });
-@@ -916,7 +916,7 @@ describe('app module', () => {
+@@ -935,7 +935,7 @@ describe('app module', () => {
        // We can't expect particular app names here, but these protocols should
        // at least have _something_ registered. Except on our Linux CI
        // environment apparently.
@@ -63,7 +63,7 @@
          this.skip();
        }
  
-@@ -979,7 +979,7 @@ describe('app module', () => {
+@@ -998,7 +998,7 @@ describe('app module', () => {
    });
  
    // FIXME Get these specs running on Linux CI
@@ -72,7 +72,7 @@
      const iconPath = path.join(__dirname, 'fixtures/assets/icon.ico');
      const sizes = {
        small: 16,
-@@ -1052,7 +1052,7 @@ describe('app module', () => {
+@@ -1071,7 +1071,7 @@ describe('app module', () => {
            expect(entry.memory).to.have.property('privateBytes').that.is.greaterThan(0);
          }
  
@@ -81,7 +81,7 @@
            expect(entry.sandboxed).to.be.a('boolean');
          }
  
-@@ -1119,7 +1119,7 @@ describe('app module', () => {
+@@ -1138,7 +1138,7 @@ describe('app module', () => {
  
      it('succeeds with complete GPUInfo', async () => {
        const completeInfo = await getGPUInfo('complete');
@@ -90,7 +90,7 @@
          // For linux and macOS complete info is same as basic info
          await verifyBasicGPUInfo(completeInfo);
          const basicInfo = await getGPUInfo('basic');
-@@ -1149,7 +1149,7 @@ describe('app module', () => {
+@@ -1168,7 +1168,7 @@ describe('app module', () => {
      const socketPath = process.platform === 'win32' ? '\\\\.\\pipe\\electron-mixed-sandbox' : '/tmp/electron-mixed-sandbox';
  
      beforeEach(function (done) {

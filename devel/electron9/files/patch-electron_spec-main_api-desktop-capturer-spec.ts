@@ -1,6 +1,6 @@
---- electron/spec-main/api-desktop-capturer-spec.ts.orig	2020-05-18 21:17:08 UTC
+--- electron/spec-main/api-desktop-capturer-spec.ts.orig	2020-12-11 21:16:23 UTC
 +++ electron/spec-main/api-desktop-capturer-spec.ts
-@@ -21,7 +21,7 @@ ifdescribe(features.isDesktopCapturerEnabled() && !pro
+@@ -29,7 +29,7 @@ ifdescribe(!process.arch.includes('arm') && process.pl
    };
  
    // TODO(nornagon): figure out why this test is failing on Linux and re-enable it.
@@ -9,7 +9,7 @@
      const sources = await getSources({ types: ['window', 'screen'] });
      expect(sources).to.be.an('array').that.is.not.empty();
    });
-@@ -32,7 +32,7 @@ ifdescribe(features.isDesktopCapturerEnabled() && !pro
+@@ -40,7 +40,7 @@ ifdescribe(!process.arch.includes('arm') && process.pl
    });
  
    // TODO(nornagon): figure out why this test is failing on Linux and re-enable it.
@@ -18,7 +18,7 @@
      const sources1 = await getSources({ types: ['window', 'screen'] });
      expect(sources1).to.be.an('array').that.is.not.empty();
  
-@@ -40,7 +40,7 @@ ifdescribe(features.isDesktopCapturerEnabled() && !pro
+@@ -48,7 +48,7 @@ ifdescribe(!process.arch.includes('arm') && process.pl
      expect(sources2).to.be.an('array').that.is.not.empty();
    });
  
@@ -27,7 +27,7 @@
      const promise1 = getSources({ types: ['window'] });
      await expect(promise1).to.eventually.be.fulfilled();
  
-@@ -49,7 +49,7 @@ ifdescribe(features.isDesktopCapturerEnabled() && !pro
+@@ -57,7 +57,7 @@ ifdescribe(!process.arch.includes('arm') && process.pl
    });
  
    // Linux doesn't return any window sources.
@@ -36,7 +36,7 @@
      const w = new BrowserWindow({ width: 200, height: 200 });
  
      const sources = await getSources({ types: ['window'] });
-@@ -60,7 +60,7 @@ ifdescribe(features.isDesktopCapturerEnabled() && !pro
+@@ -68,7 +68,7 @@ ifdescribe(!process.arch.includes('arm') && process.pl
      }
    });
  
@@ -45,7 +45,7 @@
      const displays = screen.getAllDisplays();
      const sources = await getSources({ types: ['screen'] });
      expect(sources).to.be.an('array').of.length(displays.length);
-@@ -70,7 +70,7 @@ ifdescribe(features.isDesktopCapturerEnabled() && !pro
+@@ -78,7 +78,7 @@ ifdescribe(!process.arch.includes('arm') && process.pl
      }
    });
  
@@ -54,7 +54,7 @@
      w.webContents.once('desktop-capturer-get-sources', (event) => {
        event.preventDefault();
      });
-@@ -117,7 +117,7 @@ ifdescribe(features.isDesktopCapturerEnabled() && !pro
+@@ -125,7 +125,7 @@ ifdescribe(!process.arch.includes('arm') && process.pl
      // TODO(julien.isorce): investigate why |sources| is empty on the linux
      // bots while it is not on my workstation, as expected, with and without
      // the --ci parameter.
@@ -63,7 +63,7 @@
        it.skip('desktopCapturer.getSources returned an empty source list');
        return;
      }
-@@ -161,7 +161,7 @@ ifdescribe(features.isDesktopCapturerEnabled() && !pro
+@@ -169,7 +169,7 @@ ifdescribe(!process.arch.includes('arm') && process.pl
        // TODO(julien.isorce): investigate why |sources| is empty on the linux
        // bots while it is not on my workstation, as expected, with and without
        // the --ci parameter.

@@ -1,6 +1,6 @@
---- ui/compositor/compositor.cc.orig	2020-05-26 08:03:35 UTC
+--- ui/compositor/compositor.cc.orig	2021-01-11 02:45:07 UTC
 +++ ui/compositor/compositor.cc
-@@ -695,7 +695,7 @@ void Compositor::OnFrameTokenChanged(uint32_t frame_to
+@@ -705,7 +705,7 @@ void Compositor::OnFrameTokenChanged(uint32_t frame_to
    NOTREACHED();
  }
  

@@ -1,6 +1,6 @@
---- electron/spec/chromium-spec.js.orig	2020-05-18 21:17:08 UTC
+--- electron/spec/chromium-spec.js.orig	2020-12-11 21:16:23 UTC
 +++ electron/spec/chromium-spec.js
-@@ -261,7 +261,7 @@ describe('chromium feature', () => {
+@@ -269,7 +269,7 @@ describe('chromium feature', () => {
      });
  
      it('can be get as context in canvas', () => {

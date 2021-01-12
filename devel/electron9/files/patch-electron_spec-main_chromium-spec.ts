@@ -1,6 +1,24 @@
---- electron/spec-main/chromium-spec.ts.orig	2020-06-02 18:14:21 UTC
+--- electron/spec-main/chromium-spec.ts.orig	2020-12-11 21:16:23 UTC
 +++ electron/spec-main/chromium-spec.ts
-@@ -1243,10 +1243,10 @@ describe('font fallback', () => {
+@@ -310,13 +310,13 @@ describe('command line switches', () => {
+     it('should not set an invalid locale', async () => testLocale('asdfkl', currentLocale));
+ 
+     const lcAll = String(process.env.LC_ALL);
+-    ifit(process.platform === 'linux')('current process has a valid LC_ALL env', async () => {
++    ifit(process.platform === 'linux' || process.platform === 'freebsd')('current process has a valid LC_ALL env', async () => {
+       // The LC_ALL env should not be set to DOM locale string.
+       expect(lcAll).to.not.equal(app.getLocale());
+     });
+-    ifit(process.platform === 'linux')('should not change LC_ALL', async () => testLocale('fr', lcAll, true));
+-    ifit(process.platform === 'linux')('should not change LC_ALL when setting invalid locale', async () => testLocale('asdfkl', lcAll, true));
+-    ifit(process.platform === 'linux')('should not change LC_ALL when --lang is not set', async () => testLocale('', lcAll, true));
++    ifit(process.platform === 'linux' || process.platform === 'freebsd')('should not change LC_ALL', async () => testLocale('fr', lcAll, true));
++    ifit(process.platform === 'linux' || process.platform === 'freebsd')('should not change LC_ALL when setting invalid locale', async () => testLocale('asdfkl', lcAll, true));
++    ifit(process.platform === 'linux' || process.platform === 'freebsd')('should not change LC_ALL when --lang is not set', async () => testLocale('', lcAll, true));
+   });
+ 
+   describe('--remote-debugging-port switch', () => {
+@@ -1344,10 +1344,10 @@ describe('font fallback', () => {
      const fonts = await getRenderedFonts(html);
      expect(fonts).to.be.an('array');
      expect(fonts).to.have.length(1);

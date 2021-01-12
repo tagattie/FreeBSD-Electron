@@ -1,4 +1,4 @@
---- content/renderer/renderer_blink_platform_impl.h.orig	2020-05-28 04:23:53 UTC
+--- content/renderer/renderer_blink_platform_impl.h.orig	2021-01-11 07:30:16 UTC
 +++ content/renderer/renderer_blink_platform_impl.h
 @@ -30,7 +30,7 @@
  #include "third_party/blink/public/mojom/cache_storage/cache_storage.mojom.h"
@@ -9,7 +9,7 @@
  #include "components/services/font/public/cpp/font_loader.h"  // nogncheck
  #include "third_party/skia/include/core/SkRefCnt.h"           // nogncheck
  #endif
-@@ -220,7 +220,7 @@ class CONTENT_EXPORT RendererBlinkPlatformImpl : publi
+@@ -222,7 +222,7 @@ class CONTENT_EXPORT RendererBlinkPlatformImpl : publi
  
    scoped_refptr<base::SingleThreadTaskRunner> io_runner_;
  
@@ -18,7 +18,7 @@
    std::unique_ptr<blink::WebSandboxSupport> sandbox_support_;
  #endif
  
-@@ -244,7 +244,7 @@ class CONTENT_EXPORT RendererBlinkPlatformImpl : publi
+@@ -246,7 +246,7 @@ class CONTENT_EXPORT RendererBlinkPlatformImpl : publi
    mojo::PendingRemote<blink::mojom::CodeCacheHost> code_cache_host_remote_;
    mojo::SharedRemote<blink::mojom::CodeCacheHost> code_cache_host_;
  

@@ -1,6 +1,6 @@
---- electron/shell/common/node_bindings.cc.orig	2020-05-18 21:17:08 UTC
+--- electron/shell/common/node_bindings.cc.orig	2020-12-11 21:16:23 UTC
 +++ electron/shell/common/node_bindings.cc
-@@ -262,7 +262,7 @@ void NodeBindings::Initialize() {
+@@ -284,7 +284,7 @@ void NodeBindings::Initialize() {
    node::g_standalone_mode = browser_env_ == BrowserEnvironment::BROWSER;
    node::g_upstream_node_mode = false;
  

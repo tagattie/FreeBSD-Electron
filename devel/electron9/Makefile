@@ -4,7 +4,7 @@ PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
 CATEGORIES=	devel java
-MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v9.0.3/:chromium \
+MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v9.4.0/:chromium \
 		https://commondatastorage.googleapis.com/chromium-browser-official/:chromium_official \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
@@ -120,9 +120,9 @@ PULSEAUDIO_VARS=	GN_ARGS+=use_pulseaudio=true
 PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
 
 # Official chromium version containing "gn" which is known to work
-CHROMIUM_OFFICIAL_VER=		83.0.4103.97
+CHROMIUM_OFFICIAL_VER=		83.0.4103.119
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=			83.0.4103.100
+CHROMIUM_VER=			83.0.4103.122
 # See ${WRKSRC}/third_party/node/node_modules.tar.gz.sha1 for CHROMIUM_NODE_MODULES_HASH
 CHROMIUM_NODE_MODULES_HASH=	a9603a3dc03fa41af9cc5c8ac28d23d1f98dfe3c
 # See ${WRKSRC}/third_party/test_fonts/test_fonts.tar.gz.sha1 for CHROMIUM_TEST_FONTS_HASH
@@ -132,7 +132,7 @@ NODE_VER=			12.14.1
 # See ${WRKSRC}/electron/DEPS for NAN_VER
 NAN_VER=			2ee313aaca52e2b478965ac50eb5082520380d1b
 
-YARN_TIMESTAMP=	1591433393
+YARN_TIMESTAMP=	1610333324
 
 GN_ARGS+=		clang_use_chrome_plugins=false \
 			enable_hangout_services_extension=true \

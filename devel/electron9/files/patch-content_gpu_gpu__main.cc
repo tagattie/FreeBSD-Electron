@@ -1,4 +1,4 @@
---- content/gpu/gpu_main.cc.orig	2020-05-28 04:23:53 UTC
+--- content/gpu/gpu_main.cc.orig	2021-01-11 07:30:16 UTC
 +++ content/gpu/gpu_main.cc
 @@ -84,7 +84,7 @@
  #include "ui/gfx/x/x11_switches.h"                       // nogncheck
@@ -36,7 +36,7 @@
  #error "Unsupported Linux platform."
  #elif defined(OS_MACOSX)
      // Cross-process CoreAnimation requires a CFRunLoop to function at all, and
-@@ -437,7 +437,7 @@ int GpuMain(const MainFunctionParams& parameters) {
+@@ -439,7 +439,7 @@ int GpuMain(const MainFunctionParams& parameters) {
  
  namespace {
  
@@ -45,7 +45,7 @@
  bool StartSandboxLinux(gpu::GpuWatchdogThread* watchdog_thread,
                         const gpu::GPUInfo* gpu_info,
                         const gpu::GpuPreferences& gpu_prefs) {
-@@ -474,7 +474,7 @@ bool StartSandboxLinux(gpu::GpuWatchdogThread* watchdo
+@@ -476,7 +476,7 @@ bool StartSandboxLinux(gpu::GpuWatchdogThread* watchdo
  
    return res;
  }

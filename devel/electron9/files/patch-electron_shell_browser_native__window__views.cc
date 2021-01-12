@@ -1,6 +1,6 @@
---- electron/shell/browser/native_window_views.cc.orig	2020-05-18 21:17:08 UTC
+--- electron/shell/browser/native_window_views.cc.orig	2020-12-11 21:16:23 UTC
 +++ electron/shell/browser/native_window_views.cc
-@@ -302,7 +302,7 @@ NativeWindowViews::NativeWindowViews(const gin_helper:
+@@ -303,7 +303,7 @@ NativeWindowViews::NativeWindowViews(const gin_helper:
      last_window_state_ = ui::SHOW_STATE_NORMAL;
  #endif
  
@@ -9,7 +9,7 @@
    // Listen to move events.
    aura::Window* window = GetNativeWindow();
    if (window)
-@@ -318,7 +318,7 @@ NativeWindowViews::~NativeWindowViews() {
+@@ -319,7 +319,7 @@ NativeWindowViews::~NativeWindowViews() {
    SetForwardMouseMessages(false);
  #endif
  
@@ -18,7 +18,7 @@
    aura::Window* window = GetNativeWindow();
    if (window)
      window->RemovePreTargetHandler(this);
-@@ -712,7 +712,7 @@ bool NativeWindowViews::IsResizable() {
+@@ -713,7 +713,7 @@ bool NativeWindowViews::IsResizable() {
  void NativeWindowViews::SetAspectRatio(double aspect_ratio,
                                         const gfx::Size& extra_size) {
    NativeWindow::SetAspectRatio(aspect_ratio, extra_size);
@@ -27,7 +27,7 @@
    gfx::SizeF aspect(aspect_ratio, 1.0);
    // Scale up because SetAspectRatio() truncates aspect value to int
    aspect.Scale(100);
-@@ -1335,7 +1335,7 @@ void NativeWindowViews::OnWidgetBoundsChanged(views::W
+@@ -1341,7 +1341,7 @@ void NativeWindowViews::OnWidgetBoundsChanged(views::W
  }
  
  void NativeWindowViews::OnWidgetDestroying(views::Widget* widget) {
@@ -36,7 +36,7 @@
    aura::Window* window = GetNativeWindow();
    if (window)
      window->RemovePreTargetHandler(this);
-@@ -1428,7 +1428,7 @@ void NativeWindowViews::OnWidgetMove() {
+@@ -1434,7 +1434,7 @@ void NativeWindowViews::OnWidgetMove() {
  void NativeWindowViews::HandleKeyboardEvent(
      content::WebContents*,
      const content::NativeWebKeyboardEvent& event) {
@@ -45,7 +45,7 @@
    if (event.windows_key_code == ui::VKEY_BROWSER_BACK)
      NotifyWindowExecuteAppCommand(kBrowserBackward);
    else if (event.windows_key_code == ui::VKEY_BROWSER_FORWARD)
-@@ -1440,7 +1440,7 @@ void NativeWindowViews::HandleKeyboardEvent(
+@@ -1446,7 +1446,7 @@ void NativeWindowViews::HandleKeyboardEvent(
    root_view_->HandleKeyEvent(event);
  }
  

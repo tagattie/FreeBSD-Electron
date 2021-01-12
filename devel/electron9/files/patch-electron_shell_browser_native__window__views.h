@@ -1,6 +1,6 @@
---- electron/shell/browser/native_window_views.h.orig	2020-05-18 21:17:08 UTC
+--- electron/shell/browser/native_window_views.h.orig	2020-12-11 21:16:23 UTC
 +++ electron/shell/browser/native_window_views.h
-@@ -212,7 +212,7 @@ class NativeWindowViews : public NativeWindow,
+@@ -216,7 +216,7 @@ class NativeWindowViews : public NativeWindow,
        content::WebContents*,
        const content::NativeWebKeyboardEvent& event) override;
  
