@@ -2,7 +2,7 @@
 
 PORTNAME=	simplenote
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.1
+DISTVERSION=	2.4.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		git:devel/git
 
-USES=		desktop-file-utils electron:7 gmake gnome localbase:ldflags \
+USES=		desktop-file-utils electron:9 gmake gnome localbase:ldflags \
 		node:12,build python:2.7,build xorg
 
 USE_GITHUB=	yes
@@ -35,8 +35,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1591858669
-UPSTREAM_CHROMEDRIVER_VER=	7.0.0
+PREFETCH_TIMESTAMP=	1611292470
 
 post-extract:
 	if [ -f ${FILESDIR}/config.json ]; then \
@@ -45,10 +44,6 @@ post-extract:
 
 post-patch:
 	${REINPLACE_CMD} -e 's/make build/${MAKE_CMD} build/' ${WRKSRC}/Makefile
-	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
-		${WRKSRC}/node_modules/@felixrieseberg/spellchecker/binding.gyp
-	${REINPLACE_CMD} -e 's/needflag = NULL/needflag = FLAG_NULL/' \
-		${WRKSRC}/node_modules/@felixrieseberg/spellchecker/vendor/hunspell/src/hunspell/affentry.hxx
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} build
