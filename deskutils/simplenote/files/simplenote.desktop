@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Simplenote
+GenericName=Note Taking Application
+Comment=Simplenote for Linux
+Icon=simplenote
+Exec=simplenote %U
+Categories=Utility;
+Terminal=false
+StartupWMClass=Simplenote
+StartupNotify=true
