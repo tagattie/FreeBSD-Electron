@@ -419,6 +419,7 @@ MAKE_ENV+=	USE_SYSTEM_7ZA=true		# always use system 7za
 MAKE_ENV+=	USE_SYSTEM_APP_BUILDER=true	# always use system app-builder for electron-builder
 MAKE_ENV+=	XDG_CACHE_HOME=${WRKDIR}/.cache
 MAKE_ENV+=	npm_config_build_from_source=true
+MAKE_ENV+=	npm_config_python=${PYTHON_CMD}
 SUB_LIST+=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 .endif # _INCLUDE_USES_ELECTRON_MK
