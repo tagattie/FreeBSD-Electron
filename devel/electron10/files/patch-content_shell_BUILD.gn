@@ -1,0 +1,34 @@
+--- content/shell/BUILD.gn.orig	2020-09-21 18:39:17 UTC
++++ content/shell/BUILD.gn
+@@ -226,7 +226,7 @@ static_library("content_shell_app") {
+     "//content/public/app",
+     "//v8",
+   ]
+-  if (!is_fuchsia) {
++  if (!is_fuchsia && !is_bsd) {
+     deps += [
+       "//components/crash/core/app",
+       "//components/crash/core/app:test_support",
+@@ -489,6 +489,13 @@ static_library("content_shell_lib") {
+     ]
+     deps += [ "//third_party/fuchsia-sdk/sdk/fidl/fuchsia.ui.policy" ]
+   }
++  if (is_bsd) {
++    deps -= [
++      "//components/crash/content/browser",
++      "//components/crash/core/app",
++      "//components/crash/core/app:test_support",
++    ]
++  }
+ 
+   if (enable_plugins) {
+     deps += [
+@@ -1066,7 +1073,7 @@ group("content_shell_crash_test") {
+   if (is_win) {
+     data_deps += [ "//build/win:copy_cdb_to_output" ]
+   }
+-  if (is_posix) {
++  if (is_posix && !is_bsd) {
+     data_deps += [
+       "//third_party/breakpad:dump_syms",
+       "//third_party/breakpad:minidump_stackwalk",

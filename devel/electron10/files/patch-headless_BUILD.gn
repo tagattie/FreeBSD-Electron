@@ -1,0 +1,38 @@
+--- headless/BUILD.gn.orig	2020-09-21 18:39:18 UTC
++++ headless/BUILD.gn
+@@ -268,7 +268,7 @@ source_set("headless_shared_sources") {
+   sources += generated_devtools_api
+   sources += get_target_outputs(":protocol_sources")
+ 
+-  if (!is_fuchsia) {
++  if (!is_fuchsia && !is_bsd) {
+     sources += [
+       "lib/headless_crash_reporter_client.cc",
+       "lib/headless_crash_reporter_client.h",
+@@ -288,7 +288,7 @@ source_set("headless_shared_sources") {
+     "//url",
+   ]
+ 
+-  if (!is_fuchsia) {
++  if (!is_fuchsia && !is_bsd) {
+     deps += [ "//components/crash/content/browser" ]
+   }
+   if (is_component_build && is_win) {
+@@ -441,7 +441,7 @@ component("headless_non_renderer") {
+       "//v8",
+     ]
+ 
+-    if (!is_fuchsia) {
++    if (!is_fuchsia && !is_bsd) {
+       deps += [ "//components/crash/content/browser" ]
+     }
+     if (is_win) {
+@@ -721,7 +721,7 @@ static_library("headless_shell_lib") {
+     public_deps += [ ":headless_non_renderer" ]
+   }
+ 
+-  if (!is_fuchsia) {
++  if (!is_fuchsia && !is_bsd) {
+     deps += [ "//components/crash/content/browser" ]
+   }
+ 
