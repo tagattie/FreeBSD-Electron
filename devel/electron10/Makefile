@@ -4,8 +4,7 @@ PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
 CATEGORIES=	devel java
-MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v9.4.0/:chromium \
-		https://commondatastorage.googleapis.com/chromium-browser-official/:chromium_official \
+MASTER_SITES=	https://commondatastorage.googleapis.com/chromium-browser-official/:chromium_official \
 		https://commondatastorage.googleapis.com/chromium-nodejs/:chromium_node \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
 PKGNAMESUFFIX=	${ELECTRON_VER_MAJOR}
