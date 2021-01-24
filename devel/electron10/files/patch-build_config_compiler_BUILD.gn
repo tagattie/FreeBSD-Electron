@@ -81,7 +81,7 @@
      arflags = [ "-T" ]
    } else if (is_win && use_lld) {
      arflags = [ "/llvmlibthin" ]
-@@ -2284,7 +2284,7 @@ config("symbols") {
+@@ -2284,11 +2284,11 @@ config("symbols") {
      # flag, so we can use use -g1 for pnacl and nacl-clang compiles.
      # gcc nacl is is_nacl && !is_clang, pnacl and nacl-clang are && is_clang.
      if (!is_nacl || is_clang) {
@@ -90,6 +90,11 @@
      }
  
      # TODO(https://crbug.com/1050118): Investigate missing debug info on mac.
+-    if (is_clang && !is_nacl && !use_xcode_clang && !is_mac && !is_ios) {
++    if (is_clang && !is_nacl && !use_xcode_clang && !is_mac && !is_ios && !is_bsd) {
+       cflags += [
+         "-Xclang",
+         "-debug-info-kind=constructor",
 @@ -2313,7 +2313,7 @@ config("symbols") {
      # DWARF info may be corrupt; offsets in a range list entry are in different
      # sections" there.  Maybe just a bug in nacl_switch_32.S.
