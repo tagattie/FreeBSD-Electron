@@ -1,5 +1,5 @@
-TIMESTAMP = 1582718265
-SHA256 (joplin-node-modules-1.0.185.tar.gz) = ab32dbd7c942ee4e08387f8e0a3ca22265fe93f195520fbbf3414163f198bce0
-SIZE (joplin-node-modules-1.0.185.tar.gz) = 336805598
-SHA256 (laurent22-joplin-v1.0.185_GH0.tar.gz) = 704c05f094d4d00aed0c973bc7838637d4c881e38b43e67bfda76ebe724c2c8d
-SIZE (laurent22-joplin-v1.0.185_GH0.tar.gz) = 23881114
+TIMESTAMP = 1611470993
+SHA256 (joplin-node-modules-1.6.8.tar.gz) = d0d4eb6334e88699e36ed4deee99bc8bc4505593f1bd7bd723bba4605473c243
+SIZE (joplin-node-modules-1.6.8.tar.gz) = 294888488
+SHA256 (laurent22-joplin-v1.6.8_GH0.tar.gz) = 0eb07c5265430e4312cbb9531b40033a306d61016d1eead0fc501fe843fbb87d
+SIZE (laurent22-joplin-v1.6.8_GH0.tar.gz) = 53329259
