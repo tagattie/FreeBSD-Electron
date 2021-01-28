@@ -1,10 +1,10 @@
 # $FreeBSD$
 
 PORTNAME=	museeks
-PORTVERSION=	0.11.3
+PORTVERSION=	0.11.5
 CATEGORIES=	audio
 
-MAINTAINER=	tagattie@yandex.com
+MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Simple, clean and cross-platform music player
 
 LICENSE=	MIT
@@ -13,15 +13,13 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:8 gnome localbase:ldflags \
-		node:12,build python:2.7,build
+USES=		desktop-file-utils electron:11 gmake gnome localbase:ldflags \
+		node:12,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	martpie
 
-INSTALLS_ICONS= yes
-
-BINARY_ALIAS=	python=${PYTHON_CMD}
+INSTALLS_ICONS=	yes
 
 SUB_FILES=	museeks
 
@@ -32,7 +30,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1584529773
+PREFETCH_TIMESTAMP=	1611744609
 
 post-patch:
 	${REINPLACE_CMD} -e '1 s/!defined(__linux__)/& \&\& !defined(__FreeBSD__)/' \

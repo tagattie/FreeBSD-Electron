@@ -1,4 +1,4 @@
---- src/main/modules/tray.ts.orig	2019-07-19 16:29:54 UTC
+--- src/main/modules/tray.ts.orig	2020-12-08 14:27:10 UTC
 +++ src/main/modules/tray.ts
 @@ -24,7 +24,7 @@ class TrayModule extends ModuleWindow {
    constructor(window: Electron.BrowserWindow, config: ConfigModule) {
@@ -17,4 +17,4 @@
 +    if (os.platform() === 'linux' || os.platform() === 'freebsd') {
        ps.lookup(
          {
-           command: 'gnome-shell'
+           command: 'gnome-shell',
