@@ -2,7 +2,7 @@
 
 PORTNAME=	simplenote
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.4.0
+DISTVERSION=	2.5.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -24,8 +24,6 @@ GH_PROJECT=	${PORTNAME}-electron
 USE_XORG=	x11 xau xdmcp xkbfile
 INSTALLS_ICONS=	yes
 
-BINARY_ALIAS=	python=${PYTHON_CMD}
-
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CONTRIBUTING.md README.md RELEASE-NOTES.md
@@ -35,7 +33,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1611292470
+PREFETCH_TIMESTAMP=	1612073414
 
 post-extract:
 	if [ -f ${FILESDIR}/config.json ]; then \
