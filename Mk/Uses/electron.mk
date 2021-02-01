@@ -202,6 +202,7 @@ electron-fetch-node-modules:
 			${SETENV} HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts --no-progress && \
 			${RM} package.json package-lock.json; \
 		done; \
+		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR} && \
 		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
