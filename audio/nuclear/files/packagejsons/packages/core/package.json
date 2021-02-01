@@ -1,0 +1,55 @@
+{
+  "name": "@nuclear/core",
+  "version": "0.6.3",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nukeop/nuclear.git"
+  },
+  "author": "nukeop <nukeop@gumblert.tech>",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/nukeop/nuclear/issues"
+  },
+  "homepage": "https://github.com/nukeop/nuclear#readme",
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "scripts": {
+    "start": "tsc",
+    "build": "tsc",
+    "lint": "eslint src/**/*.ts test/**/*.ts --fix",
+    "test": "eslint src/**/*.ts test/**/*.ts && ava -v"
+  },
+  "dependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/preset-env": "^7.7.7",
+    "@babel/preset-react": "^7.7.4",
+    "isomorphic-fetch": "^2.2.1",
+    "md5": "^2.2.1",
+    "react": "^16.12.0",
+    "redux": "^4.0.5"
+  },
+  "devDependencies": {
+    "@types/isomorphic-fetch": "0.0.35",
+    "@types/md5": "^2.1.33",
+    "@types/react": "^16.9.17",
+    "@typescript-eslint/eslint-plugin": "^2.11.0",
+    "@typescript-eslint/parser": "^2.11.0",
+    "ava": "^2.4.0",
+    "eslint": "^6.8.0",
+    "ts-node": "^8.5.4",
+    "typescript": "^3.7.3"
+  },
+  "ava": {
+    "files": [
+      "test/**",
+      "!test/plugins"
+    ],
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  }
+}
