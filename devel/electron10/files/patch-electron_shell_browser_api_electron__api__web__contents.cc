@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_web_contents.cc.orig	2021-01-14 16:50:03 UTC
+--- electron/shell/browser/api/electron_api_web_contents.cc.orig	2021-01-27 19:18:22 UTC
 +++ electron/shell/browser/api/electron_api_web_contents.cc
 @@ -120,11 +120,11 @@
  #include "ui/base/cocoa/defaults_utils.h"
@@ -23,7 +23,7 @@
    if (auto* linux_ui = views::LinuxUI::instance())
      return linux_ui->GetCursorBlinkInterval();
  #elif defined(OS_WIN)
-@@ -598,7 +598,7 @@ void WebContents::InitWithSessionAndOptions(
+@@ -634,7 +634,7 @@ void WebContents::InitWithSessionAndOptions(
    accept_languages.pop_back();
    prefs->accept_languages = accept_languages;
  

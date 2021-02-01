@@ -1,6 +1,6 @@
---- electron/shell/browser/electron_browser_main_parts.cc.orig	2021-01-14 16:50:03 UTC
+--- electron/shell/browser/electron_browser_main_parts.cc.orig	2021-01-27 19:18:22 UTC
 +++ electron/shell/browser/electron_browser_main_parts.cc
-@@ -365,7 +365,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
+@@ -366,7 +366,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
    // happen before the ResourceBundle is loaded
    if (locale.empty())
      l10n_util::OverrideLocaleWithCocoaLocale();
@@ -9,7 +9,7 @@
    // l10n_util::GetApplicationLocaleInternal uses g_get_language_names(),
    // which keys off of getenv("LC_ALL").
    // We must set this env first to make ui::ResourceBundle accept the custom
-@@ -388,7 +388,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
+@@ -389,7 +389,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
    ElectronBrowserClient::SetApplicationLocale(app_locale);
    fake_browser_process_->SetApplicationLocale(app_locale);
  
