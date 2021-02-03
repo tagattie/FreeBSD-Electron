@@ -23,7 +23,7 @@
     "husky": "^0.14.3",
     "lint": "^1.1.2",
     "lint-staged": "^8.1.0",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "nugget": "^2.0.1",
     "octicons": "^7.3.0",
     "plist": "^3.0.1",
