@@ -131,7 +131,7 @@ NODE_VER=			12.18.3
 # See ${WRKSRC}/electron/DEPS for NAN_VER
 NAN_VER=			2c4ee8a32a299eada3cd6e468bbd0a473bfea96d
 
-YARN_TIMESTAMP=	1611572348
+YARN_TIMESTAMP=	1612351811
 
 GN_ARGS+=		clang_use_chrome_plugins=false \
 			enable_hangout_services_extension=true \
@@ -220,8 +220,8 @@ post-extract:
 
 pre-patch:
 	${SH} ${FILESDIR}/apply-electron-patches.sh ${WRKSRC}
-	${FIND} ${WRKSRC} -type f -name '*.orig' -print -delete
-	${FIND} ${WRKSRC} -type f -name '*~' -print -delete
+	# ${FIND} ${WRKSRC} -type f -name '*.orig' -print -delete
+	# ${FIND} ${WRKSRC} -type f -name '*~' -print -delete
 
 pre-configure:
 # We used to remove bundled libraries to be sure that chromium uses
