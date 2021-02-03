@@ -1,5 +1,5 @@
-TIMESTAMP = 1584431100
-SHA256 (nuclear-node-modules-0.6.3.tar.gz) = f17dc1d4a07f5d31ce096e06f8be41222f9667ecd8f4af488594983957e9d119
-SIZE (nuclear-node-modules-0.6.3.tar.gz) = 215061995
-SHA256 (nukeop-nuclear-v0.6.3_GH0.tar.gz) = 56f14535801a69ee4934d760c59bed2cd695d8f682d4432d1307117b0a8b82ce
-SIZE (nukeop-nuclear-v0.6.3_GH0.tar.gz) = 15115199
+TIMESTAMP = 1612184009
+SHA256 (nuclear-node-modules-0.6.8.tar.gz) = eb723f821bc6111cfa9143a7bb9a7207b5c5e2a84a672e566425a8e3a6832840
+SIZE (nuclear-node-modules-0.6.8.tar.gz) = 346381613
+SHA256 (nukeop-nuclear-v0.6.8_GH0.tar.gz) = 737be5e80014da5810036bd93236c936d4684f70744e6fb3fde01f3cba2c4c10
+SIZE (nukeop-nuclear-v0.6.8_GH0.tar.gz) = 15885494

@@ -13,7 +13,6 @@ share/icons/hicolor/64x64/apps/nuclear.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-mac/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-mac/package.json
 %%DATADIR%%/resources/bin/fpcalc
-%%DATADIR%%/resources/electron.asar
 %%DATADIR%%/resources/media/1024x1024.png
 %%DATADIR%%/resources/media/512x512.png
 %%DATADIR%%/resources/media/art_placeholder.png
@@ -132,3 +131,8 @@ share/icons/hicolor/64x64/apps/nuclear.png
 %%DATADIR%%/resources/musicgenresicons/outline/tango.svg
 %%DATADIR%%/resources/musicgenresicons/outline/trending.svg
 %%DATADIR%%/resources/musicgenresicons/outline/vocal.svg
+%%DATADIR%%/resources/node_modules/sqlite3/lib/index.js
+%%DATADIR%%/resources/node_modules/sqlite3/lib/sqlite3-binding.js
+%%DATADIR%%/resources/node_modules/sqlite3/lib/sqlite3.js
+%%DATADIR%%/resources/node_modules/sqlite3/lib/trace.js
+%%DATADIR%%/resources/node_modules/sqlite3/package.json
