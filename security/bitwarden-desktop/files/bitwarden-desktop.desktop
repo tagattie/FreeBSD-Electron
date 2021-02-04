@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Bitwarden
+Comment=A secure and free password manager for all of your devices.
+Icon=bitwarden
+Exec=bitwarden-desktop
+Categories=Utility;
+Terminal=false
+StartupWMClass=Bitwarden
