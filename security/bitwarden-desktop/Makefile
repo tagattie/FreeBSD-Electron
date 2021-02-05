@@ -2,12 +2,11 @@
 
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.1
+DISTVERSION=	1.24.6
 CATEGORIES=	security
-MASTER_SITES=	https://github.com/tagattie/freebsd-ports/releases/download/${PORTNAME}-${DISTVERSION}/:webfonts
-DISTFILES=	${PORTNAME}-webfonts-${DISTVERSION}${EXTRACT_SUFX}:webfonts
+DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
-MAINTAINER=	tagattie@yandex.com
+MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Bitwarden desktop application
 
 LICENSE=	GPLv3
@@ -24,13 +23,11 @@ USES=		desktop-file-utils electron:6 gnome localbase:ldflags \
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
 GH_PROJECT=	desktop
-GH_TUPLE=	bitwarden:jslib:0a30c7eb1ecbac500e6c55a7d4024d98efa982bc:jslib/jslib
+GH_TUPLE=	bitwarden:jslib:9ddec9baf8b6e7de58c00744eb371dc68e1b6383:jslib/jslib
 
 USE_XORG=	x11 xau xcb xdmcp xext xscrnsaver
 USE_GNOME=	glib20
 INSTALLS_ICONS=	yes
-
-BINARY_ALIAS=	python=${PYTHON_CMD}
 
 SUB_FILES=	${PORTNAME}
 
@@ -38,13 +35,34 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm
-USE_ELECTRON=	prefetch extract prebuild build:builder
+USE_NODE=	npm:fetch,build
+USE_ELECTRON=	extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1584942273
+PREFETCH_TIMESTAMP=	1612427012
+
+pre-fetch:
+	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
+		${MKDIR} ${WRKDIR}/npm-cache; \
+		${CP} -r ${PKGJSONSDIR}/* ${WRKDIR}/npm-cache; \
+		cd ${WRKDIR}/npm-cache && \
+			${SETENV} HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts && \
+			${SETENV} HOME=${WRKDIR} ${NPX_CMD} gulp webfonts && \
+			${RM} package.json package-lock.json gulpfile.js webfonts.list; \
+		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
+		cd ${WRKDIR} && \
+		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:flags=.*:flags=none:' \
+			-e 's:^\.:./npm-cache:' > npm-cache.mtree && \
+		${TAR} -cz --options 'gzip:!timestamp' \
+			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
+			@npm-cache.mtree; \
+		${RM} -r ${WRKDIR}; \
+	fi
 
 post-extract:
-	${MV} ${WRKDIR}/css ${WRKSRC}/src
+	${MV} ${WRKDIR}/npm-cache/src/css ${WRKSRC}/src
 
 post-patch:
 	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
@@ -69,11 +87,5 @@ do-install:
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
-
-# helper target for port maintainer(s)
-make-webfonts:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPX_CMD} gulp webfonts
-	cd ${WRKSRC}/src && ${TAR} -czf \
-		${WRKDIR}/${PORTNAME}-webfonts-${DISTVERSION}${EXTRACT_SUFX} css
 
 .include <bsd.port.mk>

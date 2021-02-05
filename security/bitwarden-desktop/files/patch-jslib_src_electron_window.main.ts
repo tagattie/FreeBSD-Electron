@@ -1,6 +1,6 @@
---- jslib/src/electron/window.main.ts.orig	2020-01-20 05:07:09 UTC
+--- jslib/src/electron/window.main.ts.orig	2021-01-25 20:03:28 UTC
 +++ jslib/src/electron/window.main.ts
-@@ -98,7 +98,7 @@ export class WindowMain {
+@@ -111,7 +111,7 @@ export class WindowMain {
              x: this.windowStates[Keys.mainWindowSize].x,
              y: this.windowStates[Keys.mainWindowSize].y,
              title: app.getName(),
