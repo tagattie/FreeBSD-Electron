@@ -3,4 +3,4 @@
 export NODE_ENV=production
 export ELECTRON_IS_DEV=0
 
-electron%%ELECTRON_VER_MAJOR%% %%DATADIR%%/resources/app $@
+electron%%ELECTRON_VER_MAJOR%% %%DATADIR%%/resources/app.asar $@
