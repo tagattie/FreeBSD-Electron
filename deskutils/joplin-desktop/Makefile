@@ -2,7 +2,7 @@
 
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.6.8
+DISTVERSION=	1.7.11
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
@@ -27,10 +27,7 @@ GH_ACCOUNT=	laurent22
 
 INSTALLS_ICONS=	yes
 
-BINARY_ALIAS=	python=${PYTHON_CMD}
-
 SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}
-SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 PORTDOCS=	BUILD.md CONTRIBUTING.md README.md SECURITY.md
 
@@ -39,13 +36,12 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm:fetch,build
 USE_ELECTRON=	extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1611451052
+PREFETCH_TIMESTAMP=	1613027575
 
 BUILD_WRKSRC=	${WRKSRC}/packages/app-desktop
 
 pre-fetch:
-	${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
-	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
+	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
 		${MKDIR} ${WRKDIR}/npm-cache; \
 		${CP} -r ${FILESDIR}/packagejsons/* ${WRKDIR}/npm-cache; \
 		cd ${WRKDIR}/npm-cache && \
@@ -58,6 +54,7 @@ pre-fetch:
 			done; \
 		cd ${WRKDIR}/npm-cache && \
 			${RM} lerna.json package.json package-lock.json; \
+		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR} && \
 		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
@@ -65,13 +62,13 @@ pre-fetch:
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./npm-cache:' > npm-cache.mtree && \
 		${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${DIST_SUBDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
+			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
 			@npm-cache.mtree; \
 		${RM} -r ${WRKDIR}; \
 	fi
 
 post-extract:
-.for dir in app-cli app-clipper app-mobile generator-joplin plugins server
+.for dir in app-cli app-clipper app-mobile generator-joplin plugin-repo-cli plugins server
 	${RM} -r ${WRKSRC}/packages/${dir}
 .endfor
 
