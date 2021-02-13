@@ -9,6 +9,10 @@ share/icons/hicolor/48x48/apps/marktext.png
 share/icons/hicolor/512x512/apps/marktext.png
 share/icons/hicolor/64x64/apps/marktext.png
 %%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@hfelix/spellchecker/build/Release/spellchecker.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/ced/build/Release/ced.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/cld/build/Release/cld.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/fontmanager-redux/build/Release/fontmanager.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keyboard-layout/build/Release/keyboard-layout-manager.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/Release/keytar.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/vscode-ripgrep/.vscode/launch.json
@@ -19,4 +23,5 @@ share/icons/hicolor/64x64/apps/marktext.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/vscode-ripgrep/lib/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/vscode-ripgrep/lib/postinstall.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/vscode-ripgrep/package.json
-%%DATADIR%%/resources/electron.asar
+%%DATADIR%%/resources/hunspell_dictionaries/LICENSE-en-US.txt
+%%DATADIR%%/resources/hunspell_dictionaries/en-US.bdic

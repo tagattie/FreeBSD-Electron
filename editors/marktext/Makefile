@@ -2,10 +2,10 @@
 
 PORTNAME=	marktext
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.15.1
+DISTVERSION=	0.16.3
 CATEGORIES=	editors
 
-MAINTAINER=	tagattie@yandex.com
+MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Simple and elegant markdown editor
 
 LICENSE=	MIT
@@ -16,19 +16,16 @@ BUILD_DEPENDS=	app-builder:devel/app-builder \
 LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:5 gnome node:12,build pkgconfig \
-		python:2.7,build xorg
+USES=		desktop-file-utils electron:11 gmake gnome node:12,build \
+		pkgconfig python:build xorg
 
 USE_GITHUB=	yes
-
-BINARY_ALIAS=	python=${PYTHON_CMD}
 
 USE_XORG=	x11 xau xcb xdmcp xkbfile
 USE_GNOME=	glib20
 INSTALLS_ICONS=	yes
 
 SUB_FILES=	${PORTNAME}
-SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 PORTDOCS=	README.md
 
@@ -38,9 +35,15 @@ USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
 MAKE_ENV+=	MARKTEXT_IS_STABLE=1
-PREFETCH_TIMESTAMP=	1582176191
-UPSTREAM_ELECTRON_VER=	5.0.11
-UPSTREAM_CHROMEDRIVER_VER=	5.0.0
+PREFETCH_TIMESTAMP=	1613202138
+
+post-patch:
+	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
+		${WRKSRC}/node_modules/@hfelix/spellchecker/binding.gyp
+	${REINPLACE_CMD} -e 's/needflag = NULL/needflag = FLAG_NULL/' \
+		${WRKSRC}/node_modules/@hfelix/spellchecker/vendor/hunspell/src/hunspell/affentry.hxx
+	${REINPLACE_CMD} -e 's/make/g&/' \
+		${WRKSRC}/node_modules/lzma-native/liblzma-build.sh
 
 pre-build:
 	${MKDIR} ${WRKSRC}/node_modules/vscode-ripgrep/bin

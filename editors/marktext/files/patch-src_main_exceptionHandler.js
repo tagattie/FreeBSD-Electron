@@ -1,4 +1,4 @@
---- src/main/exceptionHandler.js.orig	2020-02-24 06:17:18 UTC
+--- src/main/exceptionHandler.js.orig	2020-12-27 12:26:19 UTC
 +++ src/main/exceptionHandler.js
 @@ -6,7 +6,7 @@
  // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -9,9 +9,9 @@
  import os from 'os'
  import log from 'electron-log'
  import { createAndOpenGitHubIssueUrl } from './utils/createGitHubIssue'
-@@ -107,14 +107,6 @@ const setupExceptionHandler = () => {
+@@ -107,15 +107,6 @@ const setupExceptionHandler = () => {
    // renderer process error handler
-   ipcMain.on('AGANI::handle-renderer-error', (e, error) => {
+   ipcMain.on('mt::handle-renderer-error', (e, error) => {
      handleError(ERROR_MSG_RENDERER, error, 'renderer')
 -  })
 -
@@ -20,7 +20,8 @@
 -    companyName: 'marktext',
 -    productName: 'marktext',
 -    submitURL: 'http://0.0.0.0/',
--    uploadToServer: false
+-    uploadToServer: false,
+-    compress: true
    })
  }
  
