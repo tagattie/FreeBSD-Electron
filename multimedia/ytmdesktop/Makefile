@@ -2,10 +2,10 @@
 
 PORTNAME=	ytmdesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.9.0
+DISTVERSION=	1.13.0
 CATEGORIES=	multimedia
 
-MAINTAINER=	tagattie@yandex.com
+MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Desktop app for YouTube Music
 
 LICENSE=	CC0-1.0
@@ -13,14 +13,12 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:7 gnome node:12,build \
-		python:2.7,build
+USES=		desktop-file-utils electron:10 gnome localbase:ldflags \
+		node:12,build python:build
 
 USE_GITHUB=	yes
 
 INSTALLS_ICONS=	yes
-
-BINARY_ALIAS=	python=${PYTHON_CMD}
 
 SUB_FILES=	${PORTNAME}
 
@@ -31,13 +29,17 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1584511772
+PREFETCH_TIMESTAMP=	1613546029
 ELECTRON_MAKE_FLAGS+=	--config electron-builder64.yml
+
+post-patch:
+	${REINPLACE_CMD} -e '1 s/!defined(__linux__)/& \&\& !defined(__FreeBSD__)/' \
+		${WRKSRC}/node_modules/abstract-socket/src/abstract_socket.cc
 
 pre-build:
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
-		--input=favicon.icns --out=icons --format=set --root=assets
+		--input=favicon.icns --out=icons --format=set --root=src/assets
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
