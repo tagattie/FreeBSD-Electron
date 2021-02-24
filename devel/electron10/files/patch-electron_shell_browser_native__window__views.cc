@@ -1,4 +1,4 @@
---- electron/shell/browser/native_window_views.cc.orig	2021-01-27 19:18:22 UTC
+--- electron/shell/browser/native_window_views.cc.orig	2021-02-19 19:56:33 UTC
 +++ electron/shell/browser/native_window_views.cc
 @@ -304,7 +304,7 @@ NativeWindowViews::NativeWindowViews(const gin_helper:
      last_window_state_ = ui::SHOW_STATE_NORMAL;
@@ -27,7 +27,7 @@
    gfx::SizeF aspect(aspect_ratio, 1.0);
    // Scale up because SetAspectRatio() truncates aspect value to int
    aspect.Scale(100);
-@@ -1361,7 +1361,7 @@ void NativeWindowViews::OnWidgetBoundsChanged(views::W
+@@ -1377,7 +1377,7 @@ void NativeWindowViews::OnWidgetBoundsChanged(views::W
  }
  
  void NativeWindowViews::OnWidgetDestroying(views::Widget* widget) {
@@ -36,7 +36,7 @@
    aura::Window* window = GetNativeWindow();
    if (window)
      window->RemovePreTargetHandler(this);
-@@ -1471,7 +1471,7 @@ void NativeWindowViews::HandleKeyboardEvent(
+@@ -1487,7 +1487,7 @@ void NativeWindowViews::HandleKeyboardEvent(
    if (widget_destroyed_)
      return;
  
@@ -45,7 +45,7 @@
    if (event.windows_key_code == ui::VKEY_BROWSER_BACK)
      NotifyWindowExecuteAppCommand(kBrowserBackward);
    else if (event.windows_key_code == ui::VKEY_BROWSER_FORWARD)
-@@ -1483,7 +1483,7 @@ void NativeWindowViews::HandleKeyboardEvent(
+@@ -1499,7 +1499,7 @@ void NativeWindowViews::HandleKeyboardEvent(
    root_view_->HandleKeyEvent(event);
  }
  
