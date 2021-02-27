@@ -2,7 +2,7 @@
 
 PORTNAME=	simplenote
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.6.0
+DISTVERSION=	2.7.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -33,7 +33,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1612944947
+PREFETCH_TIMESTAMP=	1614407286
 
 post-extract:
 	if [ -f ${FILESDIR}/config.json ]; then \
