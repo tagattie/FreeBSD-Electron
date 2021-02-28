@@ -2,10 +2,10 @@
 
 PORTNAME=	boostnote
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.2.1
+DISTVERSION=	0.13.2
 CATEGORIES=	deskutils
 
-MAINTAINER=	tagattie@yandex.com
+MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Intuitive and stylish markdown note app for developers
 
 LICENSE=	GPLv3+
@@ -13,7 +13,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:6 gnome node:12,build
+USES=		desktop-file-utils electron:11 gnome node:12,build \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	BoostIO
@@ -22,7 +23,6 @@ GH_PROJECT=	BoostNote.next
 INSTALLS_ICONS=	yes
 
 SUB_FILES=	${PORTNAME}
-SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 PORTDOCS=	CONTRIBUTING.md readme.md
 
@@ -31,10 +31,12 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1582610795
+PREFETCH_TIMESTAMP=	1614503538
+MAKE_ENV+=	BOOST_NOTE_BASE_URL=https://note.boostio.co \
+		BOOST_HUB_BASE_URL=https://boosthub.io
 
 post-extract:
-	${TOUCH} ${WRKSRC}/.env
+	${CP} ${WRKSRC}/.env.default ${WRKSRC}/.env
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build:electron
