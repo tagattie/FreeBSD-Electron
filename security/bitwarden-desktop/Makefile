@@ -2,7 +2,7 @@
 
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.24.6
+DISTVERSION=	1.25.1
 CATEGORIES=	security
 DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
@@ -17,13 +17,13 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre.so:devel/pcre \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:6 gnome localbase:ldflags \
-		node:10,build pkgconfig python:2.7,build xorg
+USES=		desktop-file-utils electron:11 gmake gnome localbase:ldflags \
+		node:12,build pkgconfig python:2.7,build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
 GH_PROJECT=	desktop
-GH_TUPLE=	bitwarden:jslib:9ddec9baf8b6e7de58c00744eb371dc68e1b6383:jslib/jslib
+GH_TUPLE=	bitwarden:jslib:7cc23dab72e505ab3cc255f2d035dc0c79ec7a53:jslib/jslib
 
 USE_XORG=	x11 xau xcb xdmcp xext xscrnsaver
 USE_GNOME=	glib20
@@ -38,7 +38,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm:fetch,build
 USE_ELECTRON=	extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1612427012
+PREFETCH_TIMESTAMP=	1616313125
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
@@ -65,8 +65,8 @@ post-extract:
 	${MV} ${WRKDIR}/npm-cache/src/css ${WRKSRC}/src
 
 post-patch:
-	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
-		${WRKSRC}/node_modules/desktop-idle/binding.gyp
+	${REINPLACE_CMD} -e 's/make/g&/' \
+		${WRKSRC}/node_modules/lzma-native/liblzma-build.sh
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build

@@ -1,6 +1,6 @@
---- src/main/powerMonitor.main.ts.orig	2021-01-26 21:32:25 UTC
+--- src/main/powerMonitor.main.ts.orig	2021-03-17 21:18:26 UTC
 +++ src/main/powerMonitor.main.ts
-@@ -29,7 +29,7 @@ export class PowerMonitorMain {
+@@ -28,7 +28,7 @@ export class PowerMonitorMain {
              });
          }
  
