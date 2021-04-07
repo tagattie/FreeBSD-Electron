@@ -1,5 +1,3 @@
-# $FreeBSD$
-
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}

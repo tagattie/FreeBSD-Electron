@@ -1,5 +1,3 @@
-# $FreeBSD$
-
 TEST_MODULES=	electron\ module \
 		app\ module \
 		autoUpdater\ module \
