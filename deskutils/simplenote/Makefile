@@ -1,5 +1,3 @@
-# $FreeBSD$
-
 PORTNAME=	simplenote
 DISTVERSIONPREFIX=	v
 DISTVERSION=	2.9.0
