@@ -1,5 +1,5 @@
-TIMESTAMP = 1620804720
-SHA256 (simplenote-node-modules-2.10.0.tar.gz) = 5e5547e0f51cb7a84aaa63123eb15c5d69e6ce9f843299086ffb684238c501e2
-SIZE (simplenote-node-modules-2.10.0.tar.gz) = 126292394
-SHA256 (Automattic-simplenote-electron-v2.10.0_GH0.tar.gz) = b2dc273c0439bf374836b003a2199c130af5d3c8cb784702249079f05b9fd1d7
-SIZE (Automattic-simplenote-electron-v2.10.0_GH0.tar.gz) = 2078137
+TIMESTAMP = 1637135838
+SHA256 (simplenote-node-modules-2.21.0.tar.gz) = 3281a33a0ed4a7268610a311145192636631fc7d2dae6307aaaee4e0eaaf5d35
+SIZE (simplenote-node-modules-2.21.0.tar.gz) = 128656114
+SHA256 (Automattic-simplenote-electron-v2.21.0_GH0.tar.gz) = f4b983c32bc850883687fddb4c04027ce22d417c556ed89a8c707a3ee14da6de
+SIZE (Automattic-simplenote-electron-v2.21.0_GH0.tar.gz) = 2084699

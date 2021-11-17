@@ -1,6 +1,6 @@
 PORTNAME=	simplenote
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.10.0
+DISTVERSION=	2.21.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,15 +12,14 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		git:devel/git
 
-USES=		desktop-file-utils electron:9 gmake gnome localbase:ldflags \
-		node:12,build python:2.7,build xorg
+USES=		desktop-file-utils electron:12 gmake gnome localbase:ldflags \
+		node:14,build python:2.7,build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Automattic
 GH_PROJECT=	${PORTNAME}-electron
 
 USE_XORG=	x11 xau xdmcp xkbfile
-INSTALLS_ICONS=	yes
 
 SUB_FILES=	${PORTNAME}
 
@@ -29,9 +28,9 @@ PORTDOCS=	CONTRIBUTING.md README.md RELEASE-NOTES.md
 OPTIONS_DEFINE=	DOCS
 
 USE_NODE=	npm
-USE_ELECTRON=	prefetch extract prebuild build:builder
+USE_ELECTRON=	prefetch extract build:builder
 
-PREFETCH_TIMESTAMP=	1620804470
+PREFETCH_TIMESTAMP=	1637129508
 
 post-extract:
 	if [ -f ${FILESDIR}/config.json ]; then \
@@ -42,6 +41,12 @@ post-patch:
 	${REINPLACE_CMD} -e 's/make build/${MAKE_CMD} build/' ${WRKSRC}/Makefile
 
 pre-build:
+	cd ${PKGJSONSDIR} && \
+	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
+		cd ${WRKSRC}/$${dir} && ${SETENV} ${MAKE_ENV} \
+		npm_config_nodedir=${LOCALBASE} \
+		${NPM_CMD} rebuild --no-progress; \
+	done
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} build
 
 do-install:
