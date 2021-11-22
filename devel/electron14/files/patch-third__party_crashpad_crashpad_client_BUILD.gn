@@ -1,0 +1,15 @@
+--- third_party/crashpad/crashpad/client/BUILD.gn.orig	2021-09-14 01:52:19 UTC
++++ third_party/crashpad/crashpad/client/BUILD.gn
+@@ -44,6 +44,12 @@ crashpad_static_library("client") {
+     ]
+   }
+ 
++  if (crashpad_is_posix) {
++    sources += [
++      "crashpad_client_posix.cc",
++    ]
++  }
++
+   if (crashpad_is_linux || crashpad_is_android || crashpad_is_fuchsia) {
+     sources += [
+       "client_argv_handling.cc",

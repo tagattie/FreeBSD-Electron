@@ -1,0 +1,20 @@
+--- services/network/BUILD.gn.orig	2021-09-14 01:52:01 UTC
++++ services/network/BUILD.gn
+@@ -247,7 +247,7 @@ component("network_service") {
+     "//url",
+   ]
+ 
+-  if (is_linux || is_chromeos) {
++  if ((is_linux || is_chromeos) && !is_bsd) {
+     deps += [ ":network_sandbox_hook" ]
+   }
+ 
+@@ -282,7 +282,7 @@ component("network_service") {
+   defines = [ "IS_NETWORK_SERVICE_IMPL" ]
+ }
+ 
+-if (is_linux || is_chromeos) {
++if ((is_linux || is_chromeos) && !is_bsd) {
+   source_set("network_sandbox_hook") {
+     sources = [
+       "network_sandbox_hook_linux.cc",

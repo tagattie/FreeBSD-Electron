@@ -1,0 +1,22 @@
+--- chrome/BUILD.gn.orig	2021-11-21 11:49:08 UTC
++++ chrome/BUILD.gn
+@@ -1348,6 +1348,10 @@ group("browser_dependencies") {
+     public_deps += [ "//ppapi/host" ]
+   }
+ 
++  if (is_bsd) {
++    public_deps -= [ "//components/crash/core/app" ]
++  }
++
+   if (enable_basic_printing) {
+     public_deps += [ "//printing" ]
+     if (enable_print_preview && !is_chromeos) {
+@@ -1702,7 +1706,7 @@ if (enable_resource_allowlist_generation) {
+ }
+ 
+ if (is_linux || is_chromeos) {
+-  if (is_official_build) {
++  if (is_official_build && !is_bsd) {
+     group("linux_symbols") {
+       deps = [
+         ":angle_egl_symbols",
