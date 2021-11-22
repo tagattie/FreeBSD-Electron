@@ -69,7 +69,7 @@ USE_LDCONFIG=	${DATADIR}
 USE_XORG=	x11 xcb xcomposite xcursor xdamage xext xfixes xi xrandr \
 		xrender xscrnsaver xtst
 
-SHEBANG_FILES=	buildtools/freebsd/clang-format
+SHEBANG_FILES=	buildtools/linux64/clang-format
 
 MAKE_ARGS=			-C out/${BUILDTYPE}
 MAKE_ENV+=			C_INCLUDE_PATH=${LOCALBASE}/include \
@@ -199,16 +199,6 @@ post-extract:
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/${GH_PROJECT_node}-${NODE_VER} \
 		${WRKSRC}/third_party/electron_node
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/test_fonts ${WRKSRC}/third_party/test_fonts
-# Take in clang-format from official chromium distribution
-	${MKDIR} ${WRKSRC}/buildtools/freebsd
-	${CP} ${WRKSRC}/buildtools/linux64/clang-format ${WRKSRC}/buildtools/freebsd
-# Copy FreeBSD-specific files from FILESDIR
-	${MKDIR} ${WRKSRC}/sandbox/policy/freebsd
-	${CP} ${FILESDIR}/dir_reader_freebsd.h ${WRKSRC}/base/files
-	${CP} ${FILESDIR}/device_info_fetcher_freebsd.h ${WRKSRC}/chrome/browser/enterprise/signals
-	${CP} ${FILESDIR}/device_info_fetcher_freebsd.cc ${WRKSRC}/chrome/browser/enterprise/signals
-	${CP} ${FILESDIR}/sandbox_freebsd.h ${WRKSRC}/sandbox/policy/freebsd
-	${CP} ${FILESDIR}/sandbox_freebsd.cc ${WRKSRC}/sandbox/policy/freebsd
 # Install node modules for electron
 	${MV} ${WRKDIR}/${PORTNAME}-${ELECTRON_VER}/yarn-offline-cache ${WRKDIR}
 	${ECHO_CMD} 'yarn-offline-mirror "../../../yarn-offline-cache"' >> ${WRKSRC}/electron/.yarnrc
@@ -221,6 +211,14 @@ pre-patch:
 	${SH} ${FILESDIR}/apply-electron-patches.sh ${WRKSRC}
 	# ${FIND} ${WRKSRC} -type f -name '*.orig' -print -delete
 	# ${FIND} ${WRKSRC} -type f -name '*~' -print -delete
+
+post-patch:
+	${MKDIR} ${WRKSRC}/sandbox/policy/freebsd
+	${CP} ${FILESDIR}/dir_reader_freebsd.h ${WRKSRC}/base/files
+	${CP} ${FILESDIR}/device_info_fetcher_freebsd.h ${WRKSRC}/chrome/browser/enterprise/signals
+	${CP} ${FILESDIR}/device_info_fetcher_freebsd.cc ${WRKSRC}/chrome/browser/enterprise/signals
+	${CP} ${FILESDIR}/sandbox_freebsd.h ${WRKSRC}/sandbox/policy/freebsd
+	${CP} ${FILESDIR}/sandbox_freebsd.cc ${WRKSRC}/sandbox/policy/freebsd
 
 pre-configure:
 # We used to remove bundled libraries to be sure that chromium uses
@@ -248,6 +246,8 @@ do-configure:
 	${LN} -sf ${LOCALBASE}/bin/node ${WRKSRC}/third_party/node/freebsd/node-freebsd-x64/bin/node
 # Setup buildtools/freebsd
 	${MKDIR} ${WRKSRC}/buildtools/freebsd
+	${LN} -sf ${WRKSRC}/buildtools/linux64/clang-format ${WRKSRC}/buildtools/freebsd
+	${LN} -sf ${WRKSRC}/out/${BUILDTYPE}/gn ${WRKSRC}/buildtools/freebsd
 	${LN} -sf /usr/bin/strip ${WRKSRC}/buildtools/freebsd/strip
 
 post-build:
