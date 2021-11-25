@@ -20,8 +20,10 @@ share/icons/hicolor/64x64/apps/nuclear.png
 %%DATADIR%%/resources/media/icon.png
 %%DATADIR%%/resources/media/icon_512x512x32.png
 %%DATADIR%%/resources/media/icon_apple.png
+%%DATADIR%%/resources/media/icon_apple@2x.png
 %%DATADIR%%/resources/media/logo_full_light.png
 %%DATADIR%%/resources/media/mastodon.svg
+%%DATADIR%%/resources/media/mastodon_logo_full.svg
 %%DATADIR%%/resources/media/presskit/Press Statement.txt
 %%DATADIR%%/resources/media/presskit/icons/color/1024.png
 %%DATADIR%%/resources/media/presskit/icons/color/128.png

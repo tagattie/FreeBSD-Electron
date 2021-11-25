@@ -2,7 +2,7 @@
 
 PORTNAME=	nuclear
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.6.8
+DISTVERSION=	0.6.17
 CATEGORIES=	audio
 DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
@@ -16,13 +16,11 @@ FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
 RUN_DEPENDS=	fpcalc:audio/chromaprint
 
-USES=		desktop-file-utils electron:10 gnome localbase:ldflags \
-		node:12,build python:2.7,build
+USES=		desktop-file-utils electron:12 gnome localbase:ldflags \
+		node:14,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	nukeop
-
-INSTALLS_ICONS=	yes
 
 SUB_FILES=	${PORTNAME}
 
@@ -33,7 +31,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm:fetch,build
 USE_ELECTRON=	extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1612179563
+PREFETCH_TIMESTAMP=	1637828215
 ELECTRON_MAKE_FLAGS+=	--config.extraMetadata.main=dist/main.js
 
 pre-fetch:
@@ -44,7 +42,7 @@ pre-fetch:
 		cd ${WRKDIR}/npm-cache && \
 			${SETENV} HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts; \
 		cd ${WRKDIR}/npm-cache && \
-			${SETENV} HOME=${WRKDIR} ${NPX_CMD} lerna bootstrap --ignore-scripts --ci --concurrency 1; \
+			${SETENV} HOME=${WRKDIR} ${NPX_CMD} lerna bootstrap --hoist --ignore-scripts --ci; \
 		cd ${WRKDIR}/npm-cache/packages && \
 			for dir in *; do \
 				${RM} $${dir}/package.json $${dir}/package-lock.json; \
@@ -65,8 +63,8 @@ pre-fetch:
 	fi
 
 post-patch:
-	${REINPLACE_CMD} -e '1 s/!defined(__linux__)/& \&\& !defined(__FreeBSD__)/' \
-		${WRKSRC}/packages/main/node_modules/abstract-socket/src/abstract_socket.cc
+	${REINPLACE_CMD} -e 's/make/g&/' \
+		${WRKSRC}/node_modules/lzma-native/liblzma-build.sh
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPX_CMD} lerna run build
