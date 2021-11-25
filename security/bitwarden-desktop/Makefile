@@ -26,7 +26,6 @@ GH_TUPLE=	bitwarden:jslib:764dc40b36e0000807e59b8d6feea5ac4577270d:jslib/jslib
 
 USE_XORG=	x11 xau xcb xdmcp xext xscrnsaver
 USE_GNOME=	glib20
-INSTALLS_ICONS=	yes
 
 SUB_FILES=	${PORTNAME}
 
