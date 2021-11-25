@@ -1,10 +1,9 @@
-# $FreeBSD$
-
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.25.1
+DISTVERSION=	1.29.1
 CATEGORIES=	security
-DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
+MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/${PORTNAME}-${DISTVERSION}/:npm_cache
+DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:npm_cache
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Bitwarden desktop application
@@ -17,13 +16,13 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre.so:devel/pcre \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:11 gmake gnome localbase:ldflags \
-		node:12,build pkgconfig python:2.7,build xorg
+USES=		desktop-file-utils electron:14 gmake gnome localbase:ldflags \
+		node:14,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
 GH_PROJECT=	desktop
-GH_TUPLE=	bitwarden:jslib:7cc23dab72e505ab3cc255f2d035dc0c79ec7a53:jslib/jslib
+GH_TUPLE=	bitwarden:jslib:764dc40b36e0000807e59b8d6feea5ac4577270d:jslib/jslib
 
 USE_XORG=	x11 xau xcb xdmcp xext xscrnsaver
 USE_GNOME=	glib20
@@ -35,34 +34,11 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm:fetch,build
-USE_ELECTRON=	extract prebuild build:builder
-
-PREFETCH_TIMESTAMP=	1616313125
-
-pre-fetch:
-	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
-		${MKDIR} ${WRKDIR}/npm-cache; \
-		${CP} -r ${PKGJSONSDIR}/* ${WRKDIR}/npm-cache; \
-		cd ${WRKDIR}/npm-cache && \
-			${SETENV} HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts && \
-			${SETENV} HOME=${WRKDIR} ${NPX_CMD} gulp webfonts && \
-			${RM} package.json package-lock.json gulpfile.js webfonts.list; \
-		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
-		cd ${WRKDIR} && \
-		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./npm-cache:' > npm-cache.mtree && \
-		${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
-			@npm-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
+USE_NODE=	npm
+USE_ELECTRON=	prebuild build:builder
 
 post-extract:
-	${MV} ${WRKDIR}/npm-cache/src/css ${WRKSRC}/src
+	${MV} ${WRKDIR}/node_modules ${WRKSRC}
 
 post-patch:
 	${REINPLACE_CMD} -e 's/make/g&/' \

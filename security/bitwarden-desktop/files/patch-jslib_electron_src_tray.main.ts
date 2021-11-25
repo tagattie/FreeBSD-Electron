@@ -1,5 +1,5 @@
---- jslib/src/electron/tray.main.ts.orig	2021-03-21 08:20:57 UTC
-+++ jslib/src/electron/tray.main.ts
+--- jslib/electron/src/tray.main.ts.orig	2021-11-25 07:22:43 UTC
++++ jslib/electron/src/tray.main.ts
 @@ -88,7 +88,7 @@ export class TrayMain {
      removeTray(showWindow = true) {
          // Due to https://github.com/electron/electron/issues/17622
@@ -9,3 +9,12 @@
              this.tray.destroy();
              this.tray = null;
          }
+@@ -151,7 +151,7 @@ export class TrayMain {
+     }
+ 
+     private isLinux() {
+-        return process.platform === 'linux';
++        return (process.platform === 'linux' || process.platform === 'freebsd');
+     }
+ 
+     private async toggleWindow() {

@@ -1,11 +1,11 @@
---- jslib/src/electron/window.main.ts.orig	2021-03-15 22:11:51 UTC
-+++ jslib/src/electron/window.main.ts
+--- jslib/electron/src/window.main.ts.orig	2021-11-25 07:26:09 UTC
++++ jslib/electron/src/window.main.ts
 @@ -43,7 +43,7 @@ export class WindowMain {
                                  }
                                  this.win.focus();
                              }
 -                            if (process.platform === 'win32' || process.platform === 'linux') {
-+                            if (process.platform === 'win32' || (process.platform === 'linux' || process.platform === 'freebsd')) {
++                            if (process.platform === 'win32' || process.platform === 'linux' || process.platform === 'freebsd') {
                                  if (this.argvCallback != null) {
                                      this.argvCallback(argv);
                                  }

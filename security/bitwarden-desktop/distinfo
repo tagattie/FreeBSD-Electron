@@ -1,7 +1,7 @@
-TIMESTAMP = 1616314083
-SHA256 (bitwarden-desktop-node-modules-1.25.1.tar.gz) = 6bb7cf719981a91e2e74dd2b17376fe756cf8d73f966e617eab5ce6c8a30db5e
-SIZE (bitwarden-desktop-node-modules-1.25.1.tar.gz) = 123474656
-SHA256 (bitwarden-desktop-v1.25.1_GH0.tar.gz) = 795542e5c6fb255b6231a5ba9a9a96d262de11f454fe86311c9ee9feab9a93f0
-SIZE (bitwarden-desktop-v1.25.1_GH0.tar.gz) = 4225614
-SHA256 (bitwarden-jslib-7cc23dab72e505ab3cc255f2d035dc0c79ec7a53_GH0.tar.gz) = 74fd02edc7de7bc7727038a85f971581170813b841d47834f11416df08d3d13d
-SIZE (bitwarden-jslib-7cc23dab72e505ab3cc255f2d035dc0c79ec7a53_GH0.tar.gz) = 341372
+TIMESTAMP = 1637824589
+SHA256 (bitwarden-desktop-node-modules-1.29.1.tar.gz) = a74151d007b53c4656e79a2f2f634687f53be2570cedebdd4c1226f2d71d525d
+SIZE (bitwarden-desktop-node-modules-1.29.1.tar.gz) = 109605439
+SHA256 (bitwarden-desktop-v1.29.1_GH0.tar.gz) = 19e2d21cb7a50140de15b1e431cb7f5f35ec27f4e0f9c68aaa295d616384b383
+SIZE (bitwarden-desktop-v1.29.1_GH0.tar.gz) = 7721995
+SHA256 (bitwarden-jslib-764dc40b36e0000807e59b8d6feea5ac4577270d_GH0.tar.gz) = 964d01b1d6020de6fca322cb1d78a3a397e92befbaf0b69b508fb1a1a7f065fd
+SIZE (bitwarden-jslib-764dc40b36e0000807e59b8d6feea5ac4577270d_GH0.tar.gz) = 1089502
