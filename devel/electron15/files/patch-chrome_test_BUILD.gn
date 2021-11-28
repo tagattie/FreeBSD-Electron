@@ -1,0 +1,38 @@
+--- chrome/test/BUILD.gn.orig	2021-11-28 04:34:37 UTC
++++ chrome/test/BUILD.gn
+@@ -536,7 +536,7 @@ static_library("test_support") {
+     ]
+   }
+ 
+-  if (!is_fuchsia) {
++  if (!is_fuchsia && !is_bsd) {
+     public_deps += [ "//components/crash/core/app" ]
+   }
+ 
+@@ -2119,7 +2119,7 @@ if (!is_android && !is_fuchsia) {
+       ]
+     }
+ 
+-    if (is_linux || is_chromeos) {
++    if ((is_linux || is_chromeos) && !is_bsd) {
+       sources += [
+         "../browser/error_reporting/webui_js_error_reporting_browsertest.cc",
+       ]
+@@ -6360,7 +6360,7 @@ test("unit_tests") {
+     ]
+   }
+ 
+-  if (is_linux || is_chromeos) {
++  if ((is_linux || is_chromeos) && !is_bsd) {
+     deps += [ "//chrome/browser/error_reporting:unit_test" ]
+   }
+ 
+@@ -8452,7 +8452,7 @@ test("chrome_app_unittests") {
+     "//components/safe_browsing:buildflags",
+     "//pdf:pdf_ppapi",
+   ]
+-  if (!is_fuchsia) {
++  if (!is_fuchsia && !is_bsd) {
+     deps += [ "//third_party/breakpad:client" ]
+   }
+   if (enable_gwp_asan) {

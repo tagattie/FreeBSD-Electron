@@ -1,0 +1,20 @@
+--- content/browser/BUILD.gn.orig	2021-10-08 06:25:48 UTC
++++ content/browser/BUILD.gn
+@@ -2311,6 +2311,17 @@ source_set("browser") {
+     deps += [ "//third_party/speech-dispatcher" ]
+   }
+ 
++  if (is_bsd) {
++    sources -= [
++      "compute_pressure/cpu_probe_linux.cc",
++      "compute_pressure/cpu_probe_linux.h",
++      "sandbox_host_linux.cc",
++      "sandbox_host_linux.h",
++      "sandbox_ipc_linux.cc",
++      "sandbox_ipc_linux.h",
++    ]
++  }
++
+   # ChromeOS also defines linux but their memory-monitors conflict.
+   if (is_chromeos_ash) {
+     sources += [
