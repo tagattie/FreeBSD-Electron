@@ -1,6 +1,6 @@
---- src/main/modules/mpris.ts.orig	2019-07-19 16:29:54 UTC
+--- src/main/modules/mpris.ts.orig	2021-07-28 21:45:51 UTC
 +++ src/main/modules/mpris.ts
-@@ -18,7 +18,7 @@ class MprisModule extends ModuleWindow {
+@@ -19,7 +19,7 @@ class MprisModule extends ModuleWindow {
  
    constructor(window: Electron.BrowserWindow) {
      super(window);
@@ -8,4 +8,4 @@
 +    this.platforms = ['linux', 'freebsd'];
    }
  
-   async load() {
+   async load(): Promise<void> {

@@ -1,7 +1,5 @@
-# $FreeBSD$
-
 PORTNAME=	museeks
-PORTVERSION=	0.11.5
+PORTVERSION=	0.12.0
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,13 +11,11 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:11 gmake gnome localbase:ldflags \
-		node:12,build python:build
+USES=		desktop-file-utils electron:13 gmake localbase:ldflags \
+		node:14,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	martpie
-
-INSTALLS_ICONS=	yes
 
 SUB_FILES=	museeks
 
@@ -27,14 +23,10 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm
+USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1611744609
-
-post-patch:
-	${REINPLACE_CMD} -e '1 s/!defined(__linux__)/& \&\& !defined(__FreeBSD__)/' \
-		${WRKSRC}/node_modules/abstract-socket/src/abstract_socket.cc
+PREFETCH_TIMESTAMP=	1638325143
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build

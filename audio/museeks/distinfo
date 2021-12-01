@@ -1,5 +1,5 @@
-TIMESTAMP = 1611745335
-SHA256 (museeks-node-modules-0.11.5.tar.gz) = e2c2aa6a5dfc7b308ee330f71677e44f8a7cf3548f3e7a41b44340651af0699f
-SIZE (museeks-node-modules-0.11.5.tar.gz) = 108333308
-SHA256 (martpie-museeks-0.11.5_GH0.tar.gz) = 6721a66017b42b682111f89d867343ebfa81ecbbfe23d573e17ab6c210e4be79
-SIZE (martpie-museeks-0.11.5_GH0.tar.gz) = 849810
+TIMESTAMP = 1638326240
+SHA256 (museeks-node-modules-0.12.0.tar.gz) = feb025a0fdf0a0c2622fc640cab5a0906a3328a8c01bdd910d48642da0598df8
+SIZE (museeks-node-modules-0.12.0.tar.gz) = 107906842
+SHA256 (martpie-museeks-0.12.0_GH0.tar.gz) = f4f37f182401449c6890c19935dd2b75fc1593b8f67b9d507295238102dab112
+SIZE (martpie-museeks-0.12.0_GH0.tar.gz) = 1102467
