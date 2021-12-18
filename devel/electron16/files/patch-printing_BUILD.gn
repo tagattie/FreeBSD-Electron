@@ -1,0 +1,20 @@
+--- printing/BUILD.gn.orig	2021-11-19 04:25:20 UTC
++++ printing/BUILD.gn
+@@ -68,7 +68,7 @@ component("printing_base") {
+   ]
+ }
+ 
+-if (enable_oop_printing && (is_linux || is_chromeos)) {
++if (enable_oop_printing && (is_linux || is_chromeos) && !is_bsd) {
+   source_set("printing_sandbox_hook") {
+     sources = [
+       "sandbox/print_backend_sandbox_hook_linux.cc",
+@@ -263,7 +263,7 @@ component("printing") {
+     }
+   }
+ 
+-  if (enable_oop_printing && (is_linux || is_chromeos)) {
++  if (enable_oop_printing && (is_linux || is_chromeos) && !is_bsd) {
+     deps += [ ":printing_sandbox_hook" ]
+   }
+ }

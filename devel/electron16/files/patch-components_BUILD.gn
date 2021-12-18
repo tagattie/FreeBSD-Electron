@@ -1,0 +1,16 @@
+--- components/BUILD.gn.orig	2021-11-19 04:25:12 UTC
++++ components/BUILD.gn
+@@ -366,6 +366,13 @@ test("components_unittests") {
+       ]
+     }
+ 
++    if (is_bsd) {
++      deps -= [
++        "//components/crash/content/browser:unit_tests",
++        "//components/crash/core/app:unit_tests",
++      ]
++    }
++
+     data_deps += [
+       ":components_tests_pak",
+       "//third_party/mesa_headers",

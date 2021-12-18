@@ -1,0 +1,33 @@
+--- chrome/browser/ui/BUILD.gn.orig	2021-11-19 04:25:09 UTC
++++ chrome/browser/ui/BUILD.gn
+@@ -682,10 +682,20 @@ static_library("ui") {
+     ]
+   }
+ 
+-  if (!is_fuchsia) {
++  if (!is_fuchsia && !is_bsd) {
+     deps += [ "//components/crash/core/app" ]
+   }
+ 
++  if (is_bsd) {
++    sources -= [
++      "webui/crashes_ui.cc",
++      "webui/crashes_ui.h",
++    ]
++    deps -= [
++      "//components/crash/core/browser",
++    ]
++  }
++
+   if (is_android) {
+     sources += [
+       "android/android_about_app_info.cc",
+@@ -3606,7 +3616,7 @@ static_library("ui") {
+     }
+   }
+ 
+-  if (is_linux || is_chromeos_lacros || is_mac) {
++  if ((is_linux || is_chromeos_lacros || is_mac) && !is_bsd) {
+     # The first run dialog shows only on Linux and macOS.
+     sources += [
+       "views/first_run_dialog.cc",

@@ -1,0 +1,11 @@
+--- sandbox/policy/mojom/sandbox.mojom.orig	2021-11-19 04:25:21 UTC
++++ sandbox/policy/mojom/sandbox.mojom
+@@ -45,7 +45,7 @@ enum Sandbox {
+ 
+   // Equivalent to no sandbox on all non-Fuchsia platforms.
+   // Minimally privileged sandbox on Fuchsia.
+-  [EnableIf=is_fuchsia]
++  [EnableIf=is_bsd]
+   kVideoCapture,
+ 
+   // Allows access to file contents and Windows APIs for parsing icons from PE

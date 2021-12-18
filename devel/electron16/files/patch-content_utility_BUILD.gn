@@ -1,0 +1,11 @@
+--- content/utility/BUILD.gn.orig	2021-11-19 04:25:17 UTC
++++ content/utility/BUILD.gn
+@@ -103,7 +103,7 @@ source_set("utility") {
+     deps += [ "//services/proxy_resolver:lib" ]
+   }
+ 
+-  if (is_linux || is_chromeos) {
++  if ((is_linux || is_chromeos) && !is_bsd) {
+     deps += [
+       "//content/utility/speech:speech_recognition_sandbox_hook",
+       "//services/network:network_sandbox_hook",

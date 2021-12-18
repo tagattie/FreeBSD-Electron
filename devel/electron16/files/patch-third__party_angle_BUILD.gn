@@ -1,0 +1,32 @@
+--- third_party/angle/BUILD.gn.orig	2021-11-19 04:27:32 UTC
++++ third_party/angle/BUILD.gn
+@@ -200,7 +200,6 @@ config("extra_warnings") {
+       "-Wundefined-reinterpret-cast",
+       "-Wunneeded-internal-declaration",
+       "-Wweak-template-vtables",
+-      "-Wunused-but-set-variable",
+ 
+       # The below warnings are used by WebKit. We enable them to make rolling
+       # ANGLE in WebKit easier.
+@@ -210,11 +209,12 @@ config("extra_warnings") {
+       "-Wunreachable-code-aggressive",
+       "-Wshorten-64-to-32",
+     ]
+-    if (!use_xcode_clang) {
++    if (!use_xcode_clang && !is_bsd) {
+       # Mac catalyst uses a clang version that doesn't have these.
+       cflags += [
+         "-Wsuggest-destructor-override",
+         "-Wsuggest-override",
++        "-Wunused-but-set-variable",
+       ]
+     }
+   }
+@@ -492,6 +492,7 @@ angle_static_library("angle_gpu_info_util") {
+         "X11",
+         "Xi",
+         "Xext",
++        "GL",
+       ]
+     }
+   }

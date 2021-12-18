@@ -1,0 +1,11 @@
+--- build/config/rust.gni.orig	2021-11-19 04:25:04 UTC
++++ build/config/rust.gni
+@@ -72,7 +72,7 @@ if (use_unverified_rust_toolchain) {
+   assert(rust_bin_dir != "")
+   rust_prefix = "$rust_bin_dir/"
+ } else if (toolchain_has_official_rust) {
+-  if (host_os != "linux") {
++  if (host_os != "linux" && host_os != "openbsd" && host_os != "freebsd") {
+     assert(false,
+            "Attempt to use standard Rust toolchain on an unsupported platform")
+   }

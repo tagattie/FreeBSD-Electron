@@ -1,0 +1,11 @@
+--- third_party/maldoca/BUILD.gn.orig	2021-11-19 04:25:45 UTC
++++ third_party/maldoca/BUILD.gn
+@@ -210,6 +210,8 @@ source_set("maldoca-ole") {
+     #"//third_party/libxml/src/include/"
+   ]
+ 
++  libs = [ "iconv" ]
++
+   public_deps = [
+     "//base",
+     ":example_proto",

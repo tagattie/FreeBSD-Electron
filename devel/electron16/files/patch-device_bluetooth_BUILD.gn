@@ -1,0 +1,20 @@
+--- device/bluetooth/BUILD.gn.orig	2021-11-19 04:25:17 UTC
++++ device/bluetooth/BUILD.gn
+@@ -10,7 +10,7 @@ if (is_android) {
+ }
+ if (is_chromeos_ash) {
+   import("//chromeos/dbus/use_real_dbus_clients.gni")
+-} else if (use_bluez) {
++} else if (use_bluez && !is_bsd) {
+   use_real_dbus_clients = false
+ }
+ 
+@@ -308,7 +308,7 @@ component("bluetooth") {
+     ]
+   }
+ 
+-  if (is_chromeos || is_linux) {
++  if (is_chromeos || (is_linux && !is_bsd)) {
+     if (use_bluez) {
+       if (!force_cast_bluetooth) {
+         sources += [ "bluetooth_adapter_chromeos.cc" ]

@@ -1,0 +1,31 @@
+--- chrome/BUILD.gn.orig	2021-12-18 06:49:11 UTC
++++ chrome/BUILD.gn
+@@ -287,7 +287,9 @@ if (!is_android && !is_mac) {
+           ":xdg_mime",  # Needs to be public for installer to consume files.
+         ]
+ 
+-        data_deps += [ "//components/crash/core/app:chrome_crashpad_handler" ]
++        if (!is_bsd) {
++          data_deps += [ "//components/crash/core/app:chrome_crashpad_handler" ]
++        }
+       }
+ 
+       ldflags = []
+@@ -1397,7 +1399,7 @@ group("browser_dependencies") {
+     ]
+   }
+ 
+-  if (!is_fuchsia) {
++  if (!is_fuchsia && !is_bsd) {
+     public_deps += [ "//components/crash/core/app" ]
+   }
+ 
+@@ -1718,7 +1720,7 @@ if (is_win && enable_resource_allowlist_generation) {
+ }
+ 
+ if (is_linux || is_chromeos) {
+-  if (is_official_build) {
++  if (is_official_build && !is_bsd) {
+     group("linux_symbols") {
+       deps = [
+         ":angle_egl_symbols",

@@ -1,0 +1,13 @@
+--- mojo/public/tools/bindings/mojom.gni.orig	2021-11-19 04:25:19 UTC
++++ mojo/public/tools/bindings/mojom.gni
+@@ -688,6 +688,10 @@ template("mojom") {
+       enabled_features += [ "is_win" ]
+     }
+ 
++    if (is_bsd) {
++      enabled_features += [ "is_bsd" ]
++    }
++
+     action(parser_target_name) {
+       script = mojom_parser_script
+       inputs = mojom_parser_sources + [ build_metadata_filename ]
