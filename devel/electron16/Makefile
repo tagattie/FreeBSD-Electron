@@ -16,8 +16,6 @@ COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/electron/LICENSE
 
-BROKEN_i386=	LLVM ERROR: out of memory
-
 FETCH_DEPENDS=		yarn-node16>0:www/yarn-node16
 EXTRACT_DEPENDS=	yarn-node16>0:www/yarn-node16
 PATCH_DEPENDS=		git:devel/git
