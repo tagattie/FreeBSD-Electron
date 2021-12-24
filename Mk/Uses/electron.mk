@@ -209,7 +209,8 @@ electron-fetch-node-modules:
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./npm-cache:' > npm-cache.mtree && \
-		${TAR} -cz --options 'gzip:!timestamp' \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} @npm-cache.mtree; \
 		${RM} -r ${WRKDIR}; \
 	fi
@@ -235,7 +236,8 @@ electron-fetch-node-modules:
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./yarn-offline-cache:' > yarn-offline-cache.mtree; \
-		${TAR} -cz --options 'gzip:!timestamp' \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} @yarn-offline-cache.mtree; \
 		${RM} -r ${WRKDIR}; \
 	fi
