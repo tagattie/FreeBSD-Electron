@@ -1,9 +1,8 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.29.1
+DISTVERSION=	1.30.0
 CATEGORIES=	security
-MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/${PORTNAME}-${DISTVERSION}/:npm_cache
-DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:npm_cache
+DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Bitwarden desktop application
@@ -22,7 +21,7 @@ USES=		desktop-file-utils electron:14 gmake gnome localbase:ldflags \
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
 GH_PROJECT=	desktop
-GH_TUPLE=	bitwarden:jslib:764dc40b36e0000807e59b8d6feea5ac4577270d:jslib/jslib
+GH_TUPLE=	bitwarden:jslib:f4c66b2c8c243935bf25f689b16afaa5d6345f1b:jslib/jslib
 
 USE_XORG=	x11 xau xcb xdmcp xext xscrnsaver
 USE_GNOME=	glib20
@@ -33,8 +32,31 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm
+USE_NODE=	npm:fetch,build
 USE_ELECTRON=	prebuild build:builder
+
+PREFETCH_TIMESTAMP=	1640503771
+
+pre-fetch:
+	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
+		${MKDIR} ${WRKDIR}; \
+		cd ${WRKDIR} && \
+			git clone -q -b ${DISTVERSIONFULL} https://github.com/bitwarden/desktop.git; \
+		cd ${WRKDIR}/desktop && \
+			npm run sub:init && \
+			npm ci --ignore-scripts --no-progress; \
+		${FIND} ${WRKDIR} -type d -exec ${CHMOD} 755 {} ';'; \
+		cd ${WRKDIR}/desktop && \
+			${MTREE_CMD} -cbnSp node_modules | ${MTREE_CMD} -C | ${SED} \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:flags=.*:flags=none:' \
+			-e 's:^\.:./node_modules:' > node_modules.mtree && \
+			${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
+			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} @node_modules.mtree; \
+		${RM} -r ${WRKDIR}; \
+	fi
 
 post-extract:
 	${MV} ${WRKDIR}/node_modules ${WRKSRC}
@@ -58,6 +80,7 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/dist/linux-unpacked && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	${INSTALL_DATA} ${WRKSRC}/build/package.json ${STAGEDIR}${DATADIR}/resources
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
