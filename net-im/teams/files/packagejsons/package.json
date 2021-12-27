@@ -1,6 +1,6 @@
 {
   "name": "teams-for-linux",
-  "version": "1.0.0",
+  "version": "1.0.20",
   "main": "app/index.js",
   "description": "Unofficial client for Microsoft Teams for Linux",
   "homepage": "https://github.com/IsmaelMartinez/teams-for-linux",
@@ -25,23 +25,29 @@
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "dist:linux": "electron-builder --linux",
-    "dist:linux:appimage": "electron-builder --linux AppImage",
-    "dist:linux:snap": "electron-builder --linux snap",
+    "dist:linux:targz": "electron-builder --x64 --armv7l --arm64 -l tar.gz",
+    "dist:linux:deb": "electron-builder --x64 --armv7l --arm64 -l deb",
+    "dist:linux:rpm": "electron-builder --x64 --armv7l --arm64 -l rpm",
+    "dist:linux:appimage": "electron-builder --x64 --armv7l --arm64 -l AppImage",
+    "dist:linux:snap": "electron-builder -l snap",
+    "dist:linux:snap:armv7l": "electron-builder --armv7l -l snap",
     "release": "electron-builder"
   },
   "dependencies": {
+    "@electron/remote": "^2.0.1",
     "electron-dl": "ismaelmartinez/electron-dl",
     "electron-editor-context-menu": "1.1.1",
     "electron-native-notification": "1.2.1",
+    "electron-store": "8.0.1",
     "electron-window-state": "5.0.3",
-    "spellchecker": "3.7.0",
-    "yargs": "14.0.0"
+    "spellchecker": "3.7.1",
+    "yargs": "17.2.1"
   },
   "devDependencies": {
-    "electron": "4.2.8",
-    "electron-builder": "21.2.0",
-    "eslint": "5.16.0",
-    "yarn": "1.17.3"
+    "electron": "15.3.0",
+    "electron-builder": "22.13.1",
+    "eslint": "8.1.0",
+    "yarn": "1.22.17"
   },
   "build": {
     "appId": "teams-for-linux",
@@ -58,10 +64,10 @@
       "category": "Chat;Network;Office",
       "packageCategory": "net",
       "executableName": "teams-for-linux",
-      "synopsis": "Microsoft Teams for Linux",
+      "synopsis": "Teams for Linux",
       "description": "Unofficial Microsoft Teams client for Linux using Electron. It uses the Web App and wraps it as a standalone application using Electron.",
       "desktop": {
-        "Name": "Microsoft Teams for Linux",
+        "Name": "Teams for Linux",
         "Comment": "Unofficial client for Microsoft Teams for Linux",
         "StartupWMClass": "teams-for-linux"
       },
@@ -69,9 +75,7 @@
         "rpm",
         "deb",
         "tar.gz",
-        "snap",
-        "AppImage",
-        "pacman"
+        "AppImage"
       ],
       "publish": {
         "provider": "github",
@@ -91,6 +95,9 @@
         "screen-inhibit-control",
         "wayland",
         "upower-observe"
+      ],
+      "publish": [
+        "snapStore"
       ]
     }
   }

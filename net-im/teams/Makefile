@@ -1,11 +1,9 @@
-# $FreeBSD$
-
 PORTNAME=	teams
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.0
+DISTVERSION=	1.0.20
 CATEGORIES=	net-im
 
-MAINTAINER=	tagattie@yandex.com
+MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Unofficial Microsoft Teams client
 
 LICENSE=	GPLv3
@@ -13,16 +11,12 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:4 gnome localbase:ldflags \
-		node:12,build python:2.7,build
+USES=		desktop-file-utils electron:15 gnome localbase:ldflags \
+		node:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	IsmaelMartinez
 GH_PROJECT=	teams-for-linux
-
-INSTALLS_ICONS=	yes
-
-BINARY_ALIAS=	python=${PYTHON_CMD}
 
 SUB_FILES=	${PORTNAME}
 
@@ -33,8 +27,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1583558280
-UPSTREAM_ELECTRON_VER=	4.2.8
+PREFETCH_TIMESTAMP=	1640603361
 
 post-patch:
 	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
