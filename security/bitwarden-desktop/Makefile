@@ -42,9 +42,11 @@ pre-fetch:
 		${MKDIR} ${WRKDIR}; \
 		cd ${WRKDIR} && \
 			git clone -q -b ${DISTVERSIONFULL} https://github.com/bitwarden/desktop.git; \
+		${CP} ${PKGJSONSDIR}/package.json ${PKGJSONSDIR}/package-lock.json \
+			${WRKDIR}/desktop; \
 		cd ${WRKDIR}/desktop && \
 			${SETENV} HOME=${WRKDIR} npm run sub:init && \
-			${SETENV} HOME=${WRKDIR} GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null" npm ci --ignore-scripts --no-progress; \
+			${SETENV} HOME=${WRKDIR} npm ci --ignore-scripts --no-progress; \
 		${FIND} ${WRKDIR} -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR}/desktop && \
 			${MTREE_CMD} -cbnSp node_modules | ${MTREE_CMD} -C | ${SED} \
