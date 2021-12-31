@@ -1,0 +1,15 @@
+bin/hyper
+bin/hyper-terminal
+share/applications/hyper.desktop
+%%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/bin/cli.js
+%%DATADIR%%/resources/bin/hyper
+%%DATADIR%%/resources/bin/yarn-standalone.js
+share/icons/hicolor/1024x1024/apps/hyper.png
+share/icons/hicolor/128x128/apps/hyper.png
+share/icons/hicolor/16x16/apps/hyper.png
+share/icons/hicolor/256x256/apps/hyper.png
+share/icons/hicolor/32x32/apps/hyper.png
+share/icons/hicolor/48x48/apps/hyper.png
+share/icons/hicolor/512x512/apps/hyper.png
+share/icons/hicolor/64x64/apps/hyper.png

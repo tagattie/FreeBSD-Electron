@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Hyper
+Comment=A terminal built on web technologies
+Icon=hyper
+Exec=hyper-terminal %U
+Categories=TerminalEmulator;
+Terminal=false
+StartupWMClass=Hyper
+MimeType=x-scheme-handler/ssh;
