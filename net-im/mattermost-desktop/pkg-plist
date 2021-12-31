@@ -1,0 +1,11 @@
+bin/mattermost-desktop
+share/applications/mattermost-desktop.desktop
+share/icons/hicolor/128x128/apps/mattermost.png
+share/icons/hicolor/16x16/apps/mattermost.png
+share/icons/hicolor/256x256/apps/mattermost.png
+share/icons/hicolor/32x32/apps/mattermost.png
+share/icons/hicolor/48x48/apps/mattermost.png
+share/icons/hicolor/512x512/apps/mattermost.png
+share/icons/hicolor/64x64/apps/mattermost.png
+%%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/electron.asar
