@@ -56,7 +56,7 @@ pre-fetch:
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./npm-cache:' > npm-cache.mtree && \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UF-8 \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DIST_SUBDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
 			@npm-cache.mtree; \
