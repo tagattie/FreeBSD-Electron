@@ -357,7 +357,7 @@ electron-generate-electron-zip:
 .   endif
 
 electron-generate-chromedriver-zip:
-.   if defined(UPSTREAM_CHROMEDRIVER_VER)
+.   if defined(UPSTREAM_CHROMEDRIVER_VER) && ${UPSTREAM_CHROMEDRIVER_VER} != ""
 	@${ECHO_MSG} "===>  Preparing distribution files of chromedriver"
 	@${RM} -r ${WRKDIR}/electron-dist
 	@${MKDIR} ${WRKDIR}/electron-dist
