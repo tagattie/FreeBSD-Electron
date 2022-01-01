@@ -306,7 +306,7 @@ IGNORE=	does not specify the electron version used in the upstream source. Pleas
 .	if ${NODE_PKG_MANAGER} == npm
 UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJSONSDIR}/package-lock.json | \
 				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
-.	elif ${NODE_PKC_MANAGER} === yarn
+.	elif ${NODE_PKG_MANAGER} == yarn
 UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJSONSDIR}/yarn.lock | \
 				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
 .	endif
