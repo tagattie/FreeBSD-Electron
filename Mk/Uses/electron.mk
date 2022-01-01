@@ -310,6 +310,8 @@ UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJS
 UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJSONSDIR}/yarn.lock | \
 				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
 .	endif
+CHROMEDRIVER_DOWNLOAD_URL=	https://github.com/electron/electron/releases/download/v${UPSTREAM_CHROMEDRIVER_VER}
+CHROMEDRIVER_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${CHROMEDRIVER_DOWNLOAD_URL}
 .   endif
 
 _USES_build+=	290:electron-generate-electron-zip \
@@ -363,10 +365,10 @@ electron-generate-chromedriver-zip:
 		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
 	@cd ${WRKDIR}/electron-dist && \
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
-	@${MKDIR} ${WRKDIR}/.cache/electron
+	@${MKDIR} ${WRKDIR}/.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH}
 	@cd ${WRKDIR}/electron-dist && \
-		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
-	@cd ${WRKDIR}/.cache/electron && \
+		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH}/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
+	@cd ${WRKDIR}/.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH} && \
 		${SHA256} -r chromedriver-*.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_CHROMEDRIVER_VER}
 .   else
