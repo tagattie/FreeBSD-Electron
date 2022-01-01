@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Rocket.Chat
+Comment=Official OSX, Windows, and Linux Desktop Clients for Rocket.Chat
+Icon=rocketchat-desktop
+Exec=rocketchat-desktop %U
+Categories=GNOME;GTK;Network;InstantMessaging;
+Terminal=false
+StartupWMClass=Rocket.Chat
+MimeType=x-scheme-handler/rocketchat
