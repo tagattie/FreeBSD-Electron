@@ -1,0 +1,10 @@
+--- electron-builder.json.orig	2021-11-15 14:21:52 UTC
++++ electron-builder.json
+@@ -34,7 +34,6 @@
+       ]
+     }
+   ],
+-  "afterPack": "scripts/afterpack.js",
+   "afterSign": "scripts/notarize.js",
+   "deb": {
+     "synopsis": "Mattermost Desktop App",

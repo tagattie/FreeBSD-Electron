@@ -1,10 +1,9 @@
-# $FreeBSD$
-
 PORTNAME=	mattermost-desktop
-DISTVERSION=	4.3.2
+DISTVERSIONPREFIX=	v
+DISTVERSION=	5.0.2
 CATEGORIES=	net-im
 
-MAINTAINER=	tagattie@yandex.com
+MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Mattermost desktop application
 
 LICENSE=	APACHE20
@@ -14,57 +13,40 @@ FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	7za:archivers/p7zip \
 		app-builder:devel/app-builder
 
-USES=		electron:5 gnome node:12,build
+USES=		desktop-file-utils electron:14 node:14,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
 GH_PROJECT=	desktop
 
-INSTALLS_ICONS=	yes
+SUB_FILES=	${PORTNAME}
 
-SUB_FILES=	mattermost-desktop
-SUB_LIST=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
-
-PORTDOCS=	CHANGELOG.md CONTRIBUTING.md NOTICE.txt README.md
+PORTDOCS=	CONTRIBUTING.md NOTICE.txt README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
 USE_NODE=	npm
-USE_ELECTRON=	prefetch extract prebuild
+USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1581415297
-UPSTREAM_ELECTRON_VER=	5.0.11
-UPSTREAM_CHROMEDRIVER_VER=	4.0.0
+PREFETCH_TIMESTAMP=	1640938848
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run extract-dict
-
-do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		${NPX_CMD} cross-env NODE_ENV=production \
-			npm-run-all check-build-config build
+		${NPX_CMD} cross-env NODE_ENV=production npm-run-all check-build-config build-prod
 	# generate icons
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		app-builder icon --input=icon.icns --out=icons \
-			--format=set --root=resources
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		${NPX_CMD} electron-builder --linux --dir \
-		--config.npmRebuild=false \
-		--config.electronVersion=${ELECTRON_VER} \
-		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
+		--input=icon.icns --out=icons --format=set --root=src/assets
+.for size in 1024
+	${MV} ${WRKSRC}/icons/icon_${size}.png ${WRKSRC}/icons/icon_${size}x${size}.png
+.endfor
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
 		${STAGEDIR}${PREFIX}/share/applications
-.for size in 16 32 48 64 128
+.for size in 16 32 48 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}x${size}.png \
-		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME:S/-desktop//}.png
-.endfor
-.for size in 256 512
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
-	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME:S/-desktop//}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
