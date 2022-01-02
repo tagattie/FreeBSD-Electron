@@ -255,7 +255,9 @@ electron-install-node-modules:
 			if [ -f ${WRKSRC}/$${dir}/$${f} ]; then \
 				${MV} -f ${WRKSRC}/$${dir}/$${f} ${WRKSRC}/$${dir}/$${f}.bak; \
 			fi; \
-			${CP} -f $${dir}/$${f} ${WRKSRC}/$${dir}; \
+			if [ -f $${dir}/$${f} ]; then \
+				${CP} -f $${dir}/$${f} ${WRKSRC}/$${dir}; \
+			fi; \
 		done; \
 	done
 	@${ECHO_MSG} "===>  Moving pre-fetched node modules to WRKSRC"
@@ -274,7 +276,9 @@ electron-install-node-modules:
 			if [ -f ${WRKSRC}/$${dir}/$${f} ]; then \
 				${MV} -f ${WRKSRC}/$${dir}/$${f} ${WRKSRC}/$${dir}/$${f}.bak; \
 			fi; \
-			${CP} -f $${dir}/$${f} ${WRKSRC}/$${dir}; \
+			if [ -f $${dir}/$${f} ]; then \
+				${CP} -f $${dir}/$${f} ${WRKSRC}/$${dir}; \
+			fi; \
 		done; \
 	done
 	@${ECHO_MSG} "===>  Installing node modules from pre-fetched cache"
