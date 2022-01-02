@@ -9,6 +9,8 @@ COMMENT=	Terminal built on web technologies
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BUILD_DEPENDS=	app-builder:devel/app-builder
+
 USES=		desktop-file-utils electron:13 localbase:ldflags node:14,build \
 		python:build shebangfix
 
