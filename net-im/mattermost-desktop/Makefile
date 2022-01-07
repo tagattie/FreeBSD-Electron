@@ -11,7 +11,12 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	7za:archivers/p7zip \
-		app-builder:devel/app-builder
+		app-builder:devel/app-builder \
+		gifsicle:graphics/gifsicle \
+		cjpeg:graphics/mozjpeg \
+		optipng:graphics/optipng \
+		pngquant:graphics/pngquant \
+		cwebp:graphics/webp
 
 USES=		desktop-file-utils electron:14 node:14,build
 
@@ -29,6 +34,18 @@ USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
 PREFETCH_TIMESTAMP=	1640938848
+
+post-configure:
+	${MKDIR} ${WRKSRC}/node_modules/cwebp-bin/vendor
+	${CP} ${LOCALBASE}/bin/cwebp ${WRKSRC}/node_modules/cwebp-bin/vendor
+	${MKDIR} ${WRKSRC}/node_modules/gifsicle/vendor
+	${CP} ${LOCALBASE}/bin/gifsicle ${WRKSRC}/node_modules/gifsicle/vendor
+	${MKDIR} ${WRKSRC}/node_modules/mozjpeg/vendor
+	${CP} ${LOCALBASE}/bin/cjpeg ${WRKSRC}/node_modules/mozjpeg/vendor
+	${MKDIR} ${WRKSRC}/node_modules/optipng-bin/vendor
+	${CP} ${LOCALBASE}/bin/optipng ${WRKSRC}/node_modules/optipng-bin/vendor
+	${MKDIR} ${WRKSRC}/node_modules/pngquant-bin/vendor
+	${CP} ${LOCALBASE}/bin/pngquant ${WRKSRC}/node_modules/pngquant-bin/vendor
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
