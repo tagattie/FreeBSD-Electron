@@ -10,8 +10,10 @@ LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
+LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:15 node:16,build python:build
+USES=		desktop-file-utils electron:15 node:16,build pkgconfig \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	minbrowser
