@@ -1,6 +1,7 @@
 PORTNAME=	rocketchat-desktop
 DISTVERSION=	3.7.4
 CATEGORIES=	net-im
+DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Rocket.Chat desktop client
@@ -23,10 +24,37 @@ PORTDOCS=	CHANGELOG.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	yarn
-USE_ELECTRON=	prefetch extract prebuild build:builder
+USE_NODE=	yarn:fetch,extract,build
+USE_ELECTRON=	prebuild build:builder
 
 PREFETCH_TIMESTAMP=	1641033534
+
+pre-fetch:
+	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
+		${MKDIR} ${WRKDIR}; \
+		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
+			${WRKDIR}/.yarnrc; \
+		${CP} -r ${PKGJSONSDIR}/* ${WRKDIR}; \
+		cd ${WRKDIR} && \
+			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+			${YARN_CMD} --frozen-lockfile --ignore-scripts; \
+		cd ${WRKDIR} && \
+			${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:flags=.*:flags=none:' \
+			-e 's:^\.:./yarn-offline-cache:' > yarn-offline-cache.mtree; \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
+			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
+			@yarn-offline-cache.mtree; \
+		${RM} -r ${WRKDIR}; \
+	fi
+
+post-extract:
+	${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
+	cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+		${YARN_CMD} --frozen-lockfile --ignore-scripts --offline
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${YARN_CMD} build
