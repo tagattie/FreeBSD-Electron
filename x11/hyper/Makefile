@@ -1,6 +1,6 @@
 PORTNAME=	hyper
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.1.4
+DISTVERSION=	3.1.5
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,7 +11,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:13 localbase:ldflags node:14,build \
+USES=		desktop-file-utils electron:14 localbase:ldflags node:14,build \
 		python:build shebangfix
 
 USE_GITHUB=	yes
@@ -28,7 +28,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1640862763
+PREFETCH_TIMESTAMP=	1641708296
 
 post-extract:
 	${MKDIR} ${WRKSRC}/target
@@ -43,7 +43,7 @@ pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		${YARN_CMD} run cpy --cwd=target --parents "node_modules/**/*" "../app/"
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		${YARN_CMD} run build
+		${YARN_CMD} build
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		${YARN_CMD} run cross-env BABEL_ENV=production babel target/renderer/bundle.js \
 			--out-file target/renderer/bundle.js --no-comments --minified
@@ -74,6 +74,6 @@ do-install-DOCS-on:
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} ${YARN_CMD} run test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} ${YARN_CMD} test
 
 .include <bsd.port.mk>

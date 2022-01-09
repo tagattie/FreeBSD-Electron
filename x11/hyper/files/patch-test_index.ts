@@ -1,6 +1,6 @@
---- test/index.ts.orig	2021-12-30 13:34:30 UTC
+--- test/index.ts.orig	2022-01-07 19:55:31 UTC
 +++ test/index.ts
-@@ -14,7 +14,7 @@ test.before(async () => {
+@@ -12,7 +12,7 @@ test.before(async () => {
    let pathToBinary;
  
    switch (process.platform) {
