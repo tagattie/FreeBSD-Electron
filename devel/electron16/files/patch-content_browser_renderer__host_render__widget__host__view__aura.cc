@@ -1,4 +1,4 @@
---- content/browser/renderer_host/render_widget_host_view_aura.cc.orig	2021-12-18 06:49:11 UTC
+--- content/browser/renderer_host/render_widget_host_view_aura.cc.orig	2022-01-13 10:19:11 UTC
 +++ content/browser/renderer_host/render_widget_host_view_aura.cc
 @@ -111,7 +111,7 @@
  #include "ui/gfx/gdi_util.h"
@@ -27,7 +27,7 @@
  bool RenderWidgetHostViewAura::SetCompositionFromExistingText(
      const gfx::Range& range,
      const std::vector<ui::ImeTextSpan>& ui_ime_text_spans) {
-@@ -2343,7 +2343,7 @@ bool RenderWidgetHostViewAura::NeedsInputGrab() {
+@@ -2331,7 +2331,7 @@ bool RenderWidgetHostViewAura::NeedsInputGrab() {
  }
  
  bool RenderWidgetHostViewAura::NeedsMouseCapture() {
@@ -36,7 +36,7 @@
    return NeedsInputGrab();
  #else
    return false;
-@@ -2520,7 +2520,7 @@ void RenderWidgetHostViewAura::ForwardKeyboardEventWit
+@@ -2508,7 +2508,7 @@ void RenderWidgetHostViewAura::ForwardKeyboardEventWit
    if (!target_host)
      return;
  
