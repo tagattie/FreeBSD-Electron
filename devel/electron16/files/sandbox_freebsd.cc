@@ -46,14 +46,16 @@ std::string SandboxFreeBSD::GetSandboxTypeInEnglish(SandboxType sandbox_type) {
       return "CDM";
     case SandboxType::kPrintCompositor:
       return "Print Compositor";
+#if BUILDFLAG(ENABLE_PRINTING)
+    case SandboxType::kPrintBackend:
+      return "Print Backend";
+#endif
     case SandboxType::kAudio:
       return "Audio";
     case SandboxType::kSpeechRecognition:
       return "Speech Recognition";
     case SandboxType::kService:
       return "Service";
-    case SandboxType::kVideoCapture:
-      return "Video Capture";
     default:
       return "Unknown";
   }

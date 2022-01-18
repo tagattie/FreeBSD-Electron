@@ -1,4 +1,4 @@
---- base/process/memory_unittest.cc.orig	2021-11-19 04:25:04 UTC
+--- base/process/memory_unittest.cc.orig	2021-12-14 11:44:55 UTC
 +++ base/process/memory_unittest.cc
 @@ -38,6 +38,8 @@
  #if defined(OS_LINUX) || defined(OS_CHROMEOS)
@@ -57,10 +57,11 @@
          // defined(OS_CHROMEOS))
  
  #if defined(OS_ANDROID) || defined(OS_FUCHSIA)
-@@ -659,5 +661,5 @@ TEST_F(OutOfMemoryHandledTest, UncheckedCalloc) {
+@@ -654,7 +656,6 @@ TEST_F(OutOfMemoryHandledTest, UncheckedCalloc) {
+     EXPECT_EQ(0, bytes[i]);
+   free(value_);
+ 
+-  EXPECT_FALSE(base::UncheckedCalloc(1, test_size_, &value_));
+   EXPECT_TRUE(value_ == nullptr);
  }
  
- #endif  // defined(OS_ANDROID) || defined(OS_FUCHSIA)
--#endif  // !defined(OS_OPENBSD) && BUILDFLAG(USE_ALLOCATOR_SHIM) &&
-+#endif  // !defined(OS_BSD) && BUILDFLAG(USE_ALLOCATOR_SHIM) &&
-         // !defined(MEMORY_TOOL_REPLACES_ALLOCATOR)

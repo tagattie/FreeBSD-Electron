@@ -1,12 +1,6 @@
---- chrome/common/webui_url_constants.h.orig	2021-11-19 04:25:11 UTC
+--- chrome/common/webui_url_constants.h.orig	2021-12-14 11:45:00 UTC
 +++ chrome/common/webui_url_constants.h
-@@ -324,17 +324,17 @@ extern const char kChromeUIOSSettingsHost[];
- extern const char kChromeUIOSSettingsURL[];
- #endif
- 
--#if defined(OS_LINUX) || defined(OS_CHROMEOS)
-+#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_BSD)
- extern const char kChromeUIWebUIJsErrorHost[];
+@@ -329,12 +329,12 @@ extern const char kChromeUIWebUIJsErrorHost[];
  extern const char kChromeUIWebUIJsErrorURL[];
  #endif
  

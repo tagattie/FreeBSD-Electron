@@ -1,4 +1,4 @@
---- chrome/common/chrome_features.h.orig	2021-11-19 04:25:11 UTC
+--- chrome/common/chrome_features.h.orig	2021-12-14 11:45:00 UTC
 +++ chrome/common/chrome_features.h
 @@ -77,7 +77,7 @@ extern const base::Feature kAppShimNewCloseBehavior;
  
@@ -49,20 +49,3 @@
      defined(OS_CHROMEOS) || defined(OS_FUCHSIA)
  COMPONENT_EXPORT(CHROME_FEATURES)
  extern const base::Feature kIncognitoBrandConsistencyForDesktop;
-@@ -415,14 +415,14 @@ COMPONENT_EXPORT(CHROME_FEATURES)
- extern const base::Feature kKernelnextVMs;
- #endif
- 
--#if defined(OS_LINUX) && !defined(OS_CHROMEOS)
-+#if (defined(OS_LINUX) && !defined(OS_CHROMEOS)) || defined(OS_BSD)
- COMPONENT_EXPORT(CHROME_FEATURES)
- extern const base::Feature kLinuxLowMemoryMonitor;
- COMPONENT_EXPORT(CHROME_FEATURES)
- extern const base::FeatureParam<int> kLinuxLowMemoryMonitorModerateLevel;
- COMPONENT_EXPORT(CHROME_FEATURES)
- extern const base::FeatureParam<int> kLinuxLowMemoryMonitorCriticalLevel;
--#endif  // defined(OS_LINUX) && !defined(OS_CHROMEOS)
-+#endif  // (defined(OS_LINUX) && !defined(OS_CHROMEOS)) || defined(OS_BSD)
- 
- COMPONENT_EXPORT(CHROME_FEATURES)
- extern const base::Feature kLiteVideo;

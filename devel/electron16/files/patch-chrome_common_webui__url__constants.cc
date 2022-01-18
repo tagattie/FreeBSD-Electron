@@ -1,12 +1,6 @@
---- chrome/common/webui_url_constants.cc.orig	2021-11-19 04:25:11 UTC
+--- chrome/common/webui_url_constants.cc.orig	2021-12-14 11:45:00 UTC
 +++ chrome/common/webui_url_constants.cc
-@@ -380,17 +380,17 @@ const char kChromeUIOSSettingsHost[] = "os-settings";
- const char kChromeUIOSSettingsURL[] = "chrome://os-settings/";
- #endif
- 
--#if defined(OS_LINUX) || defined(OS_CHROMEOS)
-+#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_BSD)
- const char kChromeUIWebUIJsErrorHost[] = "webuijserror";
+@@ -385,12 +385,12 @@ const char kChromeUIWebUIJsErrorHost[] = "webuijserror
  const char kChromeUIWebUIJsErrorURL[] = "chrome://webuijserror/";
  #endif
  
@@ -70,12 +64,3 @@
      defined(OS_ANDROID)
      kChromeUISandboxHost,
  #endif
-@@ -691,7 +691,7 @@ const char* const kChromeDebugURLs[] = {
-     blink::kChromeUIGpuJavaCrashURL,
-     kChromeUIJavaCrashURL,
- #endif
--#if defined(OS_LINUX) || defined(OS_CHROMEOS)
-+#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_BSD)
-     kChromeUIWebUIJsErrorURL,
- #endif
-     kChromeUIQuitURL,

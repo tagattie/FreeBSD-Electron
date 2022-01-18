@@ -1,4 +1,4 @@
---- chrome/browser/prefs/browser_prefs.cc.orig	2021-11-19 04:25:09 UTC
+--- chrome/browser/prefs/browser_prefs.cc.orig	2021-12-14 11:44:58 UTC
 +++ chrome/browser/prefs/browser_prefs.cc
 @@ -411,14 +411,14 @@
  #endif
@@ -15,6 +15,24 @@
 -    (defined(OS_LINUX) || BUILDFLAG(IS_CHROMEOS_LACROS))
 +    (defined(OS_LINUX) || BUILDFLAG(IS_CHROMEOS_LACROS)) || defined(OS_BSD)
  #include "chrome/browser/browser_switcher/browser_switcher_prefs.h"
+ #endif
+ 
+@@ -485,7 +485,7 @@ const char kLocalDiscoveryNotificationsEnabled[] =
+ #endif
+ 
+ // Deprecated 11/2020
+-#if defined(OS_LINUX) && !BUILDFLAG(IS_CHROMECAST)
++#if (defined(OS_LINUX) && !BUILDFLAG(IS_CHROMECAST)) || defined(OS_BSD)
+ const char kMigrationToLoginDBStep[] = "profile.migration_to_logindb_step";
+ #endif
+ 
+@@ -738,7 +738,7 @@ void RegisterProfilePrefsForMigration(
+ 
+   registry->RegisterBooleanPref(prefs::kWebAppsUserDisplayModeCleanedUp, false);
+ 
+-#if defined(OS_LINUX) && !BUILDFLAG(IS_CHROMECAST)
++#if (defined(OS_LINUX) && !BUILDFLAG(IS_CHROMECAST)) || defined(OS_BSD)
+   registry->RegisterIntegerPref(kMigrationToLoginDBStep, 0);
  #endif
  
 @@ -1057,10 +1057,10 @@ void RegisterLocalState(PrefRegistrySimple* registry) 
@@ -46,5 +64,14 @@
 -    (defined(OS_LINUX) || BUILDFLAG(IS_CHROMEOS_LACROS))
 +    (defined(OS_LINUX) || BUILDFLAG(IS_CHROMEOS_LACROS)) || defined(OS_BSD)
    browser_switcher::BrowserSwitcherPrefs::RegisterProfilePrefs(registry);
+ #endif
+ 
+@@ -1526,7 +1526,7 @@ void MigrateObsoleteProfilePrefs(Profile* profile) {
+       profile_prefs);
+ 
+   // Added 11/2020
+-#if defined(OS_LINUX) && !BUILDFLAG(IS_CHROMECAST)
++#if (defined(OS_LINUX) && !BUILDFLAG(IS_CHROMECAST)) || defined(OS_BSD)
+   profile_prefs->ClearPref(kMigrationToLoginDBStep);
  #endif
  

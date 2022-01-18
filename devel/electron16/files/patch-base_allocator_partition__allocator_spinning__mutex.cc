@@ -1,4 +1,4 @@
---- base/allocator/partition_allocator/spinning_mutex.cc.orig	2021-11-19 04:25:04 UTC
+--- base/allocator/partition_allocator/spinning_mutex.cc.orig	2021-12-14 11:44:55 UTC
 +++ base/allocator/partition_allocator/spinning_mutex.cc
 @@ -22,6 +22,13 @@
  #include <unistd.h>
@@ -9,7 +9,7 @@
 +#include <sys/types.h>
 +#include <sys/thr.h>
 +#include <sys/umtx.h>
-+#endif // defined(PA_HAS_FREEBSD_KERNEL)
++#endif  // defined(PA_HAS_FREEBSD_KERNEL)
 +
  #if !defined(PA_HAS_FAST_MUTEX)
  #include "base/threading/platform_thread.h"

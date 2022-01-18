@@ -1,4 +1,4 @@
---- build/config/compiler/BUILD.gn.orig	2021-11-19 04:25:04 UTC
+--- build/config/compiler/BUILD.gn.orig	2021-12-14 11:44:55 UTC
 +++ build/config/compiler/BUILD.gn
 @@ -140,7 +140,7 @@ declare_args() {
    #
@@ -133,12 +133,3 @@
        if (is_clang) {
          # This flag enables the GNU-format pubnames and pubtypes sections,
          # which lld needs in order to generate a correct GDB index.
-@@ -2312,7 +2332,7 @@ config("symbols") {
-   }
- 
-   if (is_clang && !is_nacl && !use_xcode_clang) {
--    if (is_apple) {
-+    if (is_apple || is_bsd) {
-       # TODO(https://crbug.com/1050118): Investigate missing debug info on mac.
-       # Make sure we don't use constructor homing on mac.
-       cflags += [

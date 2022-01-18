@@ -1,4 +1,4 @@
---- chrome/browser/download/chrome_download_manager_delegate.cc.orig	2021-11-19 04:25:08 UTC
+--- chrome/browser/download/chrome_download_manager_delegate.cc.orig	2021-12-14 11:44:58 UTC
 +++ chrome/browser/download/chrome_download_manager_delegate.cc
 @@ -1530,7 +1530,7 @@ void ChromeDownloadManagerDelegate::OnDownloadTargetDe
          target_info->is_filetype_handled_safely)
@@ -36,3 +36,12 @@
      defined(OS_MAC)
    return enterprise_connectors::FileSystemRenameHandler::CreateIfNeeded(
        download_item);
+@@ -1764,7 +1764,7 @@ void ChromeDownloadManagerDelegate::CheckSavePackageAl
+   DCHECK(download_item);
+   DCHECK(download_item->IsSavePackageDownload());
+ 
+-#if defined(OS_WIN) || defined(OS_LINUX) || defined(OS_CHROMEOS) || \
++#if defined(OS_WIN) || defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_BSD) || \
+     defined(OS_MAC)
+   if (!base::FeatureList::IsEnabled(
+           download::features::kAllowSavePackageScanning)) {

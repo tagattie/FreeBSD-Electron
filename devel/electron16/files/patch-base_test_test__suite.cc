@@ -1,11 +1,11 @@
---- base/test/test_suite.cc.orig	2021-11-19 04:25:04 UTC
+--- base/test/test_suite.cc.orig	2021-12-14 11:44:55 UTC
 +++ base/test/test_suite.cc
 @@ -68,7 +68,7 @@
  #include "base/test/test_support_android.h"
  #endif
  
 -#if defined(OS_LINUX) || defined(OS_CHROMEOS)
-+#if defined(OS_LINUX) || defined(OS_CHROMEOS) ||  defined(OS_BSD)
++#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_BSD)
  #include "third_party/test_fonts/fontconfig_util_linux.h"
  #endif
  

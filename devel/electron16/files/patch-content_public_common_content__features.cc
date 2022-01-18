@@ -1,4 +1,4 @@
---- content/public/common/content_features.cc.orig	2021-11-19 04:25:16 UTC
+--- content/public/common/content_features.cc.orig	2021-12-14 11:45:05 UTC
 +++ content/public/common/content_features.cc
 @@ -50,7 +50,7 @@ const base::Feature kAudioServiceOutOfProcess {
  // TODO(crbug.com/1052397): Remove !IS_CHROMEOS_LACROS once lacros starts being
@@ -45,12 +45,3 @@
        base::FEATURE_DISABLED_BY_DEFAULT
  #else
        base::FEATURE_ENABLED_BY_DEFAULT
-@@ -1094,7 +1094,7 @@ const base::Feature kRetryGetVideoCaptureDeviceInfos{
- 
- #endif  // defined(OS_MAC)
- 
--#if defined(OS_LINUX) || defined(OS_CHROMEOS)
-+#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_BSD)
- // If the JavaScript on a WebUI page has an error (such as an unhandled
- // exception), report that error back the crash reporting infrastructure, same
- // as we do for program crashes.

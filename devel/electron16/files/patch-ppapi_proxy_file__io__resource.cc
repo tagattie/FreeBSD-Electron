@@ -1,13 +1,13 @@
---- ppapi/proxy/file_io_resource.cc.orig	2021-11-19 04:25:20 UTC
+--- ppapi/proxy/file_io_resource.cc.orig	2021-12-14 11:45:09 UTC
 +++ ppapi/proxy/file_io_resource.cc
 @@ -282,17 +282,19 @@ int32_t FileIOResource::Write(int64_t offset,
  
    if (check_quota_) {
      int64_t increase = 0;
 -    uint64_t max_offset = 0;
-+    uint64_t _max_offset = 0;
 +    // (rene) avoid name collission with /usr/include/vm/vm_map.h on FreeBSD
 +    // which also defines max_offset
++    uint64_t _max_offset = 0;
      bool append = (open_flags_ & PP_FILEOPENFLAG_APPEND) != 0;
      if (append) {
        increase = bytes_to_write;

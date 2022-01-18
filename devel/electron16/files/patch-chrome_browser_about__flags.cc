@@ -1,4 +1,4 @@
---- chrome/browser/about_flags.cc.orig	2021-11-19 04:25:07 UTC
+--- chrome/browser/about_flags.cc.orig	2021-12-14 11:44:57 UTC
 +++ chrome/browser/about_flags.cc
 @@ -206,7 +206,7 @@
  #include "ui/native_theme/native_theme_features.h"
@@ -27,24 +27,6 @@
          // defined(OS_WIN)
  
  const FeatureEntry::FeatureVariation
-@@ -2481,7 +2481,7 @@ const FeatureEntry::FeatureVariation kPasswordChangeFe
-      nullptr}};
- #endif  // defined(OS_ANDROID)
- 
--#if defined(OS_LINUX) || defined(OS_CHROMEOS)
-+#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_BSD)
- const FeatureEntry::FeatureParam
-     kSendWebUIJavaScriptErrorReportsVariationSendToStaging[] = {
-         {features::kSendWebUIJavaScriptErrorReportsSendToProductionVariation,
-@@ -2786,7 +2786,7 @@ const FeatureEntry kFeatureEntries[] = {
-      flag_descriptions::kWebKioskEnableLacrosDescription, kOsCrOS,
-      FEATURE_VALUE_TYPE(features::kWebKioskEnableLacros)},
- #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
--#if defined(OS_LINUX) || defined(OS_CHROMEOS)
-+#if defined(OS_LINUX) || defined(OS_CHROMEOS) || defined(OS_BSD)
-     {"send-webui-javascript-error-reports",
-      flag_descriptions::kSendWebUIJavaScriptErrorReportsName,
-      flag_descriptions::kSendWebUIJavaScriptErrorReportsDescription,
 @@ -3241,7 +3241,7 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(media::kDeprecateLowUsageCodecs)},
  #endif  // defined(OS_CHROMEOS)
@@ -63,15 +45,6 @@
      {
          "disable-accelerated-video-encode",
          flag_descriptions::kAcceleratedVideoEncodeName,
-@@ -3583,7 +3583,7 @@ const FeatureEntry kFeatureEntries[] = {
-      FEATURE_VALUE_TYPE(performance_manager::features::kDynamicTcmallocTuning)},
- #endif  // BUILDFLAG(USE_TCMALLOC)
- #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
--#if (defined(OS_CHROMEOS) || defined(OS_LINUX) || defined(OS_ANDROID)) && \
-+#if (defined(OS_CHROMEOS) || defined(OS_LINUX) || defined(OS_ANDROID) || defined(OS_BSD)) && \
-     !defined(OS_NACL)
-     {"mojo-linux-sharedmem", flag_descriptions::kMojoLinuxChannelSharedMemName,
-      flag_descriptions::kMojoLinuxChannelSharedMemDescription,
 @@ -3622,7 +3622,7 @@ const FeatureEntry kFeatureEntries[] = {
      {"enable-login-detection", flag_descriptions::kEnableLoginDetectionName,
       flag_descriptions::kEnableLoginDetectionDescription, kOsAll,
@@ -155,7 +128,7 @@
       kOsWin | kOsMac | kOsLinux,
       FEATURE_VALUE_TYPE(media::kGlobalMediaControlsSeamlessTransfer)},
 -#endif  // defined(OS_WIN) || defined(OS_MAC) || defined(OS_LINUX) ||
-+#endif  // defined(OS_WIN) || defined(OS_MAC) || defined(OS_LINUX) || defined(OS_BSD)
++#endif  // defined(OS_WIN) || defined(OS_MAC) || defined(OS_LINUX) || defined(OS_BSD) ||
          // defined(OS_CHROMEOS)
  
      {"safety-tips", flag_descriptions::kSafetyTipName,

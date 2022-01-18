@@ -1,4 +1,4 @@
---- chrome/browser/flag_descriptions.h.orig	2021-11-19 04:25:08 UTC
+--- chrome/browser/flag_descriptions.h.orig	2021-12-14 11:44:58 UTC
 +++ chrome/browser/flag_descriptions.h
 @@ -22,9 +22,9 @@
  #include "printing/buildflags/buildflags.h"
@@ -34,24 +34,15 @@
  
  extern const char kCommanderName[];
  extern const char kCommanderDescription[];
-@@ -3069,14 +3069,14 @@ extern const char kDesktopRestructuredLanguageSettings
+@@ -3069,7 +3069,7 @@ extern const char kDesktopRestructuredLanguageSettings
  extern const char kDesktopDetailedLanguageSettingsName[];
  extern const char kDesktopDetailedLanguageSettingsDescription[];
  
 -#endif  // defined(OS_WIN) || defined(OS_MAC) || defined(OS_LINUX)
 +#endif  // defined(OS_WIN) || defined(OS_MAC) || defined(OS_LINUX) || defined(OS_BSD)
  
--#if defined(OS_CHROMEOS) || defined(OS_LINUX)
-+#if defined(OS_CHROMEOS) || defined(OS_LINUX) || defined(OS_BSD)
+ #if defined(OS_CHROMEOS) || defined(OS_LINUX)
  #if BUILDFLAG(USE_TCMALLOC)
- extern const char kDynamicTcmallocName[];
- extern const char kDynamicTcmallocDescription[];
- #endif  // BUILDFLAG(USE_TCMALLOC)
--#endif  // #if defined(OS_CHROMEOS) || defined(OS_LINUX)
-+#endif  // #if defined(OS_CHROMEOS) || defined(OS_LINUX) || defined(OS_BSD)
- 
- #if !defined(OS_ANDROID) && !BUILDFLAG(IS_CHROMEOS_ASH)
- extern const char kUserDataSnapshotName[];
 @@ -3158,7 +3158,7 @@ extern const char kElasticOverscrollName[];
  extern const char kElasticOverscrollDescription[];
  #endif  // defined(OS_WIN) || defined(OS_ANDROID)

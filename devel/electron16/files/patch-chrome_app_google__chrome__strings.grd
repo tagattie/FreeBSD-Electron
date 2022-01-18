@@ -1,20 +1,11 @@
---- chrome/app/google_chrome_strings.grd.orig	2021-11-19 04:25:05 UTC
+--- chrome/app/google_chrome_strings.grd.orig	2021-12-14 11:44:56 UTC
 +++ chrome/app/google_chrome_strings.grd
-@@ -215,7 +215,7 @@ chromium_strings.grd. -->
-           Welcome to Chrome; new browser window opened
-         </message>
-       </if>
--      <if expr="is_macosx or is_linux">
-+      <if expr="is_macosx or is_linux or is_posix">
-         <message name="IDS_FIRST_RUN_DIALOG_WINDOW_TITLE" desc="Window title of First Run dialog on Mac and Linux, displayed in title bar">
-           Welcome to Google Chrome
-         </message>
 @@ -738,7 +738,7 @@ Google Chrome is unable to recover your settings.
        </if>
  
        <!-- about:browser-switch strings -->
 -      <if expr="is_win or is_macosx or is_fuchsia or (is_linux and not chromeos)">
-+      <if expr="is_win or is_macosx or is_fuchsia or (is_posix and not chromeos)">
++      <if expr="is_win or is_macosx or is_fuchsia or (is_linux and not chromeos) or is_bsd">
          <message name="IDS_ABOUT_BROWSER_SWITCH_DESCRIPTION_UNKNOWN_BROWSER" desc="Description shown while waiting for an alternative browser to open, when the browser name is not auto-detected">
            Your system administrator has configured Google Chrome to open an alternative browser to access <ph name="TARGET_URL_HOSTNAME">$1<ex>example.com</ex></ph>.
          </message>

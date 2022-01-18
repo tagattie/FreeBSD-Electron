@@ -1,4 +1,4 @@
---- base/allocator/partition_allocator/page_allocator_internals_posix.h.orig	2021-11-19 04:25:04 UTC
+--- base/allocator/partition_allocator/page_allocator_internals_posix.h.orig	2021-12-14 11:44:55 UTC
 +++ base/allocator/partition_allocator/page_allocator_internals_posix.h
 @@ -28,10 +28,14 @@
  #if defined(OS_ANDROID)
@@ -45,27 +45,7 @@
  #endif
  
    return ret;
-@@ -291,9 +304,19 @@ void DecommitAndZeroSystemPagesInternal(void* address,
-   // shall be removed, as if by an appropriate call to munmap(), before the
-   // new mapping is established." As a consequence, the memory will be
-   // zero-initialized on next access.
-+#if !defined(OS_FREEBSD)
-   void* ptr = mmap(address, length, PROT_NONE,
-                    MAP_FIXED | MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
-   PA_CHECK(ptr == address);
-+#else
-+  int fd = HANDLE_EINTR(open("/dev/zero", O_RDONLY));
-+  PA_CHECK(fd != -1);
-+
-+  void *ptr = mmap(address, length, PROT_NONE,
-+                   MAP_FIXED | MAP_PRIVATE, fd, 0);
-+  PA_PCHECK(ptr == address);
-+  HANDLE_EINTR(close(fd));
-+#endif
- }
- 
- void RecommitSystemPagesInternal(
-@@ -346,6 +369,8 @@ void DiscardSystemPagesInternal(void* address, size_t 
+@@ -346,6 +359,8 @@ void DiscardSystemPagesInternal(void* address, size_t 
      ret = madvise(address, length, MADV_DONTNEED);
    }
    PA_PCHECK(ret == 0);

@@ -1,0 +1,20 @@
+--- chrome/browser/safe_browsing/BUILD.gn.orig	2021-12-14 11:44:59 UTC
++++ chrome/browser/safe_browsing/BUILD.gn
+@@ -296,7 +296,7 @@ static_library("safe_browsing") {
+         ]
+       }
+ 
+-      if (is_linux || is_win) {
++      if ((is_linux || is_win) && !is_bsd) {
+         sources += [
+           "download_protection/document_analysis_service.cc",
+           "download_protection/document_analysis_service.h",
+@@ -342,7 +342,7 @@ static_library("safe_browsing") {
+           "//chrome/common:version_header",
+         ]
+       }
+-      if (is_linux || is_win) {
++      if ((is_linux || is_win) && !is_bsd) {
+         deps += [
+           "//chrome/common/safe_browsing:document_analyzer_results",
+           "//chrome/services/file_util/public/mojom",

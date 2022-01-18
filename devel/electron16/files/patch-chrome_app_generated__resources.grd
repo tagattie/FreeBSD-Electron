@@ -1,29 +1,20 @@
---- chrome/app/generated_resources.grd.orig	2021-11-19 04:25:05 UTC
+--- chrome/app/generated_resources.grd.orig	2021-12-14 11:44:56 UTC
 +++ chrome/app/generated_resources.grd
 @@ -293,7 +293,7 @@ are declared in tools/grit/grit_rule.gni.
        <part file="profiles_strings.grdp" />
  
        <!-- Web app intent picker strings -->
 -      <if expr="is_win or is_macosx or is_linux">
-+      <if expr="is_win or is_macosx or is_linux or is_posix">
++      <if expr="is_win or is_macosx or is_linux or is_bsd">
          <part file="url_handler_intent_picker_strings.grdp" />
        </if>
  
-@@ -2799,7 +2799,7 @@ are declared in tools/grit/grit_rule.gni.
-       </if>
- 
-       <!-- Bluetooth Device Credentials (i.e. PIN/Passkey) dialog -->
--      <if expr="is_win or is_linux">
-+      <if expr="is_win or is_linux or is_posix">
-         <message name="IDS_BLUETOOTH_DEVICE_CREDENTIALS_TITLE" desc="Title of the Bluetooth device credentials prompt dialog.">
-           Device Credentials
-         </message>
 @@ -5528,7 +5528,7 @@ Keep your key file in a safe place. You will need it t
        </if>
  
        <!-- chrome://browser-switch strings -->
 -      <if expr="is_win or is_macosx or is_fuchsia or (is_linux and not chromeos)">
-+      <if expr="is_win or is_macosx or is_fuchsia or (is_posix and not chromeos)">
++      <if expr="is_win or is_macosx or is_fuchsia or (is_linux and not chromeos) or is_bsd">
          <message name="IDS_ABOUT_BROWSER_SWITCH_TITLE" desc="about:browser-switch page title">
            Legacy Browser Support
          </message>

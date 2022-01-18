@@ -1,4 +1,4 @@
---- chrome/browser/flag_descriptions.cc.orig	2021-11-19 04:25:08 UTC
+--- chrome/browser/flag_descriptions.cc.orig	2021-12-14 11:44:58 UTC
 +++ chrome/browser/flag_descriptions.cc
 @@ -5270,7 +5270,7 @@ const char kDownloadShelfWebUIDescription[] =
  
@@ -22,26 +22,24 @@
  
  const char kCommanderName[] = "Commander";
  const char kCommanderDescription[] =
-@@ -5307,16 +5307,16 @@ const char kDesktopDetailedLanguageSettingsName[] =
+@@ -5307,7 +5307,7 @@ const char kDesktopDetailedLanguageSettingsName[] =
  const char kDesktopDetailedLanguageSettingsDescription[] =
      "Enable the new detailed language settings page";
  
 -#endif  // defined(OS_WIN) || defined(OS_MAC) || defined(OS_LINUX)
 +#endif  // defined(OS_WIN) || defined(OS_MAC) || defined(OS_LINUX) || defined(OS_BSD)
  
--#if defined(OS_CHROMEOS) || defined(OS_LINUX)
-+#if defined(OS_CHROMEOS) || defined(OS_LINUX) || defined(OS_BSD)
+ #if defined(OS_CHROMEOS) || defined(OS_LINUX)
  #if BUILDFLAG(USE_TCMALLOC)
- const char kDynamicTcmallocName[] = "Dynamic Tcmalloc Tuning";
- const char kDynamicTcmallocDescription[] =
-     "Allows tcmalloc to dynamically adjust tunables based on system resource "
-     "utilization.";
- #endif  // BUILDFLAG(USE_TCMALLOC)
--#endif  // #if defined(OS_CHROMEOS) || defined(OS_LINUX)
-+#endif  // #if defined(OS_CHROMEOS) || defined(OS_LINU) || defined(OS_BSD)
+@@ -5421,7 +5421,7 @@ const char kAutofillCreditCardUploadDescription[] =
  
- #if !defined(OS_ANDROID) && !BUILDFLAG(IS_CHROMEOS_ASH)
- const char kUserDataSnapshotName[] = "Enable user data snapshots";
+ #endif  // defined(TOOLKIT_VIEWS) || defined(OS_ANDROID)
+ 
+-#if !defined(OS_WIN) && !defined(OS_FUCHSIA)
++#if !defined(OS_WIN) && !defined(OS_FUCHSIA) && !defined(OS_BSD)
+ const char kSendWebUIJavaScriptErrorReportsName[] =
+     "Send WebUI JavaScript Error Reports";
+ const char kSendWebUIJavaScriptErrorReportsDescription[] =
 @@ -5436,7 +5436,7 @@ const char kElasticOverscrollDescription[] =
      "Enables Elastic Overscrolling on touchscreens and precision touchpads.";
  #endif  // defined(OS_WIN) || defined(OS_ANDROID)
