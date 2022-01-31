@@ -1,6 +1,6 @@
---- electron/spec-main/webview-spec.ts.orig	2021-11-08 18:41:28 UTC
+--- electron/spec-main/webview-spec.ts.orig	2022-01-27 17:43:12 UTC
 +++ electron/spec-main/webview-spec.ts
-@@ -447,7 +447,7 @@ describe('<webview> tag', function () {
+@@ -448,7 +448,7 @@ describe('<webview> tag', function () {
  
      // FIXME(zcbenz): Fullscreen events do not work on Linux.
      // This test is flaky on arm64 macOS.

@@ -1,12 +1,12 @@
-TIMESTAMP = 1642068690
+TIMESTAMP = 1643609378
 SHA256 (electron/chromium-96.0.4664.110.tar.xz) = 36a99d29c2e93a9975be53648f2cd3ffa4ee43730f217a2e7ed88c1901a671e8
 SIZE (electron/chromium-96.0.4664.110.tar.xz) = 1209944416
 SHA256 (electron/cd96fc55dc243f6c6f4cb63ad117cad6cd48dceb) = ec973eccd669d417fbf2d0a4dac730744a3174268ff062db5451b55c82bc3492
 SIZE (electron/cd96fc55dc243f6c6f4cb63ad117cad6cd48dceb) = 26759650
-SHA256 (electron/electron-yarn-cache-16.0.7.tar.xz) = 7eba798367af093cf338362082a47c3ed10255547d68cce41a1bea7bcfb57e96
-SIZE (electron/electron-yarn-cache-16.0.7.tar.xz) = 34834588
-SHA256 (electron/electron-electron-v16.0.7_GH0.tar.gz) = e0f416105a3aaf789e0b368c36e45d99e1b7db0fbe912e31dfb1e8bbe28c420d
-SIZE (electron/electron-electron-v16.0.7_GH0.tar.gz) = 10061637
+SHA256 (electron/electron-yarn-cache-16.0.8.tar.xz) = 94097ae2c97dbb8e4ade89dbfad7b285a1d1929542676a50acfc1e5d952c45ba
+SIZE (electron/electron-yarn-cache-16.0.8.tar.xz) = 34832188
+SHA256 (electron/electron-electron-v16.0.8_GH0.tar.gz) = f97bb0e75ced4f4289a6d154156bb9a4a2e9112e8a92a222059accc230368c0a
+SIZE (electron/electron-electron-v16.0.8_GH0.tar.gz) = 10122325
 SHA256 (electron/nodejs-node-v16.9.1_GH0.tar.gz) = 05107c42c2aa1577582636530388245e872db95651eaf61055622eaba2b800f4
 SIZE (electron/nodejs-node-v16.9.1_GH0.tar.gz) = 88286425
 SHA256 (electron/nodejs-nan-65b32af46e9d7fab2e4ff657751205b3865f4920_GH0.tar.gz) = a649b75bfa9c1a0254c73d022c6e98924b9471f593bcc83832daaf68da4cae8d
