@@ -1,20 +1,20 @@
---- jslib/electron/src/tray.main.ts.orig	2021-11-25 07:22:43 UTC
+--- jslib/electron/src/tray.main.ts.orig	2022-02-11 20:26:02 UTC
 +++ jslib/electron/src/tray.main.ts
-@@ -88,7 +88,7 @@ export class TrayMain {
-     removeTray(showWindow = true) {
-         // Due to https://github.com/electron/electron/issues/17622
-         // we cannot destroy the tray icon on linux.
--        if (this.tray != null && process.platform !== 'linux') {
-+        if (this.tray != null && (process.platform !== 'linux' && process.platform !== 'freebsd')) {
-             this.tray.destroy();
-             this.tray = null;
-         }
-@@ -151,7 +151,7 @@ export class TrayMain {
+@@ -86,7 +86,7 @@ export class TrayMain {
+   removeTray(showWindow = true) {
+     // Due to https://github.com/electron/electron/issues/17622
+     // we cannot destroy the tray icon on linux.
+-    if (this.tray != null && process.platform !== "linux") {
++    if (this.tray != null && (process.platform !== "linux" && process.platform !== "freebsd")) {
+       this.tray.destroy();
+       this.tray = null;
      }
+@@ -149,7 +149,7 @@ export class TrayMain {
+   }
  
-     private isLinux() {
--        return process.platform === 'linux';
-+        return (process.platform === 'linux' || process.platform === 'freebsd');
-     }
+   private isLinux() {
+-    return process.platform === "linux";
++    return (process.platform === "linux" || process.platform === "freebsd");
+   }
  
-     private async toggleWindow() {
+   private async toggleWindow() {
