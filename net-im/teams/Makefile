@@ -1,6 +1,6 @@
 PORTNAME=	teams
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.20
+DISTVERSION=	1.0.23
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -27,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1640603361
+PREFETCH_TIMESTAMP=	1644902604
 
 post-patch:
 	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
