@@ -59,6 +59,10 @@ pre-fetch:
 	fi
 
 post-extract:
+.for f in package.json package-lock.json
+	${MV} ${WRKSRC}/${f} ${WRKSRC}/${f}.bak
+	${CP} ${PKGJSONSDIR}/${f} ${WRKSRC}
+.endfor
 	${MV} ${WRKDIR}/node_modules ${WRKSRC}
 
 post-patch:
