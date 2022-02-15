@@ -1,4 +1,4 @@
---- build/linux/hyper.orig	2022-01-09 06:36:16 UTC
+--- build/linux/hyper.orig	2022-02-04 09:30:04 UTC
 +++ build/linux/hyper
 @@ -15,20 +15,9 @@ if [ "$(id -u)" = "0" ]; then
  	fi
@@ -20,7 +20,7 @@
  
 -ELECTRON="$HYPER_PATH/hyper"
 -CLI="$HYPER_PATH/resources/bin/cli.js"
-+ELECTRON="$HYPER_PATH/bin/electron14"
++ELECTRON="$HYPER_PATH/bin/electron16"
 +CLI="$HYPER_PATH/share/hyper/resources/bin/cli.js"
  ELECTRON_RUN_AS_NODE=1 "$ELECTRON" "$CLI" "$@"
 -exit $?

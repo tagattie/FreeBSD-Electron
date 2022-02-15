@@ -1,6 +1,6 @@
 PORTNAME=	hyper
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.1.5
+DISTVERSION=	3.2.0
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,7 +11,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:14 localbase:ldflags node:14,build \
+USES=		desktop-file-utils electron:16 localbase:ldflags node:16,build \
 		python:build shebangfix
 
 USE_GITHUB=	yes
@@ -28,7 +28,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1641708296
+PREFETCH_TIMESTAMP=	1644908661
 
 post-extract:
 	${MKDIR} ${WRKSRC}/target
