@@ -1,4 +1,4 @@
---- electron/spec-main/api-browser-window-spec.ts.orig	2022-01-27 17:43:12 UTC
+--- electron/spec-main/api-browser-window-spec.ts.orig	2022-02-14 19:53:12 UTC
 +++ electron/spec-main/api-browser-window-spec.ts
 @@ -58,7 +58,7 @@ describe('BrowserWindow module', () => {
        }).not.to.throw();
@@ -63,7 +63,7 @@
      afterEach(closeAllWindows);
      it('emits an event when window is maximized', async () => {
        const w = new BrowserWindow({ show: false });
-@@ -3432,7 +3432,7 @@ describe('BrowserWindow module', () => {
+@@ -3461,7 +3461,7 @@ describe('BrowserWindow module', () => {
  
      // TODO(dsanders11): Enable once minimize event works on Linux again.
      //                   See https://github.com/electron/electron/issues/28699
@@ -72,7 +72,7 @@
        const w = new BrowserWindow();
        const minimize = emittedOnce(w, 'minimize');
        w.minimize();
-@@ -3752,7 +3752,7 @@ describe('BrowserWindow module', () => {
+@@ -3781,7 +3781,7 @@ describe('BrowserWindow module', () => {
        });
  
        // On Linux there is no "resizable" property of a window.
@@ -81,7 +81,7 @@
          const w = new BrowserWindow({ show: false });
          expect(w.resizable).to.be.true('resizable');
  
-@@ -3844,7 +3844,7 @@ describe('BrowserWindow module', () => {
+@@ -3873,7 +3873,7 @@ describe('BrowserWindow module', () => {
      });
    });
  

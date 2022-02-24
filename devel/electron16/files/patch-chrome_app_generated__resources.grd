@@ -1,4 +1,4 @@
---- chrome/app/generated_resources.grd.orig	2021-12-14 11:44:56 UTC
+--- chrome/app/generated_resources.grd.orig	2022-02-21 06:05:13 UTC
 +++ chrome/app/generated_resources.grd
 @@ -293,7 +293,7 @@ are declared in tools/grit/grit_rule.gni.
        <part file="profiles_strings.grdp" />
@@ -9,7 +9,7 @@
          <part file="url_handler_intent_picker_strings.grdp" />
        </if>
  
-@@ -5528,7 +5528,7 @@ Keep your key file in a safe place. You will need it t
+@@ -5512,7 +5512,7 @@ Keep your key file in a safe place. You will need it t
        </if>
  
        <!-- chrome://browser-switch strings -->
@@ -18,7 +18,7 @@
          <message name="IDS_ABOUT_BROWSER_SWITCH_TITLE" desc="about:browser-switch page title">
            Legacy Browser Support
          </message>
-@@ -7904,7 +7904,7 @@ Keep your key file in a safe place. You will need it t
+@@ -7888,7 +7888,7 @@ Keep your key file in a safe place. You will need it t
          Google Pay
        </message>
  
@@ -27,7 +27,7 @@
          <message name="IDS_SHOW_WINDOW_DECORATIONS" desc="The label of a radio button in the options dialog for using the system title bar and borders.">
            Use system title bar and borders
          </message>
-@@ -8981,7 +8981,7 @@ Please help our engineers fix this problem. Tell us wh
+@@ -8965,7 +8965,7 @@ Please help our engineers fix this problem. Tell us wh
          Set as default
        </message>
  

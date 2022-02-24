@@ -1,6 +1,6 @@
---- services/network/BUILD.gn.orig	2021-11-19 04:25:21 UTC
+--- services/network/BUILD.gn.orig	2022-02-21 06:05:20 UTC
 +++ services/network/BUILD.gn
-@@ -253,7 +253,7 @@ component("network_service") {
+@@ -251,7 +251,7 @@ component("network_service") {
      "//url",
    ]
  
@@ -9,7 +9,7 @@
      deps += [ ":network_sandbox_hook" ]
    }
  
-@@ -293,7 +293,7 @@ component("network_service") {
+@@ -291,7 +291,7 @@ component("network_service") {
    defines = [ "IS_NETWORK_SERVICE_IMPL" ]
  }
  

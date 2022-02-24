@@ -1,4 +1,4 @@
---- electron/shell/browser/native_window_views.cc.orig	2022-01-27 17:43:12 UTC
+--- electron/shell/browser/native_window_views.cc.orig	2022-02-14 19:53:12 UTC
 +++ electron/shell/browser/native_window_views.cc
 @@ -43,7 +43,7 @@
  #include "ui/wm/core/shadow_types.h"
@@ -27,7 +27,7 @@
    if (parent)
      SetParentWindow(parent);
  #endif
-@@ -372,7 +372,7 @@ NativeWindowViews::NativeWindowViews(const gin_helper:
+@@ -371,7 +371,7 @@ NativeWindowViews::NativeWindowViews(const gin_helper:
    if (window)
      window->AddPreTargetHandler(this);
  
@@ -36,7 +36,7 @@
    // On linux after the widget is initialized we might have to force set the
    // bounds if the bounds are smaller than the current display
    SetBounds(gfx::Rect(GetPosition(), bounds.size()), false);
-@@ -513,7 +513,7 @@ bool NativeWindowViews::IsVisible() {
+@@ -512,7 +512,7 @@ bool NativeWindowViews::IsVisible() {
  bool NativeWindowViews::IsEnabled() {
  #if defined(OS_WIN)
    return ::IsWindowEnabled(GetAcceleratedWidget());
@@ -45,7 +45,7 @@
  #if defined(USE_X11)
    return !event_disabler_.get();
  #endif
-@@ -568,7 +568,7 @@ void NativeWindowViews::SetEnabledInternal(bool enable
+@@ -567,7 +567,7 @@ void NativeWindowViews::SetEnabledInternal(bool enable
  #endif
  }
  
