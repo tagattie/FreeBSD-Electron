@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_web_contents.cc.orig	2021-11-15 23:45:07 UTC
+--- electron/shell/browser/api/electron_api_web_contents.cc.orig	2022-05-04 15:34:57 UTC
 +++ electron/shell/browser/api/electron_api_web_contents.cc
 @@ -148,11 +148,11 @@
  #include "ui/base/cocoa/defaults_utils.h"
@@ -41,7 +41,7 @@
      // A generic |CrashDumpHungChildProcess()| is not implemented for Linux.
      // Instead we send an explicit IPC to crash on the renderer's IO thread.
      rph->ForceCrash();
-@@ -2808,7 +2808,7 @@ void WebContents::CopyImageAt(int x, int y) {
+@@ -2813,7 +2813,7 @@ void WebContents::CopyImageAt(int x, int y) {
  void WebContents::Focus() {
    // Focusing on WebContents does not automatically focus the window on macOS
    // and Linux, do it manually to match the behavior on Windows.
@@ -50,7 +50,7 @@
    if (owner_window())
      owner_window()->Focus(true);
  #endif
-@@ -3657,7 +3657,7 @@ ui::ImageModel WebContents::GetDevToolsWindowIcon() {
+@@ -3662,7 +3662,7 @@ ui::ImageModel WebContents::GetDevToolsWindowIcon() {
  }
  #endif
  

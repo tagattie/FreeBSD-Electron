@@ -1,4 +1,4 @@
---- electron/BUILD.gn.orig	2021-11-15 23:45:07 UTC
+--- electron/BUILD.gn.orig	2022-05-04 15:34:57 UTC
 +++ electron/BUILD.gn
 @@ -417,7 +417,7 @@ source_set("electron_lib") {
      defines += [ "GDK_DISABLE_DEPRECATION_WARNINGS" ]
@@ -59,4 +59,4 @@
 +  if (is_linux && !is_bsd) {
      data_deps += [ "//sandbox/linux:chrome_sandbox" ]
    }
-   outputs = [ "$root_build_dir/dist.zip" ]
+   deps = data_deps

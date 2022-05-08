@@ -1,4 +1,4 @@
---- electron/spec-main/api-browser-window-spec.ts.orig	2022-01-27 17:46:32 UTC
+--- electron/spec-main/api-browser-window-spec.ts.orig	2022-05-04 15:34:57 UTC
 +++ electron/spec-main/api-browser-window-spec.ts
 @@ -58,7 +58,7 @@ describe('BrowserWindow module', () => {
        }).not.to.throw();
@@ -45,7 +45,7 @@
        it('sets 1 regardless of parameter', () => {
          const w = new BrowserWindow({ show: false });
          w.setOpacity(0);
-@@ -2615,7 +2615,7 @@ describe('BrowserWindow module', () => {
+@@ -2665,7 +2665,7 @@ describe('BrowserWindow module', () => {
          expect(test.versions).to.deep.equal(process.versions);
          expect(test.contextId).to.be.a('string');
  
@@ -54,7 +54,7 @@
            expect(test.creationTime).to.be.null('creation time');
            expect(test.systemMemoryInfo).to.be.null('system memory info');
          } else {
-@@ -3214,7 +3214,7 @@ describe('BrowserWindow module', () => {
+@@ -3264,7 +3264,7 @@ describe('BrowserWindow module', () => {
      });
    });
  
@@ -63,7 +63,7 @@
      afterEach(closeAllWindows);
      it('emits an event when window is maximized', async () => {
        const w = new BrowserWindow({ show: false });
-@@ -3415,7 +3415,7 @@ describe('BrowserWindow module', () => {
+@@ -3556,7 +3556,7 @@ describe('BrowserWindow module', () => {
  
      // TODO(dsanders11): Enable once minimize event works on Linux again.
      //                   See https://github.com/electron/electron/issues/28699
@@ -72,7 +72,7 @@
        const w = new BrowserWindow();
        const minimize = emittedOnce(w, 'minimize');
        w.minimize();
-@@ -3735,7 +3735,7 @@ describe('BrowserWindow module', () => {
+@@ -3876,7 +3876,7 @@ describe('BrowserWindow module', () => {
        });
  
        // On Linux there is no "resizable" property of a window.
@@ -81,7 +81,7 @@
          const w = new BrowserWindow({ show: false });
          expect(w.resizable).to.be.true('resizable');
  
-@@ -3827,7 +3827,7 @@ describe('BrowserWindow module', () => {
+@@ -3968,7 +3968,7 @@ describe('BrowserWindow module', () => {
      });
    });
  
