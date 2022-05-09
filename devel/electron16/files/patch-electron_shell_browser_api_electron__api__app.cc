@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_app.cc.orig	2022-01-11 17:04:42 UTC
+--- electron/shell/browser/api/electron_api_app.cc.orig	2022-05-04 15:34:10 UTC
 +++ electron/shell/browser/api/electron_api_app.cc
 @@ -702,7 +702,7 @@ void App::OnWillFinishLaunching() {
  }
@@ -18,7 +18,7 @@
    auto env = base::Environment::Create();
    env->SetVar("CHROME_DESKTOP", desktop_name);
  #endif
-@@ -1398,7 +1398,7 @@ std::vector<gin_helper::Dictionary> App::GetAppMetrics
+@@ -1400,7 +1400,7 @@ std::vector<gin_helper::Dictionary> App::GetAppMetrics
        pid_dict.Set("name", process_metric.second->name);
      }
  
@@ -27,7 +27,7 @@
      auto memory_info = process_metric.second->GetMemoryInfo();
  
      gin_helper::Dictionary memory_dict = gin::Dictionary::CreateEmpty(isolate);
-@@ -1725,7 +1725,7 @@ gin::ObjectTemplateBuilder App::GetObjectTemplateBuild
+@@ -1727,7 +1727,7 @@ gin::ObjectTemplateBuilder App::GetObjectTemplateBuild
        .SetMethod(
            "removeAsDefaultProtocolClient",
            base::BindRepeating(&Browser::RemoveAsDefaultProtocolClient, browser))
@@ -36,7 +36,7 @@
        .SetMethod(
            "getApplicationInfoForProtocol",
            base::BindRepeating(&Browser::GetApplicationInfoForProtocol, browser))
-@@ -1782,7 +1782,7 @@ gin::ObjectTemplateBuilder App::GetObjectTemplateBuild
+@@ -1784,7 +1784,7 @@ gin::ObjectTemplateBuilder App::GetObjectTemplateBuild
        .SetMethod("getJumpListSettings", &App::GetJumpListSettings)
        .SetMethod("setJumpList", &App::SetJumpList)
  #endif

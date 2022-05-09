@@ -1,4 +1,4 @@
---- electron/shell/common/node_bindings_linux.cc.orig	2021-01-22 23:55:24 UTC
+--- electron/shell/common/node_bindings_linux.cc.orig	2022-05-04 15:34:10 UTC
 +++ electron/shell/common/node_bindings_linux.cc
 @@ -4,17 +4,31 @@
  
@@ -32,7 +32,7 @@
  }
  
  NodeBindingsLinux::~NodeBindingsLinux() = default;
-@@ -37,6 +51,7 @@ void NodeBindingsLinux::OnWatcherQueueChanged(uv_loop_
+@@ -55,6 +69,7 @@ void NodeBindingsLinux::OnWatcherQueueChanged(uv_loop_
  }
  
  void NodeBindingsLinux::PollEvents() {
@@ -40,7 +40,7 @@
    int timeout = uv_backend_timeout(uv_loop_);
  
    // Wait for new libuv events.
-@@ -45,6 +60,26 @@ void NodeBindingsLinux::PollEvents() {
+@@ -63,6 +78,26 @@ void NodeBindingsLinux::PollEvents() {
      struct epoll_event ev;
      r = epoll_wait(epoll_, &ev, 1, timeout);
    } while (r == -1 && errno == EINTR);
