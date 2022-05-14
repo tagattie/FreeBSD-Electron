@@ -24,6 +24,7 @@ PATCH_DEPENDS=		git:devel/git
 BUILD_DEPENDS=		${LOCALBASE}/bin/ar:devel/binutils \
 			gperf:devel/gperf \
 			yasm:devel/yasm \
+			${LOCALBASE}/libdata/pkgconfig/dri.pc:graphics/mesa-dri \
 			${LOCALBASE}/include/linux/videodev2.h:multimedia/v4l_compat \
 			node16>0:www/node16 \
 			npm-node16>0:www/npm-node16
