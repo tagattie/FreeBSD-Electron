@@ -102,7 +102,7 @@ _INCLUDE_USES_ELECTRON_MK=	yes
 # Electron uses Node (actually a package manager) for build
 .include "${USESDIR}/node.mk"
 
-_VALID_ELECTRON_VERSIONS=	4 5 6 7 8 9 10 11 12 13 14 15 16 17
+_VALID_ELECTRON_VERSIONS=	4 5 6 7 8 9 10 11 12 13 14 15 16 17 18
 _VALID_ELECTRON_FEATURES=	prefetch extract prebuild build
 _VALID_ELECTRON_FEATURE_BUILDS=	builder packager
 
