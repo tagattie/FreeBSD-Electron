@@ -1,6 +1,6 @@
---- electron/shell/browser/electron_browser_client.cc.orig	2021-11-08 18:41:28 UTC
+--- electron/shell/browser/electron_browser_client.cc.orig	2022-05-24 14:51:39 UTC
 +++ electron/shell/browser/electron_browser_client.cc
-@@ -175,7 +175,7 @@
+@@ -176,7 +176,7 @@
  #include "content/public/common/child_process_host.h"
  #endif
  

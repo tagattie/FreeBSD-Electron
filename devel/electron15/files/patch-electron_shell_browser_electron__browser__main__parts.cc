@@ -1,6 +1,6 @@
---- electron/shell/browser/electron_browser_main_parts.cc.orig	2021-11-15 23:45:07 UTC
+--- electron/shell/browser/electron_browser_main_parts.cc.orig	2022-05-24 14:51:39 UTC
 +++ electron/shell/browser/electron_browser_main_parts.cc
-@@ -61,7 +61,7 @@
+@@ -64,7 +64,7 @@
  #include "ui/wm/core/wm_state.h"
  #endif
  
@@ -9,7 +9,7 @@
  #include "base/environment.h"
  #include "base/threading/thread_task_runner_handle.h"
  #include "ui/gtk/gtk_ui_factory.h"
-@@ -156,7 +156,7 @@ std::u16string MediaStringProvider(media::MessageId id
+@@ -159,7 +159,7 @@ std::u16string MediaStringProvider(media::MessageId id
    }
  }
  
@@ -18,7 +18,7 @@
  // GTK does not provide a way to check if current theme is dark, so we compare
  // the text and background luminosity to get a result.
  // This trick comes from FireFox.
-@@ -174,7 +174,7 @@ void UpdateDarkThemeSetting() {
+@@ -177,7 +177,7 @@ void UpdateDarkThemeSetting() {
  
  }  // namespace
  
@@ -27,7 +27,7 @@
  class DarkThemeObserver : public ui::NativeThemeObserver {
   public:
    DarkThemeObserver() = default;
-@@ -285,7 +285,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
+@@ -288,7 +288,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
  #if defined(USE_AURA)
    screen_ = views::CreateDesktopScreen();
    display::Screen::SetScreenInstance(screen_.get());
@@ -36,7 +36,7 @@
    views::LinuxUI::instance()->UpdateDeviceScaleFactor();
  #endif
  #endif
-@@ -302,7 +302,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
+@@ -305,7 +305,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
    // happen before the ResourceBundle is loaded
    if (locale.empty())
      l10n_util::OverrideLocaleWithCocoaLocale();
@@ -45,7 +45,7 @@
    // l10n_util::GetApplicationLocaleInternal uses g_get_language_names(),
    // which keys off of getenv("LC_ALL").
    // We must set this env first to make ui::ResourceBundle accept the custom
-@@ -325,7 +325,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
+@@ -328,7 +328,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
    ElectronBrowserClient::SetApplicationLocale(app_locale);
    fake_browser_process_->SetApplicationLocale(app_locale);
  
@@ -54,7 +54,7 @@
    // Reset to the original LC_ALL since we should not be changing it.
    if (!locale.empty()) {
      if (lc_all)
-@@ -372,7 +372,7 @@ void ElectronBrowserMainParts::PostDestroyThreads() {
+@@ -375,7 +375,7 @@ void ElectronBrowserMainParts::PostDestroyThreads() {
  }
  
  void ElectronBrowserMainParts::ToolkitInitialized() {
@@ -63,3 +63,13 @@
    auto linux_ui = BuildGtkUi();
    linux_ui->Initialize();
  
+@@ -486,7 +486,9 @@ void ElectronBrowserMainParts::PostCreateMainMessageLo
+ #endif
+ #if defined(OS_LINUX)
+   bluez::DBusBluezManagerWrapperLinux::Initialize();
++#endif
+ 
++#if defined(OS_LINUX) || defined(OS_BSD)
+   // Set up crypt config. This needs to be done before anything starts the
+   // network service, as the raw encryption key needs to be shared with the
+   // network service for encrypted cookie storage.

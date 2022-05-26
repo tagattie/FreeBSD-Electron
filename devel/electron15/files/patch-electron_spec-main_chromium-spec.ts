@@ -1,4 +1,4 @@
---- electron/spec-main/chromium-spec.ts.orig	2022-01-11 19:18:16 UTC
+--- electron/spec-main/chromium-spec.ts.orig	2022-05-24 14:51:39 UTC
 +++ electron/spec-main/chromium-spec.ts
 @@ -403,13 +403,13 @@ describe('command line switches', () => {
      it('should not set an invalid locale', async () => testLocale('asdfkl', currentLocale));
@@ -33,7 +33,7 @@
      const html = `
      <html lang="ja-JP">
        <head>
-@@ -1782,7 +1782,7 @@ describe('navigator.clipboard', () => {
+@@ -1810,7 +1810,7 @@ describe('navigator.clipboard', () => {
    });
  });
  
