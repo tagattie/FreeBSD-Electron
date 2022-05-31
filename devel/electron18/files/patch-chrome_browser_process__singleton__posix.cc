@@ -1,4 +1,4 @@
---- chrome/browser/process_singleton_posix.cc.orig	2022-05-20 04:30:53 UTC
+--- chrome/browser/process_singleton_posix.cc.orig	2022-05-31 05:47:45 UTC
 +++ chrome/browser/process_singleton_posix.cc
 @@ -101,13 +101,13 @@
  #include "ui/base/l10n/l10n_util.h"
@@ -25,7 +25,7 @@
    std::u16string relaunch_button_text =
        l10n_util::GetStringUTF16(IDS_PROFILE_IN_USE_LINUX_RELAUNCH);
    return ShowProcessSingletonDialog(error, relaunch_button_text);
-@@ -1012,7 +1012,7 @@ ProcessSingleton::NotifyResult ProcessSingleton::Notif
+@@ -989,7 +989,7 @@ ProcessSingleton::NotifyResult ProcessSingleton::Notif
      return PROCESS_NONE;
    } else if (strncmp(buf, kACKToken, base::size(kACKToken) - 1) == 0) {
  #if defined(TOOLKIT_VIEWS) && \

@@ -1,4 +1,4 @@
---- electron/spec-main/api-app-spec.ts.orig	2022-05-18 15:31:32 UTC
+--- electron/spec-main/api-app-spec.ts.orig	2022-05-25 15:32:14 UTC
 +++ electron/spec-main/api-app-spec.ts
 @@ -174,7 +174,7 @@ describe('app module', () => {
      });
@@ -9,7 +9,7 @@
          this.skip();
          return;
        }
-@@ -492,7 +492,7 @@ describe('app module', () => {
+@@ -436,7 +436,7 @@ describe('app module', () => {
    //   let w = null
  
    //   before(function () {
@@ -18,7 +18,7 @@
    //       this.skip()
    //     }
    //   })
-@@ -615,7 +615,7 @@ describe('app module', () => {
+@@ -559,7 +559,7 @@ describe('app module', () => {
    describe('app.badgeCount', () => {
      const platformIsNotSupported =
          (process.platform === 'win32') ||
@@ -27,7 +27,7 @@
  
      const expectedBadgeCount = 42;
  
-@@ -659,7 +659,7 @@ describe('app module', () => {
+@@ -603,7 +603,7 @@ describe('app module', () => {
      });
    });
  
@@ -36,7 +36,7 @@
      const updateExe = path.resolve(path.dirname(process.execPath), '..', 'Update.exe');
      const processStartArgs = [
        '--processStart', `"${path.basename(process.execPath)}"`,
-@@ -976,7 +976,7 @@ describe('app module', () => {
+@@ -920,7 +920,7 @@ describe('app module', () => {
      });
    });
  
@@ -45,7 +45,7 @@
      it('with properties', () => {
        it('can set accessibility support enabled', () => {
          expect(app.accessibilitySupportEnabled).to.eql(false);
-@@ -1094,7 +1094,7 @@ describe('app module', () => {
+@@ -1038,7 +1038,7 @@ describe('app module', () => {
      let w: BrowserWindow;
  
      before(function () {
@@ -54,7 +54,7 @@
          this.skip();
        }
        session.fromPartition('empty-certificate').setCertificateVerifyProc((req, cb) => { cb(0); });
-@@ -1235,7 +1235,7 @@ describe('app module', () => {
+@@ -1179,7 +1179,7 @@ describe('app module', () => {
        // We can't expect particular app names here, but these protocols should
        // at least have _something_ registered. Except on our Linux CI
        // environment apparently.
@@ -63,7 +63,7 @@
          this.skip();
        }
  
-@@ -1253,7 +1253,7 @@ describe('app module', () => {
+@@ -1197,7 +1197,7 @@ describe('app module', () => {
      });
    });
  
@@ -72,7 +72,7 @@
      it('returns promise rejection for a bogus protocol', async function () {
        await expect(
          app.getApplicationInfoForProtocol('bogus-protocol://')
-@@ -1303,7 +1303,7 @@ describe('app module', () => {
+@@ -1247,7 +1247,7 @@ describe('app module', () => {
    });
  
    // FIXME Get these specs running on Linux CI
@@ -81,7 +81,7 @@
      const iconPath = path.join(__dirname, 'fixtures/assets/icon.ico');
      const sizes = {
        small: 16,
-@@ -1384,7 +1384,7 @@ describe('app module', () => {
+@@ -1328,7 +1328,7 @@ describe('app module', () => {
            expect(entry.memory).to.have.property('privateBytes').that.is.greaterThan(0);
          }
  
@@ -90,7 +90,7 @@
            expect(entry.sandboxed).to.be.a('boolean');
          }
  
-@@ -1410,7 +1410,7 @@ describe('app module', () => {
+@@ -1354,7 +1354,7 @@ describe('app module', () => {
    });
  
    // FIXME https://github.com/electron/electron/issues/24224
@@ -99,7 +99,7 @@
      const appPath = path.join(fixturesPath, 'api', 'gpu-info.js');
  
      const getGPUInfo = async (type: string) => {
-@@ -1459,7 +1459,7 @@ describe('app module', () => {
+@@ -1403,7 +1403,7 @@ describe('app module', () => {
  
      it('succeeds with complete GPUInfo', async () => {
        const completeInfo = await getGPUInfo('complete');
@@ -108,7 +108,7 @@
          // For linux and macOS complete info is same as basic info
          await verifyBasicGPUInfo(completeInfo);
          const basicInfo = await getGPUInfo('basic');
-@@ -1489,7 +1489,7 @@ describe('app module', () => {
+@@ -1433,7 +1433,7 @@ describe('app module', () => {
      const socketPath = process.platform === 'win32' ? '\\\\.\\pipe\\electron-mixed-sandbox' : '/tmp/electron-mixed-sandbox';
  
      beforeEach(function (done) {
