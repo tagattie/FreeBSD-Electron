@@ -1,6 +1,6 @@
 PORTNAME=	youtube-music
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.14.0
+DISTVERSION=	1.17.0
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,7 +11,7 @@ LICENSE_FILE=	${WRKSRC}/license
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:12 magick:build node:14,build
+USES=		desktop-file-utils electron:17 magick:build node:16,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	th-ch
@@ -25,7 +25,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract build:builder
 
-PREFETCH_TIMESTAMP=	1640690060
+PREFETCH_TIMESTAMP=	1654151111
 
 pre-build:
 	# generate icon files
@@ -35,7 +35,6 @@ pre-build:
 		${WRKSRC}/assets/generated/icons/png/${size}x${size}.png
 .endfor
 	# generate ad-blocker engine
-	${TOUCH} ${WRKSRC}/node_modules/electron/path.txt
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run plugins
 
 do-install:

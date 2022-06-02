@@ -1,7 +1,7 @@
 {
 	"name": "youtube-music",
 	"productName": "YouTube Music",
-	"version": "1.14.0",
+	"version": "1.17.0",
 	"description": "YouTube Music Desktop App - including custom plugins",
 	"license": "MIT",
 	"repository": "th-ch/youtube-music",
@@ -15,10 +15,25 @@
 		"productName": "YouTube Music",
 		"mac": {
 			"identity": null,
+			"files": [
+				"!plugins/taskbar-mediacontrol${/*}"
+			],
+			"target": [
+				{
+					"target": "dmg",
+					"arch": [
+						"x64",
+						"arm64"
+					]
+				}
+			],
 			"icon": "assets/generated/icons/mac/icon.icns"
 		},
 		"win": {
 			"icon": "assets/generated/icons/win/icon.ico",
+			"files": [
+				"!plugins/touchbar${/*}"
+			],
 			"target": [
 				"nsis",
 				"portable"
@@ -29,6 +44,9 @@
 		},
 		"linux": {
 			"icon": "assets/generated/icons/png",
+			"files": [
+				"!plugins/{touchbar,taskbar-mediacontrol}${/*}"
+			],
 			"category": "AudioVideo",
 			"target": [
 				"AppImage",
@@ -36,6 +54,15 @@
 				"freebsd",
 				"deb",
 				"rpm"
+			]
+		},
+		"snap": {
+			"slots": [
+				{
+					"mpris": {
+						"interface": "mpris"
+					}
+				}
 			]
 		}
 	},
@@ -49,9 +76,11 @@
 		"clean": "rimraf dist",
 		"build": "yarn run clean && electron-builder --win --mac --linux",
 		"build:linux": "yarn run clean && electron-builder --linux",
-		"build:mac": "yarn run clean && electron-builder --mac",
+		"build:mac": "yarn run clean && electron-builder --mac dmg:x64",
+		"build:mac:arm64": "yarn run clean && electron-builder --mac dmg:arm64",
 		"build:win": "yarn run clean && electron-builder --win",
 		"lint": "xo",
+		"changelog": "auto-changelog",
 		"plugins": "yarn run plugin:adblocker",
 		"plugin:adblocker": "rimraf plugins/adblocker/ad-blocker-engine.bin && node plugins/adblocker/blocker.js",
 		"release:linux": "yarn run clean && electron-builder --linux -p always -c.snap.publish=github",
@@ -63,44 +92,55 @@
 		"npm": "Please use yarn and not npm"
 	},
 	"dependencies": {
-		"@cliqz/adblocker-electron": "^1.22.6",
+		"@cliqz/adblocker-electron": "^1.23.7",
+		"@electron/remote": "^2.0.8",
 		"@ffmpeg/core": "^0.10.0",
-		"@ffmpeg/ffmpeg": "^0.10.0",
+		"@ffmpeg/ffmpeg": "^0.10.1",
+		"Simple-YouTube-Age-Restriction-Bypass": "https://gitpkg.now.sh/zerodytrash/Simple-YouTube-Age-Restriction-Bypass/dist?v2.4.6",
 		"async-mutex": "^0.3.2",
 		"browser-id3-writer": "^4.4.0",
-		"custom-electron-prompt": "^1.2.0",
-		"chokidar": "^3.5.2",
-		"custom-electron-titlebar": "^3.2.7",
-		"discord-rpc": "^3.2.0",
+		"chokidar": "^3.5.3",
+		"custom-electron-prompt": "^1.4.2",
+		"custom-electron-titlebar": "^4.1.0",
+		"discord-rpc": "^4.0.1",
 		"electron-better-web-request": "^1.0.1",
 		"electron-debug": "^3.2.0",
 		"electron-is": "^3.0.0",
 		"electron-localshortcut": "^3.2.1",
-		"electron-store": "^7.0.3",
+		"electron-store": "^8.0.1",
 		"electron-unhandled": "^3.0.2",
-		"electron-updater": "^4.4.6",
+		"electron-updater": "^4.6.3",
 		"filenamify": "^4.3.0",
+		"hark": "^1.2.3",
+		"html-to-text": "^8.2.0",
 		"md5": "^2.3.0",
 		"mpris-service": "^2.1.2",
-		"node-fetch": "^2.6.2",
-		"node-notifier": "^9.0.1",
-		"ytdl-core": "^4.9.1",
-		"ytpl": "^2.2.3"
+		"node-fetch": "^2.6.7",
+		"node-notifier": "^10.0.1",
+		"ytdl-core": "^4.11.0",
+		"ytpl": "^2.3.0"
 	},
 	"devDependencies": {
-		"electron": "^12.2.2",
-		"electron-builder": "^22.10.5",
+		"auto-changelog": "^2.4.0",
+		"electron": "^17.0.0",
+		"electron-builder": "^23.0.3",
 		"electron-devtools-installer": "^3.1.1",
-		"get-port": "^5.1.1",
+		"electron-icon-maker": "0.0.5",
 		"jest": "^27.3.1",
+		"playwright": "^1.17.1",
 		"rimraf": "^3.0.2",
-		"spectron": "^14.0.0",
 		"xo": "^0.45.0"
 	},
 	"resolutions": {
 		"glob-parent": "5.1.2",
-		"minimist": "1.2.5",
+		"minimist": "1.2.6",
 		"yargs-parser": "18.1.3"
+	},
+	"auto-changelog": {
+		"hideCredit": true,
+		"package": true,
+		"unreleased": true,
+		"output": "changelog.md"
 	},
 	"xo": {
 		"envs": [
