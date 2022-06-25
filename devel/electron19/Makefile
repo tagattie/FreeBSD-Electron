@@ -135,7 +135,7 @@ SNDIO_VARS=		GN_ARGS+=use_sndio=true
 SNDIO_VARS_OFF=		GN_ARGS+=use_sndio=false
 
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=			102.0.5005.63
+CHROMIUM_VER=			102.0.5005.115
 # See ${WRKSRC}/third_party/test_fonts/test_fonts.tar.gz.sha1 for CHROMIUM_TEST_FONTS_HASH
 CHROMIUM_TEST_FONTS_HASH=	cd96fc55dc243f6c6f4cb63ad117cad6cd48dceb
 # See ${WRKSRC}/electron/DEPS for NODE_VER
@@ -149,7 +149,7 @@ REACTIVEOBJC_VER=		74ab5baccc6f7202c8ac69a8d1e152c29dc1ea76
 # See ${WRKSRC}/electron/DEPS for MANTLE_VER
 MANTLE_VER=			78d3966b3c331292ea29ec38661b25df0a245948
 
-YARN_TIMESTAMP=	1655530502
+YARN_TIMESTAMP=	1656133689
 
 GN_ARGS+=		clang_use_chrome_plugins=false \
 			enable_hangout_services_extension=true \

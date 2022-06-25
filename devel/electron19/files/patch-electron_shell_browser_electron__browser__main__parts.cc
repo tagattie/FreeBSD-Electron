@@ -1,4 +1,4 @@
---- electron/shell/browser/electron_browser_main_parts.cc.orig	2022-06-08 15:30:58 UTC
+--- electron/shell/browser/electron_browser_main_parts.cc.orig	2022-06-22 15:31:07 UTC
 +++ electron/shell/browser/electron_browser_main_parts.cc
 @@ -65,7 +65,7 @@
  #include "ui/wm/core/wm_state.h"
@@ -72,7 +72,7 @@
    auto linux_ui = BuildGtkUi();
    linux_ui->Initialize();
    DCHECK(ui::LinuxInputMethodContextFactory::instance());
-@@ -478,7 +478,9 @@ void ElectronBrowserMainParts::PostCreateMainMessageLo
+@@ -482,7 +482,9 @@ void ElectronBrowserMainParts::PostCreateMainMessageLo
    ui::OzonePlatform::GetInstance()->PostCreateMainMessageLoop(
        std::move(shutdown_cb));
    bluez::DBusBluezManagerWrapperLinux::Initialize();
@@ -82,7 +82,7 @@
    // Set up crypt config. This needs to be done before anything starts the
    // network service, as the raw encryption key needs to be shared with the
    // network service for encrypted cookie storage.
-@@ -537,7 +539,7 @@ void ElectronBrowserMainParts::PostMainMessageLoopRun(
+@@ -541,7 +543,7 @@ void ElectronBrowserMainParts::PostMainMessageLoopRun(
    fake_browser_process_->PostMainMessageLoopRun();
    content::DevToolsAgentHost::StopRemoteDebuggingPipeHandler();
  

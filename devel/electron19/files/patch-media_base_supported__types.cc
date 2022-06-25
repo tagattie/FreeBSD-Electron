@@ -1,6 +1,6 @@
---- media/base/supported_types.cc.orig	2022-05-25 04:01:04 UTC
+--- media/base/supported_types.cc.orig	2022-06-10 05:36:19 UTC
 +++ media/base/supported_types.cc
-@@ -206,7 +206,7 @@ bool IsHevcProfileSupported(const VideoType& type) {
+@@ -205,7 +205,7 @@ bool IsHevcProfileSupported(const VideoType& type) {
      return false;
  
  #if BUILDFLAG(ENABLE_PLATFORM_HEVC)
