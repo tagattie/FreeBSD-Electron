@@ -1,5 +1,5 @@
---- jslib/node/src/cli/services/cliPlatformUtils.service.ts.orig	2022-02-11 20:26:02 UTC
-+++ jslib/node/src/cli/services/cliPlatformUtils.service.ts
+--- libs/node/src/cli/services/cliPlatformUtils.service.ts.orig	2022-07-06 07:48:28 UTC
++++ libs/node/src/cli/services/cliPlatformUtils.service.ts
 @@ -26,7 +26,7 @@ export class CliPlatformUtilsService implements Platfo
          case "darwin":
            this.deviceCache = DeviceType.MacOsDesktop;

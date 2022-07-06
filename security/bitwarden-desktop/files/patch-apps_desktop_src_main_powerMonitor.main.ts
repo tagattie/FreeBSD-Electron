@@ -1,5 +1,5 @@
---- src/main/powerMonitor.main.ts.orig	2022-02-11 22:23:03 UTC
-+++ src/main/powerMonitor.main.ts
+--- apps/desktop/src/main/powerMonitor.main.ts.orig	2022-07-06 07:43:11 UTC
++++ apps/desktop/src/main/powerMonitor.main.ts
 @@ -22,7 +22,7 @@ export class PowerMonitorMain {
        });
      }
