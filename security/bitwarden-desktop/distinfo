@@ -1,5 +1,5 @@
-TIMESTAMP = 1657092665
-SHA256 (bitwarden-desktop-node-modules-2022.6.0.tar.gz) = c0d8531395e20198de886b98319e86bd58271e2fe14da9d64c77dc5035f8f9f5
-SIZE (bitwarden-desktop-node-modules-2022.6.0.tar.gz) = 254037228
-SHA256 (bitwarden-clients-desktop-v2022.6.0_GH0.tar.gz) = 1bd04aca7100de017a5385d508e0d7c31d76496ecd34d40807fe52c459a4cb57
-SIZE (bitwarden-clients-desktop-v2022.6.0_GH0.tar.gz) = 17397721
+TIMESTAMP = 1657690170
+SHA256 (bitwarden-desktop-node-modules-2022.6.2.tar.gz) = d976652d3f269908a88ce7f9da7f8bbc07b4017d949437da60cb748573ab923d
+SIZE (bitwarden-desktop-node-modules-2022.6.2.tar.gz) = 254040372
+SHA256 (bitwarden-clients-desktop-v2022.6.2_GH0.tar.gz) = 35aaf0c7689a2dd4d3e9844714dd306dea84063f17d1a875cbedefe4bdc04959
+SIZE (bitwarden-clients-desktop-v2022.6.2_GH0.tar.gz) = 17398009
