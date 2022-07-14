@@ -1,6 +1,6 @@
 PORTNAME=	hyper
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.2.0
+DISTVERSION=	3.2.3
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,7 +11,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:16 localbase:ldflags node:16,build \
+USES=		desktop-file-utils electron:17 localbase:ldflags node:16,build \
 		python:build shebangfix
 
 USE_GITHUB=	yes
@@ -28,14 +28,10 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1644908661
+PREFETCH_TIMESTAMP=	1657781712
 
 post-extract:
 	${MKDIR} ${WRKSRC}/target
-
-post-patch:
-	${REINPLACE_CMD} -e 's/make/g&/' \
-		${WRKSRC}/node_modules/lzma-native/liblzma-build.sh
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \

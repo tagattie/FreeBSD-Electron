@@ -1,6 +1,6 @@
---- node_modules/playwright-core/lib/utils/registry.js.orig	2022-02-15 07:20:15 UTC
+--- node_modules/playwright-core/lib/utils/registry.js.orig	2022-07-14 07:06:50 UTC
 +++ node_modules/playwright-core/lib/utils/registry.js
-@@ -172,7 +172,7 @@ const registryDirectory = (() => {
+@@ -173,7 +173,7 @@ const registryDirectory = (() => {
      result = envDefined;
    } else {
      let cacheDirectory;
@@ -9,10 +9,3 @@
      result = _path.default.join(cacheDirectory, 'ms-playwright');
    }
  
-@@ -750,4 +750,4 @@ function findChromiumChannel(sdkLanguage) {
- 
- const registry = new Registry(require('../../browsers.json'));
- exports.registry = registry;
--//# sourceMappingURL=registry.js.map
-\ No newline at end of file
-+//# sourceMappingURL=registry.js.map
