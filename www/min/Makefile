@@ -1,6 +1,6 @@
 PORTNAME=	min
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.22.2
+DISTVERSION=	1.25.1
 CATEGORIES=	www
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:15 node:16,build pkgconfig \
+USES=		desktop-file-utils electron:19 node:16,build pkgconfig \
 		python:build
 
 USE_GITHUB=	yes
@@ -27,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:packager
 
-PREFETCH_TIMESTAMP=	1641456118
+PREFETCH_TIMESTAMP=	1658036479
 ELECTRON_MAKE_FLAGS+=	--asar \
 			--ignore='.DS_Store' \
 			--ignore='dist/app' \
@@ -46,10 +46,6 @@ ELECTRON_MAKE_FLAGS+=	--asar \
 			--ignore='/node_modules\/[^/\n]+\/test\//g' \
 			--app-version='${DISTVERSION}' \
 			--out='dist/app'
-
-post-patch:
-	${REINPLACE_CMD} -e 's/make/g&/' \
-		${WRKSRC}/node_modules/lzma-native/liblzma-build.sh
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
