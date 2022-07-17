@@ -1,6 +1,6 @@
 PORTNAME=	stretchly
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.9.0
+DISTVERSION=	1.10.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,7 +11,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		electron:16 localbase:ldconfig node:16,build python:build
+USES=		electron:17 localbase:ldconfig node:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	hovancik
@@ -25,7 +25,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1642325401
+PREFETCH_TIMESTAMP=	1657949902
 
 pre-build:
 	# generate icon files
