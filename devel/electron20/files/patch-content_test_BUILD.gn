@@ -1,0 +1,20 @@
+--- content/test/BUILD.gn.orig	2022-08-01 19:04:29 UTC
++++ content/test/BUILD.gn
+@@ -2025,7 +2025,7 @@ static_library("run_all_unittests") {
+     ":test_support",
+     "//base/test:test_support",
+   ]
+-  if (is_linux || is_chromeos) {
++  if ((is_linux || is_chromeos) && !is_bsd) {
+     deps += [ "//content/common:set_process_title_linux" ]
+   }
+ }
+@@ -2994,7 +2994,7 @@ test("content_unittests") {
+     deps += [ "//third_party/boringssl" ]
+   }
+ 
+-  if (is_linux || is_chromeos) {
++  if ((is_linux || is_chromeos) && !is_bsd) {
+     sources += [ "../common/set_process_title_linux_unittest.cc" ]
+     deps += [ "//content/common:set_process_title_linux" ]
+   }

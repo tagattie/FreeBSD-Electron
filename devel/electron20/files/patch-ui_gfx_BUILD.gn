@@ -1,0 +1,11 @@
+--- ui/gfx/BUILD.gn.orig	2022-08-01 19:04:54 UTC
++++ ui/gfx/BUILD.gn
+@@ -586,7 +586,7 @@ source_set("memory_buffer_sources") {
+     deps += [ "//build/config/linux/libdrm" ]
+   }
+ 
+-  if (is_linux || is_chromeos || is_android) {
++  if ((is_linux || is_chromeos || is_android) && !is_bsd) {
+     deps += [ "//third_party/libsync" ]
+   }
+ 
