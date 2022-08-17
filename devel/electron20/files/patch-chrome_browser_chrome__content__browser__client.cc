@@ -1,4 +1,4 @@
---- chrome/browser/chrome_content_browser_client.cc.orig	2022-08-01 19:04:22 UTC
+--- chrome/browser/chrome_content_browser_client.cc.orig	2022-08-17 06:00:09 UTC
 +++ chrome/browser/chrome_content_browser_client.cc
 @@ -380,7 +380,7 @@
  #include "components/user_manager/user_manager.h"
@@ -122,7 +122,7 @@
  void ChromeContentBrowserClient::GetAdditionalMappedFilesForChildProcess(
      const base::CommandLine& command_line,
      int child_process_id,
-@@ -4398,14 +4400,14 @@ ChromeContentBrowserClient::CreateThrottlesForNavigati
+@@ -4402,14 +4404,14 @@ ChromeContentBrowserClient::CreateThrottlesForNavigati
          &throttles);
    }
  
@@ -139,7 +139,7 @@
    MaybeAddThrottle(enterprise_connectors::DeviceTrustNavigationThrottle::
                         MaybeCreateThrottleFor(handle),
                     &throttles);
-@@ -4438,7 +4440,7 @@ ChromeContentBrowserClient::CreateThrottlesForNavigati
+@@ -4442,7 +4444,7 @@ ChromeContentBrowserClient::CreateThrottlesForNavigati
  
  // TODO(crbug.com/1052397): Revisit the macro expression once build flag switch
  // of lacros-chrome is complete.

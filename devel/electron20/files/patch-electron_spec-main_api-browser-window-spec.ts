@@ -1,4 +1,4 @@
---- electron/spec-main/api-browser-window-spec.ts.orig	2022-08-03 15:31:32 UTC
+--- electron/spec-main/api-browser-window-spec.ts.orig	2022-08-10 15:31:37 UTC
 +++ electron/spec-main/api-browser-window-spec.ts
 @@ -58,7 +58,7 @@ describe('BrowserWindow module', () => {
        }).not.to.throw();
@@ -126,7 +126,7 @@
      // Not implemented on Linux.
      afterEach(closeAllWindows);
  
-@@ -5579,7 +5579,7 @@ describe('BrowserWindow module', () => {
+@@ -5580,7 +5580,7 @@ describe('BrowserWindow module', () => {
      });
  
      // Linux and arm64 platforms (WOA and macOS) do not return any capture sources
@@ -135,7 +135,7 @@
        const display = screen.getPrimaryDisplay();
  
        const backgroundWindow = new BrowserWindow({
-@@ -5621,7 +5621,7 @@ describe('BrowserWindow module', () => {
+@@ -5622,7 +5622,7 @@ describe('BrowserWindow module', () => {
      afterEach(closeAllWindows);
  
      // Linux/WOA doesn't return any capture sources.
