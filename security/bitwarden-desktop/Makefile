@@ -1,7 +1,8 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2022.6.2
+DISTVERSION=	2022.8.1
 CATEGORIES=	security
+DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Bitwarden desktop application
@@ -13,7 +14,7 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre.so:devel/pcre \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:16 gmake gnome localbase:ldflags \
+USES=		desktop-file-utils electron:19 gmake gnome localbase:ldflags \
 		node:16,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
@@ -29,15 +30,50 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm
-USE_ELECTRON=	prefetch extract prebuild build:builder
+USE_NODE=	npm:fetch,build
+USE_ELECTRON=	build:builder
 
-PREFETCH_TIMESTAMP=	1657688696
+PREFETCH_TIMESTAMP=	1661317958
 
 BUILD_WRKSRC=	${WRKSRC}/apps/desktop
 
+pre-fetch:
+	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
+		${MKDIR} ${WRKDIR}/npm-cache; \
+		${CP} -r ${PKGJSONSDIR}/* ${WRKDIR}/npm-cache; \
+		cd ${WRKDIR}/npm-cache && \
+			${SETENV} HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts --no-progress; \
+		${RM} -r package.json package-lock.json apps libs; \
+		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
+		cd ${WRKDIR} && \
+		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:flags=.*:flags=none:' \
+			-e 's:^\.:./npm-cache:' > npm-cache.mtree && \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
+			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
+			@npm-cache.mtree; \
+		${RM} -r ${WRKDIR}; \
+	fi
+
+post-extract:
+	for f in package.json package-lock.json; do \
+		${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
+		${CP} -f ${PKGJSONSDIR}/$${f} ${WRKSRC}; \
+	done
+	${MV} ${WRKDIR}/npm-cache/node_modules ${WRKSRC}
+
 pre-build:
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm_config_nodedir=${LOCALBASE} \
+		${NPM_CMD} rebuild --no-progress
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		npm_config_runtime=electron \
+		npm_config_target=${ELECTRON_VER} \
+		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
+		${NPM_CMD} rebuild --no-progress
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
@@ -58,5 +94,8 @@ do-install:
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
+
+do-test:
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} ${NPM_CMD} run test
 
 .include <bsd.port.mk>

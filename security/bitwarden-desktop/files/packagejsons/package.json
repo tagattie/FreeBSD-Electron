@@ -15,8 +15,19 @@
   "scripts": {
     "lint": "eslint . && prettier --check .",
     "lint:fix": "eslint . --fix",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:watch:all": "jest --watchAll",
+    "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
+    "storybook": "npm run docs:json && start-storybook -p 6006",
+    "build-storybook": "npm run docs:json && build-storybook",
+    "chromatic": "chromatic --exit-zero-on-changes"
   },
+  "workspaces": [
+    "apps/*",
+    "libs/*"
+  ],
   "devDependencies": {
     "@angular-devkit/build-angular": "^12.2.13",
     "@angular/cli": "^12.2.13",
@@ -70,14 +81,14 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.5.1",
     "del": "^6.0.0",
-    "electron": "16.2.7",
+    "electron": "19.0.8",
     "electron-builder": "22.11.10",
-    "electron-log": "^4.4.7",
+    "electron-log": "^4.4.8",
     "electron-notarize": "^1.2.1",
     "electron-rebuild": "^3.2.7",
     "electron-reload": "^2.0.0-alpha.1",
-    "electron-store": "^8.0.1",
-    "electron-updater": "^5.0.1",
+    "electron-store": "^8.0.2",
+    "electron-updater": "^5.0.5",
     "eslint": "^8.14.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-import-resolver-typescript": "^2.7.1",
@@ -148,8 +159,9 @@
     "core-js": "^3.11.0",
     "date-input-polyfill": "^2.14.0",
     "duo_web_sdk": "github:duosecurity/duo_web_sdk",
-    "https-proxy-agent": "^5.0.0",
-    "inquirer": "^8.2.4",
+    "form-data": "4.0.0",
+    "https-proxy-agent": "5.0.0",
+    "inquirer": "8.0.0",
     "jquery": "3.6.0",
     "jsdom": "^16.7.0",
     "jszip": "^3.10.0",
@@ -180,7 +192,8 @@
     "zxcvbn": "^4.4.2"
   },
   "overrides": {
-    "tailwindcss": "$tailwindcss"
+    "tailwindcss": "$tailwindcss",
+    "react": "^18.0.0"
   },
   "lint-staged": {
     "*": "prettier --ignore-unknown --write",
