@@ -13,6 +13,7 @@ DIST_SUBDIR=	${PORTNAME}
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
+WWW=		https://electronjs.org/
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/electron/LICENSE
