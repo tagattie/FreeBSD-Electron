@@ -1,4 +1,4 @@
---- electron/spec-main/chromium-spec.ts.orig	2022-08-03 15:31:32 UTC
+--- electron/spec-main/chromium-spec.ts.orig	2023-01-17 21:24:40 UTC
 +++ electron/spec-main/chromium-spec.ts
 @@ -399,13 +399,13 @@ describe('command line switches', () => {
      it('should not set an invalid locale', async () => testLocale('asdfkl', currentLocale));
@@ -18,7 +18,7 @@
    });
  
    describe('--remote-debugging-pipe switch', () => {
-@@ -1628,12 +1628,12 @@ describe('font fallback', () => {
+@@ -1656,12 +1656,12 @@ describe('font fallback', () => {
        expect(fonts[0].familyName).to.equal('Arial');
      } else if (process.platform === 'darwin') {
        expect(fonts[0].familyName).to.equal('Helvetica');
@@ -33,7 +33,7 @@
      const html = `
      <html lang="ja-JP">
        <head>
-@@ -1888,7 +1888,7 @@ describe('navigator.clipboard', () => {
+@@ -1964,7 +1964,7 @@ describe('navigator.clipboard', () => {
    });
  });
  
