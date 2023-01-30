@@ -1,4 +1,4 @@
---- chrome/common/chrome_features.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/common/chrome_features.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/common/chrome_features.cc
 @@ -107,7 +107,7 @@ BASE_FEATURE(kAsyncDns,
  );

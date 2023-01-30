@@ -1,4 +1,4 @@
---- components/embedder_support/user_agent_utils_unittest.cc.orig	2023-01-26 11:40:13 UTC
+--- components/embedder_support/user_agent_utils_unittest.cc.orig	2022-08-31 12:19:35 UTC
 +++ components/embedder_support/user_agent_utils_unittest.cc
 @@ -80,7 +80,7 @@ const char kDesktop[] =
      "Safari/537.36";

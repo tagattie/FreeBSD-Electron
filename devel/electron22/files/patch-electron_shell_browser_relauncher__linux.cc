@@ -1,4 +1,4 @@
---- electron/shell/browser/relauncher_linux.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/browser/relauncher_linux.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/browser/relauncher_linux.cc
 @@ -6,8 +6,10 @@
  

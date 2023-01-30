@@ -1,4 +1,4 @@
---- remoting/host/host_main.cc.orig	2022-05-25 04:01:06 UTC
+--- remoting/host/host_main.cc.orig	2022-04-21 18:48:31 UTC
 +++ remoting/host/host_main.cc
 @@ -50,7 +50,7 @@ int FileChooserMain();
  int RdpDesktopSessionMain();

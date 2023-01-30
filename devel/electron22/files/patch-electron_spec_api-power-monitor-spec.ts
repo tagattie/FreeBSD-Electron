@@ -1,4 +1,4 @@
---- electron/spec/api-power-monitor-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/api-power-monitor-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/api-power-monitor-spec.ts
 @@ -14,7 +14,7 @@ import { promisify } from 'util';
  describe('powerMonitor', () => {

@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_base_window.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/browser/api/electron_api_base_window.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/browser/api/electron_api_base_window.cc
 @@ -1038,7 +1038,7 @@ void BaseWindow::SetIconImpl(v8::Isolate* isolate,
    static_cast<NativeWindowViews*>(window_.get())

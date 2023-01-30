@@ -1,4 +1,4 @@
---- third_party/perfetto/src/base/unix_socket.cc.orig	2023-01-26 11:44:04 UTC
+--- third_party/perfetto/src/base/unix_socket.cc.orig	2022-10-24 13:33:33 UTC
 +++ third_party/perfetto/src/base/unix_socket.cc
 @@ -42,7 +42,7 @@
  #include <unistd.h>

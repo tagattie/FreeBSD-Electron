@@ -1,4 +1,4 @@
---- sandbox/policy/sandbox_type.cc.orig	2023-01-26 11:40:23 UTC
+--- sandbox/policy/sandbox_type.cc.orig	2022-11-30 08:12:58 UTC
 +++ sandbox/policy/sandbox_type.cc
 @@ -38,7 +38,7 @@ bool IsUnsandboxedSandboxType(Sandbox sandbox_type) {
  #endif

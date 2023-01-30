@@ -1,4 +1,4 @@
---- chrome/browser/enterprise/connectors/device_trust/device_trust_connector_service_factory.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/enterprise/connectors/device_trust/device_trust_connector_service_factory.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/enterprise/connectors/device_trust/device_trust_connector_service_factory.cc
 @@ -11,11 +11,11 @@
  #include "chrome/browser/profiles/profile.h"

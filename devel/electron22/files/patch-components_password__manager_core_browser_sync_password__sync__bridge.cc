@@ -1,4 +1,4 @@
---- components/password_manager/core/browser/sync/password_sync_bridge.cc.orig	2023-01-26 11:40:13 UTC
+--- components/password_manager/core/browser/sync/password_sync_bridge.cc.orig	2022-11-30 08:12:58 UTC
 +++ components/password_manager/core/browser/sync/password_sync_bridge.cc
 @@ -187,7 +187,7 @@ bool ShouldRecoverPasswordsDuringMerge() {
    // Delete the local undecryptable copy when this is MacOS only.

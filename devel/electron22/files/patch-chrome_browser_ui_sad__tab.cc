@@ -1,4 +1,4 @@
---- chrome/browser/ui/sad_tab.cc.orig	2022-05-25 04:00:50 UTC
+--- chrome/browser/ui/sad_tab.cc.orig	2022-04-21 18:48:31 UTC
 +++ chrome/browser/ui/sad_tab.cc
 @@ -175,7 +175,7 @@ std::vector<int> SadTab::GetSubMessages() {
        // Only show Incognito suggestion if not already in Incognito mode.

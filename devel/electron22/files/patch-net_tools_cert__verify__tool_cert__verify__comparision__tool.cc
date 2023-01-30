@@ -1,4 +1,4 @@
---- net/tools/cert_verify_tool/cert_verify_comparision_tool.cc.orig	2022-08-01 19:04:32 UTC
+--- net/tools/cert_verify_tool/cert_verify_comparision_tool.cc.orig	2022-06-17 14:20:10 UTC
 +++ net/tools/cert_verify_tool/cert_verify_comparision_tool.cc
 @@ -35,7 +35,7 @@
  #include "net/url_request/url_request_context_builder.h"

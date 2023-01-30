@@ -1,4 +1,4 @@
---- chrome/browser/after_startup_task_utils.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/after_startup_task_utils.cc.orig	2022-08-31 12:19:35 UTC
 +++ chrome/browser/after_startup_task_utils.cc
 @@ -107,7 +107,7 @@ void SetBrowserStartupIsComplete() {
    TRACE_EVENT0("startup", "SetBrowserStartupIsComplete");

@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_web_contents.h.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/browser/api/electron_api_web_contents.h.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/browser/api/electron_api_web_contents.h
 @@ -710,7 +710,7 @@ class WebContents : public ExclusiveAccessContext,
  #if defined(TOOLKIT_VIEWS) && !BUILDFLAG(IS_MAC)

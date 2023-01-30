@@ -1,4 +1,4 @@
---- ui/events/event_switches.h.orig	2022-08-01 19:04:54 UTC
+--- ui/events/event_switches.h.orig	2022-06-17 14:20:10 UTC
 +++ ui/events/event_switches.h
 @@ -13,7 +13,7 @@ namespace switches {
  EVENTS_BASE_EXPORT extern const char kCompensateForUnstablePinchZoom[];

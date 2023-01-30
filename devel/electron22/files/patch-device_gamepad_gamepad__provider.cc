@@ -1,4 +1,4 @@
---- device/gamepad/gamepad_provider.cc.orig	2022-05-19 03:45:29 UTC
+--- device/gamepad/gamepad_provider.cc.orig	2022-02-28 16:54:41 UTC
 +++ device/gamepad/gamepad_provider.cc
 @@ -216,7 +216,7 @@ void GamepadProvider::Initialize(std::unique_ptr<Gamep
  

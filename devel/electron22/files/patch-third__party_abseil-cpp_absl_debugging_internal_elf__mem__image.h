@@ -1,4 +1,4 @@
---- third_party/abseil-cpp/absl/debugging/internal/elf_mem_image.h.orig	2023-01-26 11:40:24 UTC
+--- third_party/abseil-cpp/absl/debugging/internal/elf_mem_image.h.orig	2022-08-31 12:19:35 UTC
 +++ third_party/abseil-cpp/absl/debugging/internal/elf_mem_image.h
 @@ -33,7 +33,7 @@
  

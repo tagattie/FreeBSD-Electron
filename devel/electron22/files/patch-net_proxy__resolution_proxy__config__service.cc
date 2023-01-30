@@ -1,4 +1,4 @@
---- net/proxy_resolution/proxy_config_service.cc.orig	2023-01-26 11:40:22 UTC
+--- net/proxy_resolution/proxy_config_service.cc.orig	2022-08-31 12:19:35 UTC
 +++ net/proxy_resolution/proxy_config_service.cc
 @@ -18,20 +18,20 @@
  #include "net/proxy_resolution/proxy_config_service_ios.h"

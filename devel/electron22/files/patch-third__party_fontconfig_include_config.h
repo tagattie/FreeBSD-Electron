@@ -1,4 +1,4 @@
---- third_party/fontconfig/include/config.h.orig	2022-05-11 07:01:48 UTC
+--- third_party/fontconfig/include/config.h.orig	2022-02-07 13:39:41 UTC
 +++ third_party/fontconfig/include/config.h
 @@ -18,13 +18,13 @@
  #define ENABLE_NLS 1

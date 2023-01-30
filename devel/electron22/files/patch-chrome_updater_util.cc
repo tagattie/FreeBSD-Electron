@@ -1,4 +1,4 @@
---- chrome/updater/util.cc.orig	2023-01-26 11:40:12 UTC
+--- chrome/updater/util.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/updater/util.cc
 @@ -37,7 +37,7 @@
  #include "third_party/abseil-cpp/absl/types/optional.h"

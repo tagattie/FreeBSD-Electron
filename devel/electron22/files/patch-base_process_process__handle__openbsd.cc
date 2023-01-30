@@ -1,4 +1,4 @@
---- base/process/process_handle_openbsd.cc.orig	2022-05-25 04:00:43 UTC
+--- base/process/process_handle_openbsd.cc.orig	2022-04-21 18:48:31 UTC
 +++ base/process/process_handle_openbsd.cc
 @@ -3,8 +3,11 @@
  // found in the LICENSE file.

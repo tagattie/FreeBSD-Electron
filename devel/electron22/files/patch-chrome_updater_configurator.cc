@@ -1,4 +1,4 @@
---- chrome/updater/configurator.cc.orig	2023-01-26 11:40:12 UTC
+--- chrome/updater/configurator.cc.orig	2022-09-24 10:57:32 UTC
 +++ chrome/updater/configurator.cc
 @@ -41,7 +41,7 @@
  #include "chrome/updater/win/net/network.h"

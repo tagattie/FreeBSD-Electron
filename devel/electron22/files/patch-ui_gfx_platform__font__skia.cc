@@ -1,4 +1,4 @@
---- ui/gfx/platform_font_skia.cc.orig	2023-01-26 11:41:02 UTC
+--- ui/gfx/platform_font_skia.cc.orig	2022-08-31 12:19:35 UTC
 +++ ui/gfx/platform_font_skia.cc
 @@ -28,7 +28,7 @@
  #include "ui/gfx/system_fonts_win.h"

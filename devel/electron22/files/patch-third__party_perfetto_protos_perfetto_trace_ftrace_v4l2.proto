@@ -1,4 +1,4 @@
---- third_party/perfetto/protos/perfetto/trace/ftrace/v4l2.proto.orig	2023-01-26 11:44:04 UTC
+--- third_party/perfetto/protos/perfetto/trace/ftrace/v4l2.proto.orig	2022-09-24 10:57:32 UTC
 +++ third_party/perfetto/protos/perfetto/trace/ftrace/v4l2.proto
 @@ -10,7 +10,7 @@ message V4l2QbufFtraceEvent {
    optional uint32 field = 2;

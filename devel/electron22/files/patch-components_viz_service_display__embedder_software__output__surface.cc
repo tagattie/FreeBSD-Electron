@@ -1,4 +1,4 @@
---- components/viz/service/display_embedder/software_output_surface.cc.orig	2022-08-01 19:04:28 UTC
+--- components/viz/service/display_embedder/software_output_surface.cc.orig	2022-07-22 17:30:31 UTC
 +++ components/viz/service/display_embedder/software_output_surface.cc
 @@ -93,7 +93,7 @@ void SoftwareOutputSurface::SwapBuffersCallback(base::
        now.SnappedToNextTick(refresh_timebase_, refresh_interval_) - now;

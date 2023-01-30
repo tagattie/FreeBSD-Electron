@@ -1,4 +1,4 @@
---- chrome/browser/enterprise/connectors/device_trust/signals/signals_service_factory.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/enterprise/connectors/device_trust/signals/signals_service_factory.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/enterprise/connectors/device_trust/signals/signals_service_factory.cc
 @@ -18,7 +18,7 @@
  #include "chrome/browser/profiles/profile.h"

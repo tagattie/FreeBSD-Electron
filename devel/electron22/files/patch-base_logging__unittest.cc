@@ -1,4 +1,4 @@
---- base/logging_unittest.cc.orig	2022-08-01 19:04:19 UTC
+--- base/logging_unittest.cc.orig	2022-06-17 14:20:10 UTC
 +++ base/logging_unittest.cc
 @@ -32,7 +32,7 @@
  #include "base/posix/eintr_wrapper.h"

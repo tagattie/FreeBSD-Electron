@@ -1,4 +1,4 @@
---- content/public/common/content_features.h.orig	2023-01-26 11:40:15 UTC
+--- content/public/common/content_features.h.orig	2022-11-30 08:12:58 UTC
 +++ content/public/common/content_features.h
 @@ -272,7 +272,7 @@ CONTENT_EXPORT BASE_DECLARE_FEATURE(kV8VmFuture);
  CONTENT_EXPORT BASE_DECLARE_FEATURE(kWebAppWindowControlsOverlay);

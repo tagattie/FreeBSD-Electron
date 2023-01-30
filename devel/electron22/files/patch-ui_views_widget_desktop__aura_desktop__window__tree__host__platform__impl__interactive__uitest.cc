@@ -1,4 +1,4 @@
---- ui/views/widget/desktop_aura/desktop_window_tree_host_platform_impl_interactive_uitest.cc.orig	2023-01-26 11:41:02 UTC
+--- ui/views/widget/desktop_aura/desktop_window_tree_host_platform_impl_interactive_uitest.cc.orig	2022-08-31 12:19:35 UTC
 +++ ui/views/widget/desktop_aura/desktop_window_tree_host_platform_impl_interactive_uitest.cc
 @@ -22,7 +22,7 @@
  #include "ui/views/widget/widget_delegate.h"

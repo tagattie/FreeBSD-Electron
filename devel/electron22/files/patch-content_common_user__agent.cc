@@ -1,4 +1,4 @@
---- content/common/user_agent.cc.orig	2023-01-26 11:40:15 UTC
+--- content/common/user_agent.cc.orig	2022-08-31 12:19:35 UTC
 +++ content/common/user_agent.cc
 @@ -41,7 +41,7 @@ std::string GetUserAgentPlatform() {
    return "";

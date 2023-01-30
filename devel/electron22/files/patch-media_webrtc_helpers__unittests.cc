@@ -1,4 +1,4 @@
---- media/webrtc/helpers_unittests.cc.orig	2022-08-01 19:04:31 UTC
+--- media/webrtc/helpers_unittests.cc.orig	2022-06-17 14:20:10 UTC
 +++ media/webrtc/helpers_unittests.cc
 @@ -36,7 +36,7 @@ TEST(CreateWebRtcAudioProcessingModuleTest, CheckDefau
    EXPECT_FALSE(config.pre_amplifier.enabled);

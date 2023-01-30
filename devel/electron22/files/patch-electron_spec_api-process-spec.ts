@@ -1,4 +1,4 @@
---- electron/spec/api-process-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/api-process-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/api-process-spec.ts
 @@ -54,7 +54,7 @@ describe('process module', () => {
        it('resolves promise successfully with valid data', async () => {

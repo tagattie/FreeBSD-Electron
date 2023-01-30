@@ -1,4 +1,4 @@
---- ui/base/ime/dummy_text_input_client.h.orig	2023-01-26 11:41:01 UTC
+--- ui/base/ime/dummy_text_input_client.h.orig	2022-08-31 12:19:35 UTC
 +++ ui/base/ime/dummy_text_input_client.h
 @@ -65,7 +65,7 @@ class DummyTextInputClient : public TextInputClient {
    ukm::SourceId GetClientSourceForMetrics() const override;

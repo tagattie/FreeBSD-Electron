@@ -1,4 +1,4 @@
---- third_party/libevent/event.h.orig	2023-01-26 11:40:54 UTC
+--- third_party/libevent/event.h.orig	2022-08-31 12:19:35 UTC
 +++ third_party/libevent/event.h
 @@ -1,3 +1,6 @@
 +#if defined(USE_SYSTEM_LIBEVENT)

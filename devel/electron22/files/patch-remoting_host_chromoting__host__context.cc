@@ -1,4 +1,4 @@
---- remoting/host/chromoting_host_context.cc.orig	2022-05-19 05:17:45 UTC
+--- remoting/host/chromoting_host_context.cc.orig	2022-02-28 16:54:41 UTC
 +++ remoting/host/chromoting_host_context.cc
 @@ -143,7 +143,7 @@ std::unique_ptr<ChromotingHostContext> ChromotingHostC
    // on a UI thread.

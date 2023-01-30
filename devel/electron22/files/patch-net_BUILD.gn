@@ -1,4 +1,4 @@
---- net/BUILD.gn.orig	2023-01-26 11:40:21 UTC
+--- net/BUILD.gn.orig	2022-11-30 08:12:58 UTC
 +++ net/BUILD.gn
 @@ -103,7 +103,7 @@ net_configs = [
    "//build/config/compiler:wexit_time_destructors",

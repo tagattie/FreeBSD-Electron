@@ -1,4 +1,4 @@
---- chrome/browser/headless/headless_mode_util.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/headless/headless_mode_util.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/headless/headless_mode_util.cc
 @@ -9,7 +9,7 @@
  // Native headless is currently available on Linux, Windows and Mac platforms.

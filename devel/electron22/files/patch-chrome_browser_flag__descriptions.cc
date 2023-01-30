@@ -1,4 +1,4 @@
---- chrome/browser/flag_descriptions.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/flag_descriptions.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/flag_descriptions.cc
 @@ -6600,7 +6600,7 @@ const char kSearchWebInSidePanelDescription[] =
  // Random platform combinations -----------------------------------------------

@@ -1,4 +1,4 @@
---- third_party/swiftshader/src/Vulkan/VkSemaphoreExternalLinux.hpp.orig	2022-05-11 07:07:58 UTC
+--- third_party/swiftshader/src/Vulkan/VkSemaphoreExternalLinux.hpp.orig	2022-02-07 13:39:41 UTC
 +++ third_party/swiftshader/src/Vulkan/VkSemaphoreExternalLinux.hpp
 @@ -49,13 +49,17 @@ class SharedSemaphore (public)
  	{

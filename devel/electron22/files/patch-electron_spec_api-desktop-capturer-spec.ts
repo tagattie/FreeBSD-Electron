@@ -1,4 +1,4 @@
---- electron/spec/api-desktop-capturer-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/api-desktop-capturer-spec.ts.orig	2022-06-08 15:30:58 UTC
 +++ electron/spec/api-desktop-capturer-spec.ts
 @@ -50,7 +50,7 @@ ifdescribe(!process.arch.includes('arm') && process.pl
    });

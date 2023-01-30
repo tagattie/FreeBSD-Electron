@@ -1,4 +1,4 @@
---- base/profiler/module_cache.cc.orig	2023-01-26 11:40:09 UTC
+--- base/profiler/module_cache.cc.orig	2022-08-31 12:19:35 UTC
 +++ base/profiler/module_cache.cc
 @@ -34,7 +34,7 @@ struct ModuleAddressCompare {
  

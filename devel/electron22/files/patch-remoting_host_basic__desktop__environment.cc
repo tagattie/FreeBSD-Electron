@@ -1,4 +1,4 @@
---- remoting/host/basic_desktop_environment.cc.orig	2023-01-26 11:40:23 UTC
+--- remoting/host/basic_desktop_environment.cc.orig	2022-11-30 08:12:58 UTC
 +++ remoting/host/basic_desktop_environment.cc
 @@ -179,7 +179,7 @@ BasicDesktopEnvironment::CreateVideoCapturer() {
    scoped_refptr<base::SingleThreadTaskRunner> capture_task_runner;

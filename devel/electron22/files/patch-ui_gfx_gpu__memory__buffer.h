@@ -1,4 +1,4 @@
---- ui/gfx/gpu_memory_buffer.h.orig	2023-01-26 11:41:02 UTC
+--- ui/gfx/gpu_memory_buffer.h.orig	2022-09-24 10:57:32 UTC
 +++ ui/gfx/gpu_memory_buffer.h
 @@ -15,7 +15,7 @@
  #include "ui/gfx/geometry/rect.h"

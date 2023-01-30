@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/bubble_anchor_util_views.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/views/bubble_anchor_util_views.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/ui/views/bubble_anchor_util_views.cc
 @@ -39,7 +39,7 @@ AnchorConfiguration GetPageInfoAnchorConfiguration(Bro
              views::BubbleBorder::TOP_LEFT};

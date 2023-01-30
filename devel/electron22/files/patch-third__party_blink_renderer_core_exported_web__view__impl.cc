@@ -1,4 +1,4 @@
---- third_party/blink/renderer/core/exported/web_view_impl.cc.orig	2023-01-27 05:20:34 UTC
+--- third_party/blink/renderer/core/exported/web_view_impl.cc.orig	2023-01-30 07:58:59 UTC
 +++ third_party/blink/renderer/core/exported/web_view_impl.cc
 @@ -409,7 +409,7 @@ SkFontHinting RendererPreferencesToSkiaHinting(
      const blink::RendererPreferences& prefs) {

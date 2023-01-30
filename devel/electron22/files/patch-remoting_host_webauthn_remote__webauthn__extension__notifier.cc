@@ -1,4 +1,4 @@
---- remoting/host/webauthn/remote_webauthn_extension_notifier.cc.orig	2022-08-01 19:04:32 UTC
+--- remoting/host/webauthn/remote_webauthn_extension_notifier.cc.orig	2022-06-17 14:20:10 UTC
 +++ remoting/host/webauthn/remote_webauthn_extension_notifier.cc
 @@ -23,7 +23,7 @@
  #include "base/threading/sequenced_task_runner_handle.h"

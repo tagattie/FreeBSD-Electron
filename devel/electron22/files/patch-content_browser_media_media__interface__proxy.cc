@@ -1,4 +1,4 @@
---- content/browser/media/media_interface_proxy.cc.orig	2023-01-26 11:40:15 UTC
+--- content/browser/media/media_interface_proxy.cc.orig	2022-10-24 13:33:33 UTC
 +++ content/browser/media/media_interface_proxy.cc
 @@ -73,7 +73,7 @@
  #include "media/mojo/services/mojo_renderer_service.h"  // nogncheck

@@ -1,4 +1,4 @@
---- base/system/sys_info.h.orig	2023-01-26 11:40:09 UTC
+--- base/system/sys_info.h.orig	2022-11-30 08:12:58 UTC
 +++ base/system/sys_info.h
 @@ -233,6 +233,8 @@ class BASE_EXPORT SysInfo {
    static void SetIsCpuSecurityMitigationsEnabled(bool is_enabled);

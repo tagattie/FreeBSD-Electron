@@ -1,4 +1,4 @@
---- electron/spec/api-crash-reporter-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/api-crash-reporter-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/api-crash-reporter-spec.ts
 @@ -12,7 +12,7 @@ import * as fs from 'fs';
  import * as uuid from 'uuid';

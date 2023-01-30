@@ -1,4 +1,4 @@
---- chrome/browser/safe_browsing/cloud_content_scanning/binary_upload_service.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/safe_browsing/cloud_content_scanning/binary_upload_service.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/safe_browsing/cloud_content_scanning/binary_upload_service.cc
 @@ -18,7 +18,7 @@
  #include "net/base/url_util.h"

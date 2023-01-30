@@ -1,4 +1,4 @@
---- content/browser/media/frameless_media_interface_proxy.h.orig	2023-01-26 11:40:15 UTC
+--- content/browser/media/frameless_media_interface_proxy.h.orig	2022-10-24 13:33:33 UTC
 +++ content/browser/media/frameless_media_interface_proxy.h
 @@ -19,7 +19,7 @@
  #include "mojo/public/cpp/bindings/receiver_set.h"

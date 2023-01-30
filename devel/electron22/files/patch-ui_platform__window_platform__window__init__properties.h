@@ -1,4 +1,4 @@
---- ui/platform_window/platform_window_init_properties.h.orig	2023-01-26 11:41:02 UTC
+--- ui/platform_window/platform_window_init_properties.h.orig	2022-09-24 10:57:32 UTC
 +++ ui/platform_window/platform_window_init_properties.h
 @@ -56,7 +56,7 @@ class WorkspaceExtensionDelegate;
  class ScenicWindowDelegate;

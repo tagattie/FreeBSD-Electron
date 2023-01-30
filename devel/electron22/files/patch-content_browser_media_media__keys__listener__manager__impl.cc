@@ -1,4 +1,4 @@
---- content/browser/media/media_keys_listener_manager_impl.cc.orig	2022-06-25 06:08:17 UTC
+--- content/browser/media/media_keys_listener_manager_impl.cc.orig	2023-01-30 07:58:59 UTC
 +++ content/browser/media/media_keys_listener_manager_impl.cc
 @@ -237,7 +237,7 @@ void MediaKeysListenerManagerImpl::StartListeningForMe
  // TODO(crbug.com/1052397): Revisit once build flag switch of lacros-chrome is

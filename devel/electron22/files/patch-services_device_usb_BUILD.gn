@@ -1,4 +1,4 @@
---- services/device/usb/BUILD.gn.orig	2023-01-26 11:40:23 UTC
+--- services/device/usb/BUILD.gn.orig	2022-10-29 13:32:26 UTC
 +++ services/device/usb/BUILD.gn
 @@ -103,15 +103,17 @@ static_library("usb") {
      deps += [ "//third_party/re2" ]

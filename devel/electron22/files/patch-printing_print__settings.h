@@ -1,4 +1,4 @@
---- printing/print_settings.h.orig	2022-05-19 03:45:37 UTC
+--- printing/print_settings.h.orig	2022-02-28 16:54:41 UTC
 +++ printing/print_settings.h
 @@ -18,7 +18,7 @@
  #include "ui/gfx/geometry/rect.h"

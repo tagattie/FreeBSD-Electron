@@ -1,4 +1,4 @@
---- electron/shell/app/node_main.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/app/node_main.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/app/node_main.cc
 @@ -42,7 +42,7 @@
  #include "content/public/common/content_descriptors.h"

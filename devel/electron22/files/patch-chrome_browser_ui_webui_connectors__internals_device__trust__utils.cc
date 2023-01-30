@@ -1,4 +1,4 @@
---- chrome/browser/ui/webui/connectors_internals/device_trust_utils.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/webui/connectors_internals/device_trust_utils.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/ui/webui/connectors_internals/device_trust_utils.cc
 @@ -6,7 +6,7 @@
  

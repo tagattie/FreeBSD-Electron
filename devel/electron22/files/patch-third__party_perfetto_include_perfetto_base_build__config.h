@@ -1,4 +1,4 @@
---- third_party/perfetto/include/perfetto/base/build_config.h.orig	2022-05-11 07:05:12 UTC
+--- third_party/perfetto/include/perfetto/base/build_config.h.orig	2022-02-07 13:39:41 UTC
 +++ third_party/perfetto/include/perfetto/base/build_config.h
 @@ -27,6 +27,7 @@
  #if defined(__ANDROID__)

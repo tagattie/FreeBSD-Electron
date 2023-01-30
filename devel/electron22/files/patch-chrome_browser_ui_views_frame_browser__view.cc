@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/frame/browser_view.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/views/frame/browser_view.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/ui/views/frame/browser_view.cc
 @@ -2069,7 +2069,7 @@ void BrowserView::TabDraggingStatusChanged(bool is_dra
    // CrOS cleanup is done.

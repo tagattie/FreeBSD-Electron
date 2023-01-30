@@ -1,4 +1,4 @@
---- electron/shell/common/api/electron_api_clipboard.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/common/api/electron_api_clipboard.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/common/api/electron_api_clipboard.cc
 @@ -54,7 +54,7 @@ std::string Clipboard::Read(const std::string& format_
        ui::ClipboardFormatType::CustomPlatformType(format_string));

@@ -1,4 +1,4 @@
---- printing/print_settings.cc.orig	2022-05-25 04:01:06 UTC
+--- printing/print_settings.cc.orig	2022-05-19 14:06:27 UTC
 +++ printing/print_settings.cc
 @@ -272,7 +272,7 @@ PrintSettings& PrintSettings::operator=(const PrintSet
  #endif

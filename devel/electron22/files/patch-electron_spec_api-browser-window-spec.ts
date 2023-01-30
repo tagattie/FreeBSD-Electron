@@ -1,4 +1,4 @@
---- electron/spec/api-browser-window-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/api-browser-window-spec.ts.orig	2022-08-10 15:31:37 UTC
 +++ electron/spec/api-browser-window-spec.ts
 @@ -58,7 +58,7 @@ describe('BrowserWindow module', () => {
        }).not.to.throw();

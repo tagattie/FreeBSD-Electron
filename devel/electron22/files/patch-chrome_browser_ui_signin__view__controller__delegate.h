@@ -1,4 +1,4 @@
---- chrome/browser/ui/signin_view_controller_delegate.h.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/signin_view_controller_delegate.h.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/ui/signin_view_controller_delegate.h
 @@ -84,7 +84,7 @@ class SigninViewControllerDelegate {
  #endif  // BUILDFLAG(ENABLE_DICE_SUPPORT) || BUILDFLAG(IS_CHROMEOS_LACROS)

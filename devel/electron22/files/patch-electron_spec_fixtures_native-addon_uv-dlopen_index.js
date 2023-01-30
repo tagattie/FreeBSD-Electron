@@ -1,4 +1,4 @@
---- electron/spec/fixtures/native-addon/uv-dlopen/index.js.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/fixtures/native-addon/uv-dlopen/index.js.orig	2021-01-25 12:27:55 UTC
 +++ electron/spec/fixtures/native-addon/uv-dlopen/index.js
 @@ -2,7 +2,7 @@ const testLoadLibrary = require('./build/Release/test_
  

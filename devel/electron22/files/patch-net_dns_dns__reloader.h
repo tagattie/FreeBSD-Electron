@@ -1,4 +1,4 @@
---- net/dns/dns_reloader.h.orig	2023-01-26 11:40:22 UTC
+--- net/dns/dns_reloader.h.orig	2022-11-30 08:12:58 UTC
 +++ net/dns/dns_reloader.h
 @@ -7,7 +7,7 @@
  

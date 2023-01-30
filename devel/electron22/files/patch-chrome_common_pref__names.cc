@@ -1,4 +1,4 @@
---- chrome/common/pref_names.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/common/pref_names.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/common/pref_names.cc
 @@ -1267,7 +1267,7 @@ const char kUseAshProxy[] = "lacros.proxy.use_ash_prox
  

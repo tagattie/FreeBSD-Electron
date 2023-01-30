@@ -1,4 +1,4 @@
---- ui/display/screen.h.orig	2023-01-26 11:41:01 UTC
+--- ui/display/screen.h.orig	2022-10-24 13:33:33 UTC
 +++ ui/display/screen.h
 @@ -130,7 +130,7 @@ class DISPLAY_EXPORT Screen {
    // (both of which may or may not be `nearest_id`).

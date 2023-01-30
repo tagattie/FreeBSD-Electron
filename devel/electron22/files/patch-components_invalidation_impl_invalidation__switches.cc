@@ -1,4 +1,4 @@
---- components/invalidation/impl/invalidation_switches.cc.orig	2023-01-26 11:40:13 UTC
+--- components/invalidation/impl/invalidation_switches.cc.orig	2022-11-30 08:12:58 UTC
 +++ components/invalidation/impl/invalidation_switches.cc
 @@ -21,7 +21,7 @@ const int kDefaultInstanceIDTokenTTLSeconds = 14 * 24 
  BASE_FEATURE(kSyncInstanceIDTokenTTL,

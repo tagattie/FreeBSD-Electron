@@ -1,4 +1,4 @@
---- ash/display/mirror_window_controller.cc.orig	2023-01-26 11:40:08 UTC
+--- ash/display/mirror_window_controller.cc.orig	2022-10-24 13:33:33 UTC
 +++ ash/display/mirror_window_controller.cc
 @@ -295,7 +295,11 @@ void MirrorWindowController::UpdateWindow(
        if (!base::Contains(display_info_list, iter->first,

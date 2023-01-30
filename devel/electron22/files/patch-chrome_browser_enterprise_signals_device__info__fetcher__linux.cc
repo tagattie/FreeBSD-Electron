@@ -1,4 +1,4 @@
---- chrome/browser/enterprise/signals/device_info_fetcher_linux.cc.orig	2022-05-11 07:00:29 UTC
+--- chrome/browser/enterprise/signals/device_info_fetcher_linux.cc.orig	2022-02-07 13:39:41 UTC
 +++ chrome/browser/enterprise/signals/device_info_fetcher_linux.cc
 @@ -4,12 +4,23 @@
  

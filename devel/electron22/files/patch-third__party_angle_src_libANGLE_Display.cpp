@@ -1,4 +1,4 @@
---- third_party/angle/src/libANGLE/Display.cpp.orig	2023-01-26 11:42:28 UTC
+--- third_party/angle/src/libANGLE/Display.cpp.orig	2022-10-24 13:33:33 UTC
 +++ third_party/angle/src/libANGLE/Display.cpp
 @@ -54,7 +54,7 @@
  #        include "libANGLE/renderer/gl/wgl/DisplayWGL.h"

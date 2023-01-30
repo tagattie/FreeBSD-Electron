@@ -1,4 +1,4 @@
---- base/profiler/stack_base_address_posix.cc.orig	2023-01-26 11:40:09 UTC
+--- base/profiler/stack_base_address_posix.cc.orig	2022-10-24 17:59:26 UTC
 +++ base/profiler/stack_base_address_posix.cc
 @@ -15,6 +15,10 @@
  #include "base/files/scoped_file.h"

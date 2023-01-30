@@ -1,4 +1,4 @@
---- components/viz/service/display_embedder/software_output_surface.h.orig	2022-08-01 19:04:28 UTC
+--- components/viz/service/display_embedder/software_output_surface.h.orig	2022-07-22 17:30:31 UTC
 +++ components/viz/service/display_embedder/software_output_surface.h
 @@ -47,7 +47,7 @@ class VIZ_SERVICE_EXPORT SoftwareOutputSurface : publi
    gfx::OverlayTransform GetDisplayTransform() override;

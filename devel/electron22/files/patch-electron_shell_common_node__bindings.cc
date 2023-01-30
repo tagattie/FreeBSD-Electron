@@ -1,4 +1,4 @@
---- electron/shell/common/node_bindings.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/common/node_bindings.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/common/node_bindings.cc
 @@ -39,7 +39,7 @@
  #include "third_party/blink/renderer/bindings/core/v8/v8_initializer.h"  // nogncheck

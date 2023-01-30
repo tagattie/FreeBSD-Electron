@@ -1,4 +1,4 @@
---- media/capture/video/linux/v4l2_capture_device_impl.cc.orig	2022-05-11 07:00:44 UTC
+--- media/capture/video/linux/v4l2_capture_device_impl.cc.orig	2022-02-07 13:39:41 UTC
 +++ media/capture/video/linux/v4l2_capture_device_impl.cc
 @@ -22,7 +22,7 @@ int V4L2CaptureDeviceImpl::close(int fd) {
    return ::close(fd);

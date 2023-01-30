@@ -1,4 +1,4 @@
---- ui/base/ui_base_features.cc.orig	2023-01-26 11:41:01 UTC
+--- ui/base/ui_base_features.cc.orig	2022-11-30 08:12:58 UTC
 +++ ui/base/ui_base_features.cc
 @@ -205,7 +205,7 @@ BASE_FEATURE(kExperimentalFlingAnimation,
               "ExperimentalFlingAnimation",

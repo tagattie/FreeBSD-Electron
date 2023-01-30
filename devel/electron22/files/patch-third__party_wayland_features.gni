@@ -1,4 +1,4 @@
---- third_party/wayland/features.gni.orig	2023-01-26 11:40:59 UTC
+--- third_party/wayland/features.gni.orig	2022-11-30 08:12:58 UTC
 +++ third_party/wayland/features.gni
 @@ -21,12 +21,15 @@ declare_args() {
  

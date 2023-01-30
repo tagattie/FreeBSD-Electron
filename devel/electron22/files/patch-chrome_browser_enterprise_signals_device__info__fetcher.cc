@@ -1,4 +1,4 @@
---- chrome/browser/enterprise/signals/device_info_fetcher.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/enterprise/signals/device_info_fetcher.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/enterprise/signals/device_info_fetcher.cc
 @@ -10,7 +10,7 @@
  #include "chrome/browser/enterprise/signals/device_info_fetcher_mac.h"

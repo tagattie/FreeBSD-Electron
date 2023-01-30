@@ -1,4 +1,4 @@
---- ui/gfx/mojom/native_handle_types_mojom_traits.h.orig	2023-01-26 11:41:02 UTC
+--- ui/gfx/mojom/native_handle_types_mojom_traits.h.orig	2022-08-31 12:19:35 UTC
 +++ ui/gfx/mojom/native_handle_types_mojom_traits.h
 @@ -15,7 +15,7 @@
  #include "third_party/abseil-cpp/absl/types/optional.h"

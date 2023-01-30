@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/frame/opaque_browser_frame_view.h.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/views/frame/opaque_browser_frame_view.h.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/ui/views/frame/opaque_browser_frame_view.h
 @@ -114,7 +114,7 @@ class OpaqueBrowserFrameView : public BrowserNonClient
        const gfx::Rect& bounding_rect) const override;

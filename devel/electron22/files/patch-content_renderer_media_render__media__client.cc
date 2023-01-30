@@ -1,4 +1,4 @@
---- content/renderer/media/render_media_client.cc.orig	2023-01-26 11:40:15 UTC
+--- content/renderer/media/render_media_client.cc.orig	2022-10-24 13:33:33 UTC
 +++ content/renderer/media/render_media_client.cc
 @@ -22,7 +22,7 @@ namespace {
  // when it's needed synchronously.

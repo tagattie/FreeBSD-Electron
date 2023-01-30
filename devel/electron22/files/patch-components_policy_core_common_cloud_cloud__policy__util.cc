@@ -1,4 +1,4 @@
---- components/policy/core/common/cloud/cloud_policy_util.cc.orig	2023-01-26 11:40:13 UTC
+--- components/policy/core/common/cloud/cloud_policy_util.cc.orig	2022-09-02 08:32:00 UTC
 +++ components/policy/core/common/cloud/cloud_policy_util.cc
 @@ -20,7 +20,7 @@
  #endif

@@ -1,4 +1,4 @@
---- chrome/browser/sharing/sharing_device_registration.cc.orig	2022-08-01 19:04:23 UTC
+--- chrome/browser/sharing/sharing_device_registration.cc.orig	2022-07-22 17:30:31 UTC
 +++ chrome/browser/sharing/sharing_device_registration.cc
 @@ -326,7 +326,7 @@ bool SharingDeviceRegistration::IsSmsFetcherSupported(
  

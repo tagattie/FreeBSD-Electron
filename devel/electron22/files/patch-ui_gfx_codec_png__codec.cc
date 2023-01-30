@@ -1,4 +1,4 @@
---- ui/gfx/codec/png_codec.cc.orig	2022-05-11 07:17:07 UTC
+--- ui/gfx/codec/png_codec.cc.orig	2022-02-07 13:39:41 UTC
 +++ ui/gfx/codec/png_codec.cc
 @@ -10,7 +10,7 @@
  #include "base/memory/raw_ptr.h"

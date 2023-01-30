@@ -1,4 +1,4 @@
---- ui/native_theme/native_theme_base.cc.orig	2022-05-19 03:47:21 UTC
+--- ui/native_theme/native_theme_base.cc.orig	2022-02-28 16:54:41 UTC
 +++ ui/native_theme/native_theme_base.cc
 @@ -269,7 +269,7 @@ void NativeThemeBase::Paint(cc::PaintCanvas* canvas,
        break;

@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/frame/opaque_browser_frame_view_layout_delegate.h.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/views/frame/opaque_browser_frame_view_layout_delegate.h.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/ui/views/frame/opaque_browser_frame_view_layout_delegate.h
 @@ -10,7 +10,7 @@
  #include "build/build_config.h"

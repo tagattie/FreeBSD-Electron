@@ -1,4 +1,4 @@
---- content/browser/webui/web_ui_main_frame_observer.h.orig	2022-08-01 19:04:29 UTC
+--- content/browser/webui/web_ui_main_frame_observer.h.orig	2022-07-22 17:30:31 UTC
 +++ content/browser/webui/web_ui_main_frame_observer.h
 @@ -44,7 +44,7 @@ class CONTENT_EXPORT WebUIMainFrameObserver : public W
  

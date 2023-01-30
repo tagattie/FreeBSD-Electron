@@ -1,4 +1,4 @@
---- electron/shell/browser/browser.h.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/browser/browser.h.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/browser/browser.h
 @@ -101,7 +101,7 @@ class Browser : public WindowListObserver {
  

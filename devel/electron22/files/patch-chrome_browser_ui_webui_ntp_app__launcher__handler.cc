@@ -1,4 +1,4 @@
---- chrome/browser/ui/webui/ntp/app_launcher_handler.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/webui/ntp/app_launcher_handler.cc.orig	2022-09-24 10:57:32 UTC
 +++ chrome/browser/ui/webui/ntp/app_launcher_handler.cc
 @@ -325,7 +325,7 @@ base::Value::Dict AppLauncherHandler::CreateExtensionI
    bool is_deprecated_app = false;

@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/frame/system_menu_model_delegate.cc.orig	2022-05-19 05:17:39 UTC
+--- chrome/browser/ui/views/frame/system_menu_model_delegate.cc.orig	2022-02-28 16:54:41 UTC
 +++ chrome/browser/ui/views/frame/system_menu_model_delegate.cc
 @@ -23,7 +23,7 @@
  

@@ -1,4 +1,4 @@
---- gpu/command_buffer/service/shared_image/external_vk_image_backing.cc.orig	2023-01-26 11:40:18 UTC
+--- gpu/command_buffer/service/shared_image/external_vk_image_backing.cc.orig	2022-11-30 08:12:58 UTC
 +++ gpu/command_buffer/service/shared_image/external_vk_image_backing.cc
 @@ -32,7 +32,7 @@
  #include "ui/gl/gl_version_info.h"

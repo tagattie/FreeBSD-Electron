@@ -1,4 +1,4 @@
---- third_party/blink/renderer/core/scroll/scrollbar_theme_aura.cc.orig	2023-01-26 11:40:26 UTC
+--- third_party/blink/renderer/core/scroll/scrollbar_theme_aura.cc.orig	2022-10-24 13:33:33 UTC
 +++ third_party/blink/renderer/core/scroll/scrollbar_theme_aura.cc
 @@ -155,7 +155,7 @@ bool ScrollbarThemeAura::SupportsDragSnapBack() const 
  // is true for at least GTK and QT apps).

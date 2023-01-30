@@ -1,4 +1,4 @@
---- tools/gn/src/util/exe_path.cc.orig	2022-02-15 03:23:13 UTC
+--- tools/gn/src/util/exe_path.cc.orig	2022-02-07 13:39:41 UTC
 +++ tools/gn/src/util/exe_path.cc
 @@ -15,7 +15,7 @@
  #include <windows.h>

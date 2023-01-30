@@ -1,4 +1,4 @@
---- components/safe_browsing/content/common/file_type_policies_unittest.cc.orig	2022-05-19 03:45:25 UTC
+--- components/safe_browsing/content/common/file_type_policies_unittest.cc.orig	2022-03-25 21:59:56 UTC
 +++ components/safe_browsing/content/common/file_type_policies_unittest.cc
 @@ -139,7 +139,7 @@ TEST_F(FileTypePoliciesTest, UnpackResourceBundle) {
    EXPECT_EQ(DownloadFileType::FULL_PING, file_type.ping_setting());

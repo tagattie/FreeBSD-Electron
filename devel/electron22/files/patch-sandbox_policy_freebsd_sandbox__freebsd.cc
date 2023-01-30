@@ -1,4 +1,4 @@
---- sandbox/policy/freebsd/sandbox_freebsd.cc.orig	2023-01-27 05:20:49 UTC
+--- sandbox/policy/freebsd/sandbox_freebsd.cc.orig	2022-09-02 10:45:05 UTC
 +++ sandbox/policy/freebsd/sandbox_freebsd.cc
 @@ -0,0 +1,253 @@
 +// Copyright (c) 2012 The Chromium Authors. All rights reserved.

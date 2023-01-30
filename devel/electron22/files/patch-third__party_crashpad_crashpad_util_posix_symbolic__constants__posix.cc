@@ -1,4 +1,4 @@
---- third_party/crashpad/crashpad/util/posix/symbolic_constants_posix.cc.orig	2022-05-25 04:01:51 UTC
+--- third_party/crashpad/crashpad/util/posix/symbolic_constants_posix.cc.orig	2022-04-21 18:48:31 UTC
 +++ third_party/crashpad/crashpad/util/posix/symbolic_constants_posix.cc
 @@ -67,7 +67,7 @@ constexpr const char* kSignalNames[] = {
      "INFO",

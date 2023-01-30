@@ -1,4 +1,4 @@
---- third_party/libxml/src/dict.c.orig	2023-01-26 11:40:54 UTC
+--- third_party/libxml/src/dict.c.orig	2022-10-24 13:33:33 UTC
 +++ third_party/libxml/src/dict.c
 @@ -137,7 +137,7 @@ static xmlMutexPtr xmlDictMutex = NULL;
  static int xmlDictInitialized = 0;

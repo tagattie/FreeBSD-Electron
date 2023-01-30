@@ -1,4 +1,4 @@
---- chrome/browser/ui/startup/startup_browser_creator.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/startup/startup_browser_creator.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/ui/startup/startup_browser_creator.cc
 @@ -129,7 +129,7 @@
  #include "chrome/credential_provider/common/gcp_strings.h"

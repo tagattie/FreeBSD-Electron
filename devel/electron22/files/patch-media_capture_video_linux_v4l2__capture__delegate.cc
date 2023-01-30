@@ -1,4 +1,4 @@
---- media/capture/video/linux/v4l2_capture_delegate.cc.orig	2023-01-26 11:40:19 UTC
+--- media/capture/video/linux/v4l2_capture_delegate.cc.orig	2022-11-30 08:12:58 UTC
 +++ media/capture/video/linux/v4l2_capture_delegate.cc
 @@ -4,8 +4,10 @@
  

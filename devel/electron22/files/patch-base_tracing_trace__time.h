@@ -1,4 +1,4 @@
---- base/tracing/trace_time.h.orig	2022-05-19 03:45:15 UTC
+--- base/tracing/trace_time.h.orig	2022-02-28 16:54:41 UTC
 +++ base/tracing/trace_time.h
 @@ -12,7 +12,7 @@ namespace base {
  namespace tracing {

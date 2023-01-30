@@ -1,4 +1,4 @@
---- third_party/blink/renderer/platform/graphics/video_frame_submitter.cc.orig	2023-01-26 11:40:27 UTC
+--- third_party/blink/renderer/platform/graphics/video_frame_submitter.cc.orig	2022-11-30 08:12:58 UTC
 +++ third_party/blink/renderer/platform/graphics/video_frame_submitter.cc
 @@ -347,7 +347,7 @@ void VideoFrameSubmitter::OnBeginFrame(
        continue;

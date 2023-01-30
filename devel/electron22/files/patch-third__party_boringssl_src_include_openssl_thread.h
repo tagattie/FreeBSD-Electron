@@ -1,4 +1,4 @@
---- third_party/boringssl/src/include/openssl/thread.h.orig	2022-05-25 04:04:26 UTC
+--- third_party/boringssl/src/include/openssl/thread.h.orig	2022-05-19 14:06:27 UTC
 +++ third_party/boringssl/src/include/openssl/thread.h
 @@ -78,6 +78,7 @@ typedef union crypto_mutex_st {
    void *handle;

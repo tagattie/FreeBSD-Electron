@@ -1,4 +1,4 @@
---- components/policy/core/browser/policy_pref_mapping_test.cc.orig	2023-01-26 11:40:13 UTC
+--- components/policy/core/browser/policy_pref_mapping_test.cc.orig	2022-11-30 08:12:58 UTC
 +++ components/policy/core/browser/policy_pref_mapping_test.cc
 @@ -337,7 +337,7 @@ class PolicyTestCase {
      const std::string os("chromeos_lacros");

@@ -1,4 +1,4 @@
---- third_party/ipcz/src/standalone/base/logging.cc.orig	2022-05-25 04:01:52 UTC
+--- third_party/ipcz/src/standalone/base/logging.cc.orig	2022-05-19 14:06:27 UTC
 +++ third_party/ipcz/src/standalone/base/logging.cc
 @@ -50,6 +50,9 @@ LogMessage::LogMessage(const char* file, int line, Lev
  #elif BUILDFLAG(IS_ANDROID)

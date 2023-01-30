@@ -1,4 +1,4 @@
---- chrome/browser/browser_process_impl.h.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/browser_process_impl.h.orig	2022-09-24 10:57:32 UTC
 +++ chrome/browser/browser_process_impl.h
 @@ -363,7 +363,7 @@ class BrowserProcessImpl : public BrowserProcess,
  

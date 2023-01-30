@@ -1,4 +1,4 @@
---- ui/gl/BUILD.gn.orig	2023-01-26 11:41:02 UTC
+--- ui/gl/BUILD.gn.orig	2022-11-30 08:12:58 UTC
 +++ ui/gl/BUILD.gn
 @@ -166,8 +166,6 @@ component("gl") {
      defines += [ "GPU_ENABLE_SERVICE_LOGGING" ]

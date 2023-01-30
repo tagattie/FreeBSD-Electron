@@ -1,4 +1,4 @@
---- chrome/browser/web_applications/extension_status_utils.h.orig	2022-05-25 04:00:50 UTC
+--- chrome/browser/web_applications/extension_status_utils.h.orig	2022-04-21 18:48:31 UTC
 +++ chrome/browser/web_applications/extension_status_utils.h
 @@ -43,7 +43,7 @@ bool IsExternalExtensionUninstalled(content::BrowserCo
                                      const std::string& extension_id);

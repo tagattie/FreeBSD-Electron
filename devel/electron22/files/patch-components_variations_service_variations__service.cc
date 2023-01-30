@@ -1,4 +1,4 @@
---- components/variations/service/variations_service.cc.orig	2023-01-26 11:40:14 UTC
+--- components/variations/service/variations_service.cc.orig	2022-11-30 08:12:58 UTC
 +++ components/variations/service/variations_service.cc
 @@ -95,7 +95,7 @@ std::string GetPlatformString() {
    return "android";

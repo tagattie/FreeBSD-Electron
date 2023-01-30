@@ -1,4 +1,4 @@
---- build/config/ozone.gni.orig	2023-01-26 11:40:09 UTC
+--- build/config/ozone.gni.orig	2022-08-31 12:19:35 UTC
 +++ build/config/ozone.gni
 @@ -87,7 +87,15 @@ declare_args() {
      } else if (is_chromeos_lacros) {

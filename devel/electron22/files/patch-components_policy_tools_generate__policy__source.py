@@ -1,4 +1,4 @@
---- components/policy/tools/generate_policy_source.py.orig	2023-01-26 11:40:13 UTC
+--- components/policy/tools/generate_policy_source.py.orig	2022-09-24 10:57:32 UTC
 +++ components/policy/tools/generate_policy_source.py
 @@ -50,8 +50,10 @@ PLATFORM_STRINGS = {
      'fuchsia': ['fuchsia'],

@@ -1,4 +1,4 @@
---- third_party/lzma_sdk/C/CpuArch.c.orig	2023-01-26 11:40:54 UTC
+--- third_party/lzma_sdk/C/CpuArch.c.orig	2022-09-04 11:56:14 UTC
 +++ third_party/lzma_sdk/C/CpuArch.c
 @@ -412,12 +412,40 @@ BoolInt CPU_IsSupported_SHA1(void) { return APPLE_CRYP
  BoolInt CPU_IsSupported_SHA2(void) { return APPLE_CRYPTO_SUPPORT_VAL; }

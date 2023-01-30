@@ -1,4 +1,4 @@
---- third_party/libphonenumber/dist/cpp/src/phonenumbers/base/thread_checker.h.orig	2023-01-26 11:43:36 UTC
+--- third_party/libphonenumber/dist/cpp/src/phonenumbers/base/thread_checker.h.orig	2022-09-24 10:57:32 UTC
 +++ third_party/libphonenumber/dist/cpp/src/phonenumbers/base/thread_checker.h
 @@ -22,7 +22,7 @@
  // Note that I18N_PHONENUMBERS_NO_THREAD_SAFETY must be defined only to let the

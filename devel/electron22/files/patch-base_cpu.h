@@ -1,4 +1,4 @@
---- base/cpu.h.orig	2023-01-26 11:40:09 UTC
+--- base/cpu.h.orig	2022-11-30 08:12:58 UTC
 +++ base/cpu.h
 @@ -115,7 +115,7 @@ class BASE_EXPORT CPU final {
    const std::string& cpu_brand() const { return cpu_brand_; }

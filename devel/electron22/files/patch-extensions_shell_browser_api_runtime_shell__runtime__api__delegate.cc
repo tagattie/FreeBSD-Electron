@@ -1,4 +1,4 @@
---- extensions/shell/browser/api/runtime/shell_runtime_api_delegate.cc.orig	2022-05-19 03:45:30 UTC
+--- extensions/shell/browser/api/runtime/shell_runtime_api_delegate.cc.orig	2022-02-28 16:54:41 UTC
 +++ extensions/shell/browser/api/runtime/shell_runtime_api_delegate.cc
 @@ -45,7 +45,7 @@ void ShellRuntimeAPIDelegate::OpenURL(const GURL& unin
  bool ShellRuntimeAPIDelegate::GetPlatformInfo(PlatformInfo* info) {

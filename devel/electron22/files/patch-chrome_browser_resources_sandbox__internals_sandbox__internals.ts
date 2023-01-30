@@ -1,4 +1,4 @@
---- chrome/browser/resources/sandbox_internals/sandbox_internals.ts.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/resources/sandbox_internals/sandbox_internals.ts.orig	2022-09-24 10:57:32 UTC
 +++ chrome/browser/resources/sandbox_internals/sandbox_internals.ts
 @@ -2,7 +2,7 @@
  // Use of this source code is governed by a BSD-style license that can be

@@ -1,4 +1,4 @@
---- electron/spec/api-tray-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/api-tray-spec.ts.orig	2021-01-22 23:55:24 UTC
 +++ electron/spec/api-tray-spec.ts
 @@ -125,7 +125,7 @@ describe('tray module', () => {
    describe('tray.getBounds()', () => {

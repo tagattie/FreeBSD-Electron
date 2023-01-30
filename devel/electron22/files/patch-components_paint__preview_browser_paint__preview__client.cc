@@ -1,4 +1,4 @@
---- components/paint_preview/browser/paint_preview_client.cc.orig	2023-01-26 11:40:13 UTC
+--- components/paint_preview/browser/paint_preview_client.cc.orig	2022-10-24 13:33:33 UTC
 +++ components/paint_preview/browser/paint_preview_client.cc
 @@ -307,8 +307,8 @@ void PaintPreviewClient::CapturePaintPreview(
    metadata->set_url(url.spec());

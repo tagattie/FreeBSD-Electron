@@ -1,4 +1,4 @@
---- chrome/browser/send_tab_to_self/receiving_ui_handler_registry.cc.orig	2022-05-19 03:45:18 UTC
+--- chrome/browser/send_tab_to_self/receiving_ui_handler_registry.cc.orig	2022-02-28 16:54:41 UTC
 +++ chrome/browser/send_tab_to_self/receiving_ui_handler_registry.cc
 @@ -16,7 +16,7 @@
  #include "components/send_tab_to_self/features.h"

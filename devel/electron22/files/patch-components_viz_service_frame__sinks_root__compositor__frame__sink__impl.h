@@ -1,4 +1,4 @@
---- components/viz/service/frame_sinks/root_compositor_frame_sink_impl.h.orig	2023-01-26 11:40:14 UTC
+--- components/viz/service/frame_sinks/root_compositor_frame_sink_impl.h.orig	2022-09-24 10:57:32 UTC
 +++ components/viz/service/frame_sinks/root_compositor_frame_sink_impl.h
 @@ -196,7 +196,7 @@ class VIZ_SERVICE_EXPORT RootCompositorFrameSinkImpl
  

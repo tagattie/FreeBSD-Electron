@@ -1,4 +1,4 @@
---- electron/BUILD.gn.orig	2023-01-18 11:12:36 UTC
+--- electron/BUILD.gn.orig	2022-08-03 15:31:32 UTC
 +++ electron/BUILD.gn
 @@ -111,8 +111,6 @@ electron_version = exec_script("script/print-version.p
                                 [],

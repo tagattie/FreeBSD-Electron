@@ -1,4 +1,4 @@
---- chrome/browser/intranet_redirect_detector.h.orig	2022-05-19 03:45:17 UTC
+--- chrome/browser/intranet_redirect_detector.h.orig	2022-02-28 16:54:41 UTC
 +++ chrome/browser/intranet_redirect_detector.h
 @@ -27,7 +27,7 @@ class SimpleURLLoader;
  class PrefRegistrySimple;

@@ -1,4 +1,4 @@
---- base/files/dir_reader_posix.h.orig	2022-08-01 19:04:19 UTC
+--- base/files/dir_reader_posix.h.orig	2022-06-17 14:20:10 UTC
 +++ base/files/dir_reader_posix.h
 @@ -17,7 +17,7 @@
  // seems worse than falling back to enumerating all file descriptors so we will

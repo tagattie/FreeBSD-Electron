@@ -1,4 +1,4 @@
---- headless/lib/browser/headless_browser_main_parts.h.orig	2022-08-01 19:04:30 UTC
+--- headless/lib/browser/headless_browser_main_parts.h.orig	2022-06-17 14:20:10 UTC
 +++ headless/lib/browser/headless_browser_main_parts.h
 @@ -48,7 +48,7 @@ class HEADLESS_EXPORT HeadlessBrowserMainParts
  #if BUILDFLAG(IS_MAC)

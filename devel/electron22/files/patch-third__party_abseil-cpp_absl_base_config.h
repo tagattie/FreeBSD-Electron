@@ -1,4 +1,4 @@
---- third_party/abseil-cpp/absl/base/config.h.orig	2023-01-26 11:40:24 UTC
+--- third_party/abseil-cpp/absl/base/config.h.orig	2022-11-30 08:12:58 UTC
 +++ third_party/abseil-cpp/absl/base/config.h
 @@ -460,7 +460,8 @@ static_assert(ABSL_INTERNAL_INLINE_NAMESPACE_STR[0] !=
  // POSIX.1-2001.

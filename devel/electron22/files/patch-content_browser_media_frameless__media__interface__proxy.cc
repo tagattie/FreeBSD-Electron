@@ -1,4 +1,4 @@
---- content/browser/media/frameless_media_interface_proxy.cc.orig	2023-01-26 11:40:15 UTC
+--- content/browser/media/frameless_media_interface_proxy.cc.orig	2022-08-31 12:19:35 UTC
 +++ content/browser/media/frameless_media_interface_proxy.cc
 @@ -16,7 +16,7 @@
  #include "media/mojo/mojom/renderer_extensions.mojom.h"

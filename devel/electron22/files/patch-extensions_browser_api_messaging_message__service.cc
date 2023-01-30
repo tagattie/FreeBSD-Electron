@@ -1,4 +1,4 @@
---- extensions/browser/api/messaging/message_service.cc.orig	2023-01-26 11:40:18 UTC
+--- extensions/browser/api/messaging/message_service.cc.orig	2022-11-30 08:12:58 UTC
 +++ extensions/browser/api/messaging/message_service.cc
 @@ -74,7 +74,7 @@ namespace {
  const char kReceivingEndDoesntExistError[] =

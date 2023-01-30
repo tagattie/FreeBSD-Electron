@@ -1,4 +1,4 @@
---- components/optimization_guide/core/optimization_guide_util.cc.orig	2023-01-26 11:40:13 UTC
+--- components/optimization_guide/core/optimization_guide_util.cc.orig	2022-10-24 13:33:33 UTC
 +++ components/optimization_guide/core/optimization_guide_util.cc
 @@ -27,7 +27,7 @@ optimization_guide::proto::Platform GetPlatform() {
    return optimization_guide::proto::PLATFORM_CHROMEOS;

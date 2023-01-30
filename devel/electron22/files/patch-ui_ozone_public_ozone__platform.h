@@ -1,4 +1,4 @@
---- ui/ozone/public/ozone_platform.h.orig	2023-01-27 05:20:34 UTC
+--- ui/ozone/public/ozone_platform.h.orig	2023-01-30 07:58:59 UTC
 +++ ui/ozone/public/ozone_platform.h
 @@ -148,7 +148,7 @@ class COMPONENT_EXPORT(OZONE) OzonePlatform {
      // back via gpu extra info.

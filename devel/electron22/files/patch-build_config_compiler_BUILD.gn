@@ -1,4 +1,4 @@
---- build/config/compiler/BUILD.gn.orig	2023-01-26 11:40:09 UTC
+--- build/config/compiler/BUILD.gn.orig	2022-11-30 08:12:58 UTC
 +++ build/config/compiler/BUILD.gn
 @@ -219,13 +219,16 @@ config("default_include_dirs") {
  # Compiler instrumentation can introduce dependencies in DSOs to symbols in

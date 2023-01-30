@@ -1,4 +1,4 @@
---- services/network/network_sandbox_hook_linux.cc.orig	2022-05-19 03:45:39 UTC
+--- services/network/network_sandbox_hook_linux.cc.orig	2022-03-19 12:56:15 UTC
 +++ services/network/network_sandbox_hook_linux.cc
 @@ -26,12 +26,15 @@ sandbox::syscall_broker::BrokerCommandSet GetNetworkBr
    });

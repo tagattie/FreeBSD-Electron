@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_power_monitor.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/browser/api/electron_api_power_monitor.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/browser/api/electron_api_power_monitor.cc
 @@ -77,6 +77,11 @@ void PowerMonitor::OnResume() {
    Emit("resume");

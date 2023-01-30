@@ -1,4 +1,4 @@
---- electron/script/lib/get-version.js.orig	2023-01-17 21:24:40 UTC
+--- electron/script/lib/get-version.js.orig	2023-01-24 16:58:16 UTC
 +++ electron/script/lib/get-version.js
 @@ -11,12 +11,10 @@ module.exports.getElectronVersion = () => {
    // The only difference in the "git describe" technique is that technically a commit can "change" it's version

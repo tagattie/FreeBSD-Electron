@@ -1,4 +1,4 @@
---- media/base/video_frame.h.orig	2023-01-26 11:40:19 UTC
+--- media/base/video_frame.h.orig	2022-11-30 08:12:58 UTC
 +++ media/base/video_frame.h
 @@ -41,7 +41,7 @@
  #include "base/mac/scoped_cftyperef.h"

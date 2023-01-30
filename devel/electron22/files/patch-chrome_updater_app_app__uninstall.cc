@@ -1,4 +1,4 @@
---- chrome/updater/app/app_uninstall.cc.orig	2022-05-19 03:45:22 UTC
+--- chrome/updater/app/app_uninstall.cc.orig	2022-02-28 16:54:41 UTC
 +++ chrome/updater/app/app_uninstall.cc
 @@ -32,7 +32,7 @@
  #include "chrome/updater/win/setup/uninstall.h"

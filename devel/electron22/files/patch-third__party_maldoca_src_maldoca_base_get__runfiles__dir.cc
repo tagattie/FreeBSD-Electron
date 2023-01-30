@@ -1,4 +1,4 @@
---- third_party/maldoca/src/maldoca/base/get_runfiles_dir.cc.orig	2022-05-11 07:01:55 UTC
+--- third_party/maldoca/src/maldoca/base/get_runfiles_dir.cc.orig	2022-02-07 13:39:41 UTC
 +++ third_party/maldoca/src/maldoca/base/get_runfiles_dir.cc
 @@ -24,11 +24,6 @@
  #error "__APPLE__ not supported."

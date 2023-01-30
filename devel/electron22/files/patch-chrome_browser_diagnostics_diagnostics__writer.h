@@ -1,4 +1,4 @@
---- chrome/browser/diagnostics/diagnostics_writer.h.orig	2022-05-11 07:00:29 UTC
+--- chrome/browser/diagnostics/diagnostics_writer.h.orig	2022-02-07 13:39:41 UTC
 +++ chrome/browser/diagnostics/diagnostics_writer.h
 @@ -14,6 +14,8 @@ namespace diagnostics {
  // Console base class used internally.

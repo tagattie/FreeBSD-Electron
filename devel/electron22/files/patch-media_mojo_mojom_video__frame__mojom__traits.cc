@@ -1,4 +1,4 @@
---- media/mojo/mojom/video_frame_mojom_traits.cc.orig	2023-01-26 11:40:20 UTC
+--- media/mojo/mojom/video_frame_mojom_traits.cc.orig	2022-10-24 13:33:33 UTC
 +++ media/mojo/mojom/video_frame_mojom_traits.cc
 @@ -22,7 +22,7 @@
  #include "ui/gfx/mojom/color_space_mojom_traits.h"

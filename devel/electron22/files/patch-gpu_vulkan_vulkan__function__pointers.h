@@ -1,4 +1,4 @@
---- gpu/vulkan/vulkan_function_pointers.h.orig	2022-05-25 04:01:02 UTC
+--- gpu/vulkan/vulkan_function_pointers.h.orig	2022-04-21 18:48:31 UTC
 +++ gpu/vulkan/vulkan_function_pointers.h
 @@ -305,7 +305,7 @@ struct COMPONENT_EXPORT(VULKAN) VulkanFunctionPointers
    VulkanFunction<PFN_vkGetSwapchainImagesKHR> vkGetSwapchainImagesKHR;

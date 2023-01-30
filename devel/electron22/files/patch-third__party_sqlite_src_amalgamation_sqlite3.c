@@ -1,4 +1,4 @@
---- third_party/sqlite/src/amalgamation/sqlite3.c.orig	2023-01-26 11:45:02 UTC
+--- third_party/sqlite/src/amalgamation/sqlite3.c.orig	2022-09-14 21:13:04 UTC
 +++ third_party/sqlite/src/amalgamation/sqlite3.c
 @@ -42109,7 +42109,12 @@ static int unixRandomness(sqlite3_vfs *NotUsed, int nB
    memset(zBuf, 0, nBuf);

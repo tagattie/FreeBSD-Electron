@@ -1,4 +1,4 @@
---- third_party/libxml/linux/config.h.orig	2023-01-26 11:40:54 UTC
+--- third_party/libxml/linux/config.h.orig	2022-12-14 08:02:29 UTC
 +++ third_party/libxml/linux/config.h
 @@ -72,6 +72,9 @@
  /* Define to 1 if you have the `putenv' function. */

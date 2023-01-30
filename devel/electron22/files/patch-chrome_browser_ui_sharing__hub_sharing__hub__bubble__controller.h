@@ -1,4 +1,4 @@
---- chrome/browser/ui/sharing_hub/sharing_hub_bubble_controller.h.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/sharing_hub/sharing_hub_bubble_controller.h.orig	2022-08-31 12:19:35 UTC
 +++ chrome/browser/ui/sharing_hub/sharing_hub_bubble_controller.h
 @@ -37,7 +37,7 @@ class SharingHubBubbleController {
    virtual bool ShouldOfferOmniboxIcon() = 0;

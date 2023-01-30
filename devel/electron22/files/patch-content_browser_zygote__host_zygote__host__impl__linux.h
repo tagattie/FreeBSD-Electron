@@ -1,4 +1,4 @@
---- content/browser/zygote_host/zygote_host_impl_linux.h.orig	2023-01-26 11:40:15 UTC
+--- content/browser/zygote_host/zygote_host_impl_linux.h.orig	2022-11-30 08:12:58 UTC
 +++ content/browser/zygote_host/zygote_host_impl_linux.h
 @@ -47,12 +47,14 @@ class CONTENT_EXPORT ZygoteHostImpl : public ZygoteHos
                       base::ScopedFD* control_fd,

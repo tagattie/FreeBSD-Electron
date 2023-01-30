@@ -1,4 +1,4 @@
---- content/browser/webui/web_ui_main_frame_observer.cc.orig	2022-08-01 19:04:29 UTC
+--- content/browser/webui/web_ui_main_frame_observer.cc.orig	2022-07-22 17:30:31 UTC
 +++ content/browser/webui/web_ui_main_frame_observer.cc
 @@ -13,7 +13,7 @@
  #include "content/public/browser/navigation_handle.h"

@@ -1,4 +1,4 @@
---- third_party/ffmpeg/libavutil/cpu.c.orig	2022-08-01 19:09:57 UTC
+--- third_party/ffmpeg/libavutil/cpu.c.orig	2022-07-22 17:30:31 UTC
 +++ third_party/ffmpeg/libavutil/cpu.c
 @@ -38,10 +38,7 @@
  #if HAVE_GETPROCESSAFFINITYMASK || HAVE_WINRT

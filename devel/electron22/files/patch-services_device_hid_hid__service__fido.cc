@@ -1,4 +1,4 @@
---- services/device/hid/hid_service_fido.cc.orig	2023-01-27 05:20:49 UTC
+--- services/device/hid/hid_service_fido.cc.orig	2022-11-30 08:12:58 UTC
 +++ services/device/hid/hid_service_fido.cc
 @@ -0,0 +1,399 @@
 +// Copyright 2014 The Chromium Authors

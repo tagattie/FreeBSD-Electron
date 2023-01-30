@@ -1,4 +1,4 @@
---- extensions/shell/browser/shell_extensions_api_client.cc.orig	2022-05-19 03:45:30 UTC
+--- extensions/shell/browser/shell_extensions_api_client.cc.orig	2022-02-28 16:54:41 UTC
 +++ extensions/shell/browser/shell_extensions_api_client.cc
 @@ -58,7 +58,7 @@ ShellExtensionsAPIClient::CreateDisplayInfoProvider() 
  

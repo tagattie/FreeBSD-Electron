@@ -1,4 +1,4 @@
---- extensions/common/command.cc.orig	2023-01-26 11:40:18 UTC
+--- extensions/common/command.cc.orig	2022-11-30 08:12:58 UTC
 +++ extensions/common/command.cc
 @@ -280,7 +280,7 @@ std::string Command::CommandPlatform() {
    return values::kKeybindingPlatformMac;

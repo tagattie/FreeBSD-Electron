@@ -1,4 +1,4 @@
---- media/video/video_encode_accelerator_adapter.cc.orig	2023-01-26 11:40:20 UTC
+--- media/video/video_encode_accelerator_adapter.cc.orig	2022-10-24 13:33:33 UTC
 +++ media/video/video_encode_accelerator_adapter.cc
 @@ -130,7 +130,7 @@ VideoEncodeAccelerator::Config SetUpVeaConfig(
    if (is_rgb)

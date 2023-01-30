@@ -1,4 +1,4 @@
---- electron/spec/fixtures/crash-cases/safe-storage/index.js.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/fixtures/crash-cases/safe-storage/index.js.orig	2022-05-18 15:31:32 UTC
 +++ electron/spec/fixtures/crash-cases/safe-storage/index.js
 @@ -21,7 +21,7 @@ const { expect } = require('chai');
    await app.whenReady();

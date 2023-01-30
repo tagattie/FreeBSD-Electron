@@ -1,4 +1,4 @@
---- chrome/browser/ui/signin_view_controller.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/signin_view_controller.cc.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/ui/signin_view_controller.cc
 @@ -273,7 +273,7 @@ void SigninViewController::ShowModalEnterpriseConfirma
      SkColor profile_color,

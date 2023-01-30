@@ -1,4 +1,4 @@
---- chrome/common/chrome_features.h.orig	2023-01-26 11:40:11 UTC
+--- chrome/common/chrome_features.h.orig	2022-11-30 08:12:58 UTC
 +++ chrome/common/chrome_features.h
 @@ -81,13 +81,13 @@ BASE_DECLARE_FEATURE(kAppShimNewCloseBehavior);
  COMPONENT_EXPORT(CHROME_FEATURES) BASE_DECLARE_FEATURE(kAsyncDns);

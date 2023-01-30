@@ -1,4 +1,4 @@
---- content/browser/renderer_host/render_widget_host_view_aura.cc.orig	2023-01-27 05:20:34 UTC
+--- content/browser/renderer_host/render_widget_host_view_aura.cc.orig	2022-11-30 08:12:58 UTC
 +++ content/browser/renderer_host/render_widget_host_view_aura.cc
 @@ -118,7 +118,7 @@
  #include "ui/gfx/gdi_util.h"

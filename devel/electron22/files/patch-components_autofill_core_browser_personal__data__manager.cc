@@ -1,4 +1,4 @@
---- components/autofill/core/browser/personal_data_manager.cc.orig	2023-01-26 11:40:12 UTC
+--- components/autofill/core/browser/personal_data_manager.cc.orig	2022-11-30 08:12:58 UTC
 +++ components/autofill/core/browser/personal_data_manager.cc
 @@ -2053,7 +2053,8 @@ bool PersonalDataManager::ShouldShowCardsFromAccountOp
  // TODO(crbug.com/1052397): Revisit the macro expression once build flag switch

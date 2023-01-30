@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/hung_renderer_view.cc.orig	2022-08-01 19:04:24 UTC
+--- chrome/browser/ui/views/hung_renderer_view.cc.orig	2022-06-17 14:20:10 UTC
 +++ chrome/browser/ui/views/hung_renderer_view.cc
 @@ -401,7 +401,7 @@ void HungRendererDialogView::ForceCrashHungRenderer() 
    content::RenderProcessHost* rph =

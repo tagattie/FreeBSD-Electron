@@ -1,4 +1,4 @@
---- ui/ozone/platform/headless/vulkan_implementation_headless.cc.orig	2023-01-26 11:41:02 UTC
+--- ui/ozone/platform/headless/vulkan_implementation_headless.cc.orig	2022-11-30 08:12:58 UTC
 +++ ui/ozone/platform/headless/vulkan_implementation_headless.cc
 @@ -155,7 +155,7 @@ VulkanImplementationHeadless::CreateImageFromGpuMemory
        VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT | VK_IMAGE_USAGE_SAMPLED_BIT |

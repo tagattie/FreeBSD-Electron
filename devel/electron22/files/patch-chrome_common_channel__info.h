@@ -1,4 +1,4 @@
---- chrome/common/channel_info.h.orig	2023-01-26 11:40:11 UTC
+--- chrome/common/channel_info.h.orig	2022-09-24 10:57:32 UTC
 +++ chrome/common/channel_info.h
 @@ -106,7 +106,7 @@ std::string GetChannelSuffixForDataDir();
  

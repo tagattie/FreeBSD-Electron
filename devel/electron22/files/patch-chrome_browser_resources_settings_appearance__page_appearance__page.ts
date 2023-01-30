@@ -1,4 +1,4 @@
---- chrome/browser/resources/settings/appearance_page/appearance_page.ts.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/resources/settings/appearance_page/appearance_page.ts.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/resources/settings/appearance_page/appearance_page.ts
 @@ -63,7 +63,7 @@ export interface SettingsAppearancePageElement {
  export enum SystemTheme {

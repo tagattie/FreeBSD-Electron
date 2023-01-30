@@ -1,4 +1,4 @@
---- components/autofill_assistant/browser/autofill_assistant_impl.cc.orig	2023-01-26 11:40:12 UTC
+--- components/autofill_assistant/browser/autofill_assistant_impl.cc.orig	2022-11-30 08:12:58 UTC
 +++ components/autofill_assistant/browser/autofill_assistant_impl.cc
 @@ -161,7 +161,7 @@ void AutofillAssistantImpl::GetCapabilitiesByHashPrefi
    client_context.set_platform_type(ClientContextProto::PLATFORM_TYPE_ANDROID);

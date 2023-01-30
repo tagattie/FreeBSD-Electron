@@ -1,4 +1,4 @@
---- third_party/boringssl/src/crypto/cpu_aarch64_openbsd.c.orig	2022-05-20 04:31:06 UTC
+--- third_party/boringssl/src/crypto/cpu_aarch64_openbsd.c.orig	2022-03-25 21:59:56 UTC
 +++ third_party/boringssl/src/crypto/cpu_aarch64_openbsd.c
 @@ -0,0 +1,57 @@
 +/* Copyright (c) 2022, Robert Nagy <robert@openbsd.org>

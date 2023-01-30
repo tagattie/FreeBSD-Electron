@@ -1,4 +1,4 @@
---- v8/src/base/small-vector.h.orig	2023-01-26 11:48:49 UTC
+--- v8/src/base/small-vector.h.orig	2022-10-25 08:25:05 UTC
 +++ v8/src/base/small-vector.h
 @@ -22,7 +22,7 @@ template <typename T, size_t kSize, typename Allocator
  class SmallVector {

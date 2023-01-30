@@ -1,4 +1,4 @@
---- electron/shell/browser/ui/views/electron_views_delegate.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/browser/ui/views/electron_views_delegate.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/browser/ui/views/electron_views_delegate.cc
 @@ -9,7 +9,7 @@
  #include "ui/views/widget/desktop_aura/desktop_native_widget_aura.h"

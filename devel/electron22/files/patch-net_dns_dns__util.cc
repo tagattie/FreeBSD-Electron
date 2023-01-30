@@ -1,4 +1,4 @@
---- net/dns/dns_util.cc.orig	2022-05-25 04:01:05 UTC
+--- net/dns/dns_util.cc.orig	2022-04-21 18:48:31 UTC
 +++ net/dns/dns_util.cc
 @@ -28,6 +28,8 @@
  #include "net/third_party/uri_template/uri_template.h"

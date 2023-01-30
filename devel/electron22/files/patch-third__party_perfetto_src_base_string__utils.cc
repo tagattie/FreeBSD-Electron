@@ -1,4 +1,4 @@
---- third_party/perfetto/src/base/string_utils.cc.orig	2022-05-11 07:17:51 UTC
+--- third_party/perfetto/src/base/string_utils.cc.orig	2022-02-07 13:39:41 UTC
 +++ third_party/perfetto/src/base/string_utils.cc
 @@ -36,9 +36,10 @@ namespace base {
  

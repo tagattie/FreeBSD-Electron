@@ -1,4 +1,4 @@
---- remoting/host/webauthn/remote_webauthn_caller_security_utils.cc.orig	2023-01-26 11:40:23 UTC
+--- remoting/host/webauthn/remote_webauthn_caller_security_utils.cc.orig	2022-10-24 13:33:33 UTC
 +++ remoting/host/webauthn/remote_webauthn_caller_security_utils.cc
 @@ -9,7 +9,7 @@
  #include "base/strings/utf_string_conversions.h"

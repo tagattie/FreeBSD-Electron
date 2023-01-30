@@ -1,4 +1,4 @@
---- electron/shell/common/api/electron_api_native_image.h.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/common/api/electron_api_native_image.h.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/common/api/electron_api_native_image.h
 @@ -77,7 +77,7 @@ class NativeImage : public gin::Wrappable<NativeImage>
                                                      const GURL& url);

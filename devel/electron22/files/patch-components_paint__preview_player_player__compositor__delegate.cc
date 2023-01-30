@@ -1,4 +1,4 @@
---- components/paint_preview/player/player_compositor_delegate.cc.orig	2022-05-25 04:00:57 UTC
+--- components/paint_preview/player/player_compositor_delegate.cc.orig	2022-05-19 14:06:27 UTC
 +++ components/paint_preview/player/player_compositor_delegate.cc
 @@ -444,8 +444,8 @@ void PlayerCompositorDelegate::ValidateProtoAndLoadAXT
    // use the AXTreeUpdate.

@@ -1,4 +1,4 @@
---- chrome/browser/browser_features.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/browser_features.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/browser_features.cc
 @@ -30,7 +30,7 @@ BASE_FEATURE(kColorProviderRedirectionForThemeProvider
  // the browser exits.

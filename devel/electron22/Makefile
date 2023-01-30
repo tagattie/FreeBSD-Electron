@@ -12,56 +12,60 @@ DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}:chromium \
 		electron-yarn-cache-${ELECTRON_VER}${EXTRACT_SUFX}:prefetch
 DIST_SUBDIR=	${PORTNAME}
 
-MAINTAINER=	tagattie@FreeBSD.org
+MAINTAINER=	mikael@FreeBSD.org
 COMMENT=	Build cross-platform desktop apps with JavaScript, HTML, and CSS
 WWW=		https://electronjs.org/
 
-LICENSE=	MIT
+LICENSE=	BSD3CLAUSE LGPL21 MPL11 MIT
+LICENSE_COMB=	multi
 LICENSE_FILE=	${WRKSRC}/electron/LICENSE
 
-FETCH_DEPENDS=		yarn-node16>0:www/yarn-node16
-EXTRACT_DEPENDS=	yarn-node16>0:www/yarn-node16
-PATCH_DEPENDS=		git:devel/git
-BUILD_DEPENDS=		gperf:devel/gperf \
-			yasm:devel/yasm \
-			${LOCALBASE}/libdata/pkgconfig/dri.pc:graphics/mesa-dri \
-			${LOCALBASE}/include/linux/videodev2.h:multimedia/v4l_compat \
-			node16>0:www/node16 \
-			npm-node16>0:www/npm-node16
-LIB_DEPENDS=		libatk-bridge-2.0.so:accessibility/at-spi2-atk \
-			libatspi.so:accessibility/at-spi2-core \
-			libsnappy.so:archivers/snappy \
-			libFLAC.so:audio/flac \
-			libopus.so:audio/opus \
-			libdbus-1.so:devel/dbus \
-			libicuuc.so:devel/icu \
-			libevent.so:devel/libevent \
-			libnotify.so:devel/libnotify \
-			libpci.so:devel/libpci \
-			libnspr4.so:devel/nspr \
-			libre2.so:devel/re2 \
-			libdrm.so:graphics/libdrm \
-			libpng.so:graphics/png \
-			libwayland-client.so:graphics/wayland \
-			libwebp.so:graphics/webp \
-			libva.so:multimedia/libva \
-			libopenh264.so:multimedia/openh264 \
-			libfreetype.so:print/freetype2 \
-			libharfbuzz.so:print/harfbuzz \
-			libsecret-1.so:security/libsecret \
-			libnss3.so:security/nss \
-			libexpat.so:textproc/expat2 \
-			libxkbcommon.so:x11/libxkbcommon \
-			libxshmfence.so:x11/libxshmfence \
-			libfontconfig.so:x11-fonts/fontconfig
-RUN_DEPENDS=		xdg-open:devel/xdg-utils
-TEST_DEPENDS=		git:devel/git \
-			${PYTHON_PKGNAMEPREFIX}python-dbusmock>0:devel/py-python-dbusmock@${PY_FLAVOR} \
-			npm-node16>0:www/npm-node16
+ONLY_FOR_ARCHS=	aarch64 amd64 i386
+
+FETCH_DEPENDS=	yarn-node16>0:www/yarn-node16
+EXTRACT_DEPENDS=yarn-node16>0:www/yarn-node16
+PATCH_DEPENDS=	git:devel/git
+BUILD_DEPENDS=	gperf:devel/gperf \
+		yasm:devel/yasm \
+		${LOCALBASE}/libdata/pkgconfig/dri.pc:graphics/mesa-dri \
+		${LOCALBASE}/include/linux/videodev2.h:multimedia/v4l_compat \
+		node16>0:www/node16 \
+		npm-node16>0:www/npm-node16
+LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
+		libatspi.so:accessibility/at-spi2-core \
+		libsnappy.so:archivers/snappy \
+		libFLAC.so:audio/flac \
+		libopus.so:audio/opus \
+		libdbus-1.so:devel/dbus \
+		libicuuc.so:devel/icu \
+		libevent.so:devel/libevent \
+		libnotify.so:devel/libnotify \
+		libpci.so:devel/libpci \
+		libnspr4.so:devel/nspr \
+		libre2.so:devel/re2 \
+		libdrm.so:graphics/libdrm \
+		libpng.so:graphics/png \
+		libwayland-client.so:graphics/wayland \
+		libwebp.so:graphics/webp \
+		libva.so:multimedia/libva \
+		libopenh264.so:multimedia/openh264 \
+		libfreetype.so:print/freetype2 \
+		libharfbuzz.so:print/harfbuzz \
+		libsecret-1.so:security/libsecret \
+		libnss3.so:security/nss \
+		libexpat.so:textproc/expat2 \
+		libxkbcommon.so:x11/libxkbcommon \
+		libxshmfence.so:x11/libxshmfence \
+		libfontconfig.so:x11-fonts/fontconfig
+RUN_DEPENDS=	xdg-open:devel/xdg-utils
+TEST_DEPENDS=	git:devel/git \
+		${PYTHON_PKGNAMEPREFIX}python-dbusmock>0:devel/py-python-dbusmock@${PY_FLAVOR} \
+		npm-node16>0:www/npm-node16
 
 USES=		bison compiler:c++17-lang cpe gettext-tools gl gnome iconv \
 		jpeg localbase:ldflags ninja pkgconfig python:build,test \
 		shebangfix tar:xz xorg
+
 CPE_VENDOR=	electronjs
 USE_GITHUB=	yes
 GH_TAGNAME=	${DISTVERSIONPREFIX}${ELECTRON_VER}
@@ -76,15 +80,15 @@ USE_LDCONFIG=	${DATADIR}
 USE_XORG=	x11 xcb xcomposite xcursor xdamage xext xfixes xi xrandr \
 		xrender xscrnsaver xtst
 
-SHEBANG_FILES=	buildtools/linux64/clang-format
+SHEBANG_FILES=	chrome/tools/build/linux/chrome-wrapper buildtools/linux64/clang-format
 
-MAKE_ARGS=			-C out/${BUILDTYPE}
-MAKE_ENV+=			C_INCLUDE_PATH=${LOCALBASE}/include \
-				CPLUS_INCLUDE_PATH=${LOCALBASE}/include
-ALL_TARGET=			electron third_party/electron_node:headers
-POST_BUILD_TARGETS=		licenses version
-POST_BUILD_DIST_TARGETS=	electron_dist_zip electron_chromedriver_zip \
-				electron_mksnapshot_zip
+MAKE_ARGS=	-C out/${BUILDTYPE}
+MAKE_ENV+=	C_INCLUDE_PATH=${LOCALBASE}/include \
+		CPLUS_INCLUDE_PATH=${LOCALBASE}/include
+ALL_TARGET=	electron third_party/electron_node:headers
+POST_BUILD_TARGETS=	licenses version
+POST_BUILD_DIST_TARGETS=electron_dist_zip electron_chromedriver_zip \
+			electron_mksnapshot_zip
 
 DATADIR=	${PREFIX}/share/${PORTNAME}${PKGNAMESUFFIX}
 BINARY_ALIAS=	python3=${PYTHON_CMD}
@@ -92,44 +96,106 @@ BINARY_ALIAS=	python3=${PYTHON_CMD}
 NO_WRKSUBDIR=	yes
 WRKSRC_SUBDIR=	src
 
+GN_ARGS+=	clang_use_chrome_plugins=false \
+		enable_hangout_services_extension=true \
+		enable_js_type_check=false \
+		enable_nacl=false \
+		enable_remoting=false \
+		fatal_linker_warnings=false \
+		icu_use_data_file=false \
+		is_clang=true \
+		optimize_webui=true \
+		toolkit_views=true \
+		treat_warnings_as_errors=false \
+		use_allocator="none" \
+		use_allocator_shim=false \
+		use_aura=true \
+		use_custom_libcxx=false \
+		use_gnome_keyring=false \
+		use_lld=true \
+		use_partition_alloc=true \
+		use_partition_alloc_as_malloc=false \
+		use_sysroot=false \
+		use_system_freetype=false \
+		use_system_harfbuzz=true \
+		use_system_libjpeg=true \
+		use_system_libwayland=true \
+		use_system_wayland_scanner=true \
+		use_udev=false \
+		chrome_pgo_phase=0 \
+		extra_cxxflags="${CXXFLAGS}" \
+		extra_ldflags="${LDFLAGS}"
+
+# TODO: investigate building with these options:
+# use_system_minigbm
+GN_BOOTSTRAP_FLAGS=	--no-clean --no-rebuild --skip-generate-buildfiles
+
 PLIST_SUB=	ELECTRON_VER=${ELECTRON_VER} \
 		ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
-OPTIONS_DEFINE=		CUPS DEBUG DIST DRIVER KERBEROS LTO
-OPTIONS_DEFAULT=	CUPS DRIVER KERBEROS ALSA
+OPTIONS_DEFINE=		CODECS CUPS DEBUG DIST DRIVER KERBEROS LTO
+OPTIONS_DEFAULT=	CODECS CUPS DRIVER KERBEROS SNDIO
+OPTIONS_EXCLUDE_aarch64=LTO
 OPTIONS_GROUP=		AUDIO
 OPTIONS_GROUP_AUDIO=	ALSA PULSEAUDIO SNDIO
+OPTIONS_RADIO=		KERBEROS
+OPTIONS_RADIO_KERBEROS=	HEIMDAL HEIMDAL_BASE MIT
 OPTIONS_SUB=		yes
-
-DIST_DESC=	Build distribution zip files
-DRIVER_DESC=	Install chromedriver
+CODECS_DESC=		Compile and enable patented codecs like H.264
+DIST_DESC=		Build distribution zip files
+DRIVER_DESC=		Install chromedriver
+HEIMDAL_BASE_DESC=	Heimdal Kerberos (base)
+HEIMDAL_DESC=		Heimdal Kerberos (security/heimdal)
+MIT_DESC=		MIT Kerberos (security/krb5)
 
 ALSA_LIB_DEPENDS=	libasound.so:audio/alsa-lib
-ALSA_RUN_DEPENDS=	${LOCALBASE}/lib/alsa-lib/libasound_module_pcm_oss.so:audio/alsa-plugins
+ALSA_RUN_DEPENDS=	${LOCALBASE}/lib/alsa-lib/libasound_module_pcm_oss.so:audio/alsa-plugins \
+			alsa-lib>=1.1.1_1:audio/alsa-lib
 ALSA_VARS=		GN_ARGS+=use_alsa=true
 ALSA_VARS_OFF=		GN_ARGS+=use_alsa=false
+
+CODECS_VARS=		GN_ARGS+=ffmpeg_branding="Chrome" \
+			GN_ARGS+=proprietary_codecs=true
+CODECS_VARS_OFF=	GN_ARGS+=ffmpeg_branding="Chromium" \
+			GN_ARGS+=proprietary_codecs=false
+
 CUPS_LIB_DEPENDS=	libcups.so:print/cups
 CUPS_VARS=		GN_ARGS+=use_cups=true
 CUPS_VARS_OFF=		GN_ARGS+=use_cups=false
+
+DEBUG_BUILD_DEPENDS=	esbuild:devel/esbuild
 DEBUG_VARS=		BUILDTYPE=Debug \
 			GN_FILE=testing.gn \
 			GN_ARGS+=is_debug=true \
-			GN_BOOTSTRAP_FLAGS+=--debug
+			GN_ARGS+=is_component_build=false \
+			GN_ARGS+=symbol_level=1 \
+			GN_BOOTSTRAP_FLAGS+=--debug \
+			WANTSPACE="21 GB"
 DEBUG_VARS_OFF=		BUILDTYPE=Release \
 			GN_FILE=release.gn \
 			GN_ARGS+=blink_symbol_level=0 \
 			GN_ARGS+=is_debug=false \
-			GN_ARGS+=symbol_level=0
+			GN_ARGS+=is_official_build=true \
+			GN_ARGS+=symbol_level=0 \
+			WANTSPACE="14 GB"
+
 DIST_IMPLIES=		DRIVER
-DRIVER_ALL_TARGET=	chromedriver
+DRIVER_MAKE_ARGS=	chromedriver
+
+HEIMDAL_LIB_DEPENDS=	libkrb.so.26:security/heimdal
 KERBEROS_VARS=		GN_ARGS+=use_kerberos=true
 KERBEROS_VARS_OFF=	GN_ARGS+=use_kerberos=false
+
 LTO_VARS=		GN_ARGS+=use_thin_lto=true \
-			GN_ARGS+=thin_lto_enable_optimizations=true
+			GN_ARGS+=thin_lto_enable_optimizations=true \
+			WANTSPACE="14 GB"
 LTO_VARS_OFF=		GN_ARGS+=use_thin_lto=false
+
+MIT_LIB_DEPENDS=	libkrb.so.3:security/krb5
 PULSEAUDIO_LIB_DEPENDS=	libpulse.so:audio/pulseaudio
 PULSEAUDIO_VARS=	GN_ARGS+=use_pulseaudio=true
 PULSEAUDIO_VARS_OFF=	GN_ARGS+=use_pulseaudio=false
+
 # With SNDIO=on we exclude audio_manager_linux from the build (see
 # media/audio/BUILD.gn) and use audio_manager_openbsd which does not
 # support falling back to ALSA or PulseAudio.
@@ -157,53 +223,29 @@ MANTLE_VER=			78d3966b3c331292ea29ec38661b25df0a245948
 
 YARN_TIMESTAMP=	1675054791
 
-GN_ARGS+=		clang_use_chrome_plugins=false \
-			enable_hangout_services_extension=true \
-			enable_js_type_check=false \
-			enable_nacl=false \
-			enable_remoting=false \
-			fatal_linker_warnings=false \
-			icu_use_data_file=false \
-			is_clang=true \
-			optimize_webui=true \
-			toolkit_views=true \
-			treat_warnings_as_errors=false \
-			use_allocator="none" \
-			use_allocator_shim=false \
-			use_aura=true \
-			use_custom_libcxx=false \
-			use_gnome_keyring=false \
-			use_lld=true \
-			use_sysroot=false \
-			use_system_freetype=false \
-			use_system_harfbuzz=true \
-			use_system_libjpeg=true \
-			use_system_libwayland=true \
-			use_system_wayland_scanner=true \
-			use_udev=false \
-			extra_cxxflags="${CXXFLAGS}" \
-			extra_ldflags="${LDFLAGS}"
-GN_BOOTSTRAP_FLAGS=	--no-clean --no-rebuild --skip-generate-buildfiles
-
 .include "Makefile.version"
 .include <bsd.port.pre.mk>
 
 .if ${OSREL} == "12.3"
-IGNORE=	does not compile, libc++ too old
+IGNORE=		does not compile, libc++ too old
+.endif
+
+.if ${PORT_OPTIONS:MHEIMDAL_BASE} && !exists(/usr/lib/libkrb5.so)
+IGNORE=		you have selected HEIMDAL_BASE but do not have Heimdal installed in base
 .endif
 
 .if ${COMPILER_VERSION} != 130
-LLVM_DEFAULT=	13
-BUILD_DEPENDS+=	clang${LLVM_DEFAULT}:devel/llvm${LLVM_DEFAULT}
-BINARY_ALIAS+=	cpp=${LOCALBASE}/bin/clang-cpp${LLVM_DEFAULT} \
-		cc=${LOCALBASE}/bin/clang${LLVM_DEFAULT} \
-		c++=${LOCALBASE}/bin/clang++${LLVM_DEFAULT} \
-		ar=${LOCALBASE}/bin/llvm-ar${LLVM_DEFAULT} \
-		nm=${LOCALBASE}/bin/llvm-nm${LLVM_DEFAULT} \
-		ld=${LOCALBASE}/bin/ld.lld${LLVM_DEFAULT}
+LLVM_DEFAULT=		13
+BUILD_DEPENDS+=		clang${LLVM_DEFAULT}:devel/llvm${LLVM_DEFAULT}
+BINARY_ALIAS+=		cpp=${LOCALBASE}/bin/clang-cpp${LLVM_DEFAULT} \
+			cc=${LOCALBASE}/bin/clang${LLVM_DEFAULT} \
+			c++=${LOCALBASE}/bin/clang++${LLVM_DEFAULT} \
+			ar=${LOCALBASE}/bin/llvm-ar${LLVM_DEFAULT} \
+			nm=${LOCALBASE}/bin/llvm-nm${LLVM_DEFAULT} \
+			ld=${LOCALBASE}/bin/ld.lld${LLVM_DEFAULT}
 .else
-BINARY_ALIAS+=	ar=/usr/bin/llvm-ar \
-		nm=/usr/bin/llvm-nm
+BINARY_ALIAS+=		ar=/usr/bin/llvm-ar \
+			nm=/usr/bin/llvm-nm
 .endif
 
 .if ${ARCH} == "amd64"
@@ -217,6 +259,20 @@ PLIST_SUB+=	I386=""
 .else
 PLIST_SUB+=	I386="@comment "
 .endif
+
+# Allow relocations against read-only segments (override lld default)
+LDFLAGS_i386=	-Wl,-znotext
+
+# TODO: -isystem, would be just as ugly as this approach, but more reliably
+# build would fail without C_INCLUDE_PATH/CPLUS_INCLUDE_PATH env var set.
+MAKE_ENV+=	C_INCLUDE_PATH=${LOCALBASE}/include \
+		CPLUS_INCLUDE_PATH=${LOCALBASE}/include
+
+pre-everything::
+	@${ECHO_MSG}
+	@${ECHO_MSG} "To build electron, you should have around 2GB of memory"
+	@${ECHO_MSG} "and around ${WANTSPACE} of free disk space."
+	@${ECHO_MSG}
 
 pre-fetch:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
@@ -268,33 +324,35 @@ pre-patch:
 	# ${FIND} ${WRKSRC} -type f -name '*~' -print -delete
 
 pre-configure:
-# We used to remove bundled libraries to be sure that chromium uses
-# system libraries and not shipped ones.
-# cd ${WRKSRC} && ${PYTHON_CMD} \
-#./build/linux/unbundle/remove_bundled_libraries.py [list of preserved]
+	# We used to remove bundled libraries to be sure that chromium uses
+	# system libraries and not shipped ones.
+	# cd ${WRKSRC} && ${PYTHON_CMD} \
+	#./build/linux/unbundle/remove_bundled_libraries.py [list of preserved]
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ${PYTHON_CMD} \
 		./build/linux/unbundle/replace_gn_files.py --system-libraries \
 		flac fontconfig freetype harfbuzz-ng icu libdrm libevent libpng \
 		libusb libwebp libxml libxslt openh264 opus snappy || ${FALSE}
-# Chromium uses an unreleased version of FFmpeg, so configure it
+	# Chromium uses an unreleased version of FFmpeg, so configure it
 .for brand in Chrome Chromium
-	${CP} -r \
+	${CP} -R \
 		${WRKSRC}/third_party/ffmpeg/chromium/config/${brand}/linux/ \
 		${WRKSRC}/third_party/ffmpeg/chromium/config/${brand}/freebsd
 .endfor
 
 do-configure:
-# GN generator bootstrapping and generating ninja files
+	# GN generator bootstrapping and generating ninja files
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} CC=${CC} CXX=${CXX} LD=${CXX} \
 		READELF=${READELF} AR=${AR} NM=${NM} ${PYTHON_CMD} \
 		./tools/gn/bootstrap/bootstrap.py ${GN_BOOTSTRAP_FLAGS}
 	cd ${WRKSRC} && ${SETENV} ${CONFIGURE_ENV} ./out/${BUILDTYPE}/gn gen out/${BUILDTYPE} \
 		--args='import("//electron/build/args/${GN_FILE}") ${GN_ARGS}'
-# Setup nodejs dependency
-	${MKDIR} ${WRKSRC}/third_party/node/freebsd/node-freebsd/bin
+
+	# Setup nodejs dependency
+	@${MKDIR} ${WRKSRC}/third_party/node/freebsd/node-freebsd/bin
 	${LN} -sf ${LOCALBASE}/bin/node ${WRKSRC}/third_party/node/freebsd/node-freebsd/bin/node
-# Setup buildtools/freebsd
-	${MKDIR} ${WRKSRC}/buildtools/freebsd
+
+	# Setup buildtools/freebsd
+	@${MKDIR} ${WRKSRC}/buildtools/freebsd
 	${LN} -sf ${WRKSRC}/buildtools/linux64/clang-format ${WRKSRC}/buildtools/freebsd
 	${LN} -sf ${WRKSRC}/out/${BUILDTYPE}/gn ${WRKSRC}/buildtools/freebsd
 	${LN} -sf /usr/bin/strip ${WRKSRC}/buildtools/freebsd/strip

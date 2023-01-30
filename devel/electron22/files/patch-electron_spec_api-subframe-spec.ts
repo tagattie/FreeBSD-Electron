@@ -1,4 +1,4 @@
---- electron/spec/api-subframe-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/api-subframe-spec.ts.orig	2021-04-20 23:32:33 UTC
 +++ electron/spec/api-subframe-spec.ts
 @@ -213,7 +213,7 @@ describe('renderer nodeIntegrationInSubFrames', () => 
  });

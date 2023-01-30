@@ -1,4 +1,4 @@
---- net/cert/test_root_certs_unittest.cc.orig	2023-01-26 11:40:21 UTC
+--- net/cert/test_root_certs_unittest.cc.orig	2022-11-30 08:12:58 UTC
 +++ net/cert/test_root_certs_unittest.cc
 @@ -39,7 +39,7 @@ scoped_refptr<CertVerifyProc> CreateCertVerifyProc() {
          /*cert_net_fetcher=*/nullptr);

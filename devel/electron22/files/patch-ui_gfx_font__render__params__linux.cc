@@ -1,4 +1,4 @@
---- ui/gfx/font_render_params_linux.cc.orig	2023-01-26 11:41:01 UTC
+--- ui/gfx/font_render_params_linux.cc.orig	2022-08-31 12:19:35 UTC
 +++ ui/gfx/font_render_params_linux.cc
 @@ -25,7 +25,7 @@
  #include "ui/gfx/linux/fontconfig_util.h"

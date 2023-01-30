@@ -1,4 +1,4 @@
---- weblayer/browser/content_browser_client_impl.cc.orig	2023-01-26 11:41:02 UTC
+--- weblayer/browser/content_browser_client_impl.cc.orig	2022-09-24 10:57:32 UTC
 +++ weblayer/browser/content_browser_client_impl.cc
 @@ -156,7 +156,7 @@
  // TODO(crbug.com/1052397): Revisit once build flag switch of lacros-chrome is

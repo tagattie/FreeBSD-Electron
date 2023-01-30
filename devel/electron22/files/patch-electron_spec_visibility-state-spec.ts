@@ -1,4 +1,4 @@
---- electron/spec/visibility-state-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/visibility-state-spec.ts.orig	2021-01-22 23:55:24 UTC
 +++ electron/spec/visibility-state-spec.ts
 @@ -9,7 +9,7 @@ import { ifdescribe, delay } from './spec-helpers';
  

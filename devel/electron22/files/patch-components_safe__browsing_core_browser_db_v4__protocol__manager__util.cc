@@ -1,4 +1,4 @@
---- components/safe_browsing/core/browser/db/v4_protocol_manager_util.cc.orig	2022-05-25 04:00:59 UTC
+--- components/safe_browsing/core/browser/db/v4_protocol_manager_util.cc.orig	2022-05-19 14:06:27 UTC
 +++ components/safe_browsing/core/browser/db/v4_protocol_manager_util.cc
 @@ -116,7 +116,7 @@ std::ostream& operator<<(std::ostream& os, const ListI
  PlatformType GetCurrentPlatformType() {

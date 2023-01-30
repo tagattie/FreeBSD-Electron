@@ -1,4 +1,4 @@
---- chrome/common/webui_url_constants.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/common/webui_url_constants.cc.orig	2022-10-24 13:33:33 UTC
 +++ chrome/common/webui_url_constants.cc
 @@ -480,18 +480,18 @@ const char kOsUIScanningAppURL[] = "os://scanning";
  const char kOsUIVersionURL[] = "os://version";

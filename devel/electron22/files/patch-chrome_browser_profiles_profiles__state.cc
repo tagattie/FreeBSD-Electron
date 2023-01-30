@@ -1,4 +1,4 @@
---- chrome/browser/profiles/profiles_state.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/profiles/profiles_state.cc.orig	2022-09-24 10:57:32 UTC
 +++ chrome/browser/profiles/profiles_state.cc
 @@ -181,7 +181,7 @@ bool IsGuestModeRequested(const base::CommandLine& com
                            PrefService* local_state,

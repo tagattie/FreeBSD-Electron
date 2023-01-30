@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/frame/browser_frame.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/views/frame/browser_frame.cc.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/ui/views/frame/browser_frame.cc
 @@ -46,7 +46,7 @@
  #include "components/user_manager/user_manager.h"

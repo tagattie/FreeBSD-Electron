@@ -1,4 +1,4 @@
---- mojo/public/c/system/thunks.cc.orig	2023-01-26 11:40:20 UTC
+--- mojo/public/c/system/thunks.cc.orig	2022-11-30 08:12:58 UTC
 +++ mojo/public/c/system/thunks.cc
 @@ -23,7 +23,7 @@
  #include "mojo/public/c/system/message_pipe.h"

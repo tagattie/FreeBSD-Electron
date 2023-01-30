@@ -1,4 +1,4 @@
---- ui/color/color_provider_utils.cc.orig	2023-01-26 11:41:01 UTC
+--- ui/color/color_provider_utils.cc.orig	2022-10-24 13:33:33 UTC
 +++ ui/color/color_provider_utils.cc
 @@ -88,7 +88,7 @@ base::StringPiece SystemThemeName(ui::SystemTheme syst
    switch (system_theme) {

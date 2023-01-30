@@ -1,4 +1,4 @@
---- extensions/browser/pref_names.cc.orig	2023-01-26 11:40:18 UTC
+--- extensions/browser/pref_names.cc.orig	2022-09-24 10:57:32 UTC
 +++ extensions/browser/pref_names.cc
 @@ -48,7 +48,7 @@ const char kStorageGarbageCollect[] = "extensions.stor
  const char kDeletedComponentExtensions[] =

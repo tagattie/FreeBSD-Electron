@@ -1,4 +1,4 @@
---- gpu/config/gpu_control_list.cc.orig	2022-08-01 19:04:30 UTC
+--- gpu/config/gpu_control_list.cc.orig	2022-06-17 14:20:10 UTC
 +++ gpu/config/gpu_control_list.cc
 @@ -302,7 +302,7 @@ bool GpuControlList::More::GLVersionInfoMismatch(
  GpuControlList::GLType GpuControlList::More::GetDefaultGLType() {

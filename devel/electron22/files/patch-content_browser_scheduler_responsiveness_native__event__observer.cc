@@ -1,4 +1,4 @@
---- content/browser/scheduler/responsiveness/native_event_observer.cc.orig	2022-05-19 03:45:28 UTC
+--- content/browser/scheduler/responsiveness/native_event_observer.cc.orig	2022-02-28 16:54:41 UTC
 +++ content/browser/scheduler/responsiveness/native_event_observer.cc
 @@ -15,7 +15,7 @@
  

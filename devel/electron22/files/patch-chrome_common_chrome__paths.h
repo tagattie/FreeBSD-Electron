@@ -1,4 +1,4 @@
---- chrome/common/chrome_paths.h.orig	2022-08-01 19:04:24 UTC
+--- chrome/common/chrome_paths.h.orig	2022-06-17 14:20:10 UTC
 +++ chrome/common/chrome_paths.h
 @@ -56,7 +56,7 @@ enum {
  #if BUILDFLAG(IS_CHROMEOS_ASH) ||                              \

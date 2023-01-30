@@ -1,4 +1,4 @@
---- chrome/app/chrome_command_ids.h.orig	2022-08-01 19:04:20 UTC
+--- chrome/app/chrome_command_ids.h.orig	2022-06-17 14:20:10 UTC
 +++ chrome/app/chrome_command_ids.h
 @@ -67,7 +67,7 @@
  #define IDC_NAME_WINDOW                 34049

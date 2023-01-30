@@ -1,4 +1,4 @@
---- chrome/browser/ui/exclusive_access/exclusive_access_bubble.cc.orig	2022-05-19 03:45:18 UTC
+--- chrome/browser/ui/exclusive_access/exclusive_access_bubble.cc.orig	2022-02-28 16:54:41 UTC
 +++ chrome/browser/ui/exclusive_access/exclusive_access_bubble.cc
 @@ -16,7 +16,7 @@
  

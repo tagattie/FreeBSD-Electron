@@ -1,4 +1,4 @@
---- third_party/maldoca/src/maldoca/service/common/process_doc_wrapper.cc.orig	2022-05-11 07:01:55 UTC
+--- third_party/maldoca/src/maldoca/service/common/process_doc_wrapper.cc.orig	2022-02-07 13:39:41 UTC
 +++ third_party/maldoca/src/maldoca/service/common/process_doc_wrapper.cc
 @@ -7,7 +7,7 @@
  #include "build/build_config.h"

@@ -1,4 +1,4 @@
---- components/network_session_configurator/browser/network_session_configurator_unittest.cc.orig	2022-08-01 19:04:27 UTC
+--- components/network_session_configurator/browser/network_session_configurator_unittest.cc.orig	2022-07-22 17:30:31 UTC
 +++ components/network_session_configurator/browser/network_session_configurator_unittest.cc
 @@ -833,7 +833,7 @@ TEST_F(NetworkSessionConfiguratorTest, HostRules) {
  }

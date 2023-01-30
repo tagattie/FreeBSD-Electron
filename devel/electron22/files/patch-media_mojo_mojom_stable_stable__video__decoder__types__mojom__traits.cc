@@ -1,4 +1,4 @@
---- media/mojo/mojom/stable/stable_video_decoder_types_mojom_traits.cc.orig	2023-01-26 11:40:20 UTC
+--- media/mojo/mojom/stable/stable_video_decoder_types_mojom_traits.cc.orig	2022-11-30 08:12:58 UTC
 +++ media/mojo/mojom/stable/stable_video_decoder_types_mojom_traits.cc
 @@ -42,7 +42,7 @@ media::stable::mojom::VideoFrameDataPtr MakeVideoFrame
    gfx::GpuMemoryBufferHandle gpu_memory_buffer_handle =

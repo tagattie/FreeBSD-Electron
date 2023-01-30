@@ -1,4 +1,4 @@
---- electron/spec/chromium-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/chromium-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/chromium-spec.ts
 @@ -427,13 +427,13 @@ describe('command line switches', () => {
      it('should not set an invalid locale', async () => testLocale('asdfkl', `${currentLocale}|${currentSystemLocale}|${currentPreferredLanguages}`));

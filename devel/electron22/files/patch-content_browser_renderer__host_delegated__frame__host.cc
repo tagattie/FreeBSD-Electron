@@ -1,4 +1,4 @@
---- content/browser/renderer_host/delegated_frame_host.cc.orig	2023-01-26 11:40:15 UTC
+--- content/browser/renderer_host/delegated_frame_host.cc.orig	2022-08-31 12:19:35 UTC
 +++ content/browser/renderer_host/delegated_frame_host.cc
 @@ -289,7 +289,7 @@ void DelegatedFrameHost::EmbedSurface(
  

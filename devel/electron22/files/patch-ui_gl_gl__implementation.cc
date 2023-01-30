@@ -1,4 +1,4 @@
---- ui/gl/gl_implementation.cc.orig	2023-01-26 11:41:02 UTC
+--- ui/gl/gl_implementation.cc.orig	2022-10-24 13:33:33 UTC
 +++ ui/gl/gl_implementation.cc
 @@ -287,7 +287,7 @@ GetRequestedGLImplementationFromCommandLine(
    *fallback_to_software_gl = false;

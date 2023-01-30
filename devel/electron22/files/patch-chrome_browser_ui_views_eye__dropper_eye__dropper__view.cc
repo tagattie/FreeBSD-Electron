@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/eye_dropper/eye_dropper_view.cc.orig	2022-05-19 05:17:39 UTC
+--- chrome/browser/ui/views/eye_dropper/eye_dropper_view.cc.orig	2022-04-21 18:48:31 UTC
 +++ chrome/browser/ui/views/eye_dropper/eye_dropper_view.cc
 @@ -157,7 +157,7 @@ EyeDropperView::EyeDropperView(content::RenderFrameHos
    // EyeDropper/WidgetDelegate.

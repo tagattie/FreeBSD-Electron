@@ -1,4 +1,4 @@
---- third_party/boringssl/src/crypto/fipsmodule/rand/internal.h.orig	2023-01-26 11:42:22 UTC
+--- third_party/boringssl/src/crypto/fipsmodule/rand/internal.h.orig	2022-09-24 10:57:32 UTC
 +++ third_party/boringssl/src/crypto/fipsmodule/rand/internal.h
 @@ -27,7 +27,8 @@ extern "C" {
  

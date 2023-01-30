@@ -1,4 +1,4 @@
---- chrome/common/chrome_paths_internal.h.orig	2022-05-19 03:45:19 UTC
+--- chrome/common/chrome_paths_internal.h.orig	2022-02-28 16:54:41 UTC
 +++ chrome/common/chrome_paths_internal.h
 @@ -45,7 +45,7 @@ void GetUserCacheDirectory(const base::FilePath& profi
  // Get the path to the user's documents directory.

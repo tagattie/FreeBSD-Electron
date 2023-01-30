@@ -1,4 +1,4 @@
---- media/gpu/sandbox/hardware_video_decoding_sandbox_hook_linux.cc.orig	2023-01-26 11:40:20 UTC
+--- media/gpu/sandbox/hardware_video_decoding_sandbox_hook_linux.cc.orig	2022-10-24 13:33:33 UTC
 +++ media/gpu/sandbox/hardware_video_decoding_sandbox_hook_linux.cc
 @@ -14,12 +14,15 @@
  #include "media/gpu/vaapi/vaapi_wrapper.h"

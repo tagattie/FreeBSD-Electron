@@ -1,4 +1,4 @@
---- third_party/zlib/BUILD.gn.orig	2022-08-11 06:11:58 UTC
+--- third_party/zlib/BUILD.gn.orig	2023-01-30 07:58:59 UTC
 +++ third_party/zlib/BUILD.gn
 @@ -117,7 +117,7 @@ if (use_arm_neon_optimizations) {
      # Disabled for iPhone, as described in DDI0487C_a_armv8_arm:

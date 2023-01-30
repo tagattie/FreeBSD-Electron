@@ -1,4 +1,4 @@
---- chrome/browser/web_applications/web_app_provider.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/web_applications/web_app_provider.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/web_applications/web_app_provider.cc
 @@ -277,7 +277,7 @@ void WebAppProvider::CreateSubsystems(Profile* profile
          protocol_handler_manager.get());

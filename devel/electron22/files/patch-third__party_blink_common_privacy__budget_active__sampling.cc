@@ -1,4 +1,4 @@
---- third_party/blink/common/privacy_budget/active_sampling.cc.orig	2023-01-26 11:40:25 UTC
+--- third_party/blink/common/privacy_budget/active_sampling.cc.orig	2022-08-31 12:19:35 UTC
 +++ third_party/blink/common/privacy_budget/active_sampling.cc
 @@ -24,7 +24,7 @@ namespace blink {
  bool IdentifiabilityActiveSampler::IsFontFamilyAvailable(const char* family,

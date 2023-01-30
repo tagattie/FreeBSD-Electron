@@ -1,4 +1,4 @@
---- electron/shell/browser/ui/views/menu_bar.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/browser/ui/views/menu_bar.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/browser/ui/views/menu_bar.cc
 @@ -13,7 +13,7 @@
  #include "ui/views/background.h"

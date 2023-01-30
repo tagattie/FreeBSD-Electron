@@ -1,4 +1,4 @@
---- third_party/boringssl/src/crypto/rand_extra/arc4random.c.orig	2022-05-13 07:20:05 UTC
+--- third_party/boringssl/src/crypto/rand_extra/arc4random.c.orig	2022-02-07 13:39:41 UTC
 +++ third_party/boringssl/src/crypto/rand_extra/arc4random.c
 @@ -0,0 +1,33 @@
 +/* Copyright (c) 2018, Robert Nagy <robert@openbsd.org>

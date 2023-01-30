@@ -1,4 +1,4 @@
---- electron/lib/browser/api/app.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/lib/browser/api/app.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/lib/browser/api/app.ts
 @@ -68,7 +68,7 @@ if (process.platform === 'darwin') {
    app.dock!.getMenu = () => dockMenu;

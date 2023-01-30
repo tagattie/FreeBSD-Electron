@@ -1,4 +1,4 @@
---- components/device_signals/core/common/signals_features.h.orig	2023-01-26 11:40:12 UTC
+--- components/device_signals/core/common/signals_features.h.orig	2022-11-30 08:12:58 UTC
 +++ components/device_signals/core/common/signals_features.h
 @@ -20,7 +20,7 @@ extern const base::FeatureParam<bool> kDisableSettings
  extern const base::FeatureParam<bool> kDisableAntiVirus;

@@ -1,4 +1,4 @@
---- printing/sandbox/print_backend_sandbox_hook_linux.cc.orig	2022-05-19 03:45:37 UTC
+--- printing/sandbox/print_backend_sandbox_hook_linux.cc.orig	2022-02-28 16:54:41 UTC
 +++ printing/sandbox/print_backend_sandbox_hook_linux.cc
 @@ -9,21 +9,28 @@
  #include "base/files/file_util.h"

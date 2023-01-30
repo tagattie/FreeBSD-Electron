@@ -1,4 +1,4 @@
---- chrome/browser/download/download_prefs.h.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/download/download_prefs.h.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/download/download_prefs.h
 @@ -118,7 +118,7 @@ class DownloadPrefs {
    void DisableAutoOpenByUserBasedOnExtension(const base::FilePath& file_name);

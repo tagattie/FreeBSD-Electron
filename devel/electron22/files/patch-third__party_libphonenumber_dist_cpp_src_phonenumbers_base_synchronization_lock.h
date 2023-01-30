@@ -1,4 +1,4 @@
---- third_party/libphonenumber/dist/cpp/src/phonenumbers/base/synchronization/lock.h.orig	2023-01-26 11:43:36 UTC
+--- third_party/libphonenumber/dist/cpp/src/phonenumbers/base/synchronization/lock.h.orig	2022-09-24 10:57:32 UTC
 +++ third_party/libphonenumber/dist/cpp/src/phonenumbers/base/synchronization/lock.h
 @@ -22,7 +22,7 @@
  #elif (__cplusplus >= 201103L) && defined(I18N_PHONENUMBERS_USE_STDMUTEX)

@@ -1,4 +1,4 @@
---- base/rand_util_posix.cc.orig	2023-01-26 11:40:09 UTC
+--- base/rand_util_posix.cc.orig	2022-11-30 08:12:58 UTC
 +++ base/rand_util_posix.cc
 @@ -22,7 +22,7 @@
  #include "base/time/time.h"

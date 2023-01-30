@@ -1,4 +1,4 @@
---- components/segmentation_platform/embedder/default_model/cross_device_user_segment.cc.orig	2023-01-26 11:40:13 UTC
+--- components/segmentation_platform/embedder/default_model/cross_device_user_segment.cc.orig	2022-11-30 08:12:58 UTC
 +++ components/segmentation_platform/embedder/default_model/cross_device_user_segment.cc
 @@ -200,7 +200,7 @@ void CrossDeviceUserSegment::ExecuteModelWithInput(
  // Check for current device type and subtract it from the device count

@@ -1,4 +1,4 @@
---- components/device_signals/core/system_signals/platform_delegate.cc.orig	2023-01-26 11:40:12 UTC
+--- components/device_signals/core/system_signals/platform_delegate.cc.orig	2022-09-24 10:57:32 UTC
 +++ components/device_signals/core/system_signals/platform_delegate.cc
 @@ -11,7 +11,7 @@ namespace device_signals {
  

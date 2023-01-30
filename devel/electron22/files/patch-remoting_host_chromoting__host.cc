@@ -1,4 +1,4 @@
---- remoting/host/chromoting_host.cc.orig	2022-05-19 03:45:37 UTC
+--- remoting/host/chromoting_host.cc.orig	2022-02-28 16:54:41 UTC
 +++ remoting/host/chromoting_host.cc
 @@ -124,7 +124,7 @@ void ChromotingHost::StartChromotingHostServices() {
    DCHECK_CALLED_ON_VALID_SEQUENCE(sequence_checker_);

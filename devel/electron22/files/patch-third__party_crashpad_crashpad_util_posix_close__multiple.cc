@@ -1,4 +1,4 @@
---- third_party/crashpad/crashpad/util/posix/close_multiple.cc.orig	2022-05-19 05:18:00 UTC
+--- third_party/crashpad/crashpad/util/posix/close_multiple.cc.orig	2022-02-28 16:54:41 UTC
 +++ third_party/crashpad/crashpad/util/posix/close_multiple.cc
 @@ -72,7 +72,7 @@ void CloseNowOrOnExec(int fd, bool ebadf_ok) {
  // This is an advantage over looping over all possible file descriptors, because

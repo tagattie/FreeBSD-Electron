@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_desktop_capturer.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/browser/api/electron_api_desktop_capturer.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/browser/api/electron_api_desktop_capturer.cc
 @@ -36,7 +36,7 @@
  #include "third_party/webrtc/modules/desktop_capture/win/dxgi_duplicator_controller.h"

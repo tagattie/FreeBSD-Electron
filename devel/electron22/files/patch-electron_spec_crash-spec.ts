@@ -1,4 +1,4 @@
---- electron/spec/crash-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/crash-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/crash-spec.ts
 @@ -39,7 +39,7 @@ const shouldRunCase = (crashCase: string) => {
      }

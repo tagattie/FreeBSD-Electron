@@ -1,4 +1,4 @@
---- gpu/config/gpu_finch_features.cc.orig	2023-01-26 11:40:18 UTC
+--- gpu/config/gpu_finch_features.cc.orig	2022-12-13 12:44:51 UTC
 +++ gpu/config/gpu_finch_features.cc
 @@ -57,7 +57,7 @@ bool IsDeviceBlocked(const char* field, const std::str
  BASE_FEATURE(kUseGles2ForOopR,

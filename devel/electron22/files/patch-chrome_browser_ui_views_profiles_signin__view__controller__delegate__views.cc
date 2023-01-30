@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/profiles/signin_view_controller_delegate_views.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/views/profiles/signin_view_controller_delegate_views.cc.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/ui/views/profiles/signin_view_controller_delegate_views.cc
 @@ -50,7 +50,7 @@ namespace {
  

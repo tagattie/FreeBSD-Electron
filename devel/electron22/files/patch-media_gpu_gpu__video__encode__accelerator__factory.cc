@@ -1,4 +1,4 @@
---- media/gpu/gpu_video_encode_accelerator_factory.cc.orig	2023-01-26 11:40:20 UTC
+--- media/gpu/gpu_video_encode_accelerator_factory.cc.orig	2022-08-31 12:19:35 UTC
 +++ media/gpu/gpu_video_encode_accelerator_factory.cc
 @@ -111,7 +111,7 @@ std::vector<VEAFactoryFunction> GetVEAFactoryFunctions
      return vea_factory_functions;

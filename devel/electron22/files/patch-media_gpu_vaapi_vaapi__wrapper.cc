@@ -1,4 +1,4 @@
---- media/gpu/vaapi/vaapi_wrapper.cc.orig	2023-01-26 11:40:20 UTC
+--- media/gpu/vaapi/vaapi_wrapper.cc.orig	2022-11-30 08:12:58 UTC
 +++ media/gpu/vaapi/vaapi_wrapper.cc
 @@ -740,7 +740,7 @@ VADisplayState::VADisplayState()
  bool VADisplayState::Initialize() {

@@ -1,4 +1,4 @@
---- third_party/perfetto/src/tracing/core/tracing_service_impl.cc.orig	2023-01-26 11:44:04 UTC
+--- third_party/perfetto/src/tracing/core/tracing_service_impl.cc.orig	2022-08-31 12:19:35 UTC
 +++ third_party/perfetto/src/tracing/core/tracing_service_impl.cc
 @@ -3037,7 +3037,8 @@ bool TracingServiceImpl::SnapshotClocks(
  

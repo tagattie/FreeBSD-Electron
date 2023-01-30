@@ -1,4 +1,4 @@
---- ui/ozone/platform/x11/ozone_platform_x11.cc.orig	2023-01-27 05:20:34 UTC
+--- ui/ozone/platform/x11/ozone_platform_x11.cc.orig	2023-01-30 07:58:59 UTC
 +++ ui/ozone/platform/x11/ozone_platform_x11.cc
 @@ -196,7 +196,7 @@ class OzonePlatformX11 : public OzonePlatform,
        properties->supports_global_application_menus = true;

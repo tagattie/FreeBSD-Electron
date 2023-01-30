@@ -1,4 +1,4 @@
---- media/base/media_switches.h.orig	2023-01-26 11:40:19 UTC
+--- media/base/media_switches.h.orig	2022-11-30 08:12:58 UTC
 +++ media/base/media_switches.h
 @@ -214,7 +214,7 @@ MEDIA_EXPORT BASE_DECLARE_FEATURE(kUseDecoderStreamFor
  MEDIA_EXPORT BASE_DECLARE_FEATURE(kUseFakeDeviceForMediaStream);

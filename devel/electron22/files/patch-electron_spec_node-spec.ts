@@ -1,4 +1,4 @@
---- electron/spec/node-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/node-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/node-spec.ts
 @@ -138,7 +138,7 @@ describe('node feature', () => {
      });

@@ -1,4 +1,4 @@
---- headless/lib/browser/headless_browser_main_parts_linux.cc.orig	2022-05-19 03:45:30 UTC
+--- headless/lib/browser/headless_browser_main_parts_linux.cc.orig	2022-02-28 16:54:41 UTC
 +++ headless/lib/browser/headless_browser_main_parts_linux.cc
 @@ -24,7 +24,7 @@ constexpr char kProductName[] = "HeadlessChrome";
  #endif

@@ -1,4 +1,4 @@
---- components/services/screen_ai/sandbox/screen_ai_sandbox_hook_linux.cc.orig	2023-01-26 11:40:13 UTC
+--- components/services/screen_ai/sandbox/screen_ai_sandbox_hook_linux.cc.orig	2022-09-24 10:57:32 UTC
 +++ components/services/screen_ai/sandbox/screen_ai_sandbox_hook_linux.cc
 @@ -36,6 +36,7 @@ bool ScreenAIPreSandboxHook(sandbox::policy::SandboxLi
    }

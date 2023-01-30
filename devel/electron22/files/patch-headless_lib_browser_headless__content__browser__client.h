@@ -1,4 +1,4 @@
---- headless/lib/browser/headless_content_browser_client.h.orig	2022-05-19 05:17:43 UTC
+--- headless/lib/browser/headless_content_browser_client.h.orig	2022-02-28 16:54:41 UTC
 +++ headless/lib/browser/headless_content_browser_client.h
 @@ -47,7 +47,7 @@ class HeadlessContentBrowserClient : public content::C
        override;

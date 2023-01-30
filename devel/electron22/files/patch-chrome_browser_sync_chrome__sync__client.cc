@@ -1,4 +1,4 @@
---- chrome/browser/sync/chrome_sync_client.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/sync/chrome_sync_client.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/sync/chrome_sync_client.cc
 @@ -445,7 +445,7 @@ ChromeSyncClient::CreateDataTypeControllers(syncer::Sy
  

@@ -1,4 +1,4 @@
---- device/bluetooth/bluetooth_adapter.cc.orig	2022-08-01 19:04:29 UTC
+--- device/bluetooth/bluetooth_adapter.cc.orig	2022-07-28 06:05:58 UTC
 +++ device/bluetooth/bluetooth_adapter.cc
 @@ -32,7 +32,7 @@ BluetoothAdapter::ServiceOptions::ServiceOptions() = d
  BluetoothAdapter::ServiceOptions::~ServiceOptions() = default;

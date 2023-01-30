@@ -1,4 +1,4 @@
---- media/capture/video/linux/video_capture_device_factory_linux.h.orig	2022-05-11 07:00:44 UTC
+--- media/capture/video/linux/video_capture_device_factory_linux.h.orig	2022-02-07 13:39:41 UTC
 +++ media/capture/video/linux/video_capture_device_factory_linux.h
 @@ -52,7 +52,7 @@ class CAPTURE_EXPORT VideoCaptureDeviceFactoryLinux
  

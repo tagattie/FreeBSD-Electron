@@ -1,4 +1,4 @@
---- content/renderer/renderer_main_platform_delegate_linux.cc.orig	2022-05-19 03:45:28 UTC
+--- content/renderer/renderer_main_platform_delegate_linux.cc.orig	2022-02-28 16:54:41 UTC
 +++ content/renderer/renderer_main_platform_delegate_linux.cc
 @@ -44,6 +44,7 @@ bool RendererMainPlatformDelegate::EnableSandbox() {
    // any renderer has been started.

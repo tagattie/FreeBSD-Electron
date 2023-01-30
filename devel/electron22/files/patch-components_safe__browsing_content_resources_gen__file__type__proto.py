@@ -1,4 +1,4 @@
---- components/safe_browsing/content/resources/gen_file_type_proto.py.orig	2022-05-11 07:00:34 UTC
+--- components/safe_browsing/content/resources/gen_file_type_proto.py.orig	2022-02-07 13:39:41 UTC
 +++ components/safe_browsing/content/resources/gen_file_type_proto.py
 @@ -35,6 +35,7 @@ def PlatformTypes():
          download_file_types_pb2.DownloadFileType.PLATFORM_CHROME_OS,

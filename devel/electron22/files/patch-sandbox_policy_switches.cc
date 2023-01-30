@@ -1,4 +1,4 @@
---- sandbox/policy/switches.cc.orig	2022-08-01 19:04:33 UTC
+--- sandbox/policy/switches.cc.orig	2022-06-17 14:20:10 UTC
 +++ sandbox/policy/switches.cc
 @@ -54,7 +54,7 @@ const char kWindowsSystemProxyResolverSandbox[] = "pro
  const char kMirroringSandbox[] = "mirroring";

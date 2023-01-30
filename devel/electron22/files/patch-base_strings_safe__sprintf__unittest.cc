@@ -1,4 +1,4 @@
---- base/strings/safe_sprintf_unittest.cc.orig	2023-01-26 11:40:09 UTC
+--- base/strings/safe_sprintf_unittest.cc.orig	2022-11-30 08:12:58 UTC
 +++ base/strings/safe_sprintf_unittest.cc
 @@ -740,6 +740,7 @@ TEST(SafeSPrintfTest, EmbeddedNul) {
  #endif

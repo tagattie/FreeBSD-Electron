@@ -1,4 +1,4 @@
---- chrome/browser/enterprise/connectors/reporting/browser_crash_event_router.h.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/enterprise/connectors/reporting/browser_crash_event_router.h.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/enterprise/connectors/reporting/browser_crash_event_router.h
 @@ -9,7 +9,7 @@
  #include "chrome/browser/enterprise/connectors/reporting/realtime_reporting_client.h"

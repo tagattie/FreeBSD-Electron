@@ -1,4 +1,4 @@
---- headless/lib/browser/headless_web_contents_impl.cc.orig	2023-01-27 05:20:34 UTC
+--- headless/lib/browser/headless_web_contents_impl.cc.orig	2022-10-24 13:33:33 UTC
 +++ headless/lib/browser/headless_web_contents_impl.cc
 @@ -60,7 +60,7 @@ namespace headless {
  namespace {

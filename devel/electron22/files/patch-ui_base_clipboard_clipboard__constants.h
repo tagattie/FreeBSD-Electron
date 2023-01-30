@@ -1,4 +1,4 @@
---- ui/base/clipboard/clipboard_constants.h.orig	2022-05-19 03:47:20 UTC
+--- ui/base/clipboard/clipboard_constants.h.orig	2022-03-25 21:59:56 UTC
 +++ ui/base/clipboard/clipboard_constants.h
 @@ -46,7 +46,7 @@ extern const char kMimeTypeDataTransferEndpoint[];
  #endif  // BUILDFLAG(IS_CHROMEOS)

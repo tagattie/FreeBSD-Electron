@@ -1,4 +1,4 @@
---- ui/base/ime/text_input_client.h.orig	2023-01-26 11:41:01 UTC
+--- ui/base/ime/text_input_client.h.orig	2022-11-30 08:12:58 UTC
 +++ ui/base/ime/text_input_client.h
 @@ -242,7 +242,7 @@ class COMPONENT_EXPORT(UI_BASE_IME) TextInputClient
    // fields that are considered 'private' (e.g. in incognito tabs).

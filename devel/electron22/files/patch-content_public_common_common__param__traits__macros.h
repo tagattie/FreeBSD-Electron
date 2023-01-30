@@ -1,4 +1,4 @@
---- content/public/common/common_param_traits_macros.h.orig	2023-01-26 11:40:15 UTC
+--- content/public/common/common_param_traits_macros.h.orig	2022-10-24 13:33:33 UTC
 +++ content/public/common/common_param_traits_macros.h
 @@ -125,7 +125,7 @@ IPC_STRUCT_TRAITS_BEGIN(blink::RendererPreferences)
    IPC_STRUCT_TRAITS_MEMBER(accept_languages)

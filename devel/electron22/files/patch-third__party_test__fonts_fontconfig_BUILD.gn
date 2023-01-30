@@ -1,4 +1,4 @@
---- third_party/test_fonts/fontconfig/BUILD.gn.orig	2022-05-19 03:47:11 UTC
+--- third_party/test_fonts/fontconfig/BUILD.gn.orig	2022-03-01 11:59:41 UTC
 +++ third_party/test_fonts/fontconfig/BUILD.gn
 @@ -26,7 +26,11 @@ if (is_linux || is_chromeos) {
  

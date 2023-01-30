@@ -1,4 +1,4 @@
---- sandbox/policy/switches.h.orig	2022-08-01 19:04:33 UTC
+--- sandbox/policy/switches.h.orig	2022-06-17 14:20:10 UTC
 +++ sandbox/policy/switches.h
 @@ -56,7 +56,7 @@ SANDBOX_POLICY_EXPORT extern const char kWindowsSystem
  SANDBOX_POLICY_EXPORT extern const char kMirroringSandbox[];

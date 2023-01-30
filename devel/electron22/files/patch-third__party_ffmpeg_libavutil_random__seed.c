@@ -1,4 +1,4 @@
---- third_party/ffmpeg/libavutil/random_seed.c.orig	2022-05-11 07:03:54 UTC
+--- third_party/ffmpeg/libavutil/random_seed.c.orig	2022-02-07 13:39:41 UTC
 +++ third_party/ffmpeg/libavutil/random_seed.c
 @@ -30,6 +30,11 @@
  #include <windows.h>

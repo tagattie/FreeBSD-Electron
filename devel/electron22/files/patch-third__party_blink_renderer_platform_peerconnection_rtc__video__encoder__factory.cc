@@ -1,4 +1,4 @@
---- third_party/blink/renderer/platform/peerconnection/rtc_video_encoder_factory.cc.orig	2023-01-26 11:40:27 UTC
+--- third_party/blink/renderer/platform/peerconnection/rtc_video_encoder_factory.cc.orig	2022-10-24 13:33:33 UTC
 +++ third_party/blink/renderer/platform/peerconnection/rtc_video_encoder_factory.cc
 @@ -174,12 +174,12 @@ SupportedFormats GetSupportedFormatsInternal(
        supported_formats.scalability_modes.push_back(profile.scalability_modes);

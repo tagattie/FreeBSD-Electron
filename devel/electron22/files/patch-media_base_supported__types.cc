@@ -1,4 +1,4 @@
---- media/base/supported_types.cc.orig	2023-01-26 11:40:19 UTC
+--- media/base/supported_types.cc.orig	2022-10-24 13:33:33 UTC
 +++ media/base/supported_types.cc
 @@ -206,7 +206,7 @@ bool IsHevcProfileSupported(const VideoType& type) {
  

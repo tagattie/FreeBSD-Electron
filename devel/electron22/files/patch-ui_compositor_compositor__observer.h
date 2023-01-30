@@ -1,4 +1,4 @@
---- ui/compositor/compositor_observer.h.orig	2022-05-19 03:47:20 UTC
+--- ui/compositor/compositor_observer.h.orig	2022-02-28 16:54:41 UTC
 +++ ui/compositor/compositor_observer.h
 @@ -48,7 +48,7 @@ class COMPOSITOR_EXPORT CompositorObserver {
  

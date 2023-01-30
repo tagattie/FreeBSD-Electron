@@ -1,4 +1,4 @@
---- net/dns/dns_reloader.cc.orig	2022-05-19 03:45:35 UTC
+--- net/dns/dns_reloader.cc.orig	2022-02-28 16:54:41 UTC
 +++ net/dns/dns_reloader.cc
 @@ -6,7 +6,7 @@
  

@@ -1,4 +1,4 @@
---- base/process/process_metrics_freebsd.cc.orig	2023-01-26 11:40:09 UTC
+--- base/process/process_metrics_freebsd.cc.orig	2022-10-25 08:25:05 UTC
 +++ base/process/process_metrics_freebsd.cc
 @@ -3,20 +3,39 @@
  // found in the LICENSE file.

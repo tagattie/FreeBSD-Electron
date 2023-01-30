@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/eye_dropper/eye_dropper_view_aura.cc.orig	2022-05-25 04:00:50 UTC
+--- chrome/browser/ui/views/eye_dropper/eye_dropper_view_aura.cc.orig	2022-05-19 14:06:27 UTC
 +++ chrome/browser/ui/views/eye_dropper/eye_dropper_view_aura.cc
 @@ -86,7 +86,7 @@ void EyeDropperView::MoveViewToFront() {
  }

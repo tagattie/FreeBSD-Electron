@@ -1,4 +1,4 @@
---- base/process/process_metrics_openbsd.cc.orig	2023-01-26 11:40:09 UTC
+--- base/process/process_metrics_openbsd.cc.orig	2022-09-24 10:57:32 UTC
 +++ base/process/process_metrics_openbsd.cc
 @@ -6,14 +6,23 @@
  

@@ -1,4 +1,4 @@
---- gpu/command_buffer/common/gpu_memory_buffer_support.cc.orig	2023-01-26 11:40:18 UTC
+--- gpu/command_buffer/common/gpu_memory_buffer_support.cc.orig	2022-11-30 08:12:58 UTC
 +++ gpu/command_buffer/common/gpu_memory_buffer_support.cc
 @@ -144,7 +144,7 @@ uint32_t GetPlatformSpecificTextureTarget() {
  #if BUILDFLAG(IS_MAC)

@@ -1,4 +1,4 @@
---- chrome/browser/ui/task_manager/task_manager_table_model.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/task_manager/task_manager_table_model.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/ui/task_manager/task_manager_table_model.cc
 @@ -455,7 +455,7 @@ std::u16string TaskManagerTableModel::GetText(size_t r
            ? stringifier_->backgrounded_string()

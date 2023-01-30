@@ -1,4 +1,4 @@
---- services/device/hid/hid_service_freebsd.cc.orig	2022-08-11 06:12:19 UTC
+--- services/device/hid/hid_service_freebsd.cc.orig	2022-06-17 14:20:10 UTC
 +++ services/device/hid/hid_service_freebsd.cc
 @@ -0,0 +1,397 @@
 +// Copyright 2014 The Chromium Authors. All rights reserved.

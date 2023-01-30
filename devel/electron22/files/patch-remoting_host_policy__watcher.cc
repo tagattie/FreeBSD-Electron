@@ -1,4 +1,4 @@
---- remoting/host/policy_watcher.cc.orig	2023-01-26 11:40:23 UTC
+--- remoting/host/policy_watcher.cc.orig	2022-10-24 13:33:33 UTC
 +++ remoting/host/policy_watcher.cc
 @@ -179,7 +179,7 @@ base::Value::Dict PolicyWatcher::GetDefaultPolicies() 
    result.Set(key::kRemoteAccessHostUdpPortRange, "");

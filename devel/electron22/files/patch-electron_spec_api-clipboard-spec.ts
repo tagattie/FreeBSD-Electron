@@ -1,4 +1,4 @@
---- electron/spec/api-clipboard-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/api-clipboard-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/api-clipboard-spec.ts
 @@ -43,7 +43,7 @@ ifdescribe(process.platform !== 'win32' || process.arc
      });

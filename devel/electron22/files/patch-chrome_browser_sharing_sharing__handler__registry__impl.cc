@@ -1,4 +1,4 @@
---- chrome/browser/sharing/sharing_handler_registry_impl.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/sharing/sharing_handler_registry_impl.cc.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/sharing/sharing_handler_registry_impl.cc
 @@ -23,7 +23,7 @@
  #endif  // BUILDFLAG(IS_ANDROID)

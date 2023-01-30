@@ -1,4 +1,4 @@
---- content/ppapi_plugin/ppapi_blink_platform_impl.h.orig	2022-08-01 19:04:29 UTC
+--- content/ppapi_plugin/ppapi_blink_platform_impl.h.orig	2022-07-22 17:30:31 UTC
 +++ content/ppapi_plugin/ppapi_blink_platform_impl.h
 @@ -12,7 +12,7 @@
  #include "build/build_config.h"

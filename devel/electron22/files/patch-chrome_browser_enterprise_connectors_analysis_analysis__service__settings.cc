@@ -1,4 +1,4 @@
---- chrome/browser/enterprise/connectors/analysis/analysis_service_settings.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/enterprise/connectors/analysis/analysis_service_settings.cc.orig	2022-09-24 10:57:32 UTC
 +++ chrome/browser/enterprise/connectors/analysis/analysis_service_settings.cc
 @@ -142,11 +142,11 @@ AnalysisServiceSettings::AnalysisServiceSettings(
    const char* verification_key = kKeyWindowsVerification;

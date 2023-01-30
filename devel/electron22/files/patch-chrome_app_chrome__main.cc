@@ -1,4 +1,4 @@
---- chrome/app/chrome_main.cc.orig	2023-01-26 11:40:09 UTC
+--- chrome/app/chrome_main.cc.orig	2022-08-31 12:19:35 UTC
 +++ chrome/app/chrome_main.cc
 @@ -26,7 +26,7 @@
  #include "chrome/app/notification_metrics.h"

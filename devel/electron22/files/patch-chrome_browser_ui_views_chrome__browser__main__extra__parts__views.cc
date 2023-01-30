@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/chrome_browser_main_extra_parts_views.cc.orig	2022-05-19 03:45:18 UTC
+--- chrome/browser/ui/views/chrome_browser_main_extra_parts_views.cc.orig	2022-02-28 16:54:41 UTC
 +++ chrome/browser/ui/views/chrome_browser_main_extra_parts_views.cc
 @@ -41,7 +41,7 @@
  

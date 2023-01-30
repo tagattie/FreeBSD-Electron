@@ -1,4 +1,4 @@
---- remoting/host/remote_open_url/remote_open_url_util.cc.orig	2022-05-19 03:45:37 UTC
+--- remoting/host/remote_open_url/remote_open_url_util.cc.orig	2022-02-28 16:54:41 UTC
 +++ remoting/host/remote_open_url/remote_open_url_util.cc
 @@ -30,7 +30,7 @@ const wchar_t kRegisteredApplicationsKeyName[] =
  #endif  // defined (OS_WIN)

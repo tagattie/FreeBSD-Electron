@@ -1,4 +1,4 @@
---- chrome/app/google_chrome_strings.grd.orig	2023-01-26 11:40:09 UTC
+--- chrome/app/google_chrome_strings.grd.orig	2022-11-30 08:12:58 UTC
 +++ chrome/app/google_chrome_strings.grd
 @@ -301,7 +301,7 @@ chromium_strings.grd. -->
            Welcome to Chrome; new browser window opened

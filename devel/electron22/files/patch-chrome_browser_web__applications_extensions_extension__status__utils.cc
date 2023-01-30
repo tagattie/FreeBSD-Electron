@@ -1,4 +1,4 @@
---- chrome/browser/web_applications/extensions/extension_status_utils.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/web_applications/extensions/extension_status_utils.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/web_applications/extensions/extension_status_utils.cc
 @@ -26,7 +26,7 @@ namespace {
  const char* g_preinstalled_app_for_testing = nullptr;

@@ -1,4 +1,4 @@
---- content/browser/renderer_host/render_message_filter.cc.orig	2023-01-26 11:40:15 UTC
+--- content/browser/renderer_host/render_message_filter.cc.orig	2022-11-30 08:12:58 UTC
 +++ content/browser/renderer_host/render_message_filter.cc
 @@ -66,7 +66,7 @@
  #if BUILDFLAG(IS_MAC)

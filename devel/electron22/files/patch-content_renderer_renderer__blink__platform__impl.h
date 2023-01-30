@@ -1,4 +1,4 @@
---- content/renderer/renderer_blink_platform_impl.h.orig	2023-01-27 05:20:34 UTC
+--- content/renderer/renderer_blink_platform_impl.h.orig	2023-01-30 07:58:59 UTC
 +++ content/renderer/renderer_blink_platform_impl.h
 @@ -29,7 +29,7 @@
  #include "third_party/blink/public/common/user_agent/user_agent_metadata.h"

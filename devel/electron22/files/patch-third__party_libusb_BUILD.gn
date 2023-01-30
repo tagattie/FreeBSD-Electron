@@ -1,4 +1,4 @@
---- third_party/libusb/BUILD.gn.orig	2023-01-26 11:40:54 UTC
+--- third_party/libusb/BUILD.gn.orig	2022-11-30 08:12:58 UTC
 +++ third_party/libusb/BUILD.gn
 @@ -3,7 +3,7 @@
  # found in the LICENSE file.

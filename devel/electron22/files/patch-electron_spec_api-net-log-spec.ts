@@ -1,4 +1,4 @@
---- electron/spec/api-net-log-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/api-net-log-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/api-net-log-spec.ts
 @@ -121,7 +121,7 @@ describe('netLog module', () => {
      expect(JSON.parse(dump).events.some((x: any) => x.params && x.params.bytes && Buffer.from(x.params.bytes, 'base64').includes(unique))).to.be.true('uuid present in dump');

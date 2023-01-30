@@ -1,4 +1,4 @@
---- electron/shell/browser/native_window_views.cc.orig	2023-01-18 11:12:36 UTC
+--- electron/shell/browser/native_window_views.cc.orig	2023-01-24 16:58:16 UTC
 +++ electron/shell/browser/native_window_views.cc
 @@ -43,7 +43,7 @@
  #include "ui/wm/core/shadow_types.h"

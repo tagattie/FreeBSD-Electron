@@ -1,4 +1,4 @@
---- sandbox/policy/features.cc.orig	2023-01-26 11:40:23 UTC
+--- sandbox/policy/features.cc.orig	2022-11-30 08:12:58 UTC
 +++ sandbox/policy/features.cc
 @@ -15,7 +15,11 @@ namespace sandbox::policy::features {
  // (Only causes an effect when feature kNetworkService is enabled.)

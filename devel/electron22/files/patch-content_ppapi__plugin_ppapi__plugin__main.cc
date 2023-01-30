@@ -1,4 +1,4 @@
---- content/ppapi_plugin/ppapi_plugin_main.cc.orig	2023-01-26 11:40:15 UTC
+--- content/ppapi_plugin/ppapi_plugin_main.cc.orig	2022-11-30 08:12:58 UTC
 +++ content/ppapi_plugin/ppapi_plugin_main.cc
 @@ -53,6 +53,11 @@
  #include "gin/v8_initializer.h"

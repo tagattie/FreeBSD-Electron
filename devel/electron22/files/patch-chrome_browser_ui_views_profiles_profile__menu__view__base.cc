@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/profiles/profile_menu_view_base.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/views/profiles/profile_menu_view_base.cc.orig	2022-09-24 10:57:32 UTC
 +++ chrome/browser/ui/views/profiles/profile_menu_view_base.cc
 @@ -570,7 +570,7 @@ void ProfileMenuViewBase::SetProfileIdentityInfo(
  

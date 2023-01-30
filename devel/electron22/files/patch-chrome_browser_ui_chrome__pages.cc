@@ -1,4 +1,4 @@
---- chrome/browser/ui/chrome_pages.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/chrome_pages.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/ui/chrome_pages.cc
 @@ -69,7 +69,7 @@
  #endif

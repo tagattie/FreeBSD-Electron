@@ -1,4 +1,4 @@
---- components/viz/service/display_embedder/skia_output_surface_impl.cc.orig	2023-01-26 11:40:14 UTC
+--- components/viz/service/display_embedder/skia_output_surface_impl.cc.orig	2022-11-30 08:12:58 UTC
 +++ components/viz/service/display_embedder/skia_output_surface_impl.cc
 @@ -1161,7 +1161,7 @@ GrBackendFormat SkiaOutputSurfaceImpl::GetGrBackendFor
                                            ->GetDeviceQueue()

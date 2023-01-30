@@ -1,4 +1,4 @@
---- ui/views/focus/focus_manager.cc.orig	2023-01-26 11:41:02 UTC
+--- ui/views/focus/focus_manager.cc.orig	2022-11-30 08:12:58 UTC
 +++ ui/views/focus/focus_manager.cc
 @@ -622,7 +622,7 @@ bool FocusManager::RedirectAcceleratorToBubbleAnchorWi
  

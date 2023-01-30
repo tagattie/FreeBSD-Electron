@@ -1,4 +1,4 @@
---- chrome/browser/new_tab_page/new_tab_page_util.cc.orig	2023-01-26 11:40:10 UTC
+--- chrome/browser/new_tab_page/new_tab_page_util.cc.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/new_tab_page/new_tab_page_util.cc
 @@ -11,7 +11,7 @@
  

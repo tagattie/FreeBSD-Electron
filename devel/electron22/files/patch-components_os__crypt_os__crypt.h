@@ -1,4 +1,4 @@
---- components/os_crypt/os_crypt.h.orig	2022-08-01 19:04:27 UTC
+--- components/os_crypt/os_crypt.h.orig	2022-07-22 17:30:31 UTC
 +++ components/os_crypt/os_crypt.h
 @@ -15,7 +15,7 @@
  #include "build/build_config.h"

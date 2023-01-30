@@ -1,4 +1,4 @@
---- third_party/angle/BUILD.gn.orig	2023-01-26 11:42:28 UTC
+--- third_party/angle/BUILD.gn.orig	2022-11-30 08:12:58 UTC
 +++ third_party/angle/BUILD.gn
 @@ -265,7 +265,6 @@ config("extra_warnings") {
        "-Wtautological-type-limit-compare",

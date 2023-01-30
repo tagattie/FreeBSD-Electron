@@ -1,4 +1,4 @@
---- electron/spec/webview-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/webview-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/webview-spec.ts
 @@ -526,7 +526,7 @@ describe('<webview> tag', function () {
      });

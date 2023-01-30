@@ -1,4 +1,4 @@
---- components/performance_manager/public/features.h.orig	2023-01-26 11:40:13 UTC
+--- components/performance_manager/public/features.h.orig	2022-11-30 08:12:58 UTC
 +++ components/performance_manager/public/features.h
 @@ -20,7 +20,7 @@ BASE_DECLARE_FEATURE(kRunOnMainThread);
  

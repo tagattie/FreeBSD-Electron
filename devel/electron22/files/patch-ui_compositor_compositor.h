@@ -1,4 +1,4 @@
---- ui/compositor/compositor.h.orig	2023-01-27 05:20:34 UTC
+--- ui/compositor/compositor.h.orig	2023-01-30 07:58:58 UTC
 +++ ui/compositor/compositor.h
 @@ -434,7 +434,7 @@ class COMPOSITOR_EXPORT Compositor : public base::Powe
  

@@ -1,4 +1,4 @@
---- electron/spec/version-bump-spec.ts.orig	2023-01-18 11:12:36 UTC
+--- electron/spec/version-bump-spec.ts.orig	2023-01-24 16:58:16 UTC
 +++ electron/spec/version-bump-spec.ts
 @@ -92,7 +92,7 @@ describe('version-bumper', () => {
  

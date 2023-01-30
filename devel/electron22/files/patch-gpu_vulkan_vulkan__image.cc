@@ -1,4 +1,4 @@
---- gpu/vulkan/vulkan_image.cc.orig	2022-05-19 03:45:30 UTC
+--- gpu/vulkan/vulkan_image.cc.orig	2022-02-28 16:54:41 UTC
 +++ gpu/vulkan/vulkan_image.cc
 @@ -322,7 +322,7 @@ bool VulkanImage::InitializeWithExternalMemory(
  

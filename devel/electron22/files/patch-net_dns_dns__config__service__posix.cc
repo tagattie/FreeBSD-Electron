@@ -1,4 +1,4 @@
---- net/dns/dns_config_service_posix.cc.orig	2023-01-27 05:20:34 UTC
+--- net/dns/dns_config_service_posix.cc.orig	2022-08-31 12:19:35 UTC
 +++ net/dns/dns_config_service_posix.cc
 @@ -34,6 +34,11 @@
  #include "net/dns/dns_config_watcher_mac.h"

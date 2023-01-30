@@ -1,4 +1,4 @@
---- v8/src/base/atomicops.h.orig	2022-08-01 19:10:02 UTC
+--- v8/src/base/atomicops.h.orig	2022-06-17 14:20:10 UTC
 +++ v8/src/base/atomicops.h
 @@ -57,10 +57,10 @@ using Atomic64 = SbAtomic64;
  using Atomic8 = char;

@@ -1,4 +1,4 @@
---- chrome/browser/ui/browser_command_controller.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/browser_command_controller.cc.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/ui/browser_command_controller.cc
 @@ -98,7 +98,7 @@
  #include "components/user_manager/user_manager.h"

@@ -1,4 +1,4 @@
---- ui/gfx/x/xlib_support.cc.orig	2022-05-11 07:02:11 UTC
+--- ui/gfx/x/xlib_support.cc.orig	2022-02-07 13:39:41 UTC
 +++ ui/gfx/x/xlib_support.cc
 @@ -38,10 +38,18 @@ void InitXlib() {
    if (xlib_loader->loaded())

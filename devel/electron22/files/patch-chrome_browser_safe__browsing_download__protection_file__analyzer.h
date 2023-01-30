@@ -1,4 +1,4 @@
---- chrome/browser/safe_browsing/download_protection/file_analyzer.h.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/safe_browsing/download_protection/file_analyzer.h.orig	2022-11-30 08:12:58 UTC
 +++ chrome/browser/safe_browsing/download_protection/file_analyzer.h
 @@ -18,7 +18,7 @@
  #include "components/safe_browsing/core/common/proto/csd.pb.h"

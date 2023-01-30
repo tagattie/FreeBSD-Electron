@@ -1,4 +1,4 @@
---- components/feed/core/v2/proto_util_unittest.cc.orig	2022-08-01 19:04:26 UTC
+--- components/feed/core/v2/proto_util_unittest.cc.orig	2022-06-17 14:20:10 UTC
 +++ components/feed/core/v2/proto_util_unittest.cc
 @@ -42,8 +42,8 @@ TEST(ProtoUtilTest, CreateClientInfo) {
    feedwire::ClientInfo result = CreateClientInfo(request_metadata);

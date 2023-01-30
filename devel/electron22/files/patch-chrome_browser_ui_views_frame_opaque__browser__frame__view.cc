@@ -1,4 +1,4 @@
---- chrome/browser/ui/views/frame/opaque_browser_frame_view.cc.orig	2023-01-26 11:40:11 UTC
+--- chrome/browser/ui/views/frame/opaque_browser_frame_view.cc.orig	2022-10-24 13:33:33 UTC
 +++ chrome/browser/ui/views/frame/opaque_browser_frame_view.cc
 @@ -55,7 +55,7 @@
  #include "ui/views/window/vector_icons/vector_icons.h"

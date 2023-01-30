@@ -1,4 +1,4 @@
---- chrome/common/pref_names.h.orig	2023-01-26 11:40:11 UTC
+--- chrome/common/pref_names.h.orig	2022-11-30 08:12:58 UTC
 +++ chrome/common/pref_names.h
 @@ -397,7 +397,7 @@ extern const char kUseAshProxy[];
  #endif  //  BUILDFLAG(IS_CHROMEOS_LACROS)

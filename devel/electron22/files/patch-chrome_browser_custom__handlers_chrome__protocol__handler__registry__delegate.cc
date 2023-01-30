@@ -1,4 +1,4 @@
---- chrome/browser/custom_handlers/chrome_protocol_handler_registry_delegate.cc.orig	2022-05-19 03:45:17 UTC
+--- chrome/browser/custom_handlers/chrome_protocol_handler_registry_delegate.cc.orig	2022-02-28 16:54:41 UTC
 +++ chrome/browser/custom_handlers/chrome_protocol_handler_registry_delegate.cc
 @@ -69,7 +69,7 @@ void ChromeProtocolHandlerRegistryDelegate::CheckDefau
  // If true default protocol handlers will be removed if the OS level

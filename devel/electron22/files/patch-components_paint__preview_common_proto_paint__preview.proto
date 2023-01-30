@@ -1,4 +1,4 @@
---- components/paint_preview/common/proto/paint_preview.proto.orig	2021-11-19 04:25:14 UTC
+--- components/paint_preview/common/proto/paint_preview.proto.orig	2021-12-14 11:45:03 UTC
 +++ components/paint_preview/common/proto/paint_preview.proto
 @@ -82,8 +82,8 @@ message PaintPreviewFrameProto {
  // Stores Chrome version.
