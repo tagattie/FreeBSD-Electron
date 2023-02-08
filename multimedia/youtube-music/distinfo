@@ -1,5 +1,5 @@
-TIMESTAMP = 1654152987
-SHA256 (youtube-music-node-modules-1.17.0.tar.gz) = 3b50740a68912e4c29b255c42730534c40b1ff9ba73912ed13b80b94dcde5370
-SIZE (youtube-music-node-modules-1.17.0.tar.gz) = 123459623
-SHA256 (th-ch-youtube-music-v1.17.0_GH0.tar.gz) = 6866f508dca5c5a0e0fdaa4e46c84eb85c7ddce55493ad71b894cf5afaae21fd
-SIZE (th-ch-youtube-music-v1.17.0_GH0.tar.gz) = 1125897
+TIMESTAMP = 1675839195
+SHA256 (youtube-music-node-modules-1.19.0.tar.gz) = b4bc05365c8b3da010aacb5e8f0e3e8872f5ce6f2f2c366e529c995e267d52f3
+SIZE (youtube-music-node-modules-1.19.0.tar.gz) = 120492082
+SHA256 (th-ch-youtube-music-v1.19.0_GH0.tar.gz) = 75219ae6a709e39369b1801ba2f6beafcf6ca4a346bfb4ee01415c103dc4cbb8
+SIZE (th-ch-youtube-music-v1.19.0_GH0.tar.gz) = 1103797

@@ -1,17 +1,18 @@
 PORTNAME=	youtube-music
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.0
+DISTVERSION=	1.19.0
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	YouTube Music desktop app bundled with custom plugins
+WWW=		https://th-ch.github.io/youtube-music
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/license
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:17 magick:build node:16,build
+USES=		desktop-file-utils electron:20 magick:build node:16,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	th-ch
@@ -25,7 +26,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract build:builder
 
-PREFETCH_TIMESTAMP=	1654151111
+PREFETCH_TIMESTAMP=	1675838395
 
 pre-build:
 	# generate icon files
