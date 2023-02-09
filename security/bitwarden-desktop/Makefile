@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2022.8.1
+DISTVERSION=	2023.1.1
 CATEGORIES=	security
 DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
@@ -14,8 +14,8 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre.so:devel/pcre \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:19 gmake gnome localbase:ldflags \
-		node:16,build pkgconfig python:build xorg
+USES=		cargo desktop-file-utils electron:21 gmake gnome \
+		localbase:ldflags node:16,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
@@ -24,7 +24,17 @@ GH_PROJECT=	clients
 USE_XORG=	x11 xau xcb xdmcp xext xscrnsaver
 USE_GNOME=	glib20
 
+CARGO_CARGOTOML=${BUILD_WRKSRC}/desktop_native/Cargo.toml
+CARGO_CARGOLOCK=${BUILD_WRKSRC}/desktop_native/Cargo.lock
+CARGO_BUILD=	no
+CARGO_INSTALL=	no
+CARGO_TEST=	no
+
+MAKE_ENV=	${CARGO_ENV}
+
 SUB_FILES=	${PORTNAME}
+
+BUILD_WRKSRC=	${WRKSRC}/apps/desktop
 
 PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
@@ -33,9 +43,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm:fetch,build
 USE_ELECTRON=	build:builder
 
-PREFETCH_TIMESTAMP=	1661317958
-
-BUILD_WRKSRC=	${WRKSRC}/apps/desktop
+PREFETCH_TIMESTAMP=	1675845384
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
@@ -74,6 +82,7 @@ pre-build:
 		npm_config_target=${ELECTRON_VER} \
 		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
 		${NPM_CMD} rebuild --no-progress
+	cd ${BUILD_WRKSRC}/desktop_native && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin

@@ -1,6 +1,6 @@
 {
   "name": "@bitwarden/browser",
-  "version": "2022.8.0",
+  "version": "2023.1.0",
   "scripts": {
     "build": "webpack",
     "build:mv3": "cross-env MANIFEST_VERSION=3 webpack",
@@ -9,8 +9,8 @@
     "build:prod": "cross-env NODE_ENV=production webpack",
     "build:prod:watch": "cross-env NODE_ENV=production webpack --watch",
     "dist": "npm run build:prod && gulp dist",
+    "dist:mv3": "cross-env MANIFEST_VERSION=3 npm run build:prod && cross-env MANIFEST_VERSION=3 gulp dist",
     "dist:chrome": "npm run build:prod && gulp dist:chrome",
-    "dist:chrome:mv3": "cross-env MANIFEST_VERSION=3 npm run build:prod && gulp dist:chrome",
     "dist:firefox": "npm run build:prod && gulp dist:firefox",
     "dist:opera": "npm run build:prod && gulp dist:opera",
     "dist:safari": "npm run build:prod && gulp dist:safari",

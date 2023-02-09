@@ -1,11 +1,10 @@
 {
-  "name": "@bitwarden/desktop_native",
+  "name": "@bitwarden/desktop-native",
   "version": "0.1.0",
   "description": "",
-  "main": "index.node",
   "scripts": {
-    "build": "napi build --release --platform",
-    "build:debug": "napi build --platform",
+    "build": "napi build --release --platform --js false",
+    "build:debug": "napi build --platform --js false",
     "build:cross-platform": "node build.js",
     "test": "cargo test"
   },

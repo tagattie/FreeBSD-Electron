@@ -1,5 +1,5 @@
---- libs/electron/src/tray.main.ts.orig	2022-07-06 07:44:28 UTC
-+++ libs/electron/src/tray.main.ts
+--- apps/desktop/src/main/tray.main.ts.orig	2023-02-08 11:57:23 UTC
++++ apps/desktop/src/main/tray.main.ts
 @@ -87,7 +87,7 @@ export class TrayMain {
    removeTray(showWindow = true) {
      // Due to https://github.com/electron/electron/issues/17622

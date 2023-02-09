@@ -1,5 +1,5 @@
---- libs/electron/src/services/electronPlatformUtils.service.ts.orig	2022-08-11 18:59:38 UTC
-+++ libs/electron/src/services/electronPlatformUtils.service.ts
+--- apps/desktop/src/services/electron-platform-utils.service.ts.orig	2023-02-08 12:03:42 UTC
++++ apps/desktop/src/services/electron-platform-utils.service.ts
 @@ -28,7 +28,7 @@ export class ElectronPlatformUtilsService implements P
          case "darwin":
            this.deviceCache = DeviceType.MacOsDesktop;

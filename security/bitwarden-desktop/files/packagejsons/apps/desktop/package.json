@@ -1,7 +1,7 @@
 {
   "name": "@bitwarden/desktop",
   "description": "A secure and free password manager for all of your devices.",
-  "version": "2022.8.1",
+  "version": "2023.1.1",
   "keywords": [
     "bitwarden",
     "password",
@@ -18,15 +18,17 @@
   "scripts": {
     "postinstall": "electron-rebuild",
     "start": "cross-env ELECTRON_IS_DEV=0 ELECTRON_NO_UPDATER=1 electron ./build",
+    "build-native": "cargo build --manifest-path=./desktop_native/Cargo.toml",
     "build": "concurrently -n Main,Rend -c yellow,cyan \"npm run build:main\" \"npm run build:renderer\"",
     "build:dev": "concurrently -n Main,Rend -c yellow,cyan \"npm run build:main:dev\" \"npm run build:renderer:dev\"",
     "build:main": "cross-env NODE_ENV=production webpack --config webpack.main.js",
-    "build:main:dev": "cross-env NODE_ENV=development webpack --config webpack.main.js",
+    "build:main:dev": "npm run build-native && cross-env NODE_ENV=development webpack --config webpack.main.js",
+    "build:main:watch": "npm run build-native && cross-env NODE_ENV=development webpack --config webpack.main.js --watch",
     "build:renderer": "cross-env NODE_ENV=production webpack --config webpack.renderer.js",
     "build:renderer:dev": "cross-env NODE_ENV=development webpack --config webpack.renderer.js",
     "build:renderer:watch": "cross-env NODE_ENV=development webpack --config webpack.renderer.js --watch",
-    "electron": "npm run build:main:dev && concurrently -k -n Main,Rend -c yellow,cyan \"electron --inspect=5858 ./build --watch\" \"npm run build:renderer:watch\"",
-    "electron:ignore": "npm run build:main:dev && concurrently -k -n Main,Rend -c yellow,cyan \"electron --inspect=5858 --ignore-certificate-errors ./build --watch\" \"npm run build:renderer:watch\"",
+    "electron": "node ./scripts/start.js",
+    "electron:ignore": "node ./scripts/start.js --ignore-certificate-errors",
     "clean:dist": "rimraf ./dist/*",
     "pack:dir": "npm run clean:dist && electron-builder --dir -p never",
     "pack:lin": "npm run clean:dist && electron-builder --linux --x64 -p never",
@@ -48,6 +50,9 @@
     "publish:mac:mas": "npm run dist:mac:mas && npm run upload:mas",
     "publish:win": "npm run build && npm run clean:dist && electron-builder --win --x64 --arm64 --ia32 -p always -c.win.certificateSubjectName=\"8bit Solutions LLC\"",
     "publish:win:dev": "npm run build && npm run clean:dist && electron-builder --win --x64 --arm64 --ia32 -p always",
-    "upload:mas": "xcrun altool --upload-app --type osx --file \"$(find ./dist/mas-universal/Bitwarden*.pkg)\" --username $APPLE_ID_USERNAME --password $APPLE_ID_PASSWORD"
+    "upload:mas": "xcrun altool --upload-app --type osx --file \"$(find ./dist/mas-universal/Bitwarden*.pkg)\" --username $APPLE_ID_USERNAME --password $APPLE_ID_PASSWORD",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:watch:all": "jest --watchAll"
   }
 }

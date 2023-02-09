@@ -1,9 +1,7 @@
 bin/bitwarden-desktop
 share/applications/bitwarden-desktop.desktop
 %%DATADIR%%/resources/app.asar
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/@nodert-win10-rs4/windows.security.credentials.ui/build/Release/binding.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/forcefocus/build/Release/forcefocus.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/Release/keytar.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@bitwarden/desktop-native/desktop_native.freebsd-x64.node
 %%DATADIR%%/resources/package.json
 share/icons/hicolor/1024x1024/apps/bitwarden.png
 share/icons/hicolor/128x128/apps/bitwarden.png

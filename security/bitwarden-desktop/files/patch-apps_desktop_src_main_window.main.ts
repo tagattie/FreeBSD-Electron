@@ -1,6 +1,6 @@
---- libs/electron/src/window.main.ts.orig	2022-07-06 07:46:57 UTC
-+++ libs/electron/src/window.main.ts
-@@ -46,7 +46,7 @@ export class WindowMain {
+--- apps/desktop/src/main/window.main.ts.orig	2023-02-08 11:58:59 UTC
++++ apps/desktop/src/main/window.main.ts
+@@ -48,7 +48,7 @@ export class WindowMain {
                  }
                  this.win.focus();
                }
@@ -9,7 +9,7 @@
                  if (this.argvCallback != null) {
                    this.argvCallback(argv);
                  }
-@@ -115,7 +115,7 @@ export class WindowMain {
+@@ -117,7 +117,7 @@ export class WindowMain {
        x: this.windowStates[mainWindowSizeKey].x,
        y: this.windowStates[mainWindowSizeKey].y,
        title: app.name,
