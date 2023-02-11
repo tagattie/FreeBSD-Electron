@@ -11,6 +11,5 @@ share/icons/hicolor/512x512/apps/teams.png
 share/icons/hicolor/64x64/apps/teams.png
 share/icons/hicolor/96x96/apps/teams.png
 %%DATADIR%%/resources/app.asar
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/spellchecker/vendor/hunspell_dictionaries/README.txt
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/spellchecker/vendor/hunspell_dictionaries/en_US.aff
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/spellchecker/vendor/hunspell_dictionaries/en_US.dic
+%%DATADIR%%/resources/assets/sounds/meeting_started.wav
+%%DATADIR%%/resources/assets/sounds/new_message.wav

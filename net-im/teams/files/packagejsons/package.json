@@ -1,6 +1,6 @@
 {
   "name": "teams-for-linux",
-  "version": "1.0.23",
+  "version": "1.0.49",
   "main": "app/index.js",
   "description": "Unofficial client for Microsoft Teams for Linux",
   "homepage": "https://github.com/IsmaelMartinez/teams-for-linux",
@@ -17,7 +17,7 @@
     "email": "ismaelmartinez@gmail.com",
     "url": "https://github.com/IsmaelMartinez/"
   },
-  "license": "SEE LICENSE IN LICENSE.md",
+  "license": "GPL-3.0-or-later",
   "scripts": {
     "lint": "eslint **/*.js",
     "start": "yarn install && electron ./app",
@@ -30,23 +30,27 @@
     "dist:linux:appimage": "electron-builder --x64 --armv7l --arm64 -l AppImage",
     "dist:linux:snap": "electron-builder -l snap",
     "dist:linux:snap:armv7l": "electron-builder --armv7l -l snap",
+    "dist:mac": "electron-builder --mac",
     "release": "electron-builder"
   },
   "dependencies": {
-    "@electron/remote": "^2.0.1",
+    "@electron/remote": "^2.0.8",
+    "afplay": "^1.0.3",
     "electron-dl": "ismaelmartinez/electron-dl",
     "electron-editor-context-menu": "1.1.1",
+    "electron-is-dev": "2.0.0",
     "electron-native-notification": "1.2.1",
-    "electron-store": "8.0.1",
+    "electron-store": "8.1.0",
     "electron-window-state": "5.0.3",
-    "spellchecker": "3.7.1",
-    "yargs": "17.2.1"
+    "lucid-log": "^0.0.3",
+    "node-sound": "^0.0.5",
+    "yargs": "17.5.1"
   },
   "devDependencies": {
-    "electron": "15.3.0",
-    "electron-builder": "22.13.1",
-    "eslint": "8.1.0",
-    "yarn": "1.22.17"
+    "electron": "^21.0.1",
+    "electron-builder": "23.3.3",
+    "eslint": "8.24.0",
+    "yarn": "1.22.19"
   },
   "build": {
     "appId": "teams-for-linux",
@@ -59,6 +63,12 @@
         "msteams"
       ]
     },
+    "extraResources": [
+      {
+        "from": "app/assets/sounds",
+        "to": "assets/sounds"
+      }
+    ],
     "linux": {
       "category": "Chat;Network;Office",
       "packageCategory": "net",
@@ -98,6 +108,9 @@
       "publish": [
         "snapStore"
       ]
+    },
+    "mac": {
+      "category": "public.app-category.productivity"
     }
   }
 }

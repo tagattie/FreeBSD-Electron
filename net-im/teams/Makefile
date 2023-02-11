@@ -1,17 +1,18 @@
 PORTNAME=	teams
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.23
+DISTVERSION=	1.0.49
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Unofficial Microsoft Teams client
+WWW=		https://github.com/IsmaelMartinez/teams-for-linux
 
-LICENSE=	GPLv3
+LICENSE=	GPLv3+
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:15 gnome localbase:ldflags \
+USES=		desktop-file-utils electron:21 gnome localbase:ldflags \
 		node:16,build python:build
 
 USE_GITHUB=	yes
@@ -20,20 +21,14 @@ GH_PROJECT=	teams-for-linux
 
 SUB_FILES=	${PORTNAME}
 
-PORTDOCS=	HISTORY.md KNOWN_ISSUES.md README.md
+PORTDOCS=	HISTORY.md KNOWN_ISSUES.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
 USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1644902604
-
-post-patch:
-	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
-		${WRKSRC}/node_modules/spellchecker/binding.gyp
-	${REINPLACE_CMD} -e 's/needflag = NULL/needflag = FLAG_NULL/' \
-		${WRKSRC}/node_modules/spellchecker/vendor/hunspell/src/hunspell/affentry.hxx
+PREFETCH_TIMESTAMP=	1676027110
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
