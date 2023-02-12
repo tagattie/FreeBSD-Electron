@@ -1,5 +1,5 @@
-TIMESTAMP = 1658035531
-SHA256 (stretchly-node-modules-1.10.0.tar.gz) = b3f40072a9cba6f16dc1b611a9afdf8b4dad696d99fe18259ed0634d33836f88
-SIZE (stretchly-node-modules-1.10.0.tar.gz) = 71341442
-SHA256 (hovancik-stretchly-v1.10.0_GH0.tar.gz) = cc01383ef15fe56662cc143e7ac89dd07e10bdd68e963d79229a0643f978b815
-SIZE (hovancik-stretchly-v1.10.0_GH0.tar.gz) = 31411226
+TIMESTAMP = 1676190421
+SHA256 (stretchly-node-modules-1.13.1.tar.gz) = c3277fe253232fd3c63aca038fde682708b40b2447b3406ea8bc080cb476890e
+SIZE (stretchly-node-modules-1.13.1.tar.gz) = 70555896
+SHA256 (hovancik-stretchly-v1.13.1_GH0.tar.gz) = 98f05ad41f85e8001c5fd69c90dbee7391e4643f9d2cbdb6419fd435da76f833
+SIZE (hovancik-stretchly-v1.13.1_GH0.tar.gz) = 58344240
