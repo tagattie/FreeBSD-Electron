@@ -1,4 +1,4 @@
---- src/main/modules/tray.ts.orig	2021-07-28 21:45:51 UTC
+--- src/main/modules/tray.ts.orig	2022-09-03 15:32:38 UTC
 +++ src/main/modules/tray.ts
 @@ -23,7 +23,7 @@ class TrayModule extends ModuleWindow {
    constructor(window: Electron.BrowserWindow) {
@@ -9,10 +9,10 @@
  
      this.tray = null;
      this.playToggle = [];
-@@ -53,7 +53,7 @@ class TrayModule extends ModuleWindow {
- 
+@@ -54,7 +54,7 @@ class TrayModule extends ModuleWindow {
    async load(): Promise<void> {
      // Fix for gnome-shell and high-dpi
+     // TODO: should we still use that?
 -    if (os.platform() === 'linux') {
 +    if (os.platform() === 'linux' || os.platform() === 'freebsd') {
        ps.lookup(

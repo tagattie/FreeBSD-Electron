@@ -1,5 +1,5 @@
 PORTNAME=	museeks
-PORTVERSION=	0.12.0
+PORTVERSION=	0.13.1
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,8 +11,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:13 gmake localbase:ldflags \
-		node:14,build python:build
+USES=		desktop-file-utils electron:18 gmake localbase:ldflags \
+		node:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	martpie
@@ -26,7 +26,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	yarn
 USE_ELECTRON=	prefetch extract prebuild build:builder
 
-PREFETCH_TIMESTAMP=	1638325143
+PREFETCH_TIMESTAMP=	1676201522
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
