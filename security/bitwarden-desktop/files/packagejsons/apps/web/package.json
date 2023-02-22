@@ -1,6 +1,6 @@
 {
   "name": "@bitwarden/web-vault",
-  "version": "2023.1.0",
+  "version": "2023.2.0",
   "scripts": {
     "build:oss": "webpack",
     "build:bit": "webpack -c ../../bitwarden_license/bit-web/webpack.config.js",
@@ -10,6 +10,7 @@
     "build:bit:dev:analyze": "cross-env LOGGING=false webpack -c ../../bitwarden_license/bit-web/webpack.config.js --profile --json > stats.json && npx webpack-bundle-analyzer stats.json build/",
     "build:bit:dev:watch": "cross-env ENV=development npm run build:bit:watch",
     "build:bit:qa": "cross-env NODE_ENV=production ENV=qa npm run build:bit",
+    "build:bit:poc": "cross-env NODE_ENV=production ENV=poc npm run build:bit",
     "build:bit:cloud": "cross-env NODE_ENV=production ENV=cloud npm run build:bit",
     "build:oss:selfhost:watch": "cross-env ENV=selfhosted npm run build:oss:watch",
     "build:bit:selfhost:watch": "cross-env ENV=selfhosted npm run build:bit:watch",

@@ -1,11 +1,12 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2023.1.1
+DISTVERSION=	2023.2.0
 CATEGORIES=	security
 DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Bitwarden desktop application
+WWW=		https://bitwarden.com
 
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
@@ -43,7 +44,7 @@ OPTIONS_DEFINE=	DOCS
 USE_NODE=	npm:fetch,build
 USE_ELECTRON=	build:builder
 
-PREFETCH_TIMESTAMP=	1675845384
+PREFETCH_TIMESTAMP=	1677016857
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \

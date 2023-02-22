@@ -41,11 +41,15 @@
     "bw": "build/bw.js"
   },
   "pkg": {
-    "assets": "./build/**/*"
+    "assets": [
+      "./build/**/*",
+      "../../node_modules/argon2/**/*"
+    ]
   },
   "dependencies": {
     "@koa/multer": "^3.0.0",
     "@koa/router": "^10.1.1",
+    "argon2": "^0.30.3",
     "big-integer": "^1.6.51",
     "browser-hrtime": "^1.1.8",
     "chalk": "^4.1.1",
