@@ -276,7 +276,7 @@ _USES_fetch+=	490:electron-fetch-node-modules
 electron-fetch-node-modules:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
-		${ECHO_MSG} "===>  Pre-fetching and archiving node modules"; \
+		${ECHO_MSG} "===>   Pre-fetching and archiving node modules"; \
 		${MKDIR} ${WRKDIR}/npm-cache; \
 		${CP} ${PKGJSONSDIR}/package.json ${PKGJSONSDIR}/package-lock.json ${WRKDIR}/npm-cache; \
 		cd ${WRKDIR}/npm-cache && \
@@ -299,7 +299,7 @@ electron-fetch-node-modules:
 electron-fetch-node-modules:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
-		${ECHO_MSG} "===>  Pre-fetching and archiving node modules"; \
+		${ECHO_MSG} "===>   Pre-fetching and archiving node modules"; \
 		${MKDIR} ${WRKDIR}; \
 		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
 			${WRKDIR}/.yarnrc; \
@@ -326,7 +326,7 @@ electron-fetch-node-modules:
 .   if ${_NODEJS_NPM} == npm
 _USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
-	@${ECHO_MSG} "===>  Copying package.json and package-lock.json to WRKSRC"
+	@${ECHO_MSG} "===>   Copying package.json and package-lock.json to WRKSRC"
 	@cd ${PKGJSONSDIR} && \
 	for f in package.json package-lock.json; do \
 		if [ -f ${WRKSRC}/$${f} ]; then \
@@ -334,13 +334,13 @@ electron-install-node-modules:
 		fi; \
 		${CP} $${f} ${WRKSRC}; \
 	done
-	@${ECHO_MSG} "===>  Moving pre-fetched node modules to WRKSRC"
+	@${ECHO_MSG} "===>   Moving pre-fetched node modules to WRKSRC"
 	@${MV} ${WRKDIR}/npm-cache/node_modules ${WRKSRC}
 .   elif ${_NODEJS_NPM} == yarn
 EXTRACT_DEPENDS+= ${_NODEJS_NPM_PKGNAME}>0:${_NODEJS_NPM_PORTDIR}
 _USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
-	@${ECHO_MSG} "===>  Copying package.json and yarn.lock to WRKSRC"
+	@${ECHO_MSG} "===>   Copying package.json and yarn.lock to WRKSRC"
 	@cd ${PKGJSONSDIR} && \
 	for f in package.json yarn.lock; do \
 		if [ -f ${WRKSRC}/$${f} ]; then \
@@ -348,7 +348,7 @@ electron-install-node-modules:
 		fi; \
 		${CP} $${f} ${WRKSRC}; \
 	done
-	@${ECHO_MSG} "===>  Installing node modules from pre-fetched cache"
+	@${ECHO_MSG} "===>   Installing node modules from pre-fetched cache"
 	@${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
 	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn --frozen-lockfile --ignore-scripts --offline
@@ -392,7 +392,7 @@ electron-generate-electron-zip:
 .	if ${ELECTRON_VERSION} < 6
 	# This is only to pacify @electron/get and the zip file generated will
 	# not be used for actual packaging.
-	@${ECHO_MSG} "===>  Preparing distribution files of electron"
+	@${ECHO_MSG} "===>   Preparing distribution files of electron"
 	@${RM} -r ${WRKDIR}/electron-dist
 	@${MKDIR} ${WRKDIR}/electron-dist
 	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
@@ -409,7 +409,7 @@ electron-generate-electron-zip:
 	@${DO_NADA}
 .	endif
 .   elif defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == packager
-	@${ECHO_MSG} "===>  Preparing distribution files of electron"
+	@${ECHO_MSG} "===>   Preparing distribution files of electron"
 	@${RM} -r ${WRKDIR}/electron-dist
 	@${MKDIR} ${WRKDIR}/electron-dist
 	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
@@ -426,7 +426,7 @@ electron-generate-electron-zip:
 
 electron-generate-chromedriver-zip:
 .   if defined(UPSTREAM_CHROMEDRIVER_VER) && ${UPSTREAM_CHROMEDRIVER_VER} != ""
-	@${ECHO_MSG} "===>  Preparing distribution files of chromedriver"
+	@${ECHO_MSG} "===>   Preparing distribution files of chromedriver"
 	@${RM} -r ${WRKDIR}/electron-dist
 	@${MKDIR} ${WRKDIR}/electron-dist
 	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
@@ -446,8 +446,8 @@ electron-generate-chromedriver-zip:
 electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
-	@${ECHO_MSG} "===>  Rebuilding native node modules for node"
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+	@${ECHO_MSG} "===>   Rebuilding native node modules for nodejs"
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		npm_config_nodedir=${LOCALBASE} \
 		npm rebuild --no-progress
 .   else
@@ -457,12 +457,12 @@ electron-rebuild-native-node-modules-for-node:
 electron-rebuild-native-node-modules-for-electron:
 .   if defined(_ELECTRON_FEATURE_REBUILD_ELECTRON) && \
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
-	@${ECHO_MSG} "===>  Rebuilding native node modules for electron"
+	@${ECHO_MSG} "===>   Rebuilding native node modules for electron"
 .	if ${_ELECTRON_FEATURE_BUILD} == builder
 		cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 			yarn run electron-builder install-app-deps --platform linux
 .	else
-		cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 			npm_config_runtime=electron \
 			npm_config_target=${ELECTRON_VER} \
 			npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
