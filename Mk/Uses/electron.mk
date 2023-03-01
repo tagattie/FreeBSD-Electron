@@ -304,44 +304,30 @@ _USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
 	@${ECHO_MSG} "===>  Copying package.json and package-lock.json to WRKSRC"
 	@cd ${PKGJSONSDIR} && \
-	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		for f in package.json package-lock.json; do \
-			if [ -f ${WRKSRC}/$${dir}/$${f} ]; then \
-				${MV} -f ${WRKSRC}/$${dir}/$${f} ${WRKSRC}/$${dir}/$${f}.bak; \
-			fi; \
-			if [ -f $${dir}/$${f} ]; then \
-				${CP} -f $${dir}/$${f} ${WRKSRC}/$${dir}; \
-			fi; \
-		done; \
+	for f in package.json package-lock.json; do \
+		if [ -f ${WRKSRC}/$${f} ]; then \
+			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
+		fi; \
+		${CP} $${f} ${WRKSRC}; \
 	done
 	@${ECHO_MSG} "===>  Moving pre-fetched node modules to WRKSRC"
-	@cd ${PKGJSONSDIR} && \
-	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		${MV} ${WRKDIR}/npm-cache/$${dir}/node_modules ${WRKSRC}/$${dir}; \
-	done
+	@${MV} ${WRKDIR}/npm-cache/node_modules ${WRKSRC}
 .   elif ${_NODEJS_NPM} == yarn
 EXTRACT_DEPENDS+= ${_NODEJS_NPM_PKGNAME}>0:${_NODEJS_NPM_PORTDIR}
 _USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
 	@${ECHO_MSG} "===>  Copying package.json and yarn.lock to WRKSRC"
 	@cd ${PKGJSONSDIR} && \
-	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		for f in package.json yarn.lock; do \
-			if [ -f ${WRKSRC}/$${dir}/$${f} ]; then \
-				${MV} -f ${WRKSRC}/$${dir}/$${f} ${WRKSRC}/$${dir}/$${f}.bak; \
-			fi; \
-			if [ -f $${dir}/$${f} ]; then \
-				${CP} -f $${dir}/$${f} ${WRKSRC}/$${dir}; \
-			fi; \
-		done; \
+	for f in package.json yarn.lock; do \
+		if [ -f ${WRKSRC}/$${f} ]; then \
+			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
+		fi; \
+		${CP} $${f} ${WRKSRC}; \
 	done
 	@${ECHO_MSG} "===>  Installing node modules from pre-fetched cache"
 	@${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
-	@cd ${PKGJSONSDIR} && \
-	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		cd ${WRKSRC}/$${dir} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			yarn --frozen-lockfile --ignore-scripts --offline; \
-	done
+	@cd ${WRKSRC}/$${dir} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+		yarn --frozen-lockfile --ignore-scripts --offline
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
