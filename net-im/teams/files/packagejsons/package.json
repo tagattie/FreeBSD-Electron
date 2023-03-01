@@ -19,6 +19,7 @@
   },
   "license": "GPL-3.0-or-later",
   "scripts": {
+    "postinstall": "electron-builder install-app-deps",
     "lint": "eslint **/*.js",
     "start": "yarn install && electron ./app",
     "pack": "electron-builder --dir",

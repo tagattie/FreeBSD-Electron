@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
 USES=		desktop-file-utils electron:21 gnome localbase:ldflags \
-		node:16,build python:build
+		nodejs:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	IsmaelMartinez
@@ -25,8 +25,7 @@ PORTDOCS=	HISTORY.md KNOWN_ISSUES.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	yarn
-USE_ELECTRON=	prefetch extract prebuild build:builder
+USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
 
 PREFETCH_TIMESTAMP=	1676027110
 
