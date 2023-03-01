@@ -459,8 +459,15 @@ electron-rebuild-native-node-modules-for-electron:
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for electron"
 .	if ${_ELECTRON_FEATURE_BUILD} == builder
-		cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+.	   if ${_NODEJS_NPM} == npm
+		# @cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		# 	npx electron-builder install-app-deps --platform linux
+		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+			./node_modules/.bin/electron-builder install-app-deps --platform linux
+.	   elif ${_NODEJS_NPM} == yarn
+		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 			yarn run electron-builder install-app-deps --platform linux
+.	   endif
 .	else
 		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 			npm_config_runtime=electron \
