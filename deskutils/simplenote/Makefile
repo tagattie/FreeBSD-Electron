@@ -14,7 +14,7 @@ BUILD_DEPENDS=	app-builder:devel/app-builder \
 		git:devel/git
 
 USES=		desktop-file-utils electron:12 gmake gnome localbase:ldflags \
-		node:14,build python:2.7,build xorg
+		nodejs:14,build python:2.7,build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Automattic
@@ -28,8 +28,7 @@ PORTDOCS=	CONTRIBUTING.md README.md RELEASE-NOTES.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm
-USE_ELECTRON=	prefetch extract build:builder
+USE_ELECTRON=	npm:npm prefetch extract rebuild:nodejs build:builder
 
 PREFETCH_TIMESTAMP=	1637129508
 
@@ -42,12 +41,6 @@ post-patch:
 	${REINPLACE_CMD} -e 's/make build/${MAKE_CMD} build/' ${WRKSRC}/Makefile
 
 pre-build:
-	cd ${PKGJSONSDIR} && \
-	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		cd ${WRKSRC}/$${dir} && ${SETENV} ${MAKE_ENV} \
-		npm_config_nodedir=${LOCALBASE} \
-		${NPM_CMD} rebuild --no-progress; \
-	done
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} build
 
 do-install:
