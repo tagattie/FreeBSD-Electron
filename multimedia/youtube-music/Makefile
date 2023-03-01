@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/license
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:20 magick:build node:16,build
+USES=		desktop-file-utils electron:20 magick:build nodejs:16,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	th-ch
@@ -23,8 +23,7 @@ PORTDOCS=	readme.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	yarn
-USE_ELECTRON=	prefetch extract build:builder
+USE_ELECTRON=	npm:yarn prefetch extract build:builder
 
 PREFETCH_TIMESTAMP=	1675838395
 
