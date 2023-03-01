@@ -444,7 +444,8 @@ electron-generate-chromedriver-zip:
 .   endif
 
 electron-rebuild-native-node-modules-for-node:
-.   if ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
+.   if defined(_ELECTRON_REBUILD_FEATURE_NODEJS) && \
+       ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>  Rebuilding native node modules for node"
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		npm_config_nodedir=${LOCALBASE} \
@@ -454,7 +455,8 @@ electron-rebuild-native-node-modules-for-node:
 .   endif
 
 electron-rebuild-native-node-modules-for-electron:
-.   if ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
+.   if defined(_ELECTRON_FEATURE_REBUILD_ELECTRON) && \
+       ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
 	@${ECHO_MSG} "===>  Rebuilding native node modules for electron"
 .	if ${_ELECTRON_FEATURE_BUILD} == builder
 		cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
@@ -466,6 +468,8 @@ electron-rebuild-native-node-modules-for-electron:
 			npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
 			npm rebuild --no-progress
 .	endif
+.   else
+	@${DO_NADA}
 .   endif
 .endif # _ELECTRON_FEATURE_REBUILD
 
