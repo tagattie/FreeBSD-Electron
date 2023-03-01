@@ -5,6 +5,7 @@ CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Simplenote React app packaged via Electron
+WWW=		https://simplenote.com
 
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
