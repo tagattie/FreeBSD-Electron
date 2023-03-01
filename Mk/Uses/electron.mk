@@ -25,6 +25,7 @@
 #			Supported package managers are:
 #
 #		npm:	The port uses NPM as package manager.
+#
 #		yarn:	The port uses Yarn as package manager.
 #
 #		NOTE: A port must specify exactly a single package manager.
@@ -55,13 +56,19 @@
 #	extract:	Installs the pre-fetched node modules into the port's
 #			working source directory.
 #
-#	prebuild:	Rebuilds native node modules against the version of Node
-#			installed before pre-build phase so that Node can
-#			execute the native modules.
-#			In addition the feature rebuilds native node modules
-#			against the version of Electron installed before
-#			do-build phase so that the native modules can be
-#			executed with Electron.
+#	rebuild:	Rebuilds native node modules against nodejs or electron.
+#			Supported arguments are:
+#
+#		nodejs:	Rebuilds native node modules against the version of
+#			NodeJS installed before pre-build phase so that NodeJS
+#			can execute the native modules.
+#
+#		electron: Rebuilds native node modules against the version of
+#			Electron ionstalled before do-build phase so that the
+#			native modules can be executed with Electron.
+#
+#		NOTE: If the port specify none of those argument, we assume both
+#		nodejs and electron has been specified.
 #
 #		If the port uses this feature and the major version of Electron
 #		is less than 6, the following variable must be specified.
@@ -117,8 +124,9 @@ _INCLUDE_USES_ELECTRON_MK=	yes
 .include "${USESDIR}/nodejs.mk"
 
 _VALID_ELECTRON_VERSIONS=	4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
-_VALID_ELECTRON_FEATURES=	npm prefetch extract prebuild build
+_VALID_ELECTRON_FEATURES=	npm prefetch extract rebuild build
 _VALID_ELECTRON_FEATURES_NPM=	npm yarn
+_VALID_ELECTRON_FEATURES_REBUILD=nodejs electron
 _VALID_ELECTRON_FEATURE_BUILDS=	builder packager
 
 _ELECTRON_BASE_CMD=	electron
@@ -209,6 +217,22 @@ IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_NPM}
 _NODEJS_NPM=		${_ELECTRON_FEATURE_NPM}
 _NODEJS_NPM_PKGNAME=	${_NODEJS_NPM}${NODEJS_SUFFIX}
 _NODEJS_NPM_PORTDIR=	www/${_NODEJS_NPM}${NODEJS_SUFFIX}
+.endif
+
+# Detect a nodejs or electron arguments of rebuild feature
+.if defined(_ELECTRON_FEATURE_REBUILD)
+_ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:C/^[^\:]*(\:|\$)//:S/,/ /g}
+.   if ${_ELECTRON_FEATURE_REBUILD:M*nodejs*}
+_ELECTRON_FEATURE_REBUILD_NODEJS=	yes
+.   endif
+.   if ${_ELECTRON_FEATURE_REBUILD:M*electron*}
+_ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
+.   endif
+.   if !defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
+       !defined(_ELECTRON_FEATURE_REBUILD_ELECTRON)
+_ELECTRON_FEATURE_REBUILD_NODEJS=	yes
+_ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
+.   endif
 .endif
 
 # Detect builder used with USE_ELECTRON=builder
@@ -326,12 +350,12 @@ electron-install-node-modules:
 	done
 	@${ECHO_MSG} "===>  Installing node modules from pre-fetched cache"
 	@${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
-	@cd ${WRKSRC}/$${dir} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn --frozen-lockfile --ignore-scripts --offline
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
-.if defined(_ELECTRON_FEATURE_PREBUILD)
+.if defined(_ELECTRON_FEATURE_REBUILD)
 BUILD_DEPENDS+=	zip:archivers/zip
 ZIP_CMD?=	${LOCALBASE}/bin/zip
 
@@ -420,26 +444,30 @@ electron-generate-chromedriver-zip:
 .   endif
 
 electron-rebuild-native-node-modules-for-node:
+.   if ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>  Rebuilding native node modules for node"
-	@cd ${PKGJSONSDIR} && \
-	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		cd ${WRKSRC}/$${dir} && ${SETENV} ${MAKE_ENV} \
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		npm_config_nodedir=${LOCALBASE} \
-		npm rebuild --no-progress; \
-	done
+		npm rebuild --no-progress
+.   else
+	@${DO_NADA}
+.   endif
 
 electron-rebuild-native-node-modules-for-electron:
+.   if ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
 	@${ECHO_MSG} "===>  Rebuilding native node modules for electron"
-	@cd ${PKGJSONSDIR} && \
-	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		cd ${WRKSRC}/$${dir} && ${SETENV} ${MAKE_ENV} \
-		npm_config_runtime=electron \
-		npm_config_target=${ELECTRON_VER} \
-		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
-		npm rebuild --no-progress; \
-	done
-
-.endif # _ELECTRON_FEATURE_PREBUILD
+.	if ${_ELECTRON_FEATURE_BUILD} == builder
+		cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+			yarn run electron-builder install-app-deps --platform linux
+.	else
+		cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+			npm_config_runtime=electron \
+			npm_config_target=${ELECTRON_VER} \
+			npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
+			npm rebuild --no-progress
+.	endif
+.   endif
+.endif # _ELECTRON_FEATURE_REBUILD
 
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
