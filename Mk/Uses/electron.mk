@@ -239,7 +239,7 @@ PKGJSONSDIR?=		${FILESDIR}/packagejsons
 PREFETCH_TIMESTAMP?=	0
 
 .if defined(_ELECTRON_FEATURE_PREFETCH)
-_DISTFILE_prefetch=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}
+_DISTFILE_prefetch=	${PKGNAME}-node-modules${EXTRACT_SUFX}
 DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 
 .   if ${PREFETCH_TIMESTAMP} == 0
@@ -254,13 +254,11 @@ electron-fetch-node-modules:
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
 		${ECHO_MSG} "===>  Pre-fetching and archiving node modules"; \
 		${MKDIR} ${WRKDIR}/npm-cache; \
-		${CP} -r ${PKGJSONSDIR}/* ${WRKDIR}/npm-cache; \
-		cd ${PKGJSONSDIR} && \
-		for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-			cd ${WRKDIR}/npm-cache/$${dir} && \
-			${SETENV} HOME=${WRKDIR} npm ci --ignore-scripts --no-progress && \
-			${RM} package.json package-lock.json; \
-		done; \
+		${CP} ${PKGJSONSDIR}/package.json ${PKGJSONSDIR}/package-lock.json ${WRKDIR}/npm-cache; \
+		cd ${WRKDIR}/npm-cache && \
+		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+			npm ci --ignore-scripts --no-progress && \
+		${RM} package.json package-lock.json; \
 		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR} && \
 		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
@@ -281,15 +279,12 @@ electron-fetch-node-modules:
 		${MKDIR} ${WRKDIR}; \
 		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
 			${WRKDIR}/.yarnrc; \
-		${CP} -r ${PKGJSONSDIR}/* ${WRKDIR}; \
-		cd ${PKGJSONSDIR} && \
-		for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-			cd ${WRKDIR}/$${dir} && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-				yarn --frozen-lockfile --ignore-scripts && \
-			${RM} package.json yarn.lock; \
-		done; \
-		cd ${WRKDIR}; \
+		${CP} ${PKGJSONSDIR}/package.json ${PKGJSONSDIR}/yarn.lock ${WRKDIR}; \
+		cd ${WRKDIR} && \
+		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+			yarn --frozen-lockfile --ignore-scripts && \
+		${RM} package.json yarn.lock; \
+		cd ${WRKDIR} && \
 		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
