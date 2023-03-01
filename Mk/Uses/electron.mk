@@ -444,7 +444,7 @@ electron-generate-chromedriver-zip:
 .   endif
 
 electron-rebuild-native-node-modules-for-node:
-.   if defined(_ELECTRON_REBUILD_FEATURE_NODEJS) && \
+.   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>  Rebuilding native node modules for node"
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
