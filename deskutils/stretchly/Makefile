@@ -5,13 +5,14 @@ CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Break time reminder app
+WWW=		https://hovancik.net/stretchly
 
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		electron:22 localbase:ldconfig node:16,build python:build
+USES=		electron:22 localbase:ldconfig nodejs:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	hovancik
@@ -22,8 +23,7 @@ PORTDOCS=	CHANGELOG.md CONTRIBUTING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm
-USE_ELECTRON=	prefetch extract prebuild build:builder
+USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
 PREFETCH_TIMESTAMP=	1676189939
 
