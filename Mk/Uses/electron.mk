@@ -131,6 +131,8 @@ _VALID_ELECTRON_FEATURES_BUILD=	builder packager
 
 _ELECTRON_BASE_CMD=	electron
 _ELECTRON_RELPORTDIR=	devel/electron
+_ELECTRON_DOWNLOAD_URL_BASE=	https://github.com/electron/electron/releases/download
+_ELECTRON_ARCH=		${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 
 # Process USES=electron[:ARGS]
 # Detect build, run or test dependency
@@ -339,106 +341,62 @@ electron-install-node-modules: electron-copy-package-file
 
 .if defined(_ELECTRON_FEATURE_REBUILD)
 BUILD_DEPENDS+=	zip:archivers/zip
-ZIP_CMD?=	${LOCALBASE}/bin/zip
-
 BUILD_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
 .   if ${NODEJS_NPM} == yarn
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
 .   endif
 
 .   if !defined(UPSTREAM_CHROMEDRIVER_VER)
-UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJSONSDIR}/${NODEJS_NPM_LOCKFILE} | \
-				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
-CHROMEDRIVER_DOWNLOAD_URL=	https://github.com/electron/electron/releases/download/v${UPSTREAM_CHROMEDRIVER_VER}
-CHROMEDRIVER_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${CHROMEDRIVER_DOWNLOAD_URL}
+UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*/electron-chromedriver/' ${PKGJSONSDIR}/${NODEJS_NPM_LOCKFILE} | \
+				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 .   endif
+CHROMEDRIVER_DOWNLOAD_URL=	${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_CHROMEDRIVER_VER}
+CHROMEDRIVER_DOWNLOAD_URL_HASH!=${SHA256} -q -s ${CHROMEDRIVER_DOWNLOAD_URL}
+CHROMEDRIVER_DOWNLOAD_CACHE_DIR=.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH}
 
 .   if !defined(UPSTREAM_MKSNAPSHOT_VER)
-UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*electron-mksnapshot' ${PKGJSONSDIR}/${NODEJS_NPM_LOCKFILE} | \
-				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
-MKSNAPSHOT_DOWNLOAD_URL=	https://github.com/electron/electron/releases/download/v${UPSTREAM_MKSNAPSHOT_VER}
-MKSNAPSHOT_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${MKSNAPSHOT_DOWNLOAD_URL}
+UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*/electron-mksnapshot/' ${PKGJSONSDIR}/${NODEJS_NPM_LOCKFILE} | \
+				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 .   endif
+MKSNAPSHOT_DOWNLOAD_URL=	${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_MKSNAPSHOT_VER}
+MKSNAPSHOT_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${MKSNAPSHOT_DOWNLOAD_URL}
+MKSNAPSHOT_DOWNLOAD_CACHE_DIR=	.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}
 
 _USES_build+=	290:electron-generate-electron-zip \
-		290:electron-generate-chromedriver-zip \
-		290:electron-generate-mksnapshot-zip \
 		291:electron-rebuild-native-node-modules-for-node \
 		490:electron-rebuild-native-node-modules-for-electron
+
 electron-generate-electron-zip:
-.   if !defined(_ELECTRON_FEATURE_BUILD) || \
-       (defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == builder)
-.	if ${ELECTRON_VERSION} < 6
-	# This is only to pacify @electron/get and the zip file generated will
-	# not be used for actual packaging.
-	@${ECHO_MSG} "===>   Preparing distribution files of electron"
+	@${ECHO_MSG} "===>   Preparing distribution files of electron/chromedriver/mksnapshot"
 	@${RM} -r ${WRKDIR}/electron-dist
 	@${MKDIR} ${WRKDIR}/electron-dist
 	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
 		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
 	@cd ${WRKDIR}/electron-dist && \
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
+.   if defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == packager
 	@${MKDIR} ${WRKDIR}/.cache/electron
 	@cd ${WRKDIR}/electron-dist && \
-		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/electron-v${UPSTREAM_ELECTRON_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
+		zip -q -r ${WRKDIR}/.cache/electron/electron-v${ELECTRON_VER}-linux-${_ELECTRON_ARCH}.zip .
 	@cd ${WRKDIR}/.cache/electron && \
-		${SHA256} -r electron-*.zip | \
-		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}
-.	else
-	@${DO_NADA}
-.	endif
-.   elif defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == packager
-	@${ECHO_MSG} "===>   Preparing distribution files of electron"
-	@${RM} -r ${WRKDIR}/electron-dist
-	@${MKDIR} ${WRKDIR}/electron-dist
-	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
-		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
-	@cd ${WRKDIR}/electron-dist && \
-		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
-	@${MKDIR} ${WRKDIR}/.cache/electron
-	@cd ${WRKDIR}/electron-dist && \
-		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/electron-v${ELECTRON_VER}-linux-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
-	@cd ${WRKDIR}/.cache/electron && \
-		${SHA256} -r electron-*.zip | \
+		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${ELECTRON_VER}
 .   endif
-
-electron-generate-chromedriver-zip:
 .   if defined(UPSTREAM_CHROMEDRIVER_VER) && ${UPSTREAM_CHROMEDRIVER_VER} != ""
-	@${ECHO_MSG} "===>   Preparing distribution files of chromedriver"
-	@${RM} -r ${WRKDIR}/electron-dist
-	@${MKDIR} ${WRKDIR}/electron-dist
-	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
-		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
+	@${MKDIR} ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}
 	@cd ${WRKDIR}/electron-dist && \
-		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
-	@${MKDIR} ${WRKDIR}/.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH}
-	@cd ${WRKDIR}/electron-dist && \
-		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH}/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
-	@cd ${WRKDIR}/.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH} && \
-		${SHA256} -r chromedriver-*.zip | \
+		zip -q -r ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${_ELECTRON_ARCH}.zip .
+	@cd ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR} && \
+		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_CHROMEDRIVER_VER}
-.   else
-	@${DO_NADA}
 .   endif
-
-electron-generate-mksnapshot-zip:
 .   if defined(UPSTREAM_MKSNAPSHOT_VER) && ${UPSTREAM_MKSNAPSHOT_VER} != ""
-	@${ECHO_MSG} "===>   Preparing distribution files of mksnapshot"
-	@${RM} -r ${WRKDIR}/electron-dist
-	@${MKDIR} ${WRKDIR}/electron-dist
-	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
-		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
+	@${MKDIR} ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}
 	@cd ${WRKDIR}/electron-dist && \
-		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
-	@${MKDIR} ${WRKDIR}/.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}
-	@cd ${WRKDIR}/electron-dist && \
-		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}/mksnapshot-v${UPSTREAM_MKSNAPSHOT_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
-	@cd ${WRKDIR}/.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH} && \
-		${SHA256} -r mksnapshot-*.zip | \
+		zip -q -r ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}/mksnapshot-v${UPSTREAM_MKSNAPSHOT_VER}-freebsd-${_ELECTRON_ARCH}.zip .
+	@cd ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR} && \
+		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_MKSNAPSHOT_VER}
-.   else
-	@${DO_NADA}
 .   endif
 
 electron-rebuild-native-node-modules-for-node:
