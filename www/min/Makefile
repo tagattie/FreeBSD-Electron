@@ -5,6 +5,7 @@ CATEGORIES=	www
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Fast, minimal browser that protects your privacy
+WWW=		https://minbrowser.org
 
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
@@ -12,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:22 node:16,build pkgconfig \
+USES=		desktop-file-utils electron:22 nodejs:16,build pkgconfig \
 		python:build
 
 USE_GITHUB=	yes
@@ -24,8 +25,7 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm
-USE_ELECTRON=	prefetch extract prebuild build:packager
+USE_ELECTRON=	npm:npm prefetch extract rebuild build:packager
 
 PREFETCH_TIMESTAMP=	1676967724
 ELECTRON_MAKE_FLAGS+=	--asar \
@@ -48,7 +48,7 @@ ELECTRON_MAKE_FLAGS+=	--asar \
 			--out='dist/app'
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons-out --format=set --root=icons
