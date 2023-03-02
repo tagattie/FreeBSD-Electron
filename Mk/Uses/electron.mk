@@ -278,11 +278,11 @@ electron-fetch-node-modules:
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
 		${ECHO_MSG} "===>   Pre-fetching and archiving node modules"; \
 		${MKDIR} ${WRKDIR}/npm-cache; \
-		${CP} ${PKGJSONSDIR}/package.json ${PKGJSONSDIR}/package-lock.json ${WRKDIR}/npm-cache; \
+		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/npm-cache; \
 		cd ${WRKDIR}/npm-cache && \
 		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 			npm ci --ignore-scripts --no-progress && \
-		${RM} package.json package-lock.json; \
+		${FIND} . -depth 1 -print | ${GREP} -v node_modules | ${XARGS} ${RM} -r; \
 		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR} && \
 		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
@@ -303,11 +303,11 @@ electron-fetch-node-modules:
 		${MKDIR} ${WRKDIR}; \
 		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
 			${WRKDIR}/.yarnrc; \
-		${CP} ${PKGJSONSDIR}/package.json ${PKGJSONSDIR}/yarn.lock ${WRKDIR}; \
+		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}; \
 		cd ${WRKDIR} && \
 		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 			yarn --frozen-lockfile --ignore-scripts && \
-		${RM} package.json yarn.lock; \
+		${FIND} . -depth 1 -print | ${GREP} -v yarn-offline-cache | ${XARGS} ${RM} -r; \
 		cd ${WRKDIR} && \
 		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
