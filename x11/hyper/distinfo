@@ -1,5 +1,5 @@
-TIMESTAMP = 1657782188
-SHA256 (hyper-node-modules-3.2.3.tar.gz) = 054250003d03d49d9783b37db463c52fada493028bad9fd020713a66f15444a2
-SIZE (hyper-node-modules-3.2.3.tar.gz) = 97534814
-SHA256 (vercel-hyper-v3.2.3_GH0.tar.gz) = 0640425afcaabac80c7f650b3b7f79753741cdc3b53b36ba459a64e36cae3f0b
-SIZE (vercel-hyper-v3.2.3_GH0.tar.gz) = 2793241
+TIMESTAMP = 1677723755
+SHA256 (hyper-3.4.1-node-modules.tar.gz) = 006ac8c8350bc59ae6faf8002ad9c35d4119a05ce357e629acd9701ed193f410
+SIZE (hyper-3.4.1-node-modules.tar.gz) = 98717680
+SHA256 (vercel-hyper-v3.4.1_GH0.tar.gz) = 6d691955f16496d0ffb3c5885d8e00dbc387919216629a65ec326dacb2358e75
+SIZE (vercel-hyper-v3.4.1_GH0.tar.gz) = 2800377

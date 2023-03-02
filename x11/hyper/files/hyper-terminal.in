@@ -1,6 +1,0 @@
-#! /bin/sh
-
-export NODE_ENV=production
-export ELECTRON_IS_DEV=0
-
-(cd %%DATADIR%%/resources && electron%%ELECTRON_VER_MAJOR%% app.asar $@)
