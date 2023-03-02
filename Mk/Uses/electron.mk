@@ -212,6 +212,12 @@ _ELECTRON_FEATURE_NPM_BUILD=	yes
 NODEJS_NPM=		${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}
 NODEJS_NPM_PKGNAME=	${NODEJS_NPM}${NODEJS_SUFFIX}
 NODEJS_NPM_PORTDIR=	www/${NODEJS_NPM}${NODEJS_SUFFIX}
+NODEJS_NPM_PKGFILE=	package.json
+.	if ${NODEJS_NPM} == npm
+NODEJS_NPM_LOCKFILE=	package-lock.json
+.	elif ${NODEJS_NPM} == yarn
+NODEJS_NPM_LOCKFILE=	yarn.lock
+.	endif
 .   else
 IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_NPM}
 .   endif
@@ -327,9 +333,9 @@ electron-fetch-node-modules:
 .   if ${NODEJS_NPM} == npm
 _USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
-	@${ECHO_MSG} "===>   Copying package.json and package-lock.json to WRKSRC"
+	@${ECHO_MSG} "===>   Copying ${NODEJS_NPM_PKGFILE} and ${NODEJS_NPM_LOCKFILE} to WRKSRC"
 	@cd ${PKGJSONSDIR} && \
-	for f in package.json package-lock.json; do \
+	for f in ${NODEJS_NPM_PKGFILE} ${NODEJS_NPM_LOCKFILE}; do \
 		if [ -f ${WRKSRC}/$${f} ]; then \
 			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
 		fi; \
@@ -341,9 +347,9 @@ electron-install-node-modules:
 EXTRACT_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
 _USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
-	@${ECHO_MSG} "===>   Copying package.json and yarn.lock to WRKSRC"
+	@${ECHO_MSG} "===>   Copying ${NODEJS_NPM_PKGFILE} and ${NODEJS_NPM_LOCKFILE} to WRKSRC"
 	@cd ${PKGJSONSDIR} && \
-	for f in package.json yarn.lock; do \
+	for f in ${NODEJS_NPM_PKGFILE} ${NODEJS_NPM_LOCKFILE}; do \
 		if [ -f ${WRKSRC}/$${f} ]; then \
 			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
 		fi; \
@@ -366,28 +372,18 @@ BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed fo
 .   endif
 
 .   if !defined(UPSTREAM_CHROMEDRIVER_VER)
-.	if ${NODEJS_NPM} == npm
-UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJSONSDIR}/package-lock.json | \
+UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJSONSDIR}/${NODEJS_NPM_LOCKFILE} | \
 				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
-.	elif ${NODEJS_NPM} == yarn
-UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJSONSDIR}/yarn.lock | \
-				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
-.	endif
 CHROMEDRIVER_DOWNLOAD_URL=	https://github.com/electron/electron/releases/download/v${UPSTREAM_CHROMEDRIVER_VER}
 CHROMEDRIVER_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${CHROMEDRIVER_DOWNLOAD_URL}
 .   endif
 
 .   if !defined(UPSTREAM_MKSNAPSHOT_VER)
-.	if ${NODEJS_NPM} == npm
-UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*electron-mksnapshot' ${PKGJSONSDIR}/package-lock.json | \
+UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*electron-mksnapshot' ${PKGJSONSDIR}/${NODEJS_NPM_LOCKFILE} | \
 				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
-.	elif ${NODEJS_NPM} == yarn
-UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*electron-mksnapshot' ${PKGJSONSDIR}/yarn.lock | \
-				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
-.	endif
-.   endif
 MKSNAPSHOT_DOWNLOAD_URL=	https://github.com/electron/electron/releases/download/v${UPSTREAM_MKSNAPSHOT_VER}
 MKSNAPSHOT_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${MKSNAPSHOT_DOWNLOAD_URL}
+.   endif
 
 _USES_build+=	290:electron-generate-electron-zip \
 		290:electron-generate-chromedriver-zip \
