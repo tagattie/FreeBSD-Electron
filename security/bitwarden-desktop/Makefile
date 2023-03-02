@@ -2,7 +2,6 @@ PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
 DISTVERSION=	2023.2.0
 CATEGORIES=	security
-DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Bitwarden desktop application
@@ -16,7 +15,7 @@ LIB_DEPENDS=	libpcre.so:devel/pcre \
 		libsecret-1.so:security/libsecret
 
 USES=		cargo desktop-file-utils electron:21 gmake gnome \
-		localbase:ldflags node:16,build pkgconfig python:build xorg
+		localbase:ldflags nodejs:16,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
@@ -41,49 +40,13 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm:fetch,build
-USE_ELECTRON=	build:builder
+USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
 PREFETCH_TIMESTAMP=	1677016857
 
-pre-fetch:
-	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
-		${MKDIR} ${WRKDIR}/npm-cache; \
-		${CP} -r ${PKGJSONSDIR}/* ${WRKDIR}/npm-cache; \
-		cd ${WRKDIR}/npm-cache && \
-			${SETENV} HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts --no-progress; \
-		${RM} -r package.json package-lock.json apps libs; \
-		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
-		cd ${WRKDIR} && \
-		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./npm-cache:' > npm-cache.mtree && \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
-			@npm-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
-
-post-extract:
-	for f in package.json package-lock.json; do \
-		${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
-		${CP} -f ${PKGJSONSDIR}/$${f} ${WRKSRC}; \
-	done
-	${MV} ${WRKDIR}/npm-cache/node_modules ${WRKSRC}
-
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm_config_nodedir=${LOCALBASE} \
-		${NPM_CMD} rebuild --no-progress
-	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		npm_config_runtime=electron \
-		npm_config_target=${ELECTRON_VER} \
-		npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
-		${NPM_CMD} rebuild --no-progress
-	cd ${BUILD_WRKSRC}/desktop_native && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
+	cd ${BUILD_WRKSRC}/desktop_native && ${SETENV} ${MAKE_ENV} npm run build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
