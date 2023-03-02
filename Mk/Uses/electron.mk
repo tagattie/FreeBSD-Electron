@@ -312,31 +312,24 @@ electron-fetch-node-modules:
 .endif # _FEATURE_ELECTRON_PREFETCH
 
 .if defined(_ELECTRON_FEATURE_EXTRACT)
-.   if ${NODEJS_NPM} == npm
 _USES_extract+=	900:electron-install-node-modules
-electron-install-node-modules:
+
+electron-copy-package-file:
 	@${ECHO_MSG} "===>   Copying ${NODEJS_NPM_PKGFILE} and ${NODEJS_NPM_LOCKFILE} to WRKSRC"
-	@cd ${PKGJSONSDIR} && \
-	for f in ${NODEJS_NPM_PKGFILE} ${NODEJS_NPM_LOCKFILE}; do \
-		if [ -f ${WRKSRC}/$${f} ]; then \
-			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
-		fi; \
-		${CP} $${f} ${WRKSRC}; \
-	done
+.for f in ${NODEJS_NPM_PKGFILE} ${NODEJS_NPM_LOCKFILE}
+	@if [ -f ${WRKSRC}/${f} ]; then \
+		${MV} -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak; \
+	fi
+	@${CP} ${PKGJSONSDIR}/${f} ${WRKSRC}
+.endfor
+
+.   if ${NODEJS_NPM} == npm
+electron-install-node-modules: electron-copy-package-file
 	@${ECHO_MSG} "===>   Moving pre-fetched node modules to WRKSRC"
-	@${MV} ${WRKDIR}/npm-cache/node_modules ${WRKSRC}
+	@${MV} ${WRKDIR}/node_modules ${WRKSRC}
 .   elif ${NODEJS_NPM} == yarn
 EXTRACT_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
-_USES_extract+=	900:electron-install-node-modules
-electron-install-node-modules:
-	@${ECHO_MSG} "===>   Copying ${NODEJS_NPM_PKGFILE} and ${NODEJS_NPM_LOCKFILE} to WRKSRC"
-	@cd ${PKGJSONSDIR} && \
-	for f in ${NODEJS_NPM_PKGFILE} ${NODEJS_NPM_LOCKFILE}; do \
-		if [ -f ${WRKSRC}/$${f} ]; then \
-			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
-		fi; \
-		${CP} $${f} ${WRKSRC}; \
-	done
+electron-install-node-modules: electron-copy-package-file
 	@${ECHO_MSG} "===>   Installing node modules from pre-fetched cache"
 	@${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
 	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
