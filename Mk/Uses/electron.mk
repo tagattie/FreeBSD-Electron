@@ -217,19 +217,25 @@ IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_NPM}
 .   endif
 .endif
 
-# Detect a nodejs or electron arguments of rebuild feature
+# Detect nodejs or electron argument of rebuild feature
 .if defined(_ELECTRON_FEATURE_REBUILD)
 _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:C/^[^\:]*(\:|\$)//:S/,/ /g}
-.   if ${_ELECTRON_FEATURE_REBUILD:M*nodejs*}
+.   if ${_ELECTRON_FEATURE_REBUILD:Mnodejs}
 _ELECTRON_FEATURE_REBUILD_NODEJS=	yes
+_ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:Nnodejs}
 .   endif
-.   if ${_ELECTRON_FEATURE_REBUILD:M*electron*}
+.   if ${_ELECTRON_FEATURE_REBUILD:Melectron}
 _ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
+_ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:Nelectron}
 .   endif
+# If no arguments specified, we assume both nodejs and electron are required
 .   if !defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        !defined(_ELECTRON_FEATURE_REBUILD_ELECTRON)
 _ELECTRON_FEATURE_REBUILD_NODEJS=	yes
 _ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
+.   endif
+.   if !empty(_ELECTRON_FEATURE_REBUILD)
+IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_REBUILD}
 .   endif
 .endif
 
