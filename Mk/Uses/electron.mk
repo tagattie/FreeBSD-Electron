@@ -132,7 +132,8 @@ _VALID_ELECTRON_FEATURES_BUILD=	builder packager
 _ELECTRON_BASE_CMD=	electron
 _ELECTRON_RELPORTDIR=	devel/electron
 
-# Detect a build, run or test time dependencies on Electron
+# Process USES=electron[:ARGS]
+# Detect build, run or test dependency
 _ELECTRON_ARGS=		${electron_ARGS:S/,/ /g}
 .if ${_ELECTRON_ARGS:Mbuild}
 _ELECTRON_BUILD_DEP=	yes
@@ -146,20 +147,18 @@ _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Nrun}
 _ELECTRON_TEST_DEP=	yes
 _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Ntest}
 .endif
-
-# If the port does not specify any dependency, assume all are required
+# If no dependencies specified, assume all are required
 .if !defined(_ELECTRON_BUILD_DEP) && !defined(_ELECTRON_RUN_DEP) && \
     !defined(_ELECTRON_TEST_DEP)
 _ELECTRON_BUILD_DEP=	yes
 _ELECTRON_RUN_DEP=	yes
 _ELECTRON_TEST_DEP=	yes
 .endif
-
 # Now _ELECTRON_ARGS should contain a single major version
 .if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
-_ELECTRON_VERSION=	${_ELECTRON_ARGS}
-_ELECTRON_PORTDIR=	${_ELECTRON_RELPORTDIR}${_ELECTRON_VERSION}
-.include "${PORTSDIR}/devel/electron${_ELECTRON_VERSION}/Makefile.version"
+ELECTRON_VERSION=	${_ELECTRON_ARGS}
+ELECTRON_PORTDIR=	${_ELECTRON_RELPORTDIR}${_ELECTRON_ARGS}
+.include "${PORTSDIR}/${ELECTRON_PORTDIR}/Makefile.version"
 .else
 IGNORE= uses unknown USES=electron arguments: ${_ELECTRON_ARGS}
 .endif
@@ -247,7 +246,7 @@ IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_BUILD}
 # Setup dependencies
 .for stage in BUILD RUN TEST
 .   if defined(_ELECTRON_${stage}_DEP)
-${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${_ELECTRON_VERSION}:${_ELECTRON_PORTDIR}
+${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VERSION}:${ELECTRON_PORTDIR}
 .   endif
 .endfor
 .for stage in FETCH EXTRACT BUILD RUN TEST
@@ -255,9 +254,6 @@ ${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${_ELECTRON_VERSION}:${_ELECTRON_PORTDIR
 ${stage}_DEPENDS+=	${_NODEJS_NPM_PKGNAME}>0:${_NODEJS_NPM_PORTDIR}
 .   endif
 .endfor
-
-ELECTRON_VERSION=	${_ELECTRON_VERSION}
-ELECTRON_PORTDIR=	${_ELECTRON_PORTDIR}
 
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
 PREFETCH_TIMESTAMP?=	0
