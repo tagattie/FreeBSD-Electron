@@ -172,13 +172,13 @@ _INVALID_ELECTRON_FEATURES+=	${var}
 .if !empty(_INVALID_ELECTRON_FEATURES)
 IGNORE=	uses unknown USE_ELECTRON features: ${_INVALID_ELECTRON_FEATURES}
 .endif
-
 # Make each individual feature available as _ELECTRON_FEATURE_<FEATURENAME>
 .for var in ${USE_ELECTRON}
 _ELECTRON_FEATURE_${var:C/\:.*//:tu}=	${var}
 .endfor
 
-# Detect a fetch, extract, build, run, or test time dependencies on package manager
+# Process USE_ELECTRON=npm[:ARGS]
+# Detect fetch, extract, build, run, or test dependency
 .if defined(_ELECTRON_FEATURE_NPM)
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:S/,/ /g}
 .   if ${_ELECTRON_FEATURE_NPM:Mfetch}
@@ -201,21 +201,20 @@ _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:Nrun}
 _ELECTRON_FEATURE_NPM_TEST=	yes
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:Ntest}
 .   endif
-# If the port does not specify any dependency, we assume only build dep is required
+# If no dependencies specified, we assume only build dep is required
 .   if !defined(_ELECTRON_FEATURE_NPM_FETCH) && !defined(_ELECTRON_FEATURE_NPM_EXTRACT) && \
        !defined(_ELECTRON_FEATURE_NPM_BUILD) && !defined(_ELECTRON_FEATURE_NPM_RUN) && \
        !defined(_ELECTRON_FEATURE_NPM_TEST)
 _ELECTRON_FEATURE_NPM_BUILD=	yes
 .   endif
-# Now _ELECTRON_FEATURE_NPM should contain a package manager name
+# Now _ELECTRON_FEATURE_NPM should contain a single package manager
 .   if ${_VALID_ELECTRON_FEATURES_NPM:M${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}}
-_ELECTRON_FEATURE_NPM:=	${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}
+NODEJS_NPM=		${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}
+NODEJS_NPM_PKGNAME=	${NODEJS_NPM}${NODEJS_SUFFIX}
+NODEJS_NPM_PORTDIR=	www/${NODEJS_NPM}${NODEJS_SUFFIX}
 .   else
 IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_NPM}
 .   endif
-_NODEJS_NPM=		${_ELECTRON_FEATURE_NPM}
-_NODEJS_NPM_PKGNAME=	${_NODEJS_NPM}${NODEJS_SUFFIX}
-_NODEJS_NPM_PORTDIR=	www/${_NODEJS_NPM}${NODEJS_SUFFIX}
 .endif
 
 # Detect a nodejs or electron arguments of rebuild feature
@@ -251,7 +250,7 @@ ${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VERSION}:${ELECTRON_PORTDIR}
 .endfor
 .for stage in FETCH EXTRACT BUILD RUN TEST
 .   if defined(_ELECTRON_FEATURE_NPM_${stage})
-${stage}_DEPENDS+=	${_NODEJS_NPM_PKGNAME}>0:${_NODEJS_NPM_PORTDIR}
+${stage}_DEPENDS+=	${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
 .   endif
 .endfor
 
@@ -266,9 +265,9 @@ DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 IGNORE= does not specify timestamp for pre-fetched modules
 .   endif
 
-FETCH_DEPENDS+= ${_NODEJS_NPM_PKGNAME}>0:${_NODEJS_NPM_PORTDIR}
+FETCH_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
 _USES_fetch+=	490:electron-fetch-node-modules
-.   if ${_NODEJS_NPM} == npm
+.   if ${NODEJS_NPM} == npm
 electron-fetch-node-modules:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
@@ -291,7 +290,7 @@ electron-fetch-node-modules:
 			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} @npm-cache.mtree; \
 		${RM} -r ${WRKDIR}; \
 	fi
-.   elif ${_NODEJS_NPM} == yarn
+.   elif ${NODEJS_NPM} == yarn
 electron-fetch-node-modules:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
@@ -319,7 +318,7 @@ electron-fetch-node-modules:
 .endif # _FEATURE_ELECTRON_PREFETCH
 
 .if defined(_ELECTRON_FEATURE_EXTRACT)
-.   if ${_NODEJS_NPM} == npm
+.   if ${NODEJS_NPM} == npm
 _USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
 	@${ECHO_MSG} "===>   Copying package.json and package-lock.json to WRKSRC"
@@ -332,8 +331,8 @@ electron-install-node-modules:
 	done
 	@${ECHO_MSG} "===>   Moving pre-fetched node modules to WRKSRC"
 	@${MV} ${WRKDIR}/npm-cache/node_modules ${WRKSRC}
-.   elif ${_NODEJS_NPM} == yarn
-EXTRACT_DEPENDS+= ${_NODEJS_NPM_PKGNAME}>0:${_NODEJS_NPM_PORTDIR}
+.   elif ${NODEJS_NPM} == yarn
+EXTRACT_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
 _USES_extract+=	900:electron-install-node-modules
 electron-install-node-modules:
 	@${ECHO_MSG} "===>   Copying package.json and yarn.lock to WRKSRC"
@@ -355,8 +354,8 @@ electron-install-node-modules:
 BUILD_DEPENDS+=	zip:archivers/zip
 ZIP_CMD?=	${LOCALBASE}/bin/zip
 
-BUILD_DEPENDS+= ${_NODEJS_NPM_PKGNAME}>0:${_NODEJS_NPM_PORTDIR}
-.   if ${_NODEJS_NPM} == yarn
+BUILD_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
+.   if ${NODEJS_NPM} == yarn
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
 .   endif
 
@@ -367,10 +366,10 @@ IGNORE=	does not specify the electron version used in the upstream source. Pleas
 .   endif
 
 .   if !defined(UPSTREAM_CHROMEDRIVER_VER)
-.	if ${_NODEJS_NPM} == npm
+.	if ${NODEJS_NPM} == npm
 UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJSONSDIR}/package-lock.json | \
 				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
-.	elif ${_NODEJS_NPM} == yarn
+.	elif ${NODEJS_NPM} == yarn
 UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*electron-chromedriver' ${PKGJSONSDIR}/yarn.lock | \
 				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
 .	endif
@@ -379,10 +378,10 @@ CHROMEDRIVER_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${CHROMEDRIVER_DOWNLOAD_URL}
 .   endif
 
 .   if !defined(UPSTREAM_MKSNAPSHOT_VER)
-.	if ${_NODEJS_NPM} == npm
+.	if ${NODEJS_NPM} == npm
 UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*electron-mksnapshot' ${PKGJSONSDIR}/package-lock.json | \
 				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
-.	elif ${_NODEJS_NPM} == yarn
+.	elif ${NODEJS_NPM} == yarn
 UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*electron-mksnapshot' ${PKGJSONSDIR}/yarn.lock | \
 				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
 .	endif
@@ -487,12 +486,12 @@ electron-rebuild-native-node-modules-for-electron:
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for electron"
 .	if ${_ELECTRON_FEATURE_BUILD} == builder
-.	   if ${_NODEJS_NPM} == npm
+.	   if ${NODEJS_NPM} == npm
 		# @cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		# 	npx electron-builder install-app-deps --platform linux
 		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 			./node_modules/.bin/electron-builder install-app-deps --platform linux
-.	   elif ${_NODEJS_NPM} == yarn
+.	   elif ${NODEJS_NPM} == yarn
 		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 			yarn run electron-builder install-app-deps --platform linux
 .	   endif
@@ -510,9 +509,9 @@ electron-rebuild-native-node-modules-for-electron:
 
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
-.	if ${_NODEJS_NPM} == npm
+.	if ${NODEJS_NPM} == npm
 _ELECTRON_MAKE_CMD=	npx electron-builder
-.	elif ${_NODEJS_NPM} == yarn
+.	elif ${NODEJS_NPM} == yarn
 _ELECTRON_MAKE_CMD=	yarn run electron-builder
 .	endif
 ELECTRON_MAKE_FLAGS+=	--linux --dir \
@@ -521,9 +520,9 @@ ELECTRON_MAKE_FLAGS+=	--linux --dir \
 			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
-.	if ${_NODEJS_NPM} == npm
+.	if ${NODEJS_NPM} == npm
 _ELECTRON_MAKE_CMD=	npx electron-packager
-.	elif ${_NODEJS_NPM} == yarn
+.	elif ${NODEJS_NPM} == yarn
 _ELECTRON_MAKE_CMD=	yarn run electron-packager
 .	endif
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
