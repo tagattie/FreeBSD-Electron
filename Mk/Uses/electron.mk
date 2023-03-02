@@ -215,8 +215,12 @@ NODEJS_NPM_PORTDIR=	www/${NODEJS_NPM}${NODEJS_SUFFIX}
 NODEJS_NPM_PKGFILE=	package.json
 .	if ${NODEJS_NPM} == npm
 NODEJS_NPM_LOCKFILE=	package-lock.json
+NODEJS_NPM_INSTALL_CMD=	npm ci --ignore-scripts --no-progress
+NODEJS_NPM_MODULE_CACHE=node_modules
 .	elif ${NODEJS_NPM} == yarn
 NODEJS_NPM_LOCKFILE=	yarn.lock
+NODEJS_NPM_INSTALL_CMD=	yarn --frozen-lockfile --ignore-scripts
+NODEJS_NPM_MODULE_CACHE=yarn-offline-cache
 .	endif
 .   else
 IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_NPM}
@@ -279,54 +283,32 @@ IGNORE= does not specify timestamp for pre-fetched modules
 
 FETCH_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
 _USES_fetch+=	490:electron-fetch-node-modules
-.   if ${NODEJS_NPM} == npm
+
 electron-fetch-node-modules:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
 		${ECHO_MSG} "===>   Pre-fetching and archiving node modules"; \
-		${MKDIR} ${WRKDIR}/npm-cache; \
-		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/npm-cache; \
-		cd ${WRKDIR}/npm-cache && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			npm ci --ignore-scripts --no-progress && \
-		${FIND} . -depth 1 -print | ${GREP} -v node_modules | ${XARGS} ${RM} -r; \
-		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
-		cd ${WRKDIR} && \
-		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./npm-cache:' > npm-cache.mtree && \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} @npm-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
-.   elif ${NODEJS_NPM} == yarn
-electron-fetch-node-modules:
-	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
-	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
-		${ECHO_MSG} "===>   Pre-fetching and archiving node modules"; \
-		${MKDIR} ${WRKDIR}; \
+		${MKDIR} ${WRKDIR}/node-modules-cache; \
 		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
-			${WRKDIR}/.yarnrc; \
-		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}; \
-		cd ${WRKDIR} && \
+			${WRKDIR}/node-modules-cache/.yarnrc; \
+		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
+		cd ${WRKDIR}/node-modules-cache && \
 		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			yarn --frozen-lockfile --ignore-scripts && \
-		${FIND} . -depth 1 -print | ${GREP} -v yarn-offline-cache | ${XARGS} ${RM} -r; \
-		cd ${WRKDIR} && \
-		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
+			${NODEJS_NPM_INSTALL_CMD}; \
+		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | \
+			${GREP} -v ${NODEJS_NPM_MODULE_CACHE} | ${XARGS} ${RM} -r; \
+		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
+		cd ${WRKDIR}/node-modules-cache && \
+		${MTREE_CMD} -cbnSp ${NODEJS_NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./yarn-offline-cache:' > yarn-offline-cache.mtree; \
+			-e 's:^\.:./${NODEJS_NPM_MODULE_CACHE}:' > node-modules-cache.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} @yarn-offline-cache.mtree; \
+			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} @node-modules-cache.mtree; \
 		${RM} -r ${WRKDIR}; \
 	fi
-.   endif
 .endif # _FEATURE_ELECTRON_PREFETCH
 
 .if defined(_ELECTRON_FEATURE_EXTRACT)
