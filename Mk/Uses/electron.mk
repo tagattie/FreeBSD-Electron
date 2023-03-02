@@ -123,7 +123,7 @@ _INCLUDE_USES_ELECTRON_MK=	yes
 # Electron uses Node (actually a package manager) for build
 .include "${USESDIR}/nodejs.mk"
 
-_VALID_ELECTRON_VERSIONS=	4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
+_VALID_ELECTRON_VERSIONS=	6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
 _VALID_ELECTRON_FEATURES=	npm prefetch extract rebuild build
 _VALID_ELECTRON_FEATURES_NPM=	npm yarn
 _VALID_ELECTRON_FEATURES_REBUILD=nodejs electron
@@ -363,12 +363,6 @@ ZIP_CMD?=	${LOCALBASE}/bin/zip
 BUILD_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
 .   if ${NODEJS_NPM} == yarn
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
-.   endif
-
-.   if ${ELECTRON_VERSION} < 6
-.	if !defined(UPSTREAM_ELECTRON_VER)
-IGNORE=	does not specify the electron version used in the upstream source. Please refer to package-lock.json or yarn.lock for this value and set this appropriately.
-.	endif
 .   endif
 
 .   if !defined(UPSTREAM_CHROMEDRIVER_VER)
