@@ -382,8 +382,21 @@ CHROMEDRIVER_DOWNLOAD_URL=	https://github.com/electron/electron/releases/downloa
 CHROMEDRIVER_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${CHROMEDRIVER_DOWNLOAD_URL}
 .   endif
 
+.   if !defined(UPSTREAM_MKSNAPSHOT_VER)
+.	if ${_NODEJS_NPM} == npm
+UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*electron-mksnapshot' ${PKGJSONSDIR}/package-lock.json | \
+				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
+.	elif ${_NODEJS_NPM} == yarn
+UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*electron-mksnapshot' ${PKGJSONSDIR}/yarn.lock | \
+				head -n 1 | awk -F- '{print $$NF}' | sed -E 's/\.[a-z]+.*$$//'
+.	endif
+.   endif
+MKSNAPSHOT_DOWNLOAD_URL=	https://github.com/electron/electron/releases/download/v${UPSTREAM_MKSNAPSHOT_VER}
+MKSNAPSHOT_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${MKSNAPSHOT_DOWNLOAD_URL}
+
 _USES_build+=	290:electron-generate-electron-zip \
 		290:electron-generate-chromedriver-zip \
+		290:electron-generate-mksnapshot-zip \
 		291:electron-rebuild-native-node-modules-for-node \
 		490:electron-rebuild-native-node-modules-for-electron
 electron-generate-electron-zip:
@@ -439,6 +452,25 @@ electron-generate-chromedriver-zip:
 	@cd ${WRKDIR}/.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH} && \
 		${SHA256} -r chromedriver-*.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_CHROMEDRIVER_VER}
+.   else
+	@${DO_NADA}
+.   endif
+
+electron-generate-mksnapshot-zip:
+.   if defined(UPSTREAM_MKSNAPSHOT_VER) && ${UPSTREAM_MKSNAPSHOT_VER} != ""
+	@${ECHO_MSG} "===>   Preparing distribution files of mksnapshot"
+	@${RM} -r ${WRKDIR}/electron-dist
+	@${MKDIR} ${WRKDIR}/electron-dist
+	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
+		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
+	@cd ${WRKDIR}/electron-dist && \
+		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
+	@${MKDIR} ${WRKDIR}/.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}
+	@cd ${WRKDIR}/electron-dist && \
+		${ZIP_CMD} -q -r ${WRKDIR}/.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}/mksnapshot-v${UPSTREAM_MKSNAPSHOT_VER}-freebsd-${ARCH:S/amd64/x64/:S/i386/ia32/}.zip .
+	@cd ${WRKDIR}/.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH} && \
+		${SHA256} -r mksnapshot-*.zip | \
+		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_MKSNAPSHOT_VER}
 .   else
 	@${DO_NADA}
 .   endif
