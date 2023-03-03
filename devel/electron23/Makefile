@@ -1,6 +1,7 @@
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
+PORTREVISION=	1
 CATEGORIES=	devel
 MASTER_SITES=	https://commondatastorage.googleapis.com/chromium-browser-official/:chromium \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
@@ -29,7 +30,7 @@ BUILD_DEPENDS=	gperf:devel/gperf \
 		${LOCALBASE}/include/linux/videodev2.h:multimedia/v4l_compat \
 		node18>0:www/node18 \
 		npm-node18>0:www/npm-node18
-LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-atk \
+LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libatspi.so:accessibility/at-spi2-core \
 		libsnappy.so:archivers/snappy \
 		libFLAC.so:audio/flac \

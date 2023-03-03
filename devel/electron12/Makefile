@@ -1,7 +1,7 @@
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
-PORTREVISION=	6
+PORTREVISION=	7
 CATEGORIES=	devel java
 MASTER_SITES=	https://commondatastorage.googleapis.com/chromium-browser-official/:chromium \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
@@ -27,7 +27,7 @@ BUILD_DEPENDS=		${LOCALBASE}/bin/ar:devel/binutils \
 			${LOCALBASE}/include/linux/videodev2.h:multimedia/v4l_compat \
 			node14>0:www/node14 \
 			npm-node14>0:www/npm-node14
-LIB_DEPENDS=		libatk-bridge-2.0.so:accessibility/at-spi2-atk \
+LIB_DEPENDS=		libatk-bridge-2.0.so:accessibility/at-spi2-core \
 			libatspi.so:accessibility/at-spi2-core \
 			libsnappy.so:archivers/snappy \
 			libFLAC.so:audio/flac \
