@@ -1,6 +1,6 @@
---- src/main/windows/mainWindow.ts.orig	2021-12-31 10:07:23 UTC
+--- src/main/windows/mainWindow.ts.orig	2022-12-06 14:05:15 UTC
 +++ src/main/windows/mainWindow.ts
-@@ -88,7 +88,7 @@ function createMainWindow(config: CombinedConfig, opti
+@@ -96,7 +96,7 @@ function createMainWindow(options: {linuxAppIcon: stri
          },
      });
  
@@ -9,16 +9,16 @@
          windowOptions.icon = options.linuxAppIcon;
      }
  
-@@ -145,7 +145,7 @@ function createMainWindow(config: CombinedConfig, opti
+@@ -151,7 +151,7 @@ function createMainWindow(options: {linuxAppIcon: stri
+             }
+             switch (process.platform) {
              case 'win32':
-                 hideWindow(mainWindow);
-                 break;
 -            case 'linux':
 +            case 'linux': case 'freebsd':
-                 if (config.minimizeToTray) {
-                     hideWindow(mainWindow);
-                 } else {
-@@ -185,7 +185,7 @@ function createMainWindow(config: CombinedConfig, opti
+                 if (Config.minimizeToTray) {
+                     if (Config.alwaysMinimize) {
+                         hideWindow(mainWindow);
+@@ -222,7 +222,7 @@ function createMainWindow(options: {linuxAppIcon: stri
  
      // Only add shortcuts when window is in focus
      mainWindow.on('focus', () => {

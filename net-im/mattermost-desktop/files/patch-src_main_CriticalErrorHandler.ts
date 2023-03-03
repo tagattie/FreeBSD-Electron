@@ -1,6 +1,6 @@
---- src/main/CriticalErrorHandler.ts.orig	2021-11-15 14:21:52 UTC
+--- src/main/CriticalErrorHandler.ts.orig	2022-12-06 14:05:15 UTC
 +++ src/main/CriticalErrorHandler.ts
-@@ -31,7 +31,7 @@ function openDetachedExternal(url: string) {
+@@ -28,7 +28,7 @@ function openDetachedExternal(url: string) {
          return spawn('cmd', ['/C', 'start', url], spawnOption);
      case 'darwin':
          return spawn('open', [url], spawnOption);

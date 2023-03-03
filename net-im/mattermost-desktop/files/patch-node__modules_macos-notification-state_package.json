@@ -1,0 +1,10 @@
+--- node_modules/macos-notification-state/package.json.orig	2023-03-03 02:26:03 UTC
++++ node_modules/macos-notification-state/package.json
+@@ -4,7 +4,6 @@
+   "description": "macOS notification state as a native node addon",
+   "main": "lib/index.js",
+   "scripts": {
+-    "preinstall": "node ensure-sdk.js",
+     "test": "standard && mocha ./test/test.js"
+   },
+   "repository": "https://github.com/felixrieseberg/macos-notification-state",

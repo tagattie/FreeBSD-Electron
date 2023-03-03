@@ -1,6 +1,6 @@
---- src/main/badge.ts.orig	2021-12-31 10:15:37 UTC
+--- src/main/badge.ts.orig	2022-12-06 14:05:15 UTC
 +++ src/main/badge.ts
-@@ -56,7 +56,7 @@ function showBadge(sessionExpired: boolean, mentionCou
+@@ -61,7 +61,7 @@ function showBadge(sessionExpired: boolean, mentionCou
      case 'darwin':
          showBadgeOSX(sessionExpired, mentionCount, showUnreadBadge);
          break;

@@ -1,24 +1,19 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	5.0.2
+DISTVERSION=	5.2.2
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Mattermost desktop application
+WWW=		https://mattermost.com
 
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 FETCH_DEPENDS=	git:devel/git
-BUILD_DEPENDS=	7za:archivers/p7zip \
-		app-builder:devel/app-builder \
-		gifsicle:graphics/gifsicle \
-		cjpeg:graphics/mozjpeg \
-		optipng:graphics/optipng \
-		pngquant:graphics/pngquant \
-		cwebp:graphics/webp
+BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:14 node:14,build
+USES=		desktop-file-utils electron:21 nodejs:16,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
@@ -30,26 +25,13 @@ PORTDOCS=	CONTRIBUTING.md NOTICE.txt README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm
-USE_ELECTRON=	prefetch extract prebuild build:builder
+USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1640938848
-
-post-configure:
-	${MKDIR} ${WRKSRC}/node_modules/cwebp-bin/vendor
-	${CP} ${LOCALBASE}/bin/cwebp ${WRKSRC}/node_modules/cwebp-bin/vendor
-	${MKDIR} ${WRKSRC}/node_modules/gifsicle/vendor
-	${CP} ${LOCALBASE}/bin/gifsicle ${WRKSRC}/node_modules/gifsicle/vendor
-	${MKDIR} ${WRKSRC}/node_modules/mozjpeg/vendor
-	${CP} ${LOCALBASE}/bin/cjpeg ${WRKSRC}/node_modules/mozjpeg/vendor
-	${MKDIR} ${WRKSRC}/node_modules/optipng-bin/vendor
-	${CP} ${LOCALBASE}/bin/optipng ${WRKSRC}/node_modules/optipng-bin/vendor
-	${MKDIR} ${WRKSRC}/node_modules/pngquant-bin/vendor
-	${CP} ${LOCALBASE}/bin/pngquant ${WRKSRC}/node_modules/pngquant-bin/vendor
+PREFETCH_TIMESTAMP=	1677806680
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		${NPX_CMD} cross-env NODE_ENV=production npm-run-all check-build-config build-prod
+		npm run build-prod
 	# generate icons
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=src/assets
@@ -69,6 +51,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/linux-unpacked && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	cd ${STAGEDIR}${DATADIR}/resources && \
+		${FIND} . -type f -name '*.node' -exec ${STRIP_CMD} {} ';'
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
