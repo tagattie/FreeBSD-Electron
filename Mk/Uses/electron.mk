@@ -317,7 +317,7 @@ electron-fetch-node-modules:
 _USES_extract+=	900:electron-install-node-modules
 
 electron-copy-package-file:
-	@${ECHO_MSG} "===>   Copying ${NODEJS_NPM_PKGFILE} and ${NODEJS_NPM_LOCKFILE} to WRKSRC"
+	@${ECHO_MSG} "===>   Copying ${NODEJS_NPM_PKGFILE} and ${NODEJS_NPM_LOCKFILE} to ${WRKSRC}"
 .for f in ${NODEJS_NPM_PKGFILE} ${NODEJS_NPM_LOCKFILE}
 	@if [ -f ${WRKSRC}/${f} ]; then \
 		${MV} -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak; \
@@ -327,7 +327,7 @@ electron-copy-package-file:
 
 .   if ${NODEJS_NPM} == npm
 electron-install-node-modules: electron-copy-package-file
-	@${ECHO_MSG} "===>   Moving pre-fetched node modules to WRKSRC"
+	@${ECHO_MSG} "===>   Moving pre-fetched node modules to ${WRKSRC}"
 	@${MV} ${WRKDIR}/node_modules ${WRKSRC}
 .   elif ${NODEJS_NPM} == yarn
 EXTRACT_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
