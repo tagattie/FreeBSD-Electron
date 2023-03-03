@@ -4,6 +4,7 @@ CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Simple, clean and cross-platform music player
+WWW=		https://museeks.io
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -11,11 +12,18 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:18 gmake localbase:ldflags \
-		node:16,build python:build
+USES=		cargo desktop-file-utils electron:18 gmake localbase:ldflags \
+		nodejs:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	martpie
+GH_TUPLE=	parcel-bundler:source-map:v2.1.1:source_map/source-map
+
+CARGO_CARGOTOML=${WRKSRC}/source-map/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/source-map/Cargo.lock
+CARGO_BUILD=    no
+CARGO_INSTALL=  no
+CARGO_TEST=     no
 
 SUB_FILES=	museeks
 
@@ -23,13 +31,16 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	yarn
-USE_ELECTRON=	prefetch extract prebuild build:builder
+USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
 
 PREFETCH_TIMESTAMP=	1676201522
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
+	cd ${WRKSRC}/source-map && \
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} cargo build --release --verbose --verbose
+	${CP} ${WRKDIR}/target/x86_64-unknown-freebsd/release/libparcel_sourcemap_node.so \
+		${WRKSRC}/node_modules/@parcel/source-map/parcel_sourcemap_node/artifacts/index.freebsd-x64.node
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
@@ -50,5 +61,8 @@ do-install:
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
+
+do-test:
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test:unit
 
 .include <bsd.port.mk>

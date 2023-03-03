@@ -14,6 +14,7 @@
     "url": "https://github.com/martpie/museeks/issues"
   },
   "scripts": {
+    "postinstall": "electron-builder install-app-deps",
     "build": "node esbuild.mjs --production",
     "dev": "node esbuild.mjs --watch",
     "museeks": "electron .",
