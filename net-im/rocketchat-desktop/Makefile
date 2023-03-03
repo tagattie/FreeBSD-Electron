@@ -1,10 +1,10 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	3.7.4
+DISTVERSION=	3.8.16
 CATEGORIES=	net-im
-DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Rocket.Chat desktop client
+WWW=		https://rocket.chat
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		${LOCALBASE}/libdata/pkgconfig/vips.pc:graphics/vips
 
-USES=		desktop-file-utils electron:16 node:16,build python:build
+USES=		desktop-file-utils electron:21 nodejs:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	RocketChat
@@ -24,40 +24,12 @@ PORTDOCS=	CHANGELOG.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	yarn:fetch,extract,build
-USE_ELECTRON=	prebuild build:builder
+USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1641033534
-
-pre-fetch:
-	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
-		${MKDIR} ${WRKDIR}; \
-		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
-			${WRKDIR}/.yarnrc; \
-		${CP} -r ${PKGJSONSDIR}/* ${WRKDIR}; \
-		cd ${WRKDIR} && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			${YARN_CMD} --frozen-lockfile --ignore-scripts; \
-		cd ${WRKDIR} && \
-			${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./yarn-offline-cache:' > yarn-offline-cache.mtree; \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
-			@yarn-offline-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
-
-post-extract:
-	${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
-	cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-		${YARN_CMD} --frozen-lockfile --ignore-scripts --offline
+PREFETCH_TIMESTAMP=	1677822742
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${YARN_CMD} build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
@@ -77,6 +49,6 @@ do-install-DOCS-on:
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} ${YARN_CMD} test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
 
 .include <bsd.port.mk>

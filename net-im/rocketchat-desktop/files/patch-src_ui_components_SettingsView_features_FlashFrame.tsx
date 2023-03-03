@@ -1,7 +1,7 @@
---- src/ui/components/SettingsView/features/FlashFrame.tsx.orig	2022-01-02 03:56:37 UTC
+--- src/ui/components/SettingsView/features/FlashFrame.tsx.orig	2023-01-11 00:40:36 UTC
 +++ src/ui/components/SettingsView/features/FlashFrame.tsx
-@@ -36,7 +36,7 @@ export const FlashFrame: FC<Props> = (props) => {
-           {t('settings.options.flashFrame.title')}
+@@ -38,7 +38,7 @@ export const FlashFrame: FC<Props> = (props) => {
+             : t('settings.options.flashFrame.titleDarwin')}
          </Field.Label>
        </Field.Row>
 -      {process.platform === 'linux' && (
