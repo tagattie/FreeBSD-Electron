@@ -403,8 +403,7 @@ electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for nodejs"
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		npm_config_nodedir=${LOCALBASE} \
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 		npm rebuild --no-progress
 .   else
 	@${DO_NADA}
@@ -418,17 +417,14 @@ electron-rebuild-native-node-modules-for-electron:
 .	   if ${NODEJS_NPM} == npm
 		# @cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		# 	npx electron-builder install-app-deps --platform linux
-		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			./node_modules/.bin/electron-builder install-app-deps --platform linux
 .	   elif ${NODEJS_NPM} == yarn
-		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			yarn run electron-builder install-app-deps --platform linux
 .	   endif
 .	else
-		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-			npm_config_runtime=electron \
-			npm_config_target=${ELECTRON_VER} \
-			npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers \
+		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			npm rebuild --no-progress
 .	endif
 .   else
@@ -464,6 +460,11 @@ DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLA
 .   endif
 ALL_TARGET=	# empty
 .endif
+
+NODEJS_REBUILD_ENV+=	npm_config_nodedir=${LOCALBASE}
+ELECTRON_REBUILD_ENV+=	npm_config_runtime=electron
+ELECTRON_REBUILD_ENV+=	npm_config_target=${ELECTRON_VER}
+ELECTRON_REBUILD_ENV+=	npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers
 
 MAKE_ENV+=	ELECTRON_OVERRIDE_DIST_PATH=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
