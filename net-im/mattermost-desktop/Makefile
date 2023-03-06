@@ -38,6 +38,12 @@ pre-build:
 .for size in 1024
 	${MV} ${WRKSRC}/icons/icon_${size}.png ${WRKSRC}/icons/icon_${size}x${size}.png
 .endfor
+	# ensure native node modules for windows-focus-assist is built
+	# electron-builder install-app-deps does not build this native module
+	# in poudriere for some reason
+	@cd ${WRKSRC}/node_modules/windows-focus-assist && \
+		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+		npx node-gyp rebuild
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
