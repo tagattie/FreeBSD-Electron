@@ -55,7 +55,7 @@ PORTDOCS=	PLUGINS.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn rebuild:electron build:builder
+USE_ELECTRON=	npm:yarn,fetch,extract,build,test rebuild:electron build:builder
 
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
 PREFETCH_TIMESTAMP=	1677722716
