@@ -2,6 +2,7 @@ PORTNAME=	stretchly
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.13.1
 CATEGORIES=	deskutils
+DISTFILES=	${PREFETCH_FILE}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Break time reminder app
@@ -23,9 +24,50 @@ PORTDOCS=	CHANGELOG.md CONTRIBUTING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:npm,fetch,build build:builder
 
+PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
 PREFETCH_TIMESTAMP=	1676189939
+
+pre-fetch:
+	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
+		${MKDIR} ${WRKDIR}/node-modules-cache; \
+		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
+		cd ${WRKDIR}/node-modules-cache && \
+		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+			npm ci --ignore-scripts --no-progress; \
+		cd ${WRKDIR}/node-modules-cache/app && \
+		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+			npm ci --ignore-scripts --no-progress; \
+		cd ${WRKDIR}/node-modules-cache && ${RM} package*.json app/package*.json; \
+		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
+		cd ${WRKDIR} && \
+		${MTREE_CMD} -cbnSp node-modules-cache | ${MTREE_CMD} -C | ${SED} \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:flags=.*:flags=none:' \
+			-e 's:^\.:./node-modules-cache:' > node-modules-cache.mtree; \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
+			-f ${DISTDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
+		${RM} -r ${WRKDIR}; \
+	fi
+
+post-extract:
+.for f in package.json package-lock.json
+	if [ -f ${WRKSRC}/${f} ]; then \
+		${MV} -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak; \
+	fi; \
+	${CP} ${PKGJSONSDIR}/${f} ${WRKSRC}
+.endfor
+.for f in package.json package-lock.json
+	if [ -f ${WRKSRC}/app/${f} ]; then \
+		${MV} -f ${WRKSRC}/app/${f} ${WRKSRC}/app/${f}.bak; \
+	fi; \
+	${CP} ${PKGJSONSDIR}/app/${f} ${WRKSRC}/app
+.endfor
+	${MV} ${WRKDIR}/node-modules-cache/node_modules ${WRKSRC}
+	${MV} ${WRKDIR}/node-modules-cache/app/node_modules ${WRKSRC}/app
 
 pre-build:
 	# generate icon files
@@ -34,6 +76,8 @@ pre-build:
 .for size in 16 48
 	${MV} ${WRKSRC}/icons/icon_${size}x${size}.png ${WRKSRC}/icons/icon_${size}.png
 .endfor
+	cd ${WRKSRC}/app && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+		../node_modules/.bin/electron-builder install-app-deps --platform linux
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
