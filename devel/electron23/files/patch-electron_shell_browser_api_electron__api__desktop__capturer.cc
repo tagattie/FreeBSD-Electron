@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_desktop_capturer.cc.orig	2023-01-24 16:58:16 UTC
+--- electron/shell/browser/api/electron_api_desktop_capturer.cc.orig	2023-03-08 02:34:17 UTC
 +++ electron/shell/browser/api/electron_api_desktop_capturer.cc
 @@ -36,7 +36,7 @@
  #include "third_party/webrtc/modules/desktop_capture/win/dxgi_duplicator_controller.h"
@@ -18,7 +18,7 @@
  // Private function in ui/base/x/x11_display_util.cc
  std::map<x11::RandR::Output, int> GetMonitors(int version,
                                                x11::RandR* randr,
-@@ -292,7 +292,7 @@ void DesktopCapturer::UpdateSourcesList(DesktopMediaLi
+@@ -296,7 +296,7 @@ void DesktopCapturer::UpdateSourcesList(DesktopMediaLi
      for (auto& source : screen_sources) {
        source.display_id = base::NumberToString(source.media_list_source.id.id);
      }
