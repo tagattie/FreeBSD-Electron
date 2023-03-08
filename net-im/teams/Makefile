@@ -1,6 +1,6 @@
 PORTNAME=	teams
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.49
+DISTVERSION=	1.0.52
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:21 gnome localbase:ldflags \
+USES=		desktop-file-utils electron:21 localbase:ldflags \
 		nodejs:16,build python:build
 
 USE_GITHUB=	yes
@@ -21,13 +21,13 @@ GH_PROJECT=	teams-for-linux
 
 SUB_FILES=	${PORTNAME}
 
-PORTDOCS=	HISTORY.md KNOWN_ISSUES.md README.md SECURITY.md
+PORTDOCS=	CONTRIBUTING.md HISTORY.md KNOWN_ISSUES.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1676027110
+PREFETCH_TIMESTAMP=	1678252291
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
