@@ -1,79 +1,67 @@
-# $FreeBSD$
-
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.7.11
+DISTVERSION=	2.9.17
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
-DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
+DISTFILES=	${PREFETCH_FILE}:prefetch \
+		yarn-${YARN_VER}.tgz:prefetch
+DIST_SUBDIR=	${PORTNAME}${PKGNAMESUFFIX}
+EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX} \
+		${PREFETCH_FILE}
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Note taking and to-do application with synchronisation capabilities
+WWW=		https://joplinapp.org
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		rsync:net/rsync
 LIB_DEPENDS=	libvips.so:graphics/vips \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:10 gmake gnome localbase:ldflags \
-		node:12,build python:build
+USES=		desktop-file-utils electron:19 gmake localbase:ldflags \
+		nodejs:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
 
-INSTALLS_ICONS=	yes
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 
 SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}
+
+BUILD_WRKSRC=	${WRKSRC}/packages/app-desktop
+TEST_WRKSRC=	${WRKSRC}/packages/app-desktop
 
 PORTDOCS=	BUILD.md CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	npm:fetch,build
-USE_ELECTRON=	extract prebuild build:builder
-
-PREFETCH_TIMESTAMP=	1613027575
-
-BUILD_WRKSRC=	${WRKSRC}/packages/app-desktop
-
-pre-fetch:
-	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
-		${MKDIR} ${WRKDIR}/npm-cache; \
-		${CP} -r ${FILESDIR}/packagejsons/* ${WRKDIR}/npm-cache; \
-		cd ${WRKDIR}/npm-cache && \
-			${SETENV} HOME=${WRKDIR} ${NPM_CMD} ci --ignore-scripts; \
-		cd ${WRKDIR}/npm-cache && \
-			${SETENV} HOME=${WRKDIR} ${NPX_CMD} lerna bootstrap --ignore-scripts --ci --concurrency 1; \
-		cd ${WRKDIR}/npm-cache/packages && \
-			for dir in *; do \
-				${RM} $${dir}/package.json $${dir}/package-lock.json; \
-			done; \
-		cd ${WRKDIR}/npm-cache && \
-			${RM} lerna.json package.json package-lock.json; \
-		${FIND} ${WRKDIR}/npm-cache -type d -exec ${CHMOD} 755 {} ';'; \
-		cd ${WRKDIR} && \
-		${MTREE_CMD} -cbnSp npm-cache | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./npm-cache:' > npm-cache.mtree && \
-		${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
-			@npm-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
+PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
+PREFETCH_TIMESTAMP=	1678340740
+YARN_VER=	3.1.1
 
 post-extract:
-.for dir in app-cli app-clipper app-mobile generator-joplin plugin-repo-cli plugins server
-	${RM} -r ${WRKSRC}/packages/${dir}
-.endfor
+	${MKDIR} ${WRKSRC}/.yarn
+	${MV} ${WRKDIR}/cache ${WRKSRC}/.yarn
 
-pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CMD} run build
+pre-configure:
+	${MKDIR} ${WRKDIR}/.bin
+	${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
+	${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableNetwork false
+
+do-build:
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		yarn install --immutable --immutable-cache
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+		yarn run electron-rebuild --force-abi 89
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		yarn run electron-builder --linux --dir \
+		--config.npmRebuild=false \
+		--config.electronVersion=${ELECTRON_VER} \
+		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} ${STAGEDIR}${PREFIX}/bin
@@ -91,5 +79,34 @@ do-install:
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
+
+do-test:
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
+
+maintainer-fetch:
+	${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
+	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${PREFETCH_FILE} ]; then \
+		${MKDIR} ${WRKDIR}/.bin; \
+		${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin; \
+		if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz ]; then \
+			cd ${WRKDIR} && \
+				${SETENV} ${MAKE_ENV} corepack prepare --activate --output yarn@${YARN_VER}; \
+			${MV} ${WRKDIR}/corepack.tgz ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
+		else \
+			${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
+		fi; \
+		cd ${WRKSRC} && \
+			${SETENV} ${MAKE_ENV} yarn config set enableScripts false && \
+			${SETENV} ${MAKE_ENV} yarn install --immutable; \
+		cd ${WRKSRC}/.yarn && \
+			${MTREE_CMD} -cbnSp cache | ${MTREE_CMD} -C | ${SED} \
+				-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+				-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+				-e 's:flags=.*:flags=none:' \
+				-e 's:^\.:./cache:' > node-modules-cache.mtree && \
+			${TAR} -cz --options 'gzip:!timestamp' \
+				-f ${DISTDIR}/${DIST_SUBDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
+		${RM} -r ${WRKDIR}; \
+	fi
 
 .include <bsd.port.mk>

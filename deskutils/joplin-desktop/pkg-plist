@@ -12,16 +12,6 @@ share/icons/hicolor/512x512/apps/joplin.png
 share/icons/hicolor/72x72/apps/joplin.png
 share/icons/hicolor/96x96/apps/joplin.png
 %%DATADIR%%/resources/app.asar
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-linux/arm/7za
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-linux/arm64/7za
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-linux/ia32/7za
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-linux/index.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-linux/package.json
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-linux/x64/7za
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-mac/7za
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-mac/LICENSE.txt
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-mac/index.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/7zip-bin-mac/package.json
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/node-notifier/vendor/mac.noindex/terminal-notifier.app/Contents/Info.plist
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/node-notifier/vendor/mac.noindex/terminal-notifier.app/Contents/MacOS/terminal-notifier
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/node-notifier/vendor/mac.noindex/terminal-notifier.app/Contents/PkgInfo
@@ -49,5 +39,8 @@ share/icons/hicolor/96x96/apps/joplin.png
 %%DATADIR%%/resources/build/icons/96x96.png
 %%DATADIR%%/resources/build/icons/macos-16x16Template.png
 %%DATADIR%%/resources/build/icons/macos-16x16Template@2x.png
+%%DATADIR%%/resources/build/images/SyncTarget_Dropbox.svg
+%%DATADIR%%/resources/build/images/SyncTarget_JoplinCloud.svg
+%%DATADIR%%/resources/build/images/SyncTarget_OneDrive.svg
 %%DATADIR%%/resources/build/images/chrome-logo.svg
 %%DATADIR%%/resources/build/images/firefox-logo.svg
