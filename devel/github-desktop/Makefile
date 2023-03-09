@@ -14,6 +14,8 @@ WWW=		https://github.com/shiftkey/desktop
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BUILD_DEPENDS=	zip:archivers/zip \
+		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libsnappy.so:archivers/snappy \
 		libFLAC.so:audio/flac \
@@ -31,6 +33,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libopenh264.so:multimedia/openh264 \
 		libcups.so:print/cups \
 		libharfbuzz.so:print/harfbuzz \
+		libsecret-1.so:security/libsecret \
 		libnss3.so:security/nss \
 		libexpat.so:textproc/expat2 \
 		libfontconfig.so:x11-fonts/fontconfig \
@@ -38,8 +41,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence
 
 USES=		desktop-file-utils gettext-runtime gl gmake gnome electron:22 \
-		iconv jpeg localbase:ldflags nodejs:16,build perl5 python \
-		shebangfix ssl xorg
+		iconv jpeg localbase:ldflags nodejs:16,build perl5 pkgconfig \
+		python shebangfix ssl xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	shiftkey
