@@ -325,11 +325,11 @@ electron-copy-package-file:
 	@${CP} ${PKGJSONSDIR}/${f} ${WRKSRC}
 .endfor
 
-.   if ${NODEJS_NPM} == npm
+.   if defined(NODEJS_NPM) && ${NODEJS_NPM} == npm
 electron-install-node-modules: electron-copy-package-file
 	@${ECHO_MSG} "===>   Moving pre-fetched node modules to ${WRKSRC}"
 	@${MV} ${WRKDIR}/node_modules ${WRKSRC}
-.   elif ${NODEJS_NPM} == yarn
+.   elif defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
 EXTRACT_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
 electron-install-node-modules: electron-copy-package-file
 	@${ECHO_MSG} "===>   Installing node modules from pre-fetched cache"
@@ -342,7 +342,7 @@ electron-install-node-modules: electron-copy-package-file
 .if defined(_ELECTRON_FEATURE_REBUILD)
 BUILD_DEPENDS+=	zip:archivers/zip
 BUILD_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
-.   if ${NODEJS_NPM} == yarn
+.   if defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
 .   endif
 
@@ -414,12 +414,12 @@ electron-rebuild-native-node-modules-for-electron:
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for electron"
 .	if ${_ELECTRON_FEATURE_BUILD} == builder
-.	   if ${NODEJS_NPM} == npm
+.	   if defined(NODEJS_NPM) && ${NODEJS_NPM} == npm
 		# @cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		# 	npx electron-builder install-app-deps --platform linux
 		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			./node_modules/.bin/electron-builder install-app-deps --platform linux
-.	   elif ${NODEJS_NPM} == yarn
+.	   elif defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
 		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			yarn run electron-builder install-app-deps --platform linux
 .	   endif
@@ -434,9 +434,9 @@ electron-rebuild-native-node-modules-for-electron:
 
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
-.	if ${NODEJS_NPM} == npm
+.	if defined(NODEJS_NPM) && ${NODEJS_NPM} == npm
 _ELECTRON_MAKE_CMD=	npx electron-builder
-.	elif ${NODEJS_NPM} == yarn
+.	elif defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
 _ELECTRON_MAKE_CMD=	yarn run electron-builder
 .	endif
 ELECTRON_MAKE_FLAGS+=	--linux --dir \
@@ -445,9 +445,9 @@ ELECTRON_MAKE_FLAGS+=	--linux --dir \
 			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
-.	if ${NODEJS_NPM} == npm
+.	if defined(NODEJS_NPM) && ${NODEJS_NPM} == npm
 _ELECTRON_MAKE_CMD=	npx electron-packager
-.	elif ${NODEJS_NPM} == yarn
+.	elif defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
 _ELECTRON_MAKE_CMD=	yarn run electron-packager
 .	endif
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
