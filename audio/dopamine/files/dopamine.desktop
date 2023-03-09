@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Dopamine 3
+Comment=The audio player that keeps it simple
+Icon=dopamine
+Exec=dopamine %U
+Categories=Audio;
+Terminal=false
+StartupWMClass=Dopamine
