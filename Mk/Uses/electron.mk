@@ -383,6 +383,11 @@ electron-install-node-modules: electron-copy-package-file
 	@${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
 	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn --frozen-lockfile --ignore-scripts --offline
+.   elif defined(NODEJS_NPM) && ${NODEJS_NPM} == berry
+electron-install-node-modules: electron-copy-package-file
+	@${ECHO_MSG} "===>   Installing node modules from pre-fetched cache"
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set cacheFolder "../yarn-offline-cache"
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn install --immutable --immutable-cache --mode=skip-build
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
