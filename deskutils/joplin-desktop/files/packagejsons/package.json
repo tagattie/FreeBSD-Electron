@@ -1,0 +1,91 @@
+{
+  "name": "root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laurent22/joplin.git"
+  },
+  "engines": {
+    "node": ">=16"
+  },
+  "scripts": {
+    "buildParallel": "yarn workspaces foreach --verbose --interlaced --parallel --jobs 2 --topological run build && yarn run tsc",
+    "buildSequential": "yarn workspaces foreach --verbose --interlaced --topological run build && yarn run tsc",
+    "buildApiDoc": "yarn workspace joplin start apidoc ../../readme/api/references/rest_api.md",
+    "buildCommandIndex": "gulp buildCommandIndex",
+    "buildPluginDoc": "typedoc --name 'Joplin Plugin API Documentation' --mode file -theme './Assets/PluginDocTheme/' --readme './Assets/PluginDocTheme/index.md' --excludeNotExported --excludeExternals --excludePrivate --excludeProtected --out ../joplin-website/docs/api/references/plugin_api packages/lib/services/plugins/api/",
+    "updateMarkdownDoc": "node ./packages/tools/updateMarkdownDoc",
+    "updateNews": "node ./packages/tools/website/updateNews",
+    "buildSettingJsonSchema": "yarn workspace joplin start settingschema ../../../joplin-website/docs/schema/settings.json",
+    "buildTranslations": "node packages/tools/build-translation.js",
+    "buildWebsite": "node ./packages/tools/website/build.js && yarn run buildPluginDoc && yarn run buildSettingJsonSchema",
+    "checkLibPaths": "node ./packages/tools/checkLibPaths.js",
+    "circularDependencyCheck": "madge --warning --circular --extensions js ./",
+    "clean": "npm run clean --workspaces --if-present && node packages/tools/clean && yarn cache clean",
+    "dependencyTree": "madge",
+    "generateDatabaseTypes": "node packages/tools/generate-database-types",
+    "linkChecker": "linkchecker https://joplinapp.org",
+    "linter-ci": "eslint --resolve-plugins-relative-to . --quiet --ext .js --ext .jsx --ext .ts --ext .tsx",
+    "linter-precommit": "eslint --resolve-plugins-relative-to . --fix --ext .js --ext .jsx --ext .ts --ext .tsx",
+    "linter": "eslint --resolve-plugins-relative-to . --fix --quiet --ext .js --ext .jsx --ext .ts --ext .tsx",
+    "linter-interactive": "eslint-interactive --resolve-plugins-relative-to . --fix --quiet --ext .js --ext .jsx --ext .ts --ext .tsx",
+    "postinstall": "gulp build",
+    "publishAll": "git pull && yarn run buildParallel && lerna version --yes --no-private --no-git-tag-version && gulp completePublishAll",
+    "releaseAndroid": "PATH=\"/usr/local/opt/openjdk@11/bin:$PATH\" node packages/tools/release-android.js",
+    "releaseAndroidClean": "node packages/tools/release-android.js",
+    "releaseCli": "node packages/tools/release-cli.js",
+    "releaseClipper": "node packages/tools/release-clipper.js",
+    "releaseDesktop": "node packages/tools/release-electron.js",
+    "releaseIOS": "node packages/tools/release-ios.js",
+    "releasePluginGenerator": "node packages/tools/release-plugin-generator.js",
+    "releasePluginRepoCli": "node packages/tools/release-plugin-repo-cli.js",
+    "releaseServer": "node packages/tools/release-server.js",
+    "cspell": "cspell",
+    "spellcheck": "node packages/tools/spellcheck.js",
+    "tagServerLatest": "node packages/tools/tagServerLatest.js",
+    "buildServerDocker": "node packages/tools/buildServerDocker.js",
+    "setupNewRelease": "node ./packages/tools/setupNewRelease",
+    "test-ci": "yarn workspaces foreach --parallel --verbose --interlaced --jobs 2 run test-ci",
+    "test": "yarn workspaces foreach --parallel --verbose --interlaced --jobs 2 run test",
+    "tsc": "yarn workspaces foreach --parallel --verbose --interlaced run tsc",
+    "updateIgnored": "gulp updateIgnoredTypeScriptBuild",
+    "updatePluginTypes": "./packages/generator-joplin/updateTypes.sh",
+    "watch": "yarn workspaces foreach --parallel --verbose --interlaced --jobs 999 run watch",
+    "watchWebsite": "nodemon --verbose --watch Assets/WebsiteAssets --watch packages/tools/website/build.js --ext md,ts,js,mustache,css,tsx,gif,png,svg --exec \"node packages/tools/website/build.js && http-server --port 8077 ../joplin-website/docs -a localhost\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "devDependencies": {
+    "@seiyab/eslint-plugin-react-hooks": "^4.5.1-alpha.5",
+    "@typescript-eslint/eslint-plugin": "^5.33.1",
+    "@typescript-eslint/parser": "^5.33.1",
+    "cspell": "^5.20.0",
+    "eslint": "^8.22.0",
+    "eslint-interactive": "^10.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-promise": "^6.0.1",
+    "eslint-plugin-react": "^7.30.1",
+    "fs-extra": "^8.1.0",
+    "glob": "^7.1.6",
+    "gulp": "^4.0.2",
+    "husky": "^3.0.2",
+    "lerna": "^3.22.1",
+    "lint-staged": "^9.2.1",
+    "madge": "^4.0.2",
+    "typedoc": "^0.17.8",
+    "typescript": "4.7.4"
+  },
+  "dependencies": {
+    "@types/fs-extra": "^9.0.13",
+    "http-server": "^0.12.3",
+    "node-gyp": "^8.4.1",
+    "nodemon": "^2.0.9"
+  },
+  "packageManager": "yarn@3.1.1"
+}

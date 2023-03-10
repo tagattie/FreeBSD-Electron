@@ -42,19 +42,45 @@ PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
 PREFETCH_TIMESTAMP=	1678340740
 YARN_VER=	3.1.1
 
-post-extract:
-	${MKDIR} ${WRKSRC}/.yarn
-	${MV} ${WRKDIR}/cache ${WRKSRC}/.yarn
+pre-fetch:
+	${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
+	${MKDIR} ${WRKDIR}/.bin
+	${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
+	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz ]; then \
+		cd ${WRKDIR} && \
+			${SETENV} ${MAKE_ENV} corepack prepare --activate --output yarn@${YARN_VER}; \
+		${MV} ${WRKDIR}/corepack.tgz ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
+	else \
+		${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
+	fi; \
+	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${PREFETCH_FILE} ]; then \
+		${MKDIR} ${WRKDIR}/node-modules-cache; \
+		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
+		cd ${WRKDIR}/node-modules-cache && \
+			${SETENV} ${MAKE_ENV} yarn install --immutable --mode=skip-build; \
+		cd ${WRKDIR}/node-modules-cache/.yarn && \
+			${MTREE_CMD} -cbnSp cache | ${MTREE_CMD} -C | ${SED} \
+				-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+				-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+				-e 's:flags=.*:flags=none:' \
+				-e 's:^\.:./cache:' > node-modules-cache.mtree && \
+			${TAR} -cz --options 'gzip:!timestamp' \
+				-f ${DISTDIR}/${DIST_SUBDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
+	fi
+	${RM} -r ${WRKDIR}
 
-pre-configure:
+post-extract:
 	${MKDIR} ${WRKDIR}/.bin
 	${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
 	${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz
+	${MKDIR} ${WRKSRC}/.yarn
+	${MV} ${WRKDIR}/cache ${WRKSRC}/.yarn
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableNetwork false
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
+		yarn install --immutable --immutable-cache --mode=skip-build
 
 do-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		yarn install --immutable --immutable-cache
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn rebuild
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 		yarn run electron-rebuild --force-abi 89
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} \
@@ -82,31 +108,5 @@ do-install-DOCS-on:
 
 do-test:
 	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
-
-maintainer-fetch:
-	${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
-	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${PREFETCH_FILE} ]; then \
-		${MKDIR} ${WRKDIR}/.bin; \
-		${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin; \
-		if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz ]; then \
-			cd ${WRKDIR} && \
-				${SETENV} ${MAKE_ENV} corepack prepare --activate --output yarn@${YARN_VER}; \
-			${MV} ${WRKDIR}/corepack.tgz ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
-		else \
-			${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
-		fi; \
-		cd ${WRKSRC} && \
-			${SETENV} ${MAKE_ENV} yarn config set enableScripts false && \
-			${SETENV} ${MAKE_ENV} yarn install --immutable; \
-		cd ${WRKSRC}/.yarn && \
-			${MTREE_CMD} -cbnSp cache | ${MTREE_CMD} -C | ${SED} \
-				-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-				-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-				-e 's:flags=.*:flags=none:' \
-				-e 's:^\.:./cache:' > node-modules-cache.mtree && \
-			${TAR} -cz --options 'gzip:!timestamp' \
-				-f ${DISTDIR}/${DIST_SUBDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
 
 .include <bsd.port.mk>
