@@ -125,7 +125,7 @@ _INCLUDE_USES_ELECTRON_MK=	yes
 
 _VALID_ELECTRON_VERSIONS=	6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
 _VALID_ELECTRON_FEATURES=	npm prefetch extract rebuild build
-_VALID_ELECTRON_FEATURES_NPM=	npm yarn
+_VALID_ELECTRON_FEATURES_NPM=	npm yarn berry
 _VALID_ELECTRON_FEATURES_REBUILD=nodejs electron
 _VALID_ELECTRON_FEATURES_BUILD=	builder packager
 
@@ -212,16 +212,24 @@ _ELECTRON_FEATURE_NPM_BUILD=	yes
 # Now _ELECTRON_FEATURE_NPM should contain a single package manager
 .   if ${_VALID_ELECTRON_FEATURES_NPM:M${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}}
 NODEJS_NPM=		${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}
-NODEJS_NPM_PKGNAME=	${NODEJS_NPM}${NODEJS_SUFFIX}
-NODEJS_NPM_PORTDIR=	www/${NODEJS_NPM}${NODEJS_SUFFIX}
 NODEJS_NPM_PKGFILE=	package.json
 .	if ${NODEJS_NPM} == npm
+NODEJS_NPM_PKGNAME=	${NODEJS_NPM}${NODEJS_SUFFIX}
+NODEJS_NPM_PORTDIR=	www/${NODEJS_NPM}${NODEJS_SUFFIX}
 NODEJS_NPM_LOCKFILE=	package-lock.json
 NODEJS_NPM_INSTALL_CMD=	npm ci --ignore-scripts --no-progress
 NODEJS_NPM_MODULE_CACHE=node_modules
 .	elif ${NODEJS_NPM} == yarn
+NODEJS_NPM_PKGNAME=	${NODEJS_NPM}${NODEJS_SUFFIX}
+NODEJS_NPM_PORTDIR=	www/${NODEJS_NPM}${NODEJS_SUFFIX}
 NODEJS_NPM_LOCKFILE=	yarn.lock
-NODEJS_NPM_INSTALL_CMD=	yarn --frozen-lockfile --ignore-scripts
+NODEJS_NPM_INSTALL_CMD=	yarn install --frozen-lockfile --ignore-scripts
+NODEJS_NPM_MODULE_CACHE=yarn-offline-cache
+.	elif ${NODEJS_NPM} == berry
+NODEJS_NPM_PKGNAME=	# empty
+NODEJS_NPM_PORTDIR=	# empty
+NODEJS_NPM_LOCKFILE=	yarn.lock
+NODEJS_NPM_INSTALL_CMD=	yarn install --immutable --mode=skip-build
 NODEJS_NPM_MODULE_CACHE=yarn-offline-cache
 .	endif
 .   else
