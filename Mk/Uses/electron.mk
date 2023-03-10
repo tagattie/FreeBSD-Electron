@@ -500,7 +500,7 @@ electron-rebuild-native-node-modules-for-electron:
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
 .	if defined(NODEJS_NPM) && ${NODEJS_NPM} == npm
 _ELECTRON_MAKE_CMD=	npx electron-builder
-.	elif defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
+.	elif defined(NODEJS_NPM) && (${NODEJS_NPM} == yarn || ${NODEJS_NPM} == berry)
 _ELECTRON_MAKE_CMD=	yarn run electron-builder
 .	endif
 ELECTRON_MAKE_FLAGS+=	--linux --dir \
@@ -511,7 +511,7 @@ DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
 .	if defined(NODEJS_NPM) && ${NODEJS_NPM} == npm
 _ELECTRON_MAKE_CMD=	npx electron-packager
-.	elif defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
+.	elif defined(NODEJS_NPM) && (${NODEJS_NPM} == yarn || ${NODEJS_NPM} == berry)
 _ELECTRON_MAKE_CMD=	yarn run electron-packager
 .	endif
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
