@@ -393,7 +393,9 @@ electron-install-node-modules: electron-copy-package-file
 
 .if defined(_ELECTRON_FEATURE_REBUILD)
 BUILD_DEPENDS+=	zip:archivers/zip
+.   if defined(NODEJS_NPM) && ${NODEJS_NPM} != berry
 BUILD_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
+.   endif
 .   if defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
 .   endif
@@ -455,8 +457,13 @@ electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for nodejs"
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
-		npm rebuild --no-progress
+.	if defined(NODEJS_NPM) && ${NODEJS_NPM} != berry
+		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
+			npm rebuild --no-progress
+.	elif defined(NODEJS_NPM) && ${NODEJS_NPM} == berry
+		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
+			yarn rebuild
+.	endif
 .   else
 	@${DO_NADA}
 .   endif
@@ -466,18 +473,23 @@ electron-rebuild-native-node-modules-for-electron:
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for electron"
 .	if ${_ELECTRON_FEATURE_BUILD} == builder
-.	   if defined(NODEJS_NPM) && ${NODEJS_NPM} == npm
+.	    if defined(NODEJS_NPM) && ${NODEJS_NPM} == npm
 		# @cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		# 	npx electron-builder install-app-deps --platform linux
 		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			./node_modules/.bin/electron-builder install-app-deps --platform linux
-.	   elif defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
+.	    elif defined(NODEJS_NPM) && (${NODEJS_NPM} == yarn || ${NODEJS_NPM} == berry)
 		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			yarn run electron-builder install-app-deps --platform linux
-.	   endif
+.	    endif
 .	else
+.	    if defined(NODEJS_NPM) && ${NODEJS_NPM} != berry
 		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			npm rebuild --no-progress
+.	    elif defined(NODEJS_NPM) && ${NODEJS_NPM} == berry
+		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+			yarn rebuild
+.	    endif
 .	endif
 .   else
 	@${DO_NADA}
