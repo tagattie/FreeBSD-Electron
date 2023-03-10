@@ -158,8 +158,8 @@ _ELECTRON_TEST_DEP=	yes
 .endif
 # Now _ELECTRON_ARGS should contain a single major version
 .if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
-ELECTRON_VERSION=	${_ELECTRON_ARGS}
-ELECTRON_PORTDIR=	${_ELECTRON_RELPORTDIR}${_ELECTRON_ARGS}
+_ELECTRON_VERSION=	${_ELECTRON_ARGS}
+ELECTRON_PORTDIR=	${_ELECTRON_RELPORTDIR}${_ELECTRON_VERSION}
 .include "${PORTSDIR}/${ELECTRON_PORTDIR}/Makefile.version"
 .else
 IGNORE= uses unknown USES=electron arguments: ${_ELECTRON_ARGS}
@@ -263,7 +263,7 @@ IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_BUILD}
 # Setup dependencies
 .for stage in BUILD RUN TEST
 .   if defined(_ELECTRON_${stage}_DEP)
-${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VERSION}:${ELECTRON_PORTDIR}
+${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${ELECTRON_PORTDIR}
 .   endif
 .endfor
 .for stage in FETCH EXTRACT BUILD RUN TEST
@@ -370,7 +370,7 @@ electron-generate-electron-zip:
 	@${ECHO_MSG} "===>   Preparing distribution files of electron/chromedriver/mksnapshot"
 	@${RM} -r ${WRKDIR}/electron-dist
 	@${MKDIR} ${WRKDIR}/electron-dist
-	@cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
+	@cd ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} && \
 		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
 	@cd ${WRKDIR}/electron-dist && \
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
