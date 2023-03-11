@@ -397,6 +397,12 @@ electron-install-node-modules: electron-copy-package-file
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
+_USES_patch+=	900:electron-patch-package-json
+
+electron-patch-package-json:
+	@${ECHO_MSG} "===>   Patching package.json"
+	@${REINPLACE_CMD} -e 's/electron-builder install-app-deps/& --platform linux/' ${WRKSRC}/package.json
+
 .if defined(_ELECTRON_FEATURE_REBUILD)
 BUILD_DEPENDS+=	zip:archivers/zip
 .   if defined(NODEJS_NPM) && ${NODEJS_NPM} != berry
