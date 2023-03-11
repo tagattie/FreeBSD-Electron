@@ -126,7 +126,7 @@ post-patch:
 pre-build:
 	${RM} -r ${WRKDIR}/electron-dist
 	${MKDIR} ${WRKDIR}/electron-dist
-	cd ${LOCALBASE}/share/electron${ELECTRON_VERSION} && \
+	cd ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} && \
 		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
 	cd ${WRKDIR}/electron-dist && \
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
