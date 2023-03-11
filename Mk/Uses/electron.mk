@@ -235,6 +235,8 @@ NODEJS_NPM_MODULE_CACHE=yarn-offline-cache
 NODEJS_NPM_CACHE_SETUP_CMD=	cd ${WRKDIR}/node-modules-cache && ${SETENV} ${MAKE_ENV} yarn config set cacheFolder "./yarn-offline-cache"
 NODEJS_NPM_INSTALL_CMD=	yarn install --immutable --mode=skip-build
 .	endif
+NODEJS_NODE_PKGNAME=	node${NODEJS_VERSION}
+NODEJS_NODE_PORTDIR=	www/node${NODEJS_VERSION}
 .   else
 IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_NPM}
 .   endif
@@ -281,6 +283,8 @@ ${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${ELECTRON_PORTDIR
 .   if defined(_ELECTRON_FEATURE_NPM_${stage})
 .	if defined(NODEJS_NPM) && ${NODEJS_NPM} != berry
 ${stage}_DEPENDS+=	${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
+.	elif defined(NODEJS_NPM) && ${NODEJS_NPM} == berry
+${stage}_DEPENDS+=	${NODEJS_NODE_PKGNAME}>0:${NODEJS_NODE_PORTDIR}
 .	endif
 .   endif
 .endfor
@@ -306,6 +310,8 @@ IGNORE=	does not specity yarn version for pre-fetching modules
 
 .   if ${NODEJS_NPM} != berry
 FETCH_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
+.   elif ${NODEJS_NPM} == berry
+FETCH_DEPENDS+=	${NODEJS_NODE_PKGNAME}>0:${NODEJS_NODE_PORTDIR}
 .   endif
 _USES_fetch+=	490:electron-fetch-setup-yarn-berry \
 		491:electron-fetch-node-modules
@@ -386,6 +392,7 @@ electron-install-node-modules: electron-copy-package-file
 	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn --frozen-lockfile --ignore-scripts --offline
 .   elif defined(NODEJS_NPM) && ${NODEJS_NPM} == berry
+EXTRACT_DEPENDS+= ${NODEJS_NODE_PKGNAME}>0:${NODEJS_NODE_PORTDIR}
 electron-install-node-modules: electron-copy-package-file
 	@${ECHO_MSG} "===>   Setting up yarn berry version ${YARN_VER}"
 	@${MKDIR}  ${WRKDIR}/.bin
@@ -407,6 +414,8 @@ electron-patch-package-json:
 BUILD_DEPENDS+=	zip:archivers/zip
 .   if defined(NODEJS_NPM) && ${NODEJS_NPM} != berry
 BUILD_DEPENDS+= ${NODEJS_NPM_PKGNAME}>0:${NODEJS_NPM_PORTDIR}
+.   elif defined(NODEJS_NPM) && ${NODEJS_NPM} == berry
+BUILD_DEPENDS+=	${NODEJS_NODE_PKGNAME}>0:${NODEJS_NODE_PORTDIR}
 .   endif
 .   if defined(NODEJS_NPM) && ${NODEJS_NPM} == yarn
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
