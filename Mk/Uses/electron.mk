@@ -399,8 +399,9 @@ electron-install-node-modules: electron-copy-package-file
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz
 	@${ECHO_MSG} "===>   Installing node modules from pre-fetched cache"
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableNetwork false
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set cacheFolder "../yarn-offline-cache"
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableNetwork false
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableInlineBuilds true
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn install --immutable --immutable-cache --mode=skip-build
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
