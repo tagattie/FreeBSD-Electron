@@ -3,11 +3,7 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=	2.9.17
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
-DISTFILES=	${PREFETCH_FILE}:prefetch \
-		yarn-${YARN_VER}.tgz:prefetch
 DIST_SUBDIR=	${PORTNAME}${PKGNAMESUFFIX}
-EXTRACT_ONLY=	${DISTNAME}${EXTRACT_SUFX} \
-		${PREFETCH_FILE}
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Note taking and to-do application with synchronisation capabilities
@@ -17,7 +13,8 @@ LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder \
-		rsync:net/rsync
+		rsync:net/rsync \
+		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libvips.so:graphics/vips \
 		libsecret-1.so:security/libsecret
 
@@ -38,56 +35,15 @@ PORTDOCS=	BUILD.md CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
+USE_ELECTRON=	npm:berry prefetch extract rebuild:nodejs build:builder
+
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
 PREFETCH_TIMESTAMP=	1678340740
 YARN_VER=	3.1.1
 
-pre-fetch:
-	${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
-	${MKDIR} ${WRKDIR}/.bin
-	${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
-	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz ]; then \
-		cd ${WRKDIR} && \
-			${SETENV} ${MAKE_ENV} corepack prepare --activate --output yarn@${YARN_VER}; \
-		${MV} ${WRKDIR}/corepack.tgz ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
-	else \
-		${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
-	fi; \
-	if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${PREFETCH_FILE} ]; then \
-		${MKDIR} ${WRKDIR}/node-modules-cache; \
-		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		cd ${WRKDIR}/node-modules-cache && \
-			${SETENV} ${MAKE_ENV} yarn install --immutable --mode=skip-build; \
-		cd ${WRKDIR}/node-modules-cache/.yarn && \
-			${MTREE_CMD} -cbnSp cache | ${MTREE_CMD} -C | ${SED} \
-				-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-				-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-				-e 's:flags=.*:flags=none:' \
-				-e 's:^\.:./cache:' > node-modules-cache.mtree && \
-			${TAR} -cz --options 'gzip:!timestamp' \
-				-f ${DISTDIR}/${DIST_SUBDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
-	fi
-	${RM} -r ${WRKDIR}
-
-post-extract:
-	${MKDIR} ${WRKDIR}/.bin
-	${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
-	${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz
-	${MKDIR} ${WRKSRC}/.yarn
-	${MV} ${WRKDIR}/cache ${WRKSRC}/.yarn
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableNetwork false
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		yarn install --immutable --immutable-cache --mode=skip-build
-
-do-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn rebuild
+pre-build:
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 		yarn run electron-rebuild --force-abi 89
-	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		yarn run electron-builder --linux --dir \
-		--config.npmRebuild=false \
-		--config.electronVersion=${ELECTRON_VER} \
-		--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} ${STAGEDIR}${PREFIX}/bin
