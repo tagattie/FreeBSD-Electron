@@ -38,6 +38,8 @@ pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build:prod
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 		./node_modules/.bin/electron-builder install-app-deps --platform linux
+	# electron-builder install-app-deps installs prebuilt binary for linux
+	# so force rebuild binary for FreeBSD
 	cd ${WRKSRC}/node_modules/better-sqlite3 && \
 		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run build-release
 
