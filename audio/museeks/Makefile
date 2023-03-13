@@ -9,11 +9,10 @@ WWW=		https://museeks.io
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		cargo desktop-file-utils electron:18 gmake localbase:ldflags \
-		nodejs:16,build python:build
+USES=		cargo electron:18 gmake localbase:ldflags nodejs:16,build \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	martpie
