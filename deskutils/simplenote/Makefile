@@ -13,8 +13,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		git:devel/git
 
-USES=		desktop-file-utils electron:12 gmake gnome localbase:ldflags \
-		nodejs:14,build python:2.7,build xorg
+USES=		electron:12 gmake localbase:ldflags nodejs:14,build \
+		python:2.7,build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Automattic
@@ -59,5 +59,8 @@ do-install:
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
+
+do-test:
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} ${MAKE_CMD} test
 
 .include <bsd.port.mk>
