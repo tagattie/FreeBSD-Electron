@@ -18,8 +18,7 @@ BUILD_DEPENDS=	app-builder:devel/app-builder \
 LIB_DEPENDS=	libvips.so:graphics/vips \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:19 gmake localbase:ldflags \
-		nodejs:16,build python:build
+USES=		electron:19 gmake localbase:ldflags nodejs:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
@@ -37,7 +36,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:berry prefetch extract rebuild:nodejs build:builder
 
-PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
 PREFETCH_TIMESTAMP=	1678340740
 YARN_VER=	3.1.1
 

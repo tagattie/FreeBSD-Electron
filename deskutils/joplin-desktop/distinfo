@@ -1,7 +1,7 @@
-TIMESTAMP = 1678359867
-SHA256 (joplin-desktop/joplin-desktop-2.9.17-node-modules.tar.gz) = 2752e92f0317e20d4193848e35a7a19de5083c4077c0898f950a1cc7676bc5d1
-SIZE (joplin-desktop/joplin-desktop-2.9.17-node-modules.tar.gz) = 507275316
-SHA256 (joplin-desktop/yarn-3.1.1.tgz) = 2efb64db084f64dfa5b51b8c295ed7d2ac9fedc552ab0405dc33ad1947e5cd83
-SIZE (joplin-desktop/yarn-3.1.1.tgz) = 864612
+TIMESTAMP = 1678716472
+SHA256 (joplin-desktop/joplin-desktop-2.9.17-node-modules.tar.gz) = 6b02da04e9f2c2fd451d441eadaa81b6f72ba40e7c10d7f631bfad0a014ceca1
+SIZE (joplin-desktop/joplin-desktop-2.9.17-node-modules.tar.gz) = 507280728
+SHA256 (joplin-desktop/yarn-3.1.1.tgz) = 4f3fae33064221440e1f2642eeac5000352d9fffce7ef2c958edfce190cd131a
+SIZE (joplin-desktop/yarn-3.1.1.tgz) = 864723
 SHA256 (joplin-desktop/laurent22-joplin-v2.9.17_GH0.tar.gz) = 5a1d205bd52b86182b281f7c83b8a7b463941f5043729b4408490b249dfa0af8
 SIZE (joplin-desktop/laurent22-joplin-v2.9.17_GH0.tar.gz) = 72680287
