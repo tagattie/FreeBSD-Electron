@@ -33,12 +33,11 @@ pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
 		${MKDIR} ${WRKDIR}/node-modules-cache; \
 		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			npm ci --ignore-scripts --no-progress; \
-		cd ${WRKDIR}/node-modules-cache/app && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			npm ci --ignore-scripts --no-progress; \
+		for dir in . app; do \
+			cd ${WRKDIR}/node-modules-cache/$${dir} && \
+			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+				npm ci --ignore-scripts --no-progress; \
+		done; \
 		cd ${WRKDIR}/node-modules-cache && ${RM} package*.json app/package*.json; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR} && \
@@ -54,20 +53,15 @@ pre-fetch:
 	fi
 
 post-extract:
-.for f in package.json package-lock.json
-	if [ -f ${WRKSRC}/${f} ]; then \
-		${MV} -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak; \
+.for dir in . app
+.   for f in package.json package-lock.json
+	if [ -f ${WRKSRC}/${dir}/${f} ]; then \
+		${MV} -f ${WRKSRC}/${dir}/${f} ${WRKSRC}/${dir}/${f}.bak; \
 	fi; \
-	${CP} ${PKGJSONSDIR}/${f} ${WRKSRC}
+	${CP} ${PKGJSONSDIR}/${dir}/${f} ${WRKSRC}/${dir}
+.   endfor
+	${MV} ${WRKDIR}/node-modules-cache/${dir}/node_modules ${WRKSRC}/${dir}
 .endfor
-.for f in package.json package-lock.json
-	if [ -f ${WRKSRC}/app/${f} ]; then \
-		${MV} -f ${WRKSRC}/app/${f} ${WRKSRC}/app/${f}.bak; \
-	fi; \
-	${CP} ${PKGJSONSDIR}/app/${f} ${WRKSRC}/app
-.endfor
-	${MV} ${WRKDIR}/node-modules-cache/node_modules ${WRKSRC}
-	${MV} ${WRKDIR}/node-modules-cache/app/node_modules ${WRKSRC}/app
 
 pre-build:
 	# generate icon files
@@ -99,6 +93,6 @@ do-install-DOCS-on:
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} ${NPM_CMD} run test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} npm run test
 
 .include <bsd.port.mk>
