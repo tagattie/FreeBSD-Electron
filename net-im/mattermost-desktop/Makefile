@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:21 nodejs:16,build
+USES=		desktop-file-utils electron:21 nodejs:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
@@ -30,8 +30,7 @@ USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 PREFETCH_TIMESTAMP=	1677806680
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		npm run build-prod
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build-prod
 	# generate icons
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=src/assets
@@ -65,6 +64,6 @@ do-install-DOCS-on:
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} ${NPM_CMD} run test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} npm run test
 
 .include <bsd.port.mk>
