@@ -11,6 +11,7 @@ WWW=		https://mifi.no/losslesscut
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libsnappy.so:archivers/snappy \
 		libFLAC.so:audio/flac \
@@ -25,6 +26,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libnspr4.so:devel/nspr \
 		libdrm.so:graphics/libdrm \
 		libpng.so:graphics/png \
+		libvips.so:graphics/vips \
 		libwebp.so:graphics/webp \
 		libopenh264.so:multimedia/openh264 \
 		libcups.so:print/cups \
