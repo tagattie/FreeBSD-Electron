@@ -9,8 +9,7 @@ WWW=		https://rocket.chat
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder \
-		${LOCALBASE}/libdata/pkgconfig/vips.pc:graphics/vips
+BUILD_DEPENDS=	app-builder:devel/app-builder
 
 USES=		desktop-file-utils electron:21 nodejs:16,build python:build
 
