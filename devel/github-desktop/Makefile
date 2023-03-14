@@ -78,12 +78,11 @@ pre-fetch:
 		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
 			${WRKDIR}/node-modules-cache/.yarnrc; \
 		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			yarn --frozen-lockfile --ignore-scripts; \
-		cd ${WRKDIR}/node-modules-cache/app && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			yarn --frozen-lockfile --ignore-scripts; \
+		for dir in . app; do \
+			cd ${WRKDIR}/node-modules-cache/$${dir} && \
+			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+				yarn --frozen-lockfile --ignore-scripts; \
+		done; \
 		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | ${GREP} -v yarn-offline-cache | \
 			${XARGS} ${RM} -r; \
 		cd ${WRKDIR}/node-modules-cache && \
@@ -99,23 +98,17 @@ pre-fetch:
 	fi
 
 post-extract:
-.for f in package.json yarn.lock
-	if [ -f ${WRKSRC}/${f} ]; then \
-		${MV} -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak; \
-	fi
-	${CP} ${PKGJSONSDIR}/${f} ${WRKSRC}
-.endfor
-.for f in package.json yarn.lock
-	if [ -f ${WRKSRC}/app/${f} ]; then \
-		${MV} -f ${WRKSRC}/app/${f} ${WRKSRC}/app/${f}.bak; \
-	fi
-	${CP} ${PKGJSONSDIR}/app/${f} ${WRKSRC}/app
-.endfor
 	${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
-	cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+.for dir in . app
+.   for f in package.json yarn.lock
+	if [ -f ${WRKSRC}/${dir}/${f} ]; then \
+		${MV} -f ${WRKSRC}/${dir}/${f} ${WRKSRC}/${dir}/${f}.bak; \
+	fi
+	${CP} ${PKGJSONSDIR}/${dir}/${f} ${WRKSRC}/${dir}
+.   endfor
+	cd ${WRKSRC}/${dir} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn --frozen-lockfile --ignore-scripts --offline
-	cd ${WRKSRC}/app && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-		yarn --frozen-lockfile --ignore-scripts --offline
+.endfor
 
 post-patch:
 	${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|' \
