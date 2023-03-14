@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Tabby
+Comment=A terminal for a modern age
+Icon=tabby
+Exec=tabby --no-sandbox %U
+Categories=Utility;TerminalEmulator;System;
+Terminal=false
+StartupWMClass=tabby

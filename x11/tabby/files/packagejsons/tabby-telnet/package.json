@@ -1,0 +1,35 @@
+{
+  "name": "tabby-telnet",
+  "version": "1.0.189-nightly.2",
+  "description": "Telnet/socket connections for Tabby",
+  "keywords": [
+    "tabby-builtin-plugin"
+  ],
+  "main": "dist/index.js",
+  "typings": "typings/index.d.ts",
+  "scripts": {
+    "build": "webpack --progress --color",
+    "watch": "webpack --progress --color --watch"
+  },
+  "files": [
+    "typings"
+  ],
+  "author": "Eugene Pankov",
+  "license": "MIT",
+  "devDependencies": {
+    "ansi-colors": "^4.1.1",
+    "@types/node": "14.14.31"
+  },
+  "peerDependencies": {
+    "@angular/animations": "^9.1.9",
+    "@angular/common": "^9.1.11",
+    "@angular/core": "^9.1.9",
+    "@angular/forms": "^9.1.11",
+    "@angular/platform-browser": "^9.1.11",
+    "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "rxjs": "^6.5.5",
+    "tabby-core": "*",
+    "tabby-settings": "*",
+    "tabby-terminal": "*"
+  }
+}

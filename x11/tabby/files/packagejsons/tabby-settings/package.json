@@ -1,0 +1,34 @@
+{
+  "name": "tabby-settings",
+  "version": "1.0.189-nightly.2",
+  "description": "Tabby terminal settings page",
+  "keywords": [
+    "tabby-builtin-plugin"
+  ],
+  "main": "dist/index.js",
+  "typings": "typings/index.d.ts",
+  "scripts": {
+    "build": "webpack --progress --color --display-modules",
+    "watch": "webpack --progress --color --watch"
+  },
+  "files": [
+    "typings"
+  ],
+  "author": "Eugene Pankov",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/marked": "^4.0.2",
+    "marked": "^4.0.8",
+    "ngx-infinite-scroll": "^10.0.1"
+  },
+  "peerDependencies": {
+    "@angular/animations": "^9.1.9",
+    "@angular/common": "^9.1.11",
+    "@angular/core": "^9.1.9",
+    "@angular/forms": "^9.1.11",
+    "@angular/platform-browser": "^9.1.11",
+    "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "rxjs": "^6.5.5",
+    "tabby-core": "*"
+  }
+}

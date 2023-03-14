@@ -1,0 +1,38 @@
+{
+  "name": "tabby-local",
+  "version": "1.0.189-nightly.2",
+  "description": "Tabby's local shell plugin",
+  "keywords": [
+    "tabby-builtin-plugin"
+  ],
+  "main": "dist/index.js",
+  "typings": "typings/index.d.ts",
+  "scripts": {
+    "build": "webpack --progress --color --display-modules",
+    "watch": "webpack --progress --color --watch"
+  },
+  "files": [
+    "typings"
+  ],
+  "author": "Eugene Pankov",
+  "license": "MIT",
+  "devDependencies": {
+    "ansi-colors": "^4.1.1",
+    "dataurl": "0.1.0",
+    "hasbin": "^1.2.3",
+    "ps-node": "^0.1.6",
+    "runes": "^0.4.2"
+  },
+  "peerDependencies": {
+    "@angular/animations": "^9.1.9",
+    "@angular/common": "^9.1.11",
+    "@angular/core": "^9.1.9",
+    "@angular/forms": "^9.1.11",
+    "@angular/platform-browser": "^9.1.11",
+    "@ng-bootstrap/ng-bootstrap": "^6.1.0",
+    "rxjs": "^6.5.5",
+    "tabby-core": "*",
+    "tabby-settings": "*",
+    "tabby-terminal": "*"
+  }
+}
