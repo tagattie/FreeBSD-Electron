@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/license
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:20 magick:build nodejs:16,build
+USES=		electron:20 magick:build nodejs:16,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	th-ch
@@ -53,5 +53,8 @@ do-install:
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
+
+do-test:
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
 
 .include <bsd.port.mk>
