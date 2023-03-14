@@ -63,50 +63,42 @@ UPSTREAM_MKSNAPSHOT_VER=20.3.6
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
-		${MKDIR} ${WRKDIR}; \
+		${MKDIR} ${WRKDIR}/node-modules-cache; \
 		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
-			${WRKDIR}/.yarnrc; \
-		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}; \
-		cd ${WRKDIR} && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			yarn --frozen-lockfile --ignore-scripts; \
-		cd ${WRKDIR}/target && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			yarn --frozen-lockfile --ignore-scripts; \
-		${FIND} ${WRKDIR} -depth 1 -print | ${GREP} -v yarn-offline-cache | ${XARGS} ${RM} -r; \
-		cd ${WRKDIR} && \
+			${WRKDIR}/node-modules-cache/.yarnrc; \
+		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
+		for dir in . target; do \
+			cd ${WRKDIR}/node-modules-cache/$${dir} && \
+			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+				yarn --frozen-lockfile --ignore-scripts; \
+		done; \
+		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | ${GREP} -v yarn-offline-cache | \
+			${XARGS} ${RM} -r; \
+		cd ${WRKDIR}/node-modules-cache && \
 		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./yarn-offline-cache:' > yarn-offline-cache.mtree; \
+			-e 's:^\.:./yarn-offline-cache:' > node-modules-cache.mtree; \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PREFETCH_FILE} @yarn-offline-cache.mtree; \
+			-f ${DISTDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
 		${RM} -r ${WRKDIR}; \
 	fi
 
 post-extract:
 	${MKDIR} ${WRKSRC}/target
-	cd ${PKGJSONSDIR} && \
-	for f in package.json yarn.lock; do \
-		if [ -f ${WRKSRC}/$${f} ]; then \
-			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
-		fi; \
-		${CP} $${f} ${WRKSRC}; \
-	done
-	cd ${PKGJSONSDIR}/target && \
-	for f in package.json yarn.lock; do \
-		if [ -f ${WRKSRC}/target/$${f} ]; then \
-			${MV} -f ${WRKSRC}/target/$${f} ${WRKSRC}/target/$${f}.bak; \
-		fi; \
-		${CP} $${f} ${WRKSRC}/target; \
-	done
 	${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
-	cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+.for dir in . target
+.   for f in package.json yarn.lock
+	if [ -f ${WRKSRC}/${dir}/${f} ]; then \
+		${MV} -f ${WRKSRC}/${dir}/${f} ${WRKSRC}/${dir}/${f}.bak; \
+	fi
+	${CP} ${PKGJSONSDIR}/${dir}/${f} ${WRKSRC}/${dir}
+.   endfor
+	cd ${WRKSRC}/${dir} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn --frozen-lockfile --ignore-scripts --offline
-	cd ${WRKSRC}/target && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-		yarn --frozen-lockfile --ignore-scripts --offline
+.endfor
 	${MKDIR} ${WRKSRC}/node_modules/electron/dist
 
 pre-build:
