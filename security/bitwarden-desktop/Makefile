@@ -14,8 +14,8 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre.so:devel/pcre \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo desktop-file-utils electron:21 gmake gnome \
-		localbase:ldflags nodejs:16,build pkgconfig python:build xorg
+USES=		cargo electron:21 gmake gnome localbase:ldflags \
+		nodejs:16,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
@@ -69,6 +69,6 @@ do-install-DOCS-on:
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} ${NPM_CMD} run test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} npm run test
 
 .include <bsd.port.mk>
