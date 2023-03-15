@@ -159,8 +159,8 @@ _ELECTRON_TEST_DEP=	yes
 # Now _ELECTRON_ARGS should contain a single major version
 .if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
 _ELECTRON_VERSION=	${_ELECTRON_ARGS}
-ELECTRON_PORTDIR=	${_ELECTRON_RELPORTDIR}${_ELECTRON_VERSION}
-.include "${PORTSDIR}/${ELECTRON_PORTDIR}/Makefile.version"
+_ELECTRON_PORTDIR=	${_ELECTRON_RELPORTDIR}${_ELECTRON_VERSION}
+.include "${PORTSDIR}/${_ELECTRON_PORTDIR}/Makefile.version"
 .else
 IGNORE= uses unknown USES=electron arguments: ${_ELECTRON_ARGS}
 .endif
@@ -276,7 +276,7 @@ IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_BUILD}
 # Setup dependencies
 .for stage in BUILD RUN TEST
 .   if defined(_ELECTRON_${stage}_DEP)
-${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${ELECTRON_PORTDIR}
+${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDIR}
 .   endif
 .endfor
 .for stage in FETCH EXTRACT BUILD RUN TEST
