@@ -304,6 +304,12 @@ PKGJSONSDIR?=		${FILESDIR}/packagejsons
 PREFETCH_TIMESTAMP?=	0
 YARN_VER?=		0
 
+.if exists(${PKGJSONSDIR}/${_NPM_PKGFILE})
+_EXISTS_NPM_PKGFILE=	1
+.else
+_EXISTS_NPM_PKGFILE=	0
+.endif
+
 .if defined(_ELECTRON_FEATURE_PREFETCH)
 _DISTFILE_prefetch=	${PKGNAME}-node-modules${EXTRACT_SUFX}
 DISTFILES+=		${_DISTFILE_prefetch}:prefetch
@@ -311,10 +317,12 @@ DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 DISTFILES+=		yarn-${YARN_VER}.tgz:prefetch
 .   endif
 
+.   if ${_EXISTS_NPM_PKGFILE} == 0
+IGNORE=	does not store ${_NPM_PKGFILE} in ${PKGJSONSDIR}
+.   endif
 .   if ${PREFETCH_TIMESTAMP} == 0
 IGNORE= does not specify timestamp for pre-fetched modules
 .   endif
-
 .   if ${_NODEJS_NPM} == berry && ${YARN_VER} == 0
 IGNORE=	does not specity yarn version for pre-fetching modules
 .   endif
