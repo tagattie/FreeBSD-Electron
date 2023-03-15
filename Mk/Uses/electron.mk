@@ -563,20 +563,20 @@ electron-rebuild-native-node-modules-for-electron:
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
 .	if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
-_ELECTRON_MAKE_CMD=	npx electron-builder
 .	elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry)
-_ELECTRON_MAKE_CMD=	yarn run electron-builder
+ELECTRON_MAKE_CMD?=	npx electron-builder
+ELECTRON_MAKE_CMD?=	yarn run electron-builder
 .	endif
 ELECTRON_MAKE_FLAGS+=	--linux --dir \
 			--config.npmRebuild=false \
 			--config.electronVersion=${ELECTRON_VER} \
 			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
-DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
+DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
 .	if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
-_ELECTRON_MAKE_CMD=	npx electron-packager
 .	elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry)
-_ELECTRON_MAKE_CMD=	yarn run electron-packager
+ELECTRON_MAKE_CMD?=	npx electron-packager
+ELECTRON_MAKE_CMD?=	yarn run electron-packager
 .	endif
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--no-download \
@@ -584,7 +584,7 @@ ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--electron-zip-dir=${WRKDIR}/.cache/electron \
 			--prune \
 			--overwrite
-DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${_ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
+DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
 .   endif
 ALL_TARGET=	# empty
 .endif
