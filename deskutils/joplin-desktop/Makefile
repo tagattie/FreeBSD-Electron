@@ -39,6 +39,11 @@ USE_ELECTRON=	npm:berry prefetch extract rebuild:nodejs build:builder
 PREFETCH_TIMESTAMP=	1678340740
 YARN_VER=	3.1.1
 
+post-patch:
+	${RM} -r ${WRKSRC}/packages/app-cli \
+		${WRKSRC}/packages/app-clipper \
+		${WRKSRC}/packages/app-mobile
+
 pre-build:
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 		yarn run electron-rebuild --force-abi 89
