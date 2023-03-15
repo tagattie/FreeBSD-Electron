@@ -287,15 +287,15 @@ NPM_CACHE_SETUP_CMD?=	${DO_NADA}
 NPM_INSTALL_CMD?=	npm ci --ignore-scripts --no-progress
 .   elif ${_NODEJS_NPM} == yarn
 _NPM_LOCKFILE=		yarn.lock
-_NPM_MODULE_CACHE=	yarn-offline-cache
-NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${_NPM_MODULE_CACHE}"' >> \
+_NPM_MODULE_CACHE=	./yarn-offline-cache
+NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "${_NPM_MODULE_CACHE}"' >> \
 			${WRKDIR}/node-modules-cache/.yarnrc
 NPM_INSTALL_CMD?=	yarn install --frozen-lockfile --ignore-scripts
 .   elif ${_NODEJS_NPM} == berry
 _NPM_LOCKFILE=		yarn.lock
-_NPM_MODULE_CACHE=	yarn-offline-cache
+_NPM_MODULE_CACHE=	./yarn-offline-cache
 NPM_CACHE_SETUP_CMD?=	cd ${WRKDIR}/node-modules-cache && \
-			${SETENV} ${MAKE_ENV} yarn config set cacheFolder "./${_NPM_MODULE_CACHE}"
+			${SETENV} ${MAKE_ENV} yarn config set cacheFolder "${_NPM_MODULE_CACHE}"
 NPM_INSTALL_CMD?=	yarn install --immutable --mode=skip-build
 .   endif
 .endif
