@@ -268,9 +268,9 @@ ${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDI
 .endfor
 .for stage in FETCH EXTRACT BUILD RUN TEST
 .   if defined(_ELECTRON_FEATURE_NPM_${stage})
-.	if defined(_NODEJS_NPM) && ${_NODEJS_NPM} != berry
+.	if ${_NODEJS_NPM} != berry
 ${stage}_DEPENDS+=	${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.	elif defined(_NODEJS_NPM) && ${_NODEJS_NPM} == berry
+.	elif ${_NODEJS_NPM} == berry
 ${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .	endif
 .   endif
@@ -521,10 +521,10 @@ electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for nodejs"
-.	if defined(_NODEJS_NPM) && ${_NODEJS_NPM} != berry
+.	if ${_NODEJS_NPM} != berry
 		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 			npm rebuild --no-progress
-.	elif defined(_NODEJS_NPM) && ${_NODEJS_NPM} == berry
+.	elif ${_NODEJS_NPM} == berry
 		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 			yarn rebuild
 .	endif
@@ -537,20 +537,20 @@ electron-rebuild-native-node-modules-for-electron:
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for electron"
 .	if ${_ELECTRON_FEATURE_BUILD} == builder
-.	    if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
+.	    if ${_NODEJS_NPM} == npm
 		# @cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		# 	npx electron-builder install-app-deps --platform linux
 		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			./node_modules/.bin/electron-builder install-app-deps --platform linux
-.	    elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry)
+.	    elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			yarn run electron-builder install-app-deps --platform linux
 .	    endif
 .	else
-.	    if defined(_NODEJS_NPM) && ${_NODEJS_NPM} != berry
+.	    if ${_NODEJS_NPM} != berry
 		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			npm rebuild --no-progress
-.	    elif defined(_NODEJS_NPM) && ${_NODEJS_NPM} == berry
+.	    elif ${_NODEJS_NPM} == berry
 		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			yarn rebuild
 .	    endif
@@ -562,9 +562,9 @@ electron-rebuild-native-node-modules-for-electron:
 
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
-.	if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
-.	elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry)
+.	if ${_NODEJS_NPM} == npm
 ELECTRON_MAKE_CMD?=	npx electron-builder
+.	elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 ELECTRON_MAKE_CMD?=	yarn run electron-builder
 .	endif
 ELECTRON_MAKE_FLAGS+=	--linux --dir \
@@ -573,9 +573,9 @@ ELECTRON_MAKE_FLAGS+=	--linux --dir \
 			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
 DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
-.	if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
-.	elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry)
+.	if ${_NODEJS_NPM} == npm
 ELECTRON_MAKE_CMD?=	npx electron-packager
+.	elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 ELECTRON_MAKE_CMD?=	yarn run electron-packager
 .	endif
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
