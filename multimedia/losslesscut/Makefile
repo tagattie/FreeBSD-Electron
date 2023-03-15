@@ -38,7 +38,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	ffmpeg:multimedia/ffmpeg
 
-USES=		desktop-file-utils gettext-runtime gl gnome iconv jpeg \
+USES=		desktop-file-utils gettext-runtime gl gmake gnome iconv jpeg \
 		nodejs:18,build electron:23 python:build xorg
 
 USE_GITHUB=	yes
