@@ -447,6 +447,10 @@ electron-patch-package-json:
 	@${REINPLACE_CMD} -e 's/electron-builder install-app-deps/& --platform linux/' ${WRKSRC}/package.json
 
 .if defined(_ELECTRON_FEATURE_REBUILD)
+_USES_build+=	290:electron-generate-electron-zip \
+		291:electron-rebuild-native-node-modules-for-node \
+		490:electron-rebuild-native-node-modules-for-electron
+
 BUILD_DEPENDS+=	zip:archivers/zip
 .   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} != berry
 BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
@@ -477,9 +481,8 @@ MKSNAPSHOT_DOWNLOAD_URL=	${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_MKSNAPSHOT_V
 MKSNAPSHOT_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${MKSNAPSHOT_DOWNLOAD_URL}
 MKSNAPSHOT_DOWNLOAD_CACHE_DIR=	.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}
 
-_USES_build+=	290:electron-generate-electron-zip \
-		291:electron-rebuild-native-node-modules-for-node \
-		490:electron-rebuild-native-node-modules-for-electron
+REBUILD_WRKSRC_NODEJS?=		${WRKSRC}
+REBUILD_WRKSRC_ELECTRON?=	${WRKSRC}
 
 electron-generate-electron-zip:
 	@${ECHO_MSG} "===>   Preparing distribution files of electron/chromedriver/mksnapshot"
@@ -519,10 +522,10 @@ electron-rebuild-native-node-modules-for-node:
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for nodejs"
 .	if defined(_NODEJS_NPM) && ${_NODEJS_NPM} != berry
-		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
+		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 			npm rebuild --no-progress
 .	elif defined(_NODEJS_NPM) && ${_NODEJS_NPM} == berry
-		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
+		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 			yarn rebuild
 .	endif
 .   else
@@ -537,18 +540,18 @@ electron-rebuild-native-node-modules-for-electron:
 .	    if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
 		# @cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
 		# 	npx electron-builder install-app-deps --platform linux
-		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			./node_modules/.bin/electron-builder install-app-deps --platform linux
 .	    elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry)
-		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			yarn run electron-builder install-app-deps --platform linux
 .	    endif
 .	else
 .	    if defined(_NODEJS_NPM) && ${_NODEJS_NPM} != berry
-		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			npm rebuild --no-progress
 .	    elif defined(_NODEJS_NPM) && ${_NODEJS_NPM} == berry
-		@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			yarn rebuild
 .	    endif
 .	endif
