@@ -310,12 +310,40 @@ _EXISTS_NPM_PKGFILE=	1
 _EXISTS_NPM_PKGFILE=	0
 .endif
 
+.if ${_NODEJS_NPM} == berry
+.   if ${YARN_VER} == 0
+IGNORE=	does not specity yarn version for prefetching modules
+.   endif
+
+_USES_fetch+=	490:electron-fetch-yarn-berry
+
+DISTFILES+=	yarn-${YARN_VER}.tgz:prefetch
+FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
+
+electron-fetch-yarn-berry:
+	@${ECHO_MSG} "===>   Fetching and setting up yarn berry version ${YARN_VER}"
+	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR} ${WRKDIR}/.bin
+	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
+	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz ]; then \
+		cd ${WRKDIR} && \
+		${SETENV} ${MAKE_ENV} corepack prepare --activate --output yarn@${YARN_VER} && \
+		${TAR} -xzf corepack.tgz && \
+		${MTREE_CMD} -cbnSp yarn | ${MTREE_CMD} -C | ${TAIL} -n 2 | ${SED} \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:flags=.*:flags=none:' \
+			-e 's:^\.:yarn:' > yarn.mtree && \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
+			-f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz @yarn.mtree; \
+	else \
+		${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
+	fi
+.endif
+
 .if defined(_ELECTRON_FEATURE_PREFETCH)
 _DISTFILE_prefetch=	${PKGNAME}-node-modules${EXTRACT_SUFX}
 DISTFILES+=		${_DISTFILE_prefetch}:prefetch
-.   if ${_NODEJS_NPM} == berry
-DISTFILES+=		yarn-${YARN_VER}.tgz:prefetch
-.   endif
 
 .   if ${_EXISTS_NPM_PKGFILE} == 0
 IGNORE=	does not store ${_NPM_PKGFILE} in ${PKGJSONSDIR}
@@ -323,43 +351,11 @@ IGNORE=	does not store ${_NPM_PKGFILE} in ${PKGJSONSDIR}
 .   if ${PREFETCH_TIMESTAMP} == 0
 IGNORE= does not specify timestamp for pre-fetched modules
 .   endif
-.   if ${_NODEJS_NPM} == berry && ${YARN_VER} == 0
-IGNORE=	does not specity yarn version for pre-fetching modules
-.   endif
 
 .   if ${_NODEJS_NPM} != berry
 FETCH_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.   elif ${_NODEJS_NPM} == berry
-FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .   endif
-_USES_fetch+=	490:electron-fetch-setup-yarn-berry \
-		491:electron-fetch-node-modules
-
-electron-fetch-setup-yarn-berry:
-.   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == berry
-	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
-		${ECHO_MSG} "===>   Setting up yarn berry version ${YARN_VER}"; \
-		${MKDIR} ${DISTDIR}/${DIST_SUBDIR} ${WRKDIR}/.bin; \
-		${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin; \
-		if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz ]; then \
-			cd ${WRKDIR} && \
-				${SETENV} ${MAKE_ENV} corepack prepare --activate --output yarn@${YARN_VER} && \
-				${TAR} -xzf corepack.tgz && \
-				${MTREE_CMD} -cbnSp yarn | ${MTREE_CMD} -C | ${TAIL} -n 2 | ${SED} \
-					-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-					-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-					-e 's:flags=.*:flags=none:' \
-					-e 's:^\.:yarn:' > yarn.mtree && \
-				${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-					${TAR} -cz --options 'gzip:!timestamp' \
-					-f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz @yarn.mtree; \
-		else \
-			${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
-		fi; \
-	fi
-.   else
-	@${DO_NADA}
-.   endif
+_USES_fetch+=	491:electron-fetch-node-modules
 
 electron-fetch-node-modules:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
