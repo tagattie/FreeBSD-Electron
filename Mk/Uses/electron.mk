@@ -284,19 +284,19 @@ _NPM_PKGFILE=		package.json
 _NPM_LOCKFILE=		package-lock.json
 _NPM_MODULE_CACHE=	node_modules
 NPM_CACHE_SETUP_CMD?=	${DO_NADA}
-NPM_INSTALL_CMD?=	npm ci --ignore-scripts --no-progress
+NPM_INSTALL_CMD_FETCH?=	npm ci --ignore-scripts --no-progress
 .   elif ${_NODEJS_NPM} == yarn
 _NPM_LOCKFILE=		yarn.lock
 _NPM_MODULE_CACHE=	yarn-offline-cache
-NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${_NPM_MODULE_CACHE}"' >> \
-			${WRKDIR}/node-modules-cache/.yarnrc
-NPM_INSTALL_CMD?=	yarn install --frozen-lockfile --ignore-scripts
+NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${_NPM_MODULE_CACHE}"' >> .yarnrc
+NPM_INSTALL_CMD_FETCH?=	yarn install --frozen-lockfile --ignore-scripts
+NPM_INSTALL_CMD_EXTRACT?=${NPM_INSTALL_CMD_FETCH} --offline
 .   elif ${_NODEJS_NPM} == berry
 _NPM_LOCKFILE=		yarn.lock
 _NPM_MODULE_CACHE=	yarn-offline-cache
-NPM_CACHE_SETUP_CMD?=	cd ${WRKDIR}/node-modules-cache && \
-			${SETENV} ${MAKE_ENV} yarn config set cacheFolder "./${_NPM_MODULE_CACHE}"
-NPM_INSTALL_CMD?=	yarn install --immutable --mode=skip-build
+NPM_CACHE_SETUP_CMD?=	${SETENV} ${MAKE_ENV} yarn config set cacheFolder "./${_NPM_MODULE_CACHE}"
+NPM_INSTALL_CMD_FETCH?=	yarn install --immutable --mode=skip-build
+NPM_INSTALL_CMD_EXTRACT?=${NPM_INSTALL_CMD_FETCH} --immutable-cache
 .   endif
 .endif
 
@@ -349,7 +349,7 @@ DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 IGNORE=	does not store ${_NPM_PKGFILE} in ${PKGJSONSDIR}
 .   endif
 .   if ${PREFETCH_TIMESTAMP} == 0
-IGNORE= does not specify timestamp for pre-fetched modules
+IGNORE= does not specify timestamp for prefetched modules
 .   endif
 
 .   if ${_NODEJS_NPM} != berry
@@ -363,10 +363,10 @@ electron-fetch-node-modules:
 		${ECHO_MSG} "===>   Setting up node modules cache directory"; \
 		${MKDIR} ${WRKDIR}/node-modules-cache; \
 		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		${NPM_CACHE_SETUP_CMD}; \
-		${ECHO_MSG} "===>   Pre-fetching and archiving node modules"; \
+		cd ${WRKDIR}/node-modules-cache && ${NPM_CACHE_SETUP_CMD}; \
+		${ECHO_MSG} "===>   Prefetching and archiving node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
-		${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD}; \
+		${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD_FETCH}; \
 		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | \
 			${GREP} -v ${_NPM_MODULE_CACHE} | ${XARGS} ${RM} -r; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
@@ -384,40 +384,59 @@ electron-fetch-node-modules:
 .endif # _FEATURE_ELECTRON_PREFETCH
 
 .if defined(_ELECTRON_FEATURE_EXTRACT)
-_USES_extract+=	900:electron-install-node-modules
+_USES_extract+=	900:electron-extract-yarn-berry \
+		901:electron-copy-package-file \
+		902:electron-install-node-modules
 
-electron-copy-package-file:
-	@${ECHO_MSG} "===>   Copying ${_NPM_PKGFILE} and ${_NPM_LOCKFILE} to ${WRKSRC}"
-.for f in ${_NPM_PKGFILE} ${_NPM_LOCKFILE}
-	@if [ -f ${WRKSRC}/${f} ]; then \
-		${MV} -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak; \
-	fi
-	@${CP} ${PKGJSONSDIR}/${f} ${WRKSRC}
-.endfor
-
-.   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
-electron-install-node-modules: electron-copy-package-file
-	@${ECHO_MSG} "===>   Moving pre-fetched node modules to ${WRKSRC}"
-	@${MV} ${WRKDIR}/node_modules ${WRKSRC}
-.   elif defined(_NODEJS_NPM) && ${_NODEJS_NPM} == yarn
+.   if ${_NODEJS_NPM} == yarn
 EXTRACT_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-electron-install-node-modules: electron-copy-package-file
-	@${ECHO_MSG} "===>   Installing node modules from pre-fetched cache"
-	@${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
-	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-		yarn --frozen-lockfile --ignore-scripts --offline
-.   elif defined(_NODEJS_NPM) && ${_NODEJS_NPM} == berry
+.   elif ${_NODEJS_NPM} == berry
 EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
-electron-install-node-modules: electron-copy-package-file
+.   endif
+
+electron-extract-yarn-berry:
+.   if ${_NODEJS_NPM} == berry
 	@${ECHO_MSG} "===>   Setting up yarn berry version ${YARN_VER}"
 	@${MKDIR}  ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz
-	@${ECHO_MSG} "===>   Installing node modules from pre-fetched cache"
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set cacheFolder "../yarn-offline-cache"
+.   else
+	@${DO_NADA}
+.   endif
+
+electron-copy-package-file:
+.if ${_EXISTS_NPM_PKGFILE} == 1
+	@${ECHO_MSG} "===>   Copying ${_NPM_PKGFILE} and ${_NPM_LOCKFILE} to ${WRKSRC}"
+.   for f in ${_NPM_PKGFILE} ${_NPM_LOCKFILE}
+	@if [ -f ${WRKSRC}/${f} ]; then \
+		${MV} -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak; \
+	fi
+	@${CP} ${PKGJSONSDIR}/${f} ${WRKSRC}
+.   endfor
+.endif
+
+electron-install-node-modules:
+.   if ${_NODEJS_NPM} == npm
+	@${ECHO_MSG} "===>   Moving prefetched node modules to ${WRKSRC}"
+	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
+		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
+	fi
+.   elif ${_NODEJS_NPM} == yarn
+	@${ECHO_MSG} "===>   Installing node modules from prefetched cache"
+	@cd ${WRKSRC} && ${NPM_CACHE_SETUP_CMD}
+	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
+		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
+	fi
+	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache ${NPM_INSTALL_CMD_EXTRACT}
+.   elif ${_NODEJS_NPM} == berry
+	@${ECHO_MSG} "===>   Installing node modules from prefetched cache"
+	@cd ${WRKSRC} && ${NPM_CACHE_SETUP_CMD}
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableNetwork false
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableInlineBuilds true
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn install --immutable --immutable-cache --mode=skip-build
+	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
+		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
+	fi
+	@cd ${WRKSRC} && ${NPM_INSTALL_CMD_EXTRACT}
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
