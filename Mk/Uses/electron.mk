@@ -284,19 +284,21 @@ _NPM_PKGFILE=		package.json
 _NPM_LOCKFILE=		package-lock.json
 _NPM_MODULE_CACHE=	node_modules
 NPM_CACHE_SETUP_CMD?=	${DO_NADA}
-NPM_INSTALL_CMD_FETCH?=	npm ci --ignore-scripts --no-progress
+NPM_INSTALL_CMD?=	npm ci --ignore-scripts --no-progress
 .   elif ${_NODEJS_NPM} == yarn
 _NPM_LOCKFILE=		yarn.lock
 _NPM_MODULE_CACHE=	yarn-offline-cache
 NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${_NPM_MODULE_CACHE}"' >> .yarnrc
-NPM_INSTALL_CMD_FETCH?=	yarn install --frozen-lockfile --ignore-scripts
-NPM_INSTALL_CMD_EXTRACT?=${NPM_INSTALL_CMD_FETCH} --offline
+NPM_INSTALL_CMD?=	yarn install
+NPM_INSTALL_FLAGS_FETCH?=--frozen-lockfile --ignore-scripts
+NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --offline
 .   elif ${_NODEJS_NPM} == berry
 _NPM_LOCKFILE=		yarn.lock
 _NPM_MODULE_CACHE=	yarn-offline-cache
 NPM_CACHE_SETUP_CMD?=	yarn config set cacheFolder "./${_NPM_MODULE_CACHE}"
-NPM_INSTALL_CMD_FETCH?=	yarn install --immutable --mode=skip-build
-NPM_INSTALL_CMD_EXTRACT?=${NPM_INSTALL_CMD_FETCH} --immutable-cache
+NPM_INSTALL_CMD?=	yarn install
+NPM_INSTALL_FLAGS_FETCH?=--immutable --mode=skip-build
+NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --immutable-cache
 .   endif
 .endif
 
@@ -366,7 +368,7 @@ electron-fetch-node-modules:
 		cd ${WRKDIR}/node-modules-cache && ${NPM_CACHE_SETUP_CMD}; \
 		${ECHO_MSG} "===>   Prefetching and archiving node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
-		${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD_FETCH}; \
+		${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_FETCH}; \
 		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | \
 			${GREP} -v ${_NPM_MODULE_CACHE} | ${XARGS} ${RM} -r; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
@@ -427,7 +429,7 @@ electron-install-node-modules:
 	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
 		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
-	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache ${NPM_INSTALL_CMD_EXTRACT}
+	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_EXTRACT}
 .   elif ${_NODEJS_NPM} == berry
 	@${ECHO_MSG} "===>   Installing node modules from prefetched cache"
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
@@ -436,7 +438,7 @@ electron-install-node-modules:
 	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
 		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD_EXTRACT}
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_EXTRACT}
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
