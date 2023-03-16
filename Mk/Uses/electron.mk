@@ -273,6 +273,9 @@ ${stage}_DEPENDS+=	${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .	elif ${_NODEJS_NPM} == berry
 ${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .	endif
+.	if ${_NODEJS_NPM} == yarn && ${stage} == BUILD
+${stage}_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
+.	endif
 .   endif
 .endfor
 
