@@ -38,8 +38,8 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		electron:21 gl gnome iconv jpeg localbase:ldflags \
-		nodejs:16,build python:build xorg
+USES=		electron:21 gl gmake gnome iconv jpeg localbase:ldflags \
+		nodejs:16,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
