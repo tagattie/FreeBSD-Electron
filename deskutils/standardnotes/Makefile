@@ -17,7 +17,7 @@ GH_PROJECT=	app
 WRKSRC=		${WRKDIR}/app--${PORTNAME}-desktop-${DISTVERSION}
 BUILD_WRKSRC=	${WRKSRC}/packages/desktop
 
-USES=		desktop-file-utils electron:22 localbase:ldflags \
+USES=		desktop-file-utils electron:22 gmake localbase:ldflags \
 		nodejs:16,build python:build
 
 SUB_FILES=	${PORTNAME}
