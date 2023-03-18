@@ -11,6 +11,8 @@ WWW=		https://standardnotes.com
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/packages/desktop/LICENSE
 
+BUILD_DEPENDS=	bash:shells/bash
+
 USE_GITHUB=	yes
 GH_PROJECT=	app
 
