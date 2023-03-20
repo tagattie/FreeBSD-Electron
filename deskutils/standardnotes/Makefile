@@ -11,7 +11,9 @@ WWW=		https://standardnotes.com
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/packages/desktop/LICENSE
 
-BUILD_DEPENDS=	bash:shells/bash
+BUILD_DEPENDS=	app-builder:devel/app-builder \
+		bash:shells/bash \
+		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
 USE_GITHUB=	yes
 GH_PROJECT=	app
