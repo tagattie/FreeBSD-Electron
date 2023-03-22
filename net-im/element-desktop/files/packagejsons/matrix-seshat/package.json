@@ -1,0 +1,22 @@
+{
+  "name": "matrix-seshat",
+  "version": "2.3.3",
+  "description": "A matrix message logger with full text search support",
+  "main": "lib/index.js",
+  "author": "Damir Jelić <poljar@termina.org.uk>",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "neon-cli": "^0.8.2"
+  },
+  "devDependencies": {
+    "eslint": "^8.7.0",
+    "eslint-config-google": "^0.14.0",
+    "jest": "^27.4.0",
+    "jsdoc": "^3.6.3"
+  },
+  "scripts": {
+    "install": "neon build --release",
+    "test": "jest",
+    "lint": "eslint lib/index.js"
+  }
+}

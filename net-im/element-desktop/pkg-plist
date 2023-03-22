@@ -1,0 +1,16 @@
+bin/element-desktop
+share/applications/element-desktop.desktop
+%%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/Release/keytar.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/matrix-seshat/native/index.node
+%%DATADIR%%/resources/img/element.ico
+%%DATADIR%%/resources/img/element.png
+%%DATADIR%%/resources/webapp.asar
+share/icons/hicolor/128x128/apps/element-desktop.png
+share/icons/hicolor/16x16/apps/element-desktop.png
+share/icons/hicolor/24x24/apps/element-desktop.png
+share/icons/hicolor/256x256/apps/element-desktop.png
+share/icons/hicolor/48x48/apps/element-desktop.png
+share/icons/hicolor/512x512/apps/element-desktop.png
+share/icons/hicolor/64x64/apps/element-desktop.png
+share/icons/hicolor/96x96/apps/element-desktop.png

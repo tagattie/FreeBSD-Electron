@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Element
+Comment=Glossy Matrix collaboration client for desktop
+Icon=element-desktop
+Exec=element-desktop %U
+Categories=Network;InstantMessaging;Chat;IRCClient
+Terminal=false
+StartupWMClass=Element
+MimeType=x-scheme-handler/element;
