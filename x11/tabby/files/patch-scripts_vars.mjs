@@ -1,15 +1,16 @@
---- scripts/vars.js.orig	2023-02-20 10:40:49 UTC
-+++ scripts/vars.js
-@@ -5,7 +5,7 @@ const childProcess = require('child_process')
+--- scripts/vars.mjs.orig	2023-03-22 08:11:39 UTC
++++ scripts/vars.mjs
+@@ -8,7 +8,8 @@ const __dirname = url.fileURLToPath(new URL('.', impor
  
  const electronInfo = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../node_modules/electron/package.json')))
  
--exports.version = childProcess.execSync('git describe --tags', { encoding:'utf-8' })
-+exports.version = 'v1.0.189' // childProcess.execSync('git describe --tags', { encoding:'utf-8' })
- exports.version = exports.version.substring(1).trim()
- exports.version = exports.version.replace('-', '-c')
+-export let version = childProcess.execSync('git describe --tags', { encoding:'utf-8' })
++// export let version = childProcess.execSync('git describe --tags', { encoding:'utf-8' })
++export let version = 'v1.0.196'
+ version = version.substring(1).trim()
+ version = version.replace('-', '-c')
  
-@@ -63,6 +63,12 @@ exports.keygenConfig = {
+@@ -66,6 +67,12 @@ export const keygenConfig = {
          }[process.env.ARCH ?? process.arch],
          linux: {
              x64: '7bf45071-3031-4a26-9f2e-72604308313e',

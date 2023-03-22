@@ -1,6 +1,6 @@
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.189
+DISTVERSION=	1.0.196
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -17,6 +17,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libasound.so:audio/alsa-lib \
 		libFLAC.so:audio/flac \
 		libopus.so:audio/opus \
+		libsndio.so:audio/sndio \
 		libdbus-1.so:devel/dbus \
 		libicui18n.so:devel/icu \
 		libevent.so:devel/libevent \
@@ -38,7 +39,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		electron:21 gl gmake gnome iconv jpeg localbase:ldflags \
+USES=		electron:22 gl gmake gnome iconv jpeg localbase:ldflags \
 		nodejs:16,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
@@ -106,21 +107,20 @@ post-patch:
 		${WRKSRC}/app/node_modules/fontmanager-redux/binding.gyp
 
 pre-build:
-.for module in cpu-features lzma-native node-sass ssh2
+.for module in cpu-features lzma-native ssh2
 	cd ${WRKSRC}/node_modules/${module} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 		npm rebuild --no-progress
 .endfor
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run patch-package
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} node scripts/install-deps.js
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} node scripts/install-deps.mjs
 	${CP} ${WRKSRC}/app/node_modules/glasstron/src/platforms/linux.js \
 		${WRKSRC}/app/node_modules/glasstron/src/platforms/freebsd.js
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} node scripts/build-native.js
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} node scripts/build-native.mjs
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} node scripts/prepackage-plugins.js
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} node scripts/prepackage-plugins.mjs
 
 do-install:
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
-		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 64 128 256 512
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/build/icons/${size}x${size}.png \

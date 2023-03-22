@@ -17,11 +17,14 @@
   "author": "Eugene Pankov",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": "^9.1.9"
+    "@angular/core": "^9.1.9",
+    "tabby-local": "*"
   },
   "devDependencies": {
     "electron-promise-ipc": "^2.2.4",
+    "ps-node": "^0.1.6",
     "tmp-promise": "^3.0.2",
+    "which": "^3.0.0",
     "winston": "^3.3.3"
   }
 }
