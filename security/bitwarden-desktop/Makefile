@@ -1,17 +1,21 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2023.2.0
+DISTVERSION=	2023.3.0
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Bitwarden desktop application
 WWW=		https://bitwarden.com
 
-LICENSE=	GPLv3
-LICENSE_FILE=	${WRKSRC}/LICENSE.txt
+LICENSE=	BITWARDEN GPLv3
+LICENSE_COMB=	multi
+LICENSE_NAME_BITWARDEN= BITWARDEN LICENSE AGREEMENT
+LICENSE_FILE_BITWARDEN= ${WRKSRC}/LICENSE_BITWARDEN.txt
+LICENSE_FILE_GPLv3=	${WRKSRC}/LICENSE_GPL.txt
+LICENSE_PERMS_BITWARDEN=none
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
-LIB_DEPENDS=	libpcre.so:devel/pcre \
+LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
 USES=		cargo electron:21 gmake gnome localbase:ldflags \
@@ -42,7 +46,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1677016857
+PREFETCH_TIMESTAMP=	1679571302
 
 pre-build:
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
@@ -50,8 +54,7 @@ pre-build:
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
-		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${BUILD_WRKSRC}/resources/icons/${size}x${size}.png \

@@ -17,10 +17,11 @@
     "lint": "eslint . --cache --cache-strategy content && prettier --check .",
     "lint:fix": "eslint . --cache --cache-strategy content --fix",
     "lint:clear": "rimraf .eslintcache",
-    "prettier": "prettier --write .",
+    "prettier": "prettier --cache --write .",
     "test": "jest",
     "test:watch": "jest --clearCache && jest --watch",
     "test:watch:all": "jest --watchAll",
+    "test:types": "for p in libs/**/tsconfig.spec.json; do  echo \"Typechecking $p\"; tsc --noEmit --project $p; done",
     "docs:json": "compodoc -p ./tsconfig.json -e json -d .",
     "storybook": "npm run docs:json && start-storybook -p 6006",
     "build-storybook": "npm run docs:json && build-storybook",
@@ -202,7 +203,7 @@
     "react": "^18.0.0"
   },
   "lint-staged": {
-    "*": "prettier --ignore-unknown --write",
+    "*": "prettier --cache --ignore-unknown --write",
     "*.ts": "eslint --cache --cache-strategy content --fix"
   },
   "engines": {
