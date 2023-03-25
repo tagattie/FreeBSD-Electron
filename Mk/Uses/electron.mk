@@ -389,9 +389,9 @@ electron-fetch-node-modules:
 .endif # _FEATURE_ELECTRON_PREFETCH
 
 .if defined(_ELECTRON_FEATURE_EXTRACT)
-_USES_extract+=	900:electron-extract-yarn-berry \
-		901:electron-copy-package-file \
-		902:electron-install-node-modules
+_USES_extract+=	600:electron-extract-yarn-berry \
+		601:electron-copy-package-file \
+		602:electron-install-node-modules
 
 .   if ${_NODEJS_NPM} == yarn
 EXTRACT_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
