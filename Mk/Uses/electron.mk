@@ -445,7 +445,7 @@ electron-install-node-modules:
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
-_USES_patch+=	900:electron-patch-package-json
+_USES_patch+=	600:electron-patch-package-json
 
 electron-patch-package-json:
 	@${ECHO_MSG} "===>   Patching package.json"
