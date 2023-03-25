@@ -1,0 +1,11 @@
+bin/webcord
+share/applications/webcord.desktop
+share/icons/hicolor/128x128/apps/webcord.png
+share/icons/hicolor/16x16/apps/webcord.png
+share/icons/hicolor/256x256/apps/webcord.png
+share/icons/hicolor/32x32/apps/webcord.png
+share/icons/hicolor/48x48/apps/webcord.png
+share/icons/hicolor/512x512/apps/webcord.png
+share/icons/hicolor/64x64/apps/webcord.png
+%%DATADIR%%/resources/LICENSE
+%%DATADIR%%/resources/app.asar

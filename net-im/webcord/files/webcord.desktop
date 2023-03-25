@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=WebCord
+GenericName=Internet Messenger
+Comment=A Discord and Fosscord client made with the Electron API.
+Icon=webcord
+Exec=webcord %U
+Categories=Network;InstantMessaging;
+Terminal=false
+StartupNotify=true
+StartupWMClass=WebCord
