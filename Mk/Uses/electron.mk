@@ -127,7 +127,7 @@ _VALID_ELECTRON_VERSIONS=	6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23
 _VALID_ELECTRON_FEATURES=	npm prefetch extract rebuild build
 _VALID_ELECTRON_FEATURES_NPM=	npm yarn berry
 _VALID_ELECTRON_FEATURES_REBUILD=nodejs electron
-_VALID_ELECTRON_FEATURES_BUILD=	builder packager
+_VALID_ELECTRON_FEATURES_BUILD=	builder forge packager
 
 _ELECTRON_BASE_CMD=	electron
 _ELECTRON_RELPORTDIR=	devel/electron
@@ -466,6 +466,16 @@ BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
 .   endif
 
+.   if !defined(UPSTREAM_ELECTRON_VER)
+.	if ${_EXISTS_NPM_PKGFILE} == 1
+UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
+.	endif
+.   endif
+ELECTRON_DOWNLOAD_URL=		${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_ELECTRON_VER}
+ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
+ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
+
 .   if !defined(UPSTREAM_CHROMEDRIVER_VER)
 .	if ${_EXISTS_NPM_PKGFILE} == 1
 UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*/electron-chromedriver/' ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
@@ -504,6 +514,14 @@ electron-generate-electron-zip:
 	@cd ${WRKDIR}/.cache/electron && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${ELECTRON_VER}
+.   endif
+.   if defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == forge
+	@${MKDIR} ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}
+	@cd ${WRKDIR}/electron-dist && \
+		zip -q -r ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}/electron-v${UPSTREAM_ELECTRON_VER}-linux-${_ELECTRON_ARCH}.zip .
+	@cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
+		${SHA256} -r *.zip | \
+		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}
 .   endif
 .   if defined(UPSTREAM_CHROMEDRIVER_VER) && ${UPSTREAM_CHROMEDRIVER_VER} != ""
 	@${MKDIR} ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}
@@ -590,6 +608,14 @@ ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--prune \
 			--overwrite
 DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
+.   elif ${_ELECTRON_FEATURE_BUILD} == forge
+.	if ${_NODEJS_NPM} == npm
+ELECTRON_MAKE_CMD?=	npx electron-forge package
+.	elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
+ELECTRON_MAKE_CMD?=	yarn run electron-forge package
+.	endif
+ELECTRON_MAKE_FLAGS+=	--platform=linux
+DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   endif
 ALL_TARGET=	# empty
 .endif
