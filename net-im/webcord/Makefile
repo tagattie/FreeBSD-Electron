@@ -10,7 +10,8 @@ WWW=		https://github.com/SpacingBat3/WebCord
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
+BUILD_DEPENDS=	app-builder:devel/app-builder \
+		git:devel/git
 
 USES=		electron:22 nodejs:16,build
 
@@ -44,5 +45,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/out/release/WebCord-linux-x64 && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+
+do-test:
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} npm run test
 
 .include <bsd.port.mk>
