@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2023.3.0
+DISTVERSION=	2023.3.1
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -46,7 +46,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1679571302
+PREFETCH_TIMESTAMP=	1680076030
 
 pre-build:
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
@@ -64,7 +64,8 @@ do-install:
 	cd ${BUILD_WRKSRC}/dist/linux-unpacked && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	cd ${STAGEDIR}${DATADIR}/resources && \
-		${FIND} . -type f -name '*.node' -exec ${STRIP_CMD} {} ';'
+		${FIND} . -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 	${INSTALL_DATA} ${BUILD_WRKSRC}/build/package.json ${STAGEDIR}${DATADIR}/resources
 
 do-install-DOCS-on:
