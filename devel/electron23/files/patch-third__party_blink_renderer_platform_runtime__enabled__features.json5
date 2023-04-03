@@ -1,6 +1,6 @@
---- third_party/blink/renderer/platform/runtime_enabled_features.json5.orig	2023-02-01 18:43:26 UTC
+--- third_party/blink/renderer/platform/runtime_enabled_features.json5.orig	2023-04-02 06:41:15 UTC
 +++ third_party/blink/renderer/platform/runtime_enabled_features.json5
-@@ -1258,7 +1258,7 @@
+@@ -1259,7 +1259,7 @@
        depends_on: ["FileSystemAccessLocal"],
        status: {"Android": "test", "default": "stable"},
        origin_trial_feature_name: "FileHandling",
@@ -9,7 +9,7 @@
        base_feature: "FileHandlingAPI",
      },
      {
-@@ -2867,7 +2867,7 @@
+@@ -2868,7 +2868,7 @@
      {
        name: "UnrestrictedSharedArrayBuffer",
        origin_trial_feature_name: "UnrestrictedSharedArrayBuffer",
@@ -18,7 +18,7 @@
      },
      {
        name: "URLPatternCompareComponent",
-@@ -2887,7 +2887,7 @@
+@@ -2888,7 +2888,7 @@
        origin_trial_feature_name: "UserAgentReduction",
        origin_trial_allows_third_party: true,
        // iOS not included as it should not send a reduced User-Agent string.
@@ -27,7 +27,7 @@
        base_feature: "ReduceUserAgent",
      },
      {
-@@ -3049,12 +3049,12 @@
+@@ -3050,12 +3050,12 @@
        name: "WebAppUrlHandling",
        status: "experimental",
        origin_trial_feature_name: "WebAppUrlHandling",
