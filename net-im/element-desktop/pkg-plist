@@ -1,5 +1,6 @@
 bin/element-desktop
 share/applications/element-desktop.desktop
+%%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/Release/keytar.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/matrix-seshat/native/index.node
