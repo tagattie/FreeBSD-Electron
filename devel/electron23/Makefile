@@ -64,9 +64,9 @@ TEST_DEPENDS=	git:devel/git \
 		${PYTHON_PKGNAMEPREFIX}python-dbusmock>0:devel/py-python-dbusmock@${PY_FLAVOR} \
 		npm-node18>0:www/npm-node18
 
-USES=		bison compiler:c++17-lang cpe gettext-tools gl gnome iconv \
-		jpeg localbase:ldflags ninja pkgconfig python:build,test \
-		shebangfix tar:xz xorg
+USES=		bison compiler:c++17-lang cpe gettext-tools gl gnome \
+		iconv:wchar_t jpeg localbase:ldflags ninja pkgconfig \
+		python:build,test shebangfix tar:xz xorg
 
 CPE_VENDOR=	electronjs
 USE_GITHUB=	yes
@@ -222,7 +222,7 @@ REACTIVEOBJC_VER=		74ab5baccc6f7202c8ac69a8d1e152c29dc1ea76
 # See ${WRKSRC}/electron/DEPS for MANTLE_VER
 MANTLE_VER=			78d3966b3c331292ea29ec38661b25df0a245948
 
-YARN_TIMESTAMP=	1680594054
+YARN_TIMESTAMP=	1681425662
 
 .include "Makefile.version"
 .include <bsd.port.pre.mk>
