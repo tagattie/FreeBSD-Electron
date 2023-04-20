@@ -1,6 +1,6 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.52.0
+DISTVERSION=	3.54.0
 CATEGORIES=	multimedia
 DIST_SUBDIR=	${PORTNAME}
 
@@ -38,8 +38,9 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	ffmpeg:multimedia/ffmpeg
 
-USES=		desktop-file-utils gettext-runtime gl gmake gnome iconv jpeg \
-		nodejs:18,build electron:23 python:build xorg
+USES=		desktop-file-utils gettext-runtime gl gmake gnome \
+		iconv:wchar_t jpeg nodejs:18,build electron:23 python:build \
+		xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mifi
@@ -57,7 +58,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:berry prefetch extract rebuild build:builder
 
-PREFETCH_TIMESTAMP=	1678443471
+PREFETCH_TIMESTAMP=	1681988557
 YARN_VER=	3.3.0
 
 pre-build:
@@ -72,7 +73,7 @@ pre-build:
 
 do-install:
 	${INSTALL_DATA} ${WRKSRC}/no.mifi.losslesscut.desktop \
-		${STAGEDIR}${PREFIX}/share/applications/${PORTNAME}.desktop
+		${STAGEDIR}${DESKTOPDIR}/${PORTNAME}.desktop
 .for size in 16 32 48 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}x${size}.png \
