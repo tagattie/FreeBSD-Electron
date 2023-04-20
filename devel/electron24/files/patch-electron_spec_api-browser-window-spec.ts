@@ -1,4 +1,4 @@
---- electron/spec/api-browser-window-spec.ts.orig	2023-04-03 22:25:21 UTC
+--- electron/spec/api-browser-window-spec.ts.orig	2023-04-14 16:19:15 UTC
 +++ electron/spec/api-browser-window-spec.ts
 @@ -59,7 +59,7 @@ describe('BrowserWindow module', () => {
        }).not.to.throw();
@@ -81,7 +81,7 @@
            expect(test.creationTime).to.be.null('creation time');
            expect(test.systemMemoryInfo).to.be.null('system memory info');
          } else {
-@@ -3723,7 +3723,7 @@ describe('BrowserWindow module', () => {
+@@ -3739,7 +3739,7 @@ describe('BrowserWindow module', () => {
      });
    });
  
@@ -90,7 +90,7 @@
      afterEach(closeAllWindows);
      it('emits an event when window is maximized', async () => {
        const w = new BrowserWindow({ show: false });
-@@ -3994,7 +3994,7 @@ describe('BrowserWindow module', () => {
+@@ -4010,7 +4010,7 @@ describe('BrowserWindow module', () => {
      // TODO(zcbenz):
      // This test does not run on Linux CI. See:
      // https://github.com/electron/electron/issues/28699
@@ -99,7 +99,7 @@
        const w = new BrowserWindow({});
        const maximize = emittedOnce(w, 'maximize');
        w.maximize();
-@@ -4011,7 +4011,7 @@ describe('BrowserWindow module', () => {
+@@ -4027,7 +4027,7 @@ describe('BrowserWindow module', () => {
    });
  
    // TODO(dsanders11): Enable once maximize event works on Linux again on CI
@@ -108,7 +108,7 @@
      afterEach(closeAllWindows);
      it('should show the window if it is not currently shown', async () => {
        const w = new BrowserWindow({ show: false });
-@@ -4048,7 +4048,7 @@ describe('BrowserWindow module', () => {
+@@ -4064,7 +4064,7 @@ describe('BrowserWindow module', () => {
  
      // TODO(dsanders11): Enable once minimize event works on Linux again.
      //                   See https://github.com/electron/electron/issues/28699
@@ -117,7 +117,7 @@
        const w = new BrowserWindow();
        const minimize = emittedOnce(w, 'minimize');
        w.minimize();
-@@ -4411,7 +4411,7 @@ describe('BrowserWindow module', () => {
+@@ -4427,7 +4427,7 @@ describe('BrowserWindow module', () => {
        });
  
        // On Linux there is no "resizable" property of a window.
@@ -126,7 +126,7 @@
          const w = new BrowserWindow({ show: false });
          expect(w.resizable).to.be.true('resizable');
  
-@@ -4503,7 +4503,7 @@ describe('BrowserWindow module', () => {
+@@ -4519,7 +4519,7 @@ describe('BrowserWindow module', () => {
      });
    });
  
