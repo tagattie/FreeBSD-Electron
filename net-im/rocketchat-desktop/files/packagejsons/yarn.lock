@@ -4788,9 +4788,9 @@ electron-updater@^5.3.0:
     typed-emitter "^2.1.0"
 
 electron@^22.3.1:
-  version "22.3.4"
-  resolved "https://registry.yarnpkg.com/electron/-/electron-22.3.4.tgz#d5e30a5708d07f13af147d9e5ec8879cb56f4d09"
-  integrity sha512-EY/ieC3gnKYUNOQPJSCIbiMBwEnGs/j0yIAUf0pXPK4BRh2nvXTD5d9OdouAIN7bRNLLPgqoTm0uXgZPAWTVkg==
+  version "22.3.6"
+  resolved "https://registry.yarnpkg.com/electron/-/electron-22.3.6.tgz#ab79a2da20e83b02ec9cbb22a4069468e6949b4f"
+  integrity sha512-/1/DivFHH5AWa/uOuqpkeg12/jjicjkBU8kYv70oeqRFwXzoyuJhgwlzER4jZXnbGjF5Nxz9900oXq/QzAViAw==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^16.11.26"
