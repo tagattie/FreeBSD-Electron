@@ -1,6 +1,6 @@
---- src/main/windows/windowManager.ts.orig	2022-12-06 14:05:15 UTC
+--- src/main/windows/windowManager.ts.orig	2023-04-04 12:30:25 UTC
 +++ src/main/windows/windowManager.ts
-@@ -294,7 +294,7 @@ export class WindowManager {
+@@ -409,7 +409,7 @@ export class WindowManager {
              // Workaround for linux maximizing/minimizing, which doesn't work properly because of these bugs:
              // https://github.com/electron/electron/issues/28699
              // https://github.com/electron/electron/issues/28106
@@ -9,7 +9,7 @@
                  const size = this.mainWindow.getSize();
                  bounds = {width: size[0], height: size[1]};
              } else {
-@@ -371,7 +371,7 @@ export class WindowManager {
+@@ -486,7 +486,7 @@ export class WindowManager {
      }
  
      flashFrame = (flash: boolean) => {

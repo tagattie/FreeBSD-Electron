@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	5.2.2
+DISTVERSION=	5.3.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,9 +11,10 @@ LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 FETCH_DEPENDS=	git:devel/git
-BUILD_DEPENDS=	app-builder:devel/app-builder
+BUILD_DEPENDS=	app-builder:devel/app-builder \
+		jq:textproc/jq
 
-USES=		desktop-file-utils electron:21 nodejs:16,build python:build
+USES=		desktop-file-utils electron:23 nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
@@ -27,9 +28,12 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1677806680
+PREFETCH_TIMESTAMP=	1681979037
 
 pre-build:
+	${MKDIR} ${WRKSRC}/node_modules/node-jq/bin
+	${CP} ${LOCALBASE}/bin/jq ${WRKSRC}/node_modules/node-jq/bin/jq
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} node scripts/patch_macos_notification_state.js
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build-prod
 	# generate icons
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
@@ -51,13 +55,14 @@ do-install:
 .for size in 16 32 48 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}x${size}.png \
-		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME:S/-desktop//}.png
+		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/linux-unpacked && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	cd ${STAGEDIR}${DATADIR}/resources && \
-		${FIND} . -type f -name '*.node' -exec ${STRIP_CMD} {} ';'
+		${FIND} . -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
