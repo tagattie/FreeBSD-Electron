@@ -953,14 +953,12 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/resources/app/git/bin/scalar
 %%DATADIR%%/resources/app/git/libexec/git-core/git
 %%DATADIR%%/resources/app/git/libexec/git-core/git-add
-%%DATADIR%%/resources/app/git/libexec/git-core/git-add--interactive
 %%DATADIR%%/resources/app/git/libexec/git-core/git-am
 %%DATADIR%%/resources/app/git/libexec/git-core/git-annotate
 %%DATADIR%%/resources/app/git/libexec/git-core/git-apply
 %%DATADIR%%/resources/app/git/libexec/git-core/git-archimport
 %%DATADIR%%/resources/app/git/libexec/git-core/git-archive
 %%DATADIR%%/resources/app/git/libexec/git-core/git-bisect
-%%DATADIR%%/resources/app/git/libexec/git-core/git-bisect--helper
 %%DATADIR%%/resources/app/git/libexec/git-core/git-blame
 %%DATADIR%%/resources/app/git/libexec/git-core/git-branch
 %%DATADIR%%/resources/app/git/libexec/git-core/git-bugreport
@@ -999,7 +997,6 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/resources/app/git/libexec/git-core/git-diff-tree
 %%DATADIR%%/resources/app/git/libexec/git-core/git-difftool
 %%DATADIR%%/resources/app/git/libexec/git-core/git-difftool--helper
-%%DATADIR%%/resources/app/git/libexec/git-core/git-env--helper
 %%DATADIR%%/resources/app/git/libexec/git-core/git-fast-export
 %%DATADIR%%/resources/app/git/libexec/git-core/git-fast-import
 %%DATADIR%%/resources/app/git/libexec/git-core/git-fetch

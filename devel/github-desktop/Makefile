@@ -1,6 +1,6 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.2.0
+DISTVERSION=	3.2.1
 DISTVERSIONSUFFIX=	-linux1
 CATEGORIES=	devel
 MASTER_SITES=	KERNEL_ORG/software/scm/git:git
@@ -41,8 +41,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence
 
 USES=		desktop-file-utils gettext-runtime gl gmake gnome electron:22 \
-		iconv jpeg localbase:ldflags nodejs:16,build perl5 pkgconfig \
-		python shebangfix ssl xorg
+		iconv:wchar_t jpeg localbase:ldflags nodejs:16,build perl5 \
+		pkgconfig python shebangfix ssl xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	shiftkey
@@ -62,15 +62,15 @@ USE_ELECTRON=	npm:yarn,fetch,extract,build
 
 .include <bsd.port.pre.mk>
 
-GIT_VER=	2.39.2
+GIT_VER=	2.40.0
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1678187470
+PREFETCH_TIMESTAMP=	1682075838
 UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.lock | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 ELECTRON_DOWNLOAD_URL=		https://github.com/electron/electron/releases/download/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
-MAKE_ENV+=	CIRCLE_SHA1=f5f68928c2cae3a4dad4e9814681115c9d3ef834
+MAKE_ENV+=	CIRCLE_SHA1=185b47fac6fce0fd198807367a2dcd98e6035962
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -137,7 +137,7 @@ do-build:
 			--with-iconv=${LOCALBASE} \
 			--without-tcltk && \
 		${SETENV} ${MAKE_ENV} ${MAKE_CMD} -j ${MAKE_JOBS_NUMBER} CC="${CCACHE_BIN} ${CC}" all strip && \
-		${SETEMV} ${MAKE_ENV} ${MAKE_CMD} CC="${CCACHE_BIN} ${CC}" install
+		${SETENV} ${MAKE_ENV} ${MAKE_CMD} CC="${CCACHE_BIN} ${CC}" install
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn compile:script
 	cd ${WRKSRC}/app && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm rebuild --no-progress
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build:prod
@@ -153,11 +153,9 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd "${WRKSRC}/dist/GitHub Desktop-linux-x64" && \
 		${TAR} -cf - . | ${TAR} -xf - -C ${STAGEDIR}${DATADIR}
-	cd ${STAGEDIR}${DATADIR}/resources/app && \
-		${FIND} . -type f -name '*.node' -exec ${STRIP_CMD} {} ';'
-	${STRIP_CMD} ${STAGEDIR}${DATADIR}/resources/app/desktop-trampoline/desktop-trampoline
-	${STRIP_CMD} ${STAGEDIR}${DATADIR}/resources/app/git/bin/scalar
-	${STRIP_CMD} ${STAGEDIR}${DATADIR}/resources/app/git/libexec/git-core/scalar
+	cd ${STAGEDIR}${DATADIR}/resources && \
+		${FIND} . -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 .for f in chromedriver mksnapshot v8_context_snapshot_generator
 	${RM} ${STAGEDIR}${DATADIR}/${f}
 .endfor

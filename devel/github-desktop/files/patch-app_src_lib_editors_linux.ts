@@ -1,4 +1,4 @@
---- app/src/lib/editors/linux.ts.orig	2023-03-08 01:33:29 UTC
+--- app/src/lib/editors/linux.ts.orig	2023-04-07 17:53:27 UTC
 +++ app/src/lib/editors/linux.ts
 @@ -18,52 +18,52 @@ interface ILinuxExternalEditor {
  const editors: ILinuxExternalEditor[] = [
@@ -63,7 +63,7 @@
    },
    {
      name: 'SlickEdit',
-@@ -78,11 +78,11 @@ const editors: ILinuxExternalEditor[] = [
+@@ -78,16 +78,17 @@ const editors: ILinuxExternalEditor[] = [
      // Code editor for elementary OS
      // https://github.com/elementary/code
      name: 'Code',
@@ -77,7 +77,40 @@
    },
    {
      name: 'JetBrains PhpStorm',
-@@ -118,35 +118,35 @@ const editors: ILinuxExternalEditor[] = [
+     paths: [
+       '/snap/bin/phpstorm',
++      '%%LOCALBASE%%/bin/phpstorm',
+       '.local/share/JetBrains/Toolbox/scripts/phpstorm',
+     ],
+   },
+@@ -95,17 +96,19 @@ const editors: ILinuxExternalEditor[] = [
+     name: 'JetBrains WebStorm',
+     paths: [
+       '/snap/bin/webstorm',
++      '%%LOCALBASE%%/bin/webstorm',
+       '.local/share/JetBrains/Toolbox/scripts/webstorm',
+     ],
+   },
+   {
+     name: 'IntelliJ IDEA',
+-    paths: ['/snap/bin/idea', '.local/share/JetBrains/Toolbox/scripts/idea'],
++    paths: ['/snap/bin/idea', '%%LOCALBASE%%/bin/idea', '.local/share/JetBrains/Toolbox/scripts/idea'],
+   },
+   {
+     name: 'JetBrains PyCharm',
+     paths: [
+       '/snap/bin/pycharm',
++      '%%LOCALBASE%%/bin/pycharm',
+       '.local/share/JetBrains/Toolbox/scripts/pycharm',
+     ],
+   },
+@@ -113,40 +116,41 @@ const editors: ILinuxExternalEditor[] = [
+     name: 'Android Studio',
+     paths: [
+       '/snap/bin/studio',
++      '%%LOCALBASE%%/bin/studio',
+       '.local/share/JetBrains/Toolbox/scripts/studio',
+     ],
    },
    {
      name: 'Emacs',
@@ -119,5 +152,5 @@
 -    paths: ['/usr/bin/mousepad'],
 +    paths: ['%%LOCALBASE%%/bin/mousepad'],
    },
- ]
- 
+   {
+     name: 'IntelliJ PhpStorm',
