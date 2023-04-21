@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2023.3.1
+DISTVERSION=	2023.3.2
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -46,7 +46,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1680076030
+PREFETCH_TIMESTAMP=	1682060413
 
 pre-build:
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
@@ -58,7 +58,7 @@ do-install:
 .for size in 16 32 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${BUILD_WRKSRC}/resources/icons/${size}x${size}.png \
-		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME:S/-desktop//}.png
+		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${BUILD_WRKSRC}/dist/linux-unpacked && \

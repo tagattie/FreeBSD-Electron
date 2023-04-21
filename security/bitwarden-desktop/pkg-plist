@@ -3,10 +3,10 @@ share/applications/bitwarden-desktop.desktop
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@bitwarden/desktop-native/desktop_native.freebsd-x64.node
 %%DATADIR%%/resources/package.json
-share/icons/hicolor/1024x1024/apps/bitwarden.png
-share/icons/hicolor/128x128/apps/bitwarden.png
-share/icons/hicolor/16x16/apps/bitwarden.png
-share/icons/hicolor/256x256/apps/bitwarden.png
-share/icons/hicolor/32x32/apps/bitwarden.png
-share/icons/hicolor/512x512/apps/bitwarden.png
-share/icons/hicolor/64x64/apps/bitwarden.png
+share/icons/hicolor/1024x1024/apps/bitwarden-desktop.png
+share/icons/hicolor/128x128/apps/bitwarden-desktop.png
+share/icons/hicolor/16x16/apps/bitwarden-desktop.png
+share/icons/hicolor/256x256/apps/bitwarden-desktop.png
+share/icons/hicolor/32x32/apps/bitwarden-desktop.png
+share/icons/hicolor/512x512/apps/bitwarden-desktop.png
+share/icons/hicolor/64x64/apps/bitwarden-desktop.png
