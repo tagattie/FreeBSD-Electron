@@ -1,6 +1,6 @@
 PORTNAME=	stretchly
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.13.1
+DISTVERSION=	1.14.0
 CATEGORIES=	deskutils
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		electron:22 localbase:ldconfig nodejs:16,build python:build
+USES=		electron:24 localbase:ldconfig nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	hovancik
@@ -27,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:npm,fetch,build build:builder
 
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1676189939
+PREFETCH_TIMESTAMP=	1682162391
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -75,8 +75,7 @@ pre-build:
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
-		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 48 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}.png \
@@ -86,7 +85,8 @@ do-install:
 	cd ${WRKSRC}/dist/linux-unpacked && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	cd ${STAGEDIR}${DATADIR}/resources && \
-		${FIND} . -type f -name '*.node' -exec ${STRIP_CMD} {} ';'
+		${FIND} . -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
