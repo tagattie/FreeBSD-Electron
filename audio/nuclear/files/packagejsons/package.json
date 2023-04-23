@@ -1,6 +1,6 @@
 {
   "name": "nuclear",
-  "version": "0.6.17",
+  "version": "0.6.20",
   "description": "Streaming music player that finds music sources automatically.",
   "repository": {
     "type": "git",
@@ -12,8 +12,7 @@
     "youtube"
   ],
   "author": {
-    "name": "nukeop",
-    "email": "nuclear@gumblert.tech"
+    "name": "nukeop <12746779+nukeop@users.noreply.github.com>"
   },
   "license": "AGPL-3.0",
   "bugs": {
@@ -21,7 +20,7 @@
   },
   "homepage": "https://github.com/nukeop/nuclear#readme",
   "scripts": {
-    "postinstall": "lerna bootstrap --hoist --no-ci && electron-builder install-app-deps && electron-rebuild",
+    "postinstall": "lerna bootstrap --hoist && electron-builder install-app-deps",
     "start": "lerna run start --stream",
     "build": "shx rm -rf dist && lerna run build && npm run pack",
     "test": "lerna run lint && lerna run build && lerna run test",
@@ -38,17 +37,15 @@
     "build:all": "lerna run build && cross-env NODE_OPTIONS='--max-old-space-size=8192' electron-builder -c.extraMetadata.main=dist/main.js -mwl"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^4.23.0",
-    "@typescript-eslint/parser": "^4.23.0",
+    "@typescript-eslint/eslint-plugin": "^4.33.0",
+    "@typescript-eslint/parser": "^4.33.0",
     "babel-eslint": "^10.0.3",
-    "cross-env": "^7.0.2",
-    "electron": "^12.0.5",
+    "cross-env": "^7.0.3",
+    "electron": "^12.1.0",
     "electron-builder": "^21.2.0",
-    "electron-rebuild": "^2.0.1",
     "eslint": "^7.18.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.12.4",
-    "eslint-plugin-react-hooks": "^1.6.1",
     "husky": "^3.1.0",
     "lerna": "^3.22.1",
     "lint-staged": "^10.0.0-beta.14",
@@ -76,7 +73,7 @@
   "build": {
     "appId": "nuclear",
     "productName": "nuclear",
-    "artifactName": "${productName}-${env.GITHASH}.${ext}",
+    "artifactName": "${productName}-v${env.VERSION}.${ext}",
     "directories": {
       "output": "release"
     },
@@ -100,7 +97,7 @@
       }
     ],
     "releaseInfo": {
-      "releaseName": "Nuclear ${env.GITHASH}"
+      "releaseName": "Nuclear ${env.VERSION}"
     },
     "fileAssociations": [
       {
@@ -170,14 +167,6 @@
           "filter": [
             "**/*"
           ]
-        },
-        {
-          "from": "node_modules/sqlite3",
-          "to": "resources/node_modules/sqlite3",
-          "filter": [
-            "package.json",
-            "lib/*"
-          ]
         }
       ]
     },
@@ -195,14 +184,6 @@
           "filter": [
             "**/*"
           ]
-        },
-        {
-          "from": "node_modules/sqlite3",
-          "to": "Resources/node_modules/sqlite3",
-          "filter": [
-            "package.json",
-            "lib/*"
-          ]
         }
       ]
     },
@@ -218,22 +199,15 @@
           "filter": [
             "**/*"
           ]
-        },
-        {
-          "from": "node_modules/sqlite3",
-          "to": "resources/node_modules/sqlite3",
-          "filter": [
-            "package.json",
-            "lib/*"
-          ]
         }
       ]
     },
     "nsis": {
-      "artifactName": "${productName} Setup ${env.GITHASH}.${ext}"
+      "artifactName": "${productName} Setup ${env.VERSION}.${ext}"
     }
   },
   "dependencies": {
-    "sqlite3": "^4.2.0"
+    "node-gyp": "^9.0.0",
+    "sqlite3": "^5.1.2"
   }
 }
