@@ -1,42 +1,46 @@
 # Provides support for Electron-based ports
 #
 # Feature:	electron
-# Usage:	USES=electron[:ARGS]
+# Usage:	USES=electron:<version>[,ARGS]
 # Valid ARGS:	<version>, build, run, test
 #
-# <version>:	Indicates a specific major version of Electron the port uses.
-#
-# build:	Indicates Electron is needed at build time and adds it to
-#		BUILD_DEPENDS.
-# run:		Indicates Electron is needed at run time and adds it to
-#		RUN_DEPENDS.
-# test:		Indicates Electron is needed at test time and adds it to
-#		TEST_DEPENDS.
+# <version>:	A specific major version of Electron the port is based on.
+#		The port must specify exactly a single major version.
+# build:	Electron is needed at build time. Adds it to BUILD_DEPENDS.
+# run:		Electron is needed at run time. Adds it to RUN_DEPENDS.
+# test:		Electron is needed at test time. Adds it to TEST_DEPENDS.
 #
 # NOTE: If the port specifies none of build, run or test, we assume the port
 # requires all those dependencies.
 #
-# Variables, which can be set by the port:
+# Variables, which may be set by the port:
 #
 # USE_ELECTRON:		A list of additional features and functionalities to
 #			enable. Supported features are:
 #
-#	npm:		Indicates a node package manager the port uses.
+#	npm:		A node package manager the port uses.
 #			Supported package managers are:
 #
 #		npm:	The port uses NPM as package manager.
+#		yarn:	The port uses Yarn (v1) as package manager.
+#		berry:	The port uses Yarn (v2+ aka berry) as package manager.
 #
-#		yarn:	The port uses Yarn as package manager.
-#
-#		NOTE: A port must specify exactly a single package manager.
+#		NOTE: Only a single package manager can be specified.
 #
 #		Other valid arguments are:
 #
 #		fetch, extract, build, run, and test,
 #
 #		each of which corresponds to respective dependency. If the port
-#		does not specify any of those dependencies, we assume only build
-#		time dependency is required.
+#		does not specify any of those dependencies, we assume only
+#		build time dependency is required.
+#
+#		If the port uses this feature and the package manager is berry,
+#		the following variable must be specified.
+#
+#		YARN_VER: A version of yarn the port uses. The value can be
+#			found in the "packageManager" field in the package.json
+#			file.
 #
 #	prefetch:	Downloads node modules the port uses according to the
 #			pre-stored package.json (and package-lock.json or
@@ -53,67 +57,58 @@
 #			of the archive file. You can use "date '+%s'" command to
 #			acquire this value.
 #
-#	extract:	Installs the pre-fetched node modules into the port's
+#	extract:	Installs the prefetched node modules into the port's
 #			working source directory.
 #
 #	rebuild:	Rebuilds native node modules against nodejs or electron.
 #			Supported arguments are:
 #
 #		nodejs:	Rebuilds native node modules against the version of
-#			NodeJS installed before pre-build phase so that NodeJS
-#			can execute the native modules.
+#			nodejs installed before pre-build phase so that nodejs
+#			can execute the native modules during build.
 #
 #		electron: Rebuilds native node modules against the version of
-#			Electron ionstalled before do-build phase so that the
-#			native modules can be executed with Electron.
+#			electron the port uses before do-build phase so that
+#			the native modules can be executed with Electron on run
+#			time.
 #
-#		NOTE: If the port specify none of those argument, we assume both
-#		nodejs and electron has been specified.
+#		NOTE: If the port specifies none of those arguments, we assume
+#		both nodejs and electron have been specified.
 #
-#		If the port uses this feature and the major version of Electron
-#		is less than 6, the following variable must be specified.
+#		If the port uses this feature, the following variables may be
+#		specified. (The build process tries to auto-detect these
+#		versions so you don't usually have to specify the values.)
 #
 #		UPSTREAM_ELECTRON_VER:
-#			An electron version which is usually specified in
-#			package-lock.json or yarn.lock in the source directory.
-#			The build process will generate a zip archive and a
-#			checksum file from locally installed Electron to prevent
-#			@electron/get from attempting to download binary
-#			distribution file of Electron from GitHub during build
-#			phase.
-#
-#		If the port uses this feature and the port depends on
-#		chromedriver, the following variable must be specified.
-#
 #		UPSTREAM_CHROMEDRIVER_VER:
-#			A chromedriver version which is usually specified in
-#			package-lock.json or yarn.lock in the source directory.
+#		UPSTREAM_MKSNAPSHOT_VER:
+#			An electron/chromedriver/mksnapshot version the port
+#			depends on. Those versions are usually specified in
+#			either package-lock.json or yarn.lock file in the
+#			source directory.
+#
 #			The build process will generate a zip archive and a
-#			checksum file from locally installed Electron to prevent
-#			@electron/get from attempting to download binary
-#			distribution file of chromedriver from GitHub during build
-#			phase.
+#			checksum file of electron/chromedriver/mksnapshot to
+#			prevent the build phase to download binary distribution
+#			files from GitHub.
 #
-#		NOTE: The generated zip and checksum files are just for
-#		preventing download and will not be used for other purposes.
-#		This is ugly but seems necessary.
-#
-#	build:		Prepares an Electron application in a distributable
-#			format using the specified node module as an argument.
+#	build:		Prepares an electron application in a distributable
+#			format using the specified package builder as an
+#			argument.
 #
 #		If you use this feature, one of the following argument must be
 #		specified. Valid arguments are:
 #
 #		builder:	Uses electron-builder for packaging.
-#
+#		forge:		Uses electron-forge for packageing.
 #		packager:	Uses electron-packager for packaging.
 #
 #		If you use this feature, the following variable can be
 #		specified.
 #
 #		ELECTRON_MAKE_FLAGS:
-#			Additional flags to pass to the specified packaging
-#			module. The default flags are defined in this file.
+#			Additional flags to pass to the specified package
+#			builder. The default flags are defined in this file.
 #
 # MAINTAINER:	tagattie@FreeBSD.org
 
@@ -562,7 +557,7 @@ electron-rebuild-native-node-modules-for-electron:
 .	if ${_ELECTRON_FEATURE_BUILD} == builder
 .	    if ${_NODEJS_NPM} == npm
 		# @cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		# 	npx electron-builder install-app-deps --platform linux
+		#	npx electron-builder install-app-deps --platform linux
 		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			./node_modules/.bin/electron-builder install-app-deps --platform linux
 .	    elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
