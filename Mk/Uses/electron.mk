@@ -627,7 +627,6 @@ MAKE_ENV+=	PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1	# don't download chromium for pupp
 MAKE_ENV+=	SASS_FORCE_BUILD=true		# always rebuild native node-sass module
 MAKE_ENV+=	USE_SYSTEM_7ZA=true		# always use system 7za
 MAKE_ENV+=	USE_SYSTEM_APP_BUILDER=true	# always use system app-builder for electron-builder
-MAKE_ENV+=	XDG_CACHE_HOME=${WRKDIR}/.cache
 MAKE_ENV+=	npm_config_build_from_source=true
 MAKE_ENV+=	npm_config_python=${PYTHON_CMD}
 SUB_LIST+=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
