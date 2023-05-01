@@ -1,7 +1,7 @@
 PORTNAME=	electron
 DISTVERSIONPREFIX=	v
 DISTVERSION=	${ELECTRON_VER:S/-beta./.b/}
-PORTREVISION=	7
+PORTREVISION=	8
 CATEGORIES=	devel java
 MASTER_SITES=	https://commondatastorage.googleapis.com/chromium-browser-official/:chromium \
 		https://commondatastorage.googleapis.com/chromium-fonts/:chromium_testfonts
@@ -163,6 +163,7 @@ GN_ARGS+=		clang_use_chrome_plugins=false \
 GN_BOOTSTRAP_FLAGS=	--no-clean --no-rebuild --skip-generate-buildfiles
 
 .include "Makefile.version"
+.include "${.CURDIR:H:H}/multimedia/ffmpeg4/override.mk"
 .include <bsd.port.pre.mk>
 
 # Add extra-patch-no-mempcpy-nasm only when there's no mempcpy() in base.
