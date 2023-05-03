@@ -23,7 +23,8 @@ USES=		electron:19 gmake localbase:ldflags nodejs:16,build python:build
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
 
-BINARY_ALIAS=	python3=${PYTHON_CMD}
+BINARY_ALIAS=	python=${PYTHON_CMD} \
+		python3=${PYTHON_CMD}
 
 SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}
 
