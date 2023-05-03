@@ -50,7 +50,7 @@ USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf2 glib20 gtk30 libxml2 libxslt pango
 
-BINARY_ALIAS=	pyrhon3=${PYTHON_CMD}
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 
 PORTDOCS=	README.md cli.md developer-notes.md import-export.md issues.md
 
