@@ -24,6 +24,7 @@ BUILD_WRKSRC=	${WRKSRC}/packages/desktop
 USES=		desktop-file-utils electron:22 gmake localbase:ldflags \
 		nodejs:16,build pkgconfig python:build
 
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CHANGELOG.md README.md SECURITY.md
