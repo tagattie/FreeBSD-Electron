@@ -22,6 +22,8 @@ GH_PROJECT=	${PORTNAME}-electron
 
 USE_XORG=	x11 xau xdmcp xkbfile
 
+MAKE_ENV+=	npm_config_python=${PYTHON_CMD}
+
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CONTRIBUTING.md README.md RELEASE-NOTES.md
