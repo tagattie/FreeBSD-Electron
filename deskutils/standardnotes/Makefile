@@ -1,6 +1,6 @@
 PORTNAME=	standardnotes
-DISTVERSIONPREFIX=	 @standardnotes/desktop@
-DISTVERSION=	3.150.7
+DISTVERSIONPREFIX=	@standardnotes/desktop@
+DISTVERSION=	3.159.0
 CATEGORIES=	deskutils
 DIST_SUBDIR=	${PORTNAME}
 
@@ -14,6 +14,7 @@ LICENSE_FILE=	${WRKSRC}/packages/desktop/LICENSE
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		bash:shells/bash \
 		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
+LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
 USE_GITHUB=	yes
 GH_PROJECT=	app
@@ -33,7 +34,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:berry extract rebuild build:builder
 
-PREFETCH_TIMESTAMP=	1678862224
 YARN_VER=	3.2.1
 NPM_CACHE_SETUP_CMD=	${TRUE}
 REBUILD_WRKSRC_ELECTRON=	${BUILD_WRKSRC}
@@ -46,8 +46,7 @@ pre-build:
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
-		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 128 256 512
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${BUILD_WRKSRC}/build/icon.iconset/icon_${size}x${size}.png \
@@ -59,7 +58,7 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${BUILD_WRKSRC}/dist/linux-unpacked && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	cd ${STAGEDIR}${DATADIR}/resources/app.asar.unpacked && \
+	cd ${STAGEDIR}${DATADIR}/resources && \
 		${FIND} . -type f -exec ${FILE} {} ';' | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
