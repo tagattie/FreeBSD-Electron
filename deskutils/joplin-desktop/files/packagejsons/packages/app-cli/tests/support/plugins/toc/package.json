@@ -27,5 +27,8 @@
   },
   "dependencies": {
     "uslug": "^1.0.4"
-  }
+  },
+  "files": [
+    "publish"
+  ]
 }

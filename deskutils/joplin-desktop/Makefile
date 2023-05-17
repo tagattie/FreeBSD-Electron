@@ -1,6 +1,6 @@
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.9.17
+DISTVERSION=	2.10.18
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DIST_SUBDIR=	${PORTNAME}${PKGNAMESUFFIX}
@@ -37,8 +37,8 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:berry prefetch extract rebuild:nodejs build:builder
 
-PREFETCH_TIMESTAMP=	1678340740
-YARN_VER=	3.1.1
+PREFETCH_TIMESTAMP=	1684301923
+YARN_VER=	3.3.1
 
 post-patch:
 	${RM} -r ${WRKSRC}/packages/app-cli \
@@ -51,8 +51,7 @@ pre-build:
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} ${STAGEDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}${PKGNAMESUFFIX}.desktop \
-		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}${PKGNAMESUFFIX}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 24 32 48 72 96 128 144 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${BUILD_WRKSRC}/build/icons/${size}x${size}.png \
@@ -61,6 +60,9 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${BUILD_WRKSRC}/dist/linux-unpacked && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	cd ${STAGEDIR}${DATADIR}/resources && \
+		${FIND} . -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
