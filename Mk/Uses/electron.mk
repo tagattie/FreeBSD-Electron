@@ -301,6 +301,7 @@ NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --immutable-cache
 .endif
 
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
+YARNPATCHESDIR?=	${FILESDIR}/yarnpatches
 PREFETCH_TIMESTAMP?=	0
 YARN_VER?=		0
 
@@ -363,6 +364,10 @@ electron-fetch-node-modules:
 		${ECHO_MSG} "===>   Setting up node modules cache directory"; \
 		${MKDIR} ${WRKDIR}/node-modules-cache; \
 		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
+		if [ -d ${YARNPATCHESDIR} ]; then \
+			${MKDIR} ${WRKDIR}/node-modules-cache/.yarn/patches; \
+			${CP} -R ${YARNPATCHESDIR}/* ${WRKDIR}/node-modules-cache/.yarn/patches; \
+		fi; \
 		cd ${WRKDIR}/node-modules-cache && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}; \
 		${ECHO_MSG} "===>   Prefetching and archiving node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
