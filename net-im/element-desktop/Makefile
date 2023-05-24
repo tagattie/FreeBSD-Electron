@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.29
+DISTVERSION=	1.11.31
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/keytar/-/:keytar \
@@ -21,7 +21,7 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo desktop-file-utils electron:23 nodejs:18,build \
+USES=		cargo desktop-file-utils electron:24 nodejs:18,build \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
@@ -29,8 +29,8 @@ GH_ACCOUNT=	vector-im
 
 SUB_FILES=	${PORTNAME}
 
-CARGO_CARGOTOML=${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build/native/Cargo.toml
-CARGO_CARGOLOCK=${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build/native/Cargo.lock
+CARGO_CARGOTOML=${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build/Cargo.lock
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
@@ -44,9 +44,9 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn,fetch,extract,build build:builder
 
 PREFETCH_FILE=		${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1682149389
+PREFETCH_TIMESTAMP=	1684892820
 KEYTAR_VER=		7.9.0
-MATRIX_SESHAT_VER=	2.3.3
+MATRIX_SESHAT_VER=	3.0.1
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
