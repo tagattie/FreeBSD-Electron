@@ -1552,6 +1552,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/api/middleware.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/bell.ogg
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/cli.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/colorSchemes.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/components/appearanceSettingsTab.component.pug
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/components/appearanceSettingsTab.component.scss
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/components/appearanceSettingsTab.component.ts
@@ -1612,6 +1613,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/api/interfaces.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/api/middleware.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/cli.d.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/colorSchemes.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/components/appearanceSettingsTab.component.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/components/colorPicker.component.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/components/colorSchemePreview.component.d.ts

@@ -1,6 +1,6 @@
 {
   "name": "tabby-terminal",
-  "version": "1.0.189-nightly.2",
+  "version": "1.0.197-nightly.1",
   "description": "Tabby's terminal emulation core",
   "keywords": [
     "tabby-builtin-plugin"
@@ -13,6 +13,7 @@
     "prepare": "patch-package"
   },
   "files": [
+    "dist",
     "typings"
   ],
   "author": "Eugene Pankov",
@@ -28,7 +29,7 @@
     "patch-package": "^6.5.0",
     "runes": "^0.4.2",
     "xterm": "^5.1.0",
-    "xterm-addon-canvas": "^0.3.0",
+    "xterm-addon-canvas": "^0.4.0-beta.9",
     "xterm-addon-fit": "^0.7.0",
     "xterm-addon-image": "^0.3.1",
     "xterm-addon-ligatures": "^0.6.0",
@@ -39,13 +40,13 @@
     "zmodem.js": "^0.1.9"
   },
   "peerDependencies": {
-    "@angular/animations": "^9.1.9",
-    "@angular/common": "^9.1.11",
-    "@angular/core": "^9.1.9",
-    "@angular/forms": "^9.1.11",
-    "@angular/platform-browser": "^9.1.11",
-    "@ng-bootstrap/ng-bootstrap": "^6.1.0",
-    "rxjs": "^6.5.5",
+    "@angular/animations": "^15",
+    "@angular/common": "^15",
+    "@angular/core": "^15",
+    "@angular/forms": "^15",
+    "@angular/platform-browser": "^15",
+    "@ng-bootstrap/ng-bootstrap": "^14",
+    "rxjs": "^7",
     "tabby-core": "*",
     "tabby-settings": "*"
   }

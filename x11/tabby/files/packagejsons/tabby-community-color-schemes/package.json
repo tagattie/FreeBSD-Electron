@@ -1,6 +1,6 @@
 {
   "name": "tabby-community-color-schemes",
-  "version": "1.0.189-nightly.2",
+  "version": "1.0.197-nightly.1",
   "description": "Community color schemes for Tabby",
   "keywords": [
     "tabby-builtin-plugin"
@@ -17,7 +17,7 @@
   "author": "Eugene Pankov",
   "license": "MIT",
   "peerDependencies": {
-    "@angular/core": "^9.1.9",
+    "@angular/core": "^15",
     "tabby-core": "*",
     "tabby-terminal": "*"
   }

@@ -1,6 +1,6 @@
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.196
+DISTVERSION=	1.0.197
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -23,7 +23,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libevent.so:devel/libevent \
 		libpci.so:devel/libpci \
 		libnspr4.so:devel/nspr \
-		libpcre.so:devel/pcre \
+		libpcre2-8.so:devel/pcre2 \
 		libdrm.so:graphics/libdrm \
 		libpng.so:graphics/png \
 		libwayland-client.so:graphics/wayland \
@@ -39,8 +39,8 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		electron:22 gl gmake gnome iconv jpeg localbase:ldflags \
-		nodejs:16,build pkgconfig python:build xorg
+USES=		electron:22 gl gmake gnome iconv:wchar_t jpeg \
+		localbase:ldflags nodejs:16,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
@@ -58,7 +58,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn,fetch,extract,build build:builder
 
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1678168966
+PREFETCH_TIMESTAMP=	1685357156
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
