@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	3.9.3
+DISTVERSION=	3.9.4
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -25,7 +25,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1681975805
+PREFETCH_TIMESTAMP=	1685413162
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
