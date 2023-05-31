@@ -127,7 +127,7 @@ _VALID_ELECTRON_FEATURES_BUILD=	builder forge packager
 _ELECTRON_BASE_CMD=	electron
 _ELECTRON_RELPORTDIR=	devel/electron
 _ELECTRON_DOWNLOAD_URL_BASE=	https://github.com/electron/electron/releases/download
-_ELECTRON_ARCH=		${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
+ELECTRON_ARCH=		${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 
 # Process USES=electron[:ARGS]
 # Detect build, run or test dependency
@@ -510,7 +510,7 @@ electron-generate-electron-zip:
 .   if defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == packager
 	@${MKDIR} ${WRKDIR}/.cache/electron
 	@cd ${WRKDIR}/electron-dist && \
-		zip -q -r ${WRKDIR}/.cache/electron/electron-v${ELECTRON_VER}-linux-${_ELECTRON_ARCH}.zip .
+		zip -q -r ${WRKDIR}/.cache/electron/electron-v${ELECTRON_VER}-linux-${ELECTRON_ARCH}.zip .
 	@cd ${WRKDIR}/.cache/electron && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${ELECTRON_VER}
@@ -518,7 +518,7 @@ electron-generate-electron-zip:
 .   if defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == forge
 	@${MKDIR} ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}
 	@cd ${WRKDIR}/electron-dist && \
-		zip -q -r ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}/electron-v${UPSTREAM_ELECTRON_VER}-linux-${_ELECTRON_ARCH}.zip .
+		zip -q -r ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}/electron-v${UPSTREAM_ELECTRON_VER}-linux-${ELECTRON_ARCH}.zip .
 	@cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}
@@ -526,7 +526,7 @@ electron-generate-electron-zip:
 .   if defined(UPSTREAM_CHROMEDRIVER_VER) && ${UPSTREAM_CHROMEDRIVER_VER} != ""
 	@${MKDIR} ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}
 	@cd ${WRKDIR}/electron-dist && \
-		zip -q -r ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${_ELECTRON_ARCH}.zip .
+		zip -q -r ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${ELECTRON_ARCH}.zip .
 	@cd ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_CHROMEDRIVER_VER}
@@ -534,7 +534,7 @@ electron-generate-electron-zip:
 .   if defined(UPSTREAM_MKSNAPSHOT_VER) && ${UPSTREAM_MKSNAPSHOT_VER} != ""
 	@${MKDIR} ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}
 	@cd ${WRKDIR}/electron-dist && \
-		zip -q -r ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}/mksnapshot-v${UPSTREAM_MKSNAPSHOT_VER}-freebsd-${_ELECTRON_ARCH}.zip .
+		zip -q -r ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}/mksnapshot-v${UPSTREAM_MKSNAPSHOT_VER}-freebsd-${ELECTRON_ARCH}.zip .
 	@cd ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_MKSNAPSHOT_VER}
