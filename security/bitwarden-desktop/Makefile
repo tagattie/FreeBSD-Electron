@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2023.4.0
+DISTVERSION=	2023.5.0
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -18,8 +18,8 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo electron:21 gmake gnome localbase:ldflags \
-		nodejs:16,build pkgconfig python:build xorg
+USES=		cargo electron:24 gmake gnome localbase:ldflags \
+		nodejs:18,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
@@ -46,7 +46,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1684916210
+PREFETCH_TIMESTAMP=	1686654699
 
 pre-build:
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build

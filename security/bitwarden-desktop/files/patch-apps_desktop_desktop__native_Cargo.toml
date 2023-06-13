@@ -1,10 +1,10 @@
---- apps/desktop/desktop_native/Cargo.toml.orig	2023-04-26 11:30:57 UTC
+--- apps/desktop/desktop_native/Cargo.toml.orig	2023-05-31 00:42:10 UTC
 +++ apps/desktop/desktop_native/Cargo.toml
-@@ -52,6 +52,6 @@ core-foundation = "0.9.3"
- security-framework = "2.6.1"
- security-framework-sys = "2.6.1"
+@@ -52,6 +52,6 @@ core-foundation = "=0.9.3"
+ security-framework = "=2.8.2"
+ security-framework-sys = "=2.8.0"
  
 -[target.'cfg(target_os = "linux")'.dependencies]
 +[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
- gio = "0.15.6"
- libsecret = "0.1.4"
+ gio = "=0.15.12"
+ libsecret = "=0.1.5"

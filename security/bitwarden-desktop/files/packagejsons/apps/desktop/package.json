@@ -1,7 +1,7 @@
 {
   "name": "@bitwarden/desktop",
   "description": "A secure and free password manager for all of your devices.",
-  "version": "2023.4.0",
+  "version": "2023.5.0",
   "keywords": [
     "bitwarden",
     "password",
@@ -29,7 +29,7 @@
     "build:renderer:watch": "cross-env NODE_ENV=development webpack --config webpack.renderer.js --watch",
     "electron": "node ./scripts/start.js",
     "electron:ignore": "node ./scripts/start.js --ignore-certificate-errors",
-    "clean:dist": "rimraf ./dist/*",
+    "clean:dist": "rimraf ./dist",
     "pack:dir": "npm run clean:dist && electron-builder --dir -p never",
     "pack:lin": "npm run clean:dist && electron-builder --linux --x64 -p never",
     "pack:mac": "npm run clean:dist && electron-builder --mac --universal -p never",
