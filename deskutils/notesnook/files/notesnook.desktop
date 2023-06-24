@@ -1,0 +1,24 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Notesnook
+Comment=Fully open source & end-to-end encrypted note taking application
+Icon=notesnook
+Exec=notesnook %U
+Categories=Office;
+Terminal=false
+StartupWMClass=Notesnook
+Actions=new-note;new-notebook;new-reminder;
+
+[Desktop Action new-note]
+Name=New note
+Exec=notesnook %U new note
+
+[Desktop Action new-notebook]
+Name=New notebook
+Exec=notesnook %U new notebook
+
+[Desktop Action new-reminder]
+Name=New reminder
+Exec=notesnook %U new reminder

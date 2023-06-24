@@ -1,0 +1,32 @@
+{
+  "name": "@notesnook/logger",
+  "version": "1.0.3",
+  "description": "A really simple logger with a pluggable interface.",
+  "main": "dist/index.js",
+  "scripts": {
+    "pub": "tsc && np",
+    "build": "tsc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/streetwriters/logger.git"
+  },
+  "keywords": [
+    "logger"
+  ],
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/streetwriters/logger/issues"
+  },
+  "homepage": "https://github.com/streetwriters/logger#readme",
+  "np": {
+    "tests": false,
+    "releaseDraft": false,
+    "message": "chore: bump version to %s"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "devDependencies": {}
+}

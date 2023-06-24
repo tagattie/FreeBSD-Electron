@@ -1,0 +1,9 @@
+TIMESTAMP = 1687527295
+SHA256 (notesnook/libsodium-1.0.18-stable.tar.gz) = 7e7a81385a295110998424f06f39e4438f1b43e732958dff2d7db293915da75d
+SIZE (notesnook/libsodium-1.0.18-stable.tar.gz) = 1874043
+SHA256 (notesnook/components.json) = fdbfb02831a85a2f233cb8b2254fe8dd283fa780533820ed8ccc888c09982554
+SIZE (notesnook/components.json) = 33941
+SHA256 (notesnook/notesnook-2.5.3-node-modules.tar.gz) = 6b158313168a7de36431be21005d2156d87e70eb0083af5d6749624ce16b16f9
+SIZE (notesnook/notesnook-2.5.3-node-modules.tar.gz) = 371359556
+SHA256 (notesnook/streetwriters-notesnook-v2.5.3_GH0.tar.gz) = ce18abbfc76eb2e7a26b025727439baccf55390db4a8648aeedc67676668451a
+SIZE (notesnook/streetwriters-notesnook-v2.5.3_GH0.tar.gz) = 25244422

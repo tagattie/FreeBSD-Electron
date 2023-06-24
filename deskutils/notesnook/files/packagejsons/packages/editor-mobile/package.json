@@ -1,0 +1,59 @@
+{
+  "name": "@notesnook/editor-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "dependencies": {
+    "@notesnook/editor": "*",
+    "@notesnook/theme": "*",
+    "framer-motion": "^6.5.1",
+    "@mdi/js": "^6.9.96",
+    "@mdi/react": "^1.6.0",
+    "mdi-react": "9.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "zustand": "^3.6.8",
+    "@emotion/react": "^11.10.0"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.16.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "@types/jest": "^27.0.3",
+    "@types/node": "^16.11.11",
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.2",
+    "react-error-overlay": "6.0.9",
+    "react-scripts": "^5.0.1",
+    "web-vitals": "^1.1.2",
+    "env-cmd": "^10.1.0"
+  },
+  "scripts": {
+    "start": "env-cmd -e all react-scripts start",
+    "build": "env-cmd -e all react-scripts build && rm -rf build.bundle && mv build build.bundle",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "postinstall": "patch-package"
+  },
+  "homepage": ".",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "outputs": [
+          "{projectRoot}/build.bundle"
+        ]
+      }
+    }
+  }
+}
