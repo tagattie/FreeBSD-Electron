@@ -1,6 +1,6 @@
 PORTNAME=	teams
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.1.1
+DISTVERSION=	1.1.6
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -27,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1685345692
+PREFETCH_TIMESTAMP=	1687864675
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
@@ -38,7 +38,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/dist/linux-unpacked && \
+	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
 do-install-DOCS-on:
