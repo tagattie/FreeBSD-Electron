@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	5.3.1
+DISTVERSION=	5.4.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		jq:textproc/jq
 
-USES=		desktop-file-utils electron:23 nodejs:18,build python:build
+USES=		desktop-file-utils electron:24 nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
@@ -28,7 +28,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1681979037
+PREFETCH_TIMESTAMP=	1687867554
 
 pre-build:
 	${MKDIR} ${WRKSRC}/node_modules/node-jq/bin
@@ -38,8 +38,8 @@ pre-build:
 	# generate icons
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=src/assets
-.for size in 1024
-	${MV} ${WRKSRC}/icons/icon_${size}.png ${WRKSRC}/icons/icon_${size}x${size}.png
+.for size in 16 48
+	${MV} ${WRKSRC}/icons/icon_${size}x${size}.png ${WRKSRC}/icons/icon_${size}.png
 .endfor
 	# ensure native node modules for windows-focus-assist is built
 	# electron-builder install-app-deps does not build this native module
@@ -54,11 +54,11 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/applications
 .for size in 16 32 48 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
-	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}x${size}.png \
+	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/release/linux-unpacked && \
+	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	cd ${STAGEDIR}${DATADIR}/resources && \
 		${FIND} . -type f -exec ${FILE} {} ';' | \

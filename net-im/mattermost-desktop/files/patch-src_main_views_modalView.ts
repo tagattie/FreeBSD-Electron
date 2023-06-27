@@ -1,6 +1,6 @@
---- src/main/views/modalView.ts.orig	2023-03-03 01:49:53 UTC
+--- src/main/views/modalView.ts.orig	2023-06-19 18:19:05 UTC
 +++ src/main/views/modalView.ts
-@@ -68,7 +68,7 @@ export class ModalView<T, T2> {
+@@ -71,7 +71,7 @@ export class ModalView<T, T2> {
          const setBoundsFunction = () => {
              this.view.setBounds(getWindowBoundaries(this.windowAttached!));
          };
