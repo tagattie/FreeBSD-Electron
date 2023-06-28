@@ -1,5 +1,5 @@
-TIMESTAMP = 1678168235
-SHA256 (min-1.27.0-node-modules.tar.gz) = 7e826f02fad9634fcfec9a0a27f66c6ddb7ebe7de8b80efc357a2a07a436db60
-SIZE (min-1.27.0-node-modules.tar.gz) = 92939754
-SHA256 (minbrowser-min-v1.27.0_GH0.tar.gz) = c6ac5c46faf8e2ce612e0c76541db368deffa590c067af56988307f74fe3b616
-SIZE (minbrowser-min-v1.27.0_GH0.tar.gz) = 6609307
+TIMESTAMP = 1687939634
+SHA256 (min-1.28.0-node-modules.tar.gz) = 2cf711e72a4aff0e988bd9747a5b60f11ccfc415a8ee13ad9b45b23db08d3596
+SIZE (min-1.28.0-node-modules.tar.gz) = 93674448
+SHA256 (minbrowser-min-v1.28.0_GH0.tar.gz) = 86d2a6b811a7524a42aec69569571b315c13472ff0a83e1c1db2de12385d2d39
+SIZE (minbrowser-min-v1.28.0_GH0.tar.gz) = 6616519

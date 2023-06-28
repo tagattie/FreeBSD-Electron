@@ -1,6 +1,6 @@
 PORTNAME=	min
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.27.0
+DISTVERSION=	1.28.0
 CATEGORIES=	www
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:22 nodejs:16,build pkgconfig \
+USES=		desktop-file-utils electron:24 nodejs:18,build pkgconfig \
 		python:build
 
 USE_GITHUB=	yes
@@ -27,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild build:packager
 
-PREFETCH_TIMESTAMP=	1676967724
+PREFETCH_TIMESTAMP=	1687938253
 ELECTRON_MAKE_FLAGS+=	--asar \
 			--ignore='.DS_Store' \
 			--ignore='dist/app' \
@@ -68,7 +68,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/dist/app/Min-linux-x64 && \
+	cd ${WRKSRC}/dist/app/Min-linux-${ELECTRON_ARCH} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
 do-install-DOCS-on:
