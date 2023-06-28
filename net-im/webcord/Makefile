@@ -1,6 +1,6 @@
 PORTNAME=	webcord
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.2.0
+DISTVERSION=	4.3.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		git:devel/git
 
-USES=		electron:24 nodejs:18,build
+USES=		electron:25 nodejs:18,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	SpacingBat3
@@ -23,7 +23,7 @@ SUB_FILES=	${PORTNAME}
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:forge
 
-PREFETCH_TIMESTAMP=	1682148119
+PREFETCH_TIMESTAMP=	1687933457
 MAKE_ENV+=	WEBCORD_BUILD=release \
 		WEBCORD_UPDATE_NOTIFICATIONS=false
 
@@ -43,7 +43,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/out/release/WebCord-linux-x64 && \
+	cd ${WRKSRC}/out/release/WebCord-linux-${ELECTRON_ARCH} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
 do-test:
