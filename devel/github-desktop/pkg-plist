@@ -1151,6 +1151,7 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/resources/app/git/share/git-core/templates/hooks/pre-receive.sample
 %%DATADIR%%/resources/app/git/share/git-core/templates/hooks/prepare-commit-msg.sample
 %%DATADIR%%/resources/app/git/share/git-core/templates/hooks/push-to-checkout.sample
+%%DATADIR%%/resources/app/git/share/git-core/templates/hooks/sendemail-validate.sample
 %%DATADIR%%/resources/app/git/share/git-core/templates/hooks/update.sample
 %%DATADIR%%/resources/app/git/share/git-core/templates/info/exclude
 %%DATADIR%%/resources/app/git/share/gitweb/gitweb.cgi
@@ -1320,6 +1321,8 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/resources/app/static/empty-no-pull-requests.svg
 %%DATADIR%%/resources/app/static/empty-no-repo.svg
 %%DATADIR%%/resources/app/static/explore.svg
+%%DATADIR%%/resources/app/static/ghd_dark.svg
+%%DATADIR%%/resources/app/static/ghd_light.svg
 %%DATADIR%%/resources/app/static/github-for-business.svg
 %%DATADIR%%/resources/app/static/github-for-teams.svg
 %%DATADIR%%/resources/app/static/gitignore/.github/PULL_REQUEST_TEMPLATE.md

@@ -1,6 +1,6 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.2.1
+DISTVERSION=	3.2.5
 DISTVERSIONSUFFIX=	-linux1
 CATEGORIES=	devel
 MASTER_SITES=	KERNEL_ORG/software/scm/git:git
@@ -62,15 +62,15 @@ USE_ELECTRON=	npm:yarn,fetch,extract,build
 
 .include <bsd.port.pre.mk>
 
-GIT_VER=	2.40.0
+GIT_VER=	2.41.0
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1682075838
+PREFETCH_TIMESTAMP=	1688453309
 UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.lock | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 ELECTRON_DOWNLOAD_URL=		https://github.com/electron/electron/releases/download/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
-MAKE_ENV+=	CIRCLE_SHA1=185b47fac6fce0fd198807367a2dcd98e6035962
+MAKE_ENV+=	CIRCLE_SHA1=58709c3a531e2f8987be46d2ee18815da9a959f4
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -125,14 +125,14 @@ pre-build:
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
 	${MKDIR} ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}
 	cd ${WRKDIR}/electron-dist && \
-		zip -q -r ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}/electron-v${UPSTREAM_ELECTRON_VER}-linux-x64.zip .
+		zip -q -r ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}/electron-v${UPSTREAM_ELECTRON_VER}-linux-${ELECTRON_ARCH}.zip .
 	cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}
 
 do-build:
 	cd ${WRKDIR}/git-${GIT_VER} && \
-		./configure --prefix=${WRKSRC}/app/node_modules/dugite/git \
+		./configure --prefix=${WRKSRC}/app/node_modules/@shiftkey/dugite/git \
 			--enable-pthreads=-pthread \
 			--with-iconv=${LOCALBASE} \
 			--without-tcltk && \
@@ -151,7 +151,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd "${WRKSRC}/dist/GitHub Desktop-linux-x64" && \
+	cd "${WRKSRC}/dist/GitHub Desktop-linux-${ELECTRON_ARCH}" && \
 		${TAR} -cf - . | ${TAR} -xf - -C ${STAGEDIR}${DATADIR}
 	cd ${STAGEDIR}${DATADIR}/resources && \
 		${FIND} . -type f -exec ${FILE} {} ';' | \

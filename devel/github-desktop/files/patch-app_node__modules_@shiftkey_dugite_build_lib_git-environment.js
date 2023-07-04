@@ -1,5 +1,5 @@
---- app/node_modules/dugite/build/lib/git-environment.js.orig	2023-03-14 02:18:29 UTC
-+++ app/node_modules/dugite/build/lib/git-environment.js
+--- app/node_modules/@shiftkey/dugite/build/lib/git-environment.js.orig	2023-07-04 07:17:35 UTC
++++ app/node_modules/@shiftkey/dugite/build/lib/git-environment.js
 @@ -4,7 +4,7 @@ exports.setupEnvironment = void 0;
  const path = require("path");
  function resolveEmbeddedGitDir() {

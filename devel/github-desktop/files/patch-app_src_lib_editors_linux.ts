@@ -1,4 +1,4 @@
---- app/src/lib/editors/linux.ts.orig	2023-04-07 17:53:27 UTC
+--- app/src/lib/editors/linux.ts.orig	2023-07-03 20:54:24 UTC
 +++ app/src/lib/editors/linux.ts
 @@ -18,52 +18,52 @@ interface ILinuxExternalEditor {
  const editors: ILinuxExternalEditor[] = [
@@ -152,5 +152,5 @@
 -    paths: ['/usr/bin/mousepad'],
 +    paths: ['%%LOCALBASE%%/bin/mousepad'],
    },
-   {
-     name: 'IntelliJ PhpStorm',
+ ]
+ 
