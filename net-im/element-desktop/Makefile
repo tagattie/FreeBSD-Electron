@@ -29,8 +29,8 @@ GH_ACCOUNT=	vector-im
 
 SUB_FILES=	${PORTNAME}
 
-CARGO_CARGOTOML=${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build/Cargo.toml
-CARGO_CARGOLOCK=${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build/Cargo.lock
+CARGO_CARGOTOML=${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build/Cargo.lock
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
@@ -47,6 +47,7 @@ PREFETCH_FILE=		${PKGNAME}-node-modules${EXTRACT_SUFX}
 PREFETCH_TIMESTAMP=	1687256834
 KEYTAR_VER=		7.9.0
 MATRIX_SESHAT_VER=	3.0.1
+RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -78,22 +79,22 @@ post-extract:
 	cd ${WRKSRC} && ${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
 	cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn install --frozen-lockfile --ignore-scripts --offline
-	${MKDIR} ${WRKSRC}/.hak/hakModules/keytar ${WRKSRC}/.hak/keytar/x86_64-unknown-freebsd/build
+	${MKDIR} ${WRKSRC}/.hak/hakModules/keytar ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build
 	${TAR} -xf ${DISTDIR}/keytar-${KEYTAR_VER}.tgz --strip-components 1 \
 		-C ${WRKSRC}/.hak/hakModules/keytar
 	${TAR} -xf ${DISTDIR}/keytar-${KEYTAR_VER}.tgz --strip-components 1 \
-		-C ${WRKSRC}/.hak/keytar/x86_64-unknown-freebsd/build
-	${CP} ${PKGJSONSDIR}/keytar/yarn.lock ${WRKSRC}/.hak/keytar/x86_64-unknown-freebsd/build
-	cd ${WRKSRC}/.hak/keytar/x86_64-unknown-freebsd/build && \
+		-C ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build
+	${CP} ${PKGJSONSDIR}/keytar/yarn.lock ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build
+	cd ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build && \
 		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn install --frozen-lockfile --ignore-scripts --offline
-	${MKDIR} ${WRKSRC}/.hak/hakModules/matrix-seshat ${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build
+	${MKDIR} ${WRKSRC}/.hak/hakModules/matrix-seshat ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
 	${TAR} -xf ${DISTDIR}/matrix-seshat-${MATRIX_SESHAT_VER}.tgz --strip-components 1 \
 		-C ${WRKSRC}/.hak/hakModules/matrix-seshat
 	${TAR} -xf ${DISTDIR}/matrix-seshat-${MATRIX_SESHAT_VER}.tgz --strip-components 1 \
-		-C ${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build
-	${CP} ${PKGJSONSDIR}/matrix-seshat/yarn.lock ${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build
-	cd ${WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build && \
+		-C ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
+	${CP} ${PKGJSONSDIR}/matrix-seshat/yarn.lock ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
+	cd ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build && \
 		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn install --frozen-lockfile --ignore-scripts --offline
 	${RM} ${WRKSRC}/.yarnrc
