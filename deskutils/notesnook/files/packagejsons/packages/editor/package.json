@@ -5,6 +5,7 @@
   "types": "dist/index.d.ts",
   "license": "GPL-3.0-or-later",
   "dependencies": {
+    "clipboard-polyfill": "^4.0.0",
     "@emotion/react": "^11.10.0",
     "@notesnook/theme": "*",
     "@notesnook/core": "*",
@@ -74,8 +75,8 @@
   },
   "scripts": {
     "test": "vitest run",
-    "prebuild": "zx ./scripts/build.mjs",
-    "prewatch": "zx ./scripts/build.mjs",
+    "prebuild": "node ./scripts/build.mjs",
+    "prewatch": "node ./scripts/build.mjs",
     "build": "tsc",
     "watch": "tsc --watch",
     "prepublishOnly": "npm run build && npm run test",
