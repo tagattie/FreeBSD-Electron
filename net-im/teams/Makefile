@@ -1,6 +1,6 @@
 PORTNAME=	teams
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.1.11
+DISTVERSION=	1.2.3
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,8 +12,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:21 localbase:ldflags \
-		nodejs:16,build python:build
+USES=		desktop-file-utils electron:24 localbase:ldflags \
+		nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	IsmaelMartinez
@@ -27,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1688545983
+PREFETCH_TIMESTAMP=	1688889919
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
