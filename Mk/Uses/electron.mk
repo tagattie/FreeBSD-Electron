@@ -590,7 +590,7 @@ ELECTRON_MAKE_CMD?=	npx electron-builder
 .	elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 ELECTRON_MAKE_CMD?=	yarn run electron-builder
 .	endif
-ELECTRON_MAKE_FLAGS+=	--linux --dir \
+ELECTRON_MAKE_FLAGS?=	--linux --dir \
 			--config.npmRebuild=false \
 			--config.electronVersion=${ELECTRON_VER} \
 			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
@@ -602,7 +602,7 @@ ELECTRON_MAKE_CMD?=	npx electron-packager
 .	elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 ELECTRON_MAKE_CMD?=	yarn run electron-packager
 .	endif
-ELECTRON_MAKE_FLAGS+=	--platform=linux \
+ELECTRON_MAKE_FLAGS?=	--platform=linux \
 			--no-download \
 			--electron-version=${ELECTRON_VER} \
 			--electron-zip-dir=${WRKDIR}/.cache/electron \
@@ -615,7 +615,7 @@ ELECTRON_MAKE_CMD?=	npx electron-forge package
 .	elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 ELECTRON_MAKE_CMD?=	yarn run electron-forge package
 .	endif
-ELECTRON_MAKE_FLAGS+=	--platform=linux
+ELECTRON_MAKE_FLAGS?=	--platform=linux
 DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   endif
 ALL_TARGET=	# empty
