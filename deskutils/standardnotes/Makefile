@@ -1,6 +1,6 @@
 PORTNAME=	standardnotes
 DISTVERSIONPREFIX=	@standardnotes/desktop@
-DISTVERSION=	3.162.8
+DISTVERSION=	3.165.9
 CATEGORIES=	deskutils
 DIST_SUBDIR=	${PORTNAME}
 
@@ -65,5 +65,8 @@ do-install:
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
+
+do-test:
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
 
 .include <bsd.port.mk>
