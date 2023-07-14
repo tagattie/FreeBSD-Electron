@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Moosync
+Comment=Moosync is a customizable desktop music player with a clean interface
+Icon=moosync
+Exec=moosync %U
+Categories=Audio;
+Terminal=false
+StartupWMClass=Moosync
+MimeType=x-scheme-handler/moosync;
