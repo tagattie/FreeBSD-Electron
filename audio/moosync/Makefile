@@ -37,11 +37,13 @@ PORTDOCS=	CONTRIBUTING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:yarn prefetch extract
 
 PREFETCH_TIMESTAMP=	1689147943
 ELECTRON_MAKE_CMD=	yarn electron:build
 ELECTRON_MAKE_FLAGS=	--linux --dir
+ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked
+DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 
 post-patch:
 	${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|g; \
