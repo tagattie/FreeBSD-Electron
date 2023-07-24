@@ -1,6 +1,6 @@
 PORTNAME=	min
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.28.0
+DISTVERSION=	1.28.1
 CATEGORIES=	www
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -27,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild build:packager
 
-PREFETCH_TIMESTAMP=	1687938253
+PREFETCH_TIMESTAMP=	1690196363
 ELECTRON_MAKE_FLAGS+=	--asar \
 			--ignore='.DS_Store' \
 			--ignore='dist/app' \
