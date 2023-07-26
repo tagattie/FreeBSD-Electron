@@ -1,6 +1,6 @@
 PORTNAME=	notesnook
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.5.7
+DISTVERSION=	2.5.8
 CATEGORIES=	deskutils
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -57,7 +57,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:npm,fetch,build build:builder
 
 PREFETCH_FILE=		${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1688891660
+PREFETCH_TIMESTAMP=	1690359799
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -67,8 +67,11 @@ pre-fetch:
 			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 			npm ci --ignore-scripts --no-progress; \
 		cd ${WRKDIR}/node-modules-cache && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			npx lerna bootstrap --ignore-scripts --ci --ignore=@notesnook/mobile; \
+			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache CI=1 \
+			npm run bootstrap -- --scope=web; \
+		cd ${WRKDIR}/node-modules-cache && \
+			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache CI=1 \
+			npm run bootstrap -- --scope=desktop; \
 		for i in apps extensions packages; do \
 			cd ${WRKDIR}/node-modules-cache/$${i} && \
 			for dir in *; do \
@@ -76,7 +79,7 @@ pre-fetch:
 			done; \
 		done; \
 		cd ${WRKDIR}/node-modules-cache && \
-			${RM} lerna.json package.json package-lock.json; \
+			${RM} -r scripts package.json package-lock.json; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR} && \
 		${MTREE_CMD} -cbnSp node-modules-cache | ${MTREE_CMD} -C | ${SED} \
