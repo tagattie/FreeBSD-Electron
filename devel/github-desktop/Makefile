@@ -1,7 +1,7 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.2.5
-DISTVERSIONSUFFIX=	-linux1
+DISTVERSION=	3.2.7
+DISTVERSIONSUFFIX=	-linux2
 CATEGORIES=	devel
 MASTER_SITES=	KERNEL_ORG/software/scm/git:git
 DISTFILES=	${PREFETCH_FILE}:prefetch \
@@ -23,7 +23,9 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libsndio.so:audio/sndio \
 		libdbus-1.so:devel/dbus \
 		libicui18n.so:devel/icu \
+		libepoll-shim.so:devel/libepoll-shim \
 		libevent.so:devel/libevent \
+		libffi.so:devel/libffi \
 		libpci.so:devel/libpci \
 		libnspr4.so:devel/nspr \
 		libdrm.so:graphics/libdrm \
@@ -40,8 +42,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		desktop-file-utils gettext-runtime gl gmake gnome electron:22 \
-		iconv:wchar_t jpeg localbase:ldflags nodejs:16,build perl5 \
+USES=		desktop-file-utils gettext-runtime gl gmake gnome electron:24 \
+		iconv:wchar_t jpeg localbase:ldflags nodejs:18,build perl5 \
 		pkgconfig python shebangfix ssl xorg
 
 USE_GITHUB=	yes
@@ -64,13 +66,13 @@ USE_ELECTRON=	npm:yarn,fetch,extract,build
 
 GIT_VER=	2.41.0
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1688453309
+PREFETCH_TIMESTAMP=	1692142418
 UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.lock | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 ELECTRON_DOWNLOAD_URL=		https://github.com/electron/electron/releases/download/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
-MAKE_ENV+=	CIRCLE_SHA1=58709c3a531e2f8987be46d2ee18815da9a959f4
+MAKE_ENV+=	CIRCLE_SHA1=c4fa855efa39b65ccbb57b185a40857f7f3402e5
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -132,7 +134,7 @@ pre-build:
 
 do-build:
 	cd ${WRKDIR}/git-${GIT_VER} && \
-		./configure --prefix=${WRKSRC}/app/node_modules/@shiftkey/dugite/git \
+		./configure --prefix=${WRKSRC}/app/node_modules/dugite/git \
 			--enable-pthreads=-pthread \
 			--with-iconv=${LOCALBASE} \
 			--without-tcltk && \
@@ -143,8 +145,7 @@ do-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build:prod
 
 do-install:
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
-		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 32 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/app/static/linux/logos/${size}x${size}.png \

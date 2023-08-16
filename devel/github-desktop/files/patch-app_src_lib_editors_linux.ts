@@ -1,6 +1,6 @@
---- app/src/lib/editors/linux.ts.orig	2023-07-03 20:54:24 UTC
+--- app/src/lib/editors/linux.ts.orig	2023-08-16 01:22:42 UTC
 +++ app/src/lib/editors/linux.ts
-@@ -18,52 +18,52 @@ interface ILinuxExternalEditor {
+@@ -18,30 +18,30 @@ interface ILinuxExternalEditor {
  const editors: ILinuxExternalEditor[] = [
    {
      name: 'Atom',
@@ -35,21 +35,9 @@
 -      '/usr/bin/code',
 +      '%%LOCALBASE%%/bin/code-oss',
        '/mnt/c/Program Files/Microsoft VS Code/bin/code',
-     ],
-   },
-   {
-     name: 'Visual Studio Code (Insiders)',
--    paths: ['/snap/bin/code-insiders', '/usr/bin/code-insiders'],
-+    paths: ['/snap/bin/code-insiders', '%%LOCALBASE%%/bin/code-insiders'],
-   },
-   {
-     name: 'VSCodium',
-     paths: [
--      '/usr/bin/codium',
-+      '%%LOCALBASE%%/bin/codium',
-       '/var/lib/flatpak/app/com.vscodium.codium',
-       '/usr/share/vscodium-bin/bin/codium',
-     ],
+       '/var/lib/flatpak/app/com.visualstudio.code/current/active/export/bin/com.visualstudio.code',
+       '.local/share/flatpak/app/com.visualstudio.code/current/active/export/bin/com.visualstudio.code',
+@@ -67,11 +67,11 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Sublime Text',
@@ -63,7 +51,7 @@
    },
    {
      name: 'SlickEdit',
-@@ -78,16 +78,17 @@ const editors: ILinuxExternalEditor[] = [
+@@ -86,11 +86,11 @@ const editors: ILinuxExternalEditor[] = [
      // Code editor for elementary OS
      // https://github.com/elementary/code
      name: 'Code',
@@ -77,45 +65,12 @@
    },
    {
      name: 'JetBrains PhpStorm',
-     paths: [
-       '/snap/bin/phpstorm',
-+      '%%LOCALBASE%%/bin/phpstorm',
-       '.local/share/JetBrains/Toolbox/scripts/phpstorm',
-     ],
-   },
-@@ -95,17 +96,19 @@ const editors: ILinuxExternalEditor[] = [
-     name: 'JetBrains WebStorm',
-     paths: [
-       '/snap/bin/webstorm',
-+      '%%LOCALBASE%%/bin/webstorm',
-       '.local/share/JetBrains/Toolbox/scripts/webstorm',
-     ],
-   },
-   {
-     name: 'IntelliJ IDEA',
--    paths: ['/snap/bin/idea', '.local/share/JetBrains/Toolbox/scripts/idea'],
-+    paths: ['/snap/bin/idea', '%%LOCALBASE%%/bin/idea', '.local/share/JetBrains/Toolbox/scripts/idea'],
-   },
-   {
-     name: 'JetBrains PyCharm',
-     paths: [
-       '/snap/bin/pycharm',
-+      '%%LOCALBASE%%/bin/pycharm',
-       '.local/share/JetBrains/Toolbox/scripts/pycharm',
-     ],
-   },
-@@ -113,40 +116,41 @@ const editors: ILinuxExternalEditor[] = [
-     name: 'Android Studio',
-     paths: [
-       '/snap/bin/studio',
-+      '%%LOCALBASE%%/bin/studio',
-       '.local/share/JetBrains/Toolbox/scripts/studio',
-     ],
+@@ -126,31 +126,31 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Emacs',
 -    paths: ['/snap/bin/emacs', '/usr/local/bin/emacs', '/usr/bin/emacs'],
-+    paths: ['/snap/bin/emacs', '%%LOCALBASE%%/bin/emacs'],
++    paths: ['/snap/bin/emacs', '%%LOCALBASE%%/bin/emacs', '/usr/bin/emacs'],
    },
    {
      name: 'Kate',
@@ -141,11 +96,6 @@
      name: 'Notepadqq',
 -    paths: ['/usr/bin/notepadqq'],
 +    paths: ['%%LOCALBASE%%/bin/notepadqq'],
-   },
-   {
-     name: 'Geany',
--    paths: ['/usr/bin/geany'],
-+    paths: ['%%LOCALBASE%%/bin/geany'],
    },
    {
      name: 'Mousepad',

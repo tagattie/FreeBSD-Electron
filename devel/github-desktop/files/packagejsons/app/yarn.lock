@@ -67,14 +67,6 @@
   resolved "https://registry.yarnpkg.com/@github/stable-socket/-/stable-socket-1.1.0.tgz#b8598c02df1a935fb0c970252f0b0062f4bdaa29"
   integrity sha512-kzLHnrWGvmXka7AIUnsyF+SO5dP4dxEXX2sMixXW5ngRf3i4RhvXzFNgXVy4qBKsIsg6V3fNb3NOto0z6o4XAw==
 
-"@shiftkey/dugite@2.5.0-shiftkey1":
-  version "2.5.0-shiftkey1"
-  resolved "https://registry.yarnpkg.com/@shiftkey/dugite/-/dugite-2.5.0-shiftkey1.tgz#c764c9cb699d30214c23cd30a5578bf65d4ea500"
-  integrity sha512-xSns3OmXkc2aBXq3UZHPouDQAuXSp+BNFjVuRT9WG5wybpkPa41yKudHIKBamLw6JlQyAtduWcwli3DZYL5SGA==
-  dependencies:
-    progress "^2.0.3"
-    tar "^6.1.11"
-
 accessibility-developer-tools@^2.11.0:
   version "2.12.0"
   resolved "https://registry.yarnpkg.com/accessibility-developer-tools/-/accessibility-developer-tools-2.12.0.tgz#3da0cce9d6ec6373964b84f35db7cfc3df7ab514"
@@ -388,6 +380,14 @@ dompurify@^2.3.3:
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/dompurify/-/dompurify-2.3.3.tgz#c1af3eb88be47324432964d8abc75cf4b98d634c"
   integrity sha512-dqnqRkPMAjOZE0FogZ+ceJNM2dZ3V/yNOuFB7+39qpO93hHhfRpHw3heYQC7DPK9FqbQTfBKUJhiSfz4MvXYwg==
+
+dugite@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/dugite/-/dugite-2.5.1.tgz#6ab808ebf321809edf42d974e62eea9c9e256722"
+  integrity sha512-9OjUguynzq8v3GSmp01kbVcMmErc65ZZ0OssO/0PM2RyhD8Dzb8cCuy3z72+IxLwPwNi754jZ0FtMLAFA3D0qA==
+  dependencies:
+    progress "^2.0.3"
+    tar "^6.1.11"
 
 electron-debug@^3.1.0:
   version "3.1.0"
