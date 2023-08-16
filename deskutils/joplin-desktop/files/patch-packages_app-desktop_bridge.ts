@@ -1,6 +1,6 @@
---- packages/app-desktop/bridge.ts.orig	2022-11-15 07:35:09 UTC
+--- packages/app-desktop/bridge.ts.orig	2023-06-23 14:10:56 UTC
 +++ packages/app-desktop/bridge.ts
-@@ -276,7 +276,7 @@ export class Bridge {
+@@ -274,7 +274,7 @@ export class Bridge {
  				execPath: process.env.PORTABLE_EXECUTABLE_FILE,
  			};
  			app.relaunch(options);
