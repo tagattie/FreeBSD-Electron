@@ -1,6 +1,6 @@
 PORTNAME=	standardnotes
 DISTVERSIONPREFIX=	@standardnotes/desktop@
-DISTVERSION=	3.167.2
+DISTVERSION=	3.169.32
 CATEGORIES=	deskutils
 DIST_SUBDIR=	${PORTNAME}
 
@@ -8,8 +8,8 @@ MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	End-to-end encrypted notes app for digitalists and professionals
 WWW=		https://standardnotes.com
 
-LICENSE=	AGPLv3
-LICENSE_FILE=	${WRKSRC}/packages/desktop/LICENSE
+LICENSE=	CC-BY-NC-SA-4.0
+LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		bash:shells/bash \
