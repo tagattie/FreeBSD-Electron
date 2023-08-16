@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	3.9.5
+DISTVERSION=	3.9.6
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,7 +11,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:22 nodejs:16,build python:build
+USES=		desktop-file-utils electron:24 nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	RocketChat
@@ -25,7 +25,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1687866189
+PREFETCH_TIMESTAMP=	1692171546
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
