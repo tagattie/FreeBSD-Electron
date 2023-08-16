@@ -1,6 +1,6 @@
 PORTNAME=	notesnook
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.5.8
+DISTVERSION=	2.6.1
 CATEGORIES=	deskutils
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -57,7 +57,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:npm,fetch,build build:builder
 
 PREFETCH_FILE=		${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1690359799
+PREFETCH_TIMESTAMP=	1692173460
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -67,10 +67,12 @@ pre-fetch:
 			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 			npm ci --ignore-scripts --no-progress; \
 		cd ${WRKDIR}/node-modules-cache && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache CI=1 \
+			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+			CI=1 ELECTRON_SKIP_BINARY_DOWNLOAD=1 \
 			npm run bootstrap -- --scope=web; \
 		cd ${WRKDIR}/node-modules-cache && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache CI=1 \
+			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+			CI=1 ELECTRON_SKIP_BINARY_DOWNLOAD=1 \
 			npm run bootstrap -- --scope=desktop; \
 		for i in apps extensions packages; do \
 			cd ${WRKDIR}/node-modules-cache/$${i} && \
@@ -103,6 +105,7 @@ post-extract:
 		done; \
 	done; \
 	cd ${WRKDIR}/node-modules-cache && ${MV} node_modules ${WRKSRC}
+	${RM} -f ${WRKSRC}/apps/mobile
 
 pre-build:
 	for dir in apps extensions packages; do \

@@ -1,5 +1,5 @@
-TIMESTAMP = 1690367595
-SHA256 (notesnook-2.5.8-node-modules.tar.gz) = ca687bd11b955730ff5beb6c565510d2c10294aa8d164ff47c2c26b28db5acb0
-SIZE (notesnook-2.5.8-node-modules.tar.gz) = 281856118
-SHA256 (streetwriters-notesnook-v2.5.8_GH0.tar.gz) = aef2874c2e3a5a82c5747845a1fbc7539b35e8ab7ee98065d6f46ad349cdef10
-SIZE (streetwriters-notesnook-v2.5.8_GH0.tar.gz) = 34619429
+TIMESTAMP = 1692176384
+SHA256 (notesnook-2.6.1-node-modules.tar.gz) = 2841898468e42f25006066c2b8930bbd1db100addbced83f4d7e576b8d1ac00e
+SIZE (notesnook-2.6.1-node-modules.tar.gz) = 329624284
+SHA256 (streetwriters-notesnook-v2.6.1_GH0.tar.gz) = 81905d22d8d67417b2852070541802aafc4c588d213d8eca8fcb9a11b72cdb42
+SIZE (streetwriters-notesnook-v2.6.1_GH0.tar.gz) = 41687682

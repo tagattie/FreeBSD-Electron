@@ -20,18 +20,23 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import { exec } from "child_process";
 import { readFile } from "fs/promises";
 import path from "path";
+import os from "os";
 import parser from "yargs-parser";
-import glob from "fast-glob";
+import { fdir } from "fdir";
 import Listr from "listr";
 
-const args = parser(process.argv, { alias: { scope: ["s"] } });
+const THREADS = Math.max(4, process.env.THREADS || os.cpus().length / 2);
+const args = parser(process.argv, { alias: { scope: ["s"], offline: ["o"] } });
 const IS_CI = process.env.CI;
 const scopes = {
   mobile: "apps/mobile",
   web: "apps/web",
+  vericrypt: "apps/vericrypt",
   desktop: "apps/desktop",
   core: "packages/core",
-  editor: "packages/editor"
+  editor: "packages/editor",
+  themes: "servers/themes",
+  themebuilder: "apps/theme-builder"
 };
 
 if (args.scope && !scopes[args.scope])
@@ -40,10 +45,14 @@ if (args.scope && !scopes[args.scope])
 const IS_BOOTSTRAP_ALL = !args.scope;
 
 if (IS_BOOTSTRAP_ALL) {
-  const allPackages = await glob(["packages/**", "apps/**", "extensions/**"], {
-    deep: 1,
-    onlyDirectories: true
-  });
+  const allPackages = (
+    await new fdir()
+      .onlyDirs()
+      .withMaxDepth(2)
+      .glob("packages/**", "apps/**", "extensions/**", "servers/**")
+      .crawl(".")
+      .withPromise()
+  ).slice(4);
 
   const dependencies = Array.from(
     new Set(
@@ -63,9 +72,13 @@ if (IS_BOOTSTRAP_ALL) {
 
 async function bootstrapPackages(dependencies) {
   console.log("> Found", dependencies.length, "dependencies to bootstrap.");
+  console.log("> Using", THREADS, "threads.");
 
   const outputs = { stdout: [], stderr: [] };
-  const tasks = new Listr({ concurrent: 4, exitOnError: false });
+  const tasks = new Listr({
+    concurrent: THREADS,
+    exitOnError: false
+  });
   for (const dependency of dependencies) {
     tasks.add({
       task: () => bootstrapPackage(dependency, outputs),
@@ -85,9 +98,9 @@ async function bootstrapPackages(dependencies) {
 function bootstrapPackage(cwd, outputs) {
   return new Promise((resolve, reject) =>
     exec(
-      `npm ${
-        IS_CI ? "ci" : "i"
-      } --ignore-scripts --legacy-peer-deps --no-audit --no-fund --prefer-offline --progress=false`,
+      `npm ${IS_CI ? "ci" : "i"} --legacy-peer-deps --no-audit --no-fund ${
+        args.offline ? "--offline" : "--prefer-offline"
+      } --progress=false --ignore-scripts`,
       {
         cwd,
         env: process.env,
@@ -133,10 +146,7 @@ async function findDependencies(scope) {
 function filterDependencies(basePath, dependencies) {
   if (!dependencies) return [];
   return Object.entries(dependencies)
-    .filter(
-      ([key, value]) =>
-        key.startsWith("@notesnook/") || value.startsWith("file:")
-    )
+    .filter(([key, value]) => value.startsWith("file:"))
     .map(([_, value]) =>
       path.resolve(path.join(basePath, value.replace("file:", "")))
     );
