@@ -1,4 +1,4 @@
---- electron/shell/common/node_bindings.cc.orig	2023-08-14 18:19:06 UTC
+--- electron/shell/common/node_bindings.cc.orig	2023-08-23 13:54:54 UTC
 +++ electron/shell/common/node_bindings.cc
 @@ -37,7 +37,7 @@
  #include "third_party/blink/renderer/bindings/core/v8/v8_initializer.h"  // nogncheck
@@ -18,7 +18,7 @@
    electron::crash_keys::SetCrashKey("electron.v8-fatal.message", message);
    electron::crash_keys::SetCrashKey("electron.v8-fatal.location", location);
  #endif
-@@ -434,7 +434,7 @@ void NodeBindings::Initialize(v8::Local<v8::Context> c
+@@ -427,7 +427,7 @@ void NodeBindings::Initialize(v8::Local<v8::Context> c
    TRACE_EVENT0("electron", "NodeBindings::Initialize");
    // Open node's error reporting system for browser process.
  
