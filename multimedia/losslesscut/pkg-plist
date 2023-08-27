@@ -74,6 +74,7 @@ share/icons/hicolor/64x64/apps/losslesscut.png
 %%DATADIR%%/locales/zh-TW.pak
 %%DATADIR%%/losslesscut
 %%DATADIR%%/resources.pak
+%%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/ffmpeg
 %%DATADIR%%/resources/ffprobe
