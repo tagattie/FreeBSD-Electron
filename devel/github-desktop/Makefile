@@ -1,7 +1,7 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.2.7
-DISTVERSIONSUFFIX=	-linux2
+DISTVERSION=	3.2.9
+DISTVERSIONSUFFIX=	-linux1
 CATEGORIES=	devel
 MASTER_SITES=	KERNEL_ORG/software/scm/git:git
 DISTFILES=	${PREFETCH_FILE}:prefetch \
@@ -42,7 +42,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		desktop-file-utils gettext-runtime gl gmake gnome electron:24 \
+USES=		desktop-file-utils electron:24 gettext-runtime gl gmake gnome \
 		iconv:wchar_t jpeg localbase:ldflags nodejs:18,build perl5 \
 		pkgconfig python shebangfix ssl xorg
 
@@ -64,15 +64,15 @@ USE_ELECTRON=	npm:yarn,fetch,extract,build
 
 .include <bsd.port.pre.mk>
 
-GIT_VER=	2.41.0
+GIT_VER=	2.42.0
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1692142418
+PREFETCH_TIMESTAMP=	1693221409
 UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.lock | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 ELECTRON_DOWNLOAD_URL=		https://github.com/electron/electron/releases/download/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
-MAKE_ENV+=	CIRCLE_SHA1=c4fa855efa39b65ccbb57b185a40857f7f3402e5
+MAKE_ENV+=	CIRCLE_SHA1=5fcaf6b96818fe3625de1a5dbfcce613f00f65de
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \

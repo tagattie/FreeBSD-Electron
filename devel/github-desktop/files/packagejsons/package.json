@@ -93,7 +93,7 @@
     "rimraf": "^2.5.2",
     "sass": "^1.27.0",
     "sass-loader": "^10.0.3",
-    "semver": "^5.5.0",
+    "semver": "^5.7.2",
     "split2": "^3.2.2",
     "style-loader": "^3.3.1",
     "to-camel-case": "^1.0.0",
@@ -157,8 +157,8 @@
     "@types/webpack-merge": "^5.0.0",
     "@types/xml2js": "^0.4.11",
     "electron": "24.6.5",
-    "electron-builder": "^24.4.0",
-    "electron-packager": "^15.1.0",
+    "electron-builder": "^24.6.3",
+    "electron-packager": "^17.1.2",
     "eslint-plugin-github": "^4.3.7",
     "jest-esm-transformer": "^1.0.0",
     "markdownlint-cli": "^0.32.2",
@@ -168,7 +168,7 @@
     "tsconfig-paths": "^3.9.0"
   },
   "optionalDependencies": {
-    "electron-installer-debian": "3.1.0",
+    "electron-installer-debian": "3.2.0",
     "electron-installer-redhat": "3.4.0",
     "electron-winstaller": "^5.0.0"
   }
