@@ -1,24 +1,37 @@
---- scripts/install-deps.mjs.orig	2023-03-22 08:09:41 UTC
+--- scripts/install-deps.mjs.orig	2023-08-26 08:23:27 UTC
 +++ scripts/install-deps.mjs
-@@ -9,18 +9,18 @@ sh.exec(`yarn patch-package`, { fatal: true })
+@@ -8,23 +8,23 @@ sh.exec(`yarn patch-package`, { fatal: true })
+ 
  log.info('deps', 'app')
  
- sh.cd('app')
+-sh.cd('app')
 -sh.exec(`yarn install --force --network-timeout 1000000`, { fatal: true })
-+sh.exec(`yarn install --force --frozen-lockfile --offline`, { fatal: true })
- sh.cd('..')
+-sh.cd('..')
++// sh.cd('app')
++// sh.exec(`yarn install --force --network-timeout 1000000`, { fatal: true })
++// sh.cd('..')
  
  sh.cd('web')
 -sh.exec(`yarn install --force --network-timeout 1000000`, { fatal: true })
-+sh.exec(`yarn install --force --frozen-lockfile --offline`, { fatal: true })
++// sh.exec(`yarn install --force --network-timeout 1000000`, { fatal: true })
  sh.exec(`yarn patch-package`, { fatal: true })
  sh.cd('..')
  
- vars.allPackages.forEach(plugin => {
-     log.info('deps', plugin)
-     sh.cd(plugin)
+-vars.allPackages.forEach(plugin => {
+-    log.info('deps', plugin)
+-    sh.cd(plugin)
 -    sh.exec(`yarn install --force --network-timeout 1000000`, { fatal: true })
-+    sh.exec(`yarn install --force --frozen-lockfile --offline`, { fatal: true })
-     sh.cd('..')
- })
+-    sh.cd('..')
+-})
++// vars.allPackages.forEach(plugin => {
++//     log.info('deps', plugin)
++//     sh.cd(plugin)
++//     sh.exec(`yarn install --force --network-timeout 1000000`, { fatal: true })
++//     sh.cd('..')
++// })
  
+-if (['darwin', 'linux'].includes(process.platform)) {
++if (['darwin', 'linux', 'freebsd'].includes(process.platform)) {
+     sh.cd('node_modules')
+     for (let x of vars.builtinPlugins) {
+         sh.ln('-fs', '../' + x, x)

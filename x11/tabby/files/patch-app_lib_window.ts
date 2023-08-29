@@ -1,6 +1,6 @@
---- app/lib/window.ts.orig	2023-04-27 16:45:19 UTC
+--- app/lib/window.ts.orig	2023-08-26 08:23:27 UTC
 +++ app/lib/window.ts
-@@ -189,7 +189,7 @@ export class Window {
+@@ -192,7 +192,7 @@ export class Window {
              } else {
                  DwmEnableBlurBehindWindow(this.window.getNativeWindowHandle(), enabled)
              }

@@ -1,17 +1,17 @@
---- scripts/vars.mjs.orig	2023-03-22 08:11:39 UTC
+--- scripts/vars.mjs.orig	2023-08-26 08:23:27 UTC
 +++ scripts/vars.mjs
-@@ -8,7 +8,8 @@ const __dirname = url.fileURLToPath(new URL('.', impor
+@@ -10,7 +10,8 @@ const __dirname = url.fileURLToPath(new URL('.', impor
  
  const electronInfo = JSON.parse(fs.readFileSync(path.resolve(__dirname, '../node_modules/electron/package.json')))
  
 -export let version = childProcess.execSync('git describe --tags', { encoding:'utf-8' })
 +// export let version = childProcess.execSync('git describe --tags', { encoding:'utf-8' })
-+export let version = 'v1.0.196'
++export let version = 'v1.0.198'
  version = version.substring(1).trim()
  version = version.replace('-', '-c')
  
-@@ -66,6 +67,12 @@ export const keygenConfig = {
-         }[process.env.ARCH ?? process.arch],
+@@ -68,6 +69,12 @@ export const keygenConfig = {
+         }[process.env.ARCH],
          linux: {
              x64: '7bf45071-3031-4a26-9f2e-72604308313e',
 +            arm64: '39e3c736-d4d4-4fbf-a201-324b7bab0d17',

@@ -1,4 +1,4 @@
---- app/lib/app.ts.orig	2023-02-20 10:40:49 UTC
+--- app/lib/app.ts.orig	2023-08-26 08:23:27 UTC
 +++ app/lib/app.ts
 @@ -63,7 +63,7 @@ export class Application {
              }
@@ -13,8 +13,8 @@
      }
  
      enableTray (): void {
--        if (this.tray || process.platform === 'linux') {
-+        if (this.tray || process.platform === 'linux' || process.platform === 'freebsd') {
+-        if (!!this.tray || process.platform === 'linux') {
++        if (!!this.tray || process.platform === 'linux' || process.platform === 'freebsd') {
              return
          }
          if (process.platform === 'darwin') {

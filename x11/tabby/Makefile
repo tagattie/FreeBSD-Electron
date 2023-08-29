@@ -1,6 +1,6 @@
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.197
+DISTVERSION=	1.0.198
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -20,7 +20,9 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libsndio.so:audio/sndio \
 		libdbus-1.so:devel/dbus \
 		libicui18n.so:devel/icu \
+		libepoll-shim.so:devel/libepoll-shim \
 		libevent.so:devel/libevent \
+		libffi.so:devel/libffi \
 		libpci.so:devel/libpci \
 		libnspr4.so:devel/nspr \
 		libpcre2-8.so:devel/pcre2 \
@@ -29,6 +31,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libwayland-client.so:graphics/wayland \
 		libwebp.so:graphics/webp \
 		libpython${PYTHON_VER}.so:lang/python${PYTHON_SUFFIX} \
+		libdav1d.so:multimedia/dav1d \
 		libopenh264.so:multimedia/openh264 \
 		libcups.so:print/cups \
 		libharfbuzz.so:print/harfbuzz \
@@ -39,8 +42,8 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		electron:22 gl gmake gnome iconv:wchar_t jpeg \
-		localbase:ldflags nodejs:16,build pkgconfig python:build xorg
+USES=		electron:25 gl gmake gnome iconv:wchar_t jpeg \
+		localbase:ldflags nodejs:18,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
@@ -58,7 +61,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn,fetch,extract,build build:builder
 
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1685357156
+PREFETCH_TIMESTAMP=	1693298403
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -103,8 +106,8 @@ post-extract:
 	done
 
 post-patch:
-	${REINPLACE_CMD} -e 's/make/g&/' \
-		${WRKSRC}/node_modules/lzma-native/liblzma-build.sh
+	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
+		${WRKSRC}/app/node_modules/@serialport/bindings-cpp/binding.gyp
 	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
 		${WRKSRC}/app/node_modules/fontmanager-redux/binding.gyp
 
@@ -129,7 +132,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/dist/linux-unpacked && \
+	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${TAR} -cf - . | ${TAR} -xf - -C ${STAGEDIR}${DATADIR}
 	cd ${STAGEDIR}${DATADIR}/resources/app.asar.unpacked && \
 		${FIND} . -type f -perm 755 -exec ${FILE} {} ';' | \
