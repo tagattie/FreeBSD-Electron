@@ -1,6 +1,6 @@
 PORTNAME=	moosync
 DISTVERSIONPREFIX=	v
-DISTVERSION=	9.0.2
+DISTVERSION=	10.1.0
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,8 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
-LIB_DEPENDS=	libasound.so:audio/alsa-lib \
-		libvips.so:graphics/vips
+LIB_DEPENDS=	libasound.so:audio/alsa-lib
 
 USES=		cargo desktop-file-utils electron:25 nodejs:18,build pkgconfig \
 		python:build sqlite
@@ -39,7 +38,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn prefetch extract
 
-PREFETCH_TIMESTAMP=	1689147943
+PREFETCH_TIMESTAMP=	1693706952
 ELECTRON_MAKE_CMD=	yarn electron:build
 ELECTRON_MAKE_FLAGS=	--linux --dir
 ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked
