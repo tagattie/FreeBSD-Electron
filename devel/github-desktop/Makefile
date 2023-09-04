@@ -1,6 +1,6 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.2.9
+DISTVERSION=	3.3.1
 DISTVERSIONSUFFIX=	-linux1
 CATEGORIES=	devel
 MASTER_SITES=	KERNEL_ORG/software/scm/git:git
@@ -66,13 +66,13 @@ USE_ELECTRON=	npm:yarn,fetch,extract,build
 
 GIT_VER=	2.42.0
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1693221409
+PREFETCH_TIMESTAMP=	1693828155
 UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.lock | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 ELECTRON_DOWNLOAD_URL=		https://github.com/electron/electron/releases/download/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
-MAKE_ENV+=	CIRCLE_SHA1=5fcaf6b96818fe3625de1a5dbfcce613f00f65de
+MAKE_ENV+=	CIRCLE_SHA1=3c78ad7f021eeb6aa80a9bbd06ebc365d089d8ac
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
