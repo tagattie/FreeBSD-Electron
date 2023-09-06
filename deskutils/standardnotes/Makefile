@@ -1,6 +1,6 @@
 PORTNAME=	standardnotes
 DISTVERSIONPREFIX=	@standardnotes/desktop@
-DISTVERSION=	3.169.32
+DISTVERSION=	3.172.1
 CATEGORIES=	deskutils
 DIST_SUBDIR=	${PORTNAME}
 
