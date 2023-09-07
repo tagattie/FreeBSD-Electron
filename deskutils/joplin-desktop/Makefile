@@ -1,6 +1,6 @@
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.11.11
+DISTVERSION=	2.12.15
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DIST_SUBDIR=	${PORTNAME}${PKGNAMESUFFIX}
@@ -18,7 +18,7 @@ BUILD_DEPENDS=	app-builder:devel/app-builder \
 LIB_DEPENDS=	libvips.so:graphics/vips \
 		libsecret-1.so:security/libsecret
 
-USES=		electron:19 gmake localbase:ldflags nodejs:16,build python:build
+USES=		electron:25 gmake localbase:ldflags nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
@@ -37,7 +37,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:berry prefetch extract rebuild:nodejs build:builder
 
-PREFETCH_TIMESTAMP=	1692150159
+PREFETCH_TIMESTAMP=	1693998570
 YARN_VER=	3.3.1
 
 post-patch:
@@ -47,7 +47,7 @@ post-patch:
 
 pre-build:
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
-		yarn run electron-rebuild --force-abi 89
+		yarn run electron-rebuild --force-abi 116
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} ${STAGEDIR}${PREFIX}/bin
