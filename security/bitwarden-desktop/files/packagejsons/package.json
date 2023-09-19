@@ -87,7 +87,7 @@
     "cross-env": "7.0.3",
     "css-loader": "6.8.1",
     "del": "6.1.1",
-    "electron": "24.1.1",
+    "electron": "24.8.3",
     "electron-builder": "^23.6.0",
     "electron-log": "4.4.8",
     "electron-reload": "2.0.0-alpha.1",
