@@ -100,7 +100,7 @@ function bootstrapPackage(cwd, outputs) {
     exec(
       `npm ${IS_CI ? "ci" : "i"} --legacy-peer-deps --no-audit --no-fund ${
         args.offline ? "--offline" : "--prefer-offline"
-      } --progress=false --ignore-scripts`,
+      } --progress=false`,
       {
         cwd,
         env: process.env,

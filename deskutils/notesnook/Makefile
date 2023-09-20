@@ -1,6 +1,6 @@
 PORTNAME=	notesnook
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.6.1
+DISTVERSION=	2.6.5
 CATEGORIES=	deskutils
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -38,7 +38,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence \
 		libfontconfig.so:x11-fonts/fontconfig
 
-USES=		electron:24,build gettext-runtime gl gnome iconv:wchar_t jpeg \
+USES=		electron:25,build gettext-runtime gl gnome iconv:wchar_t jpeg \
 		nodejs:18,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
@@ -57,7 +57,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:npm,fetch,build build:builder
 
 PREFETCH_FILE=		${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1692173460
+PREFETCH_TIMESTAMP=	1695209176
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -105,7 +105,7 @@ post-extract:
 		done; \
 	done; \
 	cd ${WRKDIR}/node-modules-cache && ${MV} node_modules ${WRKSRC}
-	${RM} -f ${WRKSRC}/apps/mobile
+	${RM} -r ${WRKSRC}/apps/mobile
 
 pre-build:
 	for dir in apps extensions packages; do \
