@@ -1,6 +1,7 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	3.9.6
+DISTVERSION=	3.9.7
 CATEGORIES=	net-im
+DIST_SUBDIR=	${PORTNAME}${PKGNAMESUFFIX}
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Rocket.Chat desktop client
@@ -23,9 +24,10 @@ PORTDOCS=	CHANGELOG.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:berry prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1692171546
+PREFETCH_TIMESTAMP=	1695198931
+YARN_VER=	3.2.2
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
