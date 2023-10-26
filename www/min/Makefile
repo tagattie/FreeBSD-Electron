@@ -1,6 +1,6 @@
 PORTNAME=	min
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.28.1
+DISTVERSION=	1.29.0
 CATEGORIES=	www
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:24 nodejs:18,build pkgconfig \
+USES=		desktop-file-utils electron:26 nodejs:18,build pkgconfig \
 		python:build
 
 USE_GITHUB=	yes
@@ -21,13 +21,13 @@ GH_ACCOUNT=	minbrowser
 
 SUB_FILES=	${PORTNAME}
 
-PORTDOCS=	README.md
+PORTDOCS=	README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild build:packager
 
-PREFETCH_TIMESTAMP=	1690196363
+PREFETCH_TIMESTAMP=	1698316796
 ELECTRON_MAKE_FLAGS+=	--asar \
 			--ignore='.DS_Store' \
 			--ignore='dist/app' \
@@ -60,8 +60,7 @@ pre-build:
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
-		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 48 64 128 256 512
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons-out/icon_${size}.png \
