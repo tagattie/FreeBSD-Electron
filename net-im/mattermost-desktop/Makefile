@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	5.4.0
+DISTVERSION=	5.5.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		jq:textproc/jq
 
-USES=		desktop-file-utils electron:24 nodejs:18,build python:build
+USES=		desktop-file-utils electron:26 nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
@@ -28,7 +28,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1687867554
+PREFETCH_TIMESTAMP=	1698319503
 
 pre-build:
 	${MKDIR} ${WRKSRC}/node_modules/node-jq/bin
