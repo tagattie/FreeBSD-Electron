@@ -1,6 +1,6 @@
 PORTNAME=	standardnotes
 DISTVERSIONPREFIX=	@standardnotes/desktop@
-DISTVERSION=	3.172.1
+DISTVERSION=	3.178.18
 CATEGORIES=	deskutils
 DIST_SUBDIR=	${PORTNAME}
 
@@ -8,7 +8,7 @@ MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	End-to-end encrypted notes app for digitalists and professionals
 WWW=		https://standardnotes.com
 
-LICENSE=	CC-BY-NC-SA-4.0
+LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder \
@@ -22,8 +22,8 @@ GH_PROJECT=	app
 WRKSRC=		${WRKDIR}/app--${PORTNAME}-desktop-${DISTVERSION}
 BUILD_WRKSRC=	${WRKSRC}/packages/desktop
 
-USES=		desktop-file-utils electron:22 gmake localbase:ldflags \
-		nodejs:16,build pkgconfig python:build
+USES=		desktop-file-utils electron:27 gmake localbase:ldflags \
+		nodejs:18,build pkgconfig python:build
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
