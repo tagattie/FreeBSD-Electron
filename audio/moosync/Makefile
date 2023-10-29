@@ -1,6 +1,6 @@
 PORTNAME=	moosync
 DISTVERSIONPREFIX=	v
-DISTVERSION=	10.1.0
+DISTVERSION=	10.2.0
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libasound.so:audio/alsa-lib
 
-USES=		cargo desktop-file-utils electron:25 nodejs:18,build pkgconfig \
+USES=		cargo desktop-file-utils electron:27 nodejs:18,build pkgconfig \
 		python:build sqlite
 
 USE_GITHUB=	yes
@@ -25,7 +25,6 @@ CARGO_CARGOTOML=${WRKSRC}/node_modules/librespot-node/native/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/node_modules/librespot-node/native/Cargo.lock
 # CARGO_CARGOTOML=${WRKSRC}/node_modules/scanner-native/Cargo.toml
 # CARGO_CARGOLOCK=${WRKSRC}/node_modules/scanner-native/Cargo.lock
-# CARGO_CARGOLOCK=${WRKSRC}/Cargo.lock
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
@@ -38,7 +37,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn prefetch extract
 
-PREFETCH_TIMESTAMP=	1693706952
+PREFETCH_TIMESTAMP=	1698552311
 ELECTRON_MAKE_CMD=	yarn electron:build
 ELECTRON_MAKE_FLAGS=	--linux --dir
 ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked
@@ -60,6 +59,14 @@ pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=build/icons
 	${MV} ${WRKSRC}/icons/icon_512.png ${WRKSRC}/icons/icon_512x512.png
+
+post-build:
+	# electron-builder installs prebuilt binary for linux so force rebuild
+	# binary for FreeBSD
+	cd ${WRKSRC}/node_modules/better-sqlite3 && \
+		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run build-release
+	${CP} ${WRKSRC}/node_modules/better-sqlite3/build/Release/better_sqlite3.node \
+		${WRKSRC}/dist_electron/${ELECTRON_BUILDER_APP_OUT_DIR}/resources/app.asar.unpacked/node_modules/better-sqlite3/build/Release
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin

@@ -11,12 +11,6 @@ share/icons/hicolor/64x64/apps/moosync.png
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/LICENSE
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/build/Release/better_sqlite3.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/build/Release/obj/gen/sqlite3/sqlite3.c
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/build/Release/obj/gen/sqlite3/sqlite3.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/build/Release/obj/gen/sqlite3/sqlite3ext.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/build/Release/test_extension.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/build/deps/sqlite3.Makefile
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/build/node_gyp_bins/python3
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/deps/common.gypi
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/deps/copy.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/deps/defines.gypi
