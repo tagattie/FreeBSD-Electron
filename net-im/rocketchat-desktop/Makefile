@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	3.9.7
+DISTVERSION=	3.9.9
 CATEGORIES=	net-im
 DIST_SUBDIR=	${PORTNAME}${PKGNAMESUFFIX}
 
@@ -26,7 +26,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:berry prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1695198931
+PREFETCH_TIMESTAMP=	1698571204
 YARN_VER=	3.2.2
 
 pre-build:
