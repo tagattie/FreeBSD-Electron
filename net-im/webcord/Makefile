@@ -1,6 +1,6 @@
 PORTNAME=	webcord
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.4.0
+DISTVERSION=	4.5.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		git:devel/git
 
-USES=		electron:26 nodejs:18,build
+USES=		electron:27 nodejs:18,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	SpacingBat3
@@ -23,7 +23,7 @@ SUB_FILES=	${PORTNAME}
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:forge
 
-PREFETCH_TIMESTAMP=	1692691263
+PREFETCH_TIMESTAMP=	1698550752
 MAKE_ENV+=	WEBCORD_BUILD=release \
 		WEBCORD_UPDATE_NOTIFICATIONS=false
 
