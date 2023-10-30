@@ -2,7 +2,7 @@
   "name": "@notesnook/desktop",
   "productName": "Notesnook",
   "description": "Your private note taking space",
-  "version": "2.6.5",
+  "version": "2.6.7",
   "appAppleId": "1544027013",
   "private": true,
   "main": "./dist/index.js",
@@ -12,8 +12,8 @@
   "license": "GPL-3.0-or-later",
   "dependencies": {
     "@notesnook/crypto": "file:../../packages/crypto",
-    "@trpc/client": "10.31.0",
-    "@trpc/server": "10.31.0",
+    "@trpc/client": "10.38.3",
+    "@trpc/server": "10.38.3",
     "electron-trpc": "0.5.2",
     "electron-updater": "6.1.4",
     "icojs": "^0.17.1",
@@ -191,6 +191,7 @@
       "allowNativeWayland": true
     },
     "extraResources": [
+      "app-update.yml",
       "./assets/**"
     ],
     "extraMetadata": {
