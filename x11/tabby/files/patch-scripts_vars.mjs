@@ -1,4 +1,4 @@
---- scripts/vars.mjs.orig	2023-08-26 08:23:27 UTC
+--- scripts/vars.mjs.orig	2023-10-06 11:38:27 UTC
 +++ scripts/vars.mjs
 @@ -10,7 +10,8 @@ const __dirname = url.fileURLToPath(new URL('.', impor
  
@@ -6,7 +6,7 @@
  
 -export let version = childProcess.execSync('git describe --tags', { encoding:'utf-8' })
 +// export let version = childProcess.execSync('git describe --tags', { encoding:'utf-8' })
-+export let version = 'v1.0.198'
++export let version = 'v1.0.201'
  version = version.substring(1).trim()
  version = version.replace('-', '-c')
  

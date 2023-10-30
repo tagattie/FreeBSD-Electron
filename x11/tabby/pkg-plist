@@ -835,6 +835,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/sshImporters.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/tsconfig.json
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/tsconfig.typings.json
+%%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/app/lib/config.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-core/src/api/menu.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-core/src/api/platform.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/colorSchemes.d.ts
@@ -1032,6 +1033,8 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/src/components/settingsTab.component.scss
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/src/components/settingsTab.component.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/src/components/settingsTabBody.component.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-settings/src/components/showSecretModal.component.pug
+%%DATADIR%%/resources/builtin-plugins/tabby-settings/src/components/showSecretModal.component.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/src/components/vaultSettingsTab.component.pug
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/src/components/vaultSettingsTab.component.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/src/components/windowSettingsTab.component.pug
@@ -1057,6 +1060,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/typings/components/setVaultPassphraseModal.component.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/typings/components/settingsTab.component.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/typings/components/settingsTabBody.component.d.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-settings/typings/components/showSecretModal.component.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/typings/components/vaultSettingsTab.component.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/typings/components/windowSettingsTab.component.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-settings/typings/config.d.ts
