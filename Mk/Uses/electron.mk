@@ -201,10 +201,7 @@ _ELECTRON_FEATURE_NPM_BUILD=	yes
 # Now _ELECTRON_FEATURE_NPM should contain a single package manager
 .   if ${_VALID_ELECTRON_FEATURES_NPM:M${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}}
 _NODEJS_NPM=		${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}
-.	if ${_NODEJS_NPM} == npm
-_NPM_PKGNAME=	${_NODEJS_NPM}${NODEJS_SUFFIX}
-_NPM_PORTDIR=	www/${_NODEJS_NPM}${NODEJS_SUFFIX}
-.	elif ${_NODEJS_NPM} == yarn
+.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn
 _NPM_PKGNAME=	${_NODEJS_NPM}${NODEJS_SUFFIX}
 _NPM_PORTDIR=	www/${_NODEJS_NPM}${NODEJS_SUFFIX}
 .	elif ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
