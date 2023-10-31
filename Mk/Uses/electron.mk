@@ -257,7 +257,7 @@ ${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDI
 .endfor
 .for stage in FETCH EXTRACT BUILD RUN TEST
 .   if defined(_ELECTRON_FEATURE_NPM_${stage})
-.	if ${_NODEJS_NPM} == npm && ${_NODEJS_NPM} == yarn
+.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn
 ${stage}_DEPENDS+=	${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .	elif ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
 ${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
@@ -363,7 +363,7 @@ IGNORE=	does not store ${_NPM_PKGFILE} in ${PKGJSONSDIR}
 IGNORE= does not specify timestamp for prefetched modules
 .   endif
 
-.   if ${_NODEJS_NPM} == npm && ${_NODEJS_NPM} == yarn
+.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn
 FETCH_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .   endif
 _USES_fetch+=	491:electron-fetch-node-modules
@@ -475,7 +475,7 @@ _USES_build+=	290:electron-generate-electron-zip \
 		490:electron-rebuild-native-node-modules-for-electron
 
 BUILD_DEPENDS+=	zip:archivers/zip
-.   if defined(_NODEJS_NPM) && (${_NODEJS_NPM} == npm && ${_NODEJS_NPM} == yarn)
+.   if defined(_NODEJS_NPM) && (${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn)
 BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .   elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm)
 BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
