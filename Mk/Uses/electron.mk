@@ -24,6 +24,7 @@
 #		npm:	The port uses NPM as package manager.
 #		yarn:	The port uses Yarn (v1) as package manager.
 #		berry:	The port uses Yarn (v2+ aka berry) as package manager.
+#		pnpm:	The port uses PNPM as package manager.
 #
 #		NOTE: Only a single package manager can be specified.
 #
@@ -35,12 +36,12 @@
 #		does not specify any of those dependencies, we assume only
 #		build time dependency is required.
 #
-#		If the port uses this feature and the package manager is berry,
-#		the following variable must be specified.
+#		If the port uses this feature and the package manager is berry
+#		or pnpm, the following variable must be specified.
 #
-#		YARN_VER: A version of yarn the port uses. The value can be
-#			found in the "packageManager" field in the package.json
-#			file.
+#		NPM_VER: A version of node package manager the port uses. The
+#			value can be found in the "packageManager" field in the
+#			package.json file.
 #
 #	prefetch:	Downloads node modules the port uses according to the
 #			pre-stored package.json (and package-lock.json or
@@ -120,7 +121,7 @@ _INCLUDE_USES_ELECTRON_MK=	yes
 
 _VALID_ELECTRON_VERSIONS=	6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27
 _VALID_ELECTRON_FEATURES=	npm prefetch extract rebuild build
-_VALID_ELECTRON_FEATURES_NPM=	npm yarn berry
+_VALID_ELECTRON_FEATURES_NPM=	npm yarn berry pnpm
 _VALID_ELECTRON_FEATURES_REBUILD=nodejs electron
 _VALID_ELECTRON_FEATURES_BUILD=	builder forge packager
 
@@ -213,7 +214,7 @@ _NPM_PORTDIR=	www/${_NODEJS_NPM}${NODEJS_SUFFIX}
 .	elif ${_NODEJS_NPM} == yarn
 _NPM_PKGNAME=	${_NODEJS_NPM}${NODEJS_SUFFIX}
 _NPM_PORTDIR=	www/${_NODEJS_NPM}${NODEJS_SUFFIX}
-.	elif ${_NODEJS_NPM} == berry
+.	elif ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
 _NPM_PKGNAME=	# empty
 _NPM_PORTDIR=	# empty
 .	endif
@@ -263,9 +264,9 @@ ${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDI
 .endfor
 .for stage in FETCH EXTRACT BUILD RUN TEST
 .   if defined(_ELECTRON_FEATURE_NPM_${stage})
-.	if ${_NODEJS_NPM} != berry
+.	if ${_NODEJS_NPM} == npm && ${_NODEJS_NPM} == yarn
 ${stage}_DEPENDS+=	${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.	elif ${_NODEJS_NPM} == berry
+.	elif ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
 ${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .	endif
 .	if ${_NODEJS_NPM} == yarn && ${stage} == BUILD
@@ -293,17 +294,26 @@ NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --offline
 .   elif ${_NODEJS_NPM} == berry
 _NPM_LOCKFILE=		yarn.lock
 _NPM_MODULE_CACHE=	yarn-offline-cache
+_NPM_CMDNAME=		yarn
 NPM_CACHE_SETUP_CMD?=	yarn config set cacheFolder "./${_NPM_MODULE_CACHE}"
 NPM_INSTALL_CMD?=	yarn install
 NPM_INSTALL_FLAGS_FETCH?=--immutable --mode=skip-build
 NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --immutable-cache
+.   elif ${_NODEJS_NPM} == pnpm
+_NPM_LOCKFILE=		pnpm-lock.yaml
+_NPM_MODULE_CACHE=	store
+_NPM_CMDNAME=		pnpm
+NPM_CACHE_SETUP_CMD?=	pnpm config set store-dir "${WRKDIR}/node-modules-cache/${_NPM_MODULE_CACHE}"
+NPM_INSTALL_CMD?=	pnpm install
+NPM_INSTALL_FLAGS_FETCH?=--frozen-lockfile --ignore-scripts
+NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --offline
 .   endif
 .endif
 
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
 YARNPATCHESDIR?=	${FILESDIR}/yarnpatches
 PREFETCH_TIMESTAMP?=	0
-YARN_VER?=		0
+NPM_VER?=		0
 
 .if exists(${PKGJSONSDIR}/${_NPM_PKGFILE})
 _EXISTS_NPM_PKGFILE=	1
@@ -311,34 +321,35 @@ _EXISTS_NPM_PKGFILE=	1
 _EXISTS_NPM_PKGFILE=	0
 .endif
 
-.if ${_NODEJS_NPM} == berry
-.   if ${YARN_VER} == 0
-IGNORE=	does not specity yarn version for prefetching modules
+.if ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
+.   if ${NPM_VER} == 0
+IGNORE=	does not specity ${_NPM_CMDNAME} version for prefetching modules
 .   endif
 
-_USES_fetch+=	490:electron-fetch-yarn-berry
+_USES_fetch+=	490:electron-fetch-node-package-manager
 
-DISTFILES+=	yarn-${YARN_VER}.tgz:prefetch
+DISTFILES+=	${_NPM_CMDNAME}-${NPM_VER}.tgz:prefetch
 FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 
-electron-fetch-yarn-berry:
-	@${ECHO_MSG} "===>   Fetching and setting up yarn berry version ${YARN_VER}"
+electron-fetch-node-package-manager:
+	@${ECHO_MSG} "===>   Fetching and setting up ${_NPM_CMDNAME} version ${NPM_VER}"
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR} ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
-	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz ]; then \
+	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz ]; then \
 		cd ${WRKDIR} && \
-		${SETENV} ${MAKE_ENV} corepack prepare --activate --output yarn@${YARN_VER} && \
+		${SETENV} ${MAKE_ENV} corepack prepare --activate --output ${_NPM_CMDNAME}@${NPM_VER} && \
 		${TAR} -xzf corepack.tgz && \
-		${MTREE_CMD} -cbnSp yarn | ${MTREE_CMD} -C | ${TAIL} -n 2 | ${SED} \
+		${MTREE_CMD} -cbnSp ${_NPM_CMDNAME} | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:yarn:' > yarn.mtree && \
+			-e 's:^\.:${_NPM_CMDNAME}:' | \
+			${SED} -e '1d' > ${_NPM_CMDNAME}.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz @yarn.mtree; \
+			-f ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz @${_NPM_CMDNAME}.mtree; \
 	else \
-		${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz; \
+		${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz; \
 	fi
 .endif
 
@@ -353,7 +364,7 @@ IGNORE=	does not store ${_NPM_PKGFILE} in ${PKGJSONSDIR}
 IGNORE= does not specify timestamp for prefetched modules
 .   endif
 
-.   if ${_NODEJS_NPM} != berry
+.   if ${_NODEJS_NPM} == npm && ${_NODEJS_NPM} == yarn
 FETCH_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .   endif
 _USES_fetch+=	491:electron-fetch-node-modules
@@ -389,22 +400,22 @@ electron-fetch-node-modules:
 .endif # _FEATURE_ELECTRON_PREFETCH
 
 .if defined(_ELECTRON_FEATURE_EXTRACT)
-_USES_extract+=	600:electron-extract-yarn-berry \
+_USES_extract+=	600:electron-extract-node-package-manager \
 		601:electron-copy-package-file \
 		602:electron-install-node-modules
 
 .   if ${_NODEJS_NPM} == yarn
 EXTRACT_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.   elif ${_NODEJS_NPM} == berry
+.   elif ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
 EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .   endif
 
-electron-extract-yarn-berry:
-.   if ${_NODEJS_NPM} == berry
-	@${ECHO_MSG} "===>   Setting up yarn berry version ${YARN_VER}"
+electron-extract-node-package-manager:
+.   if ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
+	@${ECHO_MSG} "===>   Setting up ${_NPN_PACKAGE_NAME} version ${NPM_VER}"
 	@${MKDIR}  ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
-	@${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/yarn-${YARN_VER}.tgz
+	@${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz
 .   else
 	@${DO_NADA}
 .   endif
@@ -442,6 +453,14 @@ electron-install-node-modules:
 		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_EXTRACT}
+.   elif ${_NODEJS_NPM} == pnpm
+	@${ECHO_MSG} "===>   Installing node modules from prefetched cache"
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
+	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
+		${MKDIR} ${WRKDIR}/node-modules-cache && \
+		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKDIR}/node-modules-cache; \
+	fi
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_EXTRACT}
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
@@ -457,9 +476,9 @@ _USES_build+=	290:electron-generate-electron-zip \
 		490:electron-rebuild-native-node-modules-for-electron
 
 BUILD_DEPENDS+=	zip:archivers/zip
-.   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} != berry
+.   if defined(_NODEJS_NPM) && (${_NODEJS_NPM} == npm && ${_NODEJS_NPM} == yarn)
 BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.   elif defined(_NODEJS_NPM) && ${_NODEJS_NPM} == berry
+.   elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm)
 BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .   endif
 .   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == yarn
@@ -544,12 +563,15 @@ electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>   Rebuilding native node modules for nodejs"
-.	if ${_NODEJS_NPM} != berry
+.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn
 		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 			npm rebuild --no-progress
 .	elif ${_NODEJS_NPM} == berry
 		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 			yarn rebuild
+.	elif ${_NODEJS_NPM} == pnpm
+		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
+			pnpm rebuild
 .	endif
 .   else
 	@${DO_NADA}
@@ -568,14 +590,20 @@ electron-rebuild-native-node-modules-for-electron:
 .	    elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			yarn run electron-builder install-app-deps --platform linux
+.	    elif ${_NODEJS_NPM} == pnpm
+		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+			pnpm exec electron-builder install-app-deps --platform linux
 .	    endif
 .	else
-.	    if ${_NODEJS_NPM} != berry
+.	    if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn
 		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			npm rebuild --no-progress
 .	    elif ${_NODEJS_NPM} == berry
 		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			yarn rebuild
+.	    elif ${_NODEJS_NPM} == pnpm
+		@cd ${REBUILD_WRKSRC_ELECTRON} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+			pnpm rebuild
 .	    endif
 .	endif
 .   else
@@ -589,6 +617,8 @@ electron-rebuild-native-node-modules-for-electron:
 ELECTRON_MAKE_CMD?=	npx electron-builder
 .	elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 ELECTRON_MAKE_CMD?=	yarn run electron-builder
+.	elif ${_NODEJS_NPM} == pnpm
+ELECTRON_MAKE_CMD?=	pnpm exec electron-builder
 .	endif
 ELECTRON_MAKE_FLAGS+=	--linux --dir \
 			--config.npmRebuild=false \
@@ -601,6 +631,8 @@ ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia
 ELECTRON_MAKE_CMD?=	npx electron-packager
 .	elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 ELECTRON_MAKE_CMD?=	yarn run electron-packager
+.	elif ${_NODEJS_NPM} == pnpm
+ELECTRON_MAKE_CMD?=	pnpm exec electron-packager
 .	endif
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--no-download \
@@ -614,6 +646,8 @@ DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAG
 ELECTRON_MAKE_CMD?=	npx electron-forge package
 .	elif ${_NODEJS_NPM} == yarn || ${_NODEJS_NPM} == berry
 ELECTRON_MAKE_CMD?=	yarn run electron-forge package
+.	elif ${_NODEJS_NPM} == pnpm
+ELECTRON_MAKE_CMD?=	pnpm exec electron-forge package
 .	endif
 ELECTRON_MAKE_FLAGS+=	--platform=linux
 DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
