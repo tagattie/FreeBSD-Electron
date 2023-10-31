@@ -36,13 +36,6 @@
 #		does not specify any of those dependencies, we assume only
 #		build time dependency is required.
 #
-#		If the port uses this feature and the package manager is berry
-#		or pnpm, the following variable must be specified.
-#
-#		NPM_VER: A version of node package manager the port uses. The
-#			value can be found in the "packageManager" field in the
-#			package.json file.
-#
 #	prefetch:	Downloads node modules the port uses according to the
 #			pre-stored package.json (and package-lock.json or
 #			yarn.lock depending on the node package manager used) in
@@ -322,6 +315,12 @@ _EXISTS_NPM_PKGFILE=	0
 .endif
 
 .if ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
+.   if ${_EXISTS_NPM_PKGFILE} == 1 && ${NPM_VER} == 0
+NPM_VER!=	${GREP} packageManager ${PKGJSONSDIR}/${_NPM_PKGFILE} | \
+		${AWK} -F':' '{print $$NF}' | \
+		${SED} -e 's/"//g' | \
+		${AWK} -F'@' '{print $$NF}'
+.   endif
 .   if ${NPM_VER} == 0
 IGNORE=	does not specity ${_NPM_CMDNAME} version for prefetching modules
 .   endif
