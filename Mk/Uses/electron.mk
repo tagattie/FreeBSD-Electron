@@ -37,10 +37,11 @@
 #		build time dependency is required.
 #
 #	prefetch:	Downloads node modules the port uses according to the
-#			pre-stored package.json (and package-lock.json or
-#			yarn.lock depending on the node package manager used) in
-#			PKGJSONSDIR. Downloaded node modules are archived into a
-#			single tar file as one of the DISTFILES.
+#			pre-stored package.json (and package-lock.json,
+#			yarn.lock, or pnpm-lock.yaml) depending on the node
+#			package manager used) in PKGJSONSDIR. Downloaded node
+#			modules are archived into a single tar file as one of
+#			the DISTFILES.
 #
 #		If the port uses this feature, the following variable must be
 #		specified.
@@ -78,8 +79,8 @@
 #		UPSTREAM_MKSNAPSHOT_VER:
 #			An electron/chromedriver/mksnapshot version the port
 #			depends on. Those versions are usually specified in
-#			either package-lock.json or yarn.lock file in the
-#			source directory.
+#			either package-lock.json, yarn.lock, or pnpm-lock.yaml
+#			file in the source directory.
 #
 #			The build process will generate a zip archive and a
 #			checksum file of electron/chromedriver/mksnapshot to
