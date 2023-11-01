@@ -1,6 +1,6 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.56.0
+DISTVERSION=	3.58.0
 CATEGORIES=	multimedia
 DIST_SUBDIR=	${PORTNAME}
 
@@ -40,7 +40,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	ffmpeg:multimedia/ffmpeg
 
-USES=		desktop-file-utils electron:26 gettext-runtime gl gmake gnome \
+USES=		desktop-file-utils electron:27 gettext-runtime gl gmake gnome \
 		iconv:wchar_t jpeg nodejs:18,build python:build xorg
 
 USE_GITHUB=	yes
@@ -59,8 +59,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:berry prefetch extract rebuild build:builder
 
-PREFETCH_TIMESTAMP=	1693137069
-YARN_VER=	3.3.0
+PREFETCH_TIMESTAMP=	1698806138
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run patch-package
@@ -81,7 +80,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/dist/linux-unpacked && \
+	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${TAR} -cf - . | ${TAR} -xf - -C ${STAGEDIR}${DATADIR}
 .for f in ffmpeg ffprobe
 	${LN} -sf ${LOCALBASE}/bin/${f} ${STAGEDIR}${DATADIR}/resources
