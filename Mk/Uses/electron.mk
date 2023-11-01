@@ -292,12 +292,11 @@ NPM_INSTALL_FLAGS_FETCH?=--immutable --mode=skip-build
 NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --immutable-cache
 .   elif ${_NODEJS_NPM} == pnpm
 _NPM_LOCKFILE=		pnpm-lock.yaml
-_NPM_MODULE_CACHE=	store
+_NPM_MODULE_CACHE=	node_modules
 _NPM_CMDNAME=		pnpm
-NPM_CACHE_SETUP_CMD?=	pnpm config set store-dir "${WRKDIR}/node-modules-cache/${_NPM_MODULE_CACHE}"
+NPM_CACHE_SETUP_CMD?=	${DO_NADA}
 NPM_INSTALL_CMD?=	pnpm install
 NPM_INSTALL_FLAGS_FETCH?=--frozen-lockfile --ignore-scripts
-NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --offline
 .   endif
 .endif
 
@@ -382,6 +381,7 @@ electron-fetch-node-modules:
 		${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_FETCH}; \
 		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | \
 			${GREP} -v ${_NPM_MODULE_CACHE} | ${XARGS} ${RM} -r; \
+		${RM} ${WRKDIR}/node-modules-cache/${_NPM_MODULE_CACHE}/.modules.yaml; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${MTREE_CMD} -cbnSp ${_NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
@@ -403,7 +403,7 @@ _USES_extract+=	600:electron-extract-node-package-manager \
 
 .   if ${_NODEJS_NPM} == yarn
 EXTRACT_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.   elif ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
+.   elif ${_NODEJS_NPM} == berry
 EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .   endif
 
@@ -429,7 +429,7 @@ electron-copy-package-file:
 .endif
 
 electron-install-node-modules:
-.   if ${_NODEJS_NPM} == npm
+.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
 	@${ECHO_MSG} "===>   Moving prefetched node modules to ${WRKSRC}"
 	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
 		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
@@ -448,14 +448,6 @@ electron-install-node-modules:
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableInlineBuilds true
 	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
 		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
-	fi
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_EXTRACT}
-.   elif ${_NODEJS_NPM} == pnpm
-	@${ECHO_MSG} "===>   Installing node modules from prefetched cache"
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
-	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
-		${MKDIR} ${WRKDIR}/node-modules-cache && \
-		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKDIR}/node-modules-cache; \
 	fi
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_EXTRACT}
 .   endif
