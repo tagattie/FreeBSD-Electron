@@ -1,4 +1,4 @@
---- app/src/lib/editors/linux.ts.orig	2023-08-16 01:22:42 UTC
+--- app/src/lib/editors/linux.ts.orig	2023-10-08 17:33:18 UTC
 +++ app/src/lib/editors/linux.ts
 @@ -18,30 +18,30 @@ interface ILinuxExternalEditor {
  const editors: ILinuxExternalEditor[] = [
@@ -37,7 +37,7 @@
        '/mnt/c/Program Files/Microsoft VS Code/bin/code',
        '/var/lib/flatpak/app/com.visualstudio.code/current/active/export/bin/com.visualstudio.code',
        '.local/share/flatpak/app/com.visualstudio.code/current/active/export/bin/com.visualstudio.code',
-@@ -67,11 +67,11 @@ const editors: ILinuxExternalEditor[] = [
+@@ -71,11 +71,11 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Sublime Text',
@@ -51,7 +51,7 @@
    },
    {
      name: 'SlickEdit',
-@@ -86,11 +86,11 @@ const editors: ILinuxExternalEditor[] = [
+@@ -90,11 +90,11 @@ const editors: ILinuxExternalEditor[] = [
      // Code editor for elementary OS
      // https://github.com/elementary/code
      name: 'Code',
@@ -65,7 +65,7 @@
    },
    {
      name: 'JetBrains PhpStorm',
-@@ -126,31 +126,31 @@ const editors: ILinuxExternalEditor[] = [
+@@ -130,31 +130,31 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Emacs',
