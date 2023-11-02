@@ -314,9 +314,9 @@ _EXISTS_NPM_PKGFILE=	0
 .if ${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm
 .   if ${_EXISTS_NPM_PKGFILE} == 1 && ${NPM_VER} == 0
 NPM_VER!=	${GREP} packageManager ${PKGJSONSDIR}/${_NPM_PKGFILE} | \
-		${AWK} -F':' '{print $$NF}' | \
-		${SED} -e 's/"//g' | \
-		${AWK} -F'@' '{print $$NF}'
+		${AWK} -F ':' '{print $$NF}' | \
+		${SED} -e 's/[",]//g' | \
+		${AWK} -F '@' '{print $$NF}'
 .   endif
 .   if ${NPM_VER} == 0
 IGNORE=	does not specity ${_NPM_CMDNAME} version for prefetching modules
