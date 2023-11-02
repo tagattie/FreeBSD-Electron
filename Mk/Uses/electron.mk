@@ -294,7 +294,7 @@ NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --immutable-cache
 _NPM_LOCKFILE=		pnpm-lock.yaml
 _NPM_MODULE_CACHE=	node_modules
 _NPM_CMDNAME=		pnpm
-NPM_CACHE_SETUP_CMD?=	${DO_NADA}
+NPM_CACHE_SETUP_CMD?=	pnpm set extend-node-path false
 NPM_INSTALL_CMD?=	pnpm install
 NPM_INSTALL_FLAGS_FETCH?=--frozen-lockfile --ignore-scripts
 .   endif
