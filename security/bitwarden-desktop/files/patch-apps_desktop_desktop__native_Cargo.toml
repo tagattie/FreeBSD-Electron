@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/Cargo.toml.orig	2023-07-12 20:35:07 UTC
+--- apps/desktop/desktop_native/Cargo.toml.orig	2023-11-06 18:50:48 UTC
 +++ apps/desktop/desktop_native/Cargo.toml
-@@ -52,6 +52,6 @@ core-foundation = "=0.9.3"
+@@ -53,6 +53,6 @@ core-foundation = "=0.9.3"
  security-framework = "=2.9.1"
  security-framework-sys = "=2.9.0"
  

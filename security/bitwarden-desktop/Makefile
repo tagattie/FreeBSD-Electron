@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2023.9.3
+DISTVERSION=	2023.10.1
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -46,7 +46,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1698567343
+PREFETCH_TIMESTAMP=	1699792019
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
