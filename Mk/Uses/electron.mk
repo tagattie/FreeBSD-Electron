@@ -274,7 +274,8 @@ _NPM_PKGFILE=		package.json
 _NPM_LOCKFILE=		package-lock.json
 _NPM_MODULE_CACHE=	node_modules
 NPM_CACHE_SETUP_CMD?=	${DO_NADA}
-NPM_INSTALL_CMD?=	npm ci --ignore-scripts --no-progress
+NPM_INSTALL_CMD?=	npm ci
+NPM_INSTALL_FLAGS_FETCH?=--ignore-scripts --no-progress --no-audit --no-fund
 .   elif ${_NODEJS_NPM} == yarn
 _NPM_LOCKFILE=		yarn.lock
 _NPM_MODULE_CACHE=	yarn-offline-cache
