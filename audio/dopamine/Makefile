@@ -1,6 +1,6 @@
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.0-preview20
+DISTVERSION=	3.0.0-preview21
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -28,7 +28,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract build:builder
 
-PREFETCH_TIMESTAMP=	1697748196
+PREFETCH_TIMESTAMP=	1699867024
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
 post-patch:
