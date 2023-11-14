@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.48
+DISTVERSION=	1.11.49
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/keytar/-/:keytar \
@@ -44,7 +44,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn,fetch,extract,build build:builder
 
 PREFETCH_FILE=		${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1699374922
+PREFETCH_TIMESTAMP=	1699937911
 KEYTAR_VER=		7.9.0
 MATRIX_SESHAT_VER=	3.0.1
 RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
