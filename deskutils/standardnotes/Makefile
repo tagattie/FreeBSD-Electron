@@ -1,8 +1,7 @@
 PORTNAME=	standardnotes
 DISTVERSIONPREFIX=	@standardnotes/desktop@
-DISTVERSION=	3.178.18
+DISTVERSION=	3.181.23
 CATEGORIES=	deskutils
-DIST_SUBDIR=	${PORTNAME}
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	End-to-end encrypted notes app for digitalists and professionals
