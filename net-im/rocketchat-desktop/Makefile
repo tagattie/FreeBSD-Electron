@@ -1,7 +1,6 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	3.9.9
+DISTVERSION=	3.9.10
 CATEGORIES=	net-im
-DIST_SUBDIR=	${PORTNAME}${PKGNAMESUFFIX}
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Rocket.Chat desktop client
@@ -12,7 +11,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:24 nodejs:18,build python:build
+USES=		desktop-file-utils electron:22 nodejs:16,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	RocketChat
@@ -26,7 +25,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:berry prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1698571204
+PREFETCH_TIMESTAMP=	1700047077
 YARN_VER=	3.2.2
 
 pre-build:
