@@ -1,4 +1,4 @@
---- electron/spec/api-browser-window-spec.ts.orig	2023-10-20 08:29:17 UTC
+--- electron/spec/api-browser-window-spec.ts.orig	2023-11-15 10:20:22 UTC
 +++ electron/spec/api-browser-window-spec.ts
 @@ -64,7 +64,7 @@ describe('BrowserWindow module', () => {
        }).not.to.throw();
@@ -9,7 +9,7 @@
        const appPath = path.join(fixtures, 'apps', 'xwindow-icon');
        const appProcess = childProcess.spawn(process.execPath, [appPath]);
        await once(appProcess, 'exit');
-@@ -1099,7 +1099,7 @@ describe('BrowserWindow module', () => {
+@@ -1119,7 +1119,7 @@ describe('BrowserWindow module', () => {
  
      describe('BrowserWindow.minimize()', () => {
        // TODO(codebytere): Enable for Linux once maximize/minimize events work in CI.
@@ -18,7 +18,7 @@
          const minimize = once(w, 'minimize');
          w.minimize();
          await minimize;
-@@ -1116,7 +1116,7 @@ describe('BrowserWindow module', () => {
+@@ -1136,7 +1136,7 @@ describe('BrowserWindow module', () => {
        });
  
        // TODO(dsanders11): Enable for Linux once CI plays nice with these kinds of tests
@@ -27,7 +27,7 @@
          const maximize = once(w, 'maximize');
          const shown = once(w, 'show');
          w.maximize();
-@@ -1153,7 +1153,7 @@ describe('BrowserWindow module', () => {
+@@ -1173,7 +1173,7 @@ describe('BrowserWindow module', () => {
          expect(w.isFocused()).to.equal(true);
        });
  
@@ -36,7 +36,7 @@
          const w1 = new BrowserWindow({ show: false });
          const w2 = new BrowserWindow({ show: false });
          const w3 = new BrowserWindow({ show: false });
-@@ -1220,7 +1220,7 @@ describe('BrowserWindow module', () => {
+@@ -1240,7 +1240,7 @@ describe('BrowserWindow module', () => {
          expect(w.isFocused()).to.equal(false);
        });
  
@@ -45,7 +45,7 @@
          const w1 = new BrowserWindow({ show: false });
          const w2 = new BrowserWindow({ show: false });
          const w3 = new BrowserWindow({ show: false });
-@@ -1631,7 +1631,7 @@ describe('BrowserWindow module', () => {
+@@ -1651,7 +1651,7 @@ describe('BrowserWindow module', () => {
          });
        });
  
@@ -54,7 +54,7 @@
          it('checks normal bounds when maximized', async () => {
            const bounds = w.getBounds();
            const maximize = once(w, 'maximize');
-@@ -1811,7 +1811,7 @@ describe('BrowserWindow module', () => {
+@@ -1831,7 +1831,7 @@ describe('BrowserWindow module', () => {
          });
        });
  
@@ -63,7 +63,7 @@
          it('checks normal bounds when minimized', async () => {
            const bounds = w.getBounds();
            const minimize = once(w, 'minimize');
-@@ -2798,7 +2798,7 @@ describe('BrowserWindow module', () => {
+@@ -2818,7 +2818,7 @@ describe('BrowserWindow module', () => {
    describe('BrowserWindow.setOpacity(opacity)', () => {
      afterEach(closeAllWindows);
  
@@ -72,7 +72,7 @@
        it('make window with initial opacity', () => {
          const w = new BrowserWindow({ show: false, opacity: 0.5 });
          expect(w.getOpacity()).to.equal(0.5);
-@@ -2824,7 +2824,7 @@ describe('BrowserWindow module', () => {
+@@ -2844,7 +2844,7 @@ describe('BrowserWindow module', () => {
        });
      });
  
@@ -81,7 +81,7 @@
        it('sets 1 regardless of parameter', () => {
          const w = new BrowserWindow({ show: false });
          w.setOpacity(0);
-@@ -3753,7 +3753,7 @@ describe('BrowserWindow module', () => {
+@@ -3773,7 +3773,7 @@ describe('BrowserWindow module', () => {
          expect(test.nodeTimers).to.equal(true);
          expect(test.nodeUrl).to.equal(true);
  
@@ -90,7 +90,7 @@
            expect(test.creationTime).to.be.null('creation time');
            expect(test.systemMemoryInfo).to.be.null('system memory info');
          } else {
-@@ -4258,7 +4258,7 @@ describe('BrowserWindow module', () => {
+@@ -4278,7 +4278,7 @@ describe('BrowserWindow module', () => {
      });
    });
  
@@ -99,7 +99,7 @@
      afterEach(closeAllWindows);
      it('emits an event when window is maximized', async () => {
        const w = new BrowserWindow({ show: false });
-@@ -4529,7 +4529,7 @@ describe('BrowserWindow module', () => {
+@@ -4549,7 +4549,7 @@ describe('BrowserWindow module', () => {
      // TODO(zcbenz):
      // This test does not run on Linux CI. See:
      // https://github.com/electron/electron/issues/28699
@@ -108,7 +108,7 @@
        const w = new BrowserWindow({});
        const maximize = once(w, 'maximize');
        w.maximize();
-@@ -4546,7 +4546,7 @@ describe('BrowserWindow module', () => {
+@@ -4566,7 +4566,7 @@ describe('BrowserWindow module', () => {
    });
  
    // TODO(dsanders11): Enable once maximize event works on Linux again on CI
@@ -117,7 +117,7 @@
      afterEach(closeAllWindows);
      it('should show the window if it is not currently shown', async () => {
        const w = new BrowserWindow({ show: false });
-@@ -4583,7 +4583,7 @@ describe('BrowserWindow module', () => {
+@@ -4603,7 +4603,7 @@ describe('BrowserWindow module', () => {
  
      // TODO(dsanders11): Enable once minimize event works on Linux again.
      //                   See https://github.com/electron/electron/issues/28699
@@ -126,7 +126,7 @@
        const w = new BrowserWindow();
        const minimize = once(w, 'minimize');
        w.minimize();
-@@ -5057,7 +5057,7 @@ describe('BrowserWindow module', () => {
+@@ -5077,7 +5077,7 @@ describe('BrowserWindow module', () => {
        });
  
        // On Linux there is no "resizable" property of a window.
@@ -135,7 +135,7 @@
          const w = new BrowserWindow({ show: false });
          expect(w.resizable).to.be.true('resizable');
  
-@@ -5147,7 +5147,7 @@ describe('BrowserWindow module', () => {
+@@ -5167,7 +5167,7 @@ describe('BrowserWindow module', () => {
      });
    });
  
@@ -144,7 +144,7 @@
      // Not implemented on Linux.
      afterEach(closeAllWindows);
  
-@@ -6301,7 +6301,7 @@ describe('BrowserWindow module', () => {
+@@ -6321,7 +6321,7 @@ describe('BrowserWindow module', () => {
    describe('"transparent" option', () => {
      afterEach(closeAllWindows);
  
