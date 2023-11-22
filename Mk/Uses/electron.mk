@@ -351,7 +351,7 @@ electron-fetch-node-package-manager:
 .endif
 
 .if defined(_ELECTRON_FEATURE_PREFETCH)
-_DISTFILE_prefetch=	${PKGNAME}-node-modules${EXTRACT_SUFX}
+_DISTFILE_prefetch=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 
 .   if ${_EXISTS_NPM_PKGFILE} == 0
