@@ -531,6 +531,9 @@ electron-generate-electron-zip:
 	@cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}
+	@cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
+		${SHA256} -r *.zip | \
+		${SED} -e 's/ / */' > SHASUMS256.txt
 .   endif
 .   if defined(UPSTREAM_CHROMEDRIVER_VER) && ${UPSTREAM_CHROMEDRIVER_VER} != ""
 	@${MKDIR} ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}
