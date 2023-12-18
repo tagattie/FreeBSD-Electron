@@ -1,6 +1,6 @@
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.201
+DISTVERSION=	1.0.205
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -33,6 +33,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libpython${PYTHON_VER}.so:lang/python${PYTHON_SUFFIX} \
 		libdav1d.so:multimedia/dav1d \
 		libopenh264.so:multimedia/openh264 \
+		libpipewire-0.3.so:multimedia/pipewire \
 		libcups.so:print/cups \
 		libharfbuzz.so:print/harfbuzz \
 		libsecret-1.so:security/libsecret \
@@ -42,7 +43,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		electron:25 gl gmake gnome iconv:wchar_t jpeg \
+USES=		electron:27 gl gmake gnome iconv:wchar_t jpeg \
 		localbase:ldflags nodejs:18,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
@@ -60,8 +61,8 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn,fetch,extract,build build:builder
 
-PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1698665643
+PREFETCH_FILE=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
+PREFETCH_TIMESTAMP=	1702885851
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
