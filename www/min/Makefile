@@ -1,6 +1,6 @@
 PORTNAME=	min
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.29.0
+DISTVERSION=	1.30.0
 CATEGORIES=	www
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:26 nodejs:18,build pkgconfig \
+USES=		desktop-file-utils electron:27 nodejs:18,build pkgconfig \
 		python:build
 
 USE_GITHUB=	yes
@@ -27,7 +27,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild build:packager
 
-PREFETCH_TIMESTAMP=	1698316796
+PREFETCH_TIMESTAMP=	1702888741
 ELECTRON_MAKE_FLAGS+=	--asar \
 			--ignore='.DS_Store' \
 			--ignore='dist/app' \

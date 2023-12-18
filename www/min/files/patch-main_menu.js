@@ -1,6 +1,6 @@
---- main/menu.js.orig	2023-06-26 23:50:27 UTC
+--- main/menu.js.orig	2023-11-25 18:12:52 UTC
 +++ main/menu.js
-@@ -177,8 +177,8 @@ function buildAppMenu (options = {}) {
+@@ -168,8 +168,8 @@ function buildAppMenu (options = {}) {
              sendIPCToWindow(window, 'print')
            }
          },
