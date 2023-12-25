@@ -1,6 +1,6 @@
---- app/src/lib/editors/linux.ts.orig	2023-10-08 17:33:18 UTC
+--- app/src/lib/editors/linux.ts.orig	2023-12-20 15:09:37 UTC
 +++ app/src/lib/editors/linux.ts
-@@ -18,30 +18,30 @@ interface ILinuxExternalEditor {
+@@ -18,30 +18,30 @@ const editors: ILinuxExternalEditor[] = [
  const editors: ILinuxExternalEditor[] = [
    {
      name: 'Atom',
@@ -51,7 +51,7 @@
    },
    {
      name: 'SlickEdit',
-@@ -90,11 +90,11 @@ const editors: ILinuxExternalEditor[] = [
+@@ -90,15 +90,16 @@ const editors: ILinuxExternalEditor[] = [
      // Code editor for elementary OS
      // https://github.com/elementary/code
      name: 'Code',
@@ -65,7 +65,49 @@
    },
    {
      name: 'JetBrains PhpStorm',
-@@ -130,31 +130,31 @@ const editors: ILinuxExternalEditor[] = [
+     paths: [
++      '%%LOCALBASE%%/bin/phpstorm',
+       '/snap/bin/phpstorm',
+       '.local/share/JetBrains/Toolbox/scripts/phpstorm',
+     ],
+@@ -106,17 +107,19 @@ const editors: ILinuxExternalEditor[] = [
+   {
+     name: 'JetBrains WebStorm',
+     paths: [
++      '%%LOCALBASE%%/bin/webstorm',
+       '/snap/bin/webstorm',
+       '.local/share/JetBrains/Toolbox/scripts/webstorm',
+     ],
+   },
+   {
+     name: 'IntelliJ IDEA',
+-    paths: ['/snap/bin/idea', '.local/share/JetBrains/Toolbox/scripts/idea'],
++    paths: ['%%LOCALBASE%%/bin/idea', '/snap/bin/idea', '.local/share/JetBrains/Toolbox/scripts/idea'],
+   },
+   {
+     name: 'IntelliJ IDEA Ultimate Edition',
+     paths: [
++      '%%LOCALBASE%%/bin/intellij-idea-ultimate',
+       '/snap/bin/intellij-idea-ultimate',
+       '.local/share/JetBrains/Toolbox/scripts/intellij-idea-ultimate',
+     ],
+@@ -124,6 +127,7 @@ const editors: ILinuxExternalEditor[] = [
+   {
+     name: 'IntelliJ Goland',
+     paths: [
++      '%%LOCALBASE%%/bin/goland',
+       '/snap/bin/goland',
+       '.local/share/JetBrains/Toolbox/scripts/goland',
+     ],
+@@ -131,6 +135,7 @@ const editors: ILinuxExternalEditor[] = [
+   {
+     name: 'JetBrains PyCharm',
+     paths: [
++      '%%LOCALBASE%%/bin/pycharm',
+       '/snap/bin/pycharm',
+       '.local/share/JetBrains/Toolbox/scripts/pycharm',
+     ],
+@@ -144,35 +149,35 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Emacs',
@@ -101,6 +143,11 @@
      name: 'Mousepad',
 -    paths: ['/usr/bin/mousepad'],
 +    paths: ['%%LOCALBASE%%/bin/mousepad'],
+   },
+   {
+     name: 'Pulsar',
+-    paths: ['/usr/bin/pulsar'],
++    paths: ['%%LOCALBASE%%/bin/pulsar'],
    },
  ]
  

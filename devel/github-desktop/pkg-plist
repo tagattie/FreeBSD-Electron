@@ -66,6 +66,8 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/locales/zh-CN.pak
 %%DATADIR%%/locales/zh-TW.pak
 %%DATADIR%%/resources.pak
+%%DATADIR%%/resources/app/8de8e0377a0e3218f870.svg
+%%DATADIR%%/resources/app/8e48abccd873a37faf51.svg
 %%DATADIR%%/resources/app/a7b45a45d471743a8d54.cmd
 %%DATADIR%%/resources/app/cli.js
 %%DATADIR%%/resources/app/cli.js.map

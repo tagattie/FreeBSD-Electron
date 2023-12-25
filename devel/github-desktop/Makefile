@@ -1,7 +1,7 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.3.3
-DISTVERSIONSUFFIX=	-linux2
+DISTVERSION=	3.3.6
+DISTVERSIONSUFFIX=	-linux3
 CATEGORIES=	devel
 MASTER_SITES=	KERNEL_ORG/software/scm/git:git
 DISTFILES=	${PREFETCH_FILE}:prefetch \
@@ -32,7 +32,9 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libpng.so:graphics/png \
 		libwayland-egl.so:graphics/wayland \
 		libwebp.so:graphics/webp \
+		libdav1d.so:multimedia/dav1d \
 		libopenh264.so:multimedia/openh264 \
+		libpipewire-0.3.so:multimedia/pipewire \
 		libcups.so:print/cups \
 		libharfbuzz.so:print/harfbuzz \
 		libsecret-1.so:security/libsecret \
@@ -42,7 +44,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		desktop-file-utils electron:24 gettext-runtime gl gmake gnome \
+USES=		desktop-file-utils electron:26 gettext-runtime gl gmake gnome \
 		iconv:wchar_t jpeg localbase:ldflags nodejs:18,build perl5 \
 		pkgconfig python shebangfix ssl xorg
 
@@ -64,15 +66,15 @@ USE_ELECTRON=	npm:yarn,fetch,extract,build
 
 .include <bsd.port.pre.mk>
 
-GIT_VER=	2.42.0
+GIT_VER=	2.43.0
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1698825906
+PREFETCH_TIMESTAMP=	1703542077
 UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.lock | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 ELECTRON_DOWNLOAD_URL=		https://github.com/electron/electron/releases/download/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
-MAKE_ENV+=	CIRCLE_SHA1=6960955cdd416ca35803634af6ed2c8557a316ef
+MAKE_ENV+=	CIRCLE_SHA1=e32359f8d0ea2f1208d0d0f333e4139d1258e115
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
