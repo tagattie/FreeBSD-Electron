@@ -1,6 +1,6 @@
---- chrome/browser/flag_descriptions.cc.orig	2023-12-20 07:12:20 UTC
+--- chrome/browser/flag_descriptions.cc.orig	2023-12-24 08:42:05 UTC
 +++ chrome/browser/flag_descriptions.cc
-@@ -7250,7 +7250,7 @@ const char kLacrosMergeIcuDataFileDescription[] =
+@@ -7256,7 +7256,7 @@ const char kLacrosMergeIcuDataFileDescription[] =
      "Enables sharing common areas of icudtl.dat between Ash and Lacros.";
  #endif  // #if BUILDFLAG(IS_CHROMEOS_LACROS)
  
@@ -9,7 +9,7 @@
  const char kGetAllScreensMediaName[] = "GetAllScreensMedia API";
  const char kGetAllScreensMediaDescription[] =
      "When enabled, the getAllScreensMedia API for capturing multiple screens "
-@@ -7489,7 +7489,7 @@ const char kSearchWebInSidePanelDescription[] =
+@@ -7495,7 +7495,7 @@ const char kSearchWebInSidePanelDescription[] =
  // Random platform combinations -----------------------------------------------
  
  #if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || \
@@ -18,7 +18,7 @@
  const char kQuickCommandsName[] = "Quick Commands";
  const char kQuickCommandsDescription[] =
      "Enable a text interface to browser features. Invoke with Ctrl-Space.";
-@@ -7498,7 +7498,7 @@ const char kQuickCommandsDescription[] =
+@@ -7504,7 +7504,7 @@ const char kQuickCommandsDescription[] =
          // BUILDFLAG(IS_FUCHSIA)
  
  #if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || \
@@ -27,7 +27,7 @@
  const char kFollowingFeedSidepanelName[] = "Following feed in the sidepanel";
  const char kFollowingFeedSidepanelDescription[] =
      "Enables the following feed in the sidepanel.";
-@@ -7513,7 +7513,7 @@ const char kEnableProtoApiForClassifyUrlDescription[] 
+@@ -7519,7 +7519,7 @@ const char kEnableProtoApiForClassifyUrlDescription[] 
      "instead of JSON.";
  #endif
  
@@ -36,7 +36,7 @@
  const char kEnableNetworkServiceSandboxName[] =
      "Enable the network service sandbox.";
  const char kEnableNetworkServiceSandboxDescription[] =
-@@ -7537,7 +7537,7 @@ const char kWebShareDescription[] =
+@@ -7543,7 +7543,7 @@ const char kWebShareDescription[] =
      "platforms.";
  #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_CHROMEOS) || BUILDFLAG(IS_MAC)
  
@@ -45,7 +45,7 @@
  const char kOzonePlatformHintChoiceDefault[] = "Default";
  const char kOzonePlatformHintChoiceAuto[] = "Auto";
  const char kOzonePlatformHintChoiceX11[] = "X11";
-@@ -7557,7 +7557,7 @@ const char kWebBluetoothConfirmPairingSupportDescripti
+@@ -7563,7 +7563,7 @@ const char kWebBluetoothConfirmPairingSupportDescripti
      "Bluetooth";
  #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_LINUX)
  
@@ -54,7 +54,7 @@
  const char kSkipUndecryptablePasswordsName[] =
      "Skip undecryptable passwords to use the available decryptable "
      "passwords.";
-@@ -7571,7 +7571,7 @@ const char kForcePasswordInitialSyncWhenDecryptionFail
+@@ -7577,7 +7577,7 @@ const char kForcePasswordInitialSyncWhenDecryptionFail
      "storage and requests initial sync.";
  #endif  // BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_MAC)
  
@@ -63,7 +63,7 @@
  const char kAsyncDnsName[] = "Async DNS resolver";
  const char kAsyncDnsDescription[] = "Enables the built-in DNS resolver.";
  #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_LINUX)
-@@ -7670,7 +7670,7 @@ const char kElasticOverscrollDescription[] =
+@@ -7676,7 +7676,7 @@ const char kElasticOverscrollDescription[] =
  
  #if BUILDFLAG(IS_WIN) ||                                      \
      (BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS_LACROS)) || \
@@ -72,7 +72,7 @@
  const char kUIDebugToolsName[] = "Debugging tools for UI";
  const char kUIDebugToolsDescription[] =
      "Enables additional keyboard shortcuts to help debugging.";
-@@ -7716,7 +7716,7 @@ const char kEnableAudioFocusEnforcementDescription[] =
+@@ -7722,7 +7722,7 @@ const char kEnableAudioFocusEnforcementDescription[] =
      "any one time. Requires #enable-media-session-service to be enabled too.";
  #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
  

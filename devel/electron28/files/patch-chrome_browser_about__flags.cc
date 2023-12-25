@@ -1,4 +1,4 @@
---- chrome/browser/about_flags.cc.orig	2023-12-20 07:12:20 UTC
+--- chrome/browser/about_flags.cc.orig	2023-12-24 08:42:05 UTC
 +++ chrome/browser/about_flags.cc
 @@ -231,7 +231,7 @@
  #include "ui/ui_features.h"
@@ -88,7 +88,7 @@
      {"enable-async-dns", flag_descriptions::kAsyncDnsName,
       flag_descriptions::kAsyncDnsDescription, kOsWin | kOsLinux,
       FEATURE_VALUE_TYPE(features::kAsyncDns)},
-@@ -8114,7 +8114,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -8122,7 +8122,7 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(supervised_user::kEnableProtoApiForClassifyUrl)},
  #endif  // BUILDFLAG(ENABLE_SUPERVISED_USERS)
  
@@ -97,7 +97,7 @@
      {"enable-network-service-sandbox",
       flag_descriptions::kEnableNetworkServiceSandboxName,
       flag_descriptions::kEnableNetworkServiceSandboxDescription,
-@@ -8139,7 +8139,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -8147,7 +8147,7 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(
           supervised_user::kFilterWebsitesForSupervisedUsersOnDesktopAndIOS)},
  
@@ -106,7 +106,7 @@
      {"enable-family-link-extensions-permissions",
       flag_descriptions::
           kEnableExtensionsPermissionsForSupervisedUsersOnDesktopName,
-@@ -8809,7 +8809,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -8817,7 +8817,7 @@ const FeatureEntry kFeatureEntries[] = {
  #endif
  
  #if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || \
@@ -115,7 +115,7 @@
      {"quick-commands", flag_descriptions::kQuickCommandsName,
       flag_descriptions::kQuickCommandsDescription, kOsDesktop,
       FEATURE_VALUE_TYPE(features::kQuickCommands)},
-@@ -9084,7 +9084,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -9092,7 +9092,7 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(ash::features::kWallpaperPerDesk)},
  #endif  // BUILDFLAG(IS_CHROMEOS_ASH)
  
@@ -124,7 +124,7 @@
      {"enable-get-all-screens-media", flag_descriptions::kGetAllScreensMediaName,
       flag_descriptions::kGetAllScreensMediaDescription,
       kOsCrOS | kOsLacros | kOsLinux,
-@@ -9126,7 +9126,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -9134,7 +9134,7 @@ const FeatureEntry kFeatureEntries[] = {
  
  #if BUILDFLAG(IS_WIN) ||                                      \
      (BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS_LACROS)) || \
@@ -133,7 +133,7 @@
      {
          "ui-debug-tools",
          flag_descriptions::kUIDebugToolsName,
-@@ -9684,7 +9684,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -9692,7 +9692,7 @@ const FeatureEntry kFeatureEntries[] = {
  #endif
  
  #if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_MAC) || \
@@ -142,7 +142,7 @@
      {"document-picture-in-picture-api",
       flag_descriptions::kDocumentPictureInPictureApiName,
       flag_descriptions::kDocumentPictureInPictureApiDescription,
-@@ -10791,7 +10791,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -10799,7 +10799,7 @@ const FeatureEntry kFeatureEntries[] = {
       FEATURE_VALUE_TYPE(features::kProcessPerSiteUpToMainFrameThreshold)},
  
  #if BUILDFLAG(IS_MAC) || BUILDFLAG(IS_WIN) || BUILDFLAG(IS_LINUX) || \
@@ -151,7 +151,7 @@
      {"camera-mic-effects", flag_descriptions::kCameraMicEffectsName,
       flag_descriptions::kCameraMicEffectsDescription,
       static_cast<unsigned short>(kOsMac | kOsWin | kOsLinux | kOsFuchsia),
-@@ -10973,7 +10973,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -10981,7 +10981,7 @@ const FeatureEntry kFeatureEntries[] = {
           password_manager::features::kFillingAcrossAffiliatedWebsitesAndroid)},
  #endif
  
@@ -160,7 +160,7 @@
      {"third-party-profile-management",
       flag_descriptions::kThirdPartyProfileManagementName,
       flag_descriptions::kThirdPartyProfileManagementDescription,
-@@ -11287,7 +11287,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -11295,7 +11295,7 @@ const FeatureEntry kFeatureEntries[] = {
       kOsDesktop, FEATURE_VALUE_TYPE(blink::features::kPasswordStrongLabel)},
  #endif
  
@@ -169,7 +169,7 @@
      {"attach-logs-to-autofill-rater-extentsion-report",
       flag_descriptions::kAttachLogsToAutofillRaterExtensionReportName,
       flag_descriptions::kAttachLogsToAutofillRaterExtensionReportDescription,
-@@ -11296,7 +11296,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -11304,7 +11304,7 @@ const FeatureEntry kFeatureEntries[] = {
                              kAttachLogsToAutofillRaterExtensionReport)},
  #endif
  
