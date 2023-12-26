@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	3.9.10
+DISTVERSION=	3.9.11
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -25,7 +25,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:berry prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1700047077
+PREFETCH_TIMESTAMP=	1703544267
 YARN_VER=	3.2.2
 
 pre-build:
