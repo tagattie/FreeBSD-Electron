@@ -1,6 +1,6 @@
 PORTNAME=	youtube-music
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.2.0
+DISTVERSION=	3.1.1
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,13 +12,12 @@ LICENSE_FILE=	${WRKSRC}/license
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		cargo electron:27 nodejs:18,build
+USES=		cargo electron:28 nodejs:18,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	th-ch
-GH_TUPLE=	rollup:rollup:v4.1.4:rollup/rollup
+GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup
 
-DEFAULT_VERSIONS+=	rust=rust-nightly
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
 CARGO_BUILD=	no
@@ -27,24 +26,19 @@ CARGO_TEST=	no
 
 SUB_FILES=	${PORTNAME}
 
-PORTDOCS=	readme.md
+PORTDOCS=	README.md changelog.md
 
 OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:pnpm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1698736889
-
-post-extract:
-	cd ${WRKSRC}/node_modules && \
-		${LN} -sf .pnpm/tslib@2.6.2/node_modules/tslib tslib
+PREFETCH_TIMESTAMP=	1703580062
 
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
 		${SETENV} ${MAKE_ENV} ${CARGO} build --release --verbose --verbose
 	${CP} ${WRKSRC}/rollup/rust/target/release/libbindings_napi.so \
 		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run postinstall
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
 
 do-install:
