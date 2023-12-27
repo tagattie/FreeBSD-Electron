@@ -1,9 +1,8 @@
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.12.19
+DISTVERSION=	2.13.11
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
-DIST_SUBDIR=	${PORTNAME}${PKGNAMESUFFIX}
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Note taking and to-do application with synchronisation capabilities
@@ -18,10 +17,18 @@ BUILD_DEPENDS=	app-builder:devel/app-builder \
 LIB_DEPENDS=	libvips.so:graphics/vips \
 		libsecret-1.so:security/libsecret
 
-USES=		electron:25 gmake localbase:ldflags nodejs:18,build python:build
+USES=		cargo electron:26 gmake localbase:ldflags nodejs:18,build \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
+GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup
+
+CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
+CARGO_BUILD=	no
+CARGO_INSTALL=	no
+CARGO_TEST=	no
 
 BINARY_ALIAS=	python=${PYTHON_CMD} \
 		python3=${PYTHON_CMD}
@@ -31,14 +38,13 @@ SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}
 BUILD_WRKSRC=	${WRKSRC}/packages/app-desktop
 TEST_WRKSRC=	${WRKSRC}/packages/app-desktop
 
-PORTDOCS=	BUILD.md CONTRIBUTING.md README.md SECURITY.md
+PORTDOCS=	README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:berry prefetch extract rebuild:nodejs build:builder
+USE_ELECTRON=	npm:berry prefetch extract build:builder
 
-PREFETCH_TIMESTAMP=	1698651539
-YARN_VER=	3.3.1
+PREFETCH_TIMESTAMP=	1703591426
 
 post-patch:
 	${RM} -r ${WRKSRC}/packages/app-cli \
@@ -46,6 +52,12 @@ post-patch:
 		${WRKSRC}/packages/app-mobile
 
 pre-build:
+	cd ${WRKSRC}/rollup/rust && \
+		${SETENV} ${MAKE_ENV} ${CARGO} build --release --verbose --verbose
+	${CP} ${WRKSRC}/rollup/rust/target/release/libbindings_napi.so \
+		${WRKSRC}/packages/turndown/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
+		yarn rebuild
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 		yarn run electron-rebuild --force-abi 116
 
