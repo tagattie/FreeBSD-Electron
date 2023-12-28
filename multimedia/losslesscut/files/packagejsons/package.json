@@ -3,7 +3,7 @@
   "productName": "LosslessCut",
   "description": "The swiss army knife of lossless video/audio editing",
   "copyright": "Copyright © 2021 ${author}",
-  "version": "3.58.0",
+  "version": "3.59.1",
   "main": "public/electron.js",
   "homepage": "./",
   "scripts": {
@@ -24,7 +24,7 @@
     "prepack-mas-dev": "yarn build",
     "pack-win": "electron-builder --win",
     "prepack-win": "yarn build",
-    "postinstall": "patch-package && electron-builder install-app-deps",
+    "postinstall": "electron-builder install-app-deps",
     "version": "node script/postversion.mjs && git add no.mifi.losslesscut.appdata.xml",
     "pack-linux": "electron-builder --linux",
     "prepack-linux": "yarn build",
@@ -52,10 +52,9 @@
     "csv-parse": "^4.15.3",
     "csv-stringify": "^5.6.2",
     "electron": "^27.0.0",
-    "electron-builder": "^24.6.3",
-    "electron-builder-notarize": "^1.5.1",
+    "electron-builder": "^24.6.4",
     "electron-devtools-installer": "^3.2.0",
-    "eslint": "^7.32.0 || ^8.2.0",
+    "eslint": "^8.53.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-plugin-import": "^2.25.3",
     "eslint-plugin-jsx-a11y": "^6.5.1",
@@ -72,7 +71,7 @@
     "mkdirp": "^1.0.3",
     "mousetrap": "^1.6.5",
     "p-map": "^5.5.0",
-    "patch-package": "^6.2.1",
+    "p-retry": "^6.1.0",
     "pify": "^5.0.0",
     "pretty-bytes": "^6.0.0",
     "react": "^18.2.0",
@@ -83,8 +82,9 @@
     "react-sortablejs": "^6.1.4",
     "react-syntax-highlighter": "^15.4.3",
     "react-use": "^17.4.0",
+    "screenfull": "^6.0.2",
     "scroll-into-view-if-needed": "^2.2.28",
-    "sharp": "^0.30.5",
+    "sharp": "^0.32.6",
     "smpte-timecode": "^1.2.3",
     "sortablejs": "^1.13.0",
     "sweetalert2": "^11.0.0",
@@ -141,11 +141,11 @@
     },
     "appId": "no.mifi.losslesscut",
     "artifactName": "${productName}-${os}-${arch}.${ext}",
-    "afterSign": "electron-builder-notarize",
     "mac": {
       "hardenedRuntime": true,
       "appId": "no.mifi.losslesscut-mac",
       "category": "public.app-category.productivity",
+      "notarize": true,
       "target": [
         {
           "target": "mas",
@@ -268,6 +268,7 @@
     },
     "mas": {
       "hardenedRuntime": false,
+      "notarize": false,
       "entitlements": "entitlements.mas.plist",
       "entitlementsInherit": "entitlements.mas.inherit.plist",
       "provisioningProfile": "LosslessCut_Mac_App_Store_provisioning_profile.provisionprofile",
@@ -431,5 +432,8 @@
       ]
     }
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@4.0.2",
+  "resolutions": {
+    "app-builder-lib@24.8.0": "patch:app-builder-lib@npm%3A24.8.0#./.yarn/patches/app-builder-lib-npm-24.8.0-51e1f5cd3f.patch"
+  }
 }

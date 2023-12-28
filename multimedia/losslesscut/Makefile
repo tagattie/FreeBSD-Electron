@@ -1,8 +1,7 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.58.0
+DISTVERSION=	3.59.1
 CATEGORIES=	multimedia
-DIST_SUBDIR=	${PORTNAME}
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Swiss army knife of lossless video/audio editing
@@ -57,12 +56,11 @@ PORTDOCS=	README.md cli.md developer-notes.md import-export.md issues.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:berry prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:yarn4 prefetch extract rebuild build:builder
 
-PREFETCH_TIMESTAMP=	1698806138
+PREFETCH_TIMESTAMP=	1703668781
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run patch-package
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
