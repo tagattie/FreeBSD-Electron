@@ -35,7 +35,7 @@ PORTDOCS=	CONTRIBUTING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn prefetch extract
+USE_ELECTRON=	npm:yarn1 prefetch extract
 
 PREFETCH_TIMESTAMP=	1698552311
 ELECTRON_MAKE_CMD=	yarn electron:build

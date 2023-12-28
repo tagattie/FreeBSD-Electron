@@ -39,17 +39,11 @@ share/icons/hicolor/64x64/apps/moosync.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/bindings/LICENSE.md
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/bindings/bindings.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/bindings/package.json
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/LICENSE
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/build/Release/bufferutil.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/build/node_gyp_bins/python3
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/fallback.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/index.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/package.json
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/prebuilds/darwin-x64+arm64/node.napi.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/prebuilds/linux-x64/node.napi.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/prebuilds/win32-ia32/node.napi.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/prebuilds/win32-x64/node.napi.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/bufferutil/src/bufferutil.c
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/file-uri-to-path/History.md
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/file-uri-to-path/LICENSE
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/file-uri-to-path/index.js
