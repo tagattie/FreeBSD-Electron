@@ -59,9 +59,9 @@ PORTDOCS=	HACKING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn,fetch,extract,build build:builder
+USE_ELECTRON=	npm:yarn1,fetch,extract,build build:builder
 
-PREFETCH_FILE=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
+PREFETCH_FILE=	${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 PREFETCH_TIMESTAMP=	1702885851
 
 pre-fetch:
