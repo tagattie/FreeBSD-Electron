@@ -23,10 +23,9 @@ PORTDOCS=	CHANGELOG.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:berry prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:yarn2 prefetch extract rebuild:electron build:builder
 
 PREFETCH_TIMESTAMP=	1703544267
-YARN_VER=	3.2.2
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
