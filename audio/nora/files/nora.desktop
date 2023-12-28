@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Nora
+Comment=An elegant music player built using Electron and React. Inspired by Oto Music for Android by Piyush Mamidwar.
+Icon=nora
+Exec=nora %U
+Categories=AudioVideo;
+Terminal=false
+StartupWMClass=Nora
+MimeType=audio/mpeg;audio/wav;audio/ogg;audio/aac;audio/x-m4r;audio/flac;x-scheme-handler/nora;
