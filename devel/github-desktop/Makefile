@@ -62,12 +62,12 @@ USE_GNOME=	cairo gdkpixbuf2 glib20 gtk30 libxml2 libxslt pango
 SHEBANG_FILES=	../git-${GIT_VER}/git-p4.py \
 		../git-${GIT_VER}/templates/hooks--fsmonitor-watchman.sample
 
-USE_ELECTRON=	npm:yarn,fetch,extract,build
+USE_ELECTRON=	npm:yarn1,fetch,extract,build
 
 .include <bsd.port.pre.mk>
 
 GIT_VER=	2.43.0
-PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
+PREFETCH_FILE=	${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 PREFETCH_TIMESTAMP=	1703542077
 UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.lock | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
