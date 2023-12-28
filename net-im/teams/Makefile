@@ -25,7 +25,7 @@ PORTDOCS=	CONTRIBUTING.md HISTORY.md KNOWN_ISSUES.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:yarn1 prefetch extract rebuild:electron build:builder
 
 PREFETCH_TIMESTAMP=	1703664777
 
