@@ -1,4 +1,4 @@
-TIMESTAMP = 1703661358
+TIMESTAMP = 1703761763
 SHA256 (rust/crates/Inflector-0.11.4.crate) = fe438c63458706e03479442743baae6c88256498e6431708f6dfc520a26515d3
 SIZE (rust/crates/Inflector-0.11.4.crate) = 17438
 SHA256 (rust/crates/ahash-0.8.6.crate) = 91429305e9f0a25f6205c5b8e0d2db09e0708a7a6df0f42212bb56c32c8ac97a
@@ -309,8 +309,8 @@ SHA256 (rust/crates/zerocopy-derive-0.7.31.crate) = b3c129550b3e6de3fd0ba67ba5c8
 SIZE (rust/crates/zerocopy-derive-0.7.31.crate) = 533507
 SHA256 (yarn-3.6.4.tgz) = cca0e813a97e329771889031e1418ea799b0de631cc9ac87b42a2d07262edc4e
 SIZE (yarn-3.6.4.tgz) = 877408
-SHA256 (joplin-desktop-2.13.11-node-modules.tar.gz) = 105cce92bc0454f11b7bc7ffdf287fe0a88a1aac4948d12b9fe91dc918ac712b
-SIZE (joplin-desktop-2.13.11-node-modules.tar.gz) = 656644986
+SHA256 (joplin-desktop-2.13.11-node-modules.tar.gz) = d1e05fe611adaedef66b567195e150244b0db6625d102a0a5ccf8ffb17b8e201
+SIZE (joplin-desktop-2.13.11-node-modules.tar.gz) = 656644912
 SHA256 (laurent22-joplin-v2.13.11_GH0.tar.gz) = c861dcb09a9cf21190054bfecb693c5fc425de4cf4c667ce535edc7f53ce10ce
 SIZE (laurent22-joplin-v2.13.11_GH0.tar.gz) = 84585674
 SHA256 (rollup-rollup-v4.9.1_GH0.tar.gz) = 26c8a97716349a502b1d6f272122363104cd2e0b6eb37d6f2e9213e78a874daf

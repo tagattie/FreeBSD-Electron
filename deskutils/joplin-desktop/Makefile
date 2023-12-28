@@ -42,7 +42,7 @@ PORTDOCS=	README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:berry prefetch extract build:builder
+USE_ELECTRON=	npm:yarn2 prefetch extract build:builder
 
 PREFETCH_TIMESTAMP=	1703591426
 
