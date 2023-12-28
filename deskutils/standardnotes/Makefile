@@ -31,7 +31,7 @@ PORTDOCS=	CHANGELOG.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:berry extract rebuild build:builder
+USE_ELECTRON=	npm:yarn2 extract rebuild build:builder
 
 NPM_VER=	3.2.1
 NPM_CACHE_SETUP_CMD=	${TRUE}
