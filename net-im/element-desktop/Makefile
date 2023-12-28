@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.51
+DISTVERSION=	1.11.52
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/keytar/-/:keytar \
@@ -25,7 +25,7 @@ USES=		cargo desktop-file-utils electron:27 nodejs:18,build \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	vector-im
+GH_ACCOUNT=	element-hq
 
 SUB_FILES=	${PORTNAME}
 
@@ -41,10 +41,10 @@ PORTDOCS=	CHANGELOG.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn,fetch,extract,build build:builder
+USE_ELECTRON=	npm:yarn1,fetch,extract,build build:builder
 
-PREFETCH_FILE=		${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1701814847
+PREFETCH_FILE=		${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
+PREFETCH_TIMESTAMP=	1703765166
 KEYTAR_VER=		7.9.0
 MATRIX_SESHAT_VER=	3.0.1
 RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
