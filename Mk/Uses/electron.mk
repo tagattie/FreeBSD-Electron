@@ -47,12 +47,6 @@
 #		If the port uses this feature, the following variable must be
 #		specified.
 #
-#		PREFETCH_TIMESTAMP:
-#			A timestamp given to every directory, file or link in
-#			the tar archive. This is necessary for reproducibility
-#			of the archive file. You can use "date '+%s'" command to
-#			acquire this value.
-#
 #	extract:	Installs the prefetched node modules into the port's
 #			working source directory.
 #
@@ -317,8 +311,9 @@ NPM_INSTALL_FLAGS_FETCH?=--frozen-lockfile --ignore-scripts
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
 DOTYARNDIR?=		${FILESDIR}/.yarn
 DOTYARNRCFILE?=		${FILESDIR}/.yarnrc.yml
-PREFETCH_TIMESTAMP?=	0
 NPM_VER?=		0
+
+_PREFETCH_TIMESTAMP=	61171200
 
 .if exists(${PKGJSONSDIR}/${_NPM_PKGFILE})
 _EXISTS_NPM_PKGFILE=	1
@@ -351,7 +346,7 @@ electron-fetch-node-package-manager:
 		${SETENV} ${MAKE_ENV} corepack prepare --activate --output ${_NPM_CMDNAME}@${NPM_VER} && \
 		${TAR} -xzf corepack.tgz && \
 		${MTREE_CMD} -cbnSp ${_NPM_CMDNAME} | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:time=[0-9.]*:time=${_PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:${_NPM_CMDNAME}:' | \
@@ -370,9 +365,6 @@ DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 
 .   if ${_EXISTS_NPM_PKGFILE} == 0
 IGNORE=	does not store ${_NPM_PKGFILE} in ${PKGJSONSDIR}
-.   endif
-.   if ${PREFETCH_TIMESTAMP} == 0
-IGNORE= does not specify timestamp for prefetched modules
 .   endif
 
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
@@ -403,7 +395,7 @@ electron-fetch-node-modules:
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${MTREE_CMD} -cbnSp ${_NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:time=[0-9.]*:time=${_PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./${_NPM_MODULE_CACHE}:' > node-modules-cache.mtree && \
