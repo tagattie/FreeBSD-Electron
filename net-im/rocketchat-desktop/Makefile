@@ -25,8 +25,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn2 prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1703544267
-
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
 

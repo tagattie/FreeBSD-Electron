@@ -57,7 +57,6 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:npm,fetch,build build:builder
 
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1703746575
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \

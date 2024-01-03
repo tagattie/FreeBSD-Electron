@@ -46,8 +46,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1703589175
-
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build

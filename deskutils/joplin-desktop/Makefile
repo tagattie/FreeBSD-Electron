@@ -44,8 +44,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn2 prefetch extract build:builder
 
-PREFETCH_TIMESTAMP=	1703591426
-
 post-patch:
 	${RM} -r ${WRKSRC}/packages/app-cli \
 		${WRKSRC}/packages/app-clipper \

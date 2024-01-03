@@ -27,8 +27,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn1 prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1703664777
-
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}

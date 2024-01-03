@@ -37,7 +37,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn1 prefetch extract
 
-PREFETCH_TIMESTAMP=	1698552311
 ELECTRON_MAKE_CMD=	yarn electron:build
 ELECTRON_MAKE_FLAGS=	--linux --dir
 ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked

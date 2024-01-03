@@ -23,7 +23,6 @@ SUB_FILES=	${PORTNAME}
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:forge
 
-PREFETCH_TIMESTAMP=	1703504277
 MAKE_ENV+=	WEBCORD_BUILD=release \
 		WEBCORD_UPDATE_NOTIFICATIONS=false
 

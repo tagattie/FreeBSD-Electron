@@ -28,8 +28,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1703666976
-
 pre-build:
 	${MKDIR} ${WRKSRC}/node_modules/node-jq/bin
 	${CP} ${LOCALBASE}/bin/jq ${WRKSRC}/node_modules/node-jq/bin/jq

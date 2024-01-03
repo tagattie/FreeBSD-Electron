@@ -27,7 +27,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract rebuild build:packager
 
-PREFETCH_TIMESTAMP=	1702888741
 ELECTRON_MAKE_FLAGS+=	--asar \
 			--ignore='.DS_Store' \
 			--ignore='dist/app' \

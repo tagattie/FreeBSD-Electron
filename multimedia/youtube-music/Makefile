@@ -32,8 +32,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:pnpm prefetch extract rebuild:electron build:builder
 
-PREFETCH_TIMESTAMP=	1703580062
-
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
 		${SETENV} ${MAKE_ENV} ${CARGO} build --release --verbose --verbose

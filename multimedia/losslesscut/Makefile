@@ -58,8 +58,6 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn4 prefetch extract rebuild build:builder
 
-PREFETCH_TIMESTAMP=	1703668781
-
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
 	# generate icon files
