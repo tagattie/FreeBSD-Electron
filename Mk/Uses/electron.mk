@@ -293,8 +293,8 @@ NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --immutable-cache
 _NPM_LOCKFILE=		yarn.lock
 _NPM_MODULE_CACHE=	yarn-offline-cache
 _NPM_CMDNAME=		yarn
-NPM_CACHE_SETUP_CMD?=	yarn config set enableGlobalCache false; \
-			yarn config set cacheFolder "./${_NPM_MODULE_CACHE}"
+NPM_CACHE_SETUP_CMD?=	${SH} -c "yarn config set enableGlobalCache false; \
+			yarn config set cacheFolder \"./${_NPM_MODULE_CACHE}\""
 NPM_INSTALL_CMD?=	yarn install
 NPM_INSTALL_FLAGS_FETCH?=--immutable --mode=skip-build
 NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --immutable-cache
