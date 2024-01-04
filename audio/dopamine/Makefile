@@ -1,6 +1,6 @@
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.0-preview21
+DISTVERSION=	3.0.0-preview.23
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		electron:21 nodejs:16,build python:build
+USES=		electron:25 nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	digimezzo
@@ -22,13 +22,12 @@ BINARY_ALIAS=	python=${PYTHON_CMD} \
 
 SUB_FILES=	${PORTNAME}
 
-PORTDOCS=	README.md
+PORTDOCS=	CHANGELOG.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm prefetch extract build:builder
 
-PREFETCH_TIMESTAMP=	1699867024
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
 post-patch:
@@ -36,8 +35,6 @@ post-patch:
 		${WRKSRC}/node_modules/register-scheme/binding.gyp
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall:electron
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npx ngcc
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build:prod
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 		./node_modules/.bin/electron-builder install-app-deps --platform linux
