@@ -1,89 +1,67 @@
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.7.6
+DISTVERSION=	1.11.5
 CATEGORIES=	net-im
-DISTFILES=	${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX}:prefetch
+MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
+DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Onion routing based messenger
+WWW=		https://getsession.org
 
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-FETCH_DEPENDS=	git:devel/git \
-		git-lfs:devel/git-lfs
-BUILD_DEPENDS=	app-builder:devel/app-builder
+BUILD_DEPENDS=	app-builder:devel/app-builder \
+		${LOCALBASE}/lib/libsignal_tokenizer.a:devel/signal-fts5-extension
+LIB_DEPENDS=	libinotify.so:devel/libinotify
 
-USES=		electron:13 localbase:ldflags node:14,build python:build
+USES=		electron:25 localbase:ldflags nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	oxen-io
 
 SUB_FILES=	${PORTNAME}
 
-PORTDOCS=	BUILDING.md CONTRIBUTING.md README.md
+PORTDOCS=	CONTRIBUTING.md README.md THEMES.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_NODE=	yarn:fetch,build
-USE_ELECTRON=	extract prebuild build:builder
+USE_ELECTRON=	npm:yarn1 prefetch extract rebuild build:builder
 
-PREFETCH_TIMESTAMP=	1641618575
+SQLCIPHER_VER=	4.5.5-fts5-fix--3.0.7--0.2.1-ef53ea45ed92b928ecfd33c552d8d405263e86e63dec38e1ec63e1b0193b630b
 MAKE_ENV+=	SIGNAL_ENV=production
-ELECTRON_MAKE_FLAGS+=	--config.asar=false \
-			--config.extraMetadata.environment=production \
+ELECTRON_MAKE_FLAGS+=	--config.extraMetadata.environment=production \
 			--config.directories.output=release
 
-pre-fetch:
-	if [ ! -f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} ]; then \
-		${MKDIR} ${WRKDIR}; \
-		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
-			${WRKDIR}/.yarnrc; \
-		${CP} -r ${PKGJSONSDIR}/* ${WRKDIR}; \
-		${SETENV} HOME=${WRKDIR} git lfs install --manual; \
-		cd ${WRKDIR} && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-				${YARN_CMD} --frozen-lockfile --ignore-scripts && \
-			${RM} package.json yarn.lock; \
-		cd ${WRKDIR}; \
-		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./yarn-offline-cache:' > yarn-offline-cache.mtree; \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PORTNAME}-node-modules-${DISTVERSION}${EXTRACT_SUFX} \
-			@yarn-offline-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
-
-post-configure:
-	${RM} -r ${WRKSRC}/node_modules/dtrace-provider
+post-extract:
+	${CP} ${DISTDIR}/sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX} \
+		${WRKSRC}/node_modules/@signalapp/better-sqlite3/deps/sqlcipher.tar.gz
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${YARN_CMD} generate
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn patch-package
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build-everything
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
-		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 48 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/build/icons/icon_${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/release/linux-unpacked && \
+	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	cd ${STAGEDIR}${DATADIR}/resources/app && \
-		${FIND} . -type f -name '*.node' -exec ${STRIP_CMD} {} ';'
+	cd ${STAGEDIR}${DATADIR}/resources && \
+		${FIND} . -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} ${YARN_CMD} test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
 
 .include <bsd.port.mk>
