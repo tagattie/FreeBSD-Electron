@@ -12,6 +12,7 @@ WWW=		https://getsession.org
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		${LOCALBASE}/lib/libsignal_tokenizer.a:devel/signal-fts5-extension
 LIB_DEPENDS=	libinotify.so:devel/libinotify
