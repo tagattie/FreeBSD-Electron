@@ -14,6 +14,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder \
+		cmake:devel/cmake-core \
 		${LOCALBASE}/lib/libsignal_tokenizer.a:devel/signal-fts5-extension
 LIB_DEPENDS=	libinotify.so:devel/libinotify
 
