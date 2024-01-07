@@ -1,6 +1,6 @@
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.13.12
+DISTVERSION=	2.13.13
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 
@@ -68,7 +68,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${BUILD_WRKSRC}/dist/linux-unpacked && \
+	cd ${BUILD_WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	cd ${STAGEDIR}${DATADIR}/resources && \
 		${FIND} . -type f -exec ${FILE} {} ';' | \
