@@ -12,5 +12,4 @@ share/icons/hicolor/64x64/apps/session-desktop.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@signalapp/better-sqlite3/build/Release/better_sqlite3.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/build/Release/libsession_util_nodejs.node
 %%DATADIR%%/resources/app.asar.unpacked/ts/mains/main_node.js
-%%DATADIR%%/resources/app.asar.unpacked/ts/webworker/workers/node/libsession/4357573c74fa115e79f773bc2fbcba6b.node
 %%DATADIR%%/resources/launcher-script.sh
