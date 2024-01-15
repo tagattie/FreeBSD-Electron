@@ -309,8 +309,6 @@ NPM_INSTALL_FLAGS_FETCH?=--frozen-lockfile --ignore-scripts
 .endif
 
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
-DOTYARNDIR?=		${FILESDIR}/.yarn
-DOTYARNRCFILE?=		${FILESDIR}/.yarnrc.yml
 NPM_VER?=		0
 
 _PREFETCH_TIMESTAMP=	61171200
@@ -377,13 +375,8 @@ electron-fetch-node-modules:
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
 		${ECHO_MSG} "===>   Setting up node modules cache directory"; \
 		${MKDIR} ${WRKDIR}/node-modules-cache; \
-		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		if [ -d ${DOTYARNDIR} ]; then \
-			${CP} -R ${DOTYARNDIR} ${WRKDIR}/node-modules-cache; \
-		fi; \
-		if [ -f ${DOTYARNRCFILE} ]; then \
-			${CP} ${DOTYARNRCFILE} ${WRKDIR}/node-modules-cache; \
-		fi; \
+		cd ${PKGJSONSDIR} && \
+			${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/node-modules-cache; \
 		cd ${WRKDIR}/node-modules-cache && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}; \
 		${ECHO_MSG} "===>   Prefetching and archiving node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
