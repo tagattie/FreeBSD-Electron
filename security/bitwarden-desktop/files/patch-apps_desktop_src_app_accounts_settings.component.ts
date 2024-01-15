@@ -1,6 +1,6 @@
---- apps/desktop/src/app/accounts/settings.component.ts.orig	2023-11-06 18:50:48 UTC
+--- apps/desktop/src/app/accounts/settings.component.ts.orig	2024-01-09 15:12:51 UTC
 +++ apps/desktop/src/app/accounts/settings.component.ts
-@@ -599,7 +599,7 @@ export class SettingsComponent implements OnInit {
+@@ -602,7 +602,7 @@ export class SettingsComponent implements OnInit {
  
        this.form.controls.enableBrowserIntegration.setValue(false);
        return;

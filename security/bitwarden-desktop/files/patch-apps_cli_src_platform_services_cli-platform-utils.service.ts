@@ -1,6 +1,6 @@
---- apps/cli/src/platform/services/cli-platform-utils.service.ts.orig	2023-11-12 12:46:21 UTC
+--- apps/cli/src/platform/services/cli-platform-utils.service.ts.orig	2024-01-09 15:12:51 UTC
 +++ apps/cli/src/platform/services/cli-platform-utils.service.ts
-@@ -76,7 +76,7 @@ export class CliPlatformUtilsService implements Platfo
+@@ -79,7 +79,7 @@ export class CliPlatformUtilsService implements Platfo
    }
  
    launchUri(uri: string, options?: any): void {

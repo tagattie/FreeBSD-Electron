@@ -1,11 +1,14 @@
-CARGO_CRATES=	aes-0.8.2 \
-		aho-corasick-1.1.1 \
-		anyhow-1.0.71 \
-		arboard-3.2.1 \
+CARGO_CRATES=	addr2line-0.21.0 \
+		adler-1.0.2 \
+		aes-0.8.3 \
+		aho-corasick-1.1.2 \
+		anyhow-1.0.75 \
+		arboard-3.3.0 \
 		autocfg-1.1.0 \
-		base64-0.21.2 \
+		backtrace-0.3.69 \
+		base64-0.21.5 \
 		bitflags-1.3.2 \
-		bitflags-2.4.0 \
+		bitflags-2.4.1 \
 		block-0.1.6 \
 		block-buffer-0.10.4 \
 		block-padding-0.3.3 \
@@ -18,65 +21,68 @@ CARGO_CRATES=	aes-0.8.2 \
 		clipboard-win-4.5.0 \
 		codespan-reporting-0.11.1 \
 		convert_case-0.6.0 \
-		core-foundation-0.9.3 \
-		core-foundation-sys-0.8.4 \
-		cpufeatures-0.2.9 \
+		core-foundation-0.9.4 \
+		core-foundation-sys-0.8.6 \
+		cpufeatures-0.2.11 \
 		crypto-common-0.1.6 \
-		ctor-0.2.4 \
-		cxx-1.0.107 \
-		cxx-build-1.0.97 \
-		cxxbridge-flags-1.0.107 \
-		cxxbridge-macro-1.0.107 \
+		ctor-0.2.5 \
+		cxx-1.0.110 \
+		cxx-build-1.0.110 \
+		cxxbridge-flags-1.0.110 \
+		cxxbridge-macro-1.0.110 \
 		digest-0.10.7 \
 		equivalent-1.0.1 \
 		error-code-2.3.1 \
-		futures-channel-0.3.28 \
-		futures-core-0.3.28 \
-		futures-executor-0.3.28 \
-		futures-io-0.3.28 \
-		futures-macro-0.3.28 \
-		futures-task-0.3.28 \
-		futures-util-0.3.28 \
+		futures-channel-0.3.29 \
+		futures-core-0.3.29 \
+		futures-executor-0.3.29 \
+		futures-io-0.3.29 \
+		futures-macro-0.3.29 \
+		futures-task-0.3.29 \
+		futures-util-0.3.29 \
 		generic-array-0.14.7 \
-		gethostname-0.2.3 \
+		gethostname-0.3.0 \
 		getrandom-0.2.10 \
-		gio-0.17.9 \
-		gio-sys-0.17.10 \
-		glib-0.17.10 \
-		glib-macros-0.17.10 \
-		glib-sys-0.17.10 \
-		gobject-sys-0.17.10 \
-		hashbrown-0.14.0 \
+		gimli-0.28.0 \
+		gio-0.18.4 \
+		gio-sys-0.18.1 \
+		glib-0.18.2 \
+		glib-macros-0.18.2 \
+		glib-sys-0.18.1 \
+		gobject-sys-0.18.0 \
+		hashbrown-0.14.2 \
 		heck-0.4.1 \
 		hermit-abi-0.3.3 \
-		indexmap-2.0.0 \
+		indexmap-2.0.2 \
 		inout-0.1.3 \
 		keytar-0.1.6 \
 		keytar-sys-0.1.6 \
-		libc-0.2.148 \
+		libc-0.2.149 \
 		libloading-0.7.4 \
-		libsecret-0.3.0 \
-		libsecret-sys-0.3.0 \
+		libsecret-0.4.0 \
+		libsecret-sys-0.4.0 \
 		link-cplusplus-1.0.9 \
-		lock_api-0.4.10 \
+		lock_api-0.4.11 \
 		log-0.4.20 \
 		malloc_buf-0.0.6 \
-		memchr-2.6.3 \
-		memoffset-0.6.5 \
-		mio-0.8.8 \
-		napi-2.13.1 \
+		memchr-2.6.4 \
+		memoffset-0.7.1 \
+		miniz_oxide-0.7.1 \
+		mio-0.8.9 \
+		napi-2.13.3 \
 		napi-build-2.0.1 \
 		napi-derive-2.13.0 \
 		napi-derive-backend-1.0.52 \
 		napi-sys-2.2.3 \
-		nix-0.24.3 \
+		nix-0.26.4 \
 		num_cpus-1.16.0 \
 		objc-0.2.7 \
 		objc-foundation-0.1.1 \
 		objc_id-0.1.1 \
-		once_cell-1.16.0 \
+		object-0.32.1 \
+		once_cell-1.18.0 \
 		parking_lot-0.12.1 \
-		parking_lot_core-0.9.8 \
+		parking_lot_core-0.9.9 \
 		pin-project-lite-0.2.13 \
 		pin-utils-0.1.0 \
 		pkg-config-0.3.27 \
@@ -84,43 +90,45 @@ CARGO_CRATES=	aes-0.8.2 \
 		proc-macro-crate-1.3.1 \
 		proc-macro-error-1.0.4 \
 		proc-macro-error-attr-1.0.4 \
-		proc-macro2-1.0.67 \
+		proc-macro2-1.0.69 \
 		quote-1.0.33 \
 		rand-0.8.5 \
 		rand_chacha-0.3.1 \
 		rand_core-0.6.4 \
-		redox_syscall-0.3.5 \
-		regex-1.9.5 \
-		regex-automata-0.3.8 \
-		regex-syntax-0.7.5 \
+		redox_syscall-0.4.1 \
+		regex-1.10.2 \
+		regex-automata-0.4.3 \
+		regex-syntax-0.8.2 \
 		retry-2.0.0 \
-		scopeguard-1.1.0 \
+		rustc-demangle-0.1.23 \
+		scopeguard-1.2.0 \
 		scratch-1.0.7 \
-		security-framework-2.9.1 \
-		security-framework-sys-2.9.0 \
-		semver-1.0.19 \
-		serde-1.0.188 \
-		serde_derive-1.0.188 \
-		serde_spanned-0.6.3 \
-		sha2-0.10.6 \
+		security-framework-2.9.2 \
+		security-framework-sys-2.9.1 \
+		semver-1.0.20 \
+		serde-1.0.190 \
+		serde_derive-1.0.190 \
+		serde_spanned-0.6.4 \
+		sha2-0.10.8 \
 		signal-hook-registry-1.4.1 \
 		slab-0.4.9 \
 		smallvec-1.11.1 \
-		socket2-0.4.9 \
+		socket2-0.5.5 \
 		str-buf-1.0.6 \
 		syn-1.0.109 \
-		syn-2.0.37 \
-		system-deps-6.1.1 \
-		target-lexicon-0.12.11 \
+		syn-2.0.38 \
+		system-deps-6.1.2 \
+		target-lexicon-0.12.12 \
 		termcolor-1.3.0 \
-		thiserror-1.0.40 \
-		thiserror-impl-1.0.40 \
-		tokio-1.28.2 \
+		thiserror-1.0.51 \
+		thiserror-impl-1.0.51 \
+		tokio-1.32.0 \
 		tokio-macros-2.1.0 \
-		toml-0.7.8 \
-		toml_datetime-0.6.3 \
+		toml-0.8.6 \
+		toml_datetime-0.6.5 \
 		toml_edit-0.19.15 \
-		typenum-1.16.0 \
+		toml_edit-0.20.7 \
+		typenum-1.17.0 \
 		unicode-ident-1.0.12 \
 		unicode-segmentation-1.10.1 \
 		unicode-width-0.1.11 \
@@ -133,7 +141,8 @@ CARGO_CRATES=	aes-0.8.2 \
 		winapi-util-0.1.6 \
 		winapi-wsapoll-0.1.1 \
 		winapi-x86_64-pc-windows-gnu-0.4.0 \
-		windows-0.48.0 \
+		windows-0.51.1 \
+		windows-core-0.51.1 \
 		windows-sys-0.48.0 \
 		windows-targets-0.48.5 \
 		windows_aarch64_gnullvm-0.48.5 \
@@ -143,6 +152,6 @@ CARGO_CRATES=	aes-0.8.2 \
 		windows_x86_64_gnu-0.48.5 \
 		windows_x86_64_gnullvm-0.48.5 \
 		windows_x86_64_msvc-0.48.5 \
-		winnow-0.5.15 \
-		x11rb-0.10.1 \
-		x11rb-protocol-0.10.0
+		winnow-0.5.17 \
+		x11rb-0.12.0 \
+		x11rb-protocol-0.12.0
