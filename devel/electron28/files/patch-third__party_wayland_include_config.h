@@ -1,6 +1,6 @@
---- third_party/wayland/include/config.h.orig	2023-12-13 00:27:58 UTC
+--- third_party/wayland/include/config.h.orig	2024-01-03 23:43:11 UTC
 +++ third_party/wayland/include/config.h
-@@ -25,7 +25,11 @@
+@@ -25,11 +25,14 @@
  
  #undef HAVE_SYS_PROCCTL_H
  
@@ -12,3 +12,7 @@
  
  #define HAVE_XUCRED_CR_PID 0
  
+ #define PACKAGE "wayland"
+ 
+ #define PACKAGE_VERSION "1.21.0"
+-
