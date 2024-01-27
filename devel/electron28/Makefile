@@ -215,7 +215,7 @@ SNDIO_VARS=		GN_ARGS+=use_sndio=true
 SNDIO_VARS_OFF=		GN_ARGS+=use_sndio=false
 
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=			120.0.6099.216
+CHROMIUM_VER=			120.0.6099.227
 # See ${WRKSRC}/third_party/test_fonts/test_fonts.tar.gz.sha1 for CHROMIUM_TEST_FONTS_HASH
 CHROMIUM_TEST_FONTS_HASH=	336e775eec536b2d785cc80eff6ac39051931286
 # See ${WRKSRC}/electron/DEPS for NODE_VER
@@ -234,8 +234,10 @@ YARN_TIMESTAMP=	61171200
 .include "Makefile.version"
 .include <bsd.port.pre.mk>
 
-.if ${OSREL:R} <= 13
-EXTRA_PATCHES=	${PATCHDIR}/extra-patch-electron_shell_browser_ui_gtk_menu__gtk.h \
+# libc++ < 16 needs these extra patches
+.if ${OPSYS} == FreeBSD && ${OSVERSION} < 1302507
+EXTRA_PATCHES=	${PATCHDIR}/extra-patch-electron_shell_browser_electron__browser__context.h \
+		${PATCHDIR}/extra-patch-electron_shell_browser_ui_gtk_menu__gtk.h \
 		${PATCHDIR}/extra-patch-electron_shell_browser_ui_status__icon__gtk.h
 .endif
 

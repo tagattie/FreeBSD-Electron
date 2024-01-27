@@ -1,6 +1,6 @@
---- electron/spec/api-utility-process-spec.ts.orig	2023-12-04 18:19:02 UTC
+--- electron/spec/api-utility-process-spec.ts.orig	2024-01-23 19:02:02 UTC
 +++ electron/spec/api-utility-process-spec.ts
-@@ -399,7 +399,7 @@ describe('utilityProcess module', () => {
+@@ -400,7 +400,7 @@ describe('utilityProcess module', () => {
        await closeWindow(w);
      });
  
