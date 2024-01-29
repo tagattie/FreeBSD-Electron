@@ -1,6 +1,6 @@
 PORTNAME=	moosync
 DISTVERSIONPREFIX=	v
-DISTVERSION=	10.2.0
+DISTVERSION=	10.3.0
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libasound.so:audio/alsa-lib
 
-USES=		cargo desktop-file-utils electron:27 nodejs:18,build pkgconfig \
+USES=		cargo desktop-file-utils electron:28 nodejs:18,build pkgconfig \
 		python:build sqlite
 
 USE_GITHUB=	yes
@@ -42,6 +42,11 @@ ELECTRON_MAKE_FLAGS=	--linux --dir
 ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked
 DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
 			${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
+
+post-extract:
+	if [ -f ${FILESDIR}/config.env ]; then \
+		${CP} ${FILESDIR}/config.env ${WRKSRC}; \
+	fi
 
 post-patch:
 	${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|g; \

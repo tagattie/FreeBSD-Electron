@@ -1,6 +1,6 @@
---- src/utils/main/ipc/mpris.ts.orig	2023-09-03 02:34:48 UTC
+--- src/utils/main/ipc/mpris.ts.orig	2024-01-24 01:20:13 UTC
 +++ src/utils/main/ipc/mpris.ts
-@@ -122,7 +122,7 @@ export class MprisChannel implements IpcChannelInterfa
+@@ -144,7 +144,7 @@ export class MprisChannel implements IpcChannelInterfa
  
    @checkStarted()
    private handlePlayPauseButtonState(isPlaying: boolean) {
