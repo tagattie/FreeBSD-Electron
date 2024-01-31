@@ -468,9 +468,9 @@ _USES_build+=	290:electron-generate-electron-zip \
 		490:electron-rebuild-native-node-modules-for-electron
 
 BUILD_DEPENDS+=	zip:archivers/zip
-.   if defined(_NODEJS_NPM) && (${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn)
+.   if defined(_NODEJS_NPM) && (${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1)
 BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.   elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == berry || ${_NODEJS_NPM} == pnpm)
+.   elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm)
 BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .   endif
 .   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == yarn1
