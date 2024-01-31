@@ -1,6 +1,6 @@
---- src/servers/renderer.ts.orig	2022-01-02 03:55:37 UTC
+--- src/servers/renderer.ts.orig	2024-01-30 23:48:22 UTC
 +++ src/servers/renderer.ts
-@@ -283,7 +283,7 @@ const updateRootWindowIconForWindows = async ({
+@@ -280,7 +280,7 @@ export default (): void => {
  export default (): void => {
    handle('servers/fetch-info', fetchInfo);
  
