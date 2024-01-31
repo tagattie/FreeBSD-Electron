@@ -492,6 +492,7 @@ UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
 				to_entries | \
 				map(if(.key | test("electron$")) then .value.version else empty end) | \
 				.[]' | \
+			${HEAD} -n 1 | \
 			${SED} -e 's/"//g'
 .	    elif ${_NODEJS_NPM} == yarn1
 UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
@@ -505,6 +506,7 @@ UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
 				to_entries | \
 				map(if(.key | test("electron@")) then .value.version else empty end) | \
 				.[]' | \
+			${HEAD} -n 1 | \
 			${SED} -e 's/"//g'
 .	    elif ${_NODEJS_NPM} == pnpm
 UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
@@ -513,6 +515,7 @@ UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
 				to_entries | \
 				map(if(.key | test("/electron@")) then .key else empty end) | \
 				.[]' | \
+			${HEAD} -n 1 | \
 			${CUT} -f 2 -d '@' | \
 			${SED} -e 's/"//g'
 .	    endif
