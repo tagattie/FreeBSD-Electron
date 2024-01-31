@@ -477,10 +477,45 @@ BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
 .   endif
 
+.   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
+BUILD_DEPENDS+=	yq:textproc/jq
+.   elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm)
+BUILD_DEPENDS+=	yq:textproc/yq
+.   endif
+
 .   if !defined(UPSTREAM_ELECTRON_VER)
 .	if ${_EXISTS_NPM_PKGFILE} == 1
-UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
-				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
+.	    if ${_NODEJS_NPM} == npm
+UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+			${LOCALBASE}/bin/jq \
+				'.packages | \
+				to_entries | \
+				map(if(.key | test("electron$")) then .value.version else empty end) | \
+				.[]' | \
+			${SED} -e 's/"//g'
+.	    elif ${_NODEJS_NPM} == yarn1
+UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+			${HEAD} -n 1 | \
+			${AWK} -F- '{print $$NF}' | \
+			${SED} -E 's/\.[a-z]+.*$$//'
+.	    elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
+UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+			${LOCALBASE}/bin/yq \
+				'. | \
+				to_entries | \
+				map(if(.key | test("electron@")) then .value.version else empty end) | \
+				.[]' | \
+			${SED} -e 's/"//g'
+.	    elif ${_NODEJS_NPM} == pnpm
+UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+			${LOCALBASE}/bin/yq \
+				'.packages | \
+				to_entries | \
+				map(if(.key | test("/electron@")) then .key else empty end) | \
+				.[]' | \
+			${CUT} -f 2 -d '@' | \
+			${SED} -e 's/"//g'
+.	    endif
 .	endif
 .   endif
 ELECTRON_DOWNLOAD_URL=		${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_ELECTRON_VER}
