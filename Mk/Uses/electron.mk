@@ -478,7 +478,7 @@ BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed fo
 .   endif
 
 .   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
-BUILD_DEPENDS+=	yq:textproc/jq
+BUILD_DEPENDS+=	jq:textproc/jq
 .   elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm)
 BUILD_DEPENDS+=	yq:textproc/yq
 .   endif
