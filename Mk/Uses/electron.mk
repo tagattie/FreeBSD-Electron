@@ -490,7 +490,7 @@ UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
 			${LOCALBASE}/bin/jq \
 				'.packages | \
 				to_entries | \
-				map(if(.key | test("electron$")) then .value.version else empty end) | \
+				map(if(.key | test("electron$$")) then .value.version else empty end) | \
 				.[]' | \
 			${HEAD} -n 1 | \
 			${SED} -e 's/"//g'
