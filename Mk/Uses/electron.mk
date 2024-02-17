@@ -487,13 +487,12 @@ BUILD_DEPENDS+=	yq:textproc/yq
 .	if ${_EXISTS_NPM_PKGFILE} == 1
 .	    if ${_NODEJS_NPM} == npm
 UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
-			${LOCALBASE}/bin/jq \
+			${LOCALBASE}/bin/jq -r \
 				'.packages | \
 				to_entries | \
 				map(if(.key | test("electron$$")) then .value.version else empty end) | \
 				.[]' | \
-			${HEAD} -n 1 | \
-			${SED} -e 's/"//g'
+			${HEAD} -n 1
 .	    elif ${_NODEJS_NPM} == yarn1
 UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
 			${HEAD} -n 1 | \
@@ -501,23 +500,21 @@ UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${_NPM_
 			${SED} -E 's/\.[a-z]+.*$$//'
 .	    elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
 UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
-			${LOCALBASE}/bin/yq \
+			${LOCALBASE}/bin/yq -r \
 				'. | \
 				to_entries | \
 				map(if(.key | test("electron@")) then .value.version else empty end) | \
 				.[]' | \
-			${HEAD} -n 1 | \
-			${SED} -e 's/"//g'
+			${HEAD} -n 1
 .	    elif ${_NODEJS_NPM} == pnpm
 UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
-			${LOCALBASE}/bin/yq \
+			${LOCALBASE}/bin/yq -r \
 				'.packages | \
 				to_entries | \
 				map(if(.key | test("/electron@")) then .key else empty end) | \
 				.[]' | \
 			${HEAD} -n 1 | \
-			${CUT} -f 2 -d '@' | \
-			${SED} -e 's/"//g'
+			${CUT} -f 2 -d '@'
 .	    endif
 .	endif
 .   endif
