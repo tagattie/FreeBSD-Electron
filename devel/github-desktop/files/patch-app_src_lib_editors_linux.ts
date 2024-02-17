@@ -1,4 +1,4 @@
---- app/src/lib/editors/linux.ts.orig	2023-12-20 15:09:37 UTC
+--- app/src/lib/editors/linux.ts.orig	2024-02-04 21:57:16 UTC
 +++ app/src/lib/editors/linux.ts
 @@ -18,30 +18,30 @@ const editors: ILinuxExternalEditor[] = [
  const editors: ILinuxExternalEditor[] = [
@@ -107,7 +107,7 @@
        '/snap/bin/pycharm',
        '.local/share/JetBrains/Toolbox/scripts/pycharm',
      ],
-@@ -144,35 +149,35 @@ const editors: ILinuxExternalEditor[] = [
+@@ -144,39 +149,39 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Emacs',
@@ -148,6 +148,11 @@
      name: 'Pulsar',
 -    paths: ['/usr/bin/pulsar'],
 +    paths: ['%%LOCALBASE%%/bin/pulsar'],
+   },
+   {
+     name: 'Pluma',
+-    paths: ['/usr/bin/pluma'],
++    paths: ['%%LOCALBASE%%/bin/pluma'],
    },
  ]
  

@@ -1,11 +1,9 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.3.6
-DISTVERSIONSUFFIX=	-linux3
+DISTVERSION=	3.3.8
+DISTVERSIONSUFFIX=	-linux2
 CATEGORIES=	devel
-MASTER_SITES=	KERNEL_ORG/software/scm/git:git
-DISTFILES=	${PREFETCH_FILE}:prefetch \
-		git-${GIT_VER}${EXTRACT_SUFX}:git
+DISTFILES=	${PREFETCH_FILE}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Focus on what matters instead of fighting with Git
@@ -43,10 +41,12 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libfontconfig.so:x11-fonts/fontconfig \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
+RUN_DEPENDS=	git:devel/git \
+		git-lfs:devel/git-lfs
 
 USES=		desktop-file-utils electron:26 gettext-runtime gl gmake gnome \
-		iconv:wchar_t jpeg localbase:ldflags nodejs:18,build perl5 \
-		pkgconfig python shebangfix ssl xorg
+		iconv:wchar_t jpeg localbase:ldflags nodejs:18,build pkgconfig \
+		python shebangfix ssl xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	shiftkey
@@ -59,21 +59,21 @@ USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf2 glib20 gtk30 libxml2 libxslt pango
 
-SHEBANG_FILES=	../git-${GIT_VER}/git-p4.py \
-		../git-${GIT_VER}/templates/hooks--fsmonitor-watchman.sample
-
 USE_ELECTRON=	npm:yarn1,fetch,extract,build
 
 .include <bsd.port.pre.mk>
 
-GIT_VER=	2.43.0
 PREFETCH_FILE=	${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.lock | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 ELECTRON_DOWNLOAD_URL=		https://github.com/electron/electron/releases/download/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
-MAKE_ENV+=	CIRCLE_SHA1=e32359f8d0ea2f1208d0d0f333e4139d1258e115
+MAKE_ENV+=	CIRCLE_SHA1=4bb33777928f120293802c7fd8b1d482ae84b2b7
+
+REINPLACE_FILES=	app/src/lib/editors/linux.ts \
+			app/src/lib/shells/linux.ts \
+			app/node_modules/dugite/build/lib/git-environment.js
 
 pre-fetch:
 	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
@@ -115,9 +115,7 @@ post-extract:
 
 post-patch:
 	${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|' \
-		${WRKSRC}/app/src/lib/editors/linux.ts
-	${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|' \
-		${WRKSRC}/app/src/lib/shells/linux.ts
+		${REINPLACE_FILES:S|^|${WRKSRC}/|}
 
 pre-build:
 	${RM} -r ${WRKDIR}/electron-dist
@@ -134,13 +132,7 @@ pre-build:
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}
 
 do-build:
-	cd ${WRKDIR}/git-${GIT_VER} && \
-		./configure --prefix=${WRKSRC}/app/node_modules/dugite/git \
-			--enable-pthreads=-pthread \
-			--with-iconv=${LOCALBASE} \
-			--without-tcltk && \
-		${SETENV} ${MAKE_ENV} ${MAKE_CMD} -j ${MAKE_JOBS_NUMBER} CC="${CCACHE_BIN} ${CC}" all strip && \
-		${SETENV} ${MAKE_ENV} ${MAKE_CMD} CC="${CCACHE_BIN} ${CC}" install
+	${MKDIR} ${WRKSRC}/app/node_modules/dugite/git
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn compile:script
 	cd ${WRKSRC}/app && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm rebuild --no-progress
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build:prod
@@ -163,6 +155,7 @@ do-install:
 .endfor
 	${RM} -r ${STAGEDIR}${DATADIR}/gen
 	${RM} -r ${STAGEDIR}${DATADIR}/node_headers
+	${RM} -r ${STAGEDIR}${DATADIR}/resources/app/git
 	${MV} -f ${STAGEDIR}${DATADIR}/"GitHub Desktop" ${STAGEDIR}${DATADIR}/${PORTNAME}
 	${RLN} ${STAGEDIR}${DATADIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 
