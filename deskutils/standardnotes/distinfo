@@ -1,5 +1,5 @@
-TIMESTAMP = 1705457335
+TIMESTAMP = 1708135275
 SHA256 (yarn-3.2.1.tgz) = 64da8eebe1c8080fd59a6165c56eb9b3eeccd657643088af2f14236339fcea17
 SIZE (yarn-3.2.1.tgz) = 837265
-SHA256 (standardnotes-app-@standardnotes-desktop@3.184.3_GH0.tar.gz) = c5c4178b62dc1dfa8c7597cfbb8d5b6b06c6929172d55c79f7613b584b172642
-SIZE (standardnotes-app-@standardnotes-desktop@3.184.3_GH0.tar.gz) = 311440220
+SHA256 (standardnotes-app-@standardnotes-desktop@3.187.3_GH0.tar.gz) = ad4330f283a05a18dd2129417bbab99a08f5c28906157d8792e7a2fdbd07aa7d
+SIZE (standardnotes-app-@standardnotes-desktop@3.187.3_GH0.tar.gz) = 319036043
