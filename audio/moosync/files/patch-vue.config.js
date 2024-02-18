@@ -1,6 +1,6 @@
---- vue.config.js.orig	2023-07-12 11:34:29 UTC
+--- vue.config.js.orig	2024-01-31 02:19:34 UTC
 +++ vue.config.js
-@@ -9,10 +9,10 @@ const manifest = require('./package.json')
+@@ -9,10 +9,10 @@ const archElectronConfig = {}
  
  const archElectronConfig = {}
  
@@ -12,5 +12,5 @@
 -    .readFileSync('/usr/lib/electron/version', { encoding: 'utf-8' })
 +    .readFileSync('%%LOCALBASE%%/share/electron%%ELECTRON_VER_MAJOR%%/version', { encoding: 'utf-8' })
      .replace('v', '')
+     .trim()
  }
- 

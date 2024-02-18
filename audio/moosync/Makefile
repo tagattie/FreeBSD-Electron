@@ -1,6 +1,6 @@
 PORTNAME=	moosync
 DISTVERSIONPREFIX=	v
-DISTVERSION=	10.3.0
+DISTVERSION=	10.3.2
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -23,6 +23,8 @@ GH_PROJECT=	Moosync
 
 CARGO_CARGOTOML=${WRKSRC}/node_modules/librespot-node/native/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/node_modules/librespot-node/native/Cargo.lock
+# CARGO_CARGOTOML=${WRKSRC}/node_modules/rodio-audio-backend/Cargo.toml
+# CARGO_CARGOLOCK=${WRKSRC}/node_modules/rodio-audio-backend/Cargo.lock
 # CARGO_CARGOTOML=${WRKSRC}/node_modules/scanner-native/Cargo.toml
 # CARGO_CARGOLOCK=${WRKSRC}/node_modules/scanner-native/Cargo.lock
 CARGO_BUILD=	no
@@ -55,7 +57,7 @@ post-patch:
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run patch-package
-.for dir in librespot-node scanner-native
+.for dir in librespot-node rodio-audio-backend scanner-native
 	cd ${WRKSRC}/node_modules/${dir} && \
 	${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm rebuild --verbose
 .endfor

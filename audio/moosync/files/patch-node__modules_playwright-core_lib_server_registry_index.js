@@ -1,6 +1,6 @@
---- node_modules/playwright-core/lib/server/registry/index.js.orig	2023-07-12 11:11:52 UTC
+--- node_modules/playwright-core/lib/server/registry/index.js.orig	2024-02-18 10:42:19 UTC
 +++ node_modules/playwright-core/lib/server/registry/index.js
-@@ -241,7 +241,7 @@ const registryDirectory = (() => {
+@@ -299,7 +299,7 @@ const registryDirectory = exports.registryDirectory = 
      result = envDefined;
    } else {
      let cacheDirectory;
@@ -9,10 +9,3 @@
      result = _path.default.join(cacheDirectory, 'ms-playwright');
    }
    if (!_path.default.isAbsolute(result)) {
-@@ -816,4 +816,4 @@ function lowercaseAllKeys(json) {
-   return result;
- }
- const registry = new Registry(require('../../../browsers.json'));
--exports.registry = registry;
-\ No newline at end of file
-+exports.registry = registry;
