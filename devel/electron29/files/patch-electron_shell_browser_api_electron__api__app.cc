@@ -1,6 +1,6 @@
---- electron/shell/browser/api/electron_api_app.cc.orig	2024-02-21 16:26:48 UTC
+--- electron/shell/browser/api/electron_api_app.cc.orig	2024-02-27 20:12:14 UTC
 +++ electron/shell/browser/api/electron_api_app.cc
-@@ -664,7 +664,7 @@ void App::OnFinishLaunching(base::Value::Dict launch_i
+@@ -667,7 +667,7 @@ void App::OnFinishLaunching(base::Value::Dict launch_i
  }
  
  void App::OnFinishLaunching(base::Value::Dict launch_info) {
@@ -9,7 +9,7 @@
    // Set the application name for audio streams shown in external
    // applications. Only affects pulseaudio currently.
    media::AudioManager::SetGlobalAppName(Browser::Get()->GetName());
-@@ -995,7 +995,7 @@ void App::SetDesktopName(const std::string& desktop_na
+@@ -998,7 +998,7 @@ void App::SetDesktopName(const std::string& desktop_na
  }
  
  void App::SetDesktopName(const std::string& desktop_name) {
@@ -18,7 +18,7 @@
    auto env = base::Environment::Create();
    env->SetVar("CHROME_DESKTOP", desktop_name);
  #endif
-@@ -1379,7 +1379,7 @@ std::vector<gin_helper::Dictionary> App::GetAppMetrics
+@@ -1382,7 +1382,7 @@ std::vector<gin_helper::Dictionary> App::GetAppMetrics
        pid_dict.Set("name", process_metric.second->name);
      }
  
@@ -27,7 +27,7 @@
      auto memory_info = process_metric.second->GetMemoryInfo();
  
      auto memory_dict = gin_helper::Dictionary::CreateEmpty(isolate);
-@@ -1670,7 +1670,7 @@ gin::ObjectTemplateBuilder App::GetObjectTemplateBuild
+@@ -1765,7 +1765,7 @@ gin::ObjectTemplateBuilder App::GetObjectTemplateBuild
        .SetMethod(
            "removeAsDefaultProtocolClient",
            base::BindRepeating(&Browser::RemoveAsDefaultProtocolClient, browser))
@@ -36,7 +36,7 @@
        .SetMethod(
            "getApplicationInfoForProtocol",
            base::BindRepeating(&Browser::GetApplicationInfoForProtocol, browser))
-@@ -1728,7 +1728,7 @@ gin::ObjectTemplateBuilder App::GetObjectTemplateBuild
+@@ -1823,7 +1823,7 @@ gin::ObjectTemplateBuilder App::GetObjectTemplateBuild
        .SetMethod("getJumpListSettings", &App::GetJumpListSettings)
        .SetMethod("setJumpList", &App::SetJumpList)
  #endif
