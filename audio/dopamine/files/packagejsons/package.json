@@ -1,7 +1,7 @@
 {
     "name": "Dopamine",
     "version": "3.0.0",
-    "versionSuffix": "preview.23",
+    "versionSuffix": "preview.24",
     "copyright": "Copyright Digimezzo Ⓒ 2014 - 2024",
     "description": "Audio player",
     "homepage": "https://github.com/digimezzo/dopamine",
@@ -83,14 +83,12 @@
         "wait-on": "7.2.0",
         "zone.js": "0.13.3"
     },
-    "engines": {
-        "node": ">=16.0.0 <17.0.0"
-    },
     "dependencies": {
         "@angular/animations": "16.2.12",
         "@angular/cdk": "16.2.12",
         "@angular/material": "16.2.12",
         "@electron/remote": "2.0.9",
+        "@fortawesome/fontawesome-free": "^6.5.1",
         "angular-split": "14.1.0",
         "better-sqlite3": "8.7.0",
         "cheerio": "1.0.0-rc.12",
@@ -100,12 +98,13 @@
         "electron-window-state": "5.0.3",
         "fast-xml-parser": "4.3.2",
         "fs-extra": "11.1.1",
+        "jimp": "^0.22.10",
         "line-awesome": "1.3.0",
         "md5-typescript": "1.0.5",
         "moment": "2.29.4",
         "node-fetch": "2.6.11",
         "node-html-parser": "6.1.11",
-        "node-taglib-sharp": "5.2.2",
+        "node-taglib-sharp": "5.2.3",
         "sanitize-filename": "1.6.3",
         "tinycolor2": "1.6.0",
         "tslib": "2.0.0",
