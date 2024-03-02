@@ -1,68 +1,85 @@
 {
-    "name": "youtube-music-desktop-app",
-    "version": "1.13.0",
-    "description": "YouTube Music Desktop App",
-    "main": "main.js",
-    "scripts": {
-        "start": "electron .",
-        "rebuild": "electron-rebuild -f",
-        "postinstall": "npx electron-builder install-app-deps",
-        "build:win": "npx electron-builder --win --config electron-builder-deploy64.yml",
-        "build:mac": "npx electron-builder --mac --config electron-builder-deploy64.yml",
-        "build:lin": "npx electron-builder --linux --config electron-builder-deploy64.yml",
-        "publish:win": "npx electron-builder --win -p always --config electron-builder64.yml",
-        "publish:mac": "npx electron-builder --mac -p always --config electron-builder64.yml",
-        "publish:lin": "npx electron-builder --linux -p always --config electron-builder64.yml"
-    },
-    "repository": "https://github.com/ytmdesktop/ytmdesktop",
-    "keywords": [
-        "Electron",
-        "Youtube",
-        "Music"
-    ],
-    "author": "Adler Luiz <adlerluiz10@gmail.com>",
-    "license": "CC0-1.0",
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged --pattern \"**/*.js\" --pattern \"**/*.html\" --pattern \"**/*.json\""
-        }
-    },
-    "devDependencies": {
-        "electron": "^10.1.1",
-        "electron-builder": "^22.8.0",
-        "electron-rebuild": "^2.0.1",
-        "husky": "^4.2.5",
-        "prettier": "^2.0.5",
-        "pretty-quick": "^2.0.1"
-    },
-    "dependencies": {
-        "ace-builds": "^1.4.12",
-        "discord-rpc": "^3.1.3",
-        "electron-canvas-to-buffer": "^2.0.0",
-        "electron-clipboard-watcher": "^1.0.1",
-        "electron-google-analytics": "^1.0.0",
-        "electron-is-dev": "^1.2.0",
-        "electron-localshortcut": "^3.2.1",
-        "electron-log": "^4.2.2",
-        "electron-native-notification": "^1.2.1",
-        "electron-store": "^6.0.0",
-        "electron-updater": "^4.3.4",
-        "i18n": "^0.10.0",
-        "image-to-base64": "^2.1.1",
-        "js-base64": "^3.4.3",
-        "markdown": "^0.5.0",
-        "node-fetch": "^2.6.0",
-        "node-vibrant": "^3.1.5",
-        "qrcode-generator": "^1.4.4",
-        "register-scheme": "0.0.2",
-        "scribble": "0.0.5",
-        "socket.io": "^2.3.0",
-        "uuid": "^8.3.0",
-        "ws": "^7.3.1"
-    },
-    "optionalDependencies": {
-        "bufferutil": "^4.0.1",
-        "mpris-service": "^2.1.0",
-        "utf-8-validate": "^5.0.2"
-    }
+  "name": "youtube-music-desktop-app",
+  "productName": "YouTube Music Desktop App",
+  "version": "2.0.2",
+  "description": "YouTube Music Desktop App",
+  "main": ".webpack/main",
+  "private": true,
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "publish:dry": "electron-forge publish --dry-run",
+    "publish:fromdry": "electron-forge publish --from-dry-run",
+    "publish": "electron-forge publish",
+    "lint": "eslint --ext .ts,.tsx,.vue .",
+    "lint:fix": "eslint --ext .ts,.tsx,.vue .",
+    "prettier": "prettier --check *.{ts,tsx,vue}",
+    "prettier:fix": "prettier --write *.{ts,tsx,vue}",
+    "postinstall": "husky install"
+  },
+  "keywords": [],
+  "author": {
+    "name": "NovusTheory",
+    "email": "novustheory@gmail.com"
+  },
+  "license": "GPL-3.0-only",
+  "devDependencies": {
+    "@electron-forge/cli": "~7.2.0",
+    "@electron-forge/maker-deb": "~7.2.0",
+    "@electron-forge/maker-rpm": "~7.2.0",
+    "@electron-forge/maker-squirrel": "~7.2.0",
+    "@electron-forge/maker-zip": "~7.2.0",
+    "@electron-forge/plugin-auto-unpack-natives": "~7.2.0",
+    "@electron-forge/plugin-fuses": "~7.2.0",
+    "@electron-forge/plugin-webpack": "~7.2.0",
+    "@electron-forge/publisher-github": "~7.2.0",
+    "@electron/fuses": "^1.7.0",
+    "@types/node": "^20.11.19",
+    "@typescript-eslint/eslint-plugin": "^7.0.2",
+    "@typescript-eslint/parser": "^7.0.2",
+    "@vercel/webpack-asset-relocator-loader": "1.7.3",
+    "css-loader": "^6.10.0",
+    "electron": "~28.2.3",
+    "eslint": "^8.56.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-import-resolver-typescript": "^3.6.1",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-vue": "^9.21.1",
+    "fork-ts-checker-webpack-plugin": "^9.0.2",
+    "git-revision-webpack-plugin": "5.0.0",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "node-loader": "^2.0.0",
+    "prettier": "3.2.5",
+    "style-loader": "^3.3.4",
+    "ts-loader": "^9.5.1",
+    "ts-node": "^10.9.2",
+    "typescript": "~5.3.3",
+    "vue-loader": "^17.4.2",
+    "vue-template-compiler": "^2.7.16",
+    "webpack": "^5.90.3"
+  },
+  "dependencies": {
+    "@fastify/cors": "^9.0.1",
+    "@fastify/error": "^3.4.1",
+    "@fastify/rate-limit": "^9.1.0",
+    "@fastify/type-provider-typebox": "^4.0.0",
+    "@sinclair/typebox": "^0.32.14",
+    "conf": "^10.2.0",
+    "electron-log": "5.1.1",
+    "electron-squirrel-startup": "^1.0.0",
+    "fastify": "^4.26.1",
+    "fastify-socket.io": "^5.0.0",
+    "material-symbols": "^0.12.0",
+    "socket.io": "^4.7.4",
+    "vue": "^3.4.19"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,vue}": [
+      "prettier --write",
+      "eslint --cache --fix"
+    ]
+  },
+  "packageManager": "yarn@4.1.0"
 }

@@ -8,3 +8,11 @@ share/icons/hicolor/48x48/apps/ytmdesktop.png
 share/icons/hicolor/512x512/apps/ytmdesktop.png
 share/icons/hicolor/64x64/apps/ytmdesktop.png
 %%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/pause-button.png
+%%DATADIR%%/resources/play-button.png
+%%DATADIR%%/resources/play-next-button.png
+%%DATADIR%%/resources/play-previous-button.png
+%%DATADIR%%/resources/tray.ico
+%%DATADIR%%/resources/trayTemplate.png
+%%DATADIR%%/resources/trayTemplate@2x.png
+%%DATADIR%%/resources/ytmd.png
