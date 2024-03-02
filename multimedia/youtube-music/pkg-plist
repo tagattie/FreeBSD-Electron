@@ -11,6 +11,7 @@ share/icons/hicolor/512x512/apps/youtube-music.png
 share/icons/hicolor/64x64/apps/youtube-music.png
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/app.asar.unpacked/assets/error.html
 %%DATADIR%%/resources/app.asar.unpacked/assets/generated/icons/mac/icon.icns
 %%DATADIR%%/resources/app.asar.unpacked/assets/generated/icons/png/1024x1024.png
 %%DATADIR%%/resources/app.asar.unpacked/assets/generated/icons/png/128x128.png
@@ -26,6 +27,7 @@ share/icons/hicolor/64x64/apps/youtube-music.png
 %%DATADIR%%/resources/app.asar.unpacked/assets/media-icons-black/pause.png
 %%DATADIR%%/resources/app.asar.unpacked/assets/media-icons-black/play.png
 %%DATADIR%%/resources/app.asar.unpacked/assets/media-icons-black/previous.png
+%%DATADIR%%/resources/app.asar.unpacked/assets/youtube-music-tray-paused.png
 %%DATADIR%%/resources/app.asar.unpacked/assets/youtube-music-tray.png
 %%DATADIR%%/resources/app.asar.unpacked/assets/youtube-music.png
 %%DATADIR%%/resources/app.asar.unpacked/assets/youtube-music.svg
