@@ -412,7 +412,7 @@ EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 
 electron-extract-node-package-manager:
 .   if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-	@${ECHO_MSG} "===>   Setting up ${_NPN_PACKAGE_NAME} version ${NPM_VER}"
+	@${ECHO_MSG} "===>   Setting up ${_NPM_CMDNAME} version ${NPM_VER}"
 	@${MKDIR}  ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz
