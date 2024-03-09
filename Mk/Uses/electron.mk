@@ -311,7 +311,7 @@ NPM_INSTALL_FLAGS_FETCH?=--frozen-lockfile --ignore-scripts
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
 NPM_VER?=		0
 
-_PREFETCH_TIMESTAMP=	61171200
+PREFETCH_TIMESTAMP=	61171200
 
 .if exists(${PKGJSONSDIR}/${_NPM_PKGFILE})
 _EXISTS_NPM_PKGFILE=	1
@@ -344,7 +344,7 @@ electron-fetch-node-package-manager:
 		${SETENV} ${MAKE_ENV} corepack prepare --activate --output ${_NPM_CMDNAME}@${NPM_VER} && \
 		${TAR} -xzf corepack.tgz && \
 		${MTREE_CMD} -cbnSp ${_NPM_CMDNAME} | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${_PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:${_NPM_CMDNAME}:' | \
@@ -388,7 +388,7 @@ electron-fetch-node-modules:
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${MTREE_CMD} -cbnSp ${_NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${_PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./${_NPM_MODULE_CACHE}:' > node-modules-cache.mtree && \
