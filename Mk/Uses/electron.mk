@@ -423,12 +423,12 @@ electron-extract-node-package-manager:
 electron-copy-package-file:
 .if ${_EXISTS_NPM_PKGFILE} == 1
 	@${ECHO_MSG} "===>   Copying ${_NPM_PKGFILE} and ${_NPM_LOCKFILE} to ${WRKSRC}"
-.   for f in ${_NPM_PKGFILE} ${_NPM_LOCKFILE}
-	@if [ -f ${WRKSRC}/${f} ]; then \
-		${MV} -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak; \
-	fi
-	@${CP} ${PKGJSONSDIR}/${f} ${WRKSRC}
-.   endfor
+	@for f in `${FIND} ${PKGJSONSDIR} -type f \( -name ${_NPM_PKGFILE} -o -name ${_NPM_LOCKFILE} \) -print | ${SED} -e 's|${PKGJSONSDIR}/||'`; do \
+		if [ -f ${WRKSRC}/$${f} ]; then \
+			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
+		fi; \
+		${CP} ${PKGJSONSDIR}/$${f} ${WRKSRC}/$${f}; \
+	done
 .endif
 
 electron-install-node-modules:
