@@ -1,6 +1,6 @@
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.13.15
+DISTVERSION=	2.14.19
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 
@@ -11,7 +11,8 @@ WWW=		https://joplinapp.org
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder \
+BUILD_DEPENDS=	7zz:archivers/7-zip \
+		app-builder:devel/app-builder \
 		rsync:net/rsync \
 		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libvips.so:graphics/vips \
@@ -54,6 +55,9 @@ pre-build:
 		${SETENV} ${MAKE_ENV} ${CARGO} build --release --verbose --verbose
 	${CP} ${WRKSRC}/rollup/rust/target/release/libbindings_napi.so \
 		${WRKSRC}/packages/turndown/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
+	${MKDIR} ${WRKSRC}/packages/app-desktop/node_modules/7zip-bin/freebsd/${ELECTRON_ARCH}
+	${CP} ${LOCALBASE}/bin/7zz \
+		${WRKSRC}/packages/app-desktop/node_modules/7zip-bin/freebsd/${ELECTRON_ARCH}/7za
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 		yarn rebuild
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
