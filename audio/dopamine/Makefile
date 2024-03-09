@@ -1,6 +1,6 @@
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.0-preview.24
+DISTVERSION=	3.0.0-preview.25
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,6 +11,7 @@ LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
+LIB_DEPENDS=	libvips.so:graphics/vips
 
 USES=		electron:25 nodejs:18,build python:build
 
@@ -42,6 +43,8 @@ pre-build:
 	# so force rebuild binary for FreeBSD
 	cd ${WRKSRC}/node_modules/better-sqlite3 && \
 		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run build-release
+	cd ${WRKSRC}/node_modules/sharp && \
+		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run install
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
