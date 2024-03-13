@@ -341,7 +341,7 @@ electron-fetch-node-package-manager:
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz ]; then \
 		cd ${WRKDIR} && \
-		${SETENV} ${MAKE_ENV} corepack prepare --activate --output ${_NPM_CMDNAME}@${NPM_VER} && \
+		${SETENV} ${MAKE_ENV} corepack pack ${_NPM_CMDNAME}@${NPM_VER} && \
 		${TAR} -xzf corepack.tgz && \
 		${MTREE_CMD} -cbnSp ${_NPM_CMDNAME} | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
@@ -352,9 +352,8 @@ electron-fetch-node-package-manager:
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz @${_NPM_CMDNAME}.mtree; \
-	else \
-		${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz; \
 	fi
+	${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz
 .endif
 
 .if defined(_ELECTRON_FEATURE_PREFETCH)
@@ -415,7 +414,7 @@ electron-extract-node-package-manager:
 	@${ECHO_MSG} "===>   Setting up ${_NPM_CMDNAME} version ${NPM_VER}"
 	@${MKDIR}  ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
-	@${SETENV} ${MAKE_ENV} corepack hydrate --activate ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz
+	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz
 .   else
 	@${DO_NADA}
 .   endif
