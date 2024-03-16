@@ -1,5 +1,5 @@
-TIMESTAMP = 1703667364
-SHA256 (mattermost-desktop-5.6.0-node-modules.tar.gz) = c962320e6293709fa7961efb007162873c2f1c8f20afa8efeb672d7510a818bf
-SIZE (mattermost-desktop-5.6.0-node-modules.tar.gz) = 162498169
-SHA256 (mattermost-desktop-v5.6.0_GH0.tar.gz) = bda2cb03e679ea40d7735467d80d1b39f1a3fce330cb6361aed5b4ff745a9de5
-SIZE (mattermost-desktop-v5.6.0_GH0.tar.gz) = 4571755
+TIMESTAMP = 1710572873
+SHA256 (mattermost-desktop-5.7.0-node-modules.tar.gz) = 95aa56af0d8f895ac4b2db99f50388d497400e9ddd6f1eec065c61b43c1d3729
+SIZE (mattermost-desktop-5.7.0-node-modules.tar.gz) = 168708395
+SHA256 (mattermost-desktop-v5.7.0_GH0.tar.gz) = 766871bb8c79bf2ee57ab2f7783605fd5b20cf0809a041cbd8bbadde4520e3f2
+SIZE (mattermost-desktop-v5.7.0_GH0.tar.gz) = 4588995

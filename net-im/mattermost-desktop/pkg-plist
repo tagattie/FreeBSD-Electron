@@ -8,6 +8,7 @@ share/icons/hicolor/32x32/apps/mattermost-desktop.png
 share/icons/hicolor/48x48/apps/mattermost-desktop.png
 share/icons/hicolor/512x512/apps/mattermost-desktop.png
 share/icons/hicolor/64x64/apps/mattermost-desktop.png
+%%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/build/Release/notificationstate.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/build/Release/focusassist.node
