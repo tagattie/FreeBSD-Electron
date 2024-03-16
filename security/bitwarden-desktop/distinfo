@@ -1,4 +1,4 @@
-TIMESTAMP = 1710040574
+TIMESTAMP = 1710565717
 SHA256 (rust/crates/addr2line-0.21.0.crate) = 8a30b2e23b9e17a9f90641c7ab1549cd9b44f296d3ccbf309d2863cfe398a0cb
 SIZE (rust/crates/addr2line-0.21.0.crate) = 40807
 SHA256 (rust/crates/adler-1.0.2.crate) = f26201604c87b1e01bd3d98f8d5d9a8fcbb815e8cedb41ffccbeb4bf593a35fe
@@ -383,7 +383,7 @@ SHA256 (rust/crates/x11rb-0.12.0.crate) = b1641b26d4dec61337c35a1b1aaf9e3cba8f46
 SIZE (rust/crates/x11rb-0.12.0.crate) = 218514
 SHA256 (rust/crates/x11rb-protocol-0.12.0.crate) = 82d6c3f9a0fb6701fab8f6cea9b0c0bd5d6876f1f89f7fada07e558077c344bc
 SIZE (rust/crates/x11rb-protocol-0.12.0.crate) = 478311
-SHA256 (bitwarden-desktop-2024.2.1-node-modules.tar.gz) = 6de6cbdc2a0509ae5b3ccd3539154a87c2a82e5da90250b95e4d6bc059b17c29
-SIZE (bitwarden-desktop-2024.2.1-node-modules.tar.gz) = 239888126
-SHA256 (bitwarden-clients-desktop-v2024.2.1_GH0.tar.gz) = c8102f25e93495628ba125eb81af9d5756e8ef605438af3ace39fb9ed3e1b013
-SIZE (bitwarden-clients-desktop-v2024.2.1_GH0.tar.gz) = 20494482
+SHA256 (bitwarden-desktop-2024.3.0-node-modules.tar.gz) = d4130dbf9b9a5aebe057ed2e4d72f3afe8b11cce85721fa9e808002a76df2020
+SIZE (bitwarden-desktop-2024.3.0-node-modules.tar.gz) = 239888082
+SHA256 (bitwarden-clients-desktop-v2024.3.0_GH0.tar.gz) = bcdd87fe6708cf13803417c0f65b708a3898d7253bc64ff881b561a1b3af4c36
+SIZE (bitwarden-clients-desktop-v2024.3.0_GH0.tar.gz) = 20496238
