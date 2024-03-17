@@ -353,7 +353,7 @@ electron-fetch-node-package-manager:
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz @${_NPM_CMDNAME}.mtree; \
 	fi
-	${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz
+	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz
 .endif
 
 .if defined(_ELECTRON_FEATURE_PREFETCH)
