@@ -3,6 +3,7 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=	2.14.19
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
+DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Note taking and to-do application with synchronisation capabilities
@@ -11,8 +12,10 @@ WWW=		https://joplinapp.org
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+FETCH_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 BUILD_DEPENDS=	7zz:archivers/7-zip \
 		app-builder:devel/app-builder \
+		git:devel/git \
 		rsync:net/rsync \
 		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libvips.so:graphics/vips \
@@ -23,7 +26,8 @@ USES=		cargo electron:26 gmake localbase:ldflags nodejs:18,build \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
-GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup
+GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup \
+		JackGruber:joplin-plugin-backup:2d814a5466604daced108331d14aedf8e8414d62:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
@@ -44,6 +48,38 @@ PORTDOCS=	README.md SECURITY.md
 OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn2 prefetch extract build:builder
+
+DEFAULT_PLUGINS_NODE_MODULES_FILE=	${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-default-plugins-node-modules${EXTRACT_SUFX}
+
+pre-fetch:
+	@if [ ! -f ${DISTDIR}/${DEFAULT_PLUGINS_NODE_MODULES_FILE} ]; then \
+		${ECHO_MSG} "===>   Prefetching and archiving node modules for default plugins"; \
+		${MKDIR} ${WRKDIR}/node-modules-cache; \
+		${CP} -R ${FILESDIR}/default-plugins/* ${WRKDIR}/node-modules-cache; \
+		for dir in `${FIND} ${FILESDIR}/default-plugins -type d -depth 1 -print | sed -e 's|${FILESDIR}/default-plugins||'`; do \
+			cd ${WRKDIR}/node-modules-cache/$${dir} && \
+			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+				npm ci --ignore-scripts --no-progress --no-audit --no-fund; \
+			${RM} package.json package-lock.json; \
+		done; \
+		cd ${WRKDIR} && \
+		${MTREE_CMD} -cbnSp node-modules-cache | ${MTREE_CMD} -C | ${SED} \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:flags=.*:flags=none:' \
+			-e 's:^\.:./node-modules-cache:' > node-modules-cache.mtree && \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
+			-f ${DISTDIR}/${DEFAULT_PLUGINS_NODE_MODULES_FILE} @node-modules-cache.mtree; \
+		${RM} -r ${WRKDIR}; \
+	fi
+
+post-extract:
+	@${ECHO_MSG} "===>   Moving prefetched node modules for default plugins to ${WRKSRC}"
+	@for dir in `${FIND} ${WRKDIR}/node-modules-cache -type d -depth 1 -print | sed -e 's|${WRKDIR}/node-modules-cache||'`; do \
+		${MV} ${WRKDIR}/node-modules-cache/$${dir}/node_modules \
+			${WRKSRC}/packages/default-plugins/plugin-sources/$${dir}; \
+	done
 
 post-patch:
 	${RM} -r ${WRKSRC}/packages/app-cli \

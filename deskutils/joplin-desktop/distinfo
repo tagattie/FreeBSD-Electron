@@ -1,4 +1,6 @@
-TIMESTAMP = 1710554936
+TIMESTAMP = 1710721985
+SHA256 (joplin-desktop-2.14.19-default-plugins-node-modules.tar.gz) = 763a183494eab4e8944505c3a3b9540a58c6de934258b05bc9cfe84761bd6b62
+SIZE (joplin-desktop-2.14.19-default-plugins-node-modules.tar.gz) = 75843382
 SHA256 (rust/crates/Inflector-0.11.4.crate) = fe438c63458706e03479442743baae6c88256498e6431708f6dfc520a26515d3
 SIZE (rust/crates/Inflector-0.11.4.crate) = 17438
 SHA256 (rust/crates/ahash-0.8.6.crate) = 91429305e9f0a25f6205c5b8e0d2db09e0708a7a6df0f42212bb56c32c8ac97a
@@ -315,3 +317,5 @@ SHA256 (laurent22-joplin-v2.14.19_GH0.tar.gz) = ec65d5bbd790c65a0f6f4b7ed6838e13
 SIZE (laurent22-joplin-v2.14.19_GH0.tar.gz) = 86807526
 SHA256 (rollup-rollup-v4.9.1_GH0.tar.gz) = 26c8a97716349a502b1d6f272122363104cd2e0b6eb37d6f2e9213e78a874daf
 SIZE (rollup-rollup-v4.9.1_GH0.tar.gz) = 1621909
+SHA256 (JackGruber-joplin-plugin-backup-2d814a5466604daced108331d14aedf8e8414d62_GH0.tar.gz) = b33e08761a430aff4b19e80feecc8e73fac6275460a53c2bef9bb3508c18c9c9
+SIZE (JackGruber-joplin-plugin-backup-2d814a5466604daced108331d14aedf8e8414d62_GH0.tar.gz) = 497307
