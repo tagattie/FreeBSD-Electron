@@ -958,6 +958,8 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/resources/app/highlighter/mode/clike.js.map
 %%DATADIR%%/resources/app/highlighter/mode/clojure.js
 %%DATADIR%%/resources/app/highlighter/mode/clojure.js.map
+%%DATADIR%%/resources/app/highlighter/mode/cmake.js
+%%DATADIR%%/resources/app/highlighter/mode/cmake.js.map
 %%DATADIR%%/resources/app/highlighter/mode/coffeescript.js
 %%DATADIR%%/resources/app/highlighter/mode/coffeescript.js.map
 %%DATADIR%%/resources/app/highlighter/mode/crystal.js
