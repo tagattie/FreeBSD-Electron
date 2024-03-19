@@ -1,6 +1,6 @@
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.14.19
+DISTVERSION=	2.14.20
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch
@@ -56,7 +56,7 @@ pre-fetch:
 		${ECHO_MSG} "===>   Prefetching and archiving node modules for default plugins"; \
 		${MKDIR} ${WRKDIR}/node-modules-cache; \
 		${CP} -R ${FILESDIR}/default-plugins/* ${WRKDIR}/node-modules-cache; \
-		for dir in `${FIND} ${FILESDIR}/default-plugins -type d -depth 1 -print | sed -e 's|${FILESDIR}/default-plugins||'`; do \
+		for dir in `${FIND} ${FILESDIR}/default-plugins -type d -depth 1 -print | ${SED} -e 's|${FILESDIR}/default-plugins||'`; do \
 			cd ${WRKDIR}/node-modules-cache/$${dir} && \
 			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 				npm ci --ignore-scripts --no-progress --no-audit --no-fund; \
@@ -76,7 +76,7 @@ pre-fetch:
 
 post-extract:
 	@${ECHO_MSG} "===>   Moving prefetched node modules for default plugins to ${WRKSRC}"
-	@for dir in `${FIND} ${WRKDIR}/node-modules-cache -type d -depth 1 -print | sed -e 's|${WRKDIR}/node-modules-cache||'`; do \
+	@for dir in `${FIND} ${WRKDIR}/node-modules-cache -type d -depth 1 -print | ${SED} -e 's|${WRKDIR}/node-modules-cache||'`; do \
 		${MV} ${WRKDIR}/node-modules-cache/$${dir}/node_modules \
 			${WRKSRC}/packages/default-plugins/plugin-sources/$${dir}; \
 	done
