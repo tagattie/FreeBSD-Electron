@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Muffon
+Comment=Advanced multi-source music streaming + discovery client
+Icon=muffon
+Exec=muffon %U
+Categories=Audio;
+Terminal=false
+StartupWMClass=Muffon
+MimeType=x-scheme-handler/muffon;

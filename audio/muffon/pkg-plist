@@ -1,0 +1,11 @@
+bin/muffon
+share/applications/muffon.desktop
+share/icons/hicolor/128x128/apps/muffon.png
+share/icons/hicolor/16x16/apps/muffon.png
+share/icons/hicolor/256x256/apps/muffon.png
+share/icons/hicolor/32x32/apps/muffon.png
+share/icons/hicolor/48x48/apps/muffon.png
+share/icons/hicolor/512x512/apps/muffon.png
+share/icons/hicolor/64x64/apps/muffon.png
+%%DATADIR%%/resources/app-update.yml
+%%DATADIR%%/resources/app.asar
