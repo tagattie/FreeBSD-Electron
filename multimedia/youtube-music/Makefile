@@ -1,6 +1,6 @@
 PORTNAME=	youtube-music
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.3.2
+DISTVERSION=	3.3.5
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,11 +12,11 @@ LICENSE_FILE=	${WRKSRC}/license
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		cargo electron:28 nodejs:18,build
+USES=		cargo electron:29 nodejs:20,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	th-ch
-GH_TUPLE=	rollup:rollup:v4.12.0:rollup/rollup
+GH_TUPLE=	rollup:rollup:v4.13.0:rollup/rollup
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
