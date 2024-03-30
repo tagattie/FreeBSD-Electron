@@ -1,4 +1,4 @@
---- electron/spec/api-app-spec.ts.orig	2024-02-27 20:12:14 UTC
+--- electron/spec/api-app-spec.ts.orig	2024-03-27 09:20:29 UTC
 +++ electron/spec/api-app-spec.ts
 @@ -123,11 +123,11 @@ describe('app module', () => {
    });
@@ -50,7 +50,7 @@
      const isMac = process.platform === 'darwin';
      const isWin = process.platform === 'win32';
  
-@@ -975,7 +975,7 @@ describe('app module', () => {
+@@ -976,7 +976,7 @@ describe('app module', () => {
      });
    });
  
@@ -59,7 +59,7 @@
      it('with properties', () => {
        it('can set accessibility support enabled', () => {
          expect(app.accessibilitySupportEnabled).to.eql(false);
-@@ -1137,7 +1137,7 @@ describe('app module', () => {
+@@ -1138,7 +1138,7 @@ describe('app module', () => {
      });
    });
  
@@ -68,7 +68,7 @@
      let w: BrowserWindow;
  
      before(function () {
-@@ -1272,7 +1272,7 @@ describe('app module', () => {
+@@ -1273,7 +1273,7 @@ describe('app module', () => {
  
    describe('getApplicationNameForProtocol()', () => {
      // TODO: Linux CI doesn't have registered http & https handlers
@@ -77,7 +77,7 @@
        // We can't expect particular app names here, but these protocols should
        // at least have _something_ registered. Except on our Linux CI
        // environment apparently.
-@@ -1290,7 +1290,7 @@ describe('app module', () => {
+@@ -1291,7 +1291,7 @@ describe('app module', () => {
      });
    });
  
@@ -86,7 +86,7 @@
      it('returns promise rejection for a bogus protocol', async function () {
        await expect(
          app.getApplicationInfoForProtocol('bogus-protocol://')
-@@ -1340,7 +1340,7 @@ describe('app module', () => {
+@@ -1341,7 +1341,7 @@ describe('app module', () => {
    });
  
    // FIXME Get these specs running on Linux CI
@@ -95,7 +95,7 @@
      const iconPath = path.join(__dirname, 'fixtures/assets/icon.ico');
      const sizes = {
        small: 16,
-@@ -1421,7 +1421,7 @@ describe('app module', () => {
+@@ -1422,7 +1422,7 @@ describe('app module', () => {
            expect(entry.memory).to.have.property('privateBytes').that.is.greaterThan(0);
          }
  
@@ -104,7 +104,7 @@
            expect(entry.sandboxed).to.be.a('boolean');
          }
  
-@@ -1447,7 +1447,7 @@ describe('app module', () => {
+@@ -1448,7 +1448,7 @@ describe('app module', () => {
    });
  
    // FIXME https://github.com/electron/electron/issues/24224
@@ -113,7 +113,7 @@
      const appPath = path.join(fixturesPath, 'api', 'gpu-info.js');
  
      const getGPUInfo = async (type: string) => {
-@@ -1496,7 +1496,7 @@ describe('app module', () => {
+@@ -1497,7 +1497,7 @@ describe('app module', () => {
  
      it('succeeds with complete GPUInfo', async () => {
        const completeInfo = await getGPUInfo('complete');
@@ -122,7 +122,7 @@
          // For linux and macOS complete info is same as basic info
          await verifyBasicGPUInfo(completeInfo);
          const basicInfo = await getGPUInfo('basic');
-@@ -1520,7 +1520,7 @@ describe('app module', () => {
+@@ -1521,7 +1521,7 @@ describe('app module', () => {
      });
    });
  
