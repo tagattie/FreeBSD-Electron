@@ -1,6 +1,6 @@
---- waveshell/pkg/base/base.go.orig	2024-03-23 04:06:21 UTC
+--- waveshell/pkg/base/base.go.orig	2024-03-29 20:28:49 UTC
 +++ waveshell/pkg/base/base.go
-@@ -299,7 +299,7 @@ func ValidGoArch(goos string, goarch string) bool {
+@@ -235,7 +235,7 @@ func ValidGoArch(goos string, goarch string) bool {
  }
  
  func ValidGoArch(goos string, goarch string) bool {

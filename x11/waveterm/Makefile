@@ -1,6 +1,6 @@
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.7.1
+DISTVERSION=	0.7.2
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -46,7 +46,7 @@ SUB_FILES=	${PORTNAME}
 USE_ELECTRON=	npm:yarn1 prefetch extract rebuild:electron build:builder
 
 BUILD_TIME!=		date +'%Y%m%d%H%M'
-WAVESHELL_VERSION=	v0.5
+WAVESHELL_VERSION=	v0.6
 WAVESRV_VERSION=	${DISTVERSION}
 GO_LDFLAGS=		-s -w -X main.BuildTime=${BUILD_TIME}
 ELECTRON_MAKE_FLAGS=	-c electron-builder.config.js
