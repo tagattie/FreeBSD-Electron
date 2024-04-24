@@ -1,7 +1,7 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.3.10
-DISTVERSIONSUFFIX=	-linux1
+DISTVERSION=	3.3.12
+DISTVERSIONSUFFIX=	-linux2
 CATEGORIES=	devel
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -44,7 +44,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 RUN_DEPENDS=	git:devel/git \
 		git-lfs:devel/git-lfs
 
-USES=		desktop-file-utils electron:26 gettext-runtime gl gmake gnome \
+USES=		desktop-file-utils electron:28 gettext-runtime gl gmake gnome \
 		iconv:wchar_t jpeg localbase:ldflags nodejs:18,build pkgconfig \
 		python shebangfix ssl xorg
 
@@ -69,7 +69,7 @@ UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.l
 ELECTRON_DOWNLOAD_URL=		https://github.com/electron/electron/releases/download/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
-MAKE_ENV+=	CIRCLE_SHA1=b46eef5bd04e01b5830ad3d404243bb4309d78be
+MAKE_ENV+=	CIRCLE_SHA1=34c4e128313494d1d07a08133d92707cbf7e4754
 
 REINPLACE_FILES=	app/src/lib/editors/linux.ts \
 			app/src/lib/shells/linux.ts \
