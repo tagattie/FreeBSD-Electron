@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2024.3.0
+DISTVERSION=	2024.4.1
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org

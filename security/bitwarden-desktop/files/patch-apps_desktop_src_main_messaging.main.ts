@@ -1,15 +1,15 @@
---- apps/desktop/src/main/messaging.main.ts.orig	2024-03-06 20:31:11 UTC
+--- apps/desktop/src/main/messaging.main.ts.orig	2024-04-11 19:17:12 UTC
 +++ apps/desktop/src/main/messaging.main.ts
-@@ -21,7 +21,7 @@ export class MessagingMain {
+@@ -23,7 +23,7 @@ export class MessagingMain {
  
-   init() {
+   async init() {
      this.scheduleNextSync();
 -    if (process.platform === "linux") {
 +    if (process.platform === "linux" || process.platform === "freebsd") {
-       // FIXME: Verify that this floating promise is intentional. If it is, add an explanatory comment and ensure there is proper error handling.
-       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-       this.stateService.setOpenAtLogin(fs.existsSync(this.linuxStartupFile()));
-@@ -135,13 +135,13 @@ export class MessagingMain {
+       await this.desktopSettingsService.setOpenAtLogin(fs.existsSync(this.linuxStartupFile()));
+     } else {
+       const loginSettings = app.getLoginItemSettings();
+@@ -129,13 +129,13 @@ export class MessagingMain {
    }
  
    private addOpenAtLogin() {
@@ -25,7 +25,7 @@
  StartupNotify=false
  Terminal=false`;
  
-@@ -156,7 +156,7 @@ Terminal=false`;
+@@ -150,7 +150,7 @@ Terminal=false`;
    }
  
    private removeOpenAtLogin() {
