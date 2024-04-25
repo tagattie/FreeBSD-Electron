@@ -1,6 +1,6 @@
 PORTNAME=	standardnotes
 DISTVERSIONPREFIX=	@standardnotes/desktop@
-DISTVERSION=	3.191.4
+DISTVERSION=	3.194.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
