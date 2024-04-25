@@ -1,6 +1,6 @@
---- libsession.worker.config.js.orig	2024-01-09 13:58:36 UTC
+--- libsession.worker.config.js.orig	2024-04-12 00:30:58 UTC
 +++ libsession.worker.config.js
-@@ -16,6 +16,9 @@ module.exports = {
+@@ -18,6 +18,9 @@ module.exports = {
        {
          test: /\.node$/,
          loader: 'node-loader',
