@@ -1,6 +1,6 @@
 PORTNAME=	muffon
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.0.2
+DISTVERSION=	2.0.3
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,11 +12,11 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		cargo desktop-file-utils electron:28 nodejs:18,build
+USES=		cargo desktop-file-utils electron:29 nodejs:20,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	staniel359
-GH_TUPLE=	rollup:rollup:v4.9.6:rollup/rollup
+GH_TUPLE=	rollup:rollup:v4.14.3:rollup/rollup
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
