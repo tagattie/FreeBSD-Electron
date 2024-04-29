@@ -1,6 +1,6 @@
 {
   "name": "teams-for-linux",
-  "version": "1.4.13",
+  "version": "1.4.30",
   "main": "app/index.js",
   "description": "Unofficial client for Microsoft Teams for Linux",
   "homepage": "https://github.com/IsmaelMartinez/teams-for-linux",
@@ -31,7 +31,7 @@
     "dist:linux:appimage": "electron-builder --x64 --armv7l --arm64 -l AppImage",
     "dist:linux:snap": "electron-builder -l snap",
     "dist:linux:snap:armv7l": "electron-builder --armv7l -l snap",
-    "dist:mac": "electron-builder --mac",
+    "dist:mac": "electron-builder --mac --universal",
     "dist:windows": "electron-builder --windows --x64",
     "dist:linux:x64": "electron-builder --x64 -l tar.gz deb rpm AppImage",
     "dist:linux:arm64": "electron-builder --arm64 -l tar.gz deb rpm AppImage",
@@ -41,7 +41,7 @@
   "dependencies": {
     "@electron/remote": "^2.1.2",
     "electron-is-dev": "2.0.0",
-    "electron-store": "8.1.0",
+    "electron-store": "8.2.0",
     "electron-window-state": "5.0.3",
     "lucid-log": "^0.0.3",
     "node-sound": "^0.0.8",
@@ -49,10 +49,10 @@
   },
   "devDependencies": {
     "@electron/fuses": "^1.7.0",
-    "electron": "29.0.1",
-    "electron-builder": "24.12.0",
-    "eslint": "8.57.0",
-    "yarn": "1.22.21"
+    "electron": "30.0.0",
+    "electron-builder": "24.13.3",
+    "eslint": "9.0.0",
+    "yarn": "1.22.22"
   },
   "build": {
     "appId": "teams-for-linux",
