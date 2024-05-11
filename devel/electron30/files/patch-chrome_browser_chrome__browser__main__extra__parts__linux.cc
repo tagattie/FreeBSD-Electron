@@ -1,9 +1,9 @@
---- chrome/browser/chrome_browser_main_extra_parts_linux.cc.orig	2024-04-15 20:33:46 UTC
+--- chrome/browser/chrome_browser_main_extra_parts_linux.cc.orig	2024-05-02 18:48:47 UTC
 +++ chrome/browser/chrome_browser_main_extra_parts_linux.cc
-@@ -169,7 +169,7 @@ void ChromeBrowserMainExtraPartsLinux::PreEarlyInitial
- ChromeBrowserMainExtraPartsLinux::~ChromeBrowserMainExtraPartsLinux() = default;
+@@ -175,7 +175,7 @@ void ChromeBrowserMainExtraPartsLinux::InitOzonePlatfo
  
- void ChromeBrowserMainExtraPartsLinux::PreEarlyInitialization() {
+ // static
+ void ChromeBrowserMainExtraPartsLinux::InitOzonePlatformHint() {
 -#if BUILDFLAG(IS_LINUX)
 +#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_BSD)
    // On the desktop, we fix the platform name if necessary.
