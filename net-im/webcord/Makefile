@@ -1,6 +1,6 @@
 PORTNAME=	webcord
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.8.0
+DISTVERSION=	4.9.2
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		git:devel/git
 
-USES=		electron:29 nodejs:20,build
+USES=		electron:30 nodejs:20,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	SpacingBat3
@@ -31,7 +31,9 @@ pre-build:
 	# generate icons
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=app.icns --out=icons --format=set --root=sources/assets/icons
-	${MV} ${WRKSRC}/icons/app_512.png ${WRKSRC}/icons/icon_512x512.png
+.for size in 256 512
+	${MV} ${WRKSRC}/icons/app_${size}.png ${WRKSRC}/icons/icon_${size}x${size}.png
+.endfor
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
