@@ -1,6 +1,6 @@
---- apps/desktop/src/main/power-monitor.main.ts.orig	2023-03-22 14:48:32 UTC
+--- apps/desktop/src/main/power-monitor.main.ts.orig	2024-05-06 13:04:55 UTC
 +++ apps/desktop/src/main/power-monitor.main.ts
-@@ -21,7 +21,7 @@ export class PowerMonitorMain {
+@@ -22,7 +22,7 @@ export class PowerMonitorMain {
        });
      }
  
