@@ -1,6 +1,6 @@
 PORTNAME=	teams
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.4.30
+DISTVERSION=	1.4.37
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		desktop-file-utils electron:30 localbase:ldflags \
+USES=		desktop-file-utils electron:29 localbase:ldflags \
 		nodejs:20,build python:build
 
 USE_GITHUB=	yes
