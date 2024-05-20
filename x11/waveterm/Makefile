@@ -1,6 +1,6 @@
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.7.2
+DISTVERSION=	0.7.5
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,11 +12,12 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		electron:29 go:1.22,modules,no_targets nodejs:20,build
+USES=		electron:30 go:1.22,modules,no_targets nodejs:20,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	wavetermdev
 GH_TUPLE=	\
+		alecthomas:units:9a357b53e9c9:alecthomas_units/vendor/github.com/alecthomas/units \
 		alessio:shellescape:v1.4.1:alessio_shellescape/vendor/github.com/alessio/shellescape \
 		armon:circbuf:5111143e8da2:armon_circbuf/vendor/github.com/armon/circbuf \
 		creack:pty:v1.1.18:creack_pty/vendor/github.com/creack/pty \
@@ -46,18 +47,22 @@ SUB_FILES=	${PORTNAME}
 USE_ELECTRON=	npm:yarn1 prefetch extract rebuild:electron build:builder
 
 BUILD_TIME!=		date +'%Y%m%d%H%M'
-WAVESHELL_VERSION=	v0.6
+WAVESHELL_VERSION=	v0.7
 WAVESRV_VERSION=	${DISTVERSION}
 GO_LDFLAGS=		-s -w -X main.BuildTime=${BUILD_TIME}
 ELECTRON_MAKE_FLAGS=	-c electron-builder.config.js
 
+pre-configure:
+	cd ${WRKSRC} && \
+		${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} work vendor
+
 pre-build:
 	cd ${WRKSRC}/waveshell && \
-		${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS:S/-mod=vendor//} \
+		${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS} \
 		-ldflags "${GO_LDFLAGS}" \
 		-o ../bin/mshell/mshell-${WAVESHELL_VERSION}-freebsd.amd64 main-waveshell.go
 	cd ${WRKSRC}/wavesrv && \
-		${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS:S/-mod=vendor//} \
+		${SETENV} ${MAKE_ENV} ${GO_ENV} ${GO_CMD} build ${GO_BUILDFLAGS} \
 		-tags "osusergo,netgo,sqlite_omit_load_extension" \
 		-ldflags "${GO_LDFLAGS} -X main.WaveVersion=${WAVESRV_VERSION}" \
 		-o ../bin/wavesrv.amd64 ./cmd

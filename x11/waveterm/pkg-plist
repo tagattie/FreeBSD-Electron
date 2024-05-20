@@ -10,5 +10,5 @@ share/icons/hicolor/512x512/apps/waveterm.png
 share/icons/hicolor/64x64/apps/waveterm.png
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
-@(,,0555) %%DATADIR%%/resources/app.asar.unpacked/bin/mshell/mshell-v0.6-freebsd.amd64
+@(,,0555) %%DATADIR%%/resources/app.asar.unpacked/bin/mshell/mshell-v0.7-freebsd.amd64
 @(,,0555) %%DATADIR%%/resources/app.asar.unpacked/bin/wavesrv.amd64
