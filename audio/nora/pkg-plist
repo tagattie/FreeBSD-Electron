@@ -76,88 +76,16 @@ share/icons/hicolor/64x64/apps/nora.png
 %%DATADIR%%/resources.pak
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/LICENSE
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/install/check.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/channel.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/colour.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/composite.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/constructor.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/index.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/input.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/is.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/libvips.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/operation.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/output.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/resize.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/sharp.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/utility.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/node-addon-api/node_api.Makefile
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/package.json
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/src/build/Release/sharp-freebsd-x64.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/src/build/node_gyp_bins/python3
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/src/common.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/src/metadata.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/src/operations.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/src/pipeline.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/src/stats.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/src/utilities.h
-%%DATADIR%%/resources/assets/fonts/MaterialSymbolsRounded.woff2
-%%DATADIR%%/resources/assets/fonts/Poppins-Bold.woff2
-%%DATADIR%%/resources/assets/fonts/Poppins-Light.woff2
-%%DATADIR%%/resources/assets/fonts/Poppins-Medium.woff2
-%%DATADIR%%/resources/assets/fonts/Poppins-Regular.woff2
-%%DATADIR%%/resources/assets/fonts/Poppins-SemiBold.woff2
-%%DATADIR%%/resources/assets/icon.icns
-%%DATADIR%%/resources/assets/icon.ico
-%%DATADIR%%/resources/assets/images/logo_light_mode.png
-%%DATADIR%%/resources/assets/images/noraAssociatedFileIcon.ico
-%%DATADIR%%/resources/assets/images/svg/Beach_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Bug Fixed_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Camping_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Cocktail _Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Data Maintenance_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Easter bunny_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Empty Inbox _Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Flying kite_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Heart face _Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Lemonade_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Network _Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Neutral face_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Road trip_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Sad face_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Summer landscape_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Sun_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Umbrella_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/Waiting_Monochromatic.svg
-%%DATADIR%%/resources/assets/images/svg/discord_dark_mode.svg
-%%DATADIR%%/resources/assets/images/svg/discord_light_mode.svg
-%%DATADIR%%/resources/assets/images/svg/github-white.svg
-%%DATADIR%%/resources/assets/images/svg/github.svg
-%%DATADIR%%/resources/assets/images/taskbar buttons/baseline_play_arrow_black_24dp.png
-%%DATADIR%%/resources/assets/images/taskbar buttons/baseline_play_arrow_white_24dp.png
-%%DATADIR%%/resources/assets/images/taskbar buttons/baseline_skip_next_black_24dp.png
-%%DATADIR%%/resources/assets/images/taskbar buttons/baseline_skip_next_white_24dp.png
-%%DATADIR%%/resources/assets/images/taskbar buttons/baseline_skip_previous_black_24dp.png
-%%DATADIR%%/resources/assets/images/taskbar buttons/baseline_skip_previous_white_24dp.png
-%%DATADIR%%/resources/assets/images/taskbar buttons/baseline_stop_white_24dp.png
-%%DATADIR%%/resources/assets/images/taskbar buttons/outline_pause_black_24dp.png
-%%DATADIR%%/resources/assets/images/taskbar buttons/outline_pause_white_24dp.png
-%%DATADIR%%/resources/assets/images/webp/album_cover_default.webp
-%%DATADIR%%/resources/assets/images/webp/artist_cover_default.webp
-%%DATADIR%%/resources/assets/images/webp/empty-folder.webp
-%%DATADIR%%/resources/assets/images/webp/favorites-playlist-icon.webp
-%%DATADIR%%/resources/assets/images/webp/genre-cover-default.webp
-%%DATADIR%%/resources/assets/images/webp/history-playlist-icon.webp
-%%DATADIR%%/resources/assets/images/webp/home-skeleton-dark.webp
-%%DATADIR%%/resources/assets/images/webp/home-skeleton-light-dark.webp
-%%DATADIR%%/resources/assets/images/webp/home-skeleton-light.webp
-%%DATADIR%%/resources/assets/images/webp/last-fm-logo.webp
-%%DATADIR%%/resources/assets/images/webp/logo_light_mode.webp
-%%DATADIR%%/resources/assets/images/webp/playlist_cover_default.webp
-%%DATADIR%%/resources/assets/images/webp/sl-flag.webp
-%%DATADIR%%/resources/assets/images/webp/song_cover_default.webp
-%%DATADIR%%/resources/assets/locales/en/en.json
-%%DATADIR%%/resources/assets/styles/styles.css
+%%DATADIR%%/resources/app.asar.unpacked/resources/logo_light_mode.png
+%%DATADIR%%/resources/app.asar.unpacked/resources/taskbar buttons/baseline_play_arrow_black_24dp.png
+%%DATADIR%%/resources/app.asar.unpacked/resources/taskbar buttons/baseline_play_arrow_white_24dp.png
+%%DATADIR%%/resources/app.asar.unpacked/resources/taskbar buttons/baseline_skip_next_black_24dp.png
+%%DATADIR%%/resources/app.asar.unpacked/resources/taskbar buttons/baseline_skip_next_white_24dp.png
+%%DATADIR%%/resources/app.asar.unpacked/resources/taskbar buttons/baseline_skip_previous_black_24dp.png
+%%DATADIR%%/resources/app.asar.unpacked/resources/taskbar buttons/baseline_skip_previous_white_24dp.png
+%%DATADIR%%/resources/app.asar.unpacked/resources/taskbar buttons/baseline_stop_white_24dp.png
+%%DATADIR%%/resources/app.asar.unpacked/resources/taskbar buttons/outline_pause_black_24dp.png
+%%DATADIR%%/resources/app.asar.unpacked/resources/taskbar buttons/outline_pause_white_24dp.png
 %%DATADIR%%/snapshot_blob.bin
 %%DATADIR%%/v8_context_snapshot.bin
 %%DATADIR%%/vk_swiftshader_icd.json

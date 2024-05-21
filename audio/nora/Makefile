@@ -1,9 +1,8 @@
 PORTNAME=	nora
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.5.0
+DISTVERSION=	3.0.0
 DISTVERSIONSUFFIX=	-stable
 CATEGORIES=	audio
-DISTFILES=	${PREFETCH_FILE}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Elegant music player built using Electron and React
@@ -14,7 +13,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
-		libsnappy.so:archivers/snappy \
 		libFLAC.so:audio/flac \
 		libopus.so:audio/opus \
 		libsndio.so:audio/sndio \
@@ -28,6 +26,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libdrm.so:graphics/libdrm \
 		libpng.so:graphics/png \
 		libvips.so:graphics/vips \
+		libwayland-client.so:graphics/wayland \
 		libwebp.so:graphics/webp \
 		libdav1d.so:multimedia/dav1d \
 		libopenh264.so:multimedia/openh264 \
@@ -40,8 +39,8 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence \
 		libfontconfig.so:x11-fonts/fontconfig
 
-USES=		desktop-file-utils electron:27 gettext-runtime gl gnome jpeg \
-		nodejs:18,build xorg
+USES=		cargo desktop-file-utils electron:30 gettext-runtime gl gnome \
+		jpeg nodejs:20,build xorg
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf2 glib20 gtk30 libxml2 libxslt pango
@@ -49,58 +48,33 @@ USE_GNOME=	cairo gdkpixbuf2 glib20 gtk30 libxml2 libxslt pango
 USE_GITHUB=	yes
 GH_ACCOUNT=	Sandakan
 GH_PROJECT=	Nora
+GH_TUPLE=	rollup:rollup:v4.17.2:rollup/rollup
+
+CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
+CARGO_BUILD=	no
+CARGO_INSTALL=	no
+CARGO_TEST=	no
 
 PORTDOCS=	README.md changelog.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm,fetch,build build:builder
+USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
 PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
 
-pre-fetch:
-	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
-		${MKDIR} ${WRKDIR}/node-modules-cache; \
-		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		for dir in . release/app; do \
-			cd ${WRKDIR}/node-modules-cache/$${dir} && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-				npm ci --ignore-scripts --no-audit --no-fund --no-progress; \
-		done; \
-		cd ${WRKDIR}/node-modules-cache && ${RM} package*.json release/app/package*.json; \
-		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
-		cd ${WRKDIR} && \
-		${MTREE_CMD} -cbnSp node-modules-cache | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./node-modules-cache:' > node-modules-cache.mtree; \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
-
-post-extract:
-.for dir in . release/app
-.   for f in package.json package-lock.json
-	if [ -f ${WRKSRC}/${dir}/${f} ]; then \
-		${MV} -f ${WRKSRC}/${dir}/${f} ${WRKSRC}/${dir}/${f}.bak; \
-	fi; \
-	${CP} ${PKGJSONSDIR}/${dir}/${f} ${WRKSRC}/${dir}
-.   endfor
-	${MV} ${WRKDIR}/node-modules-cache/${dir}/node_modules ${WRKSRC}/${dir}
-.endfor
-
 pre-build:
-	cd ${WRKSRC}/release/app && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
-		npm rebuild --verbose
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npx cross-env NODE_ENV=development \
-		TS_NODE_TRANSPILE_ONLY=true webpack --config ./.erb/configs/webpack.config.renderer.dev.dll.ts
+	cd ${WRKSRC}/rollup/rust && \
+		${SETENV} ${MAKE_ENV} ${CARGO} build --release --verbose --verbose
+	${CP} ${WRKSRC}/rollup/rust/target/release/libbindings_napi.so \
+		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
+	cd ${WRKSRC}/node_modules/sharp && \
+		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run install
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
-		--input=icon.icns --out=icons --format=set --root=assets
+		--input=icon.icns --out=icons --format=set --root=build
 	${MV} ${WRKSRC}/icons/icon_1024.png ${WRKSRC}/icons/icon_1024x1024.png
 
 do-install:
@@ -111,7 +85,7 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/release/build/${ELECTRON_BUILDER_APP_OUT_DIR} && \
+	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${TAR} -cf - . | ${TAR} -xf - -C ${STAGEDIR}${DATADIR}
 	cd ${STAGEDIR}${DATADIR}/resources && \
 		${FIND} . -type f -exec ${FILE} {} ';' | \
