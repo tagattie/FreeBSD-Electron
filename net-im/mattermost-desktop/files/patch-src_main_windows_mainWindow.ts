@@ -1,6 +1,6 @@
---- src/main/windows/mainWindow.ts.orig	2023-12-15 14:26:44 UTC
+--- src/main/windows/mainWindow.ts.orig	2024-05-16 20:45:52 UTC
 +++ src/main/windows/mainWindow.ts
-@@ -91,7 +91,7 @@ export class MainWindow extends EventEmitter {
+@@ -90,7 +90,7 @@ export class MainWindow extends EventEmitter {
              },
          });
  

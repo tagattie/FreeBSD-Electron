@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	5.7.0
+DISTVERSION=	5.8.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		jq:textproc/jq
 
-USES=		desktop-file-utils electron:28 nodejs:18,build python:build
+USES=		desktop-file-utils electron:29 nodejs:20,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
@@ -31,7 +31,6 @@ USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 pre-build:
 	${MKDIR} ${WRKSRC}/node_modules/node-jq/bin
 	${CP} ${LOCALBASE}/bin/jq ${WRKSRC}/node_modules/node-jq/bin/jq
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} node scripts/postinstall.js
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build-prod
 	# generate icons
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \

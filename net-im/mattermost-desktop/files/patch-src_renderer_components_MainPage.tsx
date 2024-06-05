@@ -1,6 +1,6 @@
---- src/renderer/components/MainPage.tsx.orig	2023-10-02 16:43:32 UTC
+--- src/renderer/components/MainPage.tsx.orig	2024-05-16 20:45:52 UTC
 +++ src/renderer/components/MainPage.tsx
-@@ -511,7 +511,7 @@ class MainPage extends React.PureComponent<Props, Stat
+@@ -509,7 +509,7 @@ class MainPage extends React.PureComponent<Props, Stat
                      ref={this.topBar}
                      className={'topBar-bg'}
                  >

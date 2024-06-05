@@ -1,6 +1,6 @@
---- src/main/notifications/index.ts.orig	2024-03-15 14:25:06 UTC
+--- src/main/notifications/index.ts.orig	2024-05-16 20:45:52 UTC
 +++ src/main/notifications/index.ts
-@@ -184,7 +184,7 @@ function getDoNotDisturb() {
+@@ -196,7 +196,7 @@ async function getDoNotDisturb() {
          return getDarwinDoNotDisturb();
      }
  
@@ -9,7 +9,7 @@
          return getLinuxDoNotDisturb();
      }
  
-@@ -192,7 +192,7 @@ function flashFrame(flash: boolean) {
+@@ -204,7 +204,7 @@ function flashFrame(flash: boolean) {
  }
  
  function flashFrame(flash: boolean) {
