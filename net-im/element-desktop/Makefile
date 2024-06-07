@@ -1,12 +1,12 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.65
+DISTVERSION=	1.11.68
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/keytar/-/:keytar \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
 DISTFILES=	element-${DISTVERSIONFULL}${EXTRACT_SUFX}:element_web \
-		${PREFETCH_FILE}:prefetch \
+		${PREFETCH_FILE} \
 		keytar-${KEYTAR_VER}.tgz:keytar \
 		matrix-seshat-${MATRIX_SESHAT_VER}.tgz:matrix_seshat
 
@@ -21,7 +21,7 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo desktop-file-utils electron:29 nodejs:20,build \
+USES=		cargo desktop-file-utils electron:30 nodejs:20,build \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
