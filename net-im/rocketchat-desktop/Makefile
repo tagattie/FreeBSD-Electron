@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	3.9.14
+DISTVERSION=	4.0.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,13 +11,13 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		cargo desktop-file-utils electron:22 nodejs:18,build \
+USES=		cargo desktop-file-utils electron:29 nodejs:20,build \
 		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	RocketChat
 GH_PROJECT=	Rocket.Chat.Electron
-GH_TUPLE=	rollup:rollup:v4.9.2:rollup/rollup
+GH_TUPLE=	rollup:rollup:v4.9.6:rollup/rollup
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock

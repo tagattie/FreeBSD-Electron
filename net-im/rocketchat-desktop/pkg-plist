@@ -7,5 +7,6 @@ share/icons/hicolor/32x32/apps/rocketchat-desktop.png
 share/icons/hicolor/48x48/apps/rocketchat-desktop.png
 share/icons/hicolor/512x512/apps/rocketchat-desktop.png
 share/icons/hicolor/64x64/apps/rocketchat-desktop.png
+%%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/build/icon.ico
