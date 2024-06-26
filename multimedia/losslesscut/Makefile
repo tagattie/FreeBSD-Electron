@@ -1,6 +1,6 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.59.1
+DISTVERSION=	3.61.1
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -24,6 +24,7 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libpci.so:devel/libpci \
 		libnspr4.so:devel/nspr \
 		libdrm.so:graphics/libdrm \
+		libwayland-client.so:graphics/wayland \
 		libpng.so:graphics/png \
 		libvips.so:graphics/vips \
 		libwebp.so:graphics/webp \
