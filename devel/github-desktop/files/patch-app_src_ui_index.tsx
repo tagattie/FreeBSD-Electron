@@ -1,4 +1,4 @@
---- app/src/ui/index.tsx.orig	2024-02-04 21:57:16 UTC
+--- app/src/ui/index.tsx.orig	2024-06-02 17:20:33 UTC
 +++ app/src/ui/index.tsx
 @@ -2,7 +2,7 @@ import * as ReactDOM from 'react-dom'
  
@@ -9,7 +9,7 @@
  import { App } from './app'
  import {
    Dispatcher,
-@@ -86,7 +86,7 @@ enableSourceMaps()
+@@ -88,7 +88,7 @@ enableSourceMaps()
  
  // Tell dugite where to find the git environment,
  // see https://github.com/desktop/dugite/pull/85

@@ -1,4 +1,4 @@
---- app/src/lib/editors/linux.ts.orig	2024-02-04 21:57:16 UTC
+--- app/src/lib/editors/linux.ts.orig	2024-06-02 17:20:33 UTC
 +++ app/src/lib/editors/linux.ts
 @@ -18,30 +18,30 @@ const editors: ILinuxExternalEditor[] = [
  const editors: ILinuxExternalEditor[] = [
@@ -37,7 +37,7 @@
        '/mnt/c/Program Files/Microsoft VS Code/bin/code',
        '/var/lib/flatpak/app/com.visualstudio.code/current/active/export/bin/com.visualstudio.code',
        '.local/share/flatpak/app/com.visualstudio.code/current/active/export/bin/com.visualstudio.code',
-@@ -71,11 +71,11 @@ const editors: ILinuxExternalEditor[] = [
+@@ -72,11 +72,11 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Sublime Text',
@@ -51,7 +51,7 @@
    },
    {
      name: 'SlickEdit',
-@@ -90,15 +90,16 @@ const editors: ILinuxExternalEditor[] = [
+@@ -91,15 +91,16 @@ const editors: ILinuxExternalEditor[] = [
      // Code editor for elementary OS
      // https://github.com/elementary/code
      name: 'Code',
@@ -70,7 +70,7 @@
        '/snap/bin/phpstorm',
        '.local/share/JetBrains/Toolbox/scripts/phpstorm',
      ],
-@@ -106,17 +107,19 @@ const editors: ILinuxExternalEditor[] = [
+@@ -107,17 +108,19 @@ const editors: ILinuxExternalEditor[] = [
    {
      name: 'JetBrains WebStorm',
      paths: [
@@ -91,7 +91,7 @@
        '/snap/bin/intellij-idea-ultimate',
        '.local/share/JetBrains/Toolbox/scripts/intellij-idea-ultimate',
      ],
-@@ -124,6 +127,7 @@ const editors: ILinuxExternalEditor[] = [
+@@ -125,6 +128,7 @@ const editors: ILinuxExternalEditor[] = [
    {
      name: 'IntelliJ Goland',
      paths: [
@@ -99,15 +99,15 @@
        '/snap/bin/goland',
        '.local/share/JetBrains/Toolbox/scripts/goland',
      ],
-@@ -131,6 +135,7 @@ const editors: ILinuxExternalEditor[] = [
+@@ -132,6 +136,7 @@ const editors: ILinuxExternalEditor[] = [
    {
      name: 'JetBrains PyCharm',
      paths: [
 +      '%%LOCALBASE%%/bin/pycharm',
        '/snap/bin/pycharm',
+       '/snap/bin/pycharm-professional',
        '.local/share/JetBrains/Toolbox/scripts/pycharm',
-     ],
-@@ -144,39 +149,39 @@ const editors: ILinuxExternalEditor[] = [
+@@ -146,39 +151,39 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Emacs',

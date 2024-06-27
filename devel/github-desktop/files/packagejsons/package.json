@@ -75,7 +75,7 @@
     "eslint-plugin-json": "^2.1.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.33.2",
-    "express": "^4.17.3",
+    "express": "^4.19.2",
     "fake-indexeddb": "^5.0.1",
     "front-matter": "^2.3.0",
     "fs-extra": "^9.0.1",
@@ -105,12 +105,12 @@
     "typescript": "^5.3.2",
     "webpack": "^5.76.0",
     "webpack-bundle-analyzer": "^4.5.0",
-    "webpack-dev-middleware": "^5.3.1",
+    "webpack-dev-middleware": "^5.3.4",
     "webpack-hot-middleware": "^2.25.1",
     "webpack-merge": "^5.8.0",
     "xml2js": "^0.5.0",
     "xvfb-maybe": "^0.2.1",
-    "yaml": "^1.4.0"
+    "yaml": "^2.4.2"
   },
   "devDependencies": {
     "@github/markdownlint-github": "^0.1.0",
@@ -159,12 +159,12 @@
     "@types/webpack-hot-middleware": "^2.25.6",
     "@types/webpack-merge": "^5.0.0",
     "@types/xml2js": "^0.4.11",
-    "electron": "28.2.9",
+    "electron": "28.3.3",
     "electron-builder": "^24.13.3",
     "electron-packager": "^17.1.2",
     "eslint-plugin-github": "^4.10.1",
     "markdownlint-cli": "^0.32.2",
-    "patch-package": "^6.5.1",
+    "patch-package": "^8.0.0",
     "postinstall-postinstall": "^2.1.0",
     "reserved-words": "^0.1.2",
     "tsconfig-paths": "^3.9.0"

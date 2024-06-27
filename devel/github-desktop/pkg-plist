@@ -952,6 +952,8 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/resources/app/highlighter/common.js.map
 %%DATADIR%%/resources/app/highlighter/ext/elixir.js
 %%DATADIR%%/resources/app/highlighter/ext/elixir.js.map
+%%DATADIR%%/resources/app/highlighter/ext/zig.js
+%%DATADIR%%/resources/app/highlighter/ext/zig.js.map
 %%DATADIR%%/resources/app/highlighter/mode/asciiarmor.js
 %%DATADIR%%/resources/app/highlighter/mode/asciiarmor.js.map
 %%DATADIR%%/resources/app/highlighter/mode/clike.js
