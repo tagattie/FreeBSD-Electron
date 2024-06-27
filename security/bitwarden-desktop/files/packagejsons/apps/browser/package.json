@@ -1,11 +1,11 @@
 {
   "name": "@bitwarden/browser",
-  "version": "2024.5.0",
+  "version": "2024.6.1",
   "scripts": {
-    "build": "webpack",
-    "build:mv3": "cross-env MANIFEST_VERSION=3 webpack",
-    "build:watch": "webpack --watch",
-    "build:watch:mv3": "cross-env MANIFEST_VERSION=3 webpack --watch",
+    "build": "cross-env MANIFEST_VERSION=3 webpack",
+    "build:mv2": "webpack",
+    "build:watch": "cross-env MANIFEST_VERSION=3 webpack --watch",
+    "build:watch:mv2": "webpack --watch",
     "build:prod": "cross-env NODE_ENV=production webpack",
     "build:prod:beta": "cross-env BETA_BUILD=1 NODE_ENV=production webpack",
     "build:prod:watch": "cross-env NODE_ENV=production webpack --watch",
