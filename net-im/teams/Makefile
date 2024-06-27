@@ -1,6 +1,6 @@
 PORTNAME=	teams
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.4.37
+DISTVERSION=	1.7.4
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -25,7 +25,7 @@ PORTDOCS=	CONTRIBUTING.md HISTORY.md KNOWN_ISSUES.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1 prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin

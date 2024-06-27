@@ -1,6 +1,6 @@
 {
   "name": "teams-for-linux",
-  "version": "1.4.37",
+  "version": "1.7.4",
   "main": "app/index.js",
   "description": "Unofficial client for Microsoft Teams for Linux",
   "homepage": "https://github.com/IsmaelMartinez/teams-for-linux",
@@ -21,7 +21,8 @@
   "scripts": {
     "postinstall": "electron-builder install-app-deps",
     "lint": "eslint **/*.js",
-    "start": "yarn install && electron ./app",
+    "prestart": "npm ci",
+    "start": "electron ./app --trace-warnings",
     "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "dist:linux": "electron-builder --linux",
@@ -41,6 +42,7 @@
   },
   "dependencies": {
     "@electron/remote": "^2.1.2",
+    "@homebridge/dbus-native": "0.6.0",
     "electron-is-dev": "2.0.0",
     "electron-store": "8.2.0",
     "electron-window-state": "5.0.3",
@@ -50,10 +52,11 @@
   },
   "devDependencies": {
     "@electron/fuses": "^1.7.0",
+    "@eslint/js": "^9.4.0",
     "electron": "29.3.0",
     "electron-builder": "24.13.3",
-    "eslint": "9.0.0",
-    "yarn": "1.22.22"
+    "eslint": "^9.4.0",
+    "globals": "^15.4.0"
   },
   "build": {
     "appId": "teams-for-linux",
@@ -96,7 +99,8 @@
     },
     "rpm": {
       "fpm": [
-        "--rpm-rpmbuild-define=_build_id_links none"
+        "--rpm-rpmbuild-define=_build_id_links  none",
+        "--rpm-digest=sha256"
       ]
     },
     "snap": {
