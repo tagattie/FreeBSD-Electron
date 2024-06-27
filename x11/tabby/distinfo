@@ -1,5 +1,5 @@
-TIMESTAMP = 1710017621
-SHA256 (tabby-1.0.207-node-modules.tar.gz) = 6c84df59959183791d35cbc8cfa4cb62bbf681b297f62ee8f5354d9a66bda993
-SIZE (tabby-1.0.207-node-modules.tar.gz) = 180529907
-SHA256 (Eugeny-tabby-v1.0.207_GH0.tar.gz) = 361c30bbbddf588c13e3b0462bdcd31dedcebbee655bfbf9eecbb06058298e29
-SIZE (Eugeny-tabby-v1.0.207_GH0.tar.gz) = 17264606
+TIMESTAMP = 1719487757
+SHA256 (tabby-1.0.208-node-modules.tar.gz) = c009bed220213f446394c5c5b9e0dcbcb0c80dc08095969fa1cb591bf6a68e61
+SIZE (tabby-1.0.208-node-modules.tar.gz) = 180558874
+SHA256 (Eugeny-tabby-v1.0.208_GH0.tar.gz) = a791c159855c89067511a44bded858bb5513e741fc162501799d3bd8f36923d6
+SIZE (Eugeny-tabby-v1.0.208_GH0.tar.gz) = 17301539

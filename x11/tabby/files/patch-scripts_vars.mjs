@@ -1,4 +1,4 @@
---- scripts/vars.mjs.orig	2024-03-04 09:42:06 UTC
+--- scripts/vars.mjs.orig	2024-06-22 19:43:37 UTC
 +++ scripts/vars.mjs
 @@ -10,7 +10,8 @@ const electronInfo = JSON.parse(fs.readFileSync(path.r
  
@@ -6,7 +6,7 @@
  
 -export let version = childProcess.execSync('git describe --tags', { encoding:'utf-8' })
 +// export let version = childProcess.execSync('git describe --tags', { encoding:'utf-8' })
-+export let version = 'v1.0.207'
++export let version = 'v1.0.208'
  version = version.substring(1).trim()
  version = version.replace('-', '-c')
  
