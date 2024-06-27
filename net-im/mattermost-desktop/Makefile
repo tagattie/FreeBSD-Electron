@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	5.8.0
+DISTVERSION=	5.8.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
