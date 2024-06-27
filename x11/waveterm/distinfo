@@ -1,10 +1,10 @@
-TIMESTAMP = 1716183393
-SHA256 (waveterm-0.7.5-node-modules.tar.gz) = 860dea2b74bd9bd370faa50d9c3b237dc3ba5d4782512d8b91162d0f65f34cfc
-SIZE (waveterm-0.7.5-node-modules.tar.gz) = 118205310
-SHA256 (wavetermdev-waveterm-v0.7.5_GH0.tar.gz) = bb448860b365304fe8dd9156b956c65bac6b3bbfc9c7c2d0c7e058a12ad6fd29
-SIZE (wavetermdev-waveterm-v0.7.5_GH0.tar.gz) = 10465921
-SHA256 (alecthomas-units-9a357b53e9c9_GH0.tar.gz) = 4c35642f1f51dcf036b6d5ab4aad4154d3fd2433ac1eff25a3e58b3f84e51d7b
-SIZE (alecthomas-units-9a357b53e9c9_GH0.tar.gz) = 6177
+TIMESTAMP = 1719479329
+SHA256 (yarn-4.1.1.tgz) = 9bc40824e2aa8f0f72a8ecb4c4e1c9c568b9fc8ae327dcb7fc9bc328ae0e6c41
+SIZE (yarn-4.1.1.tgz) = 983533
+SHA256 (waveterm-0.7.6-node-modules.tar.gz) = caa9d13001446ceb18acefbec8690268e56b72ab7be31140e2acd3782c0dff56
+SIZE (waveterm-0.7.6-node-modules.tar.gz) = 161162422
+SHA256 (wavetermdev-waveterm-v0.7.6_GH0.tar.gz) = 78879dddc0d6fdc3c0c3cd3ee0ee5097c9641d867fd0ee7654a85c5997088947
+SIZE (wavetermdev-waveterm-v0.7.6_GH0.tar.gz) = 10520120
 SHA256 (alessio-shellescape-v1.4.1_GH0.tar.gz) = ba08ce6af01fed809528363efdfa735c52770a9f0d550ea7a9ba6aebf0c7076a
 SIZE (alessio-shellescape-v1.4.1_GH0.tar.gz) = 7547
 SHA256 (armon-circbuf-5111143e8da2_GH0.tar.gz) = 05cedc6ed0f33886ecadd6ce30ee88b0adba12af058ccdace9b9f369488ccf01

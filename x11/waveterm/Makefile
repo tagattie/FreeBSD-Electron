@@ -1,6 +1,6 @@
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.7.5
+DISTVERSION=	0.7.6
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -17,7 +17,6 @@ USES=		electron:30 go:1.22,modules,no_targets nodejs:20,build
 USE_GITHUB=	yes
 GH_ACCOUNT=	wavetermdev
 GH_TUPLE=	\
-		alecthomas:units:9a357b53e9c9:alecthomas_units/vendor/github.com/alecthomas/units \
 		alessio:shellescape:v1.4.1:alessio_shellescape/vendor/github.com/alessio/shellescape \
 		armon:circbuf:5111143e8da2:armon_circbuf/vendor/github.com/armon/circbuf \
 		creack:pty:v1.1.18:creack_pty/vendor/github.com/creack/pty \
@@ -44,7 +43,7 @@ GH_TUPLE=	\
 
 SUB_FILES=	${PORTNAME}
 
-USE_ELECTRON=	npm:yarn1 prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:yarn4 prefetch extract rebuild:electron build:builder
 
 BUILD_TIME!=		date +'%Y%m%d%H%M'
 WAVESHELL_VERSION=	v0.7
