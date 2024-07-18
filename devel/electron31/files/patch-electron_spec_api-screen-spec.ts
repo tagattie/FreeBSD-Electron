@@ -1,6 +1,6 @@
---- electron/spec/api-screen-spec.ts.orig	2023-12-04 18:19:02 UTC
+--- electron/spec/api-screen-spec.ts.orig	2024-07-15 15:22:56 UTC
 +++ electron/spec/api-screen-spec.ts
-@@ -74,7 +74,7 @@ describe('screen module', () => {
+@@ -94,7 +94,7 @@ describe('screen module', () => {
  
        const { size } = display!;
  
@@ -9,7 +9,7 @@
          expect(size).to.have.property('width').that.is.a('number');
          expect(size).to.have.property('height').that.is.a('number');
        } else {
-@@ -88,7 +88,7 @@ describe('screen module', () => {
+@@ -108,7 +108,7 @@ describe('screen module', () => {
  
        const { workAreaSize } = display!;
  
@@ -18,7 +18,7 @@
          expect(workAreaSize).to.have.property('width').that.is.a('number');
          expect(workAreaSize).to.have.property('height').that.is.a('number');
        } else {
-@@ -104,7 +104,7 @@ describe('screen module', () => {
+@@ -124,7 +124,7 @@ describe('screen module', () => {
        expect(bounds).to.have.property('x').that.is.a('number');
        expect(bounds).to.have.property('y').that.is.a('number');
  
