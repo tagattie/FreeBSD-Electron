@@ -1,7 +1,6 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.3.18
-DISTVERSIONSUFFIX=	-linux1
+DISTVERSION=	3.4.2-linux1
 CATEGORIES=	devel
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -15,7 +14,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	zip:archivers/zip \
 		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
-		libsnappy.so:archivers/snappy \
 		libFLAC.so:audio/flac \
 		libopus.so:audio/opus \
 		libsndio.so:audio/sndio \
@@ -44,8 +42,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 RUN_DEPENDS=	git:devel/git \
 		git-lfs:devel/git-lfs
 
-USES=		desktop-file-utils electron:28 gettext-runtime gl gmake gnome \
-		iconv:wchar_t jpeg localbase:ldflags nodejs:18,build pkgconfig \
+USES=		desktop-file-utils electron:30 gettext-runtime gl gmake gnome \
+		iconv:wchar_t jpeg localbase:ldflags nodejs:20,build pkgconfig \
 		python shebangfix ssl xorg
 
 USE_GITHUB=	yes
@@ -69,7 +67,7 @@ UPSTREAM_ELECTRON_VER!=		${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/yarn.l
 ELECTRON_DOWNLOAD_URL=		https://github.com/electron/electron/releases/download/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
-MAKE_ENV+=	CIRCLE_SHA1=016e5dfab09885f497a73871a03e3670c3d78ba8
+MAKE_ENV+=	CIRCLE_SHA1=954d5f93599715b19c507d71e57480701adfd35c
 
 REINPLACE_FILES=	app/src/lib/editors/linux.ts \
 			app/src/lib/shells/linux.ts \

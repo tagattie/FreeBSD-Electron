@@ -1,15 +1,15 @@
---- app/node_modules/dugite/build/lib/git-environment.js.orig	2024-02-16 22:30:21 UTC
+--- app/node_modules/dugite/build/lib/git-environment.js.orig	2024-07-19 23:29:21 UTC
 +++ app/node_modules/dugite/build/lib/git-environment.js
-@@ -25,7 +25,7 @@ function resolveGitDir() {
-         return path.resolve(process.env.LOCAL_GIT_DIRECTORY);
+@@ -49,7 +49,7 @@ function resolveGitDir(env) {
+         return path.resolve(env.LOCAL_GIT_DIRECTORY);
      }
      else {
 -        return resolveEmbeddedGitDir();
 +        return '%%LOCALBASE%%';
      }
  }
- /**
-@@ -101,20 +101,20 @@ function setupEnvironment(environmentVariables) {
+ exports.resolveGitDir = resolveGitDir;
+@@ -130,20 +130,20 @@ function setupEnvironment(environmentVariables) {
          const templateDir = `${gitDir}/share/git-core/templates`;
          env.GIT_TEMPLATE_DIR = templateDir;
      }

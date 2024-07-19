@@ -78,7 +78,7 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/resources/app/crash.js.LICENSE.txt
 %%DATADIR%%/resources/app/crash.js.map
 %%DATADIR%%/resources/app/desktop-notifications.node
-%%DATADIR%%/resources/app/desktop-trampoline/desktop-trampoline
+%%DATADIR%%/resources/app/desktop-trampoline/desktop-askpass-trampoline
 %%DATADIR%%/resources/app/emoji.json
 %%DATADIR%%/resources/app/emoji/basecamp.png
 %%DATADIR%%/resources/app/emoji/basecampy.png

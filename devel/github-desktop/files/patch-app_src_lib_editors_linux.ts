@@ -1,4 +1,4 @@
---- app/src/lib/editors/linux.ts.orig	2024-06-02 17:20:33 UTC
+--- app/src/lib/editors/linux.ts.orig	2024-07-01 19:50:49 UTC
 +++ app/src/lib/editors/linux.ts
 @@ -18,30 +18,30 @@ const editors: ILinuxExternalEditor[] = [
  const editors: ILinuxExternalEditor[] = [
@@ -107,7 +107,7 @@
        '/snap/bin/pycharm',
        '/snap/bin/pycharm-professional',
        '.local/share/JetBrains/Toolbox/scripts/pycharm',
-@@ -146,39 +151,39 @@ const editors: ILinuxExternalEditor[] = [
+@@ -146,43 +151,43 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Emacs',
@@ -153,6 +153,11 @@
      name: 'Pluma',
 -    paths: ['/usr/bin/pluma'],
 +    paths: ['%%LOCALBASE%%/bin/pluma'],
+   },
+   {
+     name: 'Zed',
+-    paths: ['.local/bin/zed'],
++    paths: ['%%LOCALBASE%%/bin/zedit'],
    },
  ]
  
