@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.65
+DISTVERSION=	1.11.71
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/keytar/-/:keytar \
@@ -21,7 +21,7 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo desktop-file-utils electron:29 nodejs:20,build \
+USES=		cargo desktop-file-utils electron:31 nodejs:20,build \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
@@ -45,7 +45,7 @@ USE_ELECTRON=	npm:yarn1,fetch,extract,build build:builder
 
 PREFETCH_FILE=		${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 KEYTAR_VER=		7.9.0
-MATRIX_SESHAT_VER=	3.0.1
+MATRIX_SESHAT_VER=	4.0.0
 RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
 
 pre-fetch:
