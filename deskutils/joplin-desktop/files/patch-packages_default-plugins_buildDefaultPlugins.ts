@@ -1,4 +1,4 @@
---- packages/default-plugins/buildDefaultPlugins.ts.orig	2024-03-07 10:01:48 UTC
+--- packages/default-plugins/buildDefaultPlugins.ts.orig	2024-07-06 10:12:46 UTC
 +++ packages/default-plugins/buildDefaultPlugins.ts
 @@ -1,7 +1,7 @@
  
@@ -15,9 +15,9 @@
  import getPathToPatchFileFor from './utils/getPathToPatchFileFor';
 -import getCurrentCommitHash from './utils/getCurrentCommitHash';
  
- type BeforeEachInstallCallback = (buildDir: string, pluginName: string)=> Promise<void>;
- 
-@@ -27,7 +26,7 @@ const buildDefaultPlugins = async (outputParentDir: st
+ interface Options {
+ 	beforeInstall: (buildDir: string, pluginName: string)=> Promise<void>;
+@@ -30,7 +29,7 @@ const buildDefaultPlugins = async (outputParentDir: st
  	};
  
  	for (const pluginId in pluginRepositoryData) {
@@ -26,7 +26,7 @@
  
  		const buildDir = await mkdtemp(join(tmpdir(), 'default-plugin-build'));
  		try {
-@@ -35,29 +34,29 @@ const buildDefaultPlugins = async (outputParentDir: st
+@@ -38,29 +37,29 @@ const buildDefaultPlugins = async (outputParentDir: st
  			const pluginDir = resolve(join(pluginSourcesDir, pluginId));
  
  			// Clone the repository if not done yet

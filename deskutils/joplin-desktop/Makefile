@@ -1,6 +1,14 @@
+# Notes for port maintainer
+#
+# Before copying package.json/yarn.lock to ${PKGJSONSDIR}, do the following steps:
+# 1. Remove sharp from devDependencies in ${WRKSRC}/packages/lib
+#    $ yarn remove --mode=skip-build sharp
+# 2. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}/packages/tools
+#    $ yarn add --dev --mode=skip-build node-addon-api node-gyp
+
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.14.22
+DISTVERSION=	3.0.13
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch
@@ -21,13 +29,13 @@ BUILD_DEPENDS=	7zz:archivers/7-zip \
 LIB_DEPENDS=	libvips.so:graphics/vips \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo electron:26 gmake localbase:ldflags nodejs:18,build \
+USES=		cargo electron:29 gmake localbase:ldflags nodejs:20,build \
 		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
 GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup \
-		JackGruber:joplin-plugin-backup:2d814a5466604daced108331d14aedf8e8414d62:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup
+		JackGruber:joplin-plugin-backup:52d898315cab259da638698cc41120e9fae593ef:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
@@ -83,8 +91,7 @@ post-extract:
 
 post-patch:
 	${RM} -r ${WRKSRC}/packages/app-cli \
-		${WRKSRC}/packages/app-clipper \
-		${WRKSRC}/packages/app-mobile
+		${WRKSRC}/packages/app-clipper
 
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
@@ -97,7 +104,7 @@ pre-build:
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 		yarn rebuild
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
-		yarn run electron-rebuild --force-abi 116
+		yarn run electron-rebuild --force-abi 122
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} ${STAGEDIR}${PREFIX}/bin

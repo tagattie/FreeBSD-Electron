@@ -1,6 +1,6 @@
---- packages/app-desktop/ElectronAppWrapper.ts.orig	2024-02-26 19:28:48 UTC
+--- packages/app-desktop/ElectronAppWrapper.ts.orig	2024-07-06 10:12:46 UTC
 +++ packages/app-desktop/ElectronAppWrapper.ts
-@@ -151,7 +151,7 @@ export default class ElectronAppWrapper {
+@@ -157,7 +157,7 @@ export default class ElectronAppWrapper {
  
  		// Linux icon workaround for bug https://github.com/electron-userland/electron-builder/issues/2098
  		// Fix: https://github.com/electron-userland/electron-builder/issues/2269

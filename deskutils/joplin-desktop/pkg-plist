@@ -77,7 +77,7 @@ share/icons/hicolor/96x96/apps/joplin.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@joplin/lib/node_modules/sqlite3/src/statement.h
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@joplin/lib/node_modules/sqlite3/src/threading.h
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/LICENSE.md
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/bin/freebsd-x64-116/keytar.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/bin/freebsd-x64-122/keytar.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/Release/keytar.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/node_gyp_bins/python3
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/lib/keytar.js
