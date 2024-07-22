@@ -1,6 +1,6 @@
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.208
+DISTVERSION=	1.0.211
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -110,6 +110,8 @@ post-patch:
 		${WRKSRC}/app/node_modules/@serialport/bindings-cpp/binding.gyp
 	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
 		${WRKSRC}/app/node_modules/fontmanager-redux/binding.gyp
+	${REINPLACE_CMD} -e 's/%%DISTVERSIONFULL%%/${DISTVERSIONFULL}/' \
+		${WRKSRC}/scripts/vars.mjs
 
 pre-build:
 .for module in cpu-features lzma-native ssh2
