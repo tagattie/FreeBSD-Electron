@@ -1,6 +1,6 @@
 PORTNAME=	standardnotes
 DISTVERSIONPREFIX=	@standardnotes/desktop@
-DISTVERSION=	3.194.0
+DISTVERSION=	3.194.13
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -21,8 +21,8 @@ GH_PROJECT=	app
 WRKSRC=		${WRKDIR}/app--${PORTNAME}-desktop-${DISTVERSION}
 BUILD_WRKSRC=	${WRKSRC}/packages/desktop
 
-USES=		desktop-file-utils electron:27 gmake localbase:ldflags \
-		nodejs:18,build pkgconfig python:build
+USES=		desktop-file-utils electron:31 gmake localbase:ldflags \
+		nodejs:20,build pkgconfig python:build
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
