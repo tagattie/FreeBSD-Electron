@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	4.0.0
+DISTVERSION=	4.0.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -11,7 +11,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		cargo desktop-file-utils electron:29 nodejs:20,build \
+USES=		cargo desktop-file-utils electron:30 nodejs:20,build \
 		python:build
 
 USE_GITHUB=	yes
