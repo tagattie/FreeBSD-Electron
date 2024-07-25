@@ -10,6 +10,8 @@ WWW=		https://ueli.app/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BUILD_DEPENDS=	app-builder:devel/app-builder
+
 USES=		cargo electron:31 nodejs:20,build
 
 USE_GITHUB=	yes
