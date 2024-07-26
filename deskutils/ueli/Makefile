@@ -11,8 +11,10 @@ LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
+LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		cargo electron:31 nodejs:20,build
+USES=		cargo electron:31 localbase:ldflags nodejs:20,build \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	oliverschwendener
