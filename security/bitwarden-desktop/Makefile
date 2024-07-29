@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2024.6.4
+DISTVERSION=	2024.7.1
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -18,7 +18,7 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo electron:29 gmake gnome localbase:ldflags \
+USES=		cargo electron:31 gmake gnome localbase:ldflags \
 		nodejs:20,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
@@ -48,8 +48,8 @@ USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build-native
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
-	cd ${BUILD_WRKSRC}/desktop_native && ${SETENV} ${MAKE_ENV} npm run build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
