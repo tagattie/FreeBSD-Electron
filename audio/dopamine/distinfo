@@ -1,5 +1,5 @@
-TIMESTAMP = 1721390783
-SHA256 (dopamine-3.0.0-preview.27-node-modules.tar.gz) = 11f37320f5649840d9ea46581aa5f4a1e586989424a9c2855c26d511fc1451f9
-SIZE (dopamine-3.0.0-preview.27-node-modules.tar.gz) = 186733555
-SHA256 (digimezzo-dopamine-v3.0.0-preview.27_GH0.tar.gz) = 00d1e98c15ccbf9843aba9c3920e2d8dd427dd49bf46854848f5bf92abc27eff
-SIZE (digimezzo-dopamine-v3.0.0-preview.27_GH0.tar.gz) = 4013196
+TIMESTAMP = 1722245428
+SHA256 (dopamine-3.0.0-preview.28-ubuntu-crash-fix-node-modules.tar.gz) = 0d8ae27b4ceb0f68bc15434a7af0c8cc0a5f351a0b8bb31166d43890a47142d8
+SIZE (dopamine-3.0.0-preview.28-ubuntu-crash-fix-node-modules.tar.gz) = 198794883
+SHA256 (digimezzo-dopamine-v3.0.0-preview.28-ubuntu-crash-fix_GH0.tar.gz) = d99cedfdb75128b5f853d0a2bb9251390f02980a16bb7dda42e966fe53c084cf
+SIZE (digimezzo-dopamine-v3.0.0-preview.28-ubuntu-crash-fix_GH0.tar.gz) = 4033992

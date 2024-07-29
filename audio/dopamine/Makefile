@@ -1,6 +1,12 @@
+# Notes for port maintainer
+#
+# Before copying package.json/package-lock.json to ${PKGJSONSDIR}, do the following steps:
+# 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
+#    $ npm install --save-dev --ignore-scripts 'node-addon-api@^7' node-gyp
+
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.0-preview.27
+DISTVERSION=	3.0.0-preview.28-ubuntu-crash-fix
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -17,6 +23,9 @@ USES=		electron:25 nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	digimezzo
+
+# electron25 requires this for node_api_get_module_file_name() and node_api_create_syntax_error()
+CPPFLAGS+=	-DNAPI_EXPERIMENTAL
 
 BINARY_ALIAS=	python=${PYTHON_CMD} \
 		python3=${PYTHON_CMD}
