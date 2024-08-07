@@ -1,12 +1,6 @@
-# Notes for port maintainer
-#
-# Before copying package.json/package-lock.json to ${PKGJSONSDIR}, do the following steps:
-# 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
-#    $ npm install --save-dev --ignore-scripts 'node-addon-api@^7' node-gyp
-
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.0-preview.28-ubuntu-crash-fix
+DISTVERSION=	3.0.0-preview.29
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -17,15 +11,11 @@ LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
-LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		electron:25 nodejs:18,build python:build
+USES=		electron:26 nodejs:18,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	digimezzo
-
-# electron25 requires this for node_api_get_module_file_name() and node_api_create_syntax_error()
-CPPFLAGS+=	-DNAPI_EXPERIMENTAL
 
 BINARY_ALIAS=	python=${PYTHON_CMD} \
 		python3=${PYTHON_CMD}
@@ -52,8 +42,6 @@ pre-build:
 	# so force rebuild binary for FreeBSD
 	cd ${WRKSRC}/node_modules/better-sqlite3 && \
 		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run build-release
-	cd ${WRKSRC}/node_modules/sharp && \
-		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run install
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
