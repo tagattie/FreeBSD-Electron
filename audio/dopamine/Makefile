@@ -1,6 +1,6 @@
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.0-preview.29
+DISTVERSION=	3.0.0-preview.31
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
