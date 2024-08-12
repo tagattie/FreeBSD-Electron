@@ -1,6 +1,6 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.61.1
+DISTVERSION=	3.62.0
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
-		libsnappy.so:archivers/snappy \
+		libasound.so:audio/alsa-lib \
 		libFLAC.so:audio/flac \
 		libopus.so:audio/opus \
 		libsndio.so:audio/sndio \
@@ -40,16 +40,23 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	ffmpeg:multimedia/ffmpeg
 
-USES=		desktop-file-utils electron:27 gettext-runtime gl gmake gnome \
-		iconv:wchar_t jpeg nodejs:18,build python:build xorg
+USES=		cargo desktop-file-utils electron:31 gettext-runtime gl gmake \
+		gnome iconv:wchar_t jpeg nodejs:20,build python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mifi
 GH_PROJECT=	lossless-cut
+GH_TUPLE=	rollup:rollup:v4.19.0:rollup/rollup
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf2 glib20 gtk30 libxml2 libxslt pango
+
+CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
+CARGO_BUILD=	no
+CARGO_INSTALL=	no
+CARGO_TEST=	no
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 
@@ -60,6 +67,10 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn4 prefetch extract rebuild build:builder
 
 pre-build:
+	cd ${WRKSRC}/rollup/rust && \
+		${SETENV} ${MAKE_ENV} ${CARGO} build --release --verbose --verbose
+	${CP} ${WRKSRC}/rollup/rust/target/release/libbindings_napi.so \
+		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
