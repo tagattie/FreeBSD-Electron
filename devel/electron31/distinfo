@@ -1,8 +1,8 @@
-TIMESTAMP = 1724049388
-SHA256 (electron/chromium-126.0.6478.234.tar.xz.0) = 69076a2f21d283d223f5f0a5b02faa7a326489dec27637c495b83e760efc299e
-SIZE (electron/chromium-126.0.6478.234.tar.xz.0) = 2147483648
-SHA256 (electron/chromium-126.0.6478.234.tar.xz.1) = e67e909675864379c23be1f92cb7b68299169a4fd93af825cba395dbaa0fa445
-SIZE (electron/chromium-126.0.6478.234.tar.xz.1) = 155780048
+TIMESTAMP = 1724068640
+SHA256 (electron/chromium-126.0.6478.234.tar.xz.0) = 5940007a2cc926c0eac498ab5121727f903a60b87c7b5a5216921c4ee1028d07
+SIZE (electron/chromium-126.0.6478.234.tar.xz.0) = 2000000000
+SHA256 (electron/chromium-126.0.6478.234.tar.xz.1) = 977c9af967876a9a362038dea652c4be55a71a9758cb1c538bfc8a5a0ee27962
+SIZE (electron/chromium-126.0.6478.234.tar.xz.1) = 303263696
 SHA256 (electron/97a0b3c4c39cf05de1eafb6ffdec0fddd643f0a2) = dcfaea4d353d1df3d4ac2d245ea7e32ad177d4bea1351f363714c9c22ca5c4f8
 SIZE (electron/97a0b3c4c39cf05de1eafb6ffdec0fddd643f0a2) = 9761601
 SHA256 (electron/pulseaudio-16.1.tar.gz) = 027266c62f2a84422ac45fa721a649508f0f1628fb1fd9242315ac54ce2d7c92
