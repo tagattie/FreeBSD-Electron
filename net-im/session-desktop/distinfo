@@ -1,7 +1,7 @@
-TIMESTAMP = 1721768290
+TIMESTAMP = 1724447580
 SHA256 (sqlcipher-4.5.5-fts5-fix--3.0.7--0.2.1-ef53ea45ed92b928ecfd33c552d8d405263e86e63dec38e1ec63e1b0193b630b.tar.gz) = ef53ea45ed92b928ecfd33c552d8d405263e86e63dec38e1ec63e1b0193b630b
 SIZE (sqlcipher-4.5.5-fts5-fix--3.0.7--0.2.1-ef53ea45ed92b928ecfd33c552d8d405263e86e63dec38e1ec63e1b0193b630b.tar.gz) = 75708533
-SHA256 (session-desktop-1.12.5-node-modules.tar.gz) = ca8c3d862f484de306f2c431c6951a3173a651b06638d55e4c8730469a6c7ef6
-SIZE (session-desktop-1.12.5-node-modules.tar.gz) = 185520276
-SHA256 (oxen-io-session-desktop-v1.12.5_GH0.tar.gz) = 3ce1bd50abcb38565d61cccece8cd308affa33b19ae4a9274b3c2050119ba8a1
-SIZE (oxen-io-session-desktop-v1.12.5_GH0.tar.gz) = 6818934
+SHA256 (session-desktop-1.13.1-node-modules.tar.gz) = ed526b4ae08e99b1a1f94b8ef46fb2fc024fd3b71dd7647c641776b001a5963a
+SIZE (session-desktop-1.13.1-node-modules.tar.gz) = 118096699
+SHA256 (oxen-io-session-desktop-v1.13.1_GH0.tar.gz) = 9985b888ecbbc7facaff22aeb25c64ad26b8ce0ebeaf1f83efc5736f75989244
+SIZE (oxen-io-session-desktop-v1.13.1_GH0.tar.gz) = 7217234
