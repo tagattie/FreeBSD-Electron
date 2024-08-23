@@ -1,6 +1,6 @@
 PORTNAME=	stretchly
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.15.1
+DISTVERSION=	1.16.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		electron:27 localbase:ldconfig nodejs:18,build python:build
+USES=		electron:31 localbase:ldconfig nodejs:20,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	hovancik
