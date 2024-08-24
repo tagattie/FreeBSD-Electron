@@ -1,12 +1,12 @@
 # Notes for port maintainer
 #
-# Before copying package.json/package-lock.json to ${PKGJSONSDIR}, do the following steps:
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
 # 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
 #    $ npm install --save-dev --ignore-scripts node-addon-api node-gyp
 
 PORTNAME=	ueli
 DISTVERSIONPREFIX=	v
-DISTVERSION=	9.3.1
+DISTVERSION=	9.3.2
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
