@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	4.0.1
+DISTVERSION=	4.0.2
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
