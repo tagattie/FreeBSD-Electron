@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	5.8.1
+DISTVERSION=	5.9.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder \
 		jq:textproc/jq
 
-USES=		desktop-file-utils electron:29 nodejs:20,build python:build
+USES=		desktop-file-utils electron:31 nodejs:20,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
