@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2024.8.1
+DISTVERSION=	2024.9.0
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -18,7 +18,7 @@ BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo electron:31 gmake gnome localbase:ldflags \
+USES=		cargo electron:32 gmake gnome localbase:ldflags \
 		nodejs:20,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
@@ -34,8 +34,6 @@ CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
 
-MAKE_ENV=	${CARGO_ENV}
-
 SUB_FILES=	${PORTNAME}
 
 BUILD_WRKSRC=	${WRKSRC}/apps/desktop
@@ -48,7 +46,7 @@ USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
-	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build-native
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${CARGO_ENV} npm run build-native
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 
 do-install:
@@ -62,9 +60,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${BUILD_WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	cd ${STAGEDIR}${DATADIR}/resources && \
-		${FIND} . -type f -exec ${FILE} {} ';' | \
-		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 	${INSTALL_DATA} ${BUILD_WRKSRC}/build/package.json ${STAGEDIR}${DATADIR}/resources
 
 do-install-DOCS-on:

@@ -1,4 +1,4 @@
---- apps/desktop/desktop_native/core/Cargo.toml.orig	2024-08-23 02:03:28 UTC
+--- apps/desktop/desktop_native/core/Cargo.toml.orig	2024-09-18 00:41:50 UTC
 +++ apps/desktop/desktop_native/core/Cargo.toml
 @@ -48,7 +48,7 @@ security-framework-sys = "=2.11.0"
  security-framework = "=2.11.0"
@@ -8,4 +8,4 @@
 +[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
  gio = "=0.19.5"
  libsecret = "=0.5.0"
- zbus = "4.3.1"
+ zbus = "=4.3.1"
