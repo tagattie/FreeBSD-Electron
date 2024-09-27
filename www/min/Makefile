@@ -1,6 +1,6 @@
 PORTNAME=	min
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.32.1
+DISTVERSION=	1.33.1
 CATEGORIES=	www
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:29 nodejs:20,build pkgconfig \
+USES=		desktop-file-utils electron:32 nodejs:20,build pkgconfig \
 		python:build
 
 USE_GITHUB=	yes
@@ -25,26 +25,9 @@ PORTDOCS=	README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm prefetch extract rebuild build:packager
+USE_ELECTRON=	npm:npm prefetch extract rebuild:nodejs build:builder
 
-ELECTRON_MAKE_FLAGS+=	--asar \
-			--ignore='.DS_Store' \
-			--ignore='dist/app' \
-			--ignore='/\.map$$/g' \
-			--ignore='/\.md$$/g' \
-			--ignore='node_modules/electron-installer-debian' \
-			--ignore='node_modules/electron-installer-common' \
-			--ignore='node_modules/electron-installer-redhat' \
-			--ignore='icons/source' \
-			--ignore='icons/icon.icns' \
-			--ignore='icons-out/' \
-			--ignore='localization/' \
-			--ignore='node_modules/@types/' \
-			--ignore='node_modules/pdfjs-dist/es5' \
-			--ignore='node_modules/pdfjs-dist/lib' \
-			--ignore='/node_modules\/[^/\n]+\/test\//g' \
-			--app-version='${DISTVERSION}' \
-			--out='dist/app'
+ELECTRON_MAKE_FLAGS=	--config electron-builder.config.js
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
@@ -54,8 +37,6 @@ pre-build:
 .for size in 16 48
 	${MV} ${WRKSRC}/icons-out/icon_${size}x${size}.png ${WRKSRC}/icons-out/icon_${size}.png
 .endfor
-	# remove backup files
-	${FIND} ${WRKSRC} -type f \( -name '*.bak' -o -name '*.orig' \) -delete
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
@@ -66,8 +47,10 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/dist/app/Min-linux-${ELECTRON_ARCH} && \
+	cd ${WRKSRC}/dist/app/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
