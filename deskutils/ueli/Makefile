@@ -6,7 +6,7 @@
 
 PORTNAME=	ueli
 DISTVERSIONPREFIX=	v
-DISTVERSION=	9.3.2
+DISTVERSION=	9.6.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -19,12 +19,12 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		cargo electron:31 localbase:ldflags nodejs:20,build \
+USES=		cargo electron:32 localbase:ldflags nodejs:20,build \
 		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	oliverschwendener
-GH_TUPLE=	rollup:rollup:v4.18.1:rollup/rollup
+GH_TUPLE=	rollup:rollup:v4.21.0:rollup/rollup
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
@@ -44,8 +44,8 @@ ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO} build --release --verbose --verbose
-	${CP} ${WRKSRC}/rollup/rust/target/release/libbindings_napi.so \
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/${CARGO_BUILD_TARGET}/release/libbindings_napi.so \
 		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
@@ -66,6 +66,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
