@@ -1,6 +1,6 @@
---- tabby-electron/src/services/updater.service.ts.orig	2023-11-21 09:19:23 UTC
+--- tabby-electron/src/services/updater.service.ts.orig	2024-09-26 08:04:31 UTC
 +++ tabby-electron/src/services/updater.service.ts
-@@ -25,7 +25,7 @@ export class ElectronUpdaterService extends UpdaterSer
+@@ -23,7 +23,7 @@ export class ElectronUpdaterService extends UpdaterSer
          super()
          this.logger = log.create('updater')
  

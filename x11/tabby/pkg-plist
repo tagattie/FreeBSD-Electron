@@ -79,7 +79,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/app.asar.unpacked/dist/preload.js.map
 %%DATADIR%%/resources/app.asar.unpacked/dist/sentry.js.map
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@serialport/bindings-cpp/LICENSE
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/@serialport/bindings-cpp/bin/freebsd-amd64-118/bindings-cpp.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@serialport/bindings-cpp/bin/freebsd-amd64-121/bindings-cpp.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@serialport/bindings-cpp/binding.gyp.bak
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@serialport/bindings-cpp/build/Release/bindings.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@serialport/bindings-cpp/build/node_gyp_bins/python3
@@ -117,7 +117,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@serialport/bindings-cpp/src/serialport_unix.h
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@serialport/bindings-cpp/src/serialport_win.cpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@serialport/bindings-cpp/src/serialport_win.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/fontmanager-redux/bin/freebsd-amd64-118/fontmanager-redux.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/fontmanager-redux/bin/freebsd-amd64-121/fontmanager-redux.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/fontmanager-redux/binding.gyp.bak
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/fontmanager-redux/build/Release/fontmanager.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/fontmanager-redux/build/node_gyp_bins/python3
@@ -125,7 +125,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/fontmanager-redux/src/FontDescriptor.h
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/fontmanager-redux/src/FontManagerMac.mm
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/glasstron/LICENSE
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/glasstron/bin/freebsd-amd64-118/glasstron.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/glasstron/bin/freebsd-amd64-121/glasstron.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/glasstron/binding.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/glasstron/build/Release/dwm.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/glasstron/build/node_gyp_bins/python3
@@ -149,7 +149,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/glasstron/src/platforms/win32.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/glasstron/src/utils.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/LICENSE.md
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/bin/freebsd-amd64-118/keytar.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/bin/freebsd-amd64-121/keytar.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/Release/keytar.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/node_gyp_bins/python3
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/lib/keytar.js
@@ -179,14 +179,14 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libnpmteam/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libnpmteam/package.json
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/native-process-working-directory/.editorconfig
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/native-process-working-directory/bin/freebsd-amd64-118/native-process-working-directory.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/native-process-working-directory/bin/freebsd-amd64-121/native-process-working-directory.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/native-process-working-directory/build/Release/native-process-working-directory.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/native-process-working-directory/build/node_gyp_bins/python3
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/native-process-working-directory/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/native-process-working-directory/index.ts
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/native-process-working-directory/package.json
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/node-pty/LICENSE
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/node-pty/bin/freebsd-amd64-118/node-pty.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/node-pty/bin/freebsd-amd64-121/node-pty.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/node-pty/build/Release/pty.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/node-pty/build/node_gyp_bins/python3
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/node-pty/deps/.editorconfig
@@ -1591,6 +1591,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/frontends/frontend.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/frontends/xterm.css
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/frontends/xtermFrontend.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/helpers.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/hotkeys.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/icons/arrow-down.svg
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/icons/arrow-up.svg
@@ -1637,6 +1638,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/features/zmodem.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/frontends/frontend.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/frontends/xtermFrontend.d.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/helpers.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/hotkeys.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/index.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/middleware/inputProcessing.d.ts

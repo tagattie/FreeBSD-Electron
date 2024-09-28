@@ -1,6 +1,6 @@
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.211
+DISTVERSION=	1.0.215
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -43,8 +43,8 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		electron:27 gl gmake gnome iconv:wchar_t jpeg \
-		localbase:ldflags nodejs:18,build pkgconfig python:build xorg
+USES=		electron:29 gl gmake gnome iconv:wchar_t jpeg \
+		localbase:ldflags nodejs:20,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
@@ -136,9 +136,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${TAR} -cf - . | ${TAR} -xf - -C ${STAGEDIR}${DATADIR}
-	cd ${STAGEDIR}${DATADIR}/resources/app.asar.unpacked && \
-		${FIND} . -type f -perm 755 -exec ${FILE} {} ';' | \
-		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -perm 755 -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 .for f in chromedriver mksnapshot v8_context_snapshot_generator
 	${RM} ${STAGEDIR}${DATADIR}/${f}
 .endfor
