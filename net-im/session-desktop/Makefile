@@ -1,6 +1,6 @@
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.13.2
+DISTVERSION=	1.14.1
 CATEGORIES=	net-im
 MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
 DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher
@@ -14,15 +14,16 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	app-builder:devel/app-builder \
-		cmake:devel/cmake-core \
 		${LOCALBASE}/lib/libsignal_tokenizer.a:devel/signal-fts5-extension
 LIB_DEPENDS=	libinotify.so:devel/libinotify
 
-USES=		electron:25 localbase:ldflags nodejs:18,build python:build
+USES=		cmake:indirect electron:25 localbase:ldflags nodejs:18,build \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	oxen-io
 
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CONTRIBUTING.md README.md THEMES.md
@@ -55,9 +56,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	cd ${STAGEDIR}${DATADIR}/resources && \
-		${FIND} . -type f -exec ${FILE} {} ';' | \
-		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
