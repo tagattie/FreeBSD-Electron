@@ -6,7 +6,7 @@
 
 PORTNAME=	ueli
 DISTVERSIONPREFIX=	v
-DISTVERSION=	9.6.0
+DISTVERSION=	9.6.1
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -24,7 +24,7 @@ USES=		cargo electron:32 localbase:ldflags nodejs:20,build \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	oliverschwendener
-GH_TUPLE=	rollup:rollup:v4.21.0:rollup/rollup
+GH_TUPLE=	rollup:rollup:v4.22.4:rollup/rollup
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
