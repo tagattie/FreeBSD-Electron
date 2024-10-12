@@ -1,5 +1,5 @@
---- node_modules/vite/node_modules/rollup/dist/native.js.orig	2024-04-29 20:32:37 UTC
-+++ node_modules/vite/node_modules/rollup/dist/native.js
+--- node_modules/rollup/dist/native.js.orig	2024-10-12 19:59:14 UTC
++++ node_modules/rollup/dist/native.js
 @@ -13,6 +13,10 @@ const bindingsByPlatformAndArch = {
  		arm64: { base: 'darwin-arm64' },
  		x64: { base: 'darwin-x64' }

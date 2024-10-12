@@ -1,6 +1,6 @@
 PORTNAME=	muffon
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.0.3
+DISTVERSION=	2.1.0
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,11 +12,11 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		cargo desktop-file-utils electron:29 nodejs:20,build
+USES=		cargo desktop-file-utils electron:31 nodejs:20,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	staniel359
-GH_TUPLE=	rollup:rollup:v4.14.3:rollup/rollup
+GH_TUPLE=	rollup:rollup:v4.18.0:rollup/rollup
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
@@ -30,7 +30,9 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1 prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:pnpm prefetch extract rebuild:electron build:builder
+
+NPM_VER=	9.12.1
 
 post-extract:
 	if [ -f ${FILESDIR}/dot.env ]; then \
@@ -43,10 +45,10 @@ post-patch:
 
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO} build --release --verbose --verbose
-	${CP} ${WRKSRC}/rollup/rust/target/release/libbindings_napi.so \
-		${WRKSRC}/node_modules/vite/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/${CARGO_BUILD_TARGET}/release/libbindings_napi.so \
+		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=public/icons
@@ -63,8 +65,10 @@ do-install:
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/package_electron/${ELECTRON_BUILDER_APP_OUT_DIR} && \
+	cd ${WRKSRC}/build_electron/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
