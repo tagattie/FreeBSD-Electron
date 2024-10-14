@@ -10,7 +10,8 @@ WWW=		https://muffon.netlify.app/
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
+BUILD_DEPENDS=	app-builder:devel/app-builder \
+		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
 USES=		cargo desktop-file-utils electron:31 nodejs:20,build
 
