@@ -1,4 +1,4 @@
---- Taskfile.yml.orig	2024-10-09 07:49:55 UTC
+--- Taskfile.yml.orig	2024-10-09 01:55:26 UTC
 +++ Taskfile.yml
 @@ -56,9 +56,7 @@ tasks:
          desc: Build the wavesrv component.
@@ -30,7 +30,16 @@
      build:server:internal:
          requires:
              vars:
-@@ -123,28 +133,8 @@ tasks:
+@@ -112,8 +122,6 @@ tasks:
+             - "pkg/**/*.go"
+         generates:
+             - dist/bin/wavesrv.*{{exeExt}}
+-        deps:
+-            - go:mod:tidy
+         internal: true
+ 
+     build:wsh:
+@@ -123,28 +131,8 @@ tasks:
                ignore_error: true
              - task: build:wsh:internal
                vars:
@@ -60,3 +69,12 @@
          deps:
              - generate
  
+@@ -177,8 +165,6 @@ tasks:
+         generates:
+             - dist/bin/wsh-{{.VERSION}}-{{.GOOS}}.{{.NORMALIZEDARCH}}{{.EXT}}
+         cmd: (CGO_ENABLED=0 GOOS={{.GOOS}} GOARCH={{.GOARCH}} go build -ldflags="-s -w -X main.BuildTime=$({{.DATE}} +'%Y%m%d%H%M') -X main.WaveVersion={{.VERSION}}" -o dist/bin/wsh-{{.VERSION}}-{{.GOOS}}.{{.NORMALIZEDARCH}}{{.EXT}} cmd/wsh/main-wsh.go)
+-        deps:
+-            - go:mod:tidy
+         internal: true
+ 
+     generate:
