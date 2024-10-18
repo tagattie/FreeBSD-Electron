@@ -121,9 +121,8 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	cd ${STAGEDIR}${DATADIR}/resources && \
-		${FIND} . -type f -exec ${FILE} {} ';' | \
-		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
