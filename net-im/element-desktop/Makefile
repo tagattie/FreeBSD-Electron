@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.79
+DISTVERSION=	1.11.81
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/keytar/-/:keytar \
@@ -14,14 +14,16 @@ MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Glossy Matrix collaboration client for desktop
 WWW=		https://element.io
 
-LICENSE=	APACHE20
-LICENSE_FILE=	${WRKSRC}/LICENSE
+LICENSE=	AGPLv3 GPLv3
+LICENSE_COMB=	dual
+LICENSE_FILE_AGPLv3=	${WRKSRC}/LICENSE-AGPL-3.0
+LICENSE_FILE_GPLv3=	${WRKSRC}/LICENSE-GPL-3.0
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo desktop-file-utils electron:31 nodejs:20,build \
+USES=		cargo desktop-file-utils electron:32 nodejs:20,build \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
