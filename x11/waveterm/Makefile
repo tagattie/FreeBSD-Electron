@@ -1,6 +1,6 @@
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.8.9
+DISTVERSION=	0.8.12
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -42,7 +42,7 @@ GH_TUPLE=	\
 		mitchellh:mapstructure:v1.5.0:mitchellh_mapstructure/vendor/github.com/mitchellh/mapstructure \
 		photostorm:pty:31354506054b:photostorm_pty/vendor/github.com/creack/pty \
 		power-devops:perfstat:5aafc221ea8c:power_devops_perfstat/vendor/github.com/power-devops/perfstat \
-		sashabaranov:go-openai:v1.31.0:sashabaranov_go_openai/vendor/github.com/sashabaranov/go-openai \
+		sashabaranov:go-openai:v1.32.0:sashabaranov_go_openai/vendor/github.com/sashabaranov/go-openai \
 		sawka:txwrap:v0.2.0:sawka_txwrap/vendor/github.com/sawka/txwrap \
 		shirou:gopsutil:v4.24.9:shirou_gopsutil_v4/vendor/github.com/shirou/gopsutil/v4 \
 		skeema:knownhosts:v1.3.0:skeema_knownhosts/vendor/github.com/skeema/knownhosts \
@@ -63,7 +63,8 @@ CARGO_CARGOTOML_SWC=	${WRKSRC}/swc/bindings/Cargo.toml
 CARGO_CARGOLOCK_SWC=	${WRKSRC}/swc/bindings/Cargo.lock
 CARGO_CARGOTOML=	${CARGO_CARGOTOML_ROLLUP}
 CARGO_CARGOLOCK=	${CARGO_CARGOLOCK_ROLLUP}
-CARGO_CARGOLOCKS=	${CARGO_CARGOLOCK_ROLLUP} ${CARGO_CARGOLOCK_SWC}
+CARGO_CARGOLOCKS=	${CARGO_CARGOLOCK_ROLLUP} \
+			${CARGO_CARGOLOCK_SWC}
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
@@ -101,9 +102,9 @@ pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build:prod
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
-		--input=icons.icns --out=icons --format=set --root=build
+		--input=icon.icns --out=icons --format=set --root=build
 .for size in 16 48
-	${MV} ${WRKSRC}/icons/icon_${size}x${size}.png ${WRKSRC}/icons/icons_${size}.png
+	${MV} ${WRKSRC}/icons/icon_${size}x${size}.png ${WRKSRC}/icons/icon_${size}.png
 .endfor
 
 do-install:
@@ -111,7 +112,7 @@ do-install:
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 48 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
-	${INSTALL_DATA} ${WRKSRC}/icons/icons_${size}.png \
+	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
