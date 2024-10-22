@@ -6,6 +6,8 @@ share/applications/element-desktop.desktop
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/matrix-seshat/index.node
 %%DATADIR%%/resources/img/element.ico
 %%DATADIR%%/resources/img/element.png
+%%DATADIR%%/resources/img/monochrome.ico
+%%DATADIR%%/resources/img/monochrome.png
 %%DATADIR%%/resources/webapp.asar
 share/icons/hicolor/128x128/apps/element-desktop.png
 share/icons/hicolor/16x16/apps/element-desktop.png
