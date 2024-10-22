@@ -1,4 +1,4 @@
---- apps/desktop/desktop_native/core/src/clipboard.rs.orig	2024-07-29 07:52:27 UTC
+--- apps/desktop/desktop_native/core/src/clipboard.rs.orig	2024-10-17 20:14:05 UTC
 +++ apps/desktop/desktop_native/core/src/clipboard.rs
 @@ -29,7 +29,7 @@ fn clipboard_set(set: Set, password: bool) -> Set {
  }
@@ -9,7 +9,7 @@
  fn clipboard_set(set: Set, _password: bool) -> Set {
      use arboard::SetExtLinux;
  
-@@ -46,7 +46,7 @@ mod tests {
+@@ -52,7 +52,7 @@ mod tests {
      use super::*;
  
      #[test]

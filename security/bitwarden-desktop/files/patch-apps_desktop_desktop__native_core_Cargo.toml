@@ -1,11 +1,11 @@
---- apps/desktop/desktop_native/core/Cargo.toml.orig	2024-09-18 00:41:50 UTC
+--- apps/desktop/desktop_native/core/Cargo.toml.orig	2024-10-17 20:14:05 UTC
 +++ apps/desktop/desktop_native/core/Cargo.toml
-@@ -48,7 +48,7 @@ security-framework-sys = "=2.11.0"
- security-framework = "=2.11.0"
- security-framework-sys = "=2.11.0"
+@@ -65,7 +65,7 @@ security-framework-sys = { version = "=2.11.0", option
+ security-framework = { version = "=2.11.0", optional = true }
+ security-framework-sys = { version = "=2.11.0", optional = true }
  
 -[target.'cfg(target_os = "linux")'.dependencies]
 +[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
- gio = "=0.19.5"
- libsecret = "=0.5.0"
- zbus = "=4.3.1"
+ gio = { version = "=0.19.5", optional = true }
+ libsecret = { version = "=0.5.0", optional = true }
+ zbus = { version = "=4.3.1", optional = true }
