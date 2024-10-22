@@ -1,6 +1,6 @@
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.0-preview.34
+DISTVERSION=	3.0.0-preview.35
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	app-builder:devel/app-builder
 
-USES=		electron:26 nodejs:18,build python:build
+USES=		electron:26 nodejs:20,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	digimezzo
