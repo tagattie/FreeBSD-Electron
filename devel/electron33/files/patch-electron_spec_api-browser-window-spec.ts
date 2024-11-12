@@ -1,6 +1,6 @@
---- electron/spec/api-browser-window-spec.ts.orig	2024-10-22 02:29:46 UTC
+--- electron/spec/api-browser-window-spec.ts.orig	2024-11-07 16:14:43 UTC
 +++ electron/spec/api-browser-window-spec.ts
-@@ -68,7 +68,7 @@ describe('BrowserWindow module', () => {
+@@ -69,7 +69,7 @@ describe('BrowserWindow module', () => {
        }).not.to.throw();
      });
  
@@ -162,7 +162,7 @@
      // Not implemented on Linux.
      afterEach(closeAllWindows);
  
-@@ -6498,7 +6498,7 @@ describe('BrowserWindow module', () => {
+@@ -6546,7 +6546,7 @@ describe('BrowserWindow module', () => {
    describe('"transparent" option', () => {
      afterEach(closeAllWindows);
  

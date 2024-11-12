@@ -1,6 +1,6 @@
---- electron/filenames.gni.orig	2024-08-12 10:09:34 UTC
+--- electron/filenames.gni.orig	2024-11-07 16:14:43 UTC
 +++ electron/filenames.gni
-@@ -243,8 +243,8 @@ filenames = {
+@@ -245,8 +245,8 @@ filenames = {
      "shell/app/command_line_args.h",
      "shell/app/electron_content_client.cc",
      "shell/app/electron_content_client.h",

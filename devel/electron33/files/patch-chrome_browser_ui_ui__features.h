@@ -1,4 +1,4 @@
---- chrome/browser/ui/ui_features.h.orig	2024-10-16 21:31:02 UTC
+--- chrome/browser/ui/ui_features.h.orig	2024-11-09 21:36:38 UTC
 +++ chrome/browser/ui/ui_features.h
 @@ -78,7 +78,7 @@ BASE_DECLARE_FEATURE(kAccessCodeCastUI);
  BASE_DECLARE_FEATURE(kAccessCodeCastUI);
@@ -9,7 +9,7 @@
  BASE_DECLARE_FEATURE(kFewerUpdateConfirmations);
  #endif
  
-@@ -258,7 +258,7 @@ BASE_DECLARE_FEATURE(kTopChromeWebUIUsesSpareRenderer)
+@@ -266,7 +266,7 @@ BASE_DECLARE_FEATURE(kTopChromeWebUIUsesSpareRenderer)
  
  BASE_DECLARE_FEATURE(kTopChromeWebUIUsesSpareRenderer);
  
@@ -18,7 +18,7 @@
  BASE_DECLARE_FEATURE(kUpdateTextOptions);
  extern const base::FeatureParam<int> kUpdateTextOptionNumber;
  #endif
-@@ -283,7 +283,7 @@ BASE_DECLARE_FEATURE(kStopLoadingAnimationForHiddenWin
+@@ -291,7 +291,7 @@ BASE_DECLARE_FEATURE(kStopLoadingAnimationForHiddenWin
  
  BASE_DECLARE_FEATURE(kStopLoadingAnimationForHiddenWindow);
  

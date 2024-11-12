@@ -1,6 +1,6 @@
---- electron/shell/browser/osr/osr_host_display_client.h.orig	2024-10-22 02:29:46 UTC
+--- electron/shell/browser/osr/osr_host_display_client.h.orig	2024-11-07 16:14:43 UTC
 +++ electron/shell/browser/osr/osr_host_display_client.h
-@@ -73,7 +73,7 @@ class OffScreenHostDisplayClient : public viz::HostDis
+@@ -74,7 +74,7 @@ class OffScreenHostDisplayClient : public viz::HostDis
        mojo::PendingReceiver<viz::mojom::LayeredWindowUpdater> receiver)
        override;
  
