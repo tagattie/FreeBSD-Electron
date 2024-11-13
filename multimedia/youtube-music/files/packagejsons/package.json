@@ -1,7 +1,7 @@
 {
   "name": "youtube-music",
   "productName": "YouTube Music",
-  "version": "3.5.3",
+  "version": "3.6.2",
   "description": "YouTube Music Desktop App - including custom plugins",
   "main": "./dist/main/index.js",
   "license": "MIT",
@@ -40,7 +40,8 @@
           ]
         }
       ],
-      "icon": "assets/generated/icons/mac/icon.icns"
+      "icon": "assets/generated/icons/mac/icon.icns",
+      "compression": "maximum"
     },
     "win": {
       "icon": "assets/generated/icons/win/icon.ico",
@@ -61,7 +62,8 @@
             "arm64"
           ]
         }
-      ]
+      ],
+      "compression": "maximum"
     },
     "nsisWeb": {
       "runAfterFinish": false
@@ -70,12 +72,66 @@
       "icon": "assets/generated/icons/png",
       "category": "AudioVideo",
       "target": [
-        "AppImage",
-        "snap",
-        "freebsd",
-        "deb",
-        "rpm"
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64",
+            "armv7l"
+          ]
+        },
+        {
+          "target": "flatpak",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64",
+            "armv7l"
+          ]
+        },
+        {
+          "target": "rpm",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "snap",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "freebsd",
+          "arch": [
+            "x64",
+            "arm64",
+            "armv7l"
+          ]
+        },
+        {
+          "target": "tar.gz",
+          "arch": [
+            "x64",
+            "arm64",
+            "armv7l"
+          ]
+        }
       ]
+    },
+    "appImage": {
+      "description": "YouTube Music Desktop App bundled with custom plugins (and built-in ad blocker / downloader)",
+      "category": "AudioVideo"
+    },
+    "flatpak": {
+      "description": "YouTube Music Desktop App bundled with custom plugins (and built-in ad blocker / downloader)",
+      "category": "AudioVideo"
     },
     "deb": {
       "depends": [
@@ -139,7 +195,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "engines": {
-    "node": ">=18.0.0",
+    "node": ">=18",
     "pnpm": ">=8"
   },
   "pnpm": {
@@ -149,11 +205,12 @@
       "xml2js": "0.6.2",
       "node-fetch": "3.3.2",
       "@electron/universal": "2.0.1",
-      "@babel/runtime": "7.25.6"
+      "@babel/runtime": "7.25.7"
     },
     "patchedDependencies": {
       "vudio@2.1.1": "patches/vudio@2.1.1.patch",
-      "app-builder-lib@24.13.3": "patches/app-builder-lib@24.13.3.patch"
+      "app-builder-lib@24.13.3": "patches/app-builder-lib@24.13.3.patch",
+      "@malept/flatpak-bundler": "patches/@malept__flatpak-bundler.patch"
     }
   },
   "dependencies": {
@@ -165,9 +222,14 @@
     "@ffmpeg.wasm/main": "0.12.0",
     "@floating-ui/dom": "1.6.11",
     "@foobar404/wave": "2.0.5",
+    "@hono/node-server": "1.13.2",
+    "@hono/swagger-ui": "0.4.1",
+    "@hono/zod-openapi": "0.16.4",
+    "@hono/zod-validator": "0.4.1",
     "@jellybrick/electron-better-web-request": "1.0.4",
     "@jellybrick/mpris-service": "2.1.4",
-    "@skyra/jaro-winkler": "^1.1.1",
+    "@jimp/plugin-invert": "0.22.12",
+    "@skyra/jaro-winkler": "1.1.1",
     "@xhayper/discord-rpc": "1.2.0",
     "async-mutex": "0.5.0",
     "butterchurn": "3.0.0-beta.4",
@@ -176,69 +238,75 @@
     "conf": "13.0.1",
     "custom-electron-prompt": "1.5.8",
     "dbus-next": "0.10.2",
-    "deepmerge-ts": "7.1.0",
-    "electron-debug": "4.0.1",
+    "deepmerge-ts": "7.1.3",
+    "electron-debug": "4.1.0",
     "electron-is": "3.0.0",
     "electron-localshortcut": "3.2.1",
     "electron-store": "10.0.0",
     "electron-unhandled": "4.0.1",
-    "electron-updater": "6.3.4",
+    "electron-updater": "6.3.9",
     "fast-average-color": "9.4.0",
     "fast-equals": "5.0.1",
     "filenamify": "6.0.0",
+    "hono": "4.6.5",
     "howler": "2.2.4",
     "html-to-text": "9.0.5",
-    "i18next": "23.15.1",
+    "i18next": "23.16.0",
+    "jimp": "1.6.0",
     "keyboardevent-from-electron-accelerator": "2.0.0",
     "keyboardevents-areequal": "0.2.2",
     "node-html-parser": "6.1.13",
     "node-id3": "0.2.6",
     "peerjs": "1.5.4",
     "semver": "7.6.3",
-    "serve": "14.2.3",
+    "serve": "14.2.4",
     "simple-youtube-age-restriction-bypass": "github:organization/Simple-YouTube-Age-Restriction-Bypass#v2.5.9",
     "solid-floating-ui": "0.3.1",
-    "solid-js": "1.8.22",
+    "solid-js": "1.9.2",
     "solid-styled-components": "0.28.5",
     "solid-transition-group": "0.2.3",
-    "ts-morph": "23.0.0",
+    "ts-morph": "24.0.0",
     "vudio": "2.1.1",
     "x11": "2.3.0",
-    "youtubei.js": "10.4.0"
+    "youtubei.js": "10.5.0",
+    "zod": "3.23.8"
   },
   "devDependencies": {
-    "@playwright/test": "1.47.1",
+    "@eslint/js": "9.12.0",
+    "@playwright/test": "1.48.0",
+    "@stylistic/eslint-plugin-js": "2.9.0",
     "@total-typescript/ts-reset": "0.6.1",
     "@types/color": "3.0.6",
     "@types/electron-localshortcut": "3.1.3",
-    "@types/howler": "2.2.11",
+    "@types/eslint__js": "8.42.3",
+    "@types/howler": "2.2.12",
     "@types/html-to-text": "9.0.4",
     "@types/semver": "7.5.8",
     "@types/trusted-types": "2.0.7",
-    "@typescript-eslint/eslint-plugin": "8.6.0",
-    "@typescript-eslint/parser": "8.6.0",
     "bufferutil": "4.0.8",
     "builtin-modules": "4.0.0",
     "cross-env": "7.0.3",
-    "del-cli": "5.1.0",
-    "discord-api-types": "0.37.100",
-    "electron": "32.1.0",
+    "del-cli": "6.0.0",
+    "discord-api-types": "0.37.102",
+    "electron": "33.0.0",
     "electron-builder": "24.13.3",
     "electron-devtools-installer": "3.2.0",
     "electron-vite": "2.3.0",
-    "esbuild": "0.23.1",
-    "eslint": "8.57.1",
+    "esbuild": "0.24.0",
+    "eslint": "9.12.0",
+    "eslint-config-prettier": "9.1.0",
     "eslint-import-resolver-exports": "1.0.0-beta.5",
     "eslint-import-resolver-typescript": "3.6.3",
-    "eslint-plugin-import": "2.30.0",
+    "eslint-plugin-import": "2.31.0",
     "eslint-plugin-prettier": "5.2.1",
     "glob": "11.0.0",
     "node-gyp": "10.2.0",
-    "playwright": "1.47.1",
-    "rollup": "4.21.3",
-    "typescript": "5.6.2",
+    "playwright": "1.48.0",
+    "rollup": "4.24.0",
+    "typescript": "5.6.3",
+    "typescript-eslint": "8.9.0",
     "utf-8-validate": "6.0.4",
-    "vite": "5.4.6",
+    "vite": "5.4.9",
     "vite-plugin-inspect": "0.8.7",
     "vite-plugin-resolve": "2.5.2",
     "vite-plugin-solid": "2.10.2",

@@ -1,5 +1,5 @@
---- node_modules/.pnpm/rollup@4.21.3/node_modules/rollup/dist/native.js.orig	2024-09-27 12:01:14 UTC
-+++ node_modules/.pnpm/rollup@4.21.3/node_modules/rollup/dist/native.js
+--- node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/native.js.orig	2024-11-13 19:52:59 UTC
++++ node_modules/.pnpm/rollup@4.24.0/node_modules/rollup/dist/native.js
 @@ -13,6 +13,10 @@ const bindingsByPlatformAndArch = {
  		arm64: { base: 'darwin-arm64' },
  		x64: { base: 'darwin-x64' }
