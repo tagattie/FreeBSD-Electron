@@ -6,7 +6,7 @@
 
 PORTNAME=	ueli
 DISTVERSIONPREFIX=	v
-DISTVERSION=	9.7.0
+DISTVERSION=	9.9.1
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -19,7 +19,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		cargo electron:32 localbase:ldflags nodejs:20,build \
+USES=		cargo electron:33 localbase:ldflags nodejs:20,build \
 		python:build
 
 USE_GITHUB=	yes
