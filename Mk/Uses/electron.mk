@@ -695,7 +695,6 @@ MAKE_ENV+=	PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1	# don't download browser for playw
 MAKE_ENV+=	PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1	# don't download chromium for puppeteer
 MAKE_ENV+=	SASS_FORCE_BUILD=true		# always rebuild native node-sass module
 MAKE_ENV+=	USE_SYSTEM_APP_BUILDER=true	# always use system app-builder for electron-builder
-MAKE_ENV+=	npm_config_build_from_source=true
 SUB_LIST+=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
 .endif # _INCLUDE_USES_ELECTRON_MK
