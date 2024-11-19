@@ -1,7 +1,7 @@
---- apps/desktop/desktop_native/core/src/ipc/mod.rs.orig	2024-10-22 13:52:39 UTC
+--- apps/desktop/desktop_native/core/src/ipc/mod.rs.orig	2024-11-14 17:11:53 UTC
 +++ apps/desktop/desktop_native/core/src/ipc/mod.rs
-@@ -53,7 +53,7 @@ pub fn path(name: &str) -> std::path::PathBuf {
-         tmp.join(format!("app.{name}"))
+@@ -60,7 +60,7 @@ pub fn path(name: &str) -> std::path::PathBuf {
+         dir.join(format!("app.{name}"))
      }
  
 -    #[cfg(target_os = "linux")]
