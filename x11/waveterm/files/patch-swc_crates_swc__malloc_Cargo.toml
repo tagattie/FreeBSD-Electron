@@ -1,25 +1,6 @@
---- swc/crates/swc_malloc/Cargo.toml.orig	2024-10-09 20:03:45 UTC
+--- swc/crates/swc_malloc/Cargo.toml.orig	2024-11-04 02:42:20 UTC
 +++ swc/crates/swc_malloc/Cargo.toml
-@@ -1,20 +1,23 @@
- [package]
--authors       = ["강동윤 <kdy1997.dev@gmail.com>"]
--description   = "Configures the best memory allocator for each platforms"
-+authors = ["강동윤 <kdy1997.dev@gmail.com>"]
-+description = "Configures the best memory allocator for each platforms"
- documentation = "https://rustdoc.swc.rs/swc_malloc/"
--edition       = "2021"
--license       = "Apache-2.0"
--name          = "swc_malloc"
--repository    = "https://github.com/swc-project/swc.git"
--version       = "0.5.11"
-+edition = "2021"
-+license = "Apache-2.0"
-+name = "swc_malloc"
-+repository = "https://github.com/swc-project/swc.git"
-+version = "0.5.11"
- 
- [lib]
- bench = false
+@@ -13,8 +13,11 @@ bench = false
  
  [dependencies]
  

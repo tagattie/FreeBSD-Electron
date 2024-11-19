@@ -1,6 +1,6 @@
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.8.12
+DISTVERSION=	0.9.2
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,22 +13,22 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	app-builder:devel/app-builder-devel \
 		task:devel/task
 
-USES=		cargo electron:32 go:1.22,modules,no_targets nodejs:20,build
+USES=		cargo electron:33 go:1.22,modules,no_targets nodejs:20,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	wavetermdev
 GH_TUPLE=	\
 		alexflint:go-filemutex:v1.3.0:alexflint_go_filemutex/vendor/github.com/alexflint/go-filemutex \
-		ebitengine:purego:v0.8.0:ebitengine_purego/vendor/github.com/ebitengine/purego \
+		ebitengine:purego:v0.8.1:ebitengine_purego/vendor/github.com/ebitengine/purego \
 		felixge:httpsnoop:v1.0.4:felixge_httpsnoop/vendor/github.com/felixge/httpsnoop \
-		fsnotify:fsnotify:v1.7.0:fsnotify_fsnotify/vendor/github.com/fsnotify/fsnotify \
+		fsnotify:fsnotify:v1.8.0:fsnotify_fsnotify/vendor/github.com/fsnotify/fsnotify \
 		go-ole:go-ole:v1.2.6:go_ole_go_ole/vendor/github.com/go-ole/go-ole \
 		golang-jwt:jwt:v5.2.1:golang_jwt_jwt_v5/vendor/github.com/golang-jwt/jwt/v5 \
 		golang-migrate:migrate:v4.18.1:golang_migrate_migrate_v4/vendor/github.com/golang-migrate/migrate/v4 \
-		golang:crypto:v0.28.0:golang_crypto/vendor/golang.org/x/crypto \
+		golang:crypto:v0.29.0:golang_crypto/vendor/golang.org/x/crypto \
 		golang:net:v0.29.0:golang_net/vendor/golang.org/x/net \
-		golang:sys:v0.26.0:golang_sys/vendor/golang.org/x/sys \
-		golang:term:v0.25.0:golang_term/vendor/golang.org/x/term \
+		golang:sys:v0.27.0:golang_sys/vendor/golang.org/x/sys \
+		golang:term:v0.26.0:golang_term/vendor/golang.org/x/term \
 		google:uuid:v1.6.0:google_uuid/vendor/github.com/google/uuid \
 		gorilla:handlers:v1.5.2:gorilla_handlers/vendor/github.com/gorilla/handlers \
 		gorilla:mux:v1.8.1:gorilla_mux/vendor/github.com/gorilla/mux \
@@ -42,29 +42,25 @@ GH_TUPLE=	\
 		mitchellh:mapstructure:v1.5.0:mitchellh_mapstructure/vendor/github.com/mitchellh/mapstructure \
 		photostorm:pty:31354506054b:photostorm_pty/vendor/github.com/creack/pty \
 		power-devops:perfstat:5aafc221ea8c:power_devops_perfstat/vendor/github.com/power-devops/perfstat \
-		sashabaranov:go-openai:v1.32.0:sashabaranov_go_openai/vendor/github.com/sashabaranov/go-openai \
+		sashabaranov:go-openai:v1.35.6:sashabaranov_go_openai/vendor/github.com/sashabaranov/go-openai \
 		sawka:txwrap:v0.2.0:sawka_txwrap/vendor/github.com/sawka/txwrap \
-		shirou:gopsutil:v4.24.9:shirou_gopsutil_v4/vendor/github.com/shirou/gopsutil/v4 \
+		shirou:gopsutil:v4.24.10:shirou_gopsutil_v4/vendor/github.com/shirou/gopsutil/v4 \
+		sirupsen:logrus:v1.9.3:sirupsen_logrus/vendor/github.com/sirupsen/logrus \
 		skeema:knownhosts:v1.3.0:skeema_knownhosts/vendor/github.com/skeema/knownhosts \
 		spf13:cobra:v1.8.1:spf13_cobra/vendor/github.com/spf13/cobra \
 		spf13:pflag:v1.0.5:spf13_pflag/vendor/github.com/spf13/pflag \
 		tklauser:go-sysconf:v0.3.12:tklauser_go_sysconf/vendor/github.com/tklauser/go-sysconf \
 		tklauser:numcpus:v0.6.1:tklauser_numcpus/vendor/github.com/tklauser/numcpus \
 		uber-go:atomic:v1.7.0:uber_go_atomic/vendor/go.uber.org/atomic \
-		wavetermdev:htmltoken:v0.1.0:wavetermdev_htmltoken/vendor/github.com/wavetermdev/htmltoken \
-		wavetermdev:ssh_config:17e2087ebde2:wavetermdev_ssh_config/vendor/github.com/kevinburke/ssh_config \
+		ubuntu:decorate:2d5b0a9bb117:ubuntu_decorate/vendor/github.com/ubuntu/decorate \
+		ubuntu:GoWSL:049fd49bd93b:ubuntu_gowsl/vendor/github.com/ubuntu/gowsl \
+		wavetermdev:htmltoken:v0.2.0:wavetermdev_htmltoken/vendor/github.com/wavetermdev/htmltoken \
+		wavetermdev:ssh_config:ed124367682d:wavetermdev_ssh_config/vendor/github.com/kevinburke/ssh_config \
 		yusufpapurcu:wmi:v1.2.4:yusufpapurcu_wmi/vendor/github.com/yusufpapurcu/wmi
-GH_TUPLE+=	rollup:rollup:v4.22.4:rollup/rollup
-GH_TUPLE+=	swc-project:swc:v1.7.28:swc/swc
+GH_TUPLE+=	swc-project:swc:v1.8.0:swc/swc
 
-CARGO_CARGOTOML_ROLLUP=	${WRKSRC}/rollup/rust/Cargo.toml
-CARGO_CARGOLOCK_ROLLUP=	${WRKSRC}/rollup/rust/Cargo.lock
-CARGO_CARGOTOML_SWC=	${WRKSRC}/swc/bindings/Cargo.toml
-CARGO_CARGOLOCK_SWC=	${WRKSRC}/swc/bindings/Cargo.lock
-CARGO_CARGOTOML=	${CARGO_CARGOTOML_ROLLUP}
-CARGO_CARGOLOCK=	${CARGO_CARGOLOCK_ROLLUP}
-CARGO_CARGOLOCKS=	${CARGO_CARGOLOCK_ROLLUP} \
-			${CARGO_CARGOLOCK_SWC}
+CARGO_CARGOTOML=${WRKSRC}/swc/bindings/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/swc/bindings/Cargo.lock
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
@@ -81,23 +77,15 @@ USE_ELECTRON=	npm:yarn4 prefetch extract rebuild:electron build:builder
 
 ELECTRON_MAKE_FLAGS=	-c electron-builder.config.cjs
 
-post-configure:
-	@${ECHO_MSG} "===>   Updating Cargo.lock for ${CARGO_CARGOTOML_SWC}"
-	@${CARGO_CARGO_RUN} update --manifest-path ${CARGO_CARGOTOML_SWC} \
-		--verbose --verbose ${CARGO_UPDATE_ARGS}
-
 pre-build:
-	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
-		--manifest-path ${CARGO_CARGOTOML_ROLLUP} --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/${CARGO_BUILD_TARGET}/release/libbindings_napi.so \
-		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC}/swc/bindings && \
 		${SETENV} ${MAKE_ENV} ${CARGO_ENV} CARGO_FEATURE_LOCAL_DYNAMIC_TLS=1 \
-		${CARGO} build --manifest-path ${CARGO_CARGOTOML_SWC} \
+		${CARGO} build --manifest-path ${CARGO_CARGOTOML} \
 		--package binding_core_node --release --verbose --verbose
 	${CP} ${CARGO_TARGET_DIR}/${CARGO_BUILD_TARGET}/release/libbinding_core_node.so \
 		${WRKSRC}/node_modules/@swc/core/swc.freebsd-${ELECTRON_ARCH}.node
+	cd ${WRKSRC}/node_modules/sharp && \
+		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run install
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} task --verbose build:backend
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build:prod
 	# generate icon files
@@ -127,18 +115,5 @@ do-install-DOCS-on:
 
 do-test:
 	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
-
-#
-# targets for port maintainer(s)
-#
-cargo-crates-from-multiple-lockfiles:
-	@for lf in ${CARGO_CARGOLOCKS}; do \
-		${_CARGO_AWK} ${SCRIPTSDIR}/cargo-crates.awk $${lf}; \
-	done | \
-	${SED} -E 's/^CARGO_CRATES=\t+/\t\t/; s/ \\$$//' | \
-	${SORT} | \
-	uniq | \
-	${SED} -e '1s/^\t\t/CARGO_CRATES=\t/; s/$$/ \\/' | \
-	${SED} -e '$$s/ \\//'
 
 .include <bsd.port.mk>
