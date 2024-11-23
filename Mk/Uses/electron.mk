@@ -134,7 +134,7 @@ _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Nrun}
 _ELECTRON_TEST_DEP=	yes
 _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Ntest}
 .endif
-# If no dependencies specified, assume all are required
+# If no dependencies are specified, assume all are required
 .if !defined(_ELECTRON_BUILD_DEP) && !defined(_ELECTRON_RUN_DEP) && \
     !defined(_ELECTRON_TEST_DEP)
 _ELECTRON_BUILD_DEP=	yes
@@ -146,8 +146,10 @@ _ELECTRON_TEST_DEP=	yes
 _ELECTRON_VERSION=	${_ELECTRON_ARGS}
 _ELECTRON_PORTDIR=	${_ELECTRON_RELPORTDIR}${_ELECTRON_VERSION}
 .include "${PORTSDIR}/${_ELECTRON_PORTDIR}/Makefile.version"
+.elif empty(_ELECTRON_ARGS)
+IGNORE=	does not specify a major version of electron with USES=electron
 .else
-IGNORE= uses unknown USES=electron arguments: ${_ELECTRON_ARGS}
+IGNORE= specifies unknown USES=electron arguments: ${_ELECTRON_ARGS}
 .endif
 
 # Detect features used with USE_ELECTRON
