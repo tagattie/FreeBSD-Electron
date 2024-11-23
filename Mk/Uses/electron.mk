@@ -212,7 +212,7 @@ _NPM_PORTDIR=	# empty
 _NODEJS_PKGNAME=	node${NODEJS_VERSION}
 _NODEJS_PORTDIR=	www/node${NODEJS_VERSION}
 .   else
-IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_NPM}
+IGNORE=	specifies unknown USE_ELECTRON=npm arguments: ${_ELECTRON_FEATURE_NPM}
 .   endif
 .endif
 
