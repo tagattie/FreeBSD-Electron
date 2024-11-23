@@ -278,22 +278,24 @@ IGNORE=	specifies unknown USE_ELECTRON=build arguments: ${_ELECTRON_FEATURE_BUIL
 
 # Setup dependencies
 .for stage in BUILD RUN TEST
-.   if defined(_ELECTRON_${stage}_DEP)
+.   if defined(_ELECTRON_${stage}_DEP) && ${_ELECTRON_${stage}_DEP} == yes
 ${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDIR}
 .   endif
 .endfor
 .for stage in FETCH EXTRACT BUILD RUN TEST
-.   if defined(_ELECTRON_FEATURE_NPM_${stage})
+.   if defined(_ELECTRON_FEATURE_NPM_${stage}) && ${_ELECTRON_FEATURE_NPM_${stage}} == yes
 .	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 ${stage}_DEPENDS+=	${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 ${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .	endif
-.	if ${_NODEJS_NPM} == yarn1 && ${stage} == BUILD
-${stage}_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
-.	endif
 .   endif
 .endfor
+.if defined(_ELECTRON_FEATURE_APPBUILDER_STABLE) && ${_ELECTRON_FEATURE_APPBUILDER_STABLE} == yes
+BUILD_DEPENDS+=	app-builder:devel/app-builder
+.elif defined(_ELECTRON_FEATURE_APPBUILDER_DEVEL) && ${_ELECTRON_FEATURE_APPBUILDER_DEVEL} == yes
+BUILD_DEPENDS+=	app-builder:devel/app-builder-devel
+.endif
 
 .if empty(_NODEJS_NPM)
 IGNORE=	does not specify a node package manager
