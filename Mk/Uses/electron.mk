@@ -239,6 +239,7 @@ IGNORE=	specifies unknown USE_ELECTRON=appbuilder arguments: ${_ELECTRON_FEATURE
 .   endif
 .endif
 
+# Process USE_ELECTRON=rebuild[:ARGS]
 # Detect nodejs or electron argument of rebuild feature
 .if defined(_ELECTRON_FEATURE_REBUILD)
 _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:C/^[^\:]*(\:|\$)//:S/,/ /g}
@@ -250,14 +251,14 @@ _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:Nnodejs}
 _ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
 _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:Nelectron}
 .   endif
-# If no arguments specified, we assume both nodejs and electron are required
+# If no arguments are specified, we assume both nodejs and electron are required
 .   if !defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        !defined(_ELECTRON_FEATURE_REBUILD_ELECTRON)
 _ELECTRON_FEATURE_REBUILD_NODEJS=	yes
 _ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
 .   endif
 .   if !empty(_ELECTRON_FEATURE_REBUILD)
-IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_REBUILD}
+IGNORE=	specifies unknown USE_ELECTRON=rebuild arguments: ${_ELECTRON_FEATURE_REBUILD}
 .   endif
 .endif
 
