@@ -190,7 +190,7 @@ _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:Nrun}
 _ELECTRON_FEATURE_NPM_TEST=	yes
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:Ntest}
 .   endif
-# If no dependencies specified, we assume only build dep is required
+# If no dependencies are specified, we assume only build dep is required
 .   if !defined(_ELECTRON_FEATURE_NPM_FETCH) && !defined(_ELECTRON_FEATURE_NPM_EXTRACT) && \
        !defined(_ELECTRON_FEATURE_NPM_BUILD) && !defined(_ELECTRON_FEATURE_NPM_RUN) && \
        !defined(_ELECTRON_FEATURE_NPM_TEST)
