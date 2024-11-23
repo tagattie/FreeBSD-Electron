@@ -118,6 +118,9 @@ _VALID_ELECTRON_FEATURES_BUILD=	builder forge packager
 _ELECTRON_BASE_CMD=	electron
 _ELECTRON_RELPORTDIR=	devel/electron
 _ELECTRON_DOWNLOAD_URL_BASE=	https://github.com/electron/electron/releases/download
+_NODEJS_PKGNAME=	node${NODEJS_VERSION}
+_NODEJS_PORTDIR=	www/node${NODEJS_VERSION}
+
 ELECTRON_ARCH=		${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 
 # Process USES=electron[:ARGS]
@@ -172,6 +175,7 @@ IGNORE=	does not specify a single node package manager with USE_ELECTRON=npm
 
 # Process USE_ELECTRON=npm[:ARGS]
 # Detect fetch, extract, build, run, or test dependency
+_NODEJS_NPM?=
 .if defined(_ELECTRON_FEATURE_NPM)
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:S/,/ /g}
 .   if ${_ELECTRON_FEATURE_NPM:Mfetch}
@@ -209,12 +213,9 @@ _NPM_PORTDIR=	www/${_NODEJS_NPM}${NODEJS_SUFFIX}
 .	elif ${_NODEJS_NPM} == yarn1
 _NPM_PKGNAME=	yarn${NODEJS_SUFFIX}
 _NPM_PORTDIR=	www/yarn${NODEJS_SUFFIX}
-.	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-_NPM_PKGNAME=	# empty
-_NPM_PORTDIR=	# empty
 .	endif
-_NODEJS_PKGNAME=	node${NODEJS_VERSION}
-_NODEJS_PORTDIR=	www/node${NODEJS_VERSION}
+.   elif empty(_ELECTRON_FEATURES_NPM)
+IGNORE=	does not specify a single node package manager with USE_ELECTRON=npm
 .   else
 IGNORE=	specifies unknown USE_ELECTRON=npm arguments: ${_ELECTRON_FEATURE_NPM}
 .   endif
