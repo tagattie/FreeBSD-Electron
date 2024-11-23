@@ -262,12 +262,13 @@ IGNORE=	specifies unknown USE_ELECTRON=rebuild arguments: ${_ELECTRON_FEATURE_RE
 .   endif
 .endif
 
+# Process USE_ELECTRON=build:ARG
 # Detect builder used with USE_ELECTRON=builder
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_VALID_ELECTRON_FEATURES_BUILD:M${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}}
 _ELECTRON_FEATURE_BUILD:=	${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}
 .   else
-IGNORE=	uses unknown USE_ELECTRON features: ${_ELECTRON_FEATURE_BUILD}
+IGNORE=	specifies unknown USE_ELECTRON=build arguments: ${_ELECTRON_FEATURE_BUILD}
 .   endif
 .endif
 
