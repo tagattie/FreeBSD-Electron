@@ -38,7 +38,7 @@ PORTDOCS=	CONTRIBUTING.md PRIVACY_STATEMENT README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm prefetch extract build:builder
+USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
@@ -48,14 +48,6 @@ pre-build:
 	${CP} ${CARGO_TARGET_DIR}/${CARGO_BUILD_TARGET}/release/libbindings_napi.so \
 		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
-		./node_modules/.bin/electron-builder install-app-deps --platform linux
-	# electron-builder install-app-deps installs prebuilt binary for linux
-	# so force rebuild binary for FreeBSD
-	cd ${WRKSRC}/node_modules/better-sqlite3 && \
-		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run build-release
-	cd ${WRKSRC}/node_modules/sharp && \
-		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run install
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
