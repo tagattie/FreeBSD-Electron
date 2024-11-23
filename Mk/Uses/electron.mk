@@ -297,56 +297,50 @@ BUILD_DEPENDS+=	app-builder:devel/app-builder
 BUILD_DEPENDS+=	app-builder:devel/app-builder-devel
 .endif
 
-.if empty(_NODEJS_NPM)
-IGNORE=	does not specify a node package manager
-.else
-_NPM_PKGFILE=		package.json
-.   if ${_NODEJS_NPM} == npm
-_NPM_LOCKFILE=		package-lock.json
-_NPM_MODULE_CACHE=	node_modules
+NPM_PKGFILE?=		package.json
+.if ${_NODEJS_NPM} == npm
+NPM_LOCKFILE?=		package-lock.json
+NPM_MODULE_CACHE?=	node_modules
+NPM_CMDNAME?=		npm
 NPM_CACHE_SETUP_CMD?=	${DO_NADA}
-NPM_INSTALL_CMD?=	npm ci
-NPM_INSTALL_FLAGS_FETCH?=--ignore-scripts --no-progress --no-audit --no-fund
-.   elif ${_NODEJS_NPM} == yarn1
-_NPM_LOCKFILE=		yarn.lock
-_NPM_MODULE_CACHE=	yarn-offline-cache
-NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${_NPM_MODULE_CACHE}"' >> .yarnrc
-NPM_INSTALL_CMD?=	yarn install
-NPM_INSTALL_FLAGS_FETCH?=--frozen-lockfile --ignore-scripts
-NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --offline
+NPM_FETCH_CMD?=		${NPM_CMDNAME} ci
+NPM_FETCH_FLAGS?=	--ignore-scripts --no-progress --no-audit --no-fund
+.elif ${_NODEJS_NPM:Myarn*}
+NPM_LOCKFILE?=		yarn.lock
+NPM_MODULE_CACHE?=	yarn-offline-cache
+NPM_CMDNAME?=		yarn
+NPM_FETCH_CMD?=		${NPM_CMDNAME} install
+NPM_EXTRACT_CMD?=	${NPM_CMDNAME} install
+.   if ${_NODEJS_NPM} == yarn1
+NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${NPM_MODULE_CACHE}"' >> .yarnrc
+NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
+NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --offline
 .   elif ${_NODEJS_NPM} == yarn2
-_NPM_LOCKFILE=		yarn.lock
-_NPM_MODULE_CACHE=	yarn-offline-cache
-_NPM_CMDNAME=		yarn
-NPM_CACHE_SETUP_CMD?=	yarn config set cacheFolder "./${_NPM_MODULE_CACHE}"
-NPM_INSTALL_CMD?=	yarn install
-NPM_INSTALL_FLAGS_FETCH?=--immutable --mode=skip-build
-NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --immutable-cache
+NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} config set cacheFolder "./${NPM_MODULE_CACHE}"
+NPM_FETCH_FLAGS?=	--immutable --mode=skip-build
+NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
 .   elif ${_NODEJS_NPM} == yarn4
-_NPM_LOCKFILE=		yarn.lock
-_NPM_MODULE_CACHE=	yarn-offline-cache
-_NPM_CMDNAME=		yarn
-NPM_CACHE_SETUP_CMD?=	${SH} -c "yarn config set enableGlobalCache false; \
-			yarn config set cacheFolder \"./${_NPM_MODULE_CACHE}\""
-NPM_INSTALL_CMD?=	yarn install
-NPM_INSTALL_FLAGS_FETCH?=--immutable --mode=skip-build
-NPM_INSTALL_FLAGS_EXTRACT?=${NPM_INSTALL_FLAGS_FETCH} --immutable-cache
-.   elif ${_NODEJS_NPM} == pnpm
-_NPM_LOCKFILE=		pnpm-lock.yaml
-_NPM_MODULE_CACHE=	node_modules
-_NPM_CMDNAME=		pnpm
-NPM_CACHE_SETUP_CMD?=	pnpm set extend-node-path false
-NPM_INSTALL_CMD?=	pnpm install
-NPM_INSTALL_FLAGS_FETCH?=--frozen-lockfile --ignore-scripts
+NPM_CACHE_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableGlobalCache false; \
+			${NPM_CMDNAME} config set cacheFolder \"./${NPM_MODULE_CACHE}\""
+NPM_FETCH_FLAGS?=	--immutable --mode=skip-build
+NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
 .   endif
+.elif ${_NODEJS_NPM} == pnpm
+NPM_LOCKFILE?=		pnpm-lock.yaml
+NPM_MODULE_CACHE?=	node_modules
+NPM_CMDNAME?=		pnpm
+NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} set extend-node-path false
+NPM_FETCH_CMD?=		${NPM_CMDNAME} install
+NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
 .endif
+NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
 NPM_VER?=		0
 
 PREFETCH_TIMESTAMP=	61171200
 
-.if exists(${PKGJSONSDIR}/${_NPM_PKGFILE})
+.if exists(${PKGJSONSDIR}/${NPM_PKGFILE})
 _EXISTS_NPM_PKGFILE=	1
 .else
 _EXISTS_NPM_PKGFILE=	0
@@ -354,39 +348,39 @@ _EXISTS_NPM_PKGFILE=	0
 
 .if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 .   if ${_EXISTS_NPM_PKGFILE} == 1 && ${NPM_VER} == 0
-NPM_VER!=	${GREP} packageManager ${PKGJSONSDIR}/${_NPM_PKGFILE} | \
+NPM_VER!=	${GREP} packageManager ${PKGJSONSDIR}/${NPM_PKGFILE} | \
 		${AWK} -F ':' '{print $$NF}' | \
 		${SED} -e 's/[",]//g' | \
 		${AWK} -F '@' '{print $$NF}'
 .   endif
 .   if ${NPM_VER} == 0
-IGNORE=	does not specity ${_NPM_CMDNAME} version for prefetching modules
+IGNORE=	does not specity ${NPM_CMDNAME} version for prefetching modules
 .   endif
 
 _USES_fetch+=	490:electron-fetch-node-package-manager
 
-DISTFILES+=	${_NPM_CMDNAME}-${NPM_VER}.tgz:prefetch
+DISTFILES+=	${NPM_CMDNAME}-${NPM_VER}.tgz:prefetch
 FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 
 electron-fetch-node-package-manager:
-	@${ECHO_MSG} "===>   Fetching and setting up ${_NPM_CMDNAME} version ${NPM_VER}"
+	@${ECHO_MSG} "===>   Fetching and setting up ${NPM_CMDNAME} version ${NPM_VER}"
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR} ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
-	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz ]; then \
+	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz ]; then \
 		cd ${WRKDIR} && \
-		${SETENV} ${MAKE_ENV} corepack pack ${_NPM_CMDNAME}@${NPM_VER} && \
+		${SETENV} ${MAKE_ENV} corepack pack ${NPM_CMDNAME}@${NPM_VER} && \
 		${TAR} -xzf corepack.tgz && \
-		${MTREE_CMD} -cbnSp ${_NPM_CMDNAME} | ${MTREE_CMD} -C | ${SED} \
+		${MTREE_CMD} -cbnSp ${NPM_CMDNAME} | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:${_NPM_CMDNAME}:' | \
-			${SED} -e '1d' > ${_NPM_CMDNAME}.mtree && \
+			-e 's:^\.:${NPM_CMDNAME}:' | \
+			${SED} -e '1d' > ${NPM_CMDNAME}.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz @${_NPM_CMDNAME}.mtree; \
+			-f ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz @${NPM_CMDNAME}.mtree; \
 	fi
-	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz
+	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz
 .endif
 
 .if defined(_ELECTRON_FEATURE_PREFETCH)
@@ -394,7 +388,7 @@ _DISTFILE_prefetch=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-n
 DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 
 .   if ${_EXISTS_NPM_PKGFILE} == 0
-IGNORE=	does not store ${_NPM_PKGFILE} in ${PKGJSONSDIR}
+IGNORE=	does not store ${NPM_PKGFILE} in ${PKGJSONSDIR}
 .   endif
 
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
@@ -412,18 +406,18 @@ electron-fetch-node-modules:
 		cd ${WRKDIR}/node-modules-cache && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}; \
 		${ECHO_MSG} "===>   Prefetching and archiving node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
-		${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_FETCH}; \
+		${SETENV} ${MAKE_ENV} ${NPM_FETCH_CMD} ${NPM_FETCH_FLAGS}; \
 		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | \
-			${GREP} -v ${_NPM_MODULE_CACHE} | ${XARGS} ${RM} -r; \
-		${RM} ${WRKDIR}/node-modules-cache/${_NPM_MODULE_CACHE}/.gitignore; \
-		${RM} ${WRKDIR}/node-modules-cache/${_NPM_MODULE_CACHE}/.modules.yaml; \
+			${GREP} -v ${NPM_MODULE_CACHE} | ${XARGS} ${RM} -r; \
+		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.gitignore; \
+		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.modules.yaml; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR}/node-modules-cache && \
-		${MTREE_CMD} -cbnSp ${_NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
+		${MTREE_CMD} -cbnSp ${NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./${_NPM_MODULE_CACHE}:' > node-modules-cache.mtree && \
+			-e 's:^\.:./${NPM_MODULE_CACHE}:' > node-modules-cache.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} @node-modules-cache.mtree; \
@@ -444,18 +438,18 @@ EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 
 electron-extract-node-package-manager:
 .   if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-	@${ECHO_MSG} "===>   Setting up ${_NPM_CMDNAME} version ${NPM_VER}"
+	@${ECHO_MSG} "===>   Setting up ${NPM_CMDNAME} version ${NPM_VER}"
 	@${MKDIR}  ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
-	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${_NPM_CMDNAME}-${NPM_VER}.tgz
+	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz
 .   else
 	@${DO_NADA}
 .   endif
 
 electron-copy-package-file:
 .if ${_EXISTS_NPM_PKGFILE} == 1
-	@${ECHO_MSG} "===>   Copying ${_NPM_PKGFILE} and ${_NPM_LOCKFILE} to ${WRKSRC}"
-	@for f in `${FIND} ${PKGJSONSDIR} -type f \( -name ${_NPM_PKGFILE} -o -name ${_NPM_LOCKFILE} \) -print | ${SED} -e 's|${PKGJSONSDIR}/||'`; do \
+	@${ECHO_MSG} "===>   Copying ${NPM_PKGFILE} and ${NPM_LOCKFILE} to ${WRKSRC}"
+	@for f in `${FIND} ${PKGJSONSDIR} -type f \( -name ${NPM_PKGFILE} -o -name ${NPM_LOCKFILE} \) -print | ${SED} -e 's|${PKGJSONSDIR}/||'`; do \
 		if [ -f ${WRKSRC}/$${f} ]; then \
 			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
 		fi; \
@@ -466,25 +460,25 @@ electron-copy-package-file:
 electron-install-node-modules:
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
 	@${ECHO_MSG} "===>   Moving prefetched node modules to ${WRKSRC}"
-	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
-		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
+	@if [ -d ${WRKDIR}/${NPM_MODULE_CACHE} ]; then \
+		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
 .   elif ${_NODEJS_NPM} == yarn1
 	@${ECHO_MSG} "===>   Installing node modules from prefetched cache"
-	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
-		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
+	@if [ -d ${WRKDIR}/${NPM_MODULE_CACHE} ]; then \
+		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
-	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_EXTRACT}
+	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}
 .   elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
 	@${ECHO_MSG} "===>   Installing node modules from prefetched cache"
-	@if [ -d ${WRKDIR}/${_NPM_MODULE_CACHE} ]; then \
-		${MV} ${WRKDIR}/${_NPM_MODULE_CACHE} ${WRKSRC}; \
+	@if [ -d ${WRKDIR}/${NPM_MODULE_CACHE} ]; then \
+		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableNetwork false
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableInlineBuilds true
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_INSTALL_CMD} ${NPM_INSTALL_FLAGS_EXTRACT}
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
@@ -518,7 +512,7 @@ BUILD_DEPENDS+=	yq:textproc/yq
 .   if !defined(UPSTREAM_ELECTRON_VER)
 .	if ${_EXISTS_NPM_PKGFILE} == 1
 .	    if ${_NODEJS_NPM} == npm
-UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 			${LOCALBASE}/bin/jq -r \
 				'.packages | \
 				to_entries | \
@@ -526,12 +520,12 @@ UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
 				.[]' | \
 			${HEAD} -n 1
 .	    elif ${_NODEJS_NPM} == yarn1
-UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 			${HEAD} -n 1 | \
 			${AWK} -F- '{print $$NF}' | \
 			${SED} -E 's/\.[a-z]+.*$$//'
 .	    elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
-UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 			${LOCALBASE}/bin/yq -r \
 				'. | \
 				to_entries | \
@@ -539,7 +533,7 @@ UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
 				.[]' | \
 			${HEAD} -n 1
 .	    elif ${_NODEJS_NPM} == pnpm
-UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 			${LOCALBASE}/bin/yq -r \
 				'.packages | \
 				to_entries | \
@@ -556,7 +550,7 @@ ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
 
 .   if !defined(UPSTREAM_CHROMEDRIVER_VER)
 .	if ${_EXISTS_NPM_PKGFILE} == 1
-UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*/electron-chromedriver/' ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*/electron-chromedriver/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 .	endif
 .   endif
@@ -566,7 +560,7 @@ CHROMEDRIVER_DOWNLOAD_CACHE_DIR=.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH
 
 .   if !defined(UPSTREAM_MKSNAPSHOT_VER)
 .	if ${_EXISTS_NPM_PKGFILE} == 1
-UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*/electron-mksnapshot/' ${PKGJSONSDIR}/${_NPM_LOCKFILE} | \
+UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*/electron-mksnapshot/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
 .	endif
 .   endif
