@@ -166,6 +166,9 @@ IGNORE=	uses unknown USE_ELECTRON features: ${_INVALID_ELECTRON_FEATURES}
 .for var in ${USE_ELECTRON}
 _ELECTRON_FEATURE_${var:C/\:.*//:tu}=	${var}
 .endfor
+.if !defined(_ELECTRON_FEATURE_NPM)
+IGNORE=	does not specify a single node package manager with USE_ELECTRON=npm
+.endif
 
 # Process USE_ELECTRON=npm[:ARGS]
 # Detect fetch, extract, build, run, or test dependency
