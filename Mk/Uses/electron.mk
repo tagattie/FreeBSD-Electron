@@ -38,6 +38,14 @@
 #		does not specify any of those dependencies, we assume only
 #		build time dependency is required.
 #
+#	appbuilder:	An app-builder version the port uses. Supported
+#			arguments are:
+#
+#		release: The port uses released version of app-builder and add
+#			devel/app-builder to BUILD_DEPENDS.
+#		devel:	The port uses development version of app-builder and add
+#			devel/app-builder-devel to BUILD_DEPENDS.
+#
 #	prefetch:	Downloads node modules the port uses according to the
 #			pre-stored package.json (and package-lock.json,
 #			yarn.lock, or pnpm-lock.yaml) depending on the node
@@ -54,7 +62,6 @@
 #		nodejs:	Rebuilds native node modules against the version of
 #			nodejs installed before pre-build phase so that nodejs
 #			can execute the native modules during build.
-#
 #		electron: Rebuilds native node modules against the version of
 #			electron the port uses before do-build phase so that
 #			the native modules can be executed with Electron on run
