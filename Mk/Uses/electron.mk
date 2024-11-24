@@ -27,7 +27,8 @@
 #		yarn4:	The port uses Yarn (v4+) as package manager.
 #		pnpm:	The port uses PNPM as package manager.
 #
-#		NOTE: Only a single package manager can be specified.
+#		NOTE: The port must specify exactly a single package manager.
+#		Multiple package managers cannot be specified.
 #
 #		Other valid arguments are:
 #
@@ -40,12 +41,9 @@
 #	prefetch:	Downloads node modules the port uses according to the
 #			pre-stored package.json (and package-lock.json,
 #			yarn.lock, or pnpm-lock.yaml) depending on the node
-#			package manager used) in PKGJSONSDIR. Downloaded node
-#			modules are archived into a single tar file as one of
+#			package manager used in PKGJSONSDIR. Downloaded node
+#			modules are archived into a single tar.gz file as one of
 #			the DISTFILES.
-#
-#		If the port uses this feature, the following variable must be
-#		specified.
 #
 #	extract:	Installs the prefetched node modules into the port's
 #			working source directory.
@@ -63,24 +61,7 @@
 #			time.
 #
 #		NOTE: If the port specifies none of those arguments, we assume
-#		both nodejs and electron have been specified.
-#
-#		If the port uses this feature, the following variables may be
-#		specified. (The build process tries to auto-detect these
-#		versions so you don't usually have to specify the values.)
-#
-#		UPSTREAM_ELECTRON_VER:
-#		UPSTREAM_CHROMEDRIVER_VER:
-#		UPSTREAM_MKSNAPSHOT_VER:
-#			An electron/chromedriver/mksnapshot version the port
-#			depends on. Those versions are usually specified in
-#			either package-lock.json, yarn.lock, or pnpm-lock.yaml
-#			file in the source directory.
-#
-#			The build process will generate a zip archive and a
-#			checksum file of electron/chromedriver/mksnapshot to
-#			prevent the build phase to download binary distribution
-#			files from GitHub.
+#		only electron has been specified.
 #
 #	build:		Prepares an electron application in a distributable
 #			format using the specified package builder as an
@@ -93,19 +74,42 @@
 #		forge:		Uses electron-forge for packageing.
 #		packager:	Uses electron-packager for packaging.
 #
-#		If you use this feature, the following variable can be
-#		specified.
+# NPM_VER:		A version of node package manager the port uses. If yarn
+#			2 or later, or pnpm is used for the package manager, the
+#			framework requires the variable to be set so that it can
+#			bootstrap the correct version of package manager.
 #
-#		ELECTRON_MAKE_FLAGS:
-#			Additional flags to pass to the specified package
-#			builder. The default flags are defined in this file.
+#			It is usually specified as the key "packageManager" in
+#			package.json and the framework tries to auto-detect the
+#			version. Auto-detection can be overridden by manually
+#			specifying the value in Makefile.
+#
+# UPSTREAM_ELECTRON_VER:
+# UPSTREAM_CHROMEDRIVER_VER:
+# UPSTREAM_MKSNAPSHOT_VER:
+#			Electron, chromedriver, and mksnapshot versions the port
+#			depends on. Those versions are usually specified in
+#			either package-lock.json, yarn.lock, or pnpm-lock.yaml
+#			file in the source directory.
+#
+#			The build process tries to auto-detect these versions so
+#			you don't usually have to specify the values.
+#
+#			The build process will generate a zip archive and a
+#			checksum file of electron/chromedriver/mksnapshot to
+#			prevent the build phase to download binary distribution
+#			files from GitHub.
+#
+# ELECTRON_MAKE_FLAGS:	Additional flags to pass to the specified package
+#			builder when build feature is used. The default flags
+#			are defined in this file.
 #
 # MAINTAINER:	tagattie@FreeBSD.org
 
 .if !defined(_INCLUDE_USES_ELECTRON_MK)
 _INCLUDE_USES_ELECTRON_MK=	yes
 
-# Electron uses Node (actually a package manager) for build
+# Electron uses Node.js (actually a node package manager) for build
 .include "${USESDIR}/nodejs.mk"
 
 _VALID_ELECTRON_VERSIONS=	6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33
@@ -256,7 +260,6 @@ _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:Nelectron}
 # If no arguments are specified, we assume both nodejs and electron are required
 .   if !defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        !defined(_ELECTRON_FEATURE_REBUILD_ELECTRON)
-_ELECTRON_FEATURE_REBUILD_NODEJS=	yes
 _ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
 .   endif
 .   if !empty(_ELECTRON_FEATURE_REBUILD)
