@@ -321,6 +321,8 @@ NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
 NPM_CACHE_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableGlobalCache false; \
 			${NPM_CMDNAME} config set cacheFolder \"./${NPM_MODULE_CACHE}\""
 NPM_FETCH_FLAGS?=	--immutable --mode=skip-build
+NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false; \
+			${NPM_CMDNAME} config set enableInlineBuilds true"
 NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
 .   endif
 .elif ${_NODEJS_NPM} == pnpm
@@ -441,7 +443,7 @@ EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 
 electron-extract-node-package-manager:
 .   if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-	@${ECHO_MSG} "===>   Setting up ${NPM_CMDNAME} version ${NPM_VER}"
+	@${ECHO_MSG} "===>  Setting up ${NPM_CMDNAME} version ${NPM_VER}"
 	@${MKDIR}  ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz
@@ -451,7 +453,7 @@ electron-extract-node-package-manager:
 
 electron-copy-package-file:
 .if ${_EXISTS_NPM_PKGFILE} == 1
-	@${ECHO_MSG} "===>   Copying ${NPM_PKGFILE} and ${NPM_LOCKFILE} to ${WRKSRC}"
+	@${ECHO_MSG} "===>  Copying ${NPM_PKGFILE} and ${NPM_LOCKFILE} to ${WRKSRC}"
 	@for f in `${FIND} ${PKGJSONSDIR} -type f \( -name ${NPM_PKGFILE} -o -name ${NPM_LOCKFILE} \) -print | ${SED} -e 's|${PKGJSONSDIR}/||'`; do \
 		if [ -f ${WRKSRC}/$${f} ]; then \
 			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
@@ -462,25 +464,19 @@ electron-copy-package-file:
 
 electron-install-node-modules:
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
-	@${ECHO_MSG} "===>   Moving prefetched node modules to ${WRKSRC}"
+	@${ECHO_MSG} "===>  Moving prefetched node modules to ${WRKSRC}"
 	@if [ -d ${WRKDIR}/${NPM_MODULE_CACHE} ]; then \
 		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
-.   elif ${_NODEJS_NPM} == yarn1
-	@${ECHO_MSG} "===>   Installing node modules from prefetched cache"
-	@if [ -d ${WRKDIR}/${NPM_MODULE_CACHE} ]; then \
-		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
-	fi
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
-	@cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}
-.   elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
-	@${ECHO_MSG} "===>   Installing node modules from prefetched cache"
+.   elif ${_NODEJS_NPM:Myarn*}
+	@${ECHO_MSG} "===>  Installing node modules from prefetched cache"
 	@if [ -d ${WRKDIR}/${NPM_MODULE_CACHE} ]; then \
 		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableNetwork false
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn config set enableInlineBuilds true
+.	if defined(${NPM_EXTRACT_SETUP_CMD}) && !empty(NPM_EXTRACT_SETUP_CMD)
+	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_SETUP_CMD}
+.	endif
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
