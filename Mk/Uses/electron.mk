@@ -641,44 +641,25 @@ electron-rebuild-native-node-modules-for-electron:
 
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
-.	if ${_NODEJS_NPM} == npm
-ELECTRON_MAKE_CMD?=	npx electron-builder
-.	elif ${_NODEJS_NPM} == yarn1 || ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
-ELECTRON_MAKE_CMD?=	yarn run electron-builder
-.	elif ${_NODEJS_NPM} == pnpm
-ELECTRON_MAKE_CMD?=	pnpm exec electron-builder
-.	endif
+ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-builder
 ELECTRON_MAKE_FLAGS+=	--linux --dir \
 			--config.npmRebuild=false \
 			--config.electronVersion=${ELECTRON_VER} \
 			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
-DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
+DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
-.	if ${_NODEJS_NPM} == npm
-ELECTRON_MAKE_CMD?=	npx electron-packager
-.	elif ${_NODEJS_NPM} == yarn1 || ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
-ELECTRON_MAKE_CMD?=	yarn run electron-packager
-.	elif ${_NODEJS_NPM} == pnpm
-ELECTRON_MAKE_CMD?=	pnpm exec electron-packager
-.	endif
+ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-packager
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--no-download \
 			--electron-version=${ELECTRON_VER} \
-			--electron-zip-dir=${WRKDIR}/.cache/electron \
 			--prune \
 			--overwrite
-DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
+DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
 .   elif ${_ELECTRON_FEATURE_BUILD} == forge
-.	if ${_NODEJS_NPM} == npm
-ELECTRON_MAKE_CMD?=	npx electron-forge package
-.	elif ${_NODEJS_NPM} == yarn1 || ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
-ELECTRON_MAKE_CMD?=	yarn run electron-forge package
-.	elif ${_NODEJS_NPM} == pnpm
-ELECTRON_MAKE_CMD?=	pnpm exec electron-forge package
-.	endif
+ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-forge package
 ELECTRON_MAKE_FLAGS+=	--platform=linux
-DO_MAKE_BUILD=	${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
+DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   endif
 ALL_TARGET=	# empty
 .endif
