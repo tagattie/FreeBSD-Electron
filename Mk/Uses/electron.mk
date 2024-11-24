@@ -482,10 +482,7 @@ electron-install-node-modules:
 .endif # _ELECTRON_FEATURE_EXTRACT
 
 
-.if defined(_ELECTRON_FEATURE_REBUILD)
-_USES_build+=	290:electron-generate-electron-zip \
-		291:electron-rebuild-native-node-modules-for-node \
-		490:electron-rebuild-native-node-modules-for-electron
+_USES_build+=	290:electron-generate-electron-zip
 
 BUILD_DEPENDS+=	zip:archivers/zip
 .   if defined(_NODEJS_NPM) && (${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1)
@@ -497,77 +494,74 @@ BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
 .   endif
 
-.   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == npm
-BUILD_DEPENDS+=	jq:textproc/jq
-.   elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm)
-BUILD_DEPENDS+=	yq:textproc/yq
-.   endif
+.if ${_NODEJS_NPM} == npm
+BUILD_DEPENDS+=	${JQ_CMD}:textproc/jq
+.elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
+BUILD_DEPENDS+=	${YQ_CMD}:textproc/yq
+.endif
 
-.   if !defined(UPSTREAM_ELECTRON_VER)
-.	if ${_EXISTS_NPM_PKGFILE} == 1
-.	    if ${_NODEJS_NPM} == npm
-UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
-			${LOCALBASE}/bin/jq -r \
+.if !defined(UPSTREAM_ELECTRON_VER)
+.   if ${_EXISTS_NPM_PKGFILE} == 1
+.	if ${_NODEJS_NPM} == npm
+UPSTREAM_ELECTRON_VER!=	${JQ_CMD} -r \
 				'.packages | \
 				to_entries | \
 				map(if(.key | test("electron$$")) then .value.version else empty end) | \
-				.[]' | \
-			${HEAD} -n 1
-.	    elif ${_NODEJS_NPM} == yarn1
+				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
+			${TAIL} -n 1
+.	elif ${_NODEJS_NPM} == yarn1
 UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
-			${HEAD} -n 1 | \
+			${TAIL} -n 1 | \
 			${AWK} -F- '{print $$NF}' | \
 			${SED} -E 's/\.[a-z]+.*$$//'
-.	    elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
-UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
-			${LOCALBASE}/bin/yq -r \
+.	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
+UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				'. | \
 				to_entries | \
-				map(if(.key | test("electron@")) then .value.version else empty end) | \
-				.[]' | \
-			${HEAD} -n 1
-.	    elif ${_NODEJS_NPM} == pnpm
-UPSTREAM_ELECTRON_VER!=	${CAT} ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
-			${LOCALBASE}/bin/yq -r \
+				map(if(.key | test("^electron@")) then .value.version else empty end) | \
+				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
+			${TAIL} -n 1
+.	elif ${_NODEJS_NPM} == pnpm
+UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				'.packages | \
 				to_entries | \
 				map(if(.key | test("/electron@")) then .key else empty end) | \
-				.[]' | \
-			${HEAD} -n 1 | \
+				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
+			${TAIL} -n 1 | \
 			${CUT} -f 2 -d '@'
-.	    endif
 .	endif
 .   endif
+.endif
 ELECTRON_DOWNLOAD_URL=		${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
 
-.   if !defined(UPSTREAM_CHROMEDRIVER_VER)
-.	if ${_EXISTS_NPM_PKGFILE} == 1
+.if !defined(UPSTREAM_CHROMEDRIVER_VER)
+.   if ${_EXISTS_NPM_PKGFILE} == 1
 UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*/electron-chromedriver/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
-.	endif
 .   endif
+.endif
 CHROMEDRIVER_DOWNLOAD_URL=	${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_CHROMEDRIVER_VER}
 CHROMEDRIVER_DOWNLOAD_URL_HASH!=${SHA256} -q -s ${CHROMEDRIVER_DOWNLOAD_URL}
 CHROMEDRIVER_DOWNLOAD_CACHE_DIR=.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH}
 
-.   if !defined(UPSTREAM_MKSNAPSHOT_VER)
-.	if ${_EXISTS_NPM_PKGFILE} == 1
+.if !defined(UPSTREAM_MKSNAPSHOT_VER)
+.   if ${_EXISTS_NPM_PKGFILE} == 1
 UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*/electron-mksnapshot/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
-.	endif
 .   endif
+.endif
 MKSNAPSHOT_DOWNLOAD_URL=	${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_MKSNAPSHOT_VER}
 MKSNAPSHOT_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${MKSNAPSHOT_DOWNLOAD_URL}
 MKSNAPSHOT_DOWNLOAD_CACHE_DIR=	.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}
 
 electron-generate-electron-zip:
-	@${ECHO_MSG} "===>   Preparing distribution files of electron/chromedriver/mksnapshot"
+	@${ECHO_MSG} "===>  Preparing distribution files of electron/chromedriver/mksnapshot"
 	@${RM} -r ${WRKDIR}/electron-dist
 	@${MKDIR} ${WRKDIR}/electron-dist
-	@cd ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} && \
-		${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/electron-dist
+	@${TAR} -cf - -C ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} . | \
+		${TAR} -xf - -C ${WRKDIR}/electron-dist
 	@cd ${WRKDIR}/electron-dist && \
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
 .   if defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == packager
@@ -589,21 +583,24 @@ electron-generate-electron-zip:
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt
 .   endif
-.   if defined(UPSTREAM_CHROMEDRIVER_VER) && ${UPSTREAM_CHROMEDRIVER_VER} != ""
+.if defined(UPSTREAM_CHROMEDRIVER_VER) && !empty(UPSTREAM_CHROMEDRIVER_VER)
 	@${MKDIR} ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}
 	@cd ${WRKDIR}/electron-dist && \
 		zip -q -r ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${ELECTRON_ARCH}.zip .
 	@cd ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_CHROMEDRIVER_VER}
-.   endif
-.   if defined(UPSTREAM_MKSNAPSHOT_VER) && ${UPSTREAM_MKSNAPSHOT_VER} != ""
+.endif
+.if defined(UPSTREAM_MKSNAPSHOT_VER) && !empty(UPSTREAM_MKSNAPSHOT_VER)
 	@${MKDIR} ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}
 	@cd ${WRKDIR}/electron-dist && \
 		zip -q -r ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}/mksnapshot-v${UPSTREAM_MKSNAPSHOT_VER}-freebsd-${ELECTRON_ARCH}.zip .
 	@cd ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_MKSNAPSHOT_VER}
+.endif
+
+
 .   endif
 
 electron-rebuild-native-node-modules-for-node:
