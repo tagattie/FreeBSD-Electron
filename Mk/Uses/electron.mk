@@ -333,6 +333,9 @@ NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
 .endif
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 
+JQ_CMD?=		${LOCALBASE}/bin/jq
+YQ_CMD?=		${LOCALBASE}/bin/yq
+APP_BUILDER_CMD?=	${LOCALBASE}/bin/app-builder
 
 ELECTRON_ARCH=		${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 PREFETCH_TIMESTAMP=	61171200
