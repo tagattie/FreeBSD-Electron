@@ -481,11 +481,6 @@ electron-install-node-modules:
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
-_USES_patch+=	600:electron-patch-package-json
-
-electron-patch-package-json:
-	@${ECHO_MSG} "===>   Patching package.json"
-	@${REINPLACE_CMD} -e 's/electron-builder install-app-deps/& --platform linux/' ${WRKSRC}/package.json
 
 .if defined(_ELECTRON_FEATURE_REBUILD)
 _USES_build+=	290:electron-generate-electron-zip \
