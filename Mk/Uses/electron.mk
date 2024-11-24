@@ -599,16 +599,13 @@ electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>  Rebuilding native node modules for nodejs"
-.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
-		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
-			npm rebuild --no-progress
-.	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
-		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
-			yarn rebuild
-.	elif ${_NODEJS_NPM} == pnpm
-		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
-			pnpm rebuild
-.	endif
+	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${REBUILD_WRKSRC_NODEJS} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
+		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
+			cd $${subdir} && \
+			${ECHO_MSG} "===>  Rebuilding native node modules for nodejs in $${subdir}" && \
+			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_EXEC_CMD} node-gyp rebuild; \
+		done \
+	done
 .   else
 	@${DO_NADA}
 .   endif
