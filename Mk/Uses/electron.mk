@@ -295,6 +295,7 @@ BUILD_DEPENDS+=	app-builder:devel/app-builder
 BUILD_DEPENDS+=	app-builder:devel/app-builder-devel
 .endif
 
+# Define variables related to node package manager
 NPM_PKGFILE?=		package.json
 .if ${_NODEJS_NPM} == npm
 NPM_LOCKFILE?=		package-lock.json
@@ -335,6 +336,7 @@ NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
 .endif
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 
+# Define user-accessible variables
 JQ_CMD?=		${LOCALBASE}/bin/jq
 YQ_CMD?=		${LOCALBASE}/bin/yq
 APP_BUILDER_CMD?=	${LOCALBASE}/bin/app-builder
@@ -347,11 +349,15 @@ NPM_VER?=
 REBUILD_WRKSRC_NODEJS?=		${WRKSRC}
 REBUILD_WRKSRC_ELECTRON?=	${WRKSRC}
 
+# Check existence of package.json
 _EXISTS_NPM_PKGFILE?=
 .if exists(${PKGJSONSDIR}/${NPM_PKGFILE})
 _EXISTS_NPM_PKGFILE=	1
 .endif
 
+# If yarn 2+ or pnpm is used, we need to know the version of node package
+# manager. It is usually specified as the key "packageManager", so try to
+# automatically detect the version.
 .if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 .   if ${_EXISTS_NPM_PKGFILE} == 1 && empty(NPM_VER)
 NPM_VER!=	${JQ_CMD} -r '.packageManager' ${PKGJSONSDIR}/${NPM_PKGFILE} | \
@@ -388,6 +394,8 @@ electron-fetch-node-package-manager:
 	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz
 .endif
 
+# When prefetch feature is used, downloads node modules the port uses according
+# to the pre-stored package.json.
 .if defined(_ELECTRON_FEATURE_PREFETCH)
 .   if empty(_EXISTS_NPM_PKGFILE)
 IGNORE=	does not store ${NPM_PKGFILE} in ${PKGJSONSDIR} for prefetching node modules
@@ -430,6 +438,8 @@ electron-fetch-node-modules:
 	fi
 .endif # _FEATURE_ELECTRON_PREFETCH
 
+# When extract feature is used, installs the prefetched node modules into the
+# port's working source directory.
 .if defined(_ELECTRON_FEATURE_EXTRACT)
 _USES_extract+=	600:electron-extract-node-package-manager \
 		601:electron-copy-package-file \
@@ -481,7 +491,9 @@ electron-install-node-modules:
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
-
+# Always generates distribution zip files from installed electron package
+# directory. This is necessary to prevent the build phase from downloading
+# binary distribution files from GitHub.
 _USES_build+=	290:electron-generate-electron-zip
 
 BUILD_DEPENDS+=	zip:archivers/zip
@@ -581,7 +593,8 @@ electron-generate-electron-zip:
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_MKSNAPSHOT_VER}
 .endif
 
-
+# When rebuild feature is used, rebuilds native node modules against nodejs or
+# electron.
 .if defined(_ELECTRON_FEATURE_REBUILD)
 _USES_build+=	291:electron-rebuild-native-node-modules-for-node \
 		490:electron-rebuild-native-node-modules-for-electron
@@ -626,6 +639,8 @@ electron-rebuild-native-node-modules-for-electron:
 .   endif
 .endif # _ELECTRON_FEATURE_REBUILD
 
+# When build feature is used, prepares an electron application in a
+# distributable format using the specified package builder.
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-builder
