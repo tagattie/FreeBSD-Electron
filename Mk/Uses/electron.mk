@@ -121,8 +121,6 @@ _ELECTRON_DOWNLOAD_URL_BASE=	https://github.com/electron/electron/releases/downl
 _NODEJS_PKGNAME=	node${NODEJS_VERSION}
 _NODEJS_PORTDIR=	www/node${NODEJS_VERSION}
 
-ELECTRON_ARCH=		${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
-
 # Process USES=electron[:ARGS]
 # Detect build, run or test dependency
 _ELECTRON_ARGS=		${electron_ARGS:S/,/ /g}
@@ -335,10 +333,14 @@ NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
 .endif
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 
-PKGJSONSDIR?=		${FILESDIR}/packagejsons
-NPM_VER?=		0
 
+ELECTRON_ARCH=		${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
 PREFETCH_TIMESTAMP=	61171200
+
+PKGJSONSDIR?=		${FILESDIR}/packagejsons
+NPM_VER?=
+REBUILD_WRKSRC_NODEJS?=		${WRKSRC}
+REBUILD_WRKSRC_ELECTRON?=	${WRKSRC}
 
 .if exists(${PKGJSONSDIR}/${NPM_PKGFILE})
 _EXISTS_NPM_PKGFILE=	1
@@ -567,9 +569,6 @@ UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*/electron-mksnapshot/' ${PKGJSON
 MKSNAPSHOT_DOWNLOAD_URL=	${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_MKSNAPSHOT_VER}
 MKSNAPSHOT_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${MKSNAPSHOT_DOWNLOAD_URL}
 MKSNAPSHOT_DOWNLOAD_CACHE_DIR=	.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}
-
-REBUILD_WRKSRC_NODEJS?=		${WRKSRC}
-REBUILD_WRKSRC_ELECTRON?=	${WRKSRC}
 
 electron-generate-electron-zip:
 	@${ECHO_MSG} "===>   Preparing distribution files of electron/chromedriver/mksnapshot"
