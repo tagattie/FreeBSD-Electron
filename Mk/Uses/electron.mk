@@ -345,30 +345,28 @@ NPM_VER?=
 REBUILD_WRKSRC_NODEJS?=		${WRKSRC}
 REBUILD_WRKSRC_ELECTRON?=	${WRKSRC}
 
+_EXISTS_NPM_PKGFILE?=
 .if exists(${PKGJSONSDIR}/${NPM_PKGFILE})
 _EXISTS_NPM_PKGFILE=	1
-.else
-_EXISTS_NPM_PKGFILE=	0
 .endif
 
 .if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-.   if ${_EXISTS_NPM_PKGFILE} == 1 && ${NPM_VER} == 0
-NPM_VER!=	${GREP} packageManager ${PKGJSONSDIR}/${NPM_PKGFILE} | \
-		${AWK} -F ':' '{print $$NF}' | \
-		${SED} -e 's/[",]//g' | \
-		${AWK} -F '@' '{print $$NF}'
+.   if ${_EXISTS_NPM_PKGFILE} == 1 && empty(NPM_VER)
+NPM_VER!=	${JQ_CMD} -r '.packageManager' ${PKGJSONSDIR}/${NPM_PKGFILE} | \
+		${CUT} -f 2 -d '@'
 .   endif
-.   if ${NPM_VER} == 0
-IGNORE=	does not specity ${NPM_CMDNAME} version for prefetching modules
+.   if empty(NPM_VER)
+IGNORE=	does not specity version of ${NPM_CMDNAME} used for prefetching node modules
 .   endif
 
 _USES_fetch+=	490:electron-fetch-node-package-manager
 
 DISTFILES+=	${NPM_CMDNAME}-${NPM_VER}.tgz:prefetch
-FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
+FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR} \
+		${JQ_CMD}:textproc/jq
 
 electron-fetch-node-package-manager:
-	@${ECHO_MSG} "===>   Fetching and setting up ${NPM_CMDNAME} version ${NPM_VER}"
+	@${ECHO_MSG} "===>  Fetching and setting up ${NPM_CMDNAME} version ${NPM_VER}"
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR} ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz ]; then \
