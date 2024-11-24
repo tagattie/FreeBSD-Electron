@@ -555,15 +555,6 @@ electron-generate-electron-zip:
 		${TAR} -xf - -C ${WRKDIR}/electron-dist
 	@cd ${WRKDIR}/electron-dist && \
 		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
-.   if defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == packager
-	@${MKDIR} ${WRKDIR}/.cache/electron
-	@cd ${WRKDIR}/electron-dist && \
-		zip -q -r ${WRKDIR}/.cache/electron/electron-v${ELECTRON_VER}-linux-${ELECTRON_ARCH}.zip .
-	@cd ${WRKDIR}/.cache/electron && \
-		${SHA256} -r *.zip | \
-		${SED} -e 's/ / */' > SHASUMS256.txt-${ELECTRON_VER}
-.   endif
-.   if defined(_ELECTRON_FEATURE_BUILD) && ${_ELECTRON_FEATURE_BUILD} == forge
 	@${MKDIR} ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}
 	@cd ${WRKDIR}/electron-dist && \
 		zip -q -r ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}/electron-v${UPSTREAM_ELECTRON_VER}-linux-${ELECTRON_ARCH}.zip .
@@ -573,7 +564,6 @@ electron-generate-electron-zip:
 	@cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt
-.   endif
 .if defined(UPSTREAM_CHROMEDRIVER_VER) && !empty(UPSTREAM_CHROMEDRIVER_VER)
 	@${MKDIR} ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}
 	@cd ${WRKDIR}/electron-dist && \
