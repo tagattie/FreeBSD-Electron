@@ -387,27 +387,27 @@ electron-fetch-node-package-manager:
 .endif
 
 .if defined(_ELECTRON_FEATURE_PREFETCH)
+.   if empty(_EXISTS_NPM_PKGFILE)
+IGNORE=	does not store ${NPM_PKGFILE} in ${PKGJSONSDIR} for prefetching node modules
+.   endif
+
+_USES_fetch+=	491:electron-fetch-node-modules
+
 _DISTFILE_prefetch=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 DISTFILES+=		${_DISTFILE_prefetch}:prefetch
-
-.   if ${_EXISTS_NPM_PKGFILE} == 0
-IGNORE=	does not store ${NPM_PKGFILE} in ${PKGJSONSDIR}
-.   endif
 
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 FETCH_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .   endif
-_USES_fetch+=	491:electron-fetch-node-modules
 
 electron-fetch-node-modules:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ]; then \
-		${ECHO_MSG} "===>   Setting up node modules cache directory"; \
+		${ECHO_MSG} "===>  Setting up node modules cache directory"; \
 		${MKDIR} ${WRKDIR}/node-modules-cache; \
-		cd ${PKGJSONSDIR} && \
-			${TAR} -cf - . | ${TAR} -xf - -C ${WRKDIR}/node-modules-cache; \
+		${TAR} -cf - -C ${PKGJSONSDIR} . | ${TAR} -xf - -C ${WRKDIR}/node-modules-cache; \
 		cd ${WRKDIR}/node-modules-cache && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}; \
-		${ECHO_MSG} "===>   Prefetching and archiving node modules"; \
+		${ECHO_MSG} "===>  Prefetching and archiving node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${SETENV} ${MAKE_ENV} ${NPM_FETCH_CMD} ${NPM_FETCH_FLAGS}; \
 		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | \
