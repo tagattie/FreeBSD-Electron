@@ -485,15 +485,6 @@ electron-install-node-modules:
 _USES_build+=	290:electron-generate-electron-zip
 
 BUILD_DEPENDS+=	zip:archivers/zip
-.   if defined(_NODEJS_NPM) && (${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1)
-BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.   elif defined(_NODEJS_NPM) && (${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm)
-BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
-.   endif
-.   if defined(_NODEJS_NPM) && ${_NODEJS_NPM} == yarn1
-BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
-.   endif
-
 .if ${_NODEJS_NPM} == npm
 BUILD_DEPENDS+=	${JQ_CMD}:textproc/jq
 .elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
@@ -601,12 +592,23 @@ electron-generate-electron-zip:
 .endif
 
 
+.if defined(_ELECTRON_FEATURE_REBUILD)
+_USES_build+=	291:electron-rebuild-native-node-modules-for-node \
+		490:electron-rebuild-native-node-modules-for-electron
+
+.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
+BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
+.   elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
+BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
+.   endif
+.   if ${_NODEJS_NPM} == yarn1
+BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
 .   endif
 
 electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
-	@${ECHO_MSG} "===>   Rebuilding native node modules for nodejs"
+	@${ECHO_MSG} "===>  Rebuilding native node modules for nodejs"
 .	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 		@cd ${REBUILD_WRKSRC_NODEJS} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 			npm rebuild --no-progress
@@ -625,31 +627,13 @@ electron-rebuild-native-node-modules-for-electron:
 .   if defined(_ELECTRON_FEATURE_REBUILD_ELECTRON) && \
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
 	@${ECHO_MSG} "===>  Rebuilding native node modules for electron"
-.	if ${_NODEJS_NPM} == npm
-	    @for dir in `app-builder node-dep-tree --dir ${REBUILD_WRKSRC_ELECTRON} | jq -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
+	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${REBUILD_WRKSRC_ELECTRON} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
-		    cd $${subdir} && \
-		    ${ECHO_MSG} "===>  Rebuilding native node modules for electron in $${subdir}" && \
-		    ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm exec node-gyp rebuild; \
+			cd $${subdir} && \
+			${ECHO_MSG} "===>  Rebuilding native node modules for electron in $${subdir}" && \
+			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_EXEC_CMD} node-gyp rebuild; \
 		done \
-	    done
-.	elif ${_NODEJS_NPM} == yarn1 || ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
-	    @for dir in `app-builder node-dep-tree --dir ${REBUILD_WRKSRC_ELECTRON} | jq -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
-		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
-		    cd $${subdir} && \
-		    ${ECHO_MSG} "===>  Rebuilding native node modules for electron in $${subdir}" && \
-		    ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn exec node-gyp rebuild; \
-		done \
-	    done
-.	elif ${_NODEJS_NPM} == pnpm
-	    @for dir in `app-builder node-dep-tree --dir ${REBUILD_WRKSRC_ELECTRON} | jq -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
-		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
-		    cd $${subdir} && \
-		    ${ECHO_MSG} "===>  Rebuilding native node modules for electron in $${subdir}" && \
-		    ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} pnpm exec node-gyp rebuild; \
-		done \
-	    done
-.	endif
+	done
 .   else
 	@${DO_NADA}
 .   endif
