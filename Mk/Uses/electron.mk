@@ -370,7 +370,9 @@ _EXISTS_NPM_PKGFILE=	1
 # automatically detect the version.
 .if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 .   if ${_EXISTS_NPM_PKGFILE} == 1 && empty(NPM_VER)
-NPM_VER!=	${JQ_CMD} -r '.packageManager' ${PKGJSONSDIR}/${NPM_PKGFILE} | \
+NPM_VER!=	${GREP} packageManager ${PKGJSONSDIR}/${NPM_PKGFILE} | \
+		${AWK} -F ':' '{print $$NF}' | \
+		${SED} -e 's/[","]//g' | \
 		${CUT} -f 2 -d '@'
 .   endif
 .   if empty(NPM_VER)
@@ -380,8 +382,7 @@ IGNORE=	does not specity version of ${NPM_CMDNAME} used for prefetching node mod
 _USES_fetch+=	490:electron-fetch-node-package-manager
 
 DISTFILES+=	${NPM_CMDNAME}-${NPM_VER}.tgz:prefetch
-FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR} \
-		${JQ_CMD}:textproc/jq
+FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 
 electron-fetch-node-package-manager:
 	@${ECHO_MSG} "===>  Fetching and setting up ${NPM_CMDNAME} version ${NPM_VER}"
