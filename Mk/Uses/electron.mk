@@ -615,9 +615,6 @@ BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .   elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .   endif
-.   if ${_NODEJS_NPM} == yarn1
-BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for node-gyp
-.   endif
 
 electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
