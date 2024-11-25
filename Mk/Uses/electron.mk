@@ -522,18 +522,21 @@ UPSTREAM_ELECTRON_VER!=	${JQ_CMD} -r \
 				to_entries | \
 				map(if(.key | test("electron$$")) then .value.version else empty end) | \
 				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
+			${SORT} -n | \
 			${TAIL} -n 1
 .	elif ${_NODEJS_NPM} == yarn1
 UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
-			${TAIL} -n 1 | \
 			${AWK} -F- '{print $$NF}' | \
-			${SED} -E 's/\.[a-z]+.*$$//'
+			${SED} -E 's/\.[a-z]+.*$$//' | \
+			${SORT} -n | \
+			${TAIL} -n 1
 .	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
 UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				'. | \
 				to_entries | \
 				map(if(.key | test("^electron@")) then .value.version else empty end) | \
 				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
+			${SORT} -n | \
 			${TAIL} -n 1
 .	elif ${_NODEJS_NPM} == pnpm
 UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
@@ -541,8 +544,9 @@ UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				to_entries | \
 				map(if(.key | test("/electron@")) then .key else empty end) | \
 				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
-			${TAIL} -n 1 | \
-			${CUT} -f 2 -d '@'
+			${CUT} -f 2 -d '@' | \
+			${SORT} -n | \
+			${TAIL} -n 1
 .	endif
 .   endif
 .endif
