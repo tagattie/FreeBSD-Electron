@@ -515,7 +515,7 @@ BUILD_DEPENDS+=	${YQ_CMD}:textproc/yq
 .endif
 
 .if !defined(UPSTREAM_ELECTRON_VER)
-.   if ${_EXISTS_NPM_PKGFILE} == 1
+.   if ${_EXISTS_NPM_PKGFILE} == 1 && exists(${JQ_CMD})
 .	if ${_NODEJS_NPM} == npm
 UPSTREAM_ELECTRON_VER!=	${JQ_CMD} -r \
 				'.packages | \
