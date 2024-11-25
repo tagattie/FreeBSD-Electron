@@ -314,12 +314,14 @@ NPM_CMDNAME?=		npm
 NPM_CACHE_SETUP_CMD?=	${DO_NADA}
 NPM_FETCH_CMD?=		${NPM_CMDNAME} ci
 NPM_FETCH_FLAGS?=	--ignore-scripts --no-progress --no-audit --no-fund
+NPM_EXEC_CMD?=		${NPM_CMDNAME} exec --
 .elif ${_NODEJS_NPM:Myarn*}
 NPM_LOCKFILE?=		yarn.lock
 NPM_MODULE_CACHE?=	yarn-offline-cache
 NPM_CMDNAME?=		yarn
 NPM_FETCH_CMD?=		${NPM_CMDNAME} install
 NPM_EXTRACT_CMD?=	${NPM_CMDNAME} install
+NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 .   if ${_NODEJS_NPM} == yarn1
 NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${NPM_MODULE_CACHE}"' >> .yarnrc
 NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
@@ -343,8 +345,8 @@ NPM_CMDNAME?=		pnpm
 NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} set extend-node-path false
 NPM_FETCH_CMD?=		${NPM_CMDNAME} install
 NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
-.endif
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
+.endif
 
 # Define user-accessible variables
 JQ_CMD?=		${LOCALBASE}/bin/jq
