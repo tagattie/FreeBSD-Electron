@@ -315,6 +315,7 @@ NPM_CACHE_SETUP_CMD?=	${DO_NADA}
 NPM_FETCH_CMD?=		${NPM_CMDNAME} ci
 NPM_FETCH_FLAGS?=	--ignore-scripts --no-progress --no-audit --no-fund
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec --
+NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .elif ${_NODEJS_NPM:Myarn*}
 NPM_LOCKFILE?=		yarn.lock
 NPM_MODULE_CACHE?=	yarn-offline-cache
@@ -330,6 +331,7 @@ NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --offline
 NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} config set cacheFolder "./${NPM_MODULE_CACHE}"
 NPM_FETCH_FLAGS?=	--immutable --mode=skip-build
 NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
+NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .   elif ${_NODEJS_NPM} == yarn4
 NPM_CACHE_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableGlobalCache false; \
 			${NPM_CMDNAME} config set cacheFolder \"./${NPM_MODULE_CACHE}\""
@@ -337,6 +339,7 @@ NPM_FETCH_FLAGS?=	--immutable --mode=skip-build
 NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false; \
 			${NPM_CMDNAME} config set enableInlineBuilds true"
 NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
+NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .   endif
 .elif ${_NODEJS_NPM} == pnpm
 NPM_LOCKFILE?=		pnpm-lock.yaml
@@ -346,6 +349,7 @@ NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} set extend-node-path false
 NPM_FETCH_CMD?=		${NPM_CMDNAME} install
 NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
+NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .endif
 
 # Define user-accessible variables
@@ -625,6 +629,15 @@ BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
+.	if ${_NODEJS_NPM} == pnpm
+	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${REBUILD_WRKSRC_NODEJS} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
+		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
+			cd $${subdir} && \
+			${ECHO_MSG} "===>  Rebuilding native node modules for nodejs in $${subdir}" && \
+			${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} ${NPM_REBUILD_CMD}; \
+		done \
+	done
+.	else
 	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${REBUILD_WRKSRC_NODEJS} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
 			cd $${subdir} && \
@@ -632,6 +645,7 @@ electron-rebuild-native-node-modules-for-node:
 			${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} ${NPM_EXEC_CMD} node-gyp rebuild; \
 		done \
 	done
+.	endif
 .   else
 	@${DO_NADA}
 .   endif
@@ -639,6 +653,15 @@ electron-rebuild-native-node-modules-for-node:
 electron-rebuild-native-node-modules-for-electron:
 .   if defined(_ELECTRON_FEATURE_REBUILD_ELECTRON) && \
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
+.	if ${_NODEJS_NPM} == pnpm
+	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${REBUILD_WRKSRC_ELECTRON} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
+		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
+			cd $${subdir} && \
+			${ECHO_MSG} "===>  Rebuilding native node modules for electron in $${subdir}" && \
+			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_REBUILD_CMD}; \
+		done \
+	done
+.	else
 	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${REBUILD_WRKSRC_ELECTRON} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
 			cd $${subdir} && \
@@ -646,6 +669,7 @@ electron-rebuild-native-node-modules-for-electron:
 			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_EXEC_CMD} node-gyp rebuild; \
 		done \
 	done
+.	endif
 .   else
 	@${DO_NADA}
 .   endif
