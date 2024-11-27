@@ -675,6 +675,12 @@ electron-rebuild-native-node-modules-for-electron:
 .   endif
 .endif # _ELECTRON_FEATURE_REBUILD
 
+_USES_build+=	499:clean-up-backup-files
+
+clean-up-backup-files:
+	@${ECHO_MSG} "===>  Cleaning up backup files in ${WRKSRC}"
+	@${FIND} ${WRKSRC} -type f \( -name '*.bak' -o -name '*.orig' \) -delete
+
 # When build feature is used, prepares an electron application in a
 # distributable format using the specified package builder.
 .if defined(_ELECTRON_FEATURE_BUILD)
