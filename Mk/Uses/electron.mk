@@ -629,7 +629,7 @@ electron-rebuild-native-node-modules-for-node:
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
 			cd $${subdir} && \
 			${ECHO_MSG} "===>  Rebuilding native node modules for nodejs in $${subdir}" && \
-			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_EXEC_CMD} node-gyp rebuild; \
+			${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} ${NPM_EXEC_CMD} node-gyp rebuild; \
 		done \
 	done
 .   else
