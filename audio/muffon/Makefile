@@ -10,7 +10,8 @@ WWW=		https://muffon.netlify.app/
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		cargo desktop-file-utils electron:31 nodejs:20,build python:build
+USES=		cargo desktop-file-utils electron:31 gmake nodejs:20,build \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	staniel359
