@@ -11,6 +11,8 @@ WWW=		https://noramusic.netlify.app/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
+LIB_DEPENDS=	libvips.so:graphics/vips
+
 USES=		cargo desktop-file-utils electron:30 nodejs:20,build
 
 USE_GITHUB=	yes
