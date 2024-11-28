@@ -10,9 +10,7 @@ WWW=		https://standardnotes.com
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder \
-		bash:shells/bash \
-		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
+BUILD_DEPENDS=	bash:shells/bash
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
 USE_GITHUB=	yes
@@ -31,7 +29,7 @@ PORTDOCS=	CHANGELOG.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn2 extract rebuild build:builder
+USE_ELECTRON=	npm:yarn2 appbuilder extract build:builder
 
 NPM_VER=	3.2.1
 NPM_CACHE_SETUP_CMD=	${TRUE}
@@ -39,33 +37,34 @@ REBUILD_WRKSRC_ELECTRON=	${BUILD_WRKSRC}
 ELECTRON_MAKE_FLAGS+=	--c.extraMetadata.version=${DISTVERSION}
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build:desktop
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:desktop
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		yarn run webpack --config desktop.webpack.prod.js
+		yarn exec webpack --config desktop.webpack.prod.js
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+		yarn rebuild
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 128 256 512
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${BUILD_WRKSRC}/build/icon.iconset/icon_${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}@2/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}@2/apps
 	${INSTALL_DATA} ${BUILD_WRKSRC}/build/icon.iconset/icon_${size}x${size}@2x.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}@2/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${BUILD_WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	cd ${STAGEDIR}${DATADIR}/resources && \
-		${FIND} . -type f -exec ${FILE} {} ';' | \
-		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ':' '{print $$1}' | ${XARGS} ${STRIP_CMD}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test
 
 .include <bsd.port.mk>
