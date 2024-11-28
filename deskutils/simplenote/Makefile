@@ -10,8 +10,6 @@ WWW=		https://simplenote.com
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
-
 USES=		electron:30 gmake localbase:ldflags nodejs:20,build \
 		python:build xorg
 
@@ -28,10 +26,10 @@ PORTDOCS=	CONTRIBUTING.md README.md RELEASE-NOTES.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm prefetch extract rebuild:nodejs build:builder
+USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild:nodejs build:builder
 
-NPM_INSTALL_FLAGS_FETCH=	--ignore-scripts --no-progress --no-audit \
-				--no-fund --legacy-peer-deps
+NPM_FETCH_FLAGS=--ignore-scripts --no-progress --no-audit --no-fund \
+		--legacy-peer-deps
 
 post-extract:
 	if [ -f ${FILESDIR}/config-local.json ]; then \
@@ -39,7 +37,7 @@ post-extract:
 	fi
 
 post-patch:
-	${REINPLACE_CMD} -e 's/make build/${MAKE_CMD} build/' ${WRKSRC}/Makefile
+	@${REINPLACE_CMD} -e 's/make build/${MAKE_CMD} build/' ${WRKSRC}/Makefile
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} build
@@ -48,16 +46,16 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 128 256 512
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/resources/images/icon_${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
