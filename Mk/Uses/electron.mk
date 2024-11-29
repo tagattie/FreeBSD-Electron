@@ -550,7 +550,7 @@ UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				'.packages | \
 				to_entries | \
-				map(if(.key | test("/electron@")) then .key else empty end) | \
+				map(if(.key | test("^electron@")) then .key else empty end) | \
 				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 			${CUT} -f 2 -d '@' | \
 			${SORT} -n | \
