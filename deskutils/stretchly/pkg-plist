@@ -11,6 +11,8 @@ share/icons/hicolor/64x64/apps/stretchly.png
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/LICENSE
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/build/Release/focuscenter.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/build/Release/notificationstate.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/ensure-sdk.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/lib/dnd/bigsur-macos-dnd.h
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/lib/dnd/bigsur-macos-dnd.mm
@@ -30,6 +32,10 @@ share/icons/hicolor/64x64/apps/stretchly.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/CONTRIBUTING.md
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/LICENSE.md
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/README.md
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/build/Release/function_args.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/build/Release/function_args_noexcept.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/build/Release/property_descriptor.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/build/Release/property_descriptor_noexcept.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/function_args.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/property_descriptor.js
