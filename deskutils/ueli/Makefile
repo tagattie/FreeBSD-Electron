@@ -16,7 +16,6 @@ WWW=		https://ueli.app/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libvips.so:graphics/vips
 
 USES=		cargo electron:33 localbase:ldflags nodejs:20,build \
@@ -38,31 +37,31 @@ PORTDOCS=	CONTRIBUTING.md PRIVACY_STATEMENT README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:npm appbuilder:devel prefetch extract rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
 		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/${CARGO_BUILD_TARGET}/release/libbindings_napi.so \
+	${CP} ${CARGO_TARGET_DIR}/release/libbindings_napi.so \
 		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/0x0/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/0x0/apps
 	${INSTALL_DATA} ${WRKSRC}/assets/Build/app-icon-dark.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/0x0/apps/${PORTNAME}.png
-	${MKDIR} ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
