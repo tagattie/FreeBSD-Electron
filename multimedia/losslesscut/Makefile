@@ -10,7 +10,6 @@ WWW=		https://mifi.no/losslesscut
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libasound.so:audio/alsa-lib \
 		libFLAC.so:audio/flac \
@@ -64,14 +63,15 @@ PORTDOCS=	README.md cli.md developer-notes.md import-export.md issues.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn4 prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild:nodejs,electron \
+		build:builder
 
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO} build --release --verbose --verbose
-	${CP} ${WRKSRC}/rollup/rust/target/release/libbindings_napi.so \
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/release/libbindings_napi.so \
 		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=app.icns --out=icons --format=set --root=icon-build
@@ -83,13 +83,13 @@ do-install:
 	${INSTALL_DATA} ${WRKSRC}/no.mifi.losslesscut.desktop \
 		${STAGEDIR}${DESKTOPDIR}/${PORTNAME}.desktop
 .for size in 16 32 48 64 128 256 512 1024
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
-		${TAR} -cf - . | ${TAR} -xf - -C ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
+	${TAR} -cf - -C ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} . | \
+		${TAR} -xf - -C ${STAGEDIR}${DATADIR}
 .for f in ffmpeg ffprobe
 	${LN} -sf ${LOCALBASE}/bin/${f} ${STAGEDIR}${DATADIR}/resources
 .endfor
@@ -101,10 +101,10 @@ do-install:
 	${RLN} ${STAGEDIR}${DATADIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test
 
 .include <bsd.port.mk>

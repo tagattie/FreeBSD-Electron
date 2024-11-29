@@ -22,7 +22,6 @@
     "pack-mac": "yarn build && electron-builder --mac dmg",
     "pack-mas-dev": "yarn build && electron-builder --mac mas-dev -c.mas.provisioningProfile=LosslessCut_Dev.provisionprofile -c.mas.identity='Apple Development: Mikael Finstad (JH4PH8B3C8)'",
     "pack-win": "yarn build && electron-builder --win zip --x64",
-    "postinstall": "electron-builder install-app-deps",
     "version": "tsx script/postversion.mts && git add no.mifi.losslesscut.appdata.xml",
     "pack-linux": "yarn build && electron-builder --linux",
     "scan-i18n": "i18next --config i18next-parser.config.mjs",
