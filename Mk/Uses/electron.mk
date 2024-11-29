@@ -331,6 +331,8 @@ NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --offline
 NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} config set cacheFolder "./${NPM_MODULE_CACHE}"
 NPM_FETCH_FLAGS?=	--immutable --mode=skip-build
 NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
+NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false; \
+			${NPM_CMDNAME} config set enableInlineBuilds true"
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .   elif ${_NODEJS_NPM} == yarn4
 NPM_CACHE_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableGlobalCache false; \
