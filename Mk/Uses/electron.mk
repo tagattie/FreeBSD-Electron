@@ -683,7 +683,7 @@ clean-up-backup-files:
 # When build feature is used, prepares an electron application in a
 # distributable format using the specified package builder.
 .if defined(_ELECTRON_FEATURE_BUILD)
-.   if ${_NODEJS_NPM} == yarn1
+.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 ELECTRON_MAKE_FLAGS+=	--
 .   endif
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
