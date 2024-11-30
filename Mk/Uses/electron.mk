@@ -330,9 +330,9 @@ NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --offline
 .   elif ${_NODEJS_NPM} == yarn2
 NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} config set cacheFolder "./${NPM_MODULE_CACHE}"
 NPM_FETCH_FLAGS?=	--immutable --mode=skip-build
-NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
 NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false; \
 			${NPM_CMDNAME} config set enableInlineBuilds true"
+NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .   elif ${_NODEJS_NPM} == yarn4
 NPM_CACHE_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableGlobalCache false; \
@@ -503,7 +503,8 @@ electron-install-node-modules:
 		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
-.	if defined(${NPM_EXTRACT_SETUP_CMD}) && !empty(NPM_EXTRACT_SETUP_CMD)
+.	if defined(NPM_EXTRACT_SETUP_CMD) && !empty(NPM_EXTRACT_SETUP_CMD)
+	@${ECHO_MSG} "===>  Setting up ${NPM_CMDNAME} command options"
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_SETUP_CMD}
 .	endif
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}
