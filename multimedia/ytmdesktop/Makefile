@@ -10,9 +10,6 @@ WWW=		https://ytmdesktop.app/
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder \
-		npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
-
 USES=		electron:33 localbase:ldflags nodejs:20,build python:build
 
 USE_GITHUB=	yes
@@ -23,7 +20,7 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn4 prefetch extract rebuild:electron build:forge
+USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:forge
 
 pre-build:
 	# generate icon files
@@ -37,16 +34,16 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 48 64 128 256 512
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/out/"YouTube Music Desktop App-linux-${ELECTRON_ARCH}" && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>
