@@ -1,3 +1,9 @@
+# Notes for port maintainer
+#
+# Before copying package.json and yarn.lock to ${PKGJSONSDIR}, do the following steps:
+# 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
+#    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
+
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.9.2
@@ -10,10 +16,10 @@ WWW=		https://www.waveterm.dev/
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder-devel \
-		task:devel/task
+BUILD_DEPENDS=	task:devel/task
 
-USES=		cargo electron:33 go:1.22,modules,no_targets nodejs:20,build
+USES=		cargo electron:33 go:1.22,modules,no_targets nodejs:20,build \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	wavetermdev
@@ -65,6 +71,7 @@ CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
 
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
 PLIST_SUB=	ARCH=${ARCH:S/aarch64/arm64/:S/amd64/x64/} \
@@ -73,9 +80,9 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn4 prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:yarn4 appbuilder:devel prefetch extract rebuild build:builder
 
-ELECTRON_MAKE_FLAGS=	-c electron-builder.config.cjs
+ELECTRON_MAKE_FLAGS+=	-c electron-builder.config.cjs
 
 pre-build:
 	cd ${WRKSRC}/swc/bindings && \
@@ -84,10 +91,8 @@ pre-build:
 		--package binding_core_node --release --verbose --verbose
 	${CP} ${CARGO_TARGET_DIR}/${CARGO_BUILD_TARGET}/release/libbinding_core_node.so \
 		${WRKSRC}/node_modules/@swc/core/swc.freebsd-${ELECTRON_ARCH}.node
-	cd ${WRKSRC}/node_modules/sharp && \
-		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn run install
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} task --verbose build:backend
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build:prod
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:prod
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=build
@@ -99,21 +104,21 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 48 64 128 256 512 1024
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/make/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test
 
 .include <bsd.port.mk>
