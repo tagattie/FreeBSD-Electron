@@ -685,7 +685,9 @@ clean-up-backup-files:
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-builder
-ELECTRON_MAKE_FLAGS+=	--linux --dir \
+ELECTRON_MAKE_FLAGS+=	-- \
+			--linux \
+			--dir \
 			--config.npmRebuild=false \
 			--config.electronVersion=${ELECTRON_VER} \
 			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
@@ -693,7 +695,8 @@ DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS
 ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-packager
-ELECTRON_MAKE_FLAGS+=	--platform=linux \
+ELECTRON_MAKE_FLAGS+=	-- \
+			--platform=linux \
 			--no-download \
 			--electron-version=${ELECTRON_VER} \
 			--prune \
@@ -701,7 +704,8 @@ ELECTRON_MAKE_FLAGS+=	--platform=linux \
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
 .   elif ${_ELECTRON_FEATURE_BUILD} == forge
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-forge package
-ELECTRON_MAKE_FLAGS+=	--platform=linux
+ELECTRON_MAKE_FLAGS+=	-- \
+			--platform=linux
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   endif
 ALL_TARGET=	# empty
