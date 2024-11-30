@@ -14,7 +14,6 @@ LICENSE_FILE_BITWARDEN= ${WRKSRC}/LICENSE_BITWARDEN.txt
 LICENSE_FILE_GPLv3=	${WRKSRC}/LICENSE_GPL.txt
 LICENSE_PERMS_BITWARDEN=none
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
@@ -42,7 +41,7 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
@@ -54,11 +53,11 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 64 128 256 512 1024
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${BUILD_WRKSRC}/resources/icons/${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${BUILD_WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
@@ -66,7 +65,7 @@ do-install:
 	${INSTALL_DATA} ${BUILD_WRKSRC}/build/package.json ${STAGEDIR}${DATADIR}/resources
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
