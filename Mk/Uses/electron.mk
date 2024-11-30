@@ -684,9 +684,6 @@ clean-up-backup-files:
 # When build feature is used, prepares an electron application in a
 # distributable format using the specified package builder.
 .if defined(_ELECTRON_FEATURE_BUILD)
-.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
-ELECTRON_MAKE_FLAGS+=	--
-.   endif
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-builder
 ELECTRON_MAKE_FLAGS+=	--linux \
@@ -708,6 +705,9 @@ DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLA
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-forge package
 ELECTRON_MAKE_FLAGS+=	--platform=linux
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
+.   endif
+.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
+ELECTRON_MAKE_CMD+=	--
 .   endif
 ALL_TARGET=	# empty
 .endif
