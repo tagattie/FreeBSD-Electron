@@ -314,7 +314,7 @@ NPM_CMDNAME?=		npm
 NPM_CACHE_SETUP_CMD?=	${DO_NADA}
 NPM_FETCH_CMD?=		${NPM_CMDNAME} ci
 NPM_FETCH_FLAGS?=	--ignore-scripts --no-progress --no-audit --no-fund
-NPM_EXEC_CMD?=		${NPM_CMDNAME} exec --
+NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .elif ${_NODEJS_NPM:Myarn*}
 NPM_LOCKFILE?=		yarn.lock
