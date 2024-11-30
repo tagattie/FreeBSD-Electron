@@ -11,7 +11,6 @@ WWW=		https://tabby.sh
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libsnappy.so:archivers/snappy \
 		libasound.so:audio/alsa-lib \
@@ -59,7 +58,7 @@ PORTDOCS=	HACKING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1,fetch,extract,build build:builder
+USE_ELECTRON=	npm:yarn1,fetch,extract,build appbuilder build:builder
 
 PREFETCH_FILE=	${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 
@@ -106,36 +105,36 @@ post-extract:
 	done
 
 post-patch:
-	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
+	@${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
 		${WRKSRC}/app/node_modules/@serialport/bindings-cpp/binding.gyp
-	${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
+	@${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
 		${WRKSRC}/app/node_modules/fontmanager-redux/binding.gyp
-	${REINPLACE_CMD} -e 's/%%DISTVERSIONFULL%%/${DISTVERSIONFULL}/' \
+	@${REINPLACE_CMD} -e 's/%%DISTVERSIONFULL%%/${DISTVERSIONFULL}/' \
 		${WRKSRC}/scripts/vars.mjs
 
 pre-build:
 .for module in cpu-features lzma-native ssh2
-	cd ${WRKSRC}/node_modules/${module} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
-		npm rebuild --no-progress
+	cd ${WRKSRC}/node_modules/${module} && \
+	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn run install
 .endfor
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run patch-package
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec patch-package
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} node scripts/install-deps.mjs
 	${CP} ${WRKSRC}/app/node_modules/glasstron/src/platforms/linux.js \
 		${WRKSRC}/app/node_modules/glasstron/src/platforms/freebsd.js
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} node scripts/build-native.mjs
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} node scripts/prepackage-plugins.mjs
 
 do-install:
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 64 128 256 512
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/build/icons/${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
-		${TAR} -cf - . | ${TAR} -xf - -C ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
+	${TAR} -cf - -C ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} . | \
+		${TAR} -xf - -C ${STAGEDIR}${DATADIR}
 	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -perm 755 -exec ${FILE} {} ';' | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 .for f in chromedriver mksnapshot v8_context_snapshot_generator
@@ -146,7 +145,7 @@ do-install:
 	${RLN} ${STAGEDIR}${DATADIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>
