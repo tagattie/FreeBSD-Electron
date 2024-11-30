@@ -19,7 +19,6 @@ LICENSE_COMB=	dual
 LICENSE_FILE_AGPLv3=	${WRKSRC}/LICENSE-AGPL-3.0
 LICENSE_FILE_GPLv3=	${WRKSRC}/LICENSE-GPL-3.0
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
@@ -29,21 +28,20 @@ USES=		cargo desktop-file-utils electron:32 nodejs:20,build \
 USE_GITHUB=	yes
 GH_ACCOUNT=	element-hq
 
-SUB_FILES=	${PORTNAME}
-
 CARGO_CARGOTOML=${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build/Cargo.lock
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
 
-MAKE_ENV=	${CARGO_ENV}
+BINARY_ALIAS=	python3=${PYTHON_CMD}
+SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CHANGELOG.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1,fetch,extract,build build:builder
+USE_ELECTRON=	npm:yarn1,fetch,extract,build appbuilder build:builder
 
 PREFETCH_FILE=		${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 KEYTAR_VER=		7.9.0
@@ -80,7 +78,7 @@ post-extract:
 	cd ${WRKSRC} && ${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
 	cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn install --frozen-lockfile --ignore-scripts --offline
-	${MKDIR} ${WRKSRC}/.hak/hakModules/keytar ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build
+	@${MKDIR} ${WRKSRC}/.hak/hakModules/keytar ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build
 	${TAR} -xf ${DISTDIR}/keytar-${KEYTAR_VER}.tgz --strip-components 1 \
 		-C ${WRKSRC}/.hak/hakModules/keytar
 	${TAR} -xf ${DISTDIR}/keytar-${KEYTAR_VER}.tgz --strip-components 1 \
@@ -89,7 +87,7 @@ post-extract:
 	cd ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build && \
 		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn install --frozen-lockfile --ignore-scripts --offline
-	${MKDIR} ${WRKSRC}/.hak/hakModules/matrix-seshat ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
+	@${MKDIR} ${WRKSRC}/.hak/hakModules/matrix-seshat ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
 	${TAR} -xf ${DISTDIR}/matrix-seshat-${MATRIX_SESHAT_VER}.tgz --strip-components 1 \
 		-C ${WRKSRC}/.hak/hakModules/matrix-seshat
 	${TAR} -xf ${DISTDIR}/matrix-seshat-${MATRIX_SESHAT_VER}.tgz --strip-components 1 \
@@ -101,34 +99,34 @@ post-extract:
 	${RM} ${WRKSRC}/.yarnrc
 	${MKDIR} ${WRKSRC}/deploys
 	${MV} ${WRKDIR}/element-${DISTVERSIONFULL} ${WRKSRC}/deploys
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn fetch --noverify --cfgdir "element.io/release"
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run fetch --noverify --cfgdir "element.io/release"
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn hak link
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn hak build
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn hak copy
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build:ts
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build:res
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run hak link
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${ELECTRON_REBUILD_ENV} yarn run hak build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run hak copy
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:ts
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:res
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 24 48 64 96 128 256 512
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/build/icons/${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test
 
 .include <bsd.port.mk>
