@@ -629,7 +629,10 @@ BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
 .   endif
 .   if ${_NODEJS_NPM} == yarn1
-BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}	# npm is needed for "npm rebuild"
+# jq is needed for detecting native node modules needing build
+BUILD_DEPENDS+=	${JQ_CMD}:textproc/jq
+# npm is needed for executing "npm rebuild" command
+BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 .   endif
 
 electron-rebuild-native-node-modules-for-node:
