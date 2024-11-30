@@ -10,9 +10,6 @@ WWW=		https://github.com/SpacingBat3/WebCord
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder \
-		git:devel/git
-
 USES=		electron:32 nodejs:20,build
 
 USE_GITHUB=	yes
@@ -21,7 +18,7 @@ GH_PROJECT=	WebCord
 
 SUB_FILES=	${PORTNAME}
 
-USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:forge
+USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:forge
 
 MAKE_ENV+=	WEBCORD_BUILD=release \
 		WEBCORD_UPDATE_NOTIFICATIONS=false
@@ -42,11 +39,11 @@ do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 48 64 128 256 512
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/out/release/WebCord-linux-${ELECTRON_ARCH} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
