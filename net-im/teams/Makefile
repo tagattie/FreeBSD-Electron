@@ -10,8 +10,6 @@ WWW=		https://github.com/IsmaelMartinez/teams-for-linux
 LICENSE=	GPLv3+
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
-
 USES=		desktop-file-utils electron:30 localbase:ldflags \
 		nodejs:20,build python:build
 
@@ -25,22 +23,22 @@ PORTDOCS=	CONTRIBUTING.md HISTORY.md KNOWN_ISSUES.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm prefetch extract rebuild:electron build:builder
+USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 24 32 48 64 96 128 256 512 1024
-	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
+	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/build/icons/${size}x${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
-	${MKDIR} ${STAGEDIR}${DATADIR}
+	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 .include <bsd.port.mk>
