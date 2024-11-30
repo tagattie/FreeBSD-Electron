@@ -1212,7 +1212,6 @@ share/icons/hicolor/64x64/apps/min.png
 %%DATADIR%%/resources/app/node_modules/yallist/package.json
 %%DATADIR%%/resources/app/node_modules/yallist/yallist.js
 %%DATADIR%%/resources/app/package.json
-%%DATADIR%%/resources/app/package.json.bak
 %%DATADIR%%/resources/app/pages/error/error.js
 %%DATADIR%%/resources/app/pages/error/index.html
 %%DATADIR%%/resources/app/pages/newtab/index.html
