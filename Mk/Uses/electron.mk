@@ -638,6 +638,7 @@ BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 electron-rebuild-native-node-modules-for-node:
 .   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
+	@${ECHO_MSG} "===>  Rebuilding native node modules for nodejs"
 .	if ${_NODEJS_NPM} == yarn1
 		@cd ${REBUILD_WRKSRC_NODEJS} && \
 		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm rebuild
