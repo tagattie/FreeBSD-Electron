@@ -22,7 +22,7 @@ LICENSE_FILE_GPLv3=	${WRKSRC}/LICENSE-GPL-3.0
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo desktop-file-utils electron:32 nodejs:20,build \
+USES=		cargo desktop-file-utils electron:32 gmake nodejs:20,build \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
