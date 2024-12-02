@@ -18,8 +18,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	task:devel/task
 
-USES=		cargo electron:33 go:1.22,modules,no_targets nodejs:20,build \
-		python:build
+USES=		cargo electron:33 gmake go:1.22,modules,no_targets \
+		nodejs:20,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	wavetermdev
