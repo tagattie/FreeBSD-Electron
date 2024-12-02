@@ -17,6 +17,7 @@ LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	task:devel/task
+LIB_DEPENDS=	libvips.so:graphics/vips
 
 USES=		cargo electron:33 gmake go:1.22,modules,no_targets \
 		nodejs:20,build python:build
