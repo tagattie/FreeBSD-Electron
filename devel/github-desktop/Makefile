@@ -15,7 +15,7 @@ RUN_DEPENDS=	git:devel/git \
 		git-lfs:devel/git-lfs
 
 USES=		desktop-file-utils electron:30 localbase:ldflags \
-		nodejs:20,build python:build
+		nodejs:20,build pkgconfig python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	shiftkey
