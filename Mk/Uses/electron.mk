@@ -698,6 +698,7 @@ ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-packager
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--no-download \
 			--electron-version=${ELECTRON_VER} \
+			--electron-zip-dir=${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} \
 			--prune \
 			--overwrite
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
