@@ -22,6 +22,13 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:forge
 
+GIT_BRANCH=	HEAD
+GIT_COMMIT_HASH=62f2f3681da2eaedc74269f704d441dca35a91e3
+
+post-patch:
+	@${REINPLACE_CMD} -e 's/%%GIT_BRANCH%%/${GIT_BRANCH}/; \
+		s/%%GIT_COMMIT_HASH%%/${GIT_COMMIT_HASH}/' ${WRKSRC}/webpack.renderer.config.ts
+
 pre-build:
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
