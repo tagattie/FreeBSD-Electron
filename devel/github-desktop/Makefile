@@ -1,6 +1,6 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.4.2-linux1
+DISTVERSION=	3.4.8-linux1
 CATEGORIES=	devel
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -26,7 +26,7 @@ GH_TUPLE=	github:gemoji:50865e8895c54037bf06c4c1691aa925d030a59d:gemoji/gemoji \
 
 SUB_FILES=	${PORTNAME}
 
-MAKE_ENV+=	CIRCLE_SHA1=954d5f93599715b19c507d71e57480701adfd35c
+MAKE_ENV+=	CIRCLE_SHA1=c04819f9622e8062052507e8e27ea866458f9909
 REINPLACE_FILES=	app/src/lib/editors/linux.ts \
 			app/src/lib/shells/linux.ts \
 			app/node_modules/dugite/build/lib/git-environment.js

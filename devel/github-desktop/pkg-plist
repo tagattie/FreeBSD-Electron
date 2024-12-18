@@ -887,6 +887,8 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/resources/app/highlighter/common.js.map
 %%DATADIR%%/resources/app/highlighter/ext/elixir.js
 %%DATADIR%%/resources/app/highlighter/ext/elixir.js.map
+%%DATADIR%%/resources/app/highlighter/ext/luau.js
+%%DATADIR%%/resources/app/highlighter/ext/luau.js.map
 %%DATADIR%%/resources/app/highlighter/ext/zig.js
 %%DATADIR%%/resources/app/highlighter/ext/zig.js.map
 %%DATADIR%%/resources/app/highlighter/mode/asciiarmor.js
@@ -931,8 +933,6 @@ share/applications/github-desktop.desktop
 %%DATADIR%%/resources/app/highlighter/mode/jsx.js.map
 %%DATADIR%%/resources/app/highlighter/mode/julia.js
 %%DATADIR%%/resources/app/highlighter/mode/julia.js.map
-%%DATADIR%%/resources/app/highlighter/mode/lua.js
-%%DATADIR%%/resources/app/highlighter/mode/lua.js.map
 %%DATADIR%%/resources/app/highlighter/mode/markdown.js
 %%DATADIR%%/resources/app/highlighter/mode/markdown.js.map
 %%DATADIR%%/resources/app/highlighter/mode/mllike.js

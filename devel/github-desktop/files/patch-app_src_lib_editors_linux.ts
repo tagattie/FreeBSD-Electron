@@ -1,4 +1,4 @@
---- app/src/lib/editors/linux.ts.orig	2024-07-01 19:50:49 UTC
+--- app/src/lib/editors/linux.ts.orig	2024-11-11 20:50:12 UTC
 +++ app/src/lib/editors/linux.ts
 @@ -18,30 +18,30 @@ const editors: ILinuxExternalEditor[] = [
  const editors: ILinuxExternalEditor[] = [
@@ -68,7 +68,7 @@
      paths: [
 +      '%%LOCALBASE%%/bin/phpstorm',
        '/snap/bin/phpstorm',
-       '.local/share/JetBrains/Toolbox/scripts/phpstorm',
+       '.local/share/JetBrains/Toolbox/scripts/PhpStorm',
      ],
 @@ -107,17 +108,19 @@ const editors: ILinuxExternalEditor[] = [
    {
@@ -99,7 +99,7 @@
        '/snap/bin/goland',
        '.local/share/JetBrains/Toolbox/scripts/goland',
      ],
-@@ -132,6 +136,7 @@ const editors: ILinuxExternalEditor[] = [
+@@ -147,6 +151,7 @@ const editors: ILinuxExternalEditor[] = [
    {
      name: 'JetBrains PyCharm',
      paths: [
@@ -107,7 +107,7 @@
        '/snap/bin/pycharm',
        '/snap/bin/pycharm-professional',
        '.local/share/JetBrains/Toolbox/scripts/pycharm',
-@@ -146,43 +151,43 @@ const editors: ILinuxExternalEditor[] = [
+@@ -168,48 +173,48 @@ const editors: ILinuxExternalEditor[] = [
    },
    {
      name: 'Emacs',
@@ -156,8 +156,16 @@
    },
    {
      name: 'Zed',
--    paths: ['.local/bin/zed'],
-+    paths: ['%%LOCALBASE%%/bin/zedit'],
+     paths: [
+-      '/usr/bin/zedit',
+-      '/usr/bin/zeditor',
+-      '/usr/bin/zed-editor',
++      '%%LOCALBASE%%/bin/zedit',
++      '%%LOCALBASE%%/bin/zeditor',
++      '%%LOCALBASE%%/bin/zed-editor',
+       '~/.local/bin/zed',
+-      '/usr/bin/zed',
++      '%%LOCALBASE%%/bin/zed',
+     ],
    },
  ]
- 

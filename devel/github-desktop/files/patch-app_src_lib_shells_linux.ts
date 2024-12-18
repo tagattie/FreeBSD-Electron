@@ -1,6 +1,6 @@
---- app/src/lib/shells/linux.ts.orig	2024-07-01 19:50:49 UTC
+--- app/src/lib/shells/linux.ts.orig	2024-11-11 20:50:12 UTC
 +++ app/src/lib/shells/linux.ts
-@@ -36,37 +36,37 @@ function getShellPath(shell: Shell): Promise<string | 
+@@ -43,39 +43,39 @@ function getShellPath(shell: Shell): Promise<string | 
  function getShellPath(shell: Shell): Promise<string | null> {
    switch (shell) {
      case Shell.Gnome:
@@ -51,6 +51,9 @@
      case Shell.Warp:
 -      return getPathIfAvailable('/usr/bin/warp-terminal')
 +      return getPathIfAvailable('%%LOCALBASE%%/bin/warp-terminal')
+     case Shell.BlackBox:
+-      return getPathIfAvailable('/usr/bin/blackbox-terminal')
++      return getPathIfAvailable('%%LOCALBASE%%/bin/blackbox-terminal')
      default:
        return assertNever(shell, `Unknown shell: ${shell}`)
    }
