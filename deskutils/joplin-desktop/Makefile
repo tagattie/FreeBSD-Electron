@@ -3,12 +3,14 @@
 # Before copying package.json and yarn.lock to ${PKGJSONSDIR}, do the following steps:
 # 1. Remove sharp from devDependencies in ${WRKSRC}/packages/lib
 #    $ corepack yarn remove --mode=skip-build sharp
-# 2. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}/packages/tools
+# 2. Remove sharp from devDependencies in ${WRKSRC}/packages/app-mobile
+#    $ corepack yarn remove --mode=skip-build sharp
+# 3. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}/packages/tools
 #    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
 
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.15
+DISTVERSION=	3.1.24
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch
@@ -33,8 +35,9 @@ USES=		cargo electron:29 gmake localbase:ldflags nodejs:20,build \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
-GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup \
-		JackGruber:joplin-plugin-backup:52d898315cab259da638698cc41120e9fae593ef:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup
+GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup
+# See ${WRKSRC}/packages/default-plugins/pluginRepositories.json for GH_TUPLEs for default plugins
+GH_TUPLE+=	JackGruber:joplin-plugin-backup:5ba57c18ac0f24f20832f012e015a080b138f0c4:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
