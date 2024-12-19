@@ -1,6 +1,6 @@
---- src/renderer/components/SettingsPage.tsx.orig	2024-05-16 20:45:52 UTC
+--- src/renderer/components/SettingsPage.tsx.orig	2024-12-16 19:52:04 UTC
 +++ src/renderer/components/SettingsPage.tsx
-@@ -507,7 +507,7 @@ class SettingsPage extends React.PureComponent<Props, 
+@@ -532,7 +532,7 @@ class SettingsPage extends React.PureComponent<Props, 
          const options = [];
  
          // MacOS has an option in the Dock, to set the app to autostart, so we choose to not support this option for OSX
@@ -9,16 +9,16 @@
              options.push(
                  <FormCheck>
                      <FormCheck.Input
-@@ -691,7 +691,7 @@ class SettingsPage extends React.PureComponent<Props, 
-                 </FormCheck>);
-         }
+@@ -742,7 +742,7 @@ class SettingsPage extends React.PureComponent<Props, 
+                 </FormText>
+             </FormCheck>);
  
 -        if (window.process.platform === 'win32' || window.process.platform === 'linux') {
 +        if (window.process.platform === 'win32' || window.process.platform === 'linux' || window.process.platform === 'freebsd') {
              options.push(
                  <FormCheck>
                      <FormCheck.Input
-@@ -711,7 +711,7 @@ class SettingsPage extends React.PureComponent<Props, 
+@@ -762,7 +762,7 @@ class SettingsPage extends React.PureComponent<Props, 
                              id='renderer.components.settingsPage.flashWindow.description'
                              defaultMessage='If enabled, the taskbar icon will flash for a few seconds when a new message is received.'
                          />
@@ -27,7 +27,7 @@
                              <>
                                  <br/>
                                  <em>
-@@ -800,7 +800,7 @@ class SettingsPage extends React.PureComponent<Props, 
+@@ -851,7 +851,7 @@ class SettingsPage extends React.PureComponent<Props, 
              );
          }
  
@@ -36,7 +36,7 @@
              options.push(
                  <FormCheck
                      key='inputShowTrayIcon'
-@@ -833,7 +833,7 @@ class SettingsPage extends React.PureComponent<Props, 
+@@ -884,7 +884,7 @@ class SettingsPage extends React.PureComponent<Props, 
          }
  
          if (this.state.showTrayIcon) {
@@ -45,7 +45,7 @@
                  options.push(
                      <FormGroup
                          key='trayIconTheme'
-@@ -897,7 +897,7 @@ class SettingsPage extends React.PureComponent<Props, 
+@@ -948,7 +948,7 @@ class SettingsPage extends React.PureComponent<Props, 
              }
          }
  

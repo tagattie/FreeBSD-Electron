@@ -1,6 +1,6 @@
---- src/common/config/defaultPreferences.ts.orig	2023-06-19 18:19:05 UTC
+--- src/common/config/defaultPreferences.ts.orig	2024-12-16 19:52:04 UTC
 +++ src/common/config/defaultPreferences.ts
-@@ -20,7 +20,7 @@ export const getDefaultDownloadLocation = (): string |
+@@ -22,7 +22,7 @@ export const getDefaultDownloadLocation = (): string |
          return undefined;
      }
  
@@ -9,7 +9,7 @@
          return process.env.XDG_DOWNLOAD_DIR;
      }
  
-@@ -32,9 +32,9 @@ const defaultPreferences: ConfigV3 = {
+@@ -34,9 +34,9 @@ const defaultPreferences: ConfigV3 = {
      teams: [],
      showTrayIcon: true,
      trayIconTheme: 'use_system',
