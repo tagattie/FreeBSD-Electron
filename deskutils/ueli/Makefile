@@ -6,7 +6,7 @@
 
 PORTNAME=	ueli
 DISTVERSIONPREFIX=	v
-DISTVERSION=	9.9.1
+DISTVERSION=	9.13.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -18,18 +18,10 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		cargo electron:33 localbase:ldflags nodejs:20,build \
-		python:build
+USES=		electron:33 localbase:ldflags nodejs:20,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	oliverschwendener
-GH_TUPLE=	rollup:rollup:v4.22.4:rollup/rollup
-
-CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
-CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
-CARGO_BUILD=	no
-CARGO_INSTALL=	no
-CARGO_TEST=	no
 
 SUB_FILES=	${PORTNAME}
 
@@ -42,10 +34,6 @@ USE_ELECTRON=	npm:npm appbuilder:devel prefetch extract rebuild build:builder
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
 pre-build:
-	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/release/libbindings_napi.so \
-		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 
 do-install:
