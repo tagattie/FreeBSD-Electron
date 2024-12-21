@@ -6,7 +6,7 @@
 
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.9.2
+DISTVERSION=	0.10.3
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -19,7 +19,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	task:devel/task
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		cargo electron:33 gmake go:1.22,modules,no_targets \
+USES=		cargo electron:33 gmake go:1.23,modules,no_targets \
 		nodejs:20,build python:build
 
 USE_GITHUB=	yes
@@ -32,10 +32,10 @@ GH_TUPLE=	\
 		go-ole:go-ole:v1.2.6:go_ole_go_ole/vendor/github.com/go-ole/go-ole \
 		golang-jwt:jwt:v5.2.1:golang_jwt_jwt_v5/vendor/github.com/golang-jwt/jwt/v5 \
 		golang-migrate:migrate:v4.18.1:golang_migrate_migrate_v4/vendor/github.com/golang-migrate/migrate/v4 \
-		golang:crypto:v0.29.0:golang_crypto/vendor/golang.org/x/crypto \
+		golang:crypto:v0.31.0:golang_crypto/vendor/golang.org/x/crypto \
 		golang:net:v0.29.0:golang_net/vendor/golang.org/x/net \
-		golang:sys:v0.27.0:golang_sys/vendor/golang.org/x/sys \
-		golang:term:v0.26.0:golang_term/vendor/golang.org/x/term \
+		golang:sys:v0.28.0:golang_sys/vendor/golang.org/x/sys \
+		golang:term:v0.27.0:golang_term/vendor/golang.org/x/term \
 		google:uuid:v1.6.0:google_uuid/vendor/github.com/google/uuid \
 		gorilla:handlers:v1.5.2:gorilla_handlers/vendor/github.com/gorilla/handlers \
 		gorilla:mux:v1.8.1:gorilla_mux/vendor/github.com/gorilla/mux \
@@ -49,11 +49,12 @@ GH_TUPLE=	\
 		mitchellh:mapstructure:v1.5.0:mitchellh_mapstructure/vendor/github.com/mitchellh/mapstructure \
 		photostorm:pty:31354506054b:photostorm_pty/vendor/github.com/creack/pty \
 		power-devops:perfstat:5aafc221ea8c:power_devops_perfstat/vendor/github.com/power-devops/perfstat \
-		sashabaranov:go-openai:v1.35.6:sashabaranov_go_openai/vendor/github.com/sashabaranov/go-openai \
+		sashabaranov:go-openai:v1.36.0:sashabaranov_go_openai/vendor/github.com/sashabaranov/go-openai \
 		sawka:txwrap:v0.2.0:sawka_txwrap/vendor/github.com/sawka/txwrap \
-		shirou:gopsutil:v4.24.10:shirou_gopsutil_v4/vendor/github.com/shirou/gopsutil/v4 \
+		shirou:gopsutil:v4.24.11:shirou_gopsutil_v4/vendor/github.com/shirou/gopsutil/v4 \
 		sirupsen:logrus:v1.9.3:sirupsen_logrus/vendor/github.com/sirupsen/logrus \
 		skeema:knownhosts:v1.3.0:skeema_knownhosts/vendor/github.com/skeema/knownhosts \
+		skratchdot:open-golang:eef842397966:skratchdot_open_golang/vendor/github.com/skratchdot/open-golang \
 		spf13:cobra:v1.8.1:spf13_cobra/vendor/github.com/spf13/cobra \
 		spf13:pflag:v1.0.5:spf13_pflag/vendor/github.com/spf13/pflag \
 		tklauser:go-sysconf:v0.3.12:tklauser_go_sysconf/vendor/github.com/tklauser/go-sysconf \
@@ -62,7 +63,7 @@ GH_TUPLE=	\
 		ubuntu:decorate:2d5b0a9bb117:ubuntu_decorate/vendor/github.com/ubuntu/decorate \
 		ubuntu:GoWSL:049fd49bd93b:ubuntu_gowsl/vendor/github.com/ubuntu/gowsl \
 		wavetermdev:htmltoken:v0.2.0:wavetermdev_htmltoken/vendor/github.com/wavetermdev/htmltoken \
-		wavetermdev:ssh_config:ed124367682d:wavetermdev_ssh_config/vendor/github.com/kevinburke/ssh_config \
+		wavetermdev:ssh_config:6409e4292f34:wavetermdev_ssh_config/vendor/github.com/kevinburke/ssh_config \
 		yusufpapurcu:wmi:v1.2.4:yusufpapurcu_wmi/vendor/github.com/yusufpapurcu/wmi
 GH_TUPLE+=	swc-project:swc:v1.8.0:swc/swc
 
@@ -85,12 +86,15 @@ USE_ELECTRON=	npm:yarn4 appbuilder:devel prefetch extract rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	-c electron-builder.config.cjs
 
+post-extract:
+	${CP} ${FILESDIR}/modules.txt ${WRKSRC}/vendor
+
 pre-build:
 	cd ${WRKSRC}/swc/bindings && \
 		${SETENV} ${MAKE_ENV} ${CARGO_ENV} CARGO_FEATURE_LOCAL_DYNAMIC_TLS=1 \
 		${CARGO} build --manifest-path ${CARGO_CARGOTOML} \
 		--package binding_core_node --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/${CARGO_BUILD_TARGET}/release/libbinding_core_node.so \
+	${CP} ${CARGO_TARGET_DIR}/release/libbinding_core_node.so \
 		${WRKSRC}/node_modules/@swc/core/swc.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} task --verbose build:backend
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:prod

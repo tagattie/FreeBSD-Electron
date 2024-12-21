@@ -1,24 +1,22 @@
---- Taskfile.yml.orig	2024-11-12 04:03:04 UTC
+--- Taskfile.yml.orig	2024-12-20 02:48:27 UTC
 +++ Taskfile.yml
-@@ -60,9 +60,7 @@ tasks:
-         desc: Build the wavesrv component.
+@@ -114,8 +114,8 @@ tasks:
+             - task: build:server:linux
+             - task: build:server:macos
+             - task: build:server:windows
++            - task: build:server:freebsd
          deps:
+-            - go:mod:tidy
              - generate
--            - build:server:linux
--            - build:server:macos
--            - build:server:windows
-+            - build:server:freebsd
- 
-     build:server:macos:
-         desc: Build the wavesrv component for macOS (Darwin) platforms (generates artifacts for both arm64 and amd64).
-@@ -101,6 +99,18 @@ tasks:
+         sources:
+             - "cmd/server/*.go"
+@@ -158,6 +158,17 @@ tasks:
                    GO_ENV_VARS:
                        sh: echo "{{if eq "amd64" ARCH}}CC=\"zig cc -target x86_64-linux-gnu.2.28\"{{end}}"
  
 +    build:server:freebsd:
 +        desc: Build the wavesrv component for FreeBSD platforms (only generates artifacts for the current architecture).
-+        status:
-+            - exit {{if eq OS "freebsd"}}1{{else}}0{{end}}
++        platforms: [freebsd]
 +        cmds:
 +            - cmd: "{{.RM}} dist/bin/wavesrv*"
 +              ignore_error: true
@@ -30,16 +28,7 @@
      build:server:internal:
          requires:
              vars:
-@@ -116,8 +126,6 @@ tasks:
-             - "pkg/**/*.go"
-         generates:
-             - dist/bin/wavesrv.*{{exeExt}}
--        deps:
--            - go:mod:tidy
-         internal: true
- 
-     build:wsh:
-@@ -127,28 +135,8 @@ tasks:
+@@ -177,30 +188,9 @@ tasks:
                ignore_error: true
              - task: build:wsh:internal
                vars:
@@ -67,14 +56,7 @@
 -                  GOOS: windows
 -                  GOARCH: arm64
          deps:
-             - generate
- 
-@@ -181,8 +169,6 @@ tasks:
-         generates:
-             - dist/bin/wsh-{{.VERSION}}-{{.GOOS}}.{{.NORMALIZEDARCH}}{{.EXT}}
-         cmd: (CGO_ENABLED=0 GOOS={{.GOOS}} GOARCH={{.GOARCH}} go build -ldflags="-s -w -X main.BuildTime=$({{.DATE}} +'%Y%m%d%H%M') -X main.WaveVersion={{.VERSION}}" -o dist/bin/wsh-{{.VERSION}}-{{.GOOS}}.{{.NORMALIZEDARCH}}{{.EXT}} cmd/wsh/main-wsh.go)
--        deps:
 -            - go:mod:tidy
-         internal: true
- 
-     generate:
+             - generate
+         sources:
+             - "cmd/wsh/**/*.go"
