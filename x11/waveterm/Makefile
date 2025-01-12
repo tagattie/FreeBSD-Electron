@@ -6,7 +6,7 @@
 
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.10.3
+DISTVERSION=	0.10.4
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -33,7 +33,7 @@ GH_TUPLE=	\
 		golang-jwt:jwt:v5.2.1:golang_jwt_jwt_v5/vendor/github.com/golang-jwt/jwt/v5 \
 		golang-migrate:migrate:v4.18.1:golang_migrate_migrate_v4/vendor/github.com/golang-migrate/migrate/v4 \
 		golang:crypto:v0.31.0:golang_crypto/vendor/golang.org/x/crypto \
-		golang:net:v0.29.0:golang_net/vendor/golang.org/x/net \
+		golang:net:v0.33.0:golang_net/vendor/golang.org/x/net \
 		golang:sys:v0.28.0:golang_sys/vendor/golang.org/x/sys \
 		golang:term:v0.27.0:golang_term/vendor/golang.org/x/term \
 		google:uuid:v1.6.0:google_uuid/vendor/github.com/google/uuid \
