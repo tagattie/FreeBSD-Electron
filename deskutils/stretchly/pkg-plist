@@ -13,6 +13,7 @@ share/icons/hicolor/64x64/apps/stretchly.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/LICENSE
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/build/Release/focuscenter.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/build/Release/notificationstate.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/build/node_gyp_bins/python3
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/ensure-sdk.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/lib/dnd/bigsur-macos-dnd.h
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/lib/dnd/bigsur-macos-dnd.mm
@@ -36,6 +37,7 @@ share/icons/hicolor/64x64/apps/stretchly.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/build/Release/function_args_noexcept.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/build/Release/property_descriptor.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/build/Release/property_descriptor_noexcept.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/build/node_gyp_bins/python3
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/function_args.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/benchmark/property_descriptor.js
@@ -103,3 +105,18 @@ share/icons/hicolor/64x64/apps/stretchly.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/tools/check-napi.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/node_modules/node-addon-api/tools/conversion.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/package.json
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/LICENSE
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/build/Release/focusassist.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/build/node_gyp_bins/python3
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/lib/Note.txt
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/lib/index.js
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/lib/quiethours.idl
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/lib/quiethours_h.h
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/lib/quiethours_i.c
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/package.json
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/sample/index.js
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-quiet-hours/LICENSE
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-quiet-hours/build/Release/quiethours.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-quiet-hours/build/node_gyp_bins/python3
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-quiet-hours/lib/index.js
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-quiet-hours/package.json
