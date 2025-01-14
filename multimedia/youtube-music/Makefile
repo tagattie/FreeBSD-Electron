@@ -1,6 +1,6 @@
 PORTNAME=	youtube-music
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.6.2
+DISTVERSION=	3.7.1
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,17 +10,10 @@ WWW=		https://th-ch.github.io/youtube-music
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/license
 
-USES=		cargo electron:33 nodejs:20,build
+USES=		electron:33 nodejs:20,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	th-ch
-GH_TUPLE=	rollup:rollup:v4.24.0:rollup/rollup
-
-CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
-CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
-CARGO_BUILD=	no
-CARGO_INSTALL=	no
-CARGO_TEST=	no
 
 SUB_FILES=	${PORTNAME}
 
@@ -30,13 +23,9 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
 
-NPM_VER=	9.13.0
+NPM_VER=	9.15.4
 
 pre-build:
-	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/release/libbindings_napi.so \
-		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
 
 do-install:
