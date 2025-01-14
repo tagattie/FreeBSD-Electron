@@ -1,11 +1,11 @@
---- tabby-ssh/package.json.orig	2022-01-04 10:19:22 UTC
+--- tabby-ssh/package.json.orig	2025-01-14 21:19:30 UTC
 +++ tabby-ssh/package.json
 @@ -11,7 +11,7 @@
      "build": "webpack --progress --color",
      "watch": "webpack --progress --color --watch",
      "postinstall": "run-script-os",
--    "postinstall:darwin:linux": "exit",
-+    "postinstall:darwin:linux:freebsd": "exit",
-     "postinstall:win32": "xcopy /i /y ..\\node_modules\\ssh2\\util\\pagent.exe util\\"
+-    "postinstall:darwin:linux": "exit"
++    "postinstall:darwin:linux:freebsd": "exit"
    },
    "files": [
+     "dist",

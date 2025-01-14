@@ -1,15 +1,14 @@
---- scripts/install-deps.mjs.orig	2023-08-26 08:23:27 UTC
+--- scripts/install-deps.mjs.orig	2025-01-09 20:06:01 UTC
 +++ scripts/install-deps.mjs
-@@ -8,23 +8,23 @@ sh.exec(`yarn patch-package`, { fatal: true })
- 
+@@ -9,24 +9,24 @@ sh.cd('app')
  log.info('deps', 'app')
  
--sh.cd('app')
+ sh.cd('app')
 -sh.exec(`yarn install --force --network-timeout 1000000`, { fatal: true })
--sh.cd('..')
-+// sh.cd('app')
 +// sh.exec(`yarn install --force --network-timeout 1000000`, { fatal: true })
-+// sh.cd('..')
+ // Some native packages might fail to build before patch-package gets a chance to run via postinstall
+ sh.exec(`yarn postinstall`, { fatal: false })
+ sh.cd('..')
  
  sh.cd('web')
 -sh.exec(`yarn install --force --network-timeout 1000000`, { fatal: true })

@@ -1,6 +1,6 @@
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.215
+DISTVERSION=	1.0.219
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -43,7 +43,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		electron:29 gl gmake gnome iconv:wchar_t jpeg \
+USES=		electron:32 gl gmake gnome iconv:wchar_t jpeg \
 		localbase:ldflags nodejs:20,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
@@ -114,10 +114,6 @@ post-patch:
 		${WRKSRC}/scripts/vars.mjs
 
 pre-build:
-.for module in cpu-features lzma-native ssh2
-	cd ${WRKSRC}/node_modules/${module} && \
-	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn run install
-.endfor
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec patch-package
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} node scripts/install-deps.mjs
 	${CP} ${WRKSRC}/app/node_modules/glasstron/src/platforms/linux.js \

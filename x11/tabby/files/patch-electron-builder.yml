@@ -1,0 +1,12 @@
+--- electron-builder.yml.orig	2025-01-14 21:42:09 UTC
++++ electron-builder.yml
+@@ -101,7 +101,4 @@ rpm:
+   - '_build_id_links none'
+   - '--replaces'
+   - 'terminus-terminal'
+-electronFuses:
+-  runAsNode: false
+-  enableNodeOptionsEnvironmentVariable: false
+-  enableNodeCliInspectArguments: false
++  
+\ No newline at end of file
