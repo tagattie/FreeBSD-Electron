@@ -1,5 +1,5 @@
-TIMESTAMP = 1734680451
-SHA256 (ueli-9.13.0-node-modules.tar.gz) = 23aed4de67debb2d0853fdb3b087df2dbd4ed2504e60818524796cf9a4609be2
-SIZE (ueli-9.13.0-node-modules.tar.gz) = 139521058
-SHA256 (oliverschwendener-ueli-v9.13.0_GH0.tar.gz) = 4bb4b4acaf20728ff26b7a16f311ad5ab56fe245f1d7363d28a595cc138331f5
-SIZE (oliverschwendener-ueli-v9.13.0_GH0.tar.gz) = 38663938
+TIMESTAMP = 1736929561
+SHA256 (ueli-9.14.2-node-modules.tar.gz) = 411659dd13364d141d9988fe0ed8e73f03bb50d49bd5304c6bc4e8a093b7eba6
+SIZE (ueli-9.14.2-node-modules.tar.gz) = 141187824
+SHA256 (oliverschwendener-ueli-v9.14.2_GH0.tar.gz) = accf44d46528e9edd97a920a493be88ff9a9451bf626f6861d0f3afc67c04521
+SIZE (oliverschwendener-ueli-v9.14.2_GH0.tar.gz) = 38666140
