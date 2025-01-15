@@ -1,6 +1,6 @@
 PORTNAME=	webcord
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.10.2
+DISTVERSION=	4.10.3
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://github.com/SpacingBat3/WebCord
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:32 nodejs:20,build
+USES=		electron:33 nodejs:20,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	SpacingBat3
