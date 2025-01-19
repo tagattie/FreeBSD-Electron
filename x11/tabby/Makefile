@@ -60,7 +60,7 @@ PORTDOCS=	HACKING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1,fetch,extract,build appbuilder build:builder
+USE_ELECTRON=	npm:yarn1,fetch,extract,build appbuilder:devel build:builder
 
 PREFETCH_FILE=	${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 
