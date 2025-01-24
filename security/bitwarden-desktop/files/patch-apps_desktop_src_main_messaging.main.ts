@@ -1,6 +1,6 @@
---- apps/desktop/src/main/messaging.main.ts.orig	2024-07-26 00:17:32 UTC
+--- apps/desktop/src/main/messaging.main.ts.orig	2025-01-23 11:12:57 UTC
 +++ apps/desktop/src/main/messaging.main.ts
-@@ -21,7 +21,7 @@ export class MessagingMain {
+@@ -23,7 +23,7 @@ export class MessagingMain {
  
    async init() {
      this.scheduleNextSync();
@@ -9,7 +9,7 @@
        await this.desktopSettingsService.setOpenAtLogin(fs.existsSync(this.linuxStartupFile()));
      } else {
        const loginSettings = app.getLoginItemSettings();
-@@ -115,13 +115,13 @@ export class MessagingMain {
+@@ -117,13 +117,13 @@ export class MessagingMain {
    }
  
    private addOpenAtLogin() {
@@ -25,7 +25,7 @@
  StartupNotify=false
  Terminal=false`;
  
-@@ -136,7 +136,7 @@ Terminal=false`;
+@@ -138,7 +138,7 @@ Terminal=false`;
    }
  
    private removeOpenAtLogin() {

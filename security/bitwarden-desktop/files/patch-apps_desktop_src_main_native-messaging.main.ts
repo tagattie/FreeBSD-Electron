@@ -1,6 +1,6 @@
---- apps/desktop/src/main/native-messaging.main.ts.orig	2024-12-17 15:22:29 UTC
+--- apps/desktop/src/main/native-messaging.main.ts.orig	2025-01-23 11:12:57 UTC
 +++ apps/desktop/src/main/native-messaging.main.ts
-@@ -181,7 +181,7 @@ export class NativeMessagingMain {
+@@ -183,7 +183,7 @@ export class NativeMessagingMain {
          }
          break;
        }
@@ -9,7 +9,7 @@
          for (const [key, value] of Object.entries(this.getLinuxNMHS())) {
            if (existsSync(value)) {
              if (key === "Firefox") {
-@@ -251,7 +251,7 @@ export class NativeMessagingMain {
+@@ -253,7 +253,7 @@ export class NativeMessagingMain {
          }
          break;
        }
@@ -18,7 +18,7 @@
          for (const [key, value] of Object.entries(this.getLinuxNMHS())) {
            if (key === "Firefox") {
              await this.removeIfExists(
-@@ -360,7 +360,7 @@ export class NativeMessagingMain {
+@@ -362,7 +362,7 @@ export class NativeMessagingMain {
            .map(([, value]) => value);
          break;
        }
