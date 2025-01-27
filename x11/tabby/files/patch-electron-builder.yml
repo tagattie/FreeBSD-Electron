@@ -1,6 +1,6 @@
---- electron-builder.yml.orig	2025-01-14 21:42:09 UTC
+--- electron-builder.yml.orig	2025-01-22 22:44:36 UTC
 +++ electron-builder.yml
-@@ -101,7 +101,4 @@ rpm:
+@@ -102,7 +102,4 @@ rpm:
    - '_build_id_links none'
    - '--replaces'
    - 'terminus-terminal'

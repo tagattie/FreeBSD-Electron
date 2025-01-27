@@ -810,6 +810,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/icons/vs2019.svg
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/icons/vs2022.svg
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/index.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-electron/src/pathDrop.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/pty.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/services/dockMenu.service.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/services/docking.service.ts
@@ -848,6 +849,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/config.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/hotkeys.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/index.d.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/pathDrop.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/pty.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/services/dockMenu.service.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/services/docking.service.d.ts
@@ -1559,7 +1561,6 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/components/terminalToolbar.component.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/config.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/features/debug.ts
-%%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/features/pathDrop.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/features/zmodem.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/fonts/SourceCodePro.ttf
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/src/frontends/frontend.ts
@@ -1608,7 +1609,6 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/components/terminalToolbar.component.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/config.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/features/debug.d.ts
-%%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/features/pathDrop.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/features/zmodem.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/frontends/frontend.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-terminal/typings/frontends/xtermFrontend.d.ts
