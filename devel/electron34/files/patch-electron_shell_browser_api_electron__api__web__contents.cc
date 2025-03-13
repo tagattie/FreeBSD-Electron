@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_web_contents.cc.orig	2025-01-29 20:10:57 UTC
+--- electron/shell/browser/api/electron_api_web_contents.cc.orig	2025-03-10 00:01:50 UTC
 +++ electron/shell/browser/api/electron_api_web_contents.cc
 @@ -156,11 +156,11 @@
  #include "ui/base/cocoa/defaults_utils.h"
@@ -23,7 +23,7 @@
  #include "chrome/browser/hang_monitor/hang_crash_dump.h"  // nogncheck
  #endif
  
-@@ -519,7 +519,7 @@ std::optional<base::TimeDelta> GetCursorBlinkInterval(
+@@ -565,7 +565,7 @@ std::optional<base::TimeDelta> GetCursorBlinkInterval(
        ui::TextInsertionCaretBlinkPeriodFromDefaults());
    if (system_value)
      return *system_value;
@@ -32,7 +32,7 @@
    if (auto* linux_ui = ui::LinuxUi::instance())
      return linux_ui->GetCursorBlinkInterval();
  #elif BUILDFLAG(IS_WIN)
-@@ -889,7 +889,7 @@ void WebContents::InitWithSessionAndOptions(
+@@ -934,7 +934,7 @@ void WebContents::InitWithSessionAndOptions(
    accept_languages.pop_back();
    prefs->accept_languages = accept_languages;
  
@@ -41,7 +41,7 @@
    // Update font settings.
    static const gfx::FontRenderParams params(
        gfx::GetFontRenderParams(gfx::FontRenderParamsQuery(), nullptr));
-@@ -2675,13 +2675,13 @@ void WebContents::ForcefullyCrashRenderer() {
+@@ -2771,13 +2771,13 @@ void WebContents::ForcefullyCrashRenderer() {
  
    content::RenderProcessHost* rph = rwh->GetProcess();
    if (rph) {
@@ -57,7 +57,7 @@
      CrashDumpHungChildProcess(rph->GetProcess().Handle());
  #endif
      rph->Shutdown(content::RESULT_CODE_HUNG);
-@@ -3354,7 +3354,7 @@ void WebContents::Focus() {
+@@ -3450,7 +3450,7 @@ void WebContents::Focus() {
  void WebContents::Focus() {
    // Focusing on WebContents does not automatically focus the window on macOS
    // and Linux, do it manually to match the behavior on Windows.
@@ -66,7 +66,7 @@
    if (owner_window())
      owner_window()->Focus(true);
  #endif
-@@ -4230,7 +4230,7 @@ ui::ImageModel WebContents::GetDevToolsWindowIcon() {
+@@ -4326,7 +4326,7 @@ ui::ImageModel WebContents::GetDevToolsWindowIcon() {
  }
  #endif
  
