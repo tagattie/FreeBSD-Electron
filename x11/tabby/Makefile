@@ -52,7 +52,7 @@ GH_ACCOUNT=	Eugeny
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
-USE_GNOME=	cairo gdkpixbuf2 gtk30 libxml2 libxslt pango
+USE_GNOME=	cairo gdkpixbuf gtk30 libxml2 libxslt pango
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 
