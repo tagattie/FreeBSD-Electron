@@ -78,7 +78,7 @@ GH_TUPLE=	nodejs:node:v${NODE_VER}:node \
 		ReactiveCocoa:ReactiveObjC:${REACTIVEOBJC_VER}:reactiveobjc \
 		Mantle:Mantle:${MANTLE_VER}:mantle
 USE_GL=		gbm gl glesv2
-USE_GNOME=	atk cairo gdkpixbuf2 gtk30 libxml2 libxslt pango
+USE_GNOME=	atk cairo gdkpixbuf gtk30 libxml2 libxslt pango
 USE_LDCONFIG=	${DATADIR}
 USE_XORG=	x11 xcb xcomposite xcursor xdamage xext xfixes xi xrandr \
 		xrender xscrnsaver xtst
