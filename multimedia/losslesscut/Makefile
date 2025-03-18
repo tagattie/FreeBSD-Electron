@@ -49,7 +49,7 @@ GH_TUPLE=	rollup:rollup:v4.19.0:rollup/rollup
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
-USE_GNOME=	cairo gdkpixbuf2 glib20 gtk30 libxml2 libxslt pango
+USE_GNOME=	cairo gdkpixbuf glib20 gtk30 libxml2 libxslt pango
 
 CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
