@@ -443,6 +443,7 @@ electron-fetch-node-modules:
 			${GREP} -v ${NPM_MODULE_CACHE} | ${XARGS} ${RM} -r; \
 		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.gitignore; \
 		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.modules.yaml; \
+		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.pnpm-workspace-state.json; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${MTREE_CMD} -cbnSp ${NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
