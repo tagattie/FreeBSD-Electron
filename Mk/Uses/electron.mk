@@ -427,6 +427,8 @@ DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 FETCH_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
+.   elif ${_NODEJS_NPM} == pnpm
+FETCH_DEPENDS+=	${YQ_CMD}:textproc/yq
 .   endif
 
 electron-fetch-node-modules:
@@ -442,7 +444,10 @@ electron-fetch-node-modules:
 		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | \
 			${GREP} -v ${NPM_MODULE_CACHE} | ${XARGS} ${RM} -r; \
 		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.gitignore; \
-		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.modules.yaml; \
+		if [ -f ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.modules.yaml ]; then \
+			${YQ_CMD} -yi 'del(.prunedAt, .storeDir)' \
+				${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.modules.yaml; \
+		fi; \
 		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.pnpm-workspace-state.json; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 		cd ${WRKDIR}/node-modules-cache && \
