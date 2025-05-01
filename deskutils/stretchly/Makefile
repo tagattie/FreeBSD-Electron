@@ -1,6 +1,6 @@
 PORTNAME=	stretchly
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.1
+DISTVERSION=	1.17.2
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://hovancik.net/stretchly
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:33 localbase:ldconfig nodejs:20,build python:build
+USES=		electron:34 localbase:ldconfig nodejs:20,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	hovancik
