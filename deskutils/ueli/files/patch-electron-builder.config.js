@@ -1,7 +1,7 @@
---- electron-builder.config.js.orig	2024-07-23 21:48:42 UTC
+--- electron-builder.config.js.orig	2025-04-20 06:09:22 UTC
 +++ electron-builder.config.js
-@@ -53,6 +53,14 @@ const platformSpecificConfig = {
-             target: [{ target: "AppImage" }, { target: "deb" }, { target: "zip" }],
+@@ -58,6 +58,14 @@ const platformSpecificConfig = {
+             ],
          },
      },
 +    freebsd: {
