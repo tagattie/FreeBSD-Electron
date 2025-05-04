@@ -1,28 +1,27 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.90
+DISTVERSION=	1.11.99
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
-		https://registry.npmjs.org/keytar/-/:keytar \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
 DISTFILES=	element-${DISTVERSIONFULL}${EXTRACT_SUFX}:element_web \
 		${PREFETCH_FILE}:prefetch \
-		keytar-${KEYTAR_VER}.tgz:keytar \
 		matrix-seshat-${MATRIX_SESHAT_VER}.tgz:matrix_seshat
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Glossy Matrix collaboration client for desktop
 WWW=		https://element.io
 
-LICENSE=	AGPLv3 GPLv3
+LICENSE=	AGPLv3+ GPLv3+
 LICENSE_COMB=	dual
-LICENSE_FILE_AGPLv3=	${WRKSRC}/LICENSE-AGPL-3.0
-LICENSE_FILE_GPLv3=	${WRKSRC}/LICENSE-GPL-3.0
+LICENSE_FILE_AGPLv3+ =		${WRKSRC}/LICENSE-AGPL-3.0
+LICENSE_FILE_GPLv3+ =		${WRKSRC}/LICENSE-GPL-3.0
 
+BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo desktop-file-utils electron:33 gmake nodejs:20,build \
+USES=		cargo desktop-file-utils electron:35 gmake nodejs:22,build \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
@@ -41,11 +40,10 @@ PORTDOCS=	CHANGELOG.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1,fetch,extract,build appbuilder:devel build:builder
+USE_ELECTRON=	npm:yarn1,fetch,extract,build appbuilder:devel rebuild build:builder
 
 PREFETCH_FILE=		${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
-KEYTAR_VER=		7.9.0
-MATRIX_SESHAT_VER=	4.0.0
+MATRIX_SESHAT_VER=	4.0.1
 RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
 
 pre-fetch:
@@ -54,7 +52,7 @@ pre-fetch:
 		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
 			${WRKDIR}/node-modules-cache/.yarnrc; \
 		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		for dir in . keytar matrix-seshat; do \
+		for dir in . matrix-seshat; do \
 			cd ${WRKDIR}/node-modules-cache/$${dir} && \
 			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 				yarn install --frozen-lockfile --ignore-scripts; \
@@ -77,15 +75,6 @@ post-extract:
 	${MV} ${WRKDIR}/yarn-offline-cache ${WRKSRC}
 	cd ${WRKSRC} && ${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
 	cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-		yarn install --frozen-lockfile --ignore-scripts --offline
-	@${MKDIR} ${WRKSRC}/.hak/hakModules/keytar ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build
-	${TAR} -xf ${DISTDIR}/keytar-${KEYTAR_VER}.tgz --strip-components 1 \
-		-C ${WRKSRC}/.hak/hakModules/keytar
-	${TAR} -xf ${DISTDIR}/keytar-${KEYTAR_VER}.tgz --strip-components 1 \
-		-C ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build
-	${CP} ${PKGJSONSDIR}/keytar/yarn.lock ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build
-	cd ${WRKSRC}/.hak/keytar/${RUST_ARCH}-unknown-freebsd/build && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn install --frozen-lockfile --ignore-scripts --offline
 	@${MKDIR} ${WRKSRC}/.hak/hakModules/matrix-seshat ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
 	${TAR} -xf ${DISTDIR}/matrix-seshat-${MATRIX_SESHAT_VER}.tgz --strip-components 1 \

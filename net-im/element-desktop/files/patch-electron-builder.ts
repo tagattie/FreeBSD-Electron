@@ -1,20 +1,42 @@
---- electron-builder.ts.orig	2024-12-17 13:50:37 UTC
+--- electron-builder.ts.orig	2025-04-23 11:15:41 UTC
 +++ electron-builder.ts
-@@ -51,7 +51,7 @@ const config: Writable<Configuration> = {
- const config: Writable<Configuration> = {
+@@ -71,25 +71,25 @@ const config: Omit<Writable<Configuration>, "electronF
+  * @see https://www.electron.build/configuration/configuration
+  */
+ const config: Omit<Writable<Configuration>, "electronFuses"> & {
+-    // Make all fuses required to ensure they are all explicitly specified
+-    electronFuses: Required<Configuration["electronFuses"]>;
++    // // Make all fuses required to ensure they are all explicitly specified
++    // electronFuses: Required<Configuration["electronFuses"]>;
+ } = {
      appId: "im.riot.app",
      asarUnpack: "**/*.node",
--    afterPack: async (context: AfterPackContext) => {
-+    /* afterPack: async (context: AfterPackContext) => {
-         if (context.electronPlatformName !== "darwin" || context.arch === Arch.universal) {
-             // Burn in electron fuses for proactive security hardening.
-             // On macOS, we only do this for the universal package, as the constituent arm64 and amd64 packages are embedded within.
-@@ -87,7 +87,7 @@ const config: Writable<Configuration> = {
-                 [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: false,
-             });
-         }
+-    electronFuses: {
+-        enableCookieEncryption: true,
+-        onlyLoadAppFromAsar: true,
+-        grantFileProtocolExtraPrivileges: false,
++    // electronFuses: {
++    //     enableCookieEncryption: true,
++    //     onlyLoadAppFromAsar: true,
++    //     grantFileProtocolExtraPrivileges: false,
+ 
+-        runAsNode: false,
+-        enableNodeOptionsEnvironmentVariable: false,
+-        enableNodeCliInspectArguments: false,
+-        // We need to reset the signature if we are not signing on darwin otherwise it won't launch
+-        resetAdHocDarwinSignature: !process.env.APPLE_TEAM_ID,
++    //     runAsNode: false,
++    //     enableNodeOptionsEnvironmentVariable: false,
++    //     enableNodeCliInspectArguments: false,
++    //     // We need to reset the signature if we are not signing on darwin otherwise it won't launch
++    //     resetAdHocDarwinSignature: !process.env.APPLE_TEAM_ID,
+ 
+-        loadBrowserProcessSpecificV8Snapshot: false,
+-        enableEmbeddedAsarIntegrityValidation: true,
 -    },
-+    }, */
-     files: [
-         "package.json",
-         {
++    //     loadBrowserProcessSpecificV8Snapshot: false,
++    //     enableEmbeddedAsarIntegrityValidation: true,
++    // },
+     afterPack: async (context: AfterPackContext) => {
+         await injectAsarIntegrity(context);
+     },
