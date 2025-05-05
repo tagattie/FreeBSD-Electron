@@ -2,9 +2,9 @@
   "name": "min",
   "productName": "Min",
   "author": "PalmerAL",
-  "version": "1.33.1",
+  "version": "1.35.0",
   "description": "A fast, minimal browser that protects your privacy",
-  "electronVersion": "32.1.0",
+  "electronVersion": "34.4.1",
   "main": "main.build.js",
   "standard": {
     "globals": [
@@ -29,26 +29,28 @@
     ]
   },
   "dependencies": {
+    "@browsermt/bergamot-translator": "^0.4.9",
     "@electron/fuses": "^1.7.0",
     "chokidar": "^3.6.0",
     "dexie": "^3.0.3",
     "dragula": "github:minbrowser/dragula",
     "electron-squirrel-startup": "^1.0.0",
     "expr-eval": "^2.0.2",
-    "mousetrap": "^1.5.3",
     "node-abi": "^3.8.0",
+    "papaparse": "^5.5.1",
     "pdfjs-dist": "4.2.67",
     "quick-score": "^0.2.0",
     "regedit": "^3.0.3",
     "sortablejs": "^1.15.1",
-    "stemmer": "^1.0.5"
+    "stemmer": "^1.0.5",
+    "write-file-atomic": "^6.0.0"
   },
   "devDependencies": {
     "archiver": "^4.0.1",
     "browserify": "^16.5.1",
     "concurrently": "^5.2.0",
     "decomment": "^0.9.0",
-    "electron": "32.1.0",
+    "electron": "34.4.1",
     "electron-builder": "^24.13.3",
     "electron-installer-windows": "^3.0.0",
     "electron-renderify": "0.0.2",
