@@ -17,6 +17,7 @@ LICENSE_COMB=	dual
 LICENSE_FILE_AGPLv3+ =		${WRKSRC}/LICENSE-AGPL-3.0
 LICENSE_FILE_GPLv3+ =		${WRKSRC}/LICENSE-GPL-3.0
 
+FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
