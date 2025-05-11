@@ -119,7 +119,7 @@ _INCLUDE_USES_ELECTRON_MK=	yes
 # Electron uses Node.js (actually a node package manager) for build
 .include "${USESDIR}/nodejs.mk"
 
-_VALID_ELECTRON_VERSIONS=	6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35
+_VALID_ELECTRON_VERSIONS=	6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36
 _VALID_ELECTRON_FEATURES=	npm appbuilder prefetch extract rebuild build
 _VALID_ELECTRON_FEATURES_NPM=	npm yarn1 yarn2 yarn4 pnpm
 _VALID_ELECTRON_FEATURES_APPBUILDER=release devel
