@@ -10,7 +10,7 @@
 
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.1.24
+DISTVERSION=	3.3.12
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch
@@ -30,17 +30,25 @@ BUILD_DEPENDS=	7zz:archivers/7-zip \
 LIB_DEPENDS=	libvips.so:graphics/vips \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo electron:29 gmake localbase:ldflags nodejs:20,build \
+USES=		cargo electron:35 gmake localbase:ldflags nodejs:22,build \
 		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	laurent22
-GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup
+GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup \
+		rustwasm:wasm-pack:v0.13.1:wasm_pack/wasm-pack
 # See ${WRKSRC}/packages/default-plugins/pluginRepositories.json for GH_TUPLEs for default plugins
-GH_TUPLE+=	JackGruber:joplin-plugin-backup:5ba57c18ac0f24f20832f012e015a080b138f0c4:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup
+GH_TUPLE+=	JackGruber:joplin-plugin-backup:abb58175e2d2bf34899f1b32cb74137e5c788bf9:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup \
+		personalizedrefrigerator:joplin-plugin-freehand-drawing:49650407c1d56a2a0123d2d56d2387e48eb58415:joplin_plugin_freehand_drawing/packages/default-plugins/plugin-sources/io.github.personalizedrefrigerator.js-draw
 
-CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
-CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
+CARGO_CARGOTOML_ROLLUP=	${WRKSRC}/rollup/rust/Cargo.toml
+CARGO_CARGOLOCK_ROLLUP=	${WRKSRC}/rollup/rust/Cargo.lock
+CARGO_CARGOTOML_WASM_PACK=	${WRKSRC}/wasm-pack/Cargo.toml
+CARGO_CARGOLOCK_WASM_PACK=	${WRKSRC}/wasm-pack/Cargo.lock
+CARGO_CARGOTOML=	${CARGO_CARGOTOML_ROLLUP}
+CARGO_CARGOLOCK=	${CARGO_CARGOLOCK_ROLLUP}
+CARGO_CARGOLOCKS=	${CARGO_CARGOLOCK_ROLLUP} \
+			${CARGO_CARGOLOCK_WASM_PACK}
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
@@ -94,18 +102,34 @@ post-patch:
 	@${RM} -r ${WRKSRC}/packages/app-cli \
 		${WRKSRC}/packages/app-clipper
 
+post-configure:
+	@${ECHO_MSG} "===>   Updating Cargo.lock for ${CARGO_CARGOTOML_WASM_PACK}"
+	@${CARGO_CARGO_RUN} update --manifest-path ${CARGO_CARGOTOML_WASM_PACK} \
+		--verbose --verbose ${CARGO_UPDATE_ARGS}
+
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
+		--manifest-path ${CARGO_CARGOTOML_ROLLUP} --release --verbose --verbose
 	${CP} ${CARGO_TARGET_DIR}/release/libbindings_napi.so \
 		${WRKSRC}/packages/turndown/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
+	cd ${WRKSRC}/wasm-pack && \
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
+		--manifest-path ${CARGO_CARGOTOML_WASM_PACK} --release --verbose --verbose
+	@${MKDIR} ${WRKSRC}/packages/onenote-converter/node_modules/binary-install/node_modules/.bin
+	${CP} ${CARGO_TARGET_DIR}/release/wasm-pack \
+		${WRKSRC}/packages/onenote-converter/node_modules/binary-install/node_modules/.bin
 	@${MKDIR} ${WRKSRC}/packages/app-desktop/node_modules/7zip-bin/freebsd/${ELECTRON_ARCH}
 	${CP} ${LOCALBASE}/bin/7zz \
 		${WRKSRC}/packages/app-desktop/node_modules/7zip-bin/freebsd/${ELECTRON_ARCH}/7za
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
 		yarn rebuild
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
-		yarn exec electron-rebuild --force-abi 122
+		yarn exec electron-rebuild --force-abi 134
+	# dirty hack to avoid "EACCES: permission denied" error during electron-builder execution
+	@${RM} ${WRKDIR}/.bin/python3
+	@${CP} ${PYTHON_CMD} ${WRKDIR}/.bin/python3
+	@${CHMOD} u+w ${WRKDIR}/.bin/python3
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} ${STAGEDIR}${PREFIX}/bin
@@ -127,5 +151,18 @@ do-install-DOCS-on:
 
 do-test:
 	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test
+
+#
+# targets for port maintainer(s)
+#
+cargo-crates-from-multiple-lockfiles: extract
+	@for lf in ${CARGO_CARGOLOCKS}; do \
+		${_CARGO_AWK} ${SCRIPTSDIR}/cargo-crates.awk $${lf}; \
+	done | \
+	${SED} -E 's/^CARGO_CRATES=\t+/\t\t/; s/ \\$$//' | \
+	${SORT} | \
+	uniq | \
+	${SED} -e '1s/^\t\t/CARGO_CRATES=\t/; s/$$/ \\/' | \
+	${SED} -e '$$s/ \\//'
 
 .include <bsd.port.mk>

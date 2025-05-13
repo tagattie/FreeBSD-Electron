@@ -14,7 +14,7 @@ share/icons/hicolor/96x96/apps/joplin.png
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/LICENSE.md
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/bin/freebsd-x64-122/keytar.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/bin/freebsd-x64-134/keytar.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/Release/keytar.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/build/node_gyp_bins/python3
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar/lib/keytar.js
@@ -95,6 +95,7 @@ share/icons/hicolor/96x96/apps/joplin.png
 %%DATADIR%%/resources/build/7zip/7za
 %%DATADIR%%/resources/build/7zip/license.txt
 %%DATADIR%%/resources/build/defaultPlugins/io.github.jackgruber.backup.jpl
+%%DATADIR%%/resources/build/defaultPlugins/io.github.personalizedrefrigerator.js-draw.jpl
 %%DATADIR%%/resources/build/icons/1024x1024.png
 %%DATADIR%%/resources/build/icons/128x128.png
 %%DATADIR%%/resources/build/icons/144x144.png
