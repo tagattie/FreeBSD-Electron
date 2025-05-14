@@ -1,4 +1,4 @@
---- apps/desktop/desktop_native/core/src/ssh_agent/mod.rs.orig	2025-01-23 11:12:57 UTC
+--- apps/desktop/desktop_native/core/src/ssh_agent/mod.rs.orig	2025-04-28 18:52:32 UTC
 +++ apps/desktop/desktop_native/core/src/ssh_agent/mod.rs
 @@ -10,10 +10,10 @@ use bitwarden_russh::ssh_agent::{self, Key};
  
@@ -12,4 +12,4 @@
 +#[cfg(any(target_os = "linux", target_os = "freebsd", target_os = "macos"))]
  mod peercred_unix_listener_stream;
  
- pub mod importer;
+ pub mod peerinfo;
