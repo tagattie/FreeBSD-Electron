@@ -1,6 +1,6 @@
 PORTNAME=	ytmdesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.0.6
+DISTVERSION=	2.0.8
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://ytmdesktop.app/
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:33 localbase:ldflags nodejs:20,build python:build
+USES=		electron:34 localbase:ldflags nodejs:20,build python:build
 
 USE_GITHUB=	yes
 
@@ -23,11 +23,13 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:forge
 
 GIT_BRANCH=	HEAD
-GIT_COMMIT_HASH=62f2f3681da2eaedc74269f704d441dca35a91e3
+GIT_COMMIT_HASH=ef733c8f5df5af469bd9bf35671d9448814d8844
 
 post-patch:
 	@${REINPLACE_CMD} -e 's/%%GIT_BRANCH%%/${GIT_BRANCH}/; \
-		s/%%GIT_COMMIT_HASH%%/${GIT_COMMIT_HASH}/' ${WRKSRC}/webpack.renderer.config.ts
+		s/%%GIT_COMMIT_HASH%%/${GIT_COMMIT_HASH}/' \
+		${WRKSRC}/viteconfig/main.ts \
+		${WRKSRC}/viteconfig/renderer.ts
 
 pre-build:
 	# generate icon files

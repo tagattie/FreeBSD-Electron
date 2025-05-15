@@ -16,3 +16,5 @@ share/icons/hicolor/64x64/apps/ytmdesktop.png
 %%DATADIR%%/resources/trayTemplate.png
 %%DATADIR%%/resources/trayTemplate@2x.png
 %%DATADIR%%/resources/ytmd.png
+%%DATADIR%%/resources/ytmd_black.png
+%%DATADIR%%/resources/ytmd_white.png
