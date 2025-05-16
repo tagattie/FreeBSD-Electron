@@ -380,7 +380,7 @@ _EXISTS_NPM_PKGFILE=	1
 .   if ${_EXISTS_NPM_PKGFILE} == 1 && empty(NPM_VER)
 NPM_VER!=	${GREP} packageManager ${PKGJSONSDIR}/${NPM_PKGFILE} | \
 		${AWK} -F ':' '{print $$NF}' | \
-		${SED} -e 's/[","]//g' | \
+		${SED} -e 's/[",]//g' | \
 		${CUT} -f 2 -d '@' | \
 		${CUT} -f 1 -d '+'
 .   endif
