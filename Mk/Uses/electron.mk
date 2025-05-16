@@ -381,7 +381,8 @@ _EXISTS_NPM_PKGFILE=	1
 NPM_VER!=	${GREP} packageManager ${PKGJSONSDIR}/${NPM_PKGFILE} | \
 		${AWK} -F ':' '{print $$NF}' | \
 		${SED} -e 's/[","]//g' | \
-		${CUT} -f 2 -d '@'
+		${CUT} -f 2 -d '@' | \
+		${CUT} -f 1 -d '+'
 .   endif
 .   if empty(NPM_VER)
 IGNORE=	does not specity version of ${NPM_CMDNAME} used for prefetching node modules
