@@ -1,6 +1,6 @@
 {
   "name": "nuclear",
-  "version": "0.6.21",
+  "version": "0.6.47",
   "description": "Streaming music player that finds music sources automatically.",
   "repository": {
     "type": "git",
@@ -20,20 +20,19 @@
   },
   "homepage": "https://github.com/nukeop/nuclear#readme",
   "scripts": {
-    "postinstall": "lerna bootstrap --hoist && electron-builder install-app-deps",
-    "start": "lerna run start --stream",
+    "postinstall": "electron-builder install-app-deps && lerna run build --scope @nuclear/scanner",
+    "start": "lerna run start --stream --parallel",
     "build": "shx rm -rf dist && lerna run build && npm run pack",
-    "test": "lerna run lint && lerna run build && lerna run test",
+    "test": "lerna run test",
     "coverage": "lerna run coverage",
     "lint": "lerna run lint",
     "lint:fix": "lerna run lint:fix",
     "storybook": "lerna run storybook",
-    "docker": "docker run --rm --net=host --env=\"DISPLAY\" --volume=\"$HOME/.Xauthority:/root/.Xauthority:rw\" --device /dev/snd nuclear",
-    "build:docker": "docker build -t nuclear .",
     "pack": "cross-env NODE_OPTIONS='--max-old-space-size=8192' electron-builder --dir -c.extraMetadata.main=dist/main.js",
     "build:linux": "lerna run build && electron-builder -c.extraMetadata.main=dist/main.js --linux --publish onTag",
     "build:windows": "lerna run build && cross-env NODE_OPTIONS='--max-old-space-size=8192' electron-builder -c.extraMetadata.main=dist/main.js --windows --publish onTag",
-    "build:macos": "lerna run build && cross-env NODE_OPTIONS='--max-old-space-size=8192' electron-builder -c.extraMetadata.main=dist/main.js --macos --publish onTag",
+    "build:macos": "lerna run build && lerna run build-macos && cross-env NODE_OPTIONS='--max-old-space-size=8192' electron-builder -c.extraMetadata.main=dist/main.js --macos --x64 --publish onTag",
+    "build:macos-arm64": "lerna run build && lerna run build-macos-arm64 && cross-env NODE_OPTIONS='--max-old-space-size=8192' electron-builder -c.extraMetadata.main=dist/main.js --macos --arm64 --publish onTag",
     "build:all": "lerna run build && cross-env NODE_OPTIONS='--max-old-space-size=8192' electron-builder -c.extraMetadata.main=dist/main.js -mwl"
   },
   "devDependencies": {
@@ -41,13 +40,13 @@
     "@typescript-eslint/parser": "^4.33.0",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.3",
-    "electron": "^12.1.0",
-    "electron-builder": "^21.2.0",
+    "electron": "^33.3.1",
+    "electron-builder": "^25.1.8",
     "eslint": "^7.18.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-react": "^7.12.4",
     "husky": "^3.1.0",
-    "lerna": "^3.22.1",
+    "lerna": "^7.3.1",
     "lint-staged": "^10.0.0-beta.14",
     "shx": "^0.3.3",
     "typescript": "^4.2.4"
@@ -56,8 +55,8 @@
     "7zip-bin-mac": "^1.0.1"
   },
   "engines": {
-    "node": ">=12.14.0",
-    "npm": ">=6.0.0"
+    "node": ">=22.0.0",
+    "npm": ">=10.0.0"
   },
   "husky": {
     "hooks": {
@@ -70,10 +69,13 @@
     "*.ts": "eslint --fix",
     "*.tsx": "eslint --fix"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "build": {
     "appId": "nuclear",
     "productName": "nuclear",
-    "artifactName": "${productName}-v${env.VERSION}.${ext}",
+    "artifactName": "${productName}-v${env.VERSION}-${arch}.${ext}",
     "directories": {
       "output": "release"
     },
@@ -117,32 +119,12 @@
         "mimeType": "audio/ogg"
       },
       {
-        "ext": "aac",
-        "mimeType": "audio/aac"
-      },
-      {
         "ext": "flac",
         "mimeType": "audio/flac"
       },
       {
-        "ext": "wav",
-        "mimeType": "audio/x-wav"
-      },
-      {
-        "ext": "m4a",
-        "mimeType": "audio/m4a"
-      },
-      {
-        "ext": "weba",
-        "mimeType": "audio/weba"
-      },
-      {
         "ext": "mp4",
         "mimeType": "audio/mp4"
-      },
-      {
-        "ext": "webm",
-        "mimeType": "audio/webm"
       }
     ],
     "linux": {
@@ -167,22 +149,37 @@
           "filter": [
             "**/*"
           ]
+        },
+        {
+          "from": "node_modules/ffmpeg-static",
+          "to": "resources/bin",
+          "filter": [
+            "ffmpeg"
+          ]
         }
       ]
     },
     "mac": {
       "category": "public.app-category.music",
       "target": [
-        "zip",
-        "pkg",
-        "dmg"
+        {
+          "target": "dmg"
+        }
       ],
+      "mergeASARs": true,
       "extraFiles": [
         {
           "from": "packages/main/bin/mac",
           "to": "resources/bin",
           "filter": [
             "**/*"
+          ]
+        },
+        {
+          "from": "node_modules/ffmpeg-static",
+          "to": "resources/bin",
+          "filter": [
+            "ffmpeg"
           ]
         }
       ]
@@ -199,6 +196,13 @@
           "filter": [
             "**/*"
           ]
+        },
+        {
+          "from": "node_modules/ffmpeg-static",
+          "to": "resources/bin",
+          "filter": [
+            "ffmpeg.exe"
+          ]
         }
       ]
     },
@@ -207,7 +211,6 @@
     }
   },
   "dependencies": {
-    "node-gyp": "^9.0.0",
-    "sqlite3": "^5.1.2"
+    "sqlite3": "^5.1.6"
   }
 }

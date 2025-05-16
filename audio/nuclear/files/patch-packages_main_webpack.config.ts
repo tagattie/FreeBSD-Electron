@@ -1,6 +1,6 @@
---- packages/main/webpack.config.ts.orig	2020-02-03 18:53:44 UTC
+--- packages/main/webpack.config.ts.orig	2025-05-01 23:34:50 UTC
 +++ packages/main/webpack.config.ts
-@@ -12,6 +12,7 @@ interface BuildEnv {
+@@ -10,6 +10,7 @@ const osMapper: Record<string, BuildEnv['TARGET']> = {
  
  const osMapper: Record<string, BuildEnv['TARGET']> = {
    linux: 'linux',
