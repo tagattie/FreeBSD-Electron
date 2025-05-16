@@ -529,6 +529,9 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-community-color-schemes/schemes/Terminal Basic
 %%DATADIR%%/resources/builtin-plugins/tabby-community-color-schemes/schemes/Thayer Bright
 %%DATADIR%%/resources/builtin-plugins/tabby-community-color-schemes/schemes/The Hulk
+%%DATADIR%%/resources/builtin-plugins/tabby-community-color-schemes/schemes/TokyoNight
+%%DATADIR%%/resources/builtin-plugins/tabby-community-color-schemes/schemes/TokyoNight Day
+%%DATADIR%%/resources/builtin-plugins/tabby-community-color-schemes/schemes/TokyoNight Storm
 %%DATADIR%%/resources/builtin-plugins/tabby-community-color-schemes/schemes/Tomorrow
 %%DATADIR%%/resources/builtin-plugins/tabby-community-color-schemes/schemes/Tomorrow Night
 %%DATADIR%%/resources/builtin-plugins/tabby-community-color-schemes/schemes/Tomorrow Night Blue
