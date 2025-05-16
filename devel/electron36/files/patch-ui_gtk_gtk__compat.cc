@@ -1,4 +1,4 @@
---- ui/gtk/gtk_compat.cc.orig	2025-05-11 11:50:45 UTC
+--- ui/gtk/gtk_compat.cc.orig	2025-05-15 14:01:16 UTC
 +++ ui/gtk/gtk_compat.cc
 @@ -65,22 +65,38 @@ void* GetLibGio() {
  }
@@ -6,7 +6,7 @@
  void* GetLibGio() {
 +#if BUILDFLAG(IS_BSD)
 +  static void* libgio = DlOpen("libgio-2.0.so");
-+#else  
++#else
    static void* libgio = DlOpen("libgio-2.0.so.0");
 +#endif
    return libgio;

@@ -1,4 +1,4 @@
---- electron/spec/api-browser-window-spec.ts.orig	2025-05-07 07:36:13 UTC
+--- electron/spec/api-browser-window-spec.ts.orig	2025-05-12 02:18:43 UTC
 +++ electron/spec/api-browser-window-spec.ts
 @@ -69,7 +69,7 @@ describe('BrowserWindow module', () => {
        }).not.to.throw();
@@ -162,7 +162,7 @@
          const w = new BrowserWindow({ show: false });
          expect(w.resizable).to.be.true('resizable');
  
-@@ -5430,7 +5430,7 @@ describe('BrowserWindow module', () => {
+@@ -5481,7 +5481,7 @@ describe('BrowserWindow module', () => {
      });
    });
  
