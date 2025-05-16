@@ -1,4 +1,4 @@
---- app/src/lib/editors/linux.ts.orig	2024-11-11 20:50:12 UTC
+--- app/src/lib/editors/linux.ts.orig	2025-05-16 06:29:38 UTC
 +++ app/src/lib/editors/linux.ts
 @@ -18,30 +18,30 @@ const editors: ILinuxExternalEditor[] = [
  const editors: ILinuxExternalEditor[] = [
@@ -93,7 +93,7 @@
      ],
 @@ -125,6 +128,7 @@ const editors: ILinuxExternalEditor[] = [
    {
-     name: 'IntelliJ Goland',
+     name: 'JetBrains Goland',
      paths: [
 +      '%%LOCALBASE%%/bin/goland',
        '/snap/bin/goland',

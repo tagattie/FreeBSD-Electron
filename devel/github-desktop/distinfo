@@ -1,8 +1,8 @@
-TIMESTAMP = 1734513904
-SHA256 (github-desktop-3.4.8-linux1-node-modules.tar.gz) = 1cb08901ff5de39c305c8ae458cfafe31024c66496b83a146531c5c04ca4b9d0
-SIZE (github-desktop-3.4.8-linux1-node-modules.tar.gz) = 140724602
-SHA256 (shiftkey-desktop-release-3.4.8-linux1_GH0.tar.gz) = 9db4049642c87a8573234cbe81c9cdbab1ed93b0204cded43b0c71270b156180
-SIZE (shiftkey-desktop-release-3.4.8-linux1_GH0.tar.gz) = 20448941
+TIMESTAMP = 1747376888
+SHA256 (github-desktop-3.4.13-linux1-node-modules.tar.gz) = 26494cd9ce8e5dd3beff7414729b363224703bd76bfa11ddd56a6c0eb6853362
+SIZE (github-desktop-3.4.13-linux1-node-modules.tar.gz) = 144788756
+SHA256 (shiftkey-desktop-release-3.4.13-linux1_GH0.tar.gz) = b84f9529dea2e5aeefb2e670b4a702046db59629e3b312129091d6799f20fc34
+SIZE (shiftkey-desktop-release-3.4.13-linux1_GH0.tar.gz) = 12859856
 SHA256 (github-gemoji-50865e8895c54037bf06c4c1691aa925d030a59d_GH0.tar.gz) = c8a05fd2c2737dc2254ba1306af96bae4f116f4ab909e1505a9a0ea0ea5d52fb
 SIZE (github-gemoji-50865e8895c54037bf06c4c1691aa925d030a59d_GH0.tar.gz) = 2264613
 SHA256 (github-gitignore-e89e04390435f1e7628740d7b4ce1fe65ac218fd_GH0.tar.gz) = 8ffa870259980b8b5bbe9b009f6ccfb75310a6f3e09338741e089ca11589de79

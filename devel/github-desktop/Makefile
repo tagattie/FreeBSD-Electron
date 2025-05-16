@@ -1,6 +1,6 @@
 PORTNAME=	github-desktop
 DISTVERSIONPREFIX=	release-
-DISTVERSION=	3.4.8-linux1
+DISTVERSION=	3.4.13-linux1
 CATEGORIES=	devel
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -14,7 +14,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 RUN_DEPENDS=	git:devel/git \
 		git-lfs:devel/git-lfs
 
-USES=		desktop-file-utils electron:30 localbase:ldflags \
+USES=		desktop-file-utils electron:32 localbase:ldflags \
 		nodejs:20,build pkgconfig python:build
 
 USE_GITHUB=	yes
@@ -26,7 +26,7 @@ GH_TUPLE=	github:gemoji:50865e8895c54037bf06c4c1691aa925d030a59d:gemoji/gemoji \
 
 SUB_FILES=	${PORTNAME}
 
-MAKE_ENV+=	CIRCLE_SHA1=c04819f9622e8062052507e8e27ea866458f9909
+MAKE_ENV+=	CIRCLE_SHA1=2b2484a3d4b439b36e43c207013252e1ac859bb0
 REINPLACE_FILES=	app/src/lib/editors/linux.ts \
 			app/src/lib/shells/linux.ts \
 			app/node_modules/dugite/build/lib/git-environment.js
