@@ -1,6 +1,12 @@
+# Notes for port maintainer
+#
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
+# 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
+#    $ npm install --save-dev --ignore-scripts node-addon-api node-gyp
+
 PORTNAME=	nora
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.0
+DISTVERSION=	3.1.0
 DISTVERSIONSUFFIX=	-stable
 CATEGORIES=	audio
 
@@ -13,15 +19,15 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		cargo desktop-file-utils electron:30 nodejs:20,build
+USES=		cargo desktop-file-utils electron:35 nodejs:22,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Sandakan
 GH_PROJECT=	Nora
-GH_TUPLE=	rollup:rollup:v4.17.2:rollup/rollup
+GH_TUPLE=	swc-project:swc:v1.11.13:swc/swc
 
-CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
-CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
+CARGO_CARGOTOML=${WRKSRC}/swc/bindings/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/swc/bindings/Cargo.lock
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
@@ -35,10 +41,12 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
 
 pre-build:
-	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/release/libbindings_napi.so \
-		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
+	cd ${WRKSRC}/swc/bindings && \
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} CARGO_FEATURE_LOCAL_DYNAMIC_TLS=1 \
+		${CARGO} build --manifest-path ${CARGO_CARGOTOML} \
+		--package binding_core_node --release --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/release/libbinding_core_node.so \
+		${WRKSRC}/node_modules/@swc/core/swc.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
