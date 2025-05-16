@@ -1,6 +1,6 @@
 PORTNAME=	muffon
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.1.0
+DISTVERSION=	2.2.0
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,18 +10,11 @@ WWW=		https://muffon.netlify.app/
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		cargo desktop-file-utils electron:31 gmake nodejs:20,build \
+USES=		desktop-file-utils electron:34 gmake nodejs:20,build \
 		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	staniel359
-GH_TUPLE=	rollup:rollup:v4.18.0:rollup/rollup
-
-CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
-CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
-CARGO_BUILD=	no
-CARGO_INSTALL=	no
-CARGO_TEST=	no
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
@@ -31,8 +24,6 @@ PORTDOCS=	README.md
 OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
-
-NPM_VER=	9.12.1
 
 post-extract:
 	if [ -f ${FILESDIR}/dot.env ]; then \
@@ -44,11 +35,7 @@ post-patch:
 		${WRKSRC}/node_modules/register-scheme/binding.gyp
 
 pre-build:
-	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/release/libbindings_napi.so \
-		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build:vue
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=public/icons

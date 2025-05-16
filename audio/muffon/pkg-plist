@@ -9,11 +9,3 @@ share/icons/hicolor/512x512/apps/muffon.png
 share/icons/hicolor/64x64/apps/muffon.png
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/build/Release/register-protocol-handler.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/build/node_gyp_bins/python3
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/index.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/package.json
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/src/register.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/src/register_linux.cpp
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/src/register_mac.m
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/src/register_win.cpp
