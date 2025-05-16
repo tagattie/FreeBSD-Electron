@@ -1,6 +1,6 @@
 PORTNAME=	simplenote
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.23.0
+DISTVERSION=	2.23.2
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://simplenote.com
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE.md
 
-USES=		electron:30 gmake localbase:ldflags nodejs:20,build \
+USES=		electron:34 gmake localbase:ldflags nodejs:20,build \
 		python:build xorg
 
 USE_GITHUB=	yes
