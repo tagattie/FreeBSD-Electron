@@ -1,6 +1,6 @@
 {
   "name": "teams-for-linux",
-  "version": "1.10.2",
+  "version": "2.0.13",
   "main": "app/index.js",
   "description": "Unofficial client for Microsoft Teams for Linux",
   "homepage": "https://github.com/IsmaelMartinez/teams-for-linux",
@@ -41,24 +41,22 @@
     "release": "electron-builder"
   },
   "dependencies": {
-    "@electron/remote": "^2.1.2",
     "@homebridge/dbus-native": "0.6.0",
-    "electron-is-dev": "2.0.0",
-    "electron-log": "^5.1.7",
+    "electron-log": "^5.4.0",
     "electron-store": "8.2.0",
     "electron-window-state": "5.0.3",
-    "http-server": "^14.1.1",
     "lodash": "^4.17.21",
     "node-sound": "^0.0.8",
     "yargs": "^17.7.2"
   },
   "devDependencies": {
-    "@electron/fuses": "^1.7.0",
-    "@eslint/js": "^9.9.0",
-    "electron": "^30.4.0",
-    "electron-builder": "^24.13.3",
-    "eslint": "^9.9.0",
-    "globals": "^15.9.0"
+    "@electron/fuses": "^1.8.0",
+    "@eslint/js": "^9.26.0",
+    "http-server": "^14.1.1",
+    "electron": "^35.4.0",
+    "electron-builder": "^26.0.12",
+    "eslint": "^9.26.0",
+    "globals": "^16.1.0"
   },
   "build": {
     "appId": "teams-for-linux",
@@ -84,9 +82,10 @@
       "synopsis": "Teams for Linux",
       "description": "Unofficial Microsoft Teams client for Linux using Electron. It uses the Web App and wraps it as a standalone application using Electron.",
       "desktop": {
-        "Name": "Teams for Linux",
-        "Comment": "Unofficial client for Microsoft Teams for Linux",
-        "StartupWMClass": "teams-for-linux"
+        "entry": {
+          "Name": "Teams for Linux",
+          "Comment": "Unofficial client for Microsoft Teams for Linux"
+        }
       },
       "target": [
         "rpm",
@@ -127,7 +126,6 @@
         "default",
         "camera",
         "screen-inhibit-control",
-        "wayland",
         "upower-observe",
         "audio-record",
         "hardware-observe",
