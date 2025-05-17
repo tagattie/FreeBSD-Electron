@@ -2,7 +2,7 @@
   "$schema": "./schemas/schemastore/package.json",
   "name": "webcord",
   "productName": "WebCord",
-  "version": "4.10.5",
+  "version": "4.11.0",
   "description": "A Discord made with the Electron API.",
   "main": "app/code/common/main.js",
   "scripts": {
@@ -54,7 +54,7 @@
     "@types/source-map-support": "^0.5.4",
     "@types/ws": "^8.5.1",
     "@typescript-eslint/eslint-plugin": "^8.2.0",
-    "electron": "^35.2.0",
+    "electron": "^36.2.0",
     "eslint": "latest",
     "eslint-import-resolver-typescript": "latest",
     "eslint-plugin-import": "latest",
