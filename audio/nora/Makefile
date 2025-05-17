@@ -38,7 +38,7 @@ PORTDOCS=	README.md changelog.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:npm appbuilder:devel prefetch extract rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC}/swc/bindings && \
