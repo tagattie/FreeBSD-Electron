@@ -29,7 +29,7 @@ PORTDOCS=	CONTRIBUTING.md LEGAL.md PRIVACY_POLICY.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:npm appbuilder:devel prefetch extract rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config.extraMetadata.main=dist/main.js
 
