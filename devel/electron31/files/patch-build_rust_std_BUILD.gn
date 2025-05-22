@@ -1,6 +1,27 @@
 --- build/rust/std/BUILD.gn.orig	2024-08-19 05:20:38 UTC
 +++ build/rust/std/BUILD.gn
-@@ -65,12 +65,19 @@ if (toolchain_has_rust) {
+@@ -21,20 +21,6 @@ if (toolchain_has_rust) {
+ import("//build/config/sanitizers/sanitizers.gni")
+ 
+ if (toolchain_has_rust) {
+-  # Equivalent of allocator symbols injected by rustc.
+-  source_set("remap_alloc") {
+-    sources = [
+-      # `alias.*`, `compiler_specific.h`, and `immediate_crash.*` have been
+-      # copied from `//base`.
+-      # TODO(crbug.com/40279749): Avoid duplication / reuse code.
+-      "alias.cc",
+-      "alias.h",
+-      "compiler_specific.h",
+-      "immediate_crash.h",
+-      "remap_alloc.cc",
+-    ]
+-  }
+-
+   # List of Rust stdlib rlibs which are present in the official Rust toolchain
+   # we are using from the Android team. This is usually a version or two behind
+   # nightly. Generally this matches the toolchain we build ourselves, but if
+@@ -65,12 +51,19 @@ if (toolchain_has_rust) {
      # These are no longer present in the Windows toolchain.
      stdlib_files += [
        "addr2line",
@@ -21,7 +42,7 @@
    }
  
    if (toolchain_for_rust_host_build_tools) {
-@@ -90,7 +97,6 @@ if (toolchain_has_rust) {
+@@ -90,7 +83,6 @@ if (toolchain_has_rust) {
    # don't need to pass to the C++ linker because they're used for specialized
    # purposes.
    skip_stdlib_files = [
@@ -29,3 +50,24 @@
      "rustc_std_workspace_alloc",
      "rustc_std_workspace_core",
      "rustc_std_workspace_std",
+@@ -292,7 +284,6 @@ if (toolchain_has_rust) {
+       ]
+       public_deps = [
+         ":local_stdlib_libs",
+-        ":remap_alloc",
+       ]
+     }
+   } else {
+@@ -419,12 +410,6 @@ if (toolchain_has_rust) {
+         ":stdlib_public_dependent_libs",
+       ]
+       deps = [ ":prebuilt_rustc_copy_to_sysroot" ]
+-
+-      # The host builds tools toolchain supports Rust only and does not use
+-      # the allocator remapping to point it to PartitionAlloc.
+-      if (!toolchain_for_rust_host_build_tools) {
+-        deps += [ ":remap_alloc" ]
+-      }
+     }
+   }
+ }
