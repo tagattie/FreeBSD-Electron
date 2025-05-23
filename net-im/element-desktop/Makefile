@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.100
+DISTVERSION=	1.11.101
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
@@ -22,7 +22,7 @@ BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo desktop-file-utils electron:35 gmake nodejs:22,build \
+USES=		cargo desktop-file-utils electron:36 gmake nodejs:22,build \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
@@ -33,6 +33,7 @@ CARGO_CARGOLOCK=${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build/
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
+CARGO_ENV=	OPENSSL_NO_VENDOR=1
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}

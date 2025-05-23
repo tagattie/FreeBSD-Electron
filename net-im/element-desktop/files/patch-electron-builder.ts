@@ -1,12 +1,10 @@
---- electron-builder.ts.orig	2025-04-23 11:15:41 UTC
+--- electron-builder.ts.orig	2025-05-20 14:01:24 UTC
 +++ electron-builder.ts
-@@ -71,25 +71,25 @@ const config: Omit<Writable<Configuration>, "electronF
-  * @see https://www.electron.build/configuration/configuration
+@@ -48,24 +48,24 @@ const config: Omit<Writable<Configuration>, "electronF
   */
  const config: Omit<Writable<Configuration>, "electronFuses"> & {
--    // Make all fuses required to ensure they are all explicitly specified
+     // Make all fuses required to ensure they are all explicitly specified
 -    electronFuses: Required<Configuration["electronFuses"]>;
-+    // // Make all fuses required to ensure they are all explicitly specified
 +    // electronFuses: Required<Configuration["electronFuses"]>;
  } = {
      appId: "im.riot.app",
@@ -37,6 +35,6 @@
 +    //     loadBrowserProcessSpecificV8Snapshot: false,
 +    //     enableEmbeddedAsarIntegrityValidation: true,
 +    // },
-     afterPack: async (context: AfterPackContext) => {
-         await injectAsarIntegrity(context);
-     },
+     files: [
+         "package.json",
+         {
