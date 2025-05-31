@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2025.4.2
+DISTVERSION=	2025.5.0
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -46,7 +46,7 @@ USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run postinstall
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${CARGO_ENV:C/^CARGO_TARGET_DIR=.*$//} \
-		npm run build-native cross-platform
+		npm run build-native -- --release
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 
 do-install:

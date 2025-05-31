@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/core/Cargo.toml.orig	2025-04-28 18:52:32 UTC
+--- apps/desktop/desktop_native/core/Cargo.toml.orig	2025-05-23 19:07:06 UTC
 +++ apps/desktop/desktop_native/core/Cargo.toml
-@@ -81,7 +81,7 @@ desktop_objc = { path = "../objc" }
+@@ -82,7 +82,7 @@ desktop_objc = { path = "../objc" }
  security-framework-sys = { workspace = true, optional = true }
  desktop_objc = { path = "../objc" }
  
