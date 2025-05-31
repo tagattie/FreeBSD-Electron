@@ -1,27 +1,28 @@
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.14.2
+DISTVERSION=	1.16.1
 CATEGORIES=	net-im
 MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
 DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher
 
 MAINTAINER=	tagattie@FreeBSD.org
-COMMENT=	Onion routing based messenger
+COMMENT=	Decentralized, Onion routed, private messenger
 WWW=		https://getsession.org
 
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 FETCH_DEPENDS=	git:devel/git
-BUILD_DEPENDS=	app-builder:devel/app-builder \
-		${LOCALBASE}/lib/libsignal_tokenizer.a:devel/signal-fts5-extension
+BUILD_DEPENDS=	${LOCALBASE}/lib/libsignal_sqlcipher_extension.a:devel/signal-sqlcipher-extension
 LIB_DEPENDS=	libinotify.so:devel/libinotify
 
-USES=		cmake:indirect electron:25 localbase:ldflags nodejs:18,build \
-		python:build
+USES=		cmake:indirect electron:34 localbase:ldflags nodejs:20,build \
+		python:3.12+,build
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	oxen-io
+GH_ACCOUNT=	session-foundation
+
+MAKE_ENV=	SIGNAL_ENV=production
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
@@ -30,20 +31,21 @@ PORTDOCS=	CONTRIBUTING.md README.md THEMES.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1 prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:yarn1 appbuilder prefetch extract rebuild build:builder
 
-SQLCIPHER_VER=	4.5.5-fts5-fix--3.0.7--0.2.1-ef53ea45ed92b928ecfd33c552d8d405263e86e63dec38e1ec63e1b0193b630b
-MAKE_ENV+=	SIGNAL_ENV=production
+SQLCIPHER_VER=	v2-4.6.1-signal-patch2--0.2.1-asm2-6253f886c40e49bf892d5cdc92b2eb200b12cd8d80c48ce5b05967cfd01ee8c7
 ELECTRON_MAKE_FLAGS+=	--config.extraMetadata.environment=production \
 			--config.directories.output=release
 
 post-extract:
-	${CP} ${DISTDIR}/sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX} \
+	@${CP} ${DISTDIR}/sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX} \
 		${WRKSRC}/node_modules/@signalapp/better-sqlite3/deps/sqlcipher.tar.gz
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn patch-package
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn build-everything
+	cd ${WRKSRC}/node_modules/libsession_util_nodejs && \
+		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm run install
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run patch-package
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build-everything
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
@@ -60,10 +62,10 @@ do-install:
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
-	${MKDIR} ${STAGEDIR}${DOCSDIR}
+	@${MKDIR} ${STAGEDIR}${DOCSDIR}
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test
 
 .include <bsd.port.mk>
