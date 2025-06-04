@@ -32,7 +32,7 @@ PORTDOCS=	CONTRIBUTING.md README.md THEMES.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1 appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:yarn1 appbuilder:devel prefetch extract rebuild build:builder
 
 SQLCIPHER_VER=	v2-4.6.1-signal-patch2--0.2.1-asm2-6253f886c40e49bf892d5cdc92b2eb200b12cd8d80c48ce5b05967cfd01ee8c7
 ELECTRON_MAKE_FLAGS+=	--config.extraMetadata.environment=production \
