@@ -1,13 +1,13 @@
---- electron-builder.ts.orig	2025-05-20 14:01:24 UTC
+--- electron-builder.ts.orig	2025-06-03 15:13:27 UTC
 +++ electron-builder.ts
-@@ -48,24 +48,24 @@ const config: Omit<Writable<Configuration>, "electronF
+@@ -56,24 +56,24 @@ const config: Omit<Writable<Configuration>, "electronF
   */
  const config: Omit<Writable<Configuration>, "electronFuses"> & {
      // Make all fuses required to ensure they are all explicitly specified
 -    electronFuses: Required<Configuration["electronFuses"]>;
 +    // electronFuses: Required<Configuration["electronFuses"]>;
  } = {
-     appId: "im.riot.app",
+     appId: DEFAULT_APP_ID,
      asarUnpack: "**/*.node",
 -    electronFuses: {
 -        enableCookieEncryption: true,
