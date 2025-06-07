@@ -108,16 +108,18 @@ post-configure:
 		--verbose --verbose ${CARGO_UPDATE_ARGS}
 
 pre-build:
+	# Rust 1.87 appears to break release build of rollup. So use debug
+	# build temporarily.
 	cd ${WRKSRC}/rollup/rust && \
 		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
-		--manifest-path ${CARGO_CARGOTOML_ROLLUP} --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/release/libbindings_napi.so \
+		--manifest-path ${CARGO_CARGOTOML_ROLLUP} --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/*/libbindings_napi.so \
 		${WRKSRC}/packages/turndown/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC}/wasm-pack && \
 		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
 		--manifest-path ${CARGO_CARGOTOML_WASM_PACK} --release --verbose --verbose
 	@${MKDIR} ${WRKSRC}/packages/onenote-converter/node_modules/binary-install/node_modules/.bin
-	${CP} ${CARGO_TARGET_DIR}/release/wasm-pack \
+	${CP} ${CARGO_TARGET_DIR}/*/wasm-pack \
 		${WRKSRC}/packages/onenote-converter/node_modules/binary-install/node_modules/.bin
 	@${MKDIR} ${WRKSRC}/packages/app-desktop/node_modules/7zip-bin/freebsd/${ELECTRON_ARCH}
 	${CP} ${LOCALBASE}/bin/7zz \
