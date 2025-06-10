@@ -2,15 +2,15 @@
 #
 # Before copying package.json and yarn.lock to ${PKGJSONSDIR}, do the following steps:
 # 1. Remove sharp from devDependencies in ${WRKSRC}/packages/lib
-#    $ corepack yarn remove --mode=skip-build sharp
+#    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
 # 2. Remove sharp from devDependencies in ${WRKSRC}/packages/app-mobile
-#    $ corepack yarn remove --mode=skip-build sharp
+#    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
 # 3. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}/packages/tools
 #    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
 
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.3.12
+DISTVERSION=	3.3.13
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch
@@ -98,10 +98,6 @@ post-extract:
 			${WRKSRC}/packages/default-plugins/plugin-sources/$${dir}; \
 	done
 
-post-patch:
-	@${RM} -r ${WRKSRC}/packages/app-cli \
-		${WRKSRC}/packages/app-clipper
-
 post-configure:
 	@${ECHO_MSG} "===>   Updating Cargo.lock for ${CARGO_CARGOTOML_WASM_PACK}"
 	@${CARGO_CARGO_RUN} update --manifest-path ${CARGO_CARGOTOML_WASM_PACK} \
@@ -124,10 +120,9 @@ pre-build:
 	@${MKDIR} ${WRKSRC}/packages/app-desktop/node_modules/7zip-bin/freebsd/${ELECTRON_ARCH}
 	${CP} ${LOCALBASE}/bin/7zz \
 		${WRKSRC}/packages/app-desktop/node_modules/7zip-bin/freebsd/${ELECTRON_ARCH}/7za
-	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} \
-		yarn rebuild
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec gulp build
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
-		yarn exec electron-rebuild --force-abi 134
+		yarn run electronRebuild
 	# dirty hack to avoid "EACCES: permission denied" error during electron-builder execution
 	@${RM} ${WRKDIR}/.bin/python3
 	@${CP} ${PYTHON_CMD} ${WRKDIR}/.bin/python3

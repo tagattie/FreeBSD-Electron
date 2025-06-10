@@ -8416,6 +8416,8 @@ __metadata:
     jsdom: 24.1.1
     lodash: 4.17.21
     md5: 2.3.0
+    node-addon-api: ^8.3.1
+    node-gyp: ^11.2.0
     nodemon: 3.1.7
     path-browserify: 1.0.1
     prop-types: 15.8.1
@@ -8455,6 +8457,7 @@ __metadata:
     react-test-renderer: 18.3.1
     redux: 4.2.1
     rn-fetch-blob: 0.12.0
+    sharp: 0.33.4
     sqlite3: 5.1.6
     stream: 0.0.3
     stream-browserify: 3.0.0
@@ -8659,7 +8662,9 @@ __metadata:
     multiparty: 4.2.3
     mustache: 4.2.0
     nanoid: 3.3.7
+    node-addon-api: ^8.3.1
     node-fetch: 2.6.7
+    node-gyp: ^11.2.0
     node-notifier: 10.0.1
     node-persist: 3.1.3
     node-rsa: 1.1.1
@@ -8673,6 +8678,7 @@ __metadata:
     relative: 3.0.2
     reselect: 4.1.8
     server-destroy: 1.0.1
+    sharp: 0.33.4
     sprintf-js: 1.1.3
     sqlite3: 5.1.6
     string-padding: 1.0.2
@@ -25300,14 +25306,14 @@ __metadata:
   linkType: hard
 
 "fdir@npm:^6.4.4":
-  version: 6.4.4
-  resolution: "fdir@npm:6.4.4"
+  version: 6.4.6
+  resolution: "fdir@npm:6.4.6"
   peerDependencies:
     picomatch: ^3 || ^4
   peerDependenciesMeta:
     picomatch:
       optional: true
-  checksum: 79043610236579ffbd0647c508b43bd030a2d034a17c43cf96813a00e8e92e51acdb115c6ddecef3b5812cc2692b976155b4f6413e51e3761f1e772fa019a321
+  checksum: fe9f3014901d023cf631831dcb9eae5447f4d7f69218001dd01ecf007eccc40f6c129a04411b5cc273a5f93c14e02e971e17270afc9022041c80be924091eb6f
   languageName: node
   linkType: hard
 
@@ -43655,12 +43661,12 @@ __metadata:
   linkType: hard
 
 "socks@npm:^2.8.3":
-  version: 2.8.4
-  resolution: "socks@npm:2.8.4"
+  version: 2.8.5
+  resolution: "socks@npm:2.8.5"
   dependencies:
     ip-address: ^9.0.5
     smart-buffer: ^4.2.0
-  checksum: cd1edc924475d5dfde534adf66038df7e62c7343e6b8c0113e52dc9bb6a0a10e25b2f136197f379d695f18e8f0f2b7f6e42977bf720ddbee912a851201c396ad
+  checksum: d39a77a8c91cfacafc75c67dba45925eccfd884a8a4a68dcda6fb9ab7f37de6e250bb6db3721e8a16a066a8e1ebe872d4affc26f3eb763f4befedcc7b733b7ed
   languageName: node
   linkType: hard
 
@@ -46037,12 +46043,12 @@ __metadata:
   linkType: hard
 
 "tinyglobby@npm:^0.2.12":
-  version: 0.2.13
-  resolution: "tinyglobby@npm:0.2.13"
+  version: 0.2.14
+  resolution: "tinyglobby@npm:0.2.14"
   dependencies:
     fdir: ^6.4.4
     picomatch: ^4.0.2
-  checksum: 3a2e87a2518cb3616057b0aa58be4f17771ae78c6890556516ae1e631f8ce4cfee1ba1dcb62fcc54a64e2bdd6c3104f4f3d021e1a3e3f8fb0875bca380b913e5
+  checksum: 261e986e3f2062dec3a582303bad2ce31b4634b9348648b46828c000d464b012cf474e38f503312367d4117c3f2f18611992738fca684040758bba44c24de522
   languageName: node
   linkType: hard
 
