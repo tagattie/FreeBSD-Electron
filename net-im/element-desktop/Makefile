@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.102
+DISTVERSION=	1.11.103
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
@@ -14,8 +14,8 @@ WWW=		https://element.io
 
 LICENSE=	AGPLv3+ GPLv3+
 LICENSE_COMB=	dual
-LICENSE_FILE_AGPLv3+ =		${WRKSRC}/LICENSE-AGPL-3.0
-LICENSE_FILE_GPLv3+ =		${WRKSRC}/LICENSE-GPL-3.0
+LICENSE_FILE_AGPLv3+ =	${WRKSRC}/LICENSE-AGPL-3.0
+LICENSE_FILE_GPLv3+ =	${WRKSRC}/LICENSE-GPL-3.0
 
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
