@@ -54,7 +54,6 @@ CARGO_INSTALL=	no
 CARGO_TEST=	no
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
-
 SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}
 
 BUILD_WRKSRC=	${WRKSRC}/packages/app-desktop
@@ -97,6 +96,7 @@ post-extract:
 		${MV} ${WRKDIR}/node-modules-cache/$${dir}/node_modules \
 			${WRKSRC}/packages/default-plugins/plugin-sources/$${dir}; \
 	done
+	@${RM} -r ${WRKSRC}/packages/app-clipper
 
 post-configure:
 	@${ECHO_MSG} "===>   Updating Cargo.lock for ${CARGO_CARGOTOML_WASM_PACK}"
