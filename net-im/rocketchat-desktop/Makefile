@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	4.5.0
+DISTVERSION=	4.6.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -33,8 +33,8 @@ USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/release/libbindings_napi.so \
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/*/libbindings_napi.so \
 		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec patch-package
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
