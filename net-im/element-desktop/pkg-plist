@@ -2,14 +2,8 @@ bin/element-desktop
 share/applications/element-desktop.desktop
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar-forked/LICENSE.md
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar-forked/build/Release/keytar.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar-forked/lib/keytar.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar-forked/package.json
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar-forked/src/async.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar-forked/src/credentials.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/keytar-forked/src/keytar.h
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/matrix-seshat/index.node
+%%DATADIR%%/resources/default_app.asar
 %%DATADIR%%/resources/img/element.ico
 %%DATADIR%%/resources/img/element.png
 %%DATADIR%%/resources/webapp.asar

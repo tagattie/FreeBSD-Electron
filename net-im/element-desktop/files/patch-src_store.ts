@@ -1,6 +1,6 @@
---- src/store.ts.orig	2025-06-03 15:13:27 UTC
+--- src/store.ts.orig	2025-07-01 15:32:42 UTC
 +++ src/store.ts
-@@ -162,7 +162,7 @@ class Store extends ElectronStore<StoreData> {
+@@ -167,7 +167,7 @@ class Store extends ElectronStore<StoreData> {
          Store.internalInstance = store;
  
          if (
@@ -9,7 +9,7 @@
              (store.get("safeStorageBackendOverride") || store.get("safeStorageBackendMigrate"))
          ) {
              const backend = store.get("safeStorageBackend")!;
-@@ -246,7 +246,7 @@ class Store extends ElectronStore<StoreData> {
+@@ -255,7 +255,7 @@ class Store extends ElectronStore<StoreData> {
              return "plaintext";
          }
  

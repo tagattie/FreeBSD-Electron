@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.103
+DISTVERSION=	1.11.105
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
@@ -76,6 +76,10 @@ pre-fetch:
 post-extract:
 	${MV} ${WRKDIR}/yarn-offline-cache ${WRKSRC}
 	cd ${WRKSRC} && ${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
+.for f in package.json yarn.lock
+	mv -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak
+	cp ${PKGJSONSDIR}/${f} ${WRKSRC}
+.endfor
 	cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
 		yarn install --frozen-lockfile --ignore-scripts --offline
 	@${MKDIR} ${WRKSRC}/.hak/hakModules/matrix-seshat ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
