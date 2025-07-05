@@ -1,0 +1,21 @@
+--- electron-builder.json.orig	2025-07-05 12:33:52 UTC
++++ electron-builder.json
+@@ -6,7 +6,6 @@
+     "name": "Rocket.Chat",
+     "schemes": ["rocketchat"]
+   },
+-  "afterPack": "./build/afterPack.js",
+   "mac": {
+     "category": "public.app-category.productivity",
+     "target": ["dmg", "pkg", "zip", "mas"],
+@@ -122,9 +121,7 @@
+     "artifactName": "rocketchat-${version}-${os}-${arch}.${ext}"
+   },
+   "deb": {
+-    "fpm": [
+-      "--after-install=build/linux/postinst.sh"
+-    ]
++    "fpm": ["--after-install=build/linux/postinst.sh"]
+   },
+   "rpm": {
+     "fpm": ["--rpm-rpmbuild-define=_build_id_links none"]

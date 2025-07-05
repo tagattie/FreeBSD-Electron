@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	4.6.0
+DISTVERSION=	4.7.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -9,7 +9,7 @@ WWW=		https://rocket.chat
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		cargo desktop-file-utils electron:34 nodejs:20,build \
+USES=		cargo desktop-file-utils electron:37 nodejs:22,build \
 		python:build
 
 USE_GITHUB=	yes
@@ -33,7 +33,8 @@ USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --verbose --verbose
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} CARGO_PROFILE_RELEASE_LTO=false \
+		${CARGO} build --release --verbose --verbose
 	${CP} ${CARGO_TARGET_DIR}/*/libbindings_napi.so \
 		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec patch-package
