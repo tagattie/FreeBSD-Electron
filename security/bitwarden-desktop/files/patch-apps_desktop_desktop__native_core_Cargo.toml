@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/core/Cargo.toml.orig	2025-05-23 19:07:06 UTC
+--- apps/desktop/desktop_native/core/Cargo.toml.orig	2025-07-18 15:50:12 UTC
 +++ apps/desktop/desktop_native/core/Cargo.toml
-@@ -82,7 +82,7 @@ desktop_objc = { path = "../objc" }
+@@ -81,7 +81,7 @@ desktop_objc = { path = "../objc" }
  security-framework-sys = { workspace = true, optional = true }
  desktop_objc = { path = "../objc" }
  
@@ -8,4 +8,4 @@
 +[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
  oo7 = { workspace = true }
  libc = { workspace = true }
- 
+ ashpd = { workspace = true }

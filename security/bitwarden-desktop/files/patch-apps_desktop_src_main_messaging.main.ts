@@ -1,36 +1,29 @@
---- apps/desktop/src/main/messaging.main.ts.orig	2025-04-28 18:52:32 UTC
+--- apps/desktop/src/main/messaging.main.ts.orig	2025-07-18 15:50:12 UTC
 +++ apps/desktop/src/main/messaging.main.ts
-@@ -23,7 +23,7 @@ export class MessagingMain {
- 
-   async init() {
-     this.scheduleNextSync();
--    if (process.platform === "linux") {
-+    if (process.platform === "linux" || process.platform === "freebsd") {
-       await this.desktopSettingsService.setOpenAtLogin(fs.existsSync(this.linuxStartupFile()));
-     } else {
-       const loginSettings = app.getLoginItemSettings();
-@@ -121,13 +121,13 @@ export class MessagingMain {
+@@ -127,7 +127,7 @@ export class MessagingMain {
    }
  
    private addOpenAtLogin() {
 -    if (process.platform === "linux") {
 +    if (process.platform === "linux" || process.platform === "freebsd") {
-       const data = `[Desktop Entry]
- Type=Application
- Version=${app.getVersion()}
- Name=Bitwarden
- Comment=Bitwarden startup script
--Exec=${app.getPath("exe")}
-+Exec=bitwarden-desktop
- StartupNotify=false
- Terminal=false`;
+       if (isFlatpak()) {
+         autostart.setAutostart(true, []).catch((e) => {});
+       } else {
+@@ -136,7 +136,7 @@ export class MessagingMain {
+   Version=${app.getVersion()}
+   Name=Bitwarden
+   Comment=Bitwarden startup script
+-  Exec=${app.getPath("exe")}
++  Exec=bitwarden-desktop
+   StartupNotify=false
+   Terminal=false`;
  
-@@ -142,7 +142,7 @@ Terminal=false`;
+@@ -152,7 +152,7 @@ export class MessagingMain {
    }
  
    private removeOpenAtLogin() {
 -    if (process.platform === "linux") {
 +    if (process.platform === "linux" || process.platform === "freebsd") {
-       if (fs.existsSync(this.linuxStartupFile())) {
-         fs.unlinkSync(this.linuxStartupFile());
-       }
+       if (isFlatpak()) {
+         autostart.setAutostart(false, []).catch((e) => {});
+       } else {

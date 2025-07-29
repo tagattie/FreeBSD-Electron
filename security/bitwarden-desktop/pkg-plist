@@ -2,7 +2,6 @@ bin/bitwarden-desktop
 share/applications/bitwarden-desktop.desktop
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/@bitwarden/desktop-napi/desktop_napi.freebsd-x64.node
 %%DATADIR%%/resources/package.json
 share/icons/hicolor/1024x1024/apps/bitwarden-desktop.png
 share/icons/hicolor/128x128/apps/bitwarden-desktop.png

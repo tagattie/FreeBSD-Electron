@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/core/src/ssh_agent/mod.rs.orig	2025-04-28 18:52:32 UTC
+--- apps/desktop/desktop_native/core/src/ssh_agent/mod.rs.orig	2025-07-18 15:50:12 UTC
 +++ apps/desktop/desktop_native/core/src/ssh_agent/mod.rs
-@@ -10,10 +10,10 @@ use bitwarden_russh::ssh_agent::{self, Key};
+@@ -14,10 +14,10 @@ use bitwarden_russh::{
  
  #[cfg_attr(target_os = "windows", path = "windows.rs")]
  #[cfg_attr(target_os = "macos", path = "unix.rs")]
