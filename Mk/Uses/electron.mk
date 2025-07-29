@@ -421,7 +421,8 @@ electron-fetch-node-package-manager:
 IGNORE=	does not store ${NPM_PKGFILE} in ${PKGJSONSDIR} for prefetching node modules
 .   endif
 
-_USES_fetch+=	491:electron-fetch-node-modules
+_USES_fetch+=	491:electron-fetch-node-modules \
+		492:electron-archive-node-modules
 
 _DISTFILE_prefetch=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 DISTFILES+=		${_DISTFILE_prefetch}:prefetch
@@ -439,11 +440,9 @@ electron-fetch-node-modules:
 		${MKDIR} ${WRKDIR}/node-modules-cache; \
 		${TAR} -cf - -C ${PKGJSONSDIR} . | ${TAR} -xf - -C ${WRKDIR}/node-modules-cache; \
 		cd ${WRKDIR}/node-modules-cache && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}; \
-		${ECHO_MSG} "===>  Prefetching and archiving node modules"; \
+		${ECHO_MSG} "===>  Prefetching node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${SETENV} ${MAKE_ENV} ${NPM_FETCH_CMD} ${NPM_FETCH_FLAGS}; \
-		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | \
-			${GREP} -v ${NPM_MODULE_CACHE} | ${XARGS} ${RM} -r; \
 		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.gitignore; \
 		if [ -f ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.modules.yaml ]; then \
 			${YQ_CMD} -yi 'del(.prunedAt, .storeDir)' \
@@ -451,6 +450,30 @@ electron-fetch-node-modules:
 		fi; \
 		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.pnpm-workspace-state.json; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
+	fi
+
+electron-archive-node-modules:
+.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
+	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
+		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
+		for dir in `${FIND} -s ${WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
+			${GREP} -ve '${NPM_MODULE_CACHE}/.*/${NPM_MODULE_CACHE}'`; do \
+			${MTREE_CMD} -cbnSp $${dir} | ${MTREE_CMD} -C | ${SED} \
+				-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+				-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+				-e 's:flags=.*:flags=none:' \
+				-e "s|\.|$${dir}|" \
+				-e 's|^${WRKDIR}|.|' >> ${WRKDIR}/node-modules-cache.mtree; \
+		done; \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
+			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} \
+			-C ${WRKDIR} @node-modules-cache.mtree; \
+		${RM} -r ${WRKDIR}; \
+	fi
+.   elif ${_NODEJS_NPM:Myarn*}
+	@if [ -d ${WRKDIR}/node-modules-cache ]; then
+		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${MTREE_CMD} -cbnSp ${NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
@@ -462,6 +485,7 @@ electron-fetch-node-modules:
 			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} @node-modules-cache.mtree; \
 		${RM} -r ${WRKDIR}; \
 	fi
+.   endif
 .endif # _FEATURE_ELECTRON_PREFETCH
 
 # When extract feature is used, installs the prefetched node modules into the
@@ -501,8 +525,11 @@ electron-copy-package-file:
 electron-install-node-modules:
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
 	@${ECHO_MSG} "===>  Moving prefetched node modules to ${WRKSRC}"
-	@if [ -d ${WRKDIR}/${NPM_MODULE_CACHE} ]; then \
-		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
+	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
+		for dir in `${FIND} -s ${WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
+			${GREP} -ve '${NPM_MODULE_CACHE}/.*/${NPM_MODULE_CACHE}'`; do \
+			${MV} $${dir} `${ECHO_CMD} $${dir} | sed -e 's|${WRKDIR}/node-modules-cache|${WRKSRC}|'`; \
+		done; \
 	fi
 .   elif ${_NODEJS_NPM:Myarn*}
 	@${ECHO_MSG} "===>  Installing node modules from prefetched cache"
