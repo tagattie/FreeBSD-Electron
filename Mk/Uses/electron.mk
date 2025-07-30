@@ -472,7 +472,7 @@ electron-archive-node-modules:
 		${RM} -r ${WRKDIR}; \
 	fi
 .   elif ${_NODEJS_NPM:Myarn*}
-	@if [ -d ${WRKDIR}/node-modules-cache ]; then
+	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${MTREE_CMD} -cbnSp ${NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
