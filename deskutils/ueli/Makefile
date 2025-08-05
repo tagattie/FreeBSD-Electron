@@ -6,7 +6,7 @@
 
 PORTNAME=	ueli
 DISTVERSIONPREFIX=	v
-DISTVERSION=	9.24.0
+DISTVERSION=	9.25.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -18,7 +18,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		electron:34 localbase:ldflags nodejs:20,build python:build
+USES=		electron:37 localbase:ldflags nodejs:22,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	oliverschwendener
