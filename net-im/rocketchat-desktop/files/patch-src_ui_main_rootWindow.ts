@@ -1,15 +1,15 @@
---- src/ui/main/rootWindow.ts.orig	2025-07-30 23:45:16 UTC
+--- src/ui/main/rootWindow.ts.orig	2025-08-05 18:08:30 UTC
 +++ src/ui/main/rootWindow.ts
-@@ -281,7 +281,7 @@ export const setupRootWindow = (): void => {
-         rootWindow.setFullScreen(false);
-       }
+@@ -286,7 +286,7 @@ export const setupRootWindow = (): void => {
+           rootWindow.setFullScreen(false);
+         }
  
--      if (process.platform !== 'linux') rootWindow.blur();
-+      if (process.platform !== 'linux' && process.platform !== 'freebsd') rootWindow.blur();
+-        if (process.platform !== 'linux' && !rootWindow.isDestroyed()) {
++        if ((process.platform !== 'linux' && process.platform !== 'freebsd') && !rootWindow.isDestroyed()) {
+           rootWindow.blur();
+         }
  
-       const isTrayIconEnabled = select(
-         ({ isTrayIconEnabled }) => isTrayIconEnabled ?? true
-@@ -310,7 +310,7 @@ export const setupRootWindow = (): void => {
+@@ -339,7 +339,7 @@ export const setupRootWindow = (): void => {
      });
    });
  
@@ -18,7 +18,7 @@
      const selectRootWindowIcon = createStructuredSelector({
        globalBadge: selectGlobalBadge,
        rootWindowIcon: ({ rootWindowIcon }: RootState) => rootWindowIcon,
-@@ -335,7 +335,7 @@ export const setupRootWindow = (): void => {
+@@ -364,7 +364,7 @@ export const setupRootWindow = (): void => {
          const icon = nativeImage.createEmpty();
          const { scaleFactor } = screen.getPrimaryDisplay();
  
