@@ -4,7 +4,7 @@
   "private": true,
   "repository": "https://github.com/Eugeny/tabby",
   "author": {
-    "name": "Eugene Pankov",
+    "name": "Tabby Developers",
     "email": "e@ajenti.org"
   },
   "main": "dist/main.js",
@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@electron/remote": "^2",
-    "node-pty": "^1.0.0",
+    "node-pty": "^1.1.0-beta34",
     "any-promise": "^1.3.0",
     "electron-config": "2.0.0",
     "electron-debug": "^3.2.0",
@@ -64,9 +64,9 @@
     "tabby-terminal": "*"
   },
   "resolutions": {
-    "*/node-abi": "^3",
+    "node-abi": "4.9.0",
     "node-gyp": "^10.0.0",
-    "nan": "2.22.0",
+    "nan": "2.22.2",
     "node-addon-api": "^8.3.0"
   }
 }

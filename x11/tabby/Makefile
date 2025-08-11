@@ -1,6 +1,6 @@
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.223
+DISTVERSION=	1.0.225
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -20,7 +20,6 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libopus.so:audio/opus \
 		libsndio.so:audio/sndio \
 		libdbus-1.so:devel/dbus \
-		libicui18n.so:devel/icu \
 		libepoll-shim.so:devel/libepoll-shim \
 		libevent.so:devel/libevent \
 		libffi.so:devel/libffi \
@@ -44,15 +43,22 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		electron:32 gl gmake gnome iconv:wchar_t jpeg \
-		localbase:ldflags nodejs:20,build pkgconfig python:build xorg
+USES=		cargo electron:36 gl gmake gnome iconv:wchar_t jpeg \
+		localbase:ldflags nodejs:22,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
+GH_TUPLE=	Eugeny:russh-napi:f861c638c187b4d368b54ea6d068ba6f70766aff:russh_napi/russh-napi
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf gtk30 libxml2 libxslt pango
+
+CARGO_CARGOTOML=${WRKSRC}/russh-napi/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/russh-napi/Cargo.lock
+CARGO_BUILD=	no
+CARGO_INSTALL=	no
+CARGO_TEST=	no
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 
@@ -115,6 +121,11 @@ post-patch:
 		${WRKSRC}/scripts/vars.mjs
 
 pre-build:
+	cd ${WRKSRC}/russh-napi && \
+		${SETENV} ${MAKE_ENV} ${CARGO_ENV} \
+		${CARGO} build --release --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/*/librussh_napi.so \
+		${WRKSRC}/app/node_modules/russh/russh.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec patch-package
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} node scripts/install-deps.mjs
 	${CP} ${WRKSRC}/app/node_modules/glasstron/src/platforms/linux.js \

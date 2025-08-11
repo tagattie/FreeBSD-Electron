@@ -1,4 +1,4 @@
---- scripts/vars.mjs.orig	2024-07-18 22:16:58 UTC
+--- scripts/vars.mjs.orig	2025-08-09 14:17:25 UTC
 +++ scripts/vars.mjs
 @@ -10,7 +10,8 @@ const electronInfo = JSON.parse(fs.readFileSync(path.r
  
@@ -10,7 +10,7 @@
  version = version.substring(1).trim()
  version = version.replace('-', '-c')
  
-@@ -68,6 +69,12 @@ export const keygenConfig = {
+@@ -69,6 +70,12 @@ export const keygenConfig = {
          }[process.env.ARCH],
          linux: {
              x64: '7bf45071-3031-4a26-9f2e-72604308313e',
