@@ -1,6 +1,6 @@
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.225
+DISTVERSION=	1.0.226
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -126,7 +126,9 @@ pre-build:
 		${CARGO} build --release --verbose --verbose
 	${CP} ${CARGO_TARGET_DIR}/*/librussh_napi.so \
 		${WRKSRC}/app/node_modules/russh/russh.freebsd-${ELECTRON_ARCH}.node
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec patch-package
+	for dir in ${WRKSRC} ${WRKSRC}/app ${WRKSRC}/tabby-terminal; do \
+		cd $${dir} && ${SETENV} ${MAKE_ENV} yarn exec patch-package; \
+	done
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} node scripts/install-deps.mjs
 	${CP} ${WRKSRC}/app/node_modules/glasstron/src/platforms/linux.js \
 		${WRKSRC}/app/node_modules/glasstron/src/platforms/freebsd.js
