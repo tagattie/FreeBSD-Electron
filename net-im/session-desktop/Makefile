@@ -1,6 +1,6 @@
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.16.5
+DISTVERSION=	1.16.6
 CATEGORIES=	net-im
 MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
 DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher
@@ -34,6 +34,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn1 appbuilder:devel prefetch extract rebuild build:builder
 
+# See ${WRKSRC}/node_modules/@signalapp/better-sqlite3/deps/download.js for SQLCIPHER_VER
 SQLCIPHER_VER=	v2-4.6.1-signal-patch2--0.2.1-asm2-6253f886c40e49bf892d5cdc92b2eb200b12cd8d80c48ce5b05967cfd01ee8c7
 ELECTRON_MAKE_FLAGS+=	--config.extraMetadata.environment=production \
 			--config.directories.output=release
@@ -44,9 +45,9 @@ post-extract:
 
 pre-build:
 	cd ${WRKSRC}/node_modules/libsession_util_nodejs && \
-		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm run install
+		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn run install
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run patch-package
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build-everything
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
