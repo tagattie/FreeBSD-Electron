@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	5.12.1
+DISTVERSION=	5.13.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://mattermost.com
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-USES=		desktop-file-utils electron:35 nodejs:22,build python:build
+USES=		desktop-file-utils electron:37 nodejs:22,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
@@ -25,6 +25,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
 
 pre-build:
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm exec patch-package
 	@${MKDIR} ${WRKSRC}/node_modules/node-jq/bin
 	${CP} ${LOCALBASE}/bin/jq ${WRKSRC}/node_modules/node-jq/bin/jq
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build-prod
