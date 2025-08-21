@@ -360,12 +360,12 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		windows-implement-0.60.0 \
 		windows-interface-0.57.0 \
 		windows-interface-0.59.1 \
-		windows-link-0.1.1 \
+		windows-link-0.1.3 \
 		windows-numerics-0.2.0 \
-		windows-registry-0.5.1 \
+		windows-registry-0.5.3 \
 		windows-result-0.1.2 \
-		windows-result-0.3.2 \
-		windows-strings-0.4.0 \
+		windows-result-0.3.4 \
+		windows-strings-0.4.2 \
 		windows-sys-0.52.0 \
 		windows-sys-0.59.0 \
 		windows-targets-0.48.5 \
