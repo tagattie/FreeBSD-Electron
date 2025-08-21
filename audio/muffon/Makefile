@@ -1,6 +1,6 @@
 PORTNAME=	muffon
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.2.0
+DISTVERSION=	2.3.0
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://muffon.netlify.app/
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		desktop-file-utils electron:34 gmake nodejs:20,build \
+USES=		desktop-file-utils electron:37 gmake nodejs:22,build \
 		python:build
 
 USE_GITHUB=	yes
@@ -26,13 +26,9 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
 
 post-extract:
-	if [ -f ${FILESDIR}/dot.env ]; then \
+	@if [ -f ${FILESDIR}/dot.env ]; then \
 		${CP} ${FILESDIR}/dot.env ${WRKSRC}/.env; \
 	fi
-
-post-patch:
-	@${REINPLACE_CMD} -e 's/OS == "linux"/& or OS == "freebsd"/' \
-		${WRKSRC}/node_modules/register-scheme/binding.gyp
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build:vue
