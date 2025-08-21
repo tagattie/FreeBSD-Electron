@@ -1,3 +1,9 @@
+# Notes for port maintainer
+#
+# Before copying package.json and yarn.lock to ${PKGJSONSDIR}, do the following steps:
+# 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
+#    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
+
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
 DISTVERSION=	0.11.4
@@ -11,6 +17,7 @@ LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	task:devel/task
+LIB_DEPENDS=	libvips.so:graphics/vips
 
 USES=		cargo electron:37 gmake go:modules,no_targets nodejs:22,build \
 		python:build
