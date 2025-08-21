@@ -1,3 +1,9 @@
+# Notes for port maintainer
+#
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
+# 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
+#    $ yarn add --dev --ignore-scripts node-addon-api node-gyp
+
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.16.6
@@ -15,7 +21,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	${LOCALBASE}/lib/cmake/fmt/fmt-config.cmake:devel/libfmt \
 		${LOCALBASE}/lib/libsignal_sqlcipher_extension.a:devel/signal-sqlcipher-extension
-LIB_DEPENDS=	libinotify.so:devel/libinotify
+LIB_DEPENDS=	libinotify.so:devel/libinotify \
+		libvips.so:graphics/vips
 
 USES=		cmake:indirect electron:34 localbase:ldflags nodejs:20,build \
 		python:3.12+,build
