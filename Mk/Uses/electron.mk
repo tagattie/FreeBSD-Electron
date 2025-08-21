@@ -448,7 +448,7 @@ electron-fetch-node-modules:
 			${YQ_CMD} -yi 'del(.prunedAt, .storeDir)' \
 				${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.modules.yaml; \
 		fi; \
-		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.pnpm-workspace-state.json; \
+		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.pnpm-workspace-state*.json; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 	fi
 
