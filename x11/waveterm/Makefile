@@ -17,6 +17,10 @@ LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	task:devel/task
+# electron-builder does not recognize yarn v4 as package manager yet and falls back to npm.
+# So we have to add npm as build-time dependency.
+# https://github.com/electron-userland/electron-builder/blob/master/packages/app-builder-lib/src/node-module-collector/packageManager.ts#L45-L65
+BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libvips.so:graphics/vips
 
 USES=		cargo electron:37 gmake go:modules,no_targets nodejs:22,build \
