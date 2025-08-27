@@ -56,7 +56,7 @@ pre-build:
 		${WRKSRC}/node_modules/@swc/core/swc.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} task --verbose build:backend
 	cd ${WRKSRC}/node_modules/sharp && \
-		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run install
+		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn run install
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:prod
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
