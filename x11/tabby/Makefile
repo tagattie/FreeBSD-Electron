@@ -1,6 +1,13 @@
+# Notes for port maintainer
+#
+# Before copying package.json and yarn.lock to ${PKGJSONSDIR}, do the following steps:
+# 1. Downgrade electron-builder to 25 (from 26) in ${WRKSRC}
+#    (electron-builder 26 appears to have some issues with packaging node_modules)
+#   $ yarn upgrade --ignore-scripts 'electron-builder@^25'
+
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.226
+DISTVERSION=	1.0.227
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -43,12 +50,12 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		cargo electron:36 gl gmake gnome iconv:wchar_t jpeg \
+USES=		cargo electron:37 gl gmake gnome iconv:wchar_t jpeg \
 		localbase:ldflags nodejs:22,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
-GH_TUPLE=	Eugeny:russh-napi:f861c638c187b4d368b54ea6d068ba6f70766aff:russh_napi/russh-napi
+GH_TUPLE=	Eugeny:russh-napi:260b57ab994d2e15bfff3b7454b6f16ac92ae9cc:russh_napi/russh-napi
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
