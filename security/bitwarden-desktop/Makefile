@@ -1,6 +1,13 @@
+# Notes for port maintainer
+#
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
+# 1. Downgrade electron-builder to 26.0.0 in ${WRKSRC}
+#    (Later versions of electron-builder 26 appears to have some issues with packaging node_modules)
+#   $ npm install --save-dev --ignore-scripts electron-builder@26.0.0
+
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2025.8.0
+DISTVERSION=	2025.8.1
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
