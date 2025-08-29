@@ -10,6 +10,10 @@ WWW=		https://github.com/Vencord/Vesktop
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+# electron-builder seems to try to use npm as package manager even if the project uses pnpm.
+# So we have to add npm as build-time dependency.
+BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
+
 USES=		desktop-file-utils electron:37 nodejs:22,build
 
 USE_GITHUB=	yes
