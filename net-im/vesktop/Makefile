@@ -20,7 +20,7 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:pnpm prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
 
 SUB_FILES=	${PORTNAME}
 
