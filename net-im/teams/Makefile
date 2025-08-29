@@ -30,7 +30,7 @@ PORTDOCS=	CONTRIBUTING.md HISTORY.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:npm appbuilder:devel prefetch extract rebuild build:builder
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
