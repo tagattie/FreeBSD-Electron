@@ -1,4 +1,4 @@
---- packages/default-plugins/buildDefaultPlugins.ts.orig	2024-07-06 10:12:46 UTC
+--- packages/default-plugins/buildDefaultPlugins.ts.orig	2025-09-01 11:50:43 UTC
 +++ packages/default-plugins/buildDefaultPlugins.ts
 @@ -1,7 +1,7 @@
  
@@ -9,14 +9,14 @@
  import { join, resolve, basename } from 'path';
  import { tmpdir } from 'os';
  import { chdir, cwd } from 'process';
-@@ -10,7 +10,6 @@ import getPathToPatchFileFor from './utils/getPathToPa
+@@ -9,7 +9,6 @@ import getPathToPatchFileFor from './utils/getPathToPa
+ import { glob } from 'glob';
  import readRepositoryJson from './utils/readRepositoryJson';
- import waitForCliInput from './utils/waitForCliInput';
  import getPathToPatchFileFor from './utils/getPathToPatchFileFor';
 -import getCurrentCommitHash from './utils/getCurrentCommitHash';
+ import { waitForCliInput } from '@joplin/utils/cli';
  
  interface Options {
- 	beforeInstall: (buildDir: string, pluginName: string)=> Promise<void>;
 @@ -30,7 +29,7 @@ const buildDefaultPlugins = async (outputParentDir: st
  	};
  

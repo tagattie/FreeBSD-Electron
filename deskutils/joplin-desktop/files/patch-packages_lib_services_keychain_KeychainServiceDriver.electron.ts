@@ -1,4 +1,4 @@
---- packages/lib/services/keychain/KeychainServiceDriver.electron.ts.orig	2025-05-12 13:47:42 UTC
+--- packages/lib/services/keychain/KeychainServiceDriver.electron.ts.orig	2025-09-01 11:50:43 UTC
 +++ packages/lib/services/keychain/KeychainServiceDriver.electron.ts
 @@ -18,7 +18,7 @@ export default class KeychainServiceDriver extends Key
  	public constructor(appId: string, clientId: string) {
@@ -9,7 +9,7 @@
  			logger.info('KeychainService Linux backend: ', shim.electronBridge()?.safeStorage?.getSelectedStorageBackend());
  		}
  	}
-@@ -50,7 +50,7 @@ export default class KeychainServiceDriver extends Key
+@@ -56,7 +56,7 @@ export default class KeychainServiceDriver extends Key
  					result = await shim.electronBridge().safeStorage.decryptString(data);
  				} catch (e) {
  					logger.warn('Decryption of a setting failed. Corrupted data or new keychain password? Error:', e);

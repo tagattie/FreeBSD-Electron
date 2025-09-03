@@ -10,7 +10,7 @@
 
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.3.13
+DISTVERSION=	3.4.10
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch
@@ -39,7 +39,7 @@ GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup \
 		rustwasm:wasm-pack:v0.13.1:wasm_pack/wasm-pack
 # See ${WRKSRC}/packages/default-plugins/pluginRepositories.json for GH_TUPLEs for default plugins
 GH_TUPLE+=	JackGruber:joplin-plugin-backup:abb58175e2d2bf34899f1b32cb74137e5c788bf9:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup \
-		personalizedrefrigerator:joplin-plugin-freehand-drawing:49650407c1d56a2a0123d2d56d2387e48eb58415:joplin_plugin_freehand_drawing/packages/default-plugins/plugin-sources/io.github.personalizedrefrigerator.js-draw
+		personalizedrefrigerator:joplin-plugin-freehand-drawing:63b6d3f185b5b3664632e498df7c7ad7824038d0:joplin_plugin_freehand_drawing/packages/default-plugins/plugin-sources/io.github.personalizedrefrigerator.js-draw
 
 CARGO_CARGOTOML_ROLLUP=	${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK_ROLLUP=	${WRKSRC}/rollup/rust/Cargo.lock
@@ -52,6 +52,7 @@ CARGO_CARGOLOCKS=	${CARGO_CARGOLOCK_ROLLUP} \
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
+CARGO_ENV=	CARGO_PROFILE_RELEASE_LTO=false
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}
@@ -63,7 +64,7 @@ PORTDOCS=	README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn2 appbuilder prefetch extract build:builder
+USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract build:builder
 
 DEFAULT_PLUGINS_NODE_MODULES_FILE=	${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-default-plugins-node-modules${EXTRACT_SUFX}
 
@@ -96,7 +97,7 @@ post-extract:
 		${MV} ${WRKDIR}/node-modules-cache/$${dir}/node_modules \
 			${WRKSRC}/packages/default-plugins/plugin-sources/$${dir}; \
 	done
-	@${RM} -r ${WRKSRC}/packages/app-clipper
+	# @${RM} -r ${WRKSRC}/packages/app-clipper
 
 post-configure:
 	@${ECHO_MSG} "===>   Updating Cargo.lock for ${CARGO_CARGOTOML_WASM_PACK}"
@@ -104,16 +105,16 @@ post-configure:
 		--verbose --verbose ${CARGO_UPDATE_ARGS}
 
 pre-build:
-	# Rust 1.87 appears to break release build of rollup. So use debug
-	# build temporarily.
 	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
-		--manifest-path ${CARGO_CARGOTOML_ROLLUP} --verbose --verbose
+	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
+		--manifest-path ${CARGO_CARGOTOML_ROLLUP} \
+		--release --verbose --verbose
 	${CP} ${CARGO_TARGET_DIR}/*/libbindings_napi.so \
 		${WRKSRC}/packages/turndown/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC}/wasm-pack && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
-		--manifest-path ${CARGO_CARGOTOML_WASM_PACK} --release --verbose --verbose
+	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
+		--manifest-path ${CARGO_CARGOTOML_WASM_PACK} \
+		--release --verbose --verbose
 	@${MKDIR} ${WRKSRC}/packages/onenote-converter/node_modules/binary-install/node_modules/.bin
 	${CP} ${CARGO_TARGET_DIR}/*/wasm-pack \
 		${WRKSRC}/packages/onenote-converter/node_modules/binary-install/node_modules/.bin
@@ -121,8 +122,10 @@ pre-build:
 	${CP} ${LOCALBASE}/bin/7zz \
 		${WRKSRC}/packages/app-desktop/node_modules/7zip-bin/freebsd/${ELECTRON_ARCH}/7za
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec gulp build
-	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
-		yarn run electronRebuild
+	cd ${BUILD_WRKSRC} && \
+	${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn run electronRebuild
+	cd ${BUILD_WRKSRC} && \
+	${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn exec gulp before-dist
 	# dirty hack to avoid "EACCES: permission denied" error during electron-builder execution
 	@${RM} ${WRKDIR}/.bin/python3
 	@${CP} ${PYTHON_CMD} ${WRKDIR}/.bin/python3

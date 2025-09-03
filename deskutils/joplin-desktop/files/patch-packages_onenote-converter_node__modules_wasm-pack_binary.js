@@ -1,6 +1,6 @@
---- packages/onenote-converter/node_modules/wasm-pack/binary.js.orig	2025-05-12 14:40:40 UTC
+--- packages/onenote-converter/node_modules/wasm-pack/binary.js.orig	2025-09-03 06:07:11 UTC
 +++ packages/onenote-converter/node_modules/wasm-pack/binary.js
-@@ -17,6 +17,10 @@ const getPlatform = () => {
+@@ -18,6 +18,10 @@ const getPlatform = () => {
    if (type === "Linux" && arch === "arm64") {
      return "aarch64-unknown-linux-musl";
    }
