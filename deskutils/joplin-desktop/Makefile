@@ -13,7 +13,8 @@ DISTVERSIONPREFIX=	v
 DISTVERSION=	3.4.10
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
-DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch
+DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch \
+		${APP_CLIPPER_NODE_MODULES_FILE}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Note taking and to-do application with synchronisation capabilities
@@ -67,6 +68,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract build:builder
 
 DEFAULT_PLUGINS_NODE_MODULES_FILE=	${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-default-plugins-node-modules${EXTRACT_SUFX}
+APP_CLIPPER_NODE_MODULES_FILE=		${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-app-clipper-node-modules${EXTRACT_SUFX}
 
 pre-fetch:
 	@if [ ! -f ${DISTDIR}/${DEFAULT_PLUGINS_NODE_MODULES_FILE} ]; then \
@@ -90,6 +92,25 @@ pre-fetch:
 			-f ${DISTDIR}/${DEFAULT_PLUGINS_NODE_MODULES_FILE} @node-modules-cache.mtree; \
 		${RM} -r ${WRKDIR}; \
 	fi
+	@if [ ! -f ${DISTDIR}/${APP_CLIPPER_NODE_MODULES_FILE} ]; then \
+		${ECHO_MSG} "===>  Prefetching and archiving node modules for app-clipper"; \
+		${MKDIR} ${WRKDIR}/node-modules-cache-app-clipper; \
+		${CP} -R ${FILESDIR}/app-clipper/* ${WRKDIR}/node-modules-cache-app-clipper; \
+		cd ${WRKDIR}/node-modules-cache-app-clipper && \
+		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
+			npm ci --ignore-scripts --no-progress --no-audit --no-fund && \
+		${RM} package.json package-lock.json; \
+		cd ${WRKDIR} && \
+		${MTREE_CMD} -cbnSp node-modules-cache-app-clipper | ${MTREE_CMD} -C | ${SED} \
+			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
+			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:flags=.*:flags=none:' \
+			-e 's:^\.:./node-modules-cache-app-clipper:' > node-modules-cache-app-clipper.mtree && \
+		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
+			${TAR} -cz --options 'gzip:!timestamp' \
+			-f ${DISTDIR}/${APP_CLIPPER_NODE_MODULES_FILE} @node-modules-cache-app-clipper.mtree; \
+		${RM} -r ${WRKDIR}; \
+	fi
 
 post-extract:
 	@${ECHO_MSG} "===>  Moving prefetched node modules for default plugins to ${WRKSRC}"
@@ -97,7 +118,9 @@ post-extract:
 		${MV} ${WRKDIR}/node-modules-cache/$${dir}/node_modules \
 			${WRKSRC}/packages/default-plugins/plugin-sources/$${dir}; \
 	done
-	# @${RM} -r ${WRKSRC}/packages/app-clipper
+	@${ECHO_MSG} "===>  Moving prefetched node modules for app-clipper to ${WRKSRC}"
+	@${MV} ${WRKDIR}/node-modules-cache-app-clipper/node_modules \
+		${WRKSRC}/packages/app-clipper/popup
 
 post-configure:
 	@${ECHO_MSG} "===>   Updating Cargo.lock for ${CARGO_CARGOTOML_WASM_PACK}"

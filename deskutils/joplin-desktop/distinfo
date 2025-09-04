@@ -1,6 +1,8 @@
-TIMESTAMP = 1756879356
+TIMESTAMP = 1756962685
 SHA256 (joplin-desktop-3.4.10-default-plugins-node-modules.tar.gz) = 43401322040b44d25acea14ee078a59c843d92a6adbcc12f962c58e4d096c05e
 SIZE (joplin-desktop-3.4.10-default-plugins-node-modules.tar.gz) = 101307668
+SHA256 (joplin-desktop-3.4.10-app-clipper-node-modules.tar.gz) = af00d88371ba573773d18c3003bfe0e1cb9e407b99471d737d1ee316964eddbe
+SIZE (joplin-desktop-3.4.10-app-clipper-node-modules.tar.gz) = 10194943
 SHA256 (rust/crates/Inflector-0.11.4.crate) = fe438c63458706e03479442743baae6c88256498e6431708f6dfc520a26515d3
 SIZE (rust/crates/Inflector-0.11.4.crate) = 17438
 SHA256 (rust/crates/addr2line-0.24.2.crate) = dfbe277e56a376000877090da837660b4427aad530e3028d44e0bffe4f89a1c1
