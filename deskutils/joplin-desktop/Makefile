@@ -46,7 +46,7 @@ CARGO_TEST=	no
 CARGO_ENV=	CARGO_PROFILE_RELEASE_LTO=false
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
-SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}
+SUB_FILES=	${PKGBASE}
 
 BUILD_WRKSRC=	${WRKSRC}/packages/app-desktop
 TEST_WRKSRC=	${WRKSRC}/packages/app-desktop
@@ -57,8 +57,8 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract build:builder
 
-DEFAULT_PLUGINS_NODE_MODULES_FILE=	${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-default-plugins-node-modules${EXTRACT_SUFX}
-APP_CLIPPER_NODE_MODULES_FILE=		${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-app-clipper-node-modules${EXTRACT_SUFX}
+DEFAULT_PLUGINS_NODE_MODULES_FILE=	${PKGBASE}-${DISTVERSION}-default-plugins-node-modules${EXTRACT_SUFX}
+APP_CLIPPER_NODE_MODULES_FILE=		${PKGBASE}-${DISTVERSION}-app-clipper-node-modules${EXTRACT_SUFX}
 
 pre-fetch:
 	@if [ ! -f ${DISTDIR}/${DEFAULT_PLUGINS_NODE_MODULES_FILE} ]; then \
@@ -145,8 +145,8 @@ pre-build:
 	@${CHMOD} u+w ${WRKDIR}/.bin/python3
 
 do-install:
-	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} ${STAGEDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}${PKGNAMESUFFIX}.desktop ${STAGEDIR}${DESKTOPDIR}
+	${INSTALL_SCRIPT} ${WRKDIR}/${PKGBASE} ${STAGEDIR}${PREFIX}/bin
+	${INSTALL_DATA} ${FILESDIR}/${PKGBASE}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 24 32 48 72 96 128 144 256 512 1024
 	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${BUILD_WRKSRC}/build/icons/${size}x${size}.png \
