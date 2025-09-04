@@ -1,13 +1,3 @@
-# Notes for port maintainer
-#
-# Before copying package.json and yarn.lock to ${PKGJSONSDIR}, do the following steps:
-# 1. Remove sharp from devDependencies in ${WRKSRC}/packages/lib
-#    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
-# 2. Remove sharp from devDependencies in ${WRKSRC}/packages/app-mobile
-#    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
-# 3. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}/packages/tools
-#    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
-
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
 DISTVERSION=	3.4.10
