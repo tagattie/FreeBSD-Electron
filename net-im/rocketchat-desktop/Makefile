@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	4.8.1
+DISTVERSION=	4.9.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -22,6 +22,7 @@ CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
+CARGO_ENV=	CARGO_PROFILE_RELEASE_LTO=false
 
 SUB_FILES=	${PORTNAME}
 
@@ -33,7 +34,7 @@ USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} CARGO_PROFILE_RELEASE_LTO=false \
+	${SETENV} ${MAKE_ENV} ${CARGO_ENV} \
 		${CARGO} build --release --verbose --verbose
 	${CP} ${CARGO_TARGET_DIR}/*/libbindings_napi.so \
 		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
