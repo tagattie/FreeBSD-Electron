@@ -1,6 +1,6 @@
 PORTNAME=	youtube-music
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.9.0
+DISTVERSION=	3.11.0
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://th-ch.github.io/youtube-music
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/license
 
-USES=		electron:34 nodejs:20,build
+USES=		electron:38 nodejs:22,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	th-ch
@@ -23,7 +23,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
 
-NPM_VER=	10.10.0
+NPM_VER=	10.15.1
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
