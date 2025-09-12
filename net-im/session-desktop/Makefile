@@ -1,12 +1,6 @@
-# Notes for port maintainer
-#
-# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
-# 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
-#    $ yarn add --dev --ignore-scripts node-addon-api node-gyp
-
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.16.6
+DISTVERSION=	1.16.8
 CATEGORIES=	net-im
 MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
 DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher
