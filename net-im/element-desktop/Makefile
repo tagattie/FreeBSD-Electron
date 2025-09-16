@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.11.110
+DISTVERSION=	1.11.111
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
@@ -100,13 +100,20 @@ pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${ELECTRON_REBUILD_ENV} yarn run build:native
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:ts
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:res
+	# generate icon files
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
+		--input=icon.icns --out=icons --format=set --root=build
+.for size in 16 48
+	@${MV} ${WRKSRC}/icons/icon_${size}x${size}.png \
+		${WRKSRC}/icons/icon_${size}.png
+.endfor
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
-.for size in 16 24 48 64 96 128 256 512
+.for size in 16 32 48 64 128 256 1024
 	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
-	${INSTALL_DATA} ${WRKSRC}/build/icons/${size}x${size}.png \
+	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	@${MKDIR} ${STAGEDIR}${DATADIR}
