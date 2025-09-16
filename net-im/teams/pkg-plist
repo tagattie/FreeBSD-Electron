@@ -14,3 +14,4 @@ share/icons/hicolor/96x96/apps/teams.png
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/assets/sounds/meeting_started.wav
 %%DATADIR%%/resources/assets/sounds/new_message.wav
+%%DATADIR%%/resources/default_app.asar

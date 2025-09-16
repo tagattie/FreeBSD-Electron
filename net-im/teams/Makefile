@@ -1,13 +1,6 @@
-# Notes for port maintainer
-#
-# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
-# 1. Downgrade electron-builder to 25 (from 26) in ${WRKSRC}
-#    (electron-builder 26 appears to have some issues with packaging node_modules)
-#   $ npm install --save-dev --ignore-scripts 'electron-builder@^25'
-
 PORTNAME=	teams
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.5.3
+DISTVERSION=	2.5.6
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
