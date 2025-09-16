@@ -1,6 +1,12 @@
+# Notes for port maintainer
+#
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
+# 1. Upgrade electron-builder to 26.0.20 or later in ${WRKSRC}
+#    $ npm install --save-dev --ignore-scripts 'electron-builder@^26.0.20'
+
 PORTNAME=	stretchly
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.2
+DISTVERSION=	1.18.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +16,7 @@ WWW=		https://hovancik.net/stretchly
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:34 localbase:ldconfig nodejs:20,build python:build
+USES=		electron:38 localbase:ldconfig nodejs:22,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	hovancik
@@ -28,7 +34,8 @@ pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=build
 .for size in 16 48
-	${MV} ${WRKSRC}/icons/icon_${size}x${size}.png ${WRKSRC}/icons/icon_${size}.png
+	@${MV} ${WRKSRC}/icons/icon_${size}x${size}.png \
+		${WRKSRC}/icons/icon_${size}.png
 .endfor
 
 do-install:

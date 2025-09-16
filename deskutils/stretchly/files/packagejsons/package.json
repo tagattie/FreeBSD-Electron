@@ -1,10 +1,11 @@
 {
   "name": "Stretchly",
-  "version": "1.17.2",
+  "version": "1.18.0",
   "description": "The break time reminder app",
   "main": "app/main.js",
+  "type": "module",
   "engines": {
-    "node": "20.18.1"
+    "node": "22.19.0"
   },
   "scripts": {
     "start": "electron .",
@@ -106,7 +107,6 @@
         "appx"
       ],
       "asarUnpack": [
-        "node_modules/windows-quiet-hours/**",
         "node_modules/windows-notification-state/**",
         "node_modules/macos-notification-state/**"
       ]
@@ -136,30 +136,27 @@
     ]
   },
   "devDependencies": {
-    "@vitest/coverage-istanbul": "^3.0.2",
-    "cross-env": "^7.0.3",
-    "electron": "^34.0.0",
-    "electron-builder": "^25.1.8",
+    "@vitest/coverage-istanbul": "^3.2.4",
+    "cross-env": "^10.0.0",
+    "electron": "^38.1.0",
+    "electron-builder": "^26.0.20",
     "husky": "^9.1.7",
     "rimraf": "^6.0.1",
     "standard": "^17.1.2",
-    "vitest": "^3.0.2"
+    "vitest": "^3.2.4"
   },
   "dependencies": {
-    "@electron/remote": "^2.1.2",
+    "@particle/dbus-next": "^0.11.4",
     "auto-launch": "^6.0.0-rc1",
-    "dbus-final": "github:Jelmerro/dbus-final",
-    "electron-log": "^5.2.4",
-    "electron-store": "^8.2.0",
-    "humanize-duration": "^3.32.1",
-    "i18next": "^24.2.1",
+    "electron-log": "^5.4.3",
+    "electron-store": "^10.1.0",
+    "humanize-duration": "^3.33.0",
+    "i18next": "^25.5.2",
     "i18next-fs-backend": "^2.6.0",
-    "luxon": "^3.5.0",
+    "luxon": "^3.7.2",
     "meeussunmoon": "^3.0.3",
-    "ps-list": "7.2",
-    "rtl-detect": "^1.1.2",
-    "semver": "^7.6.3",
-    "windows-focus-assist": "^1.4.0",
-    "windows-quiet-hours": "github:hovancik/windows-quiet-hours#fix-LPTSTR"
+    "ps-list": "^8.1.1",
+    "semver": "^7.7.2",
+    "windows-focus-assist": "^1.4.0"
   }
 }
