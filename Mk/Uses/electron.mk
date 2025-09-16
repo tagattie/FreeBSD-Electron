@@ -313,9 +313,11 @@ NPM_MODULE_CACHE?=	node_modules
 NPM_CMDNAME?=		npm
 NPM_CACHE_SETUP_CMD?=	${DO_NADA}
 NPM_FETCH_CMD?=		${NPM_CMDNAME} ci
-NPM_FETCH_FLAGS?=	--ignore-scripts --no-progress --no-audit --no-fund
+NPM_FETCH_FLAGS?=	--ignore-scripts --no-progress --no-audit --no-fund --no-update-notifier
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
+NPM_EXEC_FLAGS?=	--no-update-notifier
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
+NPM_REBUILD_FLAGS?=	--no-update-notifier
 .elif ${_NODEJS_NPM:Myarn*}
 NPM_LOCKFILE?=		yarn.lock
 NPM_MODULE_CACHE?=	yarn-offline-cache
@@ -692,7 +694,7 @@ electron-rebuild-native-node-modules-for-electron:
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
 			cd $${subdir} && \
 			${ECHO_MSG} "===>  Rebuilding native node modules for electron in $${subdir}" && \
-			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_REBUILD_CMD}; \
+			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_REBUILD_CMD} ${NPM_REBUILD_FLAGS}; \
 		done \
 	done
 .	else
@@ -700,7 +702,7 @@ electron-rebuild-native-node-modules-for-electron:
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
 			cd $${subdir} && \
 			${ECHO_MSG} "===>  Rebuilding native node modules for electron in $${subdir}" && \
-			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_EXEC_CMD} node-gyp rebuild; \
+			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} node-gyp rebuild; \
 		done \
 	done
 .	endif
@@ -719,7 +721,7 @@ clean-up-backup-files:
 # distributable format using the specified package builder.
 .if defined(_ELECTRON_FEATURE_BUILD)
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
-ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-builder
+ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} electron-builder
 ELECTRON_MAKE_FLAGS+=	--linux \
 			--dir \
 			--config.npmRebuild=false \
@@ -728,7 +730,7 @@ ELECTRON_MAKE_FLAGS+=	--linux \
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
-ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-packager
+ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} electron-packager
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--no-download \
 			--electron-version=${ELECTRON_VER} \
@@ -737,7 +739,7 @@ ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--overwrite
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
 .   elif ${_ELECTRON_FEATURE_BUILD} == forge
-ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} electron-forge package
+ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} electron-forge package
 ELECTRON_MAKE_FLAGS+=	--platform=linux
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 .   endif
