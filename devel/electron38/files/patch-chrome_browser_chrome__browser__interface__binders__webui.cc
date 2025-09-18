@@ -1,4 +1,4 @@
---- chrome/browser/chrome_browser_interface_binders_webui.cc.orig	2025-08-26 20:49:50 UTC
+--- chrome/browser/chrome_browser_interface_binders_webui.cc.orig	2025-09-09 01:18:53 UTC
 +++ chrome/browser/chrome_browser_interface_binders_webui.cc
 @@ -51,18 +51,18 @@
  #include "mojo/public/cpp/bindings/binder_map.h"
@@ -48,7 +48,7 @@
        WhatsNewUI,
  #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX)
        NewTabPageUI>(map);
-@@ -1192,7 +1192,7 @@ void PopulateChromeWebUIFrameBinders(
+@@ -1193,7 +1193,7 @@ void PopulateChromeWebUIFrameBinders(
  #endif  // BUILDFLAG(IS_CHROMEOS)
  
  #if BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC) || BUILDFLAG(IS_LINUX) || \
