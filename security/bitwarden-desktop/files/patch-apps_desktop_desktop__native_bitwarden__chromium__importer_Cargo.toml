@@ -1,0 +1,11 @@
+--- apps/desktop/desktop_native/bitwarden_chromium_importer/Cargo.toml.orig	2025-09-23 19:06:36 UTC
++++ apps/desktop/desktop_native/bitwarden_chromium_importer/Cargo.toml
+@@ -30,7 +30,7 @@ windows = { workspace = true, features = ["Win32_Secur
+ winapi = { version = "=0.3.9", features = ["dpapi", "memoryapi"] }
+ windows = { workspace = true, features = ["Win32_Security", "Win32_Security_Cryptography", "Win32_Storage_FileSystem", "Win32_System_IO", "Win32_System_Memory", "Win32_System_Pipes", "Win32_System_Services", "Win32_System_Threading", "Win32_UI_Shell", "Win32_UI_WindowsAndMessaging"] }
+ 
+-[target.'cfg(target_os = "linux")'.dependencies]
++[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
+ oo7 = { workspace = true }
+ 
+ [lints]

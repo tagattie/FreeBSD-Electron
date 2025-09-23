@@ -1,4 +1,4 @@
---- apps/desktop/desktop_native/core/src/process_isolation/freebsd.rs.orig	2024-08-24 08:19:46 UTC
+--- apps/desktop/desktop_native/core/src/process_isolation/freebsd.rs.orig	2025-09-23 18:59:56 UTC
 +++ apps/desktop/desktop_native/core/src/process_isolation/freebsd.rs
 @@ -0,0 +1,13 @@
 +use anyhow::{bail, Result};
@@ -11,6 +11,6 @@
 +    bail!("Not implemented on FreeBSD")
 +}
 +
-+pub fn disable_memory_access() -> Result<()> {
++pub fn isolate_process() -> Result<()> {
 +    bail!("Not implemented on FreeBSD")
 +}

@@ -1,6 +1,6 @@
---- apps/desktop/src/utils.ts.orig	2025-01-23 11:12:57 UTC
+--- apps/desktop/src/utils.ts.orig	2025-09-09 17:14:14 UTC
 +++ apps/desktop/src/utils.ts
-@@ -28,7 +28,7 @@ export function isLinux() {
+@@ -24,7 +24,7 @@ export function isLinux() {
  }
  
  export function isLinux() {
