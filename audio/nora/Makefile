@@ -17,6 +17,7 @@ WWW=		https://noramusic.netlify.app/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
+BUILD_DEPENDS=	rust188>0:lang/rust188
 LIB_DEPENDS=	libvips.so:graphics/vips
 
 USES=		cargo desktop-file-utils electron:35 nodejs:22,build
@@ -28,6 +29,7 @@ GH_TUPLE=	swc-project:swc:v1.11.13:swc/swc
 
 CARGO_CARGOTOML=${WRKSRC}/swc/bindings/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/swc/bindings/Cargo.lock
+CARGO_BUILDDEP=	no
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
