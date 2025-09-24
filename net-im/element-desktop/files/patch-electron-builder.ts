@@ -1,13 +1,13 @@
---- electron-builder.ts.orig	2025-06-03 15:13:27 UTC
+--- electron-builder.ts.orig	2025-09-23 12:46:01 UTC
 +++ electron-builder.ts
-@@ -56,24 +56,24 @@ const config: Omit<Writable<Configuration>, "electronF
+@@ -92,24 +92,24 @@ const config: Omit<Writable<Configuration>, "electronF
   */
  const config: Omit<Writable<Configuration>, "electronFuses"> & {
      // Make all fuses required to ensure they are all explicitly specified
 -    electronFuses: Required<Configuration["electronFuses"]>;
 +    // electronFuses: Required<Configuration["electronFuses"]>;
  } = {
-     appId: DEFAULT_APP_ID,
+     appId: variant.appId,
      asarUnpack: "**/*.node",
 -    electronFuses: {
 -        enableCookieEncryption: true,
