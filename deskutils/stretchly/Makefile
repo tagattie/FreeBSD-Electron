@@ -1,12 +1,6 @@
-# Notes for port maintainer
-#
-# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
-# 1. Upgrade electron-builder to 26.0.20 or later in ${WRKSRC}
-#    $ npm install --save-dev --ignore-scripts 'electron-builder@^26.0.20'
-
 PORTNAME=	stretchly
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.18.0
+DISTVERSION=	1.18.1
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
