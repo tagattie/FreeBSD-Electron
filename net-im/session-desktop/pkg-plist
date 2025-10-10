@@ -10,6 +10,9 @@ share/icons/hicolor/512x512/apps/session-desktop.png
 share/icons/hicolor/64x64/apps/session-desktop.png
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@img/colour/color.cjs
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@img/colour/index.cjs
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@img/colour/package.json
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@signalapp/better-sqlite3/LICENSE
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@signalapp/better-sqlite3/build/Release/better_sqlite3.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/@signalapp/better-sqlite3/build/deps/sqlite3.Makefile
