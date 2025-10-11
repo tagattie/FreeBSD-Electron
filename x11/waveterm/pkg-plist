@@ -12,4 +12,3 @@ share/icons/hicolor/64x64/apps/waveterm.png
 %%DATADIR%%/resources/app.asar
 @(,,0555) %%DATADIR%%/resources/app.asar.unpacked/dist/bin/wavesrv.%%ARCH%%
 @(,,0555) %%DATADIR%%/resources/app.asar.unpacked/dist/bin/wsh-%%DISTVERSION%%-freebsd.%%ARCH%%
-%%DATADIR%%/resources/default_app.asar

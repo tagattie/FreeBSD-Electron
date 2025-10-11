@@ -1,13 +1,16 @@
 # Notes for port maintainer
 #
-# Before copying package.json and yarn.lock to ${PKGJSONSDIR}, do the following steps:
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
 # 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
-#    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
+#    $ npm install --save-dev --ignore-scripts node-addon-api node-gyp
+# This is required for building sharp node module from source.
+# https://sharp.pixelplumbing.com/install/#building-from-source
 
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.11.5
+DISTVERSION=	0.11.6
 CATEGORIES=	x11
+DISTFILES=	tsunami/go.mod:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Open-source, cross-platform terminal for seamless workflows
@@ -18,18 +21,14 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	task:devel/task \
 		rust188>0:lang/rust188
-# electron-builder does not recognize yarn v4 as package manager yet and falls back to npm.
-# So we have to add npm as build-time dependency.
-# https://github.com/electron-userland/electron-builder/blob/master/packages/app-builder-lib/src/node-module-collector/packageManager.ts#L45-L65
-BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		cargo electron:37 gmake go:modules,no_targets nodejs:22,build \
+USES=		cargo electron:38 gmake go:modules,no_targets nodejs:22,build \
 		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	wavetermdev
-GH_TUPLE=	swc-project:swc:v1.13.3:swc/swc
+GH_TUPLE=	swc-project:swc:v1.13.5:swc/swc
 
 CARGO_CARGOTOML=${WRKSRC}/swc/bindings/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/swc/bindings/Cargo.lock
@@ -37,6 +36,7 @@ CARGO_BUILDDEP=	no
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
+CARGO_ENV+=	CARGO_FEATURE_LOCAL_DYNAMIC_TLS=1
 
 GO_MODULE=	github.com/wavetermdev/waveterm
 
@@ -49,21 +49,39 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn4 appbuilder:devel prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:npm appbuilder:devel prefetch extract rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	-c electron-builder.config.cjs
 
+pre-fetch:
+	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}/tsunami
+	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/tsunami/go.mod ]; then \
+		${FETCH_CMD} ${FETCH_BEFORE_ARGS} \
+			https://raw.githubusercontent.com/${GH_ACCOUNT}/${GH_PROJECT}/${DISTVERSIONFULL}/tsunami/go.mod \
+			-o ${DISTDIR}/${DIST_SUBDIR}/tsunami/go.mod; \
+	fi
+
+pre-extract:
+	@${MKDIR} ${WRKSRC}/tsunami/frontend
+
+post-extract:
+	@${TAR} -cf - -C ${WRKDIR}/${GH_PROJECT}-${DISTVERSION}/tsunami . | \
+		${TAR} -xf - -C ${WRKSRC}/tsunami
+
 pre-build:
 	cd ${WRKSRC}/swc/bindings && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} CARGO_FEATURE_LOCAL_DYNAMIC_TLS=1 \
-		${CARGO} build --manifest-path ${CARGO_CARGOTOML} \
+	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
+		--manifest-path ${CARGO_CARGOTOML} \
 		--package binding_core_node --release --verbose --verbose
 	${CP} ${CARGO_TARGET_DIR}/release/libbinding_core_node.so \
 		${WRKSRC}/node_modules/@swc/core/swc.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} task --verbose build:backend
-	cd ${WRKSRC}/node_modules/sharp && \
+
+.for mod in lqip-loader plugin-ideal-image
+	cd ${WRKSRC}/node_modules/@docusaurus/${mod}/node_modules/sharp && \
 		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn run install
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:prod
+.endfor
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build:prod
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=build
@@ -90,6 +108,6 @@ do-install-DOCS-on:
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} npm run test
 
 .include <bsd.port.mk>
