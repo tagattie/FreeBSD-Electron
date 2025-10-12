@@ -79,7 +79,7 @@ pre-build:
 
 .for mod in lqip-loader plugin-ideal-image
 	cd ${WRKSRC}/node_modules/@docusaurus/${mod}/node_modules/sharp && \
-		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn run install
+		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run install
 .endfor
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build:prod
 	# generate icon files
