@@ -405,8 +405,8 @@ electron-fetch-node-package-manager:
 		${TAR} -xzf corepack.tgz && \
 		${MTREE_CMD} -cbnSp ${NPM_CMDNAME} | ${MTREE_CMD} -C | \
 		${AWK} '{
-		    if ($0 ~ /mode=[0-7]+/) {
-			mode_str = substr($0, RSTART+5, RLENGTH-5)
+		    if ($$0 ~ /mode=[0-7]+/) {
+			mode_str = substr($$0, RSTART+5, RLENGTH-5)
 			mode = "0" mode_str
 			if (and(mode, 0111) != 0) {
 			    sub(/mode=[0-7]+/, "mode=0755")
@@ -475,8 +475,8 @@ electron-archive-node-modules:
 			${GREP} -ve '${NPM_MODULE_CACHE}/.*/${NPM_MODULE_CACHE}'`; do \
 			${MTREE_CMD} -cbnSp $${dir} | ${MTREE_CMD} -C | \
 			${AWK} '{
-			    if ($0 ~ /mode=[0-7]+/) {
-				mode_str = substr($0, RSTART+5, RLENGTH-5)
+			    if ($$0 ~ /mode=[0-7]+/) {
+				mode_str = substr($$0, RSTART+5, RLENGTH-5)
 				mode = "0" mode_str
 				if (and(mode, 0111) != 0) {
 				    sub(/mode=[0-7]+/, "mode=0755")
@@ -505,8 +505,8 @@ electron-archive-node-modules:
 		cd ${WRKDIR}/node-modules-cache && \
 		${MTREE_CMD} -cbnSp ${NPM_MODULE_CACHE} | ${MTREE_CMD} -C | \
 		${AWK} '{
-		    if ($0 ~ /mode=[0-7]+/) {
-			mode_str = substr($0, RSTART+5, RLENGTH-5)
+		    if ($$0 ~ /mode=[0-7]+/) {
+			mode_str = substr($$0, RSTART+5, RLENGTH-5)
 			mode = "0" mode_str
 			if (and(mode, 0111) != 0) {
 			    sub(/mode=[0-7]+/, "mode=0755")
