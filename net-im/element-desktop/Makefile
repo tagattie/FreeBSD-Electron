@@ -65,6 +65,7 @@ pre-fetch:
 		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
+			-e 's:mode=\([0-7]\)6[0-7][0-7]:mode=\1644:' \
 			-e 's:flags=.*:flags=none:' \
 			-e 's:^\.:./yarn-offline-cache:' > node-modules-cache.mtree; \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
