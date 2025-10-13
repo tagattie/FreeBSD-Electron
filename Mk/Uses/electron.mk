@@ -484,7 +484,7 @@ electron-archive-node-modules:
 				if (and(mode, 0111) != 0) {
 				    newmode = or(special, 0755)
 				} else {
-				  newmode = or(special, 0644)
+				    newmode = or(special, 0644)
 				}
 				sub(/mode=[0-7]+/, "mode=" sprintf("%04d", newmode))
 			    }
@@ -516,7 +516,7 @@ electron-archive-node-modules:
 			if (and(mode, 0111) != 0) {
 			    newmode = or(special, 0755)
 			} else {
-			  newmode = or(special, 0644)
+			    newmode = or(special, 0644)
 			}
 			sub(/mode=[0-7]+/, "mode=" sprintf("%04d", newmode))
 		    }
