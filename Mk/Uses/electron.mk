@@ -408,11 +408,13 @@ electron-fetch-node-package-manager:
 		    if ($$0 ~ /mode=[0-7]+/) {
 			mode_str = substr($$0, RSTART+5, RLENGTH-5)
 			mode = "0" mode_str
+			special = and(mode, 07000)
 			if (and(mode, 0111) != 0) {
-			    sub(/mode=[0-7]+/, "mode=0755")
+			    newmode = or(special, 0755)
 			} else {
-			    sub(/mode=[0-7]+/, "mode=0644")
+			    newmode = or(special, 0644)
 			}
+			sub(/mode=[0-7]+/, "mode=" sprintf("%04d", newmode))
 		    }
 		    print
 		}' | \
@@ -478,11 +480,13 @@ electron-archive-node-modules:
 			    if ($$0 ~ /mode=[0-7]+/) {
 				mode_str = substr($$0, RSTART+5, RLENGTH-5)
 				mode = "0" mode_str
+				special = and(mode, 07000)
 				if (and(mode, 0111) != 0) {
-				    sub(/mode=[0-7]+/, "mode=0755")
+				    newmode = or(special, 0755)
 				} else {
-				    sub(/mode=[0-7]+/, "mode=0644")
+				  newmode = or(special, 0644)
 				}
+				sub(/mode=[0-7]+/, "mode=" sprintf("%04d", newmode))
 			    }
 			    print
 			}' | \
@@ -508,11 +512,13 @@ electron-archive-node-modules:
 		    if ($$0 ~ /mode=[0-7]+/) {
 			mode_str = substr($$0, RSTART+5, RLENGTH-5)
 			mode = "0" mode_str
+			special = and(mode, 07000)
 			if (and(mode, 0111) != 0) {
-			    sub(/mode=[0-7]+/, "mode=0755")
+			    newmode = or(special, 0755)
 			} else {
-			    sub(/mode=[0-7]+/, "mode=0644")
+			  newmode = or(special, 0644)
 			}
+			sub(/mode=[0-7]+/, "mode=" sprintf("%04d", newmode))
 		    }
 		    print
 		}' | \
