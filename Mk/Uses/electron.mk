@@ -403,7 +403,20 @@ electron-fetch-node-package-manager:
 		cd ${WRKDIR} && \
 		${SETENV} ${MAKE_ENV} corepack pack ${NPM_CMDNAME}@${NPM_VER} && \
 		${TAR} -xzf corepack.tgz && \
-		${MTREE_CMD} -cbnSp ${NPM_CMDNAME} | ${MTREE_CMD} -C | ${SED} \
+		${MTREE_CMD} -cbnSp ${NPM_CMDNAME} | ${MTREE_CMD} -C | \
+		${AWK} '{
+		    if ($0 ~ /mode=[0-7]+/) {
+			mode_str = substr($0, RSTART+5, RLENGTH-5)
+			mode = "0" mode_str
+			if (and(mode, 0111) != 0) {
+			    sub(/mode=[0-7]+/, "mode=0755")
+			} else {
+			    sub(/mode=[0-7]+/, "mode=0644")
+			}
+		    }
+		    print
+		}' | \
+		${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
@@ -460,7 +473,20 @@ electron-archive-node-modules:
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		for dir in `${FIND} -s ${WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
 			${GREP} -ve '${NPM_MODULE_CACHE}/.*/${NPM_MODULE_CACHE}'`; do \
-			${MTREE_CMD} -cbnSp $${dir} | ${MTREE_CMD} -C | ${SED} \
+			${MTREE_CMD} -cbnSp $${dir} | ${MTREE_CMD} -C | \
+			${AWK} '{
+			    if ($0 ~ /mode=[0-7]+/) {
+				mode_str = substr($0, RSTART+5, RLENGTH-5)
+				mode = "0" mode_str
+				if (and(mode, 0111) != 0) {
+				    sub(/mode=[0-7]+/, "mode=0755")
+				} else {
+				    sub(/mode=[0-7]+/, "mode=0644")
+				}
+			    }
+			    print
+			}' | \
+			${SED} \
 				-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 				-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 				-e 's:flags=.*:flags=none:' \
@@ -477,7 +503,20 @@ electron-archive-node-modules:
 	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
-		${MTREE_CMD} -cbnSp ${NPM_MODULE_CACHE} | ${MTREE_CMD} -C | ${SED} \
+		${MTREE_CMD} -cbnSp ${NPM_MODULE_CACHE} | ${MTREE_CMD} -C | \
+		${AWK} '{
+		    if ($0 ~ /mode=[0-7]+/) {
+			mode_str = substr($0, RSTART+5, RLENGTH-5)
+			mode = "0" mode_str
+			if (and(mode, 0111) != 0) {
+			    sub(/mode=[0-7]+/, "mode=0755")
+			} else {
+			    sub(/mode=[0-7]+/, "mode=0644")
+			}
+		    }
+		    print
+		}' | \
+		${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \
