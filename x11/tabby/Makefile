@@ -91,7 +91,22 @@ pre-fetch:
 			${RM} package.json yarn.lock; \
 		done; \
 		cd ${WRKDIR}/node-modules-cache && \
-		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
+		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | \
+		${AWK} '{ \
+		    if ($$0 ~ /mode=[0-7]+/) { \
+			mode_str = substr($$0, RSTART+5, RLENGTH-5); \
+			mode = "0" mode_str; \
+			special = and(mode, 07000); \
+			if (and(mode, 0111) != 0) { \
+			    newmode = or(special, 0755); \
+			} else { \
+			    newmode = or(special, 0644); \
+			} \
+			sub(/mode=[0-7]+/, "mode=" sprintf("%04d", newmode)); \
+		    } \
+		    print; \
+		}' | \
+		${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
 			-e 's:flags=.*:flags=none:' \

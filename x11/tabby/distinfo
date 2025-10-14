@@ -1,6 +1,6 @@
-TIMESTAMP = 1756357033
-SHA256 (tabby-1.0.227-node-modules.tar.gz) = e112d8f8d3fbd9298d832399c7da2dcf268682aa99a5f7960eb1b28bd096f9f3
-SIZE (tabby-1.0.227-node-modules.tar.gz) = 224467119
+TIMESTAMP = 1760426935
+SHA256 (tabby-1.0.227-node-modules.tar.gz) = ecb7a05816b1534e2536775261380e056c3e3cc8c94733d884dcb6a32ac4b4a6
+SIZE (tabby-1.0.227-node-modules.tar.gz) = 224467107
 SHA256 (rust/crates/addr2line-0.24.2.crate) = dfbe277e56a376000877090da837660b4427aad530e3028d44e0bffe4f89a1c1
 SIZE (rust/crates/addr2line-0.24.2.crate) = 39015
 SHA256 (rust/crates/adler2-2.0.0.crate) = 512761e0bb2578dd7380c6baaa0f4ce03e84f95e960231d1dec8bf4d7d6e2627
