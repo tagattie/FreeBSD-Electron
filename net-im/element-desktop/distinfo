@@ -1,8 +1,8 @@
-TIMESTAMP = 1760428088
+TIMESTAMP = 1760739011
 SHA256 (element-v1.12.1.tar.gz) = a6c0849666b631e14297d14124542917b00628a3eee3faf1338747d350ccfa28
 SIZE (element-v1.12.1.tar.gz) = 38307785
-SHA256 (element-desktop-1.12.1-node-modules.tar.gz) = 09fcc4233f02d46a4ff60e53f3dcd93879cf7f9348bb678c34379ca0da4663f5
-SIZE (element-desktop-1.12.1-node-modules.tar.gz) = 264996989
+SHA256 (element-desktop-1.12.1-node-modules.tar.gz) = 20cb5bfdc87b1dca6f1c0a5896361a54b5a3f0ba6d354b4e107fa3e28b5bf463
+SIZE (element-desktop-1.12.1-node-modules.tar.gz) = 264996997
 SHA256 (matrix-seshat-4.0.1.tgz) = 9bfe48f6852bd56fb3791ec41454f9c3ece46e3be7b359064278cd68f42037c9
 SIZE (matrix-seshat-4.0.1.tgz) = 4553838
 SHA256 (rust/crates/addr2line-0.19.0.crate) = a76fd60b23679b7d19bd066031410fb7e458ccc5e958eb5c325888ce4baedc97
