@@ -8,7 +8,7 @@
 
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.11.6
+DISTVERSION=	0.12.1
 CATEGORIES=	x11
 DISTFILES=	tsunami/go.mod:prefetch
 
@@ -73,10 +73,9 @@ pre-build:
 	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
 		--manifest-path ${CARGO_CARGOTOML} \
 		--package binding_core_node --release --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/release/libbinding_core_node.so \
+	${CP} ${CARGO_TARGET_DIR}/*/libbinding_core_node.so \
 		${WRKSRC}/node_modules/@swc/core/swc.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} task --verbose build:backend
-
 .for mod in lqip-loader plugin-ideal-image
 	cd ${WRKSRC}/node_modules/@docusaurus/${mod}/node_modules/sharp && \
 		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run install

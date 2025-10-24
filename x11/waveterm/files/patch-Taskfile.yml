@@ -1,6 +1,6 @@
 --- Taskfile.yml.orig	1979-11-29 15:00:00 UTC
 +++ Taskfile.yml
-@@ -164,8 +164,8 @@ tasks:
+@@ -182,8 +182,8 @@ tasks:
              - task: build:server:linux
              - task: build:server:macos
              - task: build:server:windows
@@ -10,7 +10,7 @@
              - generate
          sources:
              - "cmd/server/*.go"
-@@ -230,6 +230,17 @@ tasks:
+@@ -248,6 +248,17 @@ tasks:
                    GO_ENV_VARS:
                        sh: echo "{{if eq "amd64" ARCH}}CC=\"zig cc -target x86_64-linux-gnu.2.28\"{{else}}CC=\"zig cc -target aarch64-linux-gnu.2.28\"{{end}}"
  
@@ -28,7 +28,7 @@
      build:server:internal:
          requires:
              vars:
-@@ -249,38 +260,9 @@ tasks:
+@@ -267,38 +278,9 @@ tasks:
                ignore_error: true
              - task: build:wsh:internal
                vars:
