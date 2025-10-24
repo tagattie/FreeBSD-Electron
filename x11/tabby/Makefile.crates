@@ -41,6 +41,7 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		const-random-macro-0.1.16 \
 		convert_case-0.7.1 \
 		core-foundation-sys-0.8.7 \
+		core-models-0.0.3 \
 		cpufeatures-0.2.17 \
 		crc32fast-1.4.2 \
 		crunchy-0.2.3 \
@@ -77,9 +78,13 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		futures-util-0.3.31 \
 		generic-array-0.14.7 \
 		getrandom-0.2.15 \
+		getrandom-0.3.3 \
 		ghash-0.5.1 \
 		gimli-0.31.1 \
 		group-0.13.0 \
+		hax-lib-0.3.5 \
+		hax-lib-macros-0.3.5 \
+		hax-lib-macros-types-0.3.5 \
 		hermit-abi-0.3.9 \
 		hex-0.4.3 \
 		hex-literal-0.4.1 \
@@ -93,9 +98,15 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		inout-0.1.3 \
 		internal-russh-forked-ssh-key-0.6.11+upstream-0.6.7 \
 		is_terminal_polyfill-1.70.1 \
+		itoa-1.0.15 \
 		js-sys-0.3.77 \
 		lazy_static-1.5.0 \
 		libc-0.2.169 \
+		libcrux-intrinsics-0.0.3 \
+		libcrux-ml-kem-0.0.3 \
+		libcrux-platform-0.0.2 \
+		libcrux-secrets-0.0.3 \
+		libcrux-sha3-0.0.3 \
 		libloading-0.8.6 \
 		libm-0.2.11 \
 		lock_api-0.4.12 \
@@ -122,11 +133,11 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		p256-0.13.2 \
 		p384-0.13.0 \
 		p521-0.13.3 \
-		pageant-0.0.2 \
-		pageant-0.0.3 \
+		pageant-0.1.0 \
 		parking_lot-0.12.3 \
 		parking_lot_core-0.9.10 \
 		password-hash-0.5.0 \
+		pastey-0.1.1 \
 		pbkdf2-0.12.2 \
 		pem-rfc7468-0.7.0 \
 		pin-project-lite-0.2.16 \
@@ -138,11 +149,17 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		polyval-0.6.2 \
 		ppv-lite86-0.2.20 \
 		primeorder-0.13.6 \
+		proc-macro-error-attr2-2.0.0 \
+		proc-macro-error2-2.0.1 \
 		proc-macro2-1.0.93 \
 		quote-1.0.38 \
+		r-efi-5.3.0 \
 		rand-0.8.5 \
+		rand-0.9.2 \
 		rand_chacha-0.3.1 \
+		rand_chacha-0.9.0 \
 		rand_core-0.6.4 \
+		rand_core-0.9.3 \
 		redox_syscall-0.5.8 \
 		regex-1.11.1 \
 		regex-automata-0.4.9 \
@@ -150,13 +167,14 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		rfc6979-0.4.0 \
 		ring-0.17.14 \
 		rsa-0.9.7 \
-		russh-0.54.3 \
+		russh-0.54.6 \
 		russh-cryptovec-0.52.0 \
 		russh-sftp-2.0.6 \
 		russh-util-0.52.0 \
 		rustc-demangle-0.1.24 \
 		rustc_version-0.4.1 \
 		rustversion-1.0.19 \
+		ryu-1.0.20 \
 		salsa20-0.10.2 \
 		scopeguard-1.2.0 \
 		scrypt-0.11.0 \
@@ -165,6 +183,7 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		semver-1.0.25 \
 		serde-1.0.217 \
 		serde_derive-1.0.217 \
+		serde_json-1.0.143 \
 		sha1-0.10.6 \
 		sha2-0.10.8 \
 		shlex-1.3.0 \
@@ -194,8 +213,11 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		universal-hash-0.5.1 \
 		untrusted-0.9.0 \
 		utf8parse-0.2.2 \
+		uuid-1.18.1 \
 		version_check-0.9.5 \
 		wasi-0.11.0+wasi-snapshot-preview1 \
+		wasi-0.14.7+wasi-0.2.4 \
+		wasip2-1.0.1+wasi-0.2.4 \
 		wasm-bindgen-0.2.100 \
 		wasm-bindgen-backend-0.2.100 \
 		wasm-bindgen-futures-0.4.50 \
@@ -206,24 +228,35 @@ CARGO_CRATES=	addr2line-0.24.2 \
 		winapi-0.3.9 \
 		winapi-i686-pc-windows-gnu-0.4.0 \
 		winapi-x86_64-pc-windows-gnu-0.4.0 \
-		windows-0.58.0 \
+		windows-0.59.0 \
 		windows-core-0.52.0 \
-		windows-core-0.58.0 \
-		windows-implement-0.58.0 \
-		windows-interface-0.58.0 \
-		windows-result-0.2.0 \
-		windows-strings-0.1.0 \
+		windows-core-0.59.0 \
+		windows-implement-0.59.0 \
+		windows-interface-0.59.1 \
+		windows-link-0.1.3 \
+		windows-result-0.3.4 \
+		windows-strings-0.3.1 \
 		windows-sys-0.52.0 \
 		windows-sys-0.59.0 \
 		windows-targets-0.52.6 \
+		windows-targets-0.53.3 \
 		windows_aarch64_gnullvm-0.52.6 \
+		windows_aarch64_gnullvm-0.53.0 \
 		windows_aarch64_msvc-0.52.6 \
+		windows_aarch64_msvc-0.53.0 \
 		windows_i686_gnu-0.52.6 \
+		windows_i686_gnu-0.53.0 \
 		windows_i686_gnullvm-0.52.6 \
+		windows_i686_gnullvm-0.53.0 \
 		windows_i686_msvc-0.52.6 \
+		windows_i686_msvc-0.53.0 \
 		windows_x86_64_gnu-0.52.6 \
+		windows_x86_64_gnu-0.53.0 \
 		windows_x86_64_gnullvm-0.52.6 \
+		windows_x86_64_gnullvm-0.53.0 \
 		windows_x86_64_msvc-0.52.6 \
+		windows_x86_64_msvc-0.53.0 \
+		wit-bindgen-0.46.0 \
 		zerocopy-0.7.35 \
 		zerocopy-derive-0.7.35 \
 		zeroize-1.8.1

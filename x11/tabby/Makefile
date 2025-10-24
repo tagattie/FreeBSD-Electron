@@ -7,7 +7,7 @@
 
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.227
+DISTVERSION=	1.0.228
 CATEGORIES=	x11
 DISTFILES=	${PREFETCH_FILE}:prefetch
 
@@ -50,12 +50,14 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		cargo electron:37 gl gmake gnome iconv:wchar_t jpeg \
+USES=		cargo electron:38 gl gmake gnome iconv:wchar_t jpeg \
 		localbase:ldflags nodejs:22,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
-GH_TUPLE=	Eugeny:russh-napi:260b57ab994d2e15bfff3b7454b6f16ac92ae9cc:russh_napi/russh-napi
+# For GH_TUPLE, look for version in ${WRKSRC}/app/node_modules/russh/package.json,
+# and search corresponding commit hash at https://github.com/Eugeny/russh-napi
+GH_TUPLE=	Eugeny:russh-napi:727dced7a1186a44433c76428e87518002181527:russh_napi/russh-napi
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
