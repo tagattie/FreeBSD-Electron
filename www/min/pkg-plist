@@ -436,6 +436,7 @@ share/icons/hicolor/64x64/apps/min.png
 %%DATADIR%%/resources/app/node_modules/delegates/package.json
 %%DATADIR%%/resources/app/node_modules/detect-libc/LICENSE
 %%DATADIR%%/resources/app/node_modules/detect-libc/lib/detect-libc.js
+%%DATADIR%%/resources/app/node_modules/detect-libc/lib/elf.js
 %%DATADIR%%/resources/app/node_modules/detect-libc/lib/filesystem.js
 %%DATADIR%%/resources/app/node_modules/detect-libc/lib/process.js
 %%DATADIR%%/resources/app/node_modules/detect-libc/package.json
@@ -643,6 +644,7 @@ share/icons/hicolor/64x64/apps/min.png
 %%DATADIR%%/resources/app/node_modules/minizlib/package.json
 %%DATADIR%%/resources/app/node_modules/ms/index.js
 %%DATADIR%%/resources/app/node_modules/ms/package.json
+%%DATADIR%%/resources/app/node_modules/nan/.pre-commit-config.yaml
 %%DATADIR%%/resources/app/node_modules/nan/CMakeLists.txt
 %%DATADIR%%/resources/app/node_modules/nan/include_dirs.js
 %%DATADIR%%/resources/app/node_modules/nan/nan.h
