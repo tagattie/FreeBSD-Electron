@@ -5,7 +5,6 @@ CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
 DISTFILES=	element-${DISTVERSIONFULL}${EXTRACT_SUFX}:element_web \
-		${PREFETCH_FILE}:prefetch \
 		matrix-seshat-${MATRIX_SESHAT_VER}.tgz:matrix_seshat
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -42,87 +41,23 @@ PORTDOCS=	CHANGELOG.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1,fetch,extract,build appbuilder:devel rebuild build:builder
+USE_ELECTRON=	npm:yarn1 appbuilder:devel prefetch extract rebuild build:builder
 
-PREFETCH_FILE=		${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 MATRIX_SESHAT_VER=	4.0.1
 RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
 
-pre-fetch:
-	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
-		${MKDIR} ${WRKDIR}/node-modules-cache; \
-		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
-			${WRKDIR}/node-modules-cache/.yarnrc; \
-		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		for dir in . matrix-seshat; do \
-			cd ${WRKDIR}/node-modules-cache/$${dir} && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-				yarn install --frozen-lockfile --ignore-scripts; \
-		done; \
-		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | ${GREP} -v yarn-offline-cache | \
-			${XARGS} ${RM} -r; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | \
-		${AWK} ' \
-			function oct2dec(octstr, i, c, val) { \
-				val = 0; \
-				for (i = 1; i <= length(octstr); i++) { \
-					c = substr(octstr, i, 1); \
-					if (c < "0" || c > "7") { \
-						break; \
-					} \
-					val = val * 8 + (c - "0"); \
-				} \
-				return val; \
-			} \
-			{ \
-				if (match($$0, /mode=[0-7]+/)) { \
-					mode_str = substr($$0, RSTART+5, RLENGTH-5); \
-					mode = oct2dec(mode_str); \
-					exec_bits = 73; \
-					special_bits = 3584; \
-					special = and(mode, special_bits); \
-					if (and(mode, exec_bits) != 0) { \
-						newmode = or(special, 493); \
-					} else { \
-						newmode = or(special, 420); \
-					} \
-					sub(/mode=[0-7]+/, "mode=" sprintf("%04o", newmode)); \
-				} \
-				print; \
-			}' | \
-		${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./yarn-offline-cache:' > node-modules-cache.mtree; \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
-
 post-extract:
-	${MV} ${WRKDIR}/yarn-offline-cache ${WRKSRC}
-	cd ${WRKSRC} && ${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
-.for f in package.json yarn.lock
-	mv -f ${WRKSRC}/${f} ${WRKSRC}/${f}.bak
-	cp ${PKGJSONSDIR}/${f} ${WRKSRC}
-.endfor
-	cd ${WRKSRC} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-		yarn install --frozen-lockfile --ignore-scripts --offline
-	@${MKDIR} ${WRKSRC}/.hak/hakModules/matrix-seshat ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
-	${TAR} -xf ${DISTDIR}/matrix-seshat-${MATRIX_SESHAT_VER}.tgz --strip-components 1 \
-		-C ${WRKSRC}/.hak/hakModules/matrix-seshat
-	${TAR} -xf ${DISTDIR}/matrix-seshat-${MATRIX_SESHAT_VER}.tgz --strip-components 1 \
-		-C ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
-	${CP} ${PKGJSONSDIR}/matrix-seshat/yarn.lock ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
-	cd ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-		yarn install --frozen-lockfile --ignore-scripts --offline
-	${RM} ${WRKSRC}/.yarnrc
-	${MKDIR} ${WRKSRC}/deploys
-	${MV} ${WRKDIR}/element-${DISTVERSIONFULL} ${WRKSRC}/deploys
+	@${TAR} -xf ${DISTDIR}/matrix-seshat-${MATRIX_SESHAT_VER}.tgz --strip-components 1 \
+		-C ${WRKSRC}/matrix-seshat --exclude package.json
+	@${MKDIR} ${WRKSRC}/.hak/hakModules/matrix-seshat \
+		${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
+	@cd ${WRKSRC}/matrix-seshat && \
+		${COPYTREE_SHARE} . ${WRKSRC}/.hak/hakModules/matrix-seshat
+	@cd ${WRKSRC}/matrix-seshat && \
+		${COPYTREE_SHARE} . ${WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
+	@${RM} ${WRKSRC}/.yarnrc
+	@${MKDIR} ${WRKSRC}/deploys
+	@${MV} ${WRKDIR}/element-${DISTVERSIONFULL} ${WRKSRC}/deploys
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run fetch --noverify --cfgdir "element.io/release"
 
 pre-build:
