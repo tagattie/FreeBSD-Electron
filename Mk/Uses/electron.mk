@@ -606,6 +606,7 @@ electron-copy-package-file:
 .if ${_EXISTS_NPM_PKGFILE} == 1
 	@${ECHO_MSG} "===>  Copying ${NPM_PKGFILE} and ${NPM_LOCKFILE} to ${WRKSRC}"
 	@for f in `${FIND} ${PKGJSONSDIR} -type f \( -name ${NPM_PKGFILE} -o -name ${NPM_LOCKFILE} \) -print | ${SED} -e 's|${PKGJSONSDIR}/||'`; do \
+		${MKDIR} -p `${DIRNAME} ${WRKSRC}/$${f}`; \
 		if [ -f ${WRKSRC}/$${f} ]; then \
 			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
 		fi; \
