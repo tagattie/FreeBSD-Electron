@@ -472,14 +472,16 @@ electron-fetch-node-modules:
 		${TAR} -cf - -C ${PKGJSONSDIR} . | ${TAR} -xf - -C ${WRKDIR}/node-modules-cache; \
 		cd ${WRKDIR}/node-modules-cache && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}; \
 		${ECHO_MSG} "===>  Prefetching node modules"; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${SETENV} ${MAKE_ENV} ${NPM_FETCH_CMD} ${NPM_FETCH_FLAGS}; \
-		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.gitignore; \
-		if [ -f ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.modules.yaml ]; then \
-			${YQ_CMD} -yi 'del(.prunedAt, .storeDir)' \
-				${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.modules.yaml; \
-		fi; \
-		${RM} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/.pnpm-workspace-state*.json; \
+		for dir in `${FIND} ${WRKDIR}/node-modules-cache -type f -name ${NPM_LOCKFILE} -exec ${DIRNAME} {} ';'`; do \
+			cd $${dir} && \
+			${SETENV} ${MAKE_ENV} ${NPM_FETCH_CMD} ${NPM_FETCH_FLAGS}; \
+			${RM} $${dir}/${NPM_MODULE_CACHE}/.gitignore; \
+			if [ -f $${dir}/${NPM_MODULE_CACHE}/.modules.yaml ]; then \
+				${YQ_CMD} -yi 'del(.prunedAt, .storeDir)' \
+					$${dir}/${NPM_MODULE_CACHE}/.modules.yaml; \
+			fi; \
+			${RM} $${dir}/${NPM_MODULE_CACHE}/.pnpm-workspace-state*.json; \
+		done; \
 		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 	fi
 
