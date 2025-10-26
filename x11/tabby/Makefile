@@ -9,7 +9,6 @@ PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
 DISTVERSION=	1.0.228
 CATEGORIES=	x11
-DISTFILES=	${PREFETCH_FILE}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Terminal for a more modern age
@@ -75,80 +74,7 @@ PORTDOCS=	HACKING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1,fetch,extract,build appbuilder:devel build:builder
-
-PREFETCH_FILE=	${PORTNAME}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
-
-pre-fetch:
-	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
-		${MKDIR} ${WRKDIR}/node-modules-cache; \
-		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
-			${WRKDIR}/node-modules-cache/.yarnrc; \
-		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		cd ${PKGJSONSDIR} && \
-		for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-			cd ${WRKDIR}/node-modules-cache/$${dir} && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-				yarn --frozen-lockfile --ignore-scripts; \
-			${RM} package.json yarn.lock; \
-		done; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | \
-		${AWK} ' \
-			function oct2dec(octstr, i, c, val) { \
-				val = 0; \
-				for (i = 1; i <= length(octstr); i++) { \
-					c = substr(octstr, i, 1); \
-					if (c < "0" || c > "7") { \
-						break; \
-					} \
-					val = val * 8 + (c - "0"); \
-				} \
-				return val; \
-			} \
-			{ \
-				if (match($$0, /mode=[0-7]+/)) { \
-					mode_str = substr($$0, RSTART+5, RLENGTH-5); \
-					mode = oct2dec(mode_str); \
-					exec_bits = 73; \
-					special_bits = 3584; \
-					special = and(mode, special_bits); \
-					if (and(mode, exec_bits) != 0) { \
-						newmode = or(special, 493); \
-					} else { \
-						newmode = or(special, 420); \
-					} \
-					sub(/mode=[0-7]+/, "mode=" sprintf("%04o", newmode)); \
-				} \
-				print; \
-			}' | \
-		${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./yarn-offline-cache:' > node-modules-cache.mtree && \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
-
-post-extract:
-	cd ${PKGJSONSDIR} && \
-	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		for f in package.json yarn.lock; do \
-			if [ -f ${WRKSRC}/$${dir}/$${f} ]; then \
-				${MV} -f ${WRKSRC}/$${dir}/$${f} ${WRKSRC}/$${dir}/$${f}.bak; \
-			fi; \
-			${CP} $${dir}/$${f} ${WRKSRC}/$${dir}; \
-		done; \
-	done; \
-	${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
-	cd ${PKGJSONSDIR} && \
-	for dir in `${FIND} . -type f -name package.json -exec dirname {} ';'`; do \
-		cd ${WRKSRC}/$${dir} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			yarn --frozen-lockfile --ignore-scripts --offline; \
-	done
+USE_ELECTRON=	npm:yarn1 appbuilder:devel prefetch extract build:builder
 
 post-patch:
 	@${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
