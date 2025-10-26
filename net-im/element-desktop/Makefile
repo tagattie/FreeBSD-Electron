@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.12.1
+DISTVERSION=	1.12.2
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
@@ -126,6 +126,7 @@ post-extract:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run fetch --noverify --cfgdir "element.io/release"
 
 pre-build:
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec patch-package
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${ELECTRON_REBUILD_ENV} yarn run build:native
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:ts
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build:res
