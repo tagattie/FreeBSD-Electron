@@ -1,6 +1,6 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.62.0
+DISTVERSION=	3.66.1
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -16,7 +16,6 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libopus.so:audio/opus \
 		libsndio.so:audio/sndio \
 		libdbus-1.so:devel/dbus \
-		libicui18n.so:devel/icu \
 		libepoll-shim.so:devel/libepoll-shim \
 		libevent.so:devel/libevent \
 		libffi.so:devel/libffi \
@@ -39,27 +38,21 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	ffmpeg:multimedia/ffmpeg
 
-USES=		cargo desktop-file-utils electron:31 gettext-runtime gl gmake \
-		gnome iconv:wchar_t jpeg nodejs:20,build python:build xorg
+USES=		desktop-file-utils electron:38 gettext-runtime gl gmake gnome \
+		iconv:wchar_t jpeg nodejs:22,build python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mifi
 GH_PROJECT=	lossless-cut
-GH_TUPLE=	rollup:rollup:v4.19.0:rollup/rollup
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf glib20 gtk30 libxml2 libxslt pango
 
-CARGO_CARGOTOML=${WRKSRC}/rollup/rust/Cargo.toml
-CARGO_CARGOLOCK=${WRKSRC}/rollup/rust/Cargo.lock
-CARGO_BUILD=	no
-CARGO_INSTALL=	no
-CARGO_TEST=	no
-
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 
-PORTDOCS=	README.md cli.md developer-notes.md import-export.md issues.md
+PORTDOCS=	CONTRIBUTING.md README.md api.md batch.md cli.md docs.md \
+		import-export.md issues.md
 
 OPTIONS_DEFINE=	DOCS
 
@@ -67,12 +60,6 @@ USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild:nodejs,electron \
 		build:builder
 
 pre-build:
-	# Rust 1.87 appears to break release build of rollup. So use debug
-	# build temporarily
-	cd ${WRKSRC}/rollup/rust && \
-		${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build --verbose --verbose
-	${CP} ${CARGO_TARGET_DIR}/*/libbindings_napi.so \
-		${WRKSRC}/node_modules/rollup/dist/rollup.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
