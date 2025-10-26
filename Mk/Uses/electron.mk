@@ -632,7 +632,11 @@ electron-install-node-modules:
 	@${ECHO_MSG} "===>  Setting up ${NPM_CMDNAME} command options"
 	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_SETUP_CMD}
 .	endif
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}
+	@cd ${PKGJSONSDIR} && \
+	for dir in `${FIND} . -type f -name ${NPM_LOCKFILE} -exec ${DIRNAME} {} ';'`; do \
+		cd ${WRKSRC}/$${dir} && \
+		${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}; \
+	done
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
