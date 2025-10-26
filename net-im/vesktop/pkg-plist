@@ -1,12 +1,10 @@
 bin/vesktop
 share/applications/vesktop.desktop
-share/icons/hicolor/1024x1024/apps/vesktop.png
 share/icons/hicolor/128x128/apps/vesktop.png
 share/icons/hicolor/16x16/apps/vesktop.png
 share/icons/hicolor/256x256/apps/vesktop.png
 share/icons/hicolor/32x32/apps/vesktop.png
 share/icons/hicolor/48x48/apps/vesktop.png
-share/icons/hicolor/512x512/apps/vesktop.png
 share/icons/hicolor/64x64/apps/vesktop.png
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar

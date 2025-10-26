@@ -1,6 +1,6 @@
 PORTNAME=	vesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.5.8
+DISTVERSION=	1.6.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,19 +14,21 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 # So we have to add npm as build-time dependency.
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
-USES=		desktop-file-utils electron:37 nodejs:22,build
+USES=		desktop-file-utils electron:38 gnome nodejs:22,build pkgconfig
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Vencord
 GH_PROJECT=	Vesktop
+
+USE_GNOME=	glib20
+
+SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
-
-SUB_FILES=	${PORTNAME}
 
 post-extract:
 	@if [ -r ${FILESDIR}/detectable.json ]; then \
@@ -36,18 +38,20 @@ post-extract:
 
 pre-build:
 	# cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run postinstall
+	cd ${WRKSRC}/packages/libvesktop && \
+		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} pnpm run build
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
 	# generate icons
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=build
-.for size in 16 48
+.for size in 16 48 64
 	${MV} ${WRKSRC}/icons/icon_${size}x${size}.png ${WRKSRC}/icons/icon_${size}.png
 .endfor
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
 	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
-.for size in 16 32 48 64 128 256 512 1024
+.for size in 16 32 48 64 128 256
 	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
