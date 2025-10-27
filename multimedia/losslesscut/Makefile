@@ -10,6 +10,10 @@ WWW=		https://mifi.no/losslesscut
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+# electron-builder does not yet seem to recognize yarn v4 as package manager
+# and falls back to use npm for packaging. So we have to add npm as build-time
+# dependency for now.
+BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libasound.so:audio/alsa-lib \
 		libFLAC.so:audio/flac \
