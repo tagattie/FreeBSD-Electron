@@ -376,8 +376,8 @@ PREFETCH_TIMESTAMP=	61171200
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
 NPM_VER?=
 NPM_EXTRACT_WRKSRC?=		${WRKSRC}
-REBUILD_WRKSRC_NODEJS?=		${WRKSRC}
-REBUILD_WRKSRC_ELECTRON?=	${WRKSRC}
+NPM_REBUILD_WRKSRC_NODEJS?=	${WRKSRC}
+NPM_REBUILD_WRKSRC_ELECTRON?=	${WRKSRC}
 
 # Check existence of package.json
 _EXISTS_NPM_PKGFILE?=
@@ -690,10 +690,10 @@ electron-rebuild-native-node-modules-for-node:
        ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>  Rebuilding native node modules for nodejs"
 .	if ${_NODEJS_NPM} == yarn1
-		@cd ${REBUILD_WRKSRC_NODEJS} && \
+		@cd ${NPM_REBUILD_WRKSRC_NODEJS} && \
 		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm rebuild
 .	else
-		@cd ${REBUILD_WRKSRC_NODEJS} && \
+		@cd ${NPM_REBUILD_WRKSRC_NODEJS} && \
 		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} ${NPM_CMDNAME} rebuild
 .	endif
 .   else
@@ -704,7 +704,7 @@ electron-rebuild-native-node-modules-for-electron:
 .   if defined(_ELECTRON_FEATURE_REBUILD_ELECTRON) && \
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
 .	if ${_NODEJS_NPM} == pnpm
-	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${REBUILD_WRKSRC_ELECTRON} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
+	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${NPM_REBUILD_WRKSRC_ELECTRON} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
 			cd $${subdir} && \
 			${ECHO_MSG} "===>  Rebuilding native node modules for electron in $${subdir}" && \
@@ -712,7 +712,7 @@ electron-rebuild-native-node-modules-for-electron:
 		done \
 	done
 .	else
-	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${REBUILD_WRKSRC_ELECTRON} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
+	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${NPM_REBUILD_WRKSRC_ELECTRON} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
 			cd $${subdir} && \
 			${ECHO_MSG} "===>  Rebuilding native node modules for electron in $${subdir}" && \
