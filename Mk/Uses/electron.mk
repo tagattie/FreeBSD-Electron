@@ -375,6 +375,7 @@ PREFETCH_TIMESTAMP=	61171200
 
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
 NPM_VER?=
+NPM_EXTRACT_WRKSRC?=		${WRKSRC}
 REBUILD_WRKSRC_NODEJS?=		${WRKSRC}
 REBUILD_WRKSRC_ELECTRON?=	${WRKSRC}
 
@@ -518,21 +519,21 @@ electron-extract-node-package-manager:
 
 electron-copy-package-file:
 .if ${_EXISTS_NPM_PKGFILE} == 1
-	@${ECHO_MSG} "===>  Copying ${NPM_PKGFILE} and ${NPM_LOCKFILE} to ${WRKSRC}"
+	@${ECHO_MSG} "===>  Copying ${NPM_PKGFILE} and ${NPM_LOCKFILE} to ${NPM_EXTRACT_WRKSRC}"
 	@for f in `${FIND} ${PKGJSONSDIR} -type f \( -name ${NPM_PKGFILE} -o -name ${NPM_LOCKFILE} \) -print | ${SED} -e 's|${PKGJSONSDIR}/||'`; do \
-		${MKDIR} -p `${DIRNAME} ${WRKSRC}/$${f}`; \
-		if [ -f ${WRKSRC}/$${f} ]; then \
-			${MV} -f ${WRKSRC}/$${f} ${WRKSRC}/$${f}.bak; \
+		${MKDIR} -p `${DIRNAME} ${NPM_EXTRACT_WRKSRC}/$${f}`; \
+		if [ -f ${NPM_EXTRACT_WRKSRC}/$${f} ]; then \
+			${MV} -f ${NPM_EXTRACT_WRKSRC}/$${f} ${NPM_EXTRACT_WRKSRC}/$${f}.bak; \
 		fi; \
-		${CP} ${PKGJSONSDIR}/$${f} ${WRKSRC}/$${f}; \
+		${CP} ${PKGJSONSDIR}/$${f} ${NPM_EXTRACT_WRKSRC}/$${f}; \
 	done
 .endif
 
 electron-install-node-modules:
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
-	@${ECHO_MSG} "===>  Moving prefetched node modules to ${WRKSRC}"
 	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
 		for dir in `${FIND} -s ${WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
+	@${ECHO_MSG} "===>  Moving prefetched node modules to ${NPM_EXTRACT_WRKSRC}"
 			${GREP} -ve '${NPM_MODULE_CACHE}/.*/${NPM_MODULE_CACHE}'`; do \
 			${MV} $${dir} `${ECHO_CMD} $${dir} | sed -e 's|${WRKDIR}/node-modules-cache|${WRKSRC}|'`; \
 		done; \
@@ -542,19 +543,19 @@ electron-install-node-modules:
 	@if [ -d ${WRKDIR}/${NPM_MODULE_CACHE} ]; then \
 		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
 	fi
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
+	@cd ${NPM_EXTRACT_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
 .	if defined(NPM_EXTRACT_SETUP_CMD) && !empty(NPM_EXTRACT_SETUP_CMD)
 	@${ECHO_MSG} "===>  Setting up ${NPM_CMDNAME} command options"
-	@cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_SETUP_CMD}
+	@cd ${NPM_EXTRACT_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_SETUP_CMD}
 .	endif
 	@if [ -d ${PKGJSONSDIR} ]; then \
 		cd ${PKGJSONSDIR} && \
 		for dir in `${FIND} . -type f -name ${NPM_LOCKFILE} -exec ${DIRNAME} {} ';'`; do \
-			cd ${WRKSRC}/$${dir} && \
+			cd ${NPM_EXTRACT_WRKSRC}/$${dir} && \
 			${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}; \
 		done; \
 	else \
-		cd ${WRKSRC} && \
+		cd ${NPM_EXTRACT_WRKSRC} && \
 		${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}; \
 	fi
 .   endif
