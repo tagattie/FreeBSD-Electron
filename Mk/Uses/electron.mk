@@ -738,6 +738,8 @@ clean-up-backup-files:
 # When build feature is used, prepares an electron application in a
 # distributable format using the specified package builder.
 .if defined(_ELECTRON_FEATURE_BUILD)
+ELECTRON_MAKE_FLAGS?=
+
 .   if ${_ELECTRON_FEATURE_BUILD} == builder
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} electron-builder
 ELECTRON_MAKE_FLAGS+=	--linux \
