@@ -28,8 +28,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild:nodejs build:builder
 
-NPM_FETCH_FLAGS=--ignore-scripts --no-progress --no-audit --no-fund \
-		--legacy-peer-deps
+NPM_FETCH_FLAGS+=	--legacy-peer-deps
 
 post-extract:
 	if [ -f ${FILESDIR}/config-local.json ]; then \
