@@ -9,7 +9,7 @@
 # build:	Electron is needed at build time. Adds it to BUILD_DEPENDS.
 # run:		Electron is needed at run time. Adds it to RUN_DEPENDS.
 # test:		Electron is needed at test time. Adds it to TEST_DEPENDS.
-# env:		Electron is not needed any of build, run, or test time.
+# env:		Electron is not needed at any of build, run, or test time.
 #		However, the port needs USE_ELECTRON features.
 #
 # NOTE: If the port specifies none of build, run or test, we assume the port
