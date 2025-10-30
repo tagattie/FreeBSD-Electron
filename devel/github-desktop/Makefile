@@ -31,7 +31,7 @@ REINPLACE_FILES=	app/src/lib/editors/linux.ts \
 			app/node_modules/dugite/build/lib/git-environment.js
 
 USE_ELECTRON=	npm:yarn1 appbuilder prefetch extract rebuild
-REBUILD_WRKSRC_ELECTRON=	${WRKSRC}/app
+NPM_REBUILD_WRKSRC_ELECTRON=	${WRKSRC}/app
 
 post-patch:
 	@${REINPLACE_CMD} -e 's|%%LOCALBASE%%|${LOCALBASE}|' \

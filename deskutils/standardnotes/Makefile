@@ -34,7 +34,7 @@ USE_ELECTRON=	npm:yarn2 appbuilder extract build:builder
 
 NPM_VER=	3.2.1
 NPM_CACHE_SETUP_CMD=	${TRUE}
-REBUILD_WRKSRC_ELECTRON=	${BUILD_WRKSRC}
+NPM_REBUILD_WRKSRC_ELECTRON=	${BUILD_WRKSRC}
 ELECTRON_MAKE_FLAGS+=	--c.extraMetadata.version=${DISTVERSION}
 
 pre-build:
