@@ -315,6 +315,11 @@ BUILD_DEPENDS+=	app-builder:devel/app-builder-devel
 .endif
 
 # Define variables related to node package manager
+NPM_FETCH_FLAGS?=
+NPM_EXTRACT_FLAGS?=
+NPM_EXEC_FLAGS?=
+NPM_REBUILD_FLAGS?=
+
 NPM_PKGFILE?=		package.json
 .if ${_NODEJS_NPM} == npm
 NPM_LOCKFILE?=		package-lock.json
@@ -322,11 +327,11 @@ NPM_MODULE_CACHE?=	node_modules
 NPM_CMDNAME?=		npm
 NPM_CACHE_SETUP_CMD?=	${DO_NADA}
 NPM_FETCH_CMD?=		${NPM_CMDNAME} ci
-NPM_FETCH_FLAGS?=	--ignore-scripts --no-progress --no-audit --no-fund --no-update-notifier
+NPM_FETCH_FLAGS+=	--ignore-scripts --no-progress --no-audit --no-fund --no-update-notifier
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
-NPM_EXEC_FLAGS?=	--no-update-notifier
+NPM_EXEC_FLAGS+=	--no-update-notifier
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
-NPM_REBUILD_FLAGS?=	--no-update-notifier
+NPM_REBUILD_FLAGS+=	--no-update-notifier
 .elif ${_NODEJS_NPM:Myarn*}
 NPM_LOCKFILE?=		yarn.lock
 NPM_MODULE_CACHE?=	yarn-offline-cache
@@ -336,22 +341,22 @@ NPM_EXTRACT_CMD?=	${NPM_CMDNAME} install
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 .   if ${_NODEJS_NPM} == yarn1
 NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${NPM_MODULE_CACHE}"' >> .yarnrc
-NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
-NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --offline
+NPM_FETCH_FLAGS+=	--frozen-lockfile --ignore-scripts
+NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --offline
 .   elif ${_NODEJS_NPM} == yarn2
 NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} config set cacheFolder "./${NPM_MODULE_CACHE}"
-NPM_FETCH_FLAGS?=	--immutable --mode=skip-build
+NPM_FETCH_FLAGS+=	--immutable --mode=skip-build
 NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false; \
 			${NPM_CMDNAME} config set enableInlineBuilds true"
-NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
+NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --immutable-cache
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .   elif ${_NODEJS_NPM} == yarn4
 NPM_CACHE_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableGlobalCache false; \
 			${NPM_CMDNAME} config set cacheFolder \"./${NPM_MODULE_CACHE}\""
-NPM_FETCH_FLAGS?=	--immutable --mode=skip-build
+NPM_FETCH_FLAGS+=	--immutable --mode=skip-build
 NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false; \
 			${NPM_CMDNAME} config set enableInlineBuilds true"
-NPM_EXTRACT_FLAGS?=	${NPM_FETCH_FLAGS} --immutable-cache
+NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --immutable-cache
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .   endif
 .elif ${_NODEJS_NPM} == pnpm
