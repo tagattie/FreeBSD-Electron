@@ -1,8 +1,6 @@
-TIMESTAMP = 1761460784
+TIMESTAMP = 1761860352
 SHA256 (element-v1.12.2.tar.gz) = 31ead740cfb828a2f095595760e9233dd645749ab2a675debd158acfadcd119a
 SIZE (element-v1.12.2.tar.gz) = 38888990
-SHA256 (element-desktop-1.12.2-node-modules.tar.gz) = 2eaf7b4ea9eb16c08c1f5c72b0181783b59c52779ca91bc0c501ce7b871954f3
-SIZE (element-desktop-1.12.2-node-modules.tar.gz) = 264051466
 SHA256 (matrix-seshat-4.0.1.tgz) = 9bfe48f6852bd56fb3791ec41454f9c3ece46e3be7b359064278cd68f42037c9
 SIZE (matrix-seshat-4.0.1.tgz) = 4553838
 SHA256 (rust/crates/addr2line-0.19.0.crate) = a76fd60b23679b7d19bd066031410fb7e458ccc5e958eb5c325888ce4baedc97
@@ -529,5 +527,7 @@ SHA256 (rust/crates/zerocopy-derive-0.7.34.crate) = 15e934569e47891f7d9411f1a451
 SIZE (rust/crates/zerocopy-derive-0.7.34.crate) = 37907
 SHA256 (rust/crates/zeroize-1.8.1.crate) = ced3678a2879b30306d323f4542626697a464a97c0a07c9aebf7ebca65cd4dde
 SIZE (rust/crates/zeroize-1.8.1.crate) = 20029
+SHA256 (element-desktop-1.12.2-node-modules.tar.gz) = 9cc0d6e180415fdf63b713aed8c17b9efdfd7835b1cec01c2d35b87c81534b10
+SIZE (element-desktop-1.12.2-node-modules.tar.gz) = 264051185
 SHA256 (element-hq-element-desktop-v1.12.2_GH0.tar.gz) = fb2eaf9816231cad86292145d5eb214d20305aec2fc27d901f203e4007047534
 SIZE (element-hq-element-desktop-v1.12.2_GH0.tar.gz) = 3161554
