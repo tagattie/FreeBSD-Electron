@@ -404,34 +404,7 @@ electron-fetch-node-package-manager:
 		${SETENV} ${MAKE_ENV} corepack pack ${NPM_CMDNAME}@${NPM_VER} && \
 		${TAR} -xzf corepack.tgz && \
 		${MTREE_CMD} -cbnSp ${NPM_CMDNAME} | ${MTREE_CMD} -C | \
-		${AWK} ' \
-			function oct2dec(octstr, i, c, val) { \
-				val = 0; \
-				for (i = 1; i <= length(octstr); i++) { \
-					c = substr(octstr, i, 1); \
-					if (c < "0" || c > "7") { \
-						break; \
-					} \
-					val = val * 8 + (c - "0"); \
-				} \
-				return val; \
-			} \
-			{ \
-				if (match($$0, /mode=[0-7]+/)) { \
-					mode_str = substr($$0, RSTART+5, RLENGTH-5); \
-					mode = oct2dec(mode_str); \
-					exec_bits = 73; \
-					special_bits = 3584; \
-					special = and(mode, special_bits); \
-					if (and(mode, exec_bits) != 0) { \
-						newmode = or(special, 493); \
-					} else { \
-						newmode = or(special, 420); \
-					} \
-					sub(/mode=[0-7]+/, "mode=" sprintf("%04o", newmode)); \
-				} \
-				print; \
-			}' | \
+		${AWK} -f ${SCRIPTSDIR}/electron-normalize-permissions.awk | \
 		${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
@@ -492,34 +465,7 @@ electron-archive-node-modules:
 		for dir in `${FIND} -s ${WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
 			${GREP} -ve '${NPM_MODULE_CACHE}/.*/${NPM_MODULE_CACHE}'`; do \
 			${MTREE_CMD} -cbnSp $${dir} | ${MTREE_CMD} -C | \
-			${AWK} ' \
-				function oct2dec(octstr, i, c, val) { \
-					val = 0; \
-					for (i = 1; i <= length(octstr); i++) { \
-						c = substr(octstr, i, 1); \
-						if (c < "0" || c > "7") { \
-							break; \
-						} \
-						val = val * 8 + (c - "0"); \
-					} \
-					return val; \
-				} \
-				{ \
-					if (match($$0, /mode=[0-7]+/)) { \
-						mode_str = substr($$0, RSTART+5, RLENGTH-5); \
-						mode = oct2dec(mode_str); \
-						exec_bits = 73; \
-						special_bits = 3584; \
-						special = and(mode, special_bits); \
-						if (and(mode, exec_bits) != 0) { \
-							newmode = or(special, 493); \
-						} else { \
-							newmode = or(special, 420); \
-						} \
-						sub(/mode=[0-7]+/, "mode=" sprintf("%04o", newmode)); \
-					} \
-					print; \
-				}' | \
+			${AWK} -f ${SCRIPTSDIR}/electron-normalize-permissions.awk | \
 			${SED} \
 				-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 				-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
@@ -538,34 +484,7 @@ electron-archive-node-modules:
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${MTREE_CMD} -cbnSp ${NPM_MODULE_CACHE} | ${MTREE_CMD} -C | \
-		${AWK} ' \
-			function oct2dec(octstr, i, c, val) { \
-				val = 0; \
-				for (i = 1; i <= length(octstr); i++) { \
-					c = substr(octstr, i, 1); \
-					if (c < "0" || c > "7") { \
-						break; \
-					} \
-					val = val * 8 + (c - "0"); \
-				} \
-				return val; \
-			} \
-			{ \
-				if (match($$0, /mode=[0-7]+/)) { \
-					mode_str = substr($$0, RSTART+5, RLENGTH-5); \
-					mode = oct2dec(mode_str); \
-					exec_bits = 73; \
-					special_bits = 3584; \
-					special = and(mode, special_bits); \
-					if (and(mode, exec_bits) != 0) { \
-						newmode = or(special, 493); \
-					} else { \
-						newmode = or(special, 420); \
-					} \
-					sub(/mode=[0-7]+/, "mode=" sprintf("%04o", newmode)); \
-				} \
-				print; \
-			}' | \
+		${AWK} -f ${SCRIPTSDIR}/electron-normalize-permissions.awk | \
 		${SED} \
 			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
 			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
