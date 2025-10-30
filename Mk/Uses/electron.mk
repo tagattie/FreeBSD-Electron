@@ -531,17 +531,17 @@ electron-copy-package-file:
 
 electron-install-node-modules:
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
-	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
-		for dir in `${FIND} -s ${WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
 	@${ECHO_MSG} "===>  Moving prefetched node modules to ${NPM_EXTRACT_WRKSRC}"
+	@if [ -d ${EXTRACT_WRKDIR}/node-modules-cache ]; then \
+		for dir in `${FIND} -s ${EXTRACT_WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
 			${GREP} -ve '${NPM_MODULE_CACHE}/.*/${NPM_MODULE_CACHE}'`; do \
-			${MV} $${dir} `${ECHO_CMD} $${dir} | sed -e 's|${WRKDIR}/node-modules-cache|${WRKSRC}|'`; \
+			${MV} $${dir} `${ECHO_CMD} $${dir} | sed -e 's|${EXTRACT_WRKDIR}/node-modules-cache|${NPM_EXTRACT_WRKSRC}|'`; \
 		done; \
 	fi
 .   elif ${_NODEJS_NPM:Myarn*}
 	@${ECHO_MSG} "===>  Installing node modules from prefetched cache"
-	@if [ -d ${WRKDIR}/${NPM_MODULE_CACHE} ]; then \
-		${MV} ${WRKDIR}/${NPM_MODULE_CACHE} ${WRKSRC}; \
+	@if [ -d ${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE} ]; then \
+		${MV} ${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE} ${NPM_EXTRACT_WRKSRC}; \
 	fi
 	@cd ${NPM_EXTRACT_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
 .	if defined(NPM_EXTRACT_SETUP_CMD) && !empty(NPM_EXTRACT_SETUP_CMD)
