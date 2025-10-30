@@ -460,7 +460,6 @@ electron-fetch-node-modules:
 			fi; \
 			${RM} $${dir}/${NPM_MODULE_CACHE}/.pnpm-workspace-state*.json; \
 		done; \
-		${FIND} ${WRKDIR}/node-modules-cache -type d -exec ${CHMOD} 755 {} ';'; \
 	fi
 
 electron-archive-node-modules:
