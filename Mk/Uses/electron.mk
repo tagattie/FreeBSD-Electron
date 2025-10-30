@@ -327,7 +327,7 @@ NPM_MODULE_CACHE?=	node_modules
 NPM_CMDNAME?=		npm
 NPM_CACHE_SETUP_CMD?=	${DO_NADA}
 NPM_FETCH_CMD?=		${NPM_CMDNAME} ci
-NPM_FETCH_FLAGS+=	--ignore-scripts --no-progress --no-audit --no-fund --no-update-notifier
+NPM_FETCH_FLAGS+=	--ignore-scripts --no-progress --no-audit --no-fund --no-update-notifier --loglevel=error
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 NPM_EXEC_FLAGS+=	--no-update-notifier
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
@@ -365,7 +365,7 @@ NPM_MODULE_CACHE?=	node_modules
 NPM_CMDNAME?=		pnpm
 NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} set extendNodePath false
 NPM_FETCH_CMD?=		${NPM_CMDNAME} install
-NPM_FETCH_FLAGS?=	--frozen-lockfile --ignore-scripts
+NPM_FETCH_FLAGS+=	--frozen-lockfile --ignore-scripts --loglevel=error
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .endif
