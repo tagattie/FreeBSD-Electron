@@ -68,44 +68,13 @@ pre-fetch:
 		for dir in `${FIND} ${FILESDIR}/default-plugins -type d -depth 1 -print | ${SED} -e 's|${FILESDIR}/default-plugins||'`; do \
 			cd ${WRKDIR}/node-modules-cache/$${dir} && \
 			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-				npm ci --ignore-scripts --no-progress --no-audit --no-fund; \
+				npm ci --ignore-scripts --no-progress --no-audit --no-fund --no-update-notifier --loglevel=error; \
 			${RM} package.json package-lock.json; \
 		done; \
 		cd ${WRKDIR} && \
-		${MTREE_CMD} -cbnSp node-modules-cache | ${MTREE_CMD} -C | \
-		${AWK} ' \
-			function oct2dec(octstr, i, c, val) { \
-				val = 0; \
-				for (i = 1; i <= length(octstr); i++) { \
-					c = substr(octstr, i, 1); \
-					if (c < "0" || c > "7") { \
-						break; \
-					} \
-					val = val * 8 + (c - "0"); \
-				} \
-				return val; \
-			} \
-			{ \
-				if (match($$0, /mode=[0-7]+/)) { \
-					mode_str = substr($$0, RSTART+5, RLENGTH-5); \
-					mode = oct2dec(mode_str); \
-					exec_bits = 73; \
-					special_bits = 3584; \
-					special = and(mode, special_bits); \
-					if (and(mode, exec_bits) != 0) { \
-						newmode = or(special, 493); \
-					} else { \
-						newmode = or(special, 420); \
-					} \
-					sub(/mode=[0-7]+/, "mode=" sprintf("%04o", newmode)); \
-				} \
-				print; \
-			}' | \
-		${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./node-modules-cache:' > node-modules-cache.mtree && \
+		${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
+			${SH} ${SCRIPTSDIR}/electron-create-mtree.sh node-modules-cache > \
+			node-modules-cache.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DEFAULT_PLUGINS_NODE_MODULES_FILE} @node-modules-cache.mtree; \
@@ -117,43 +86,12 @@ pre-fetch:
 		${CP} -R ${FILESDIR}/app-clipper/* ${WRKDIR}/node-modules-cache-app-clipper; \
 		cd ${WRKDIR}/node-modules-cache-app-clipper && \
 		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			npm ci --ignore-scripts --no-progress --no-audit --no-fund && \
+			npm ci --ignore-scripts --no-progress --no-audit --no-fund --no-update-notifier --loglevel=error && \
 		${RM} package.json package-lock.json; \
 		cd ${WRKDIR} && \
-		${MTREE_CMD} -cbnSp node-modules-cache-app-clipper | ${MTREE_CMD} -C | \
-		${AWK} ' \
-			function oct2dec(octstr, i, c, val) { \
-				val = 0; \
-				for (i = 1; i <= length(octstr); i++) { \
-					c = substr(octstr, i, 1); \
-					if (c < "0" || c > "7") { \
-						break; \
-					} \
-					val = val * 8 + (c - "0"); \
-				} \
-				return val; \
-			} \
-			{ \
-				if (match($$0, /mode=[0-7]+/)) { \
-					mode_str = substr($$0, RSTART+5, RLENGTH-5); \
-					mode = oct2dec(mode_str); \
-					exec_bits = 73; \
-					special_bits = 3584; \
-					special = and(mode, special_bits); \
-					if (and(mode, exec_bits) != 0) { \
-						newmode = or(special, 493); \
-					} else { \
-						newmode = or(special, 420); \
-					} \
-					sub(/mode=[0-7]+/, "mode=" sprintf("%04o", newmode)); \
-				} \
-				print; \
-			}' | \
-		${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./node-modules-cache-app-clipper:' > node-modules-cache-app-clipper.mtree && \
+		${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
+			${SH} ${SCRIPTSDIR}/electron-create-mtree.sh node-modules-cache-app-clipper > \
+			node-modules-cache-app-clipper.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${APP_CLIPPER_NODE_MODULES_FILE} @node-modules-cache-app-clipper.mtree; \
