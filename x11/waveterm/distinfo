@@ -1,4 +1,4 @@
-TIMESTAMP = 1761333473
+TIMESTAMP = 1761861335
 SHA256 (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/tsunami/go.mod) = ddaa33d6ef5798c7e1fd7c44cb8d3041d1d453fa86dc433fcfeb14ed5a386f19
 SIZE (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/tsunami/go.mod) = 307
 SHA256 (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/rust/crates/Inflector-0.11.4.crate) = fe438c63458706e03479442743baae6c88256498e6431708f6dfc520a26515d3
@@ -1275,8 +1275,8 @@ SHA256 (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/rust/crates/zerovec-0.1
 SIZE (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/rust/crates/zerovec-0.11.2.crate) = 124500
 SHA256 (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/rust/crates/zerovec-derive-0.11.1.crate) = 5b96237efa0c878c64bd89c436f661be4e46b2f3eff1ebb976f7ef2321d2f58f
 SIZE (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/rust/crates/zerovec-derive-0.11.1.crate) = 21294
-SHA256 (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/waveterm-0.12.1-node-modules.tar.gz) = 6f39c5f1fc4c76dbddf7b13ad4353f4d345c0e9fa1c2ebda873c765ed5041d7d
-SIZE (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/waveterm-0.12.1-node-modules.tar.gz) = 245360108
+SHA256 (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/waveterm-0.12.1-node-modules.tar.gz) = 09478a1e983ffa4115d14bde00cd28aaf44c2b1e214ee48a3f15dda142dc90fd
+SIZE (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/waveterm-0.12.1-node-modules.tar.gz) = 245337224
 SHA256 (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/v0.12.1.mod) = 3d4ada63f58c7f878ba100f7c45ea5a34c9e94af36c9073ec9b4cc304575c0d7
 SIZE (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/v0.12.1.mod) = 5261
 SHA256 (go/x11_waveterm/wavetermdev-waveterm-v0.12.1_GH0/v0.12.1.zip) = 46445f1d00a4592f6996499e0c00dc0a4ff239a0332176d2b4e129aa9439234c
