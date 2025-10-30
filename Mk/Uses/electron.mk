@@ -341,11 +341,11 @@ NPM_EXTRACT_CMD?=	${NPM_CMDNAME} install
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 .   if ${_NODEJS_NPM} == yarn1
 NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${NPM_MODULE_CACHE}"' >> .yarnrc
-NPM_FETCH_FLAGS+=	--frozen-lockfile --ignore-scripts
+NPM_FETCH_FLAGS+=	--frozen-lockfile --ignore-scripts --silent
 NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --offline
 .   elif ${_NODEJS_NPM} == yarn2
 NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} config set cacheFolder "./${NPM_MODULE_CACHE}"
-NPM_FETCH_FLAGS+=	--immutable --mode=skip-build
+NPM_FETCH_FLAGS+=	--immutable --mode=skip-build --log-level=error
 NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false; \
 			${NPM_CMDNAME} config set enableInlineBuilds true"
 NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --immutable-cache
@@ -353,7 +353,7 @@ NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .   elif ${_NODEJS_NPM} == yarn4
 NPM_CACHE_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableGlobalCache false; \
 			${NPM_CMDNAME} config set cacheFolder \"./${NPM_MODULE_CACHE}\""
-NPM_FETCH_FLAGS+=	--immutable --mode=skip-build
+NPM_FETCH_FLAGS+=	--immutable --mode=skip-build --log-level=error
 NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false; \
 			${NPM_CMDNAME} config set enableInlineBuilds true"
 NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --immutable-cache
