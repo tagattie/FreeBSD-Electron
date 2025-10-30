@@ -1,6 +1,4 @@
-TIMESTAMP = 1761316307
-SHA256 (tabby-1.0.228-node-modules.tar.gz) = fbe280992f20503589436aded93971118a54f1de2c1def51ca4f6e7bbc5962f1
-SIZE (tabby-1.0.228-node-modules.tar.gz) = 225483284
+TIMESTAMP = 1761861018
 SHA256 (rust/crates/addr2line-0.24.2.crate) = dfbe277e56a376000877090da837660b4427aad530e3028d44e0bffe4f89a1c1
 SIZE (rust/crates/addr2line-0.24.2.crate) = 39015
 SHA256 (rust/crates/adler2-2.0.0.crate) = 512761e0bb2578dd7380c6baaa0f4ce03e84f95e960231d1dec8bf4d7d6e2627
@@ -525,6 +523,8 @@ SHA256 (rust/crates/zerocopy-derive-0.7.35.crate) = fa4f8080344d4671fb4e831a13ad
 SIZE (rust/crates/zerocopy-derive-0.7.35.crate) = 37829
 SHA256 (rust/crates/zeroize-1.8.1.crate) = ced3678a2879b30306d323f4542626697a464a97c0a07c9aebf7ebca65cd4dde
 SIZE (rust/crates/zeroize-1.8.1.crate) = 20029
+SHA256 (tabby-1.0.228-node-modules.tar.gz) = 7b20e27b41c4fa0744f8142a31af896f75acf5c7bef22182e3b6d50147e8369c
+SIZE (tabby-1.0.228-node-modules.tar.gz) = 225482777
 SHA256 (Eugeny-tabby-v1.0.228_GH0.tar.gz) = 69e6ed78948a8aab03e138effffc37fdc3505a36b199a80deb79cfdf7e539a59
 SIZE (Eugeny-tabby-v1.0.228_GH0.tar.gz) = 18925973
 SHA256 (Eugeny-russh-napi-727dced7a1186a44433c76428e87518002181527_GH0.tar.gz) = 3c758d9ed2d72ff3166f56d1b93bb7bbd27f0f45b65a393ecd73f9c1e3365069
