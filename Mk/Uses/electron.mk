@@ -2,13 +2,15 @@
 #
 # Feature:	electron
 # Usage:	USES=electron:<version>[,ARGS]
-# Valid ARGS:	<version>, build, run, test
+# Valid ARGS:	<version>, build, run, test, env
 #
 # <version>:	A specific major version of Electron the port is based on.
 #		The port must specify exactly a single major version.
 # build:	Electron is needed at build time. Adds it to BUILD_DEPENDS.
 # run:		Electron is needed at run time. Adds it to RUN_DEPENDS.
 # test:		Electron is needed at test time. Adds it to TEST_DEPENDS.
+# env:		Electron is not needed any of build, run, or test time.
+#		However, the port needs USE_ELECTRON features.
 #
 # NOTE: If the port specifies none of build, run or test, we assume the port
 # requires all those dependencies.
@@ -147,22 +149,29 @@ _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Nrun}
 _ELECTRON_TEST_DEP=	yes
 _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Ntest}
 .endif
+.if ${_ELECTRON_ARGS:Menv}
+_ELECTRON_NO_DEP=	yes
+_ELECTRON_ARGS:=	${_ELECTRON_ARGS:Nenv}
+.endif
 # If no dependencies are specified, assume all are required
 .if !defined(_ELECTRON_BUILD_DEP) && !defined(_ELECTRON_RUN_DEP) && \
-    !defined(_ELECTRON_TEST_DEP)
+    !defined(_ELECTRON_TEST_DEP) && !defined(_ELECTRON_NO_DEP)
 _ELECTRON_BUILD_DEP=	yes
 _ELECTRON_RUN_DEP=	yes
 _ELECTRON_TEST_DEP=	yes
 .endif
 # Now _ELECTRON_ARGS should contain a single major version
-.if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
+# unless electron:env is set
+.if !defined(_ELECTRON_NO_DEP)
+.   if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
 _ELECTRON_VERSION=	${_ELECTRON_ARGS}
 _ELECTRON_PORTDIR=	${_ELECTRON_RELPORTDIR}${_ELECTRON_VERSION}
-.include "${PORTSDIR}/${_ELECTRON_PORTDIR}/Makefile.version"
-.elif empty(_ELECTRON_ARGS)
+.   include "${PORTSDIR}/${_ELECTRON_PORTDIR}/Makefile.version"
+.   elif empty(_ELECTRON_ARGS)
 IGNORE=	does not specify a major version of electron with USES=electron
-.else
+.   else
 IGNORE= specifies unknown USES=electron arguments: ${_ELECTRON_ARGS}
+.   endif
 .endif
 
 # Detect features used with USE_ELECTRON
