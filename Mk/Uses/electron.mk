@@ -389,7 +389,6 @@ YQ_CMD?=		${LOCALBASE}/bin/yq
 APP_BUILDER_CMD?=	${LOCALBASE}/bin/app-builder
 
 ELECTRON_ARCH=		${ARCH:S/aarch64/arm64/:S/amd64/x64/:S/i386/ia32/}
-PREFETCH_TIMESTAMP=	61171200
 
 PKGJSONSDIR?=		${FILESDIR}/packagejsons
 NPM_VER?=
