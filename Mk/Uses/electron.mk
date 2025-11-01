@@ -757,7 +757,7 @@ ELECTRON_MAKE_FLAGS+=	--linux \
 			--dir \
 			--config.npmRebuild=false \
 			--config.electronVersion=${ELECTRON_VER} \
-			--config.electronDist=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
+			--config.electronDist=${WRKDIR}/electron-dist
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked
 .   elif ${_ELECTRON_FEATURE_BUILD} == packager
