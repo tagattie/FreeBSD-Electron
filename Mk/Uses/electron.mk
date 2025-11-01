@@ -51,6 +51,9 @@
 #		devel:	The port uses development version of app-builder and add
 #			devel/app-builder-devel to BUILD_DEPENDS.
 #
+#		NOTE: If the port specifies none of those arguments, we assume
+#		release has been specified.
+#
 #	prefetch:	Downloads node modules the port uses according to the
 #			pre-stored package.json (and package-lock.json,
 #			yarn.lock, or pnpm-lock.yaml depending on the node
