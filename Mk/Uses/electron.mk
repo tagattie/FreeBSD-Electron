@@ -12,7 +12,10 @@
 # env:		Electron is not needed at any of build, run, or test time.
 #		However, the port needs USE_ELECTRON features.
 #
-# NOTE: If the port specifies none of build, run or test, we assume the port
+# NOTE 1: {build, run, test} and env are mutually exclusive. If the port
+# specifies both of them, env takes precedence.
+#
+# NOTE 2: If the port specifies none of build, run or test, we assume the port
 # requires all those dependencies.
 #
 # Variables, which may be set by the port:
