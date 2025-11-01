@@ -785,7 +785,7 @@ ELECTRON_REBUILD_ENV+=	npm_config_runtime=electron
 ELECTRON_REBUILD_ENV+=	npm_config_target=${ELECTRON_VER}
 ELECTRON_REBUILD_ENV+=	npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers
 
-MAKE_ENV+=	ELECTRON_OVERRIDE_DIST_PATH=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
+MAKE_ENV+=	ELECTRON_OVERRIDE_DIST_PATH=${WRKDIR}/electron-dist
 MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 	# don't download electron binary distribution
 MAKE_ENV+=	PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1	# don't download browser for playwright
 MAKE_ENV+=	PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1	# don't download chromium for puppeteer
