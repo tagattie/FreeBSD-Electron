@@ -148,7 +148,7 @@ _NODEJS_PKGNAME=	node${NODEJS_VERSION}
 _NODEJS_PORTDIR=	www/node${NODEJS_VERSION}
 
 # Process USES=electron[:ARGS]
-# Detect build, run or test dependency
+# Detect build, run, test, or env dependency
 _ELECTRON_ARGS=		${electron_ARGS:S/,/ /g}
 .if ${_ELECTRON_ARGS:Mbuild}
 _ELECTRON_BUILD_DEP=	yes
@@ -166,15 +166,14 @@ _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Ntest}
 _ELECTRON_NO_DEP=	yes
 _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Nenv}
 .endif
-# If no dependencies are specified, assume all are required
+# If no dependencies are specified, assume build, run, and test are required
 .if !defined(_ELECTRON_BUILD_DEP) && !defined(_ELECTRON_RUN_DEP) && \
     !defined(_ELECTRON_TEST_DEP) && !defined(_ELECTRON_NO_DEP)
 _ELECTRON_BUILD_DEP=	yes
 _ELECTRON_RUN_DEP=	yes
 _ELECTRON_TEST_DEP=	yes
 .endif
-# Now _ELECTRON_ARGS should contain a single major version
-# unless electron:env is set
+# Now _ELECTRON_ARGS should contain a single major version unless env is set
 .if !defined(_ELECTRON_NO_DEP)
 .   if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
 _ELECTRON_VERSION=	${_ELECTRON_ARGS}
@@ -264,7 +263,7 @@ _ELECTRON_FEATURE_APPBUILDER:=	${_ELECTRON_FEATURE_APPBUILDER:Nrelease}
 _ELECTRON_FEATURE_APPBUILDER_DEVEL=	yes
 _ELECTRON_FEATURE_APPBUILDER:=	${_ELECTRON_FEATURE_APPBUILDER:Ndevel}
 .   endif
-# If no arguments are specified, we assume stable is specified
+# If no arguments are specified, we assume release is specified
 .   if !defined(_ELECTRON_FEATURE_APPBUILDER_RELEASE) && \
        !defined(_ELECTRON_FEATURE_APPBUILDER_DEVEL)
 _ELECTRON_FEATURE_APPBUILDER_RELEASE=	yes
@@ -286,7 +285,7 @@ _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:Nnodejs}
 _ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
 _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:Nelectron}
 .   endif
-# If no arguments are specified, we assume both nodejs and electron are required
+# If no arguments are specified, we assume electron is specified
 .   if !defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
        !defined(_ELECTRON_FEATURE_REBUILD_ELECTRON)
 _ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
@@ -787,11 +786,11 @@ ELECTRON_REBUILD_ENV+=	npm_config_target=${ELECTRON_VER}
 ELECTRON_REBUILD_ENV+=	npm_config_nodedir=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}/node_headers
 
 MAKE_ENV+=	ELECTRON_OVERRIDE_DIST_PATH=${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR}
-MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 # effective electron >=6
+MAKE_ENV+=	ELECTRON_SKIP_BINARY_DOWNLOAD=1 	# don't download electron binary distribution
 MAKE_ENV+=	PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD=1	# don't download browser for playwright
 MAKE_ENV+=	PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=1	# don't download chromium for puppeteer
-MAKE_ENV+=	SASS_FORCE_BUILD=true		# always rebuild native node-sass module
-MAKE_ENV+=	USE_SYSTEM_APP_BUILDER=true	# always use system app-builder for electron-builder
+MAKE_ENV+=	SASS_FORCE_BUILD=true			# always rebuild native node-sass module
+MAKE_ENV+=	USE_SYSTEM_APP_BUILDER=true		# always use system app-builder for electron-builder
 MAKE_ENV+=	npm_config_build_from_source=true
 SUB_LIST+=	ELECTRON_VER_MAJOR=${ELECTRON_VER_MAJOR}
 
