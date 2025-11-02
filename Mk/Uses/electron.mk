@@ -61,10 +61,15 @@
 #			modules are archived into a single tarball as one of
 #			the DISTFILES.
 #
-#		NOTE: If the source directory of the port has other relevant
+#		NOTE 1: If the source directory of the port has other relevant
 #		files than package.json and lockfile, the relevant files must
 #		also be copied into PKGJSONSDIR. (Examples of relevant files
 #		includes .npmrc, .yarnrc, and pnpm-workspace.yaml.)
+#
+#		NOTE 2: If the source directory of the port contains multiple
+#		package.json's and/or lockfiles, all files needed for generating
+#		node modules archive must be copied into PKGJSONSDIR with
+#		directory hierarchy preserved.
 #
 #	extract:	Installs the prefetched node modules into the port's
 #			working source directory.
