@@ -760,6 +760,7 @@ ELECTRON_MAKE_FLAGS?=
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} electron-builder
 ELECTRON_MAKE_FLAGS+=	--linux \
 			--dir \
+			--publish never \
 			--config.npmRebuild=false \
 			--config.electronVersion=${ELECTRON_VER} \
 			--config.electronDist=${WRKDIR}/electron-dist
