@@ -1,8 +1,9 @@
 # Notes for port maintainer
 #
-# Don't need to the following step. It builds fine without it.
+# Don't need the following step. It builds fine without it.
 #
-# Before copying package.json and yarn.lock to ${PKGJSONSDIR}, do the following steps:
+# Before copying package.json and yarn.lock to ${PKGJSONSDIR},
+# do the following steps:
 # 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
 #    $ yarn add --dev --ignore-scripts node-addon-api node-gyp
 # This is required for building sharp node module from source.
@@ -10,7 +11,7 @@
 
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.1
+DISTVERSION=	1.17.2
 CATEGORIES=	net-im
 MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
 DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher
