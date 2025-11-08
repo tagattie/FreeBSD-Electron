@@ -1,6 +1,6 @@
 PORTNAME=	vesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.6.0
+DISTVERSION=	1.6.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 # So we have to add npm as build-time dependency.
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
-USES=		desktop-file-utils electron:38 gnome nodejs:22,build pkgconfig
+USES=		desktop-file-utils electron:39 gnome nodejs:22,build pkgconfig
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Vencord
@@ -37,7 +37,6 @@ post-extract:
 	fi
 
 pre-build:
-	# cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run postinstall
 	cd ${WRKSRC}/packages/libvesktop && \
 		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} pnpm run build
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
