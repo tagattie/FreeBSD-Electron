@@ -1,6 +1,7 @@
-# Notes for port maintainer
+# Notes for port maintainer(s)
 #
-# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR},
+# do the following steps:
 # 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
 #    $ npm install --save-dev --ignore-scripts node-addon-api node-gyp
 # This is required for building sharp node module from source.
@@ -8,7 +9,7 @@
 
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.12.1
+DISTVERSION=	0.12.2
 CATEGORIES=	x11
 DISTFILES=	tsunami/go.mod:prefetch
 
