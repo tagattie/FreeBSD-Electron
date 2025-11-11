@@ -1,8 +1,7 @@
 PORTNAME=	hyper
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.4.1
+DISTVERSION=	4.0.0-q-canary.8
 CATEGORIES=	x11
-DISTFILES=	${PREFETCH_FILE}:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Terminal built on web technologies
@@ -11,24 +10,26 @@ WWW=		https://hyper.is
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	app-builder:devel/app-builder
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libatspi.so:accessibility/at-spi2-core \
 		libsnappy.so:archivers/snappy \
 		libasound.so:audio/alsa-lib \
 		libFLAC.so:audio/flac \
 		libopus.so:audio/opus \
+		libsndio.so:audio/sndio \
 		libdbus-1.so:devel/dbus \
-		libicui18n.so:devel/icu \
+		libepoll-shim.so:devel/libepoll-shim \
 		libevent.so:devel/libevent \
+		libffi.so:devel/libffi \
 		libpci.so:devel/libpci \
 		libnspr4.so:devel/nspr \
 		libdrm.so:graphics/libdrm \
 		libpng.so:graphics/png \
 		libwayland-client.so:graphics/wayland \
 		libwebp.so:graphics/webp \
-		libpython3.9.so:lang/python39 \
+		libdav1d.so:multimedia/dav1d \
 		libopenh264.so:multimedia/openh264 \
+		libpipewire-0.3.so:multimedia/pipewire \
 		libcups.so:print/cups \
 		libharfbuzz.so:print/harfbuzz \
 		libnss3.so:security/nss \
@@ -38,12 +39,12 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence
 RUN_DEPENDS=	bash:shells/bash
 
-USES=		desktop-file-utils electron:20,build,test gettext-runtime gl \
-		gnome iconv jpeg localbase:ldflags nodejs:16,build python:build \
-		shebangfix xorg
+USES=		desktop-file-utils electron:34 gettext-runtime gl gnome iconv \
+		jpeg localbase:ldflags nodejs:20,build python:build shebangfix \
+		xorg
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	vercel
+GH_ACCOUNT=	quine-global
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
@@ -55,67 +56,27 @@ PORTDOCS=	PLUGINS.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn,fetch,extract,build,test rebuild:electron build:builder
-
-PREFETCH_FILE=	${PKGNAME}-node-modules${EXTRACT_SUFX}
-PREFETCH_TIMESTAMP=	1677722716
-UPSTREAM_MKSNAPSHOT_VER=20.3.6
-
-pre-fetch:
-	if [ ! -f ${DISTDIR}/${PREFETCH_FILE} ]; then \
-		${MKDIR} ${WRKDIR}/node-modules-cache; \
-		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
-			${WRKDIR}/node-modules-cache/.yarnrc; \
-		${CP} -R ${PKGJSONSDIR}/* ${WRKDIR}/node-modules-cache; \
-		for dir in . target; do \
-			cd ${WRKDIR}/node-modules-cache/$${dir} && \
-			${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-				yarn --frozen-lockfile --ignore-scripts; \
-		done; \
-		${FIND} ${WRKDIR}/node-modules-cache -depth 1 -print | ${GREP} -v yarn-offline-cache | \
-			${XARGS} ${RM} -r; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${MTREE_CMD} -cbnSp yarn-offline-cache | ${MTREE_CMD} -C | ${SED} \
-			-e 's:time=[0-9.]*:time=${PREFETCH_TIMESTAMP}.000000000:' \
-			-e 's:\([gu]id\)=[0-9]*:\1=0:g' \
-			-e 's:flags=.*:flags=none:' \
-			-e 's:^\.:./yarn-offline-cache:' > node-modules-cache.mtree; \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${PREFETCH_FILE} @node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
-	fi
+USE_ELECTRON=	npm:yarn1 prefetch extract rebuild build:builder
 
 post-extract:
-	${MKDIR} ${WRKSRC}/target
-	${ECHO_CMD} 'yarn-offline-mirror "../yarn-offline-cache"' >> ${WRKSRC}/.yarnrc
-.for dir in . target
-.   for f in package.json yarn.lock
-	if [ -f ${WRKSRC}/${dir}/${f} ]; then \
-		${MV} -f ${WRKSRC}/${dir}/${f} ${WRKSRC}/${dir}/${f}.bak; \
-	fi
-	${CP} ${PKGJSONSDIR}/${dir}/${f} ${WRKSRC}/${dir}
-.   endfor
-	cd ${WRKSRC}/${dir} && ${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-		yarn --frozen-lockfile --ignore-scripts --offline
-.endfor
-	${MKDIR} ${WRKSRC}/node_modules/electron/dist
+	@${MKDIR} ${WRKSRC}/target
+	@${CP} -R ${WRKSRC}/app/node_modules ${WRKSRC}/target
 
 pre-build:
-	cd ${WRKSRC}/node_modules/leveldown && ${SETENV} ${MAKE_ENV} \
-		npm_config_nodedir=${LOCALBASE} \
-		npm rebuild --no-progress
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		yarn run cross-env npm_config_arch=x64 yarn run v8-snapshot:arch
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		yarn run webpack --config-name hyper-app
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		yarn run cpy --cwd=target --parents "node_modules/**/*" "../app/"
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		yarn build
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} \
-		yarn run cross-env BABEL_ENV=production babel target/renderer/bundle.js \
-			--out-file target/renderer/bundle.js --no-comments --minified
+	cd ${WRKSRC}/node_modules/leveldown && \
+		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm rebuild
+	cd ${WRKSRC} && \
+		${SETENV} ${MAKE_ENV} yarn exec cross-env npm_config_arch=x64 yarn run v8-snapshot:arch
+	cd ${WRKSRC} && \
+		${SETENV} ${MAKE_ENV} yarn exec webpack --config-name hyper-app
+	cd ${WRKSRC} && \
+		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn run rebuild-node-pty
+	cd ${WRKSRC} && \
+		${SETENV} ${MAKE_ENV} yarn run cpy --cwd=target node_modules "../../app/"
+	cd ${WRKSRC} && \
+		${SETENV} ${MAKE_ENV} yarn run generate-schema
+	cd ${WRKSRC} && \
+		${SETENV} ${MAKE_ENV} yarn run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=build
@@ -124,19 +85,17 @@ pre-build:
 .endfor
 
 do-install:
-	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop \
-		${STAGEDIR}${PREFIX}/share/applications
+	${INSTALL_DATA} ${FILESDIR}/${PORTNAME}.desktop ${STAGEDIR}${DESKTOPDIR}
 .for size in 16 32 48 64 128 256 512 1024
 	${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
 	${INSTALL_DATA} ${WRKSRC}/icons/icon_${size}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	cd ${WRKSRC}/dist/linux-unpacked && \
-		${TAR} -cf - . | ${TAR} -xf - -C ${STAGEDIR}${DATADIR}
-	cd ${STAGEDIR}${DATADIR}/resources/app.asar.unpacked && \
-		${FIND} . -type f -name '*.node' -exec ${STRIP_CMD} {} ';'
-	${FIND} ${STAGEDIR}${DATADIR} -type f -name '*.orig' -delete
+	${TAR} -cf - -C ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} . | \
+		${TAR} -xf - -C ${STAGEDIR}${DATADIR}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 .for f in chromedriver mksnapshot v8_context_snapshot_generator
 	${RM} ${STAGEDIR}${DATADIR}/${f}
 .endfor
@@ -149,6 +108,6 @@ do-install-DOCS-on:
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test:unit
 
 .include <bsd.port.mk>

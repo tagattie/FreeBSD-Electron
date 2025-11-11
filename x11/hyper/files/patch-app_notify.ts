@@ -1,6 +1,6 @@
---- app/notify.ts.orig	2021-12-30 13:29:33 UTC
+--- app/notify.ts.orig	2025-08-31 08:00:06 UTC
 +++ app/notify.ts
-@@ -16,5 +16,5 @@ export default function notify(title: string, body = '
+@@ -17,5 +17,5 @@ const _createNotification = (title: string, body: stri
  }
  
  const _createNotification = (title: string, body: string) => {

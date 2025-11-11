@@ -1,6 +1,6 @@
---- app/config/paths.ts.orig	2021-10-09 08:39:21 UTC
+--- app/config/paths.ts.orig	2025-08-31 08:00:06 UTC
 +++ app/config/paths.ts
-@@ -63,7 +63,7 @@ const defaultPlatformKeyPath = () => {
+@@ -71,7 +71,7 @@ const defaultPlatformKeyPath = () => {
        return darwinKeys;
      case 'win32':
        return win32Keys;

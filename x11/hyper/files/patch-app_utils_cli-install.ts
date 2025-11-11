@@ -1,6 +1,6 @@
---- app/utils/cli-install.ts.orig	2021-12-30 13:30:19 UTC
+--- app/utils/cli-install.ts.orig	2025-08-31 08:00:06 UTC
 +++ app/utils/cli-install.ts
-@@ -138,7 +138,7 @@ export const installCLI = async (withNotification: boo
+@@ -141,7 +141,7 @@ export const installCLI = async (withNotification: boo
      } catch (err) {
        logNotify(withNotification, 'Hyper CLI installation failed', `Failed to add Hyper CLI path to user PATH ${err}`);
      }

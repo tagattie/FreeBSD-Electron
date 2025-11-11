@@ -1,6 +1,6 @@
---- lib/index.tsx.orig	2023-01-07 20:46:57 UTC
+--- lib/index.tsx.orig	2025-08-31 08:00:06 UTC
 +++ lib/index.tsx
-@@ -22,7 +22,7 @@ import {configOptions} from './config';
+@@ -23,7 +23,7 @@ import * as plugins from './utils/plugins';
  
  // On Linux, the default zoom was somehow changed with Electron 3 (or maybe 2).
  // Setting zoom factor to 1.2 brings back the normal default size

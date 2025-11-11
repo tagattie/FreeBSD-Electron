@@ -1,5 +1,5 @@
-TIMESTAMP = 1677723755
-SHA256 (hyper-3.4.1-node-modules.tar.gz) = 006ac8c8350bc59ae6faf8002ad9c35d4119a05ce357e629acd9701ed193f410
-SIZE (hyper-3.4.1-node-modules.tar.gz) = 98717680
-SHA256 (vercel-hyper-v3.4.1_GH0.tar.gz) = 6d691955f16496d0ffb3c5885d8e00dbc387919216629a65ec326dacb2358e75
-SIZE (vercel-hyper-v3.4.1_GH0.tar.gz) = 2800377
+TIMESTAMP = 1762859321
+SHA256 (hyper-4.0.0-q-canary.8-node-modules.tar.gz) = 2bc6e3da2458529b32226c06b984d253468bfb4c9c46fdff7d75f8dd91ecd28c
+SIZE (hyper-4.0.0-q-canary.8-node-modules.tar.gz) = 166315533
+SHA256 (quine-global-hyper-v4.0.0-q-canary.8_GH0.tar.gz) = fb6573012cbf0fa63f3fbc13c55fce51400d8bb67e29a4b489e1ca5d388a467b
+SIZE (quine-global-hyper-v4.0.0-q-canary.8_GH0.tar.gz) = 4054341
