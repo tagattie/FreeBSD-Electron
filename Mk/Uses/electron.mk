@@ -677,6 +677,9 @@ electron-generate-electron-zip:
 	@cd ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_CHROMEDRIVER_VER}
+	@cd ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR} && \
+		${SHA256} -r *.zip | \
+		${SED} -e 's/ / */' > SHASUMS256.txt
 .endif
 .if defined(UPSTREAM_MKSNAPSHOT_VER) && !empty(UPSTREAM_MKSNAPSHOT_VER)
 	@${MKDIR} ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}
@@ -685,6 +688,9 @@ electron-generate-electron-zip:
 	@cd ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
 		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_MKSNAPSHOT_VER}
+	@cd ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR} && \
+		${SHA256} -r *.zip | \
+		${SED} -e 's/ / */' > SHASUMS256.txt
 .endif
 
 # When rebuild feature is used, rebuilds native node modules against nodejs or
