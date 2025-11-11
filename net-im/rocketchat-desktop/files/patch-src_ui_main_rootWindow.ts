@@ -1,6 +1,6 @@
---- src/ui/main/rootWindow.ts.orig	2025-08-05 18:08:30 UTC
+--- src/ui/main/rootWindow.ts.orig	2025-11-07 17:42:39 UTC
 +++ src/ui/main/rootWindow.ts
-@@ -286,7 +286,7 @@ export const setupRootWindow = (): void => {
+@@ -320,7 +320,7 @@ export const setupRootWindow = (): void => {
            rootWindow.setFullScreen(false);
          }
  
@@ -9,7 +9,7 @@
            rootWindow.blur();
          }
  
-@@ -339,7 +339,7 @@ export const setupRootWindow = (): void => {
+@@ -383,7 +383,7 @@ export const setupRootWindow = (): void => {
      });
    });
  
@@ -18,12 +18,12 @@
      const selectRootWindowIcon = createStructuredSelector({
        globalBadge: selectGlobalBadge,
        rootWindowIcon: ({ rootWindowIcon }: RootState) => rootWindowIcon,
-@@ -364,7 +364,7 @@ export const setupRootWindow = (): void => {
-         const icon = nativeImage.createEmpty();
-         const { scaleFactor } = screen.getPrimaryDisplay();
+@@ -407,7 +407,7 @@ export const setupRootWindow = (): void => {
+           const icon = nativeImage.createEmpty();
+           const { scaleFactor } = screen.getPrimaryDisplay();
  
--        if (process.platform === 'linux') {
-+        if (process.platform === 'linux' || process.platform === 'freebsd') {
-           rootWindowIcon.icon.forEach((representation) => {
-             icon.addRepresentation({
-               ...representation,
+-          if (process.platform === 'linux') {
++          if (process.platform === 'linux' || process.platform === 'freebsd') {
+             rootWindowIcon.icon.forEach((representation) => {
+               icon.addRepresentation({
+                 ...representation,
