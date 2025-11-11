@@ -1,6 +1,6 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.66.1
+DISTVERSION=	3.67.0
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -60,8 +60,7 @@ PORTDOCS=	CONTRIBUTING.md README.md api.md batch.md cli.md docs.md \
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild:nodejs,electron \
-		build:builder
+USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
