@@ -10,6 +10,7 @@ WWW=		https://hyper.is
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+FETCH_DEPENDS=	git:devel/git
 LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libatspi.so:accessibility/at-spi2-core \
 		libsnappy.so:archivers/snappy \
