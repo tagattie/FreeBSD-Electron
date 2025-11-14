@@ -57,7 +57,7 @@ PORTDOCS=	PLUGINS.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1 prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:yarn1 appbuilder prefetch extract rebuild build:builder
 
 post-extract:
 	@${MKDIR} ${WRKSRC}/target
