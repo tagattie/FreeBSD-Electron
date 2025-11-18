@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/core/src/ssh_agent/mod.rs.orig	2025-10-10 16:12:57 UTC
+--- apps/desktop/desktop_native/core/src/ssh_agent/mod.rs.orig	2025-11-07 19:32:19 UTC
 +++ apps/desktop/desktop_native/core/src/ssh_agent/mod.rs
-@@ -15,10 +15,10 @@ use tracing::{error, info};
+@@ -18,10 +18,10 @@ use tracing::{error, info};
  
  #[cfg_attr(target_os = "windows", path = "windows.rs")]
  #[cfg_attr(target_os = "macos", path = "unix.rs")]

@@ -1,13 +1,15 @@
-# Notes for port maintainer
+# Notes for port maintainer(s)
 #
-# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR},
+# do the following steps:
 # 1. Downgrade electron-builder to 26.0.0 in ${WRKSRC}
-#    (Later versions of electron-builder 26 appears to have some issues with packaging node_modules)
-#   $ npm install --save-dev --ignore-scripts electron-builder@26.0.0
+#    (Later versions of electron-builder 26 appears to have
+#    some issues with packaging node_modules)
+#    $ npm install --save-dev --ignore-scripts 'electron-builder@26.0.0'
 
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2025.10.0
+DISTVERSION=	2025.11.0
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -24,7 +26,7 @@ LICENSE_PERMS_BITWARDEN=none
 LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo electron:36 gmake gnome localbase:ldflags \
+USES=		cargo electron:37 gmake gnome localbase:ldflags \
 		nodejs:22,build pkgconfig python:build xorg
 
 USE_GITHUB=	yes
