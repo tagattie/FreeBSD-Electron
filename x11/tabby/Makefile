@@ -1,13 +1,15 @@
-# Notes for port maintainer
+# Notes for port maintainer(s)
 #
-# Before copying package.json and yarn.lock to ${PKGJSONSDIR}, do the following steps:
-# 1. Downgrade electron-builder to 25 (from 26) in ${WRKSRC}
-#    (electron-builder 26 appears to have some issues with packaging node_modules)
-#   $ yarn upgrade --ignore-scripts 'electron-builder@^25'
+# Before copying package.json and yarn.lock to ${PKGJSONSDIR},
+# do the following steps:
+# 1. Downgrade electron-builder to 26.0.0 in ${WRKSRC}
+#    (Later versions of electron-builder 26 appears to have
+#    some issues with packaging node_modules)
+#    $ yarn upgrade --ignore-scripts 'electron-builder@26.0.0'
 
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.228
+DISTVERSION=	1.0.229
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
