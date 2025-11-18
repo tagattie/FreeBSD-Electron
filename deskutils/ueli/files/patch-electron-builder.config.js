@@ -1,6 +1,6 @@
---- electron-builder.config.js.orig	2025-04-20 06:09:22 UTC
+--- electron-builder.config.js.orig	2025-11-10 08:01:29 UTC
 +++ electron-builder.config.js
-@@ -58,6 +58,14 @@ const platformSpecificConfig = {
+@@ -59,6 +59,14 @@ const platformSpecificConfig = {
              ],
          },
      },

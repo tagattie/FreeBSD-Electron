@@ -1,12 +1,15 @@
-# Notes for port maintainer
+# Notes for port maintainer(s)
 #
-# Before copying package.json and package-lock.json to ${PKGJSONSDIR}, do the following steps:
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR},
+# do the following steps:
 # 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
 #    $ npm install --save-dev --ignore-scripts node-addon-api node-gyp
+# This is required for building sharp node module from source.
+# https://sharp.pixelplumbing.com/install/#building-from-source
 
 PORTNAME=	ueli
 DISTVERSIONPREFIX=	v
-DISTVERSION=	9.25.1
+DISTVERSION=	9.26.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -18,7 +21,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		electron:37 localbase:ldflags nodejs:22,build python:build
+USES=		electron:38 localbase:ldflags nodejs:22,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	oliverschwendener
