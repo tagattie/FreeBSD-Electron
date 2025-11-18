@@ -1,6 +1,6 @@
---- src/renderer/downloadsDropdownMenu.tsx.orig	2023-04-04 12:30:25 UTC
+--- src/renderer/downloadsDropdownMenu.tsx.orig	2025-11-18 12:31:15 UTC
 +++ src/renderer/downloadsDropdownMenu.tsx
-@@ -38,7 +38,7 @@ const DownloadsDropdownMenu = () => {
+@@ -39,7 +39,7 @@ const DownloadsDropdownMenu = () => {
                      id='renderer.downloadsDropdownMenu.ShowInFinder'
                      defaultMessage='Show in Finder'
                  />);

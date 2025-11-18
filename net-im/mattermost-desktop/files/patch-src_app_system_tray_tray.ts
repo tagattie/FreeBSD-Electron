@@ -1,5 +1,5 @@
---- src/main/tray/tray.ts.orig	2024-05-16 20:45:52 UTC
-+++ src/main/tray/tray.ts
+--- src/app/system/tray/tray.ts.orig	2025-11-18 22:37:05 UTC
++++ src/app/system/tray/tray.ts
 @@ -71,7 +71,7 @@ export class TrayIcon {
  
              break;

@@ -12,4 +12,5 @@ share/icons/hicolor/64x64/apps/mattermost-desktop.png
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/build/Release/focuscenter.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/macos-notification-state/build/Release/notificationstate.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/registry-js/build/Release/registry.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/build/Release/focusassist.node

@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	5.13.2
+DISTVERSION=	6.0.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://mattermost.com
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-USES=		desktop-file-utils electron:37 nodejs:22,build python:build
+USES=		desktop-file-utils electron:38 nodejs:22,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost

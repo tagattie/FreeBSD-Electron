@@ -1,6 +1,6 @@
---- src/main/permissionsManager.test.js.orig	2025-05-16 07:07:35 UTC
-+++ src/main/permissionsManager.test.js
-@@ -60,7 +60,7 @@ describe('main/PermissionsManager', () => {
+--- src/main/security/permissionsManager.test.js.orig	2025-11-18 22:15:50 UTC
++++ src/main/security/permissionsManager.test.js
+@@ -69,7 +69,7 @@ describe('main/PermissionsManager', () => {
  
  describe('main/PermissionsManager', () => {
      describe('setForServer', () => {
