@@ -1,11 +1,11 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.67.0
+DISTVERSION=	3.67.1
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Swiss army knife of lossless video/audio editing
-WWW=		https://mifi.no/losslesscut
+WWW=		https://losslesscut.app/
 
 LICENSE=	GPLv2
 LICENSE_FILE=	${WRKSRC}/LICENSE
@@ -63,6 +63,8 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:builder
 
 pre-build:
+	cd ${WRKSRC}/node_modules/sharp && \
+	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm rebuild
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
