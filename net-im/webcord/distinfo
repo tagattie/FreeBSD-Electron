@@ -1,5 +1,5 @@
-TIMESTAMP = 1761859284
-SHA256 (webcord-4.11.1-node-modules.tar.gz) = 3ad5bdee30452419a47eff98c1b4e4e74717ba59d991949e01cdd2131b3db982
-SIZE (webcord-4.11.1-node-modules.tar.gz) = 37099818
-SHA256 (SpacingBat3-WebCord-v4.11.1_GH0.tar.gz) = 668e0f495103f32183930d53df1e3add64b3f7c61cc29d0f9a06506402e891b9
-SIZE (SpacingBat3-WebCord-v4.11.1_GH0.tar.gz) = 541766
+TIMESTAMP = 1763644818
+SHA256 (webcord-4.12.1-node-modules.tar.gz) = 2d079b6f6e709fcca70aa94890b01f7e0e0af64f4268da6fecb15a2dc435e300
+SIZE (webcord-4.12.1-node-modules.tar.gz) = 46761100
+SHA256 (SpacingBat3-WebCord-v4.12.1_GH0.tar.gz) = 8ae161c5e203a052546778e35c461780bf45beafb5102ea7390a311c74ea231f
+SIZE (SpacingBat3-WebCord-v4.12.1_GH0.tar.gz) = 552832
