@@ -24,6 +24,13 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
 
+# git ls-remote --tags https://github.com/mattermost/desktop refs/tags/${GH_TAGNAME}^{}
+COMMIT_HASH=	0836d9fdbec86e1fc68b09f4274a35526c043130
+
+post-patch:
+	@${REINPLACE_CMD} -e 's/%%COMMIT_HASH%%/${COMMIT_HASH}/' \
+		${WRKSRC}/webpack.config.base.js
+
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm exec patch-package
 	@${MKDIR} ${WRKSRC}/node_modules/node-jq/bin
