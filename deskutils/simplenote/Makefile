@@ -1,6 +1,6 @@
 PORTNAME=	simplenote
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.23.2
+DISTVERSION=	2.24.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -36,7 +36,8 @@ post-extract:
 	fi
 
 post-patch:
-	@${REINPLACE_CMD} -e 's|make build|${MAKE_CMD} build|' ${WRKSRC}/Makefile
+	@${REINPLACE_CMD} -e 's|make build|${MAKE_CMD} build|' \
+		${WRKSRC}/Makefile
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${MAKE_CMD} build

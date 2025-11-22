@@ -9,4 +9,5 @@ export ELECTRON_OZONE_PLATFORM_HINT=auto
 if [ "${DBUS_SESSION_BUS_ADDRESS}" = "" ]; then
     export DBUS_SESSION_BUS_ADDRESS="autolaunch:"
 fi
+
 exec electron%%ELECTRON_VER_MAJOR%% %%DATADIR%%/resources/app.asar $@
