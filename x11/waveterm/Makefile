@@ -9,7 +9,7 @@
 
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.12.2
+DISTVERSION=	0.12.4
 CATEGORIES=	x11
 DISTFILES=	tsunami/go.mod:prefetch
 
@@ -39,6 +39,7 @@ CARGO_INSTALL=	no
 CARGO_TEST=	no
 CARGO_ENV+=	CARGO_FEATURE_LOCAL_DYNAMIC_TLS=1
 
+GO_MOD_DIST=	github
 GO_MODULE=	github.com/wavetermdev/waveterm
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
@@ -62,13 +63,6 @@ pre-fetch:
 			-o ${DISTDIR}/${DIST_SUBDIR}/tsunami/go.mod; \
 	fi
 
-pre-extract:
-	@${MKDIR} ${WRKSRC}/tsunami/frontend
-
-post-extract:
-	@${TAR} -cf - -C ${WRKDIR}/${GH_PROJECT}-${DISTVERSION}/tsunami . | \
-		${TAR} -xf - -C ${WRKSRC}/tsunami
-
 pre-build:
 	cd ${WRKSRC}/swc/bindings && \
 	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
@@ -76,7 +70,10 @@ pre-build:
 		--package binding_core_node --release --verbose --verbose
 	${CP} ${CARGO_TARGET_DIR}/*/libbinding_core_node.so \
 		${WRKSRC}/node_modules/@swc/core/swc.freebsd-${ELECTRON_ARCH}.node
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${GO_ENV} task --verbose build:backend
+	cd ${WRKSRC} && \
+		${SETENV} ${MAKE_ENV} ${GO_ENV} task --verbose build:backend
+	cd ${WRKSRC} && \
+		${SETENV} ${MAKE_ENV} ${GO_ENV} task --verbose build:tsunamiscaffold
 .for mod in lqip-loader plugin-ideal-image
 	cd ${WRKSRC}/node_modules/@docusaurus/${mod}/node_modules/sharp && \
 		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} npm run install
