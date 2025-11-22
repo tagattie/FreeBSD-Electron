@@ -1,0 +1,16 @@
+bin/superproductivity
+share/applications/superproductivity.desktop
+share/icons/hicolor/1024x1024/apps/superproductivity.png
+share/icons/hicolor/1080x1080/apps/superproductivity.png
+share/icons/hicolor/128x128/apps/superproductivity.png
+share/icons/hicolor/16x16/apps/superproductivity.png
+share/icons/hicolor/24x24/apps/superproductivity.png
+share/icons/hicolor/256x256/apps/superproductivity.png
+share/icons/hicolor/300x300/apps/superproductivity.png
+share/icons/hicolor/32x32/apps/superproductivity.png
+share/icons/hicolor/48x48/apps/superproductivity.png
+share/icons/hicolor/512x512/apps/superproductivity.png
+share/icons/hicolor/64x64/apps/superproductivity.png
+%%DATADIR%%/resources/app-update.yml
+%%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/default_app.asar

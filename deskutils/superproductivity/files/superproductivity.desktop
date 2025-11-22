@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Super Productivity
+Comment=ToDo list and Time Tracking
+Icon=superproductivity
+Exec=superproductivity %U
+Categories=Office;ProjectManagement;
+Terminal=false
+StartupWMClass=Super Productivity
