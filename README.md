@@ -1,54 +1,71 @@
-# Electron port for FreeBSD
+# Electron and Electron-based applications ports for FreeBSD
 
-## Now It's Official
-Electron is officially available in the FreeBSD ports tree. For more information, please see the following URLs:
+## For general users
 
-- https://www.freshports.org/devel/electron4/
-- https://www.freshports.org/devel/electron5/ (to appear)
+Electron is available in the FreeBSD ports tree. For available Electron versions, please see the following URL:
 
-This repository will continue to serve as a pre-official development repository.
+- https://www.freshports.org/search.php?stype=name&method=prefix&query=electron
 
----
+NOTE: Due to resource constraints in the package builders, binary packages may not be available in the official package repository. In that case, you will have to build/install Electron from ports for yourself.
 
-This repository contains an experimental port of electron for FreeBSD. The port is largely based on:
+## For curious users
 
-- chromium patch files from [www/chromium port](https://www.freshports.org/www/chromium/)
-- electron patch files by [@prash-wghats](https://github.com/prash-wghats/)
+This repository is a playground of the Electron ports maintainer and contains work-in-progress ports of Electron and Electron-based applications which are not yet included in the ports tree.
 
-## Get
-A package file is available at the releases page. To install, download the file (with .txz extension) and run the command (for example):
+### Get
+
+#### Electron:
+
+For versions prior to being incorporated into the ports tree, binary packages for amd64 architecture are available on the Releases page. To install, download the file (with .pkg extension) and run the command:
 
 ``` shell
-pkg install electron-4.1.4-freebsd12-amd64.txz
+pkg install /path/to/the/downloaded/pkgfile.pkg
 ```
 
-## Run
+#### Electron-based applications:
+
+There are no binary packages available.
+
+### Run
+
+Electron alone is not very interesting since it is a framework on which applications are built. Nevertheless, you can run the default application with the following command:
 
 ``` shell
 electron
 ```
 
-## Build
-If you would like to build artifacts for yourself, be sure you have the ports tree on your machine. If not, run the following commands:
+### Build
+
+If you would like to build Electron or Electron-based applications for yourself, be sure you have the ports tree on your machine. If not, clone it using `git` command like:
 
 ``` shell
-portsnap fetch
-portsnap extract
+git clone https://git.freebsd.org/ports.git /your/ports/directory
 ```
 
-Clone this repository with git command and build/install electron (an external working directory is currently needed, defined with the WRKDIR enviroment variable):
+Next, clone this repository into an arbitrary directory:
 
 ``` shell
-git clone https://github.com/tagattie/FreeBSD-Electron
-cd FreeBSD-Electron/devel/electron4
-export WKRDIR=~/wrkdir
+git clone https://github.com/tagattie/FreeBSD-Electron.git
+```
+
+If you are going to build/install an Electron-based application, copy `electron.mk` and companion scripts to your ports directory:
+
+``` shell
+cd FreeBSD-Electron
+cp -R Mk/* /your/ports/directory/Mk
+```
+
+Finally, change your working directory to a port of your choice and execute the following commands:
+
+``` shell
+cd devel/electron39  # for example
 make install clean
 ```
 
-## Platform
-- Built on FreeBSD 11 and 12 amd64.
-
 ## Credits
+
+I would like to thank the following works on which Electron ports are largely based:
+
 - Chromium patches by [FreeBSD/Chromium Team](https://wiki.freebsd.org/Chromium)
 - Electron patches by @prash-wghats at [Electron-VSCode-Atom-For-FreeBSD](https://github.com/prash-wghats/Electron-VSCode-Atom-For-FreeBSD)
 - Porting works by @freebsd-electron at [electron-port](https://github.com/freebsd-electron/electron-port)
