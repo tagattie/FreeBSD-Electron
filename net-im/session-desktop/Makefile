@@ -1,4 +1,4 @@
-# Notes for port maintainer
+# Notes for port maintainer(s)
 #
 # Don't need the following step. It builds fine without it.
 #
@@ -11,7 +11,7 @@
 
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.2
+DISTVERSION=	1.17.3
 CATEGORIES=	net-im
 MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
 DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher

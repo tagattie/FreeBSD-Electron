@@ -44,10 +44,12 @@ share/icons/hicolor/64x64/apps/session-desktop.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/constants.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/contacts_config.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/convo_info_volatile_config.hpp
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/encrypt_decrypt/encrypt_decrypt.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/groups/meta_group.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/groups/meta_group_wrapper.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/meta/meta_base_wrapper.hpp
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/multi_encrypt/multi_encrypt.hpp
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/pro/pro.hpp
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/pro/types.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/profile_pic.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/user_config.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/user_groups_config.hpp
@@ -55,7 +57,6 @@ share/icons/hicolor/64x64/apps/session-desktop.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/package.json
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/prepare_release.sh
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/update_version.sh
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/LICENSE
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/install/check.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/sharp/lib/channel.js

@@ -1,6 +1,6 @@
---- node_modules/libsession_util_nodejs/src/user_config.cpp.orig	2025-11-08 20:44:18 UTC
+--- node_modules/libsession_util_nodejs/src/user_config.cpp.orig	2025-11-28 13:37:36 UTC
 +++ node_modules/libsession_util_nodejs/src/user_config.cpp
-@@ -164,7 +164,7 @@ Napi::Value UserConfigWrapper::getNoteToSelfExpiry(con
+@@ -238,7 +238,7 @@ Napi::Value UserConfigWrapper::getNoteToSelfExpiry(con
  }
  
  Napi::Value UserConfigWrapper::getNoteToSelfExpiry(const Napi::CallbackInfo& info) {
