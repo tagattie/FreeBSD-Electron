@@ -6,10 +6,12 @@
 #    $ npm install --save-dev --ignore-scripts node-addon-api node-gyp
 # This is required for building sharp node module from source.
 # https://sharp.pixelplumbing.com/install/#building-from-source
+# 2. Generate package.json and package-lock.json in ${WRKSRC}/tsunami/template
+#    $ cd tsunami/templates && cp package.json.tmpl package.json && npm install --ignore-scripts
 
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.12.4
+DISTVERSION=	0.12.5
 CATEGORIES=	x11
 DISTFILES=	tsunami/go.mod:prefetch
 
