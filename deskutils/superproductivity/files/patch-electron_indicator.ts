@@ -1,6 +1,6 @@
---- electron/indicator.ts.orig	2025-11-14 14:43:39 UTC
+--- electron/indicator.ts.orig	2025-11-30 12:41:43 UTC
 +++ electron/indicator.ts
-@@ -15,7 +15,7 @@ const IS_MAC = process.platform === 'darwin';
+@@ -14,7 +14,7 @@ const IS_MAC = process.platform === 'darwin';
  let DIR: string;
  let shouldUseDarkColors: boolean;
  const IS_MAC = process.platform === 'darwin';
