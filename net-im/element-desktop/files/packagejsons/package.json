@@ -3,7 +3,7 @@
     "productName": "Element",
     "main": "lib/electron-main.js",
     "exports": "./lib/electron-main.js",
-    "version": "1.12.4",
+    "version": "1.12.5",
     "description": "Element: the future of secure communication",
     "author": {
         "name": "Element",
@@ -89,7 +89,7 @@
         "app-builder-lib": "26.1.0",
         "chokidar": "^4.0.0",
         "detect-libc": "^2.0.0",
-        "electron": "39.0.0",
+        "electron": "39.1.1",
         "electron-builder": "26.1.0",
         "electron-builder-squirrel-windows": "26.1.0",
         "electron-devtools-installer": "^4.0.0",
@@ -121,6 +121,6 @@
     "resolutions": {
         "@types/node": "18.19.130",
         "config-file-ts": "0.2.8-rc1",
-        "node-abi": "4.15.0"
+        "node-abi": "4.17.0"
     }
 }
