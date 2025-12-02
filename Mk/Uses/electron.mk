@@ -654,43 +654,49 @@ MKSNAPSHOT_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${MKSNAPSHOT_DOWNLOAD_URL}
 MKSNAPSHOT_DOWNLOAD_CACHE_DIR=	.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}
 
 electron-generate-electron-zip:
-	@${ECHO_MSG} "===>  Preparing distribution files of electron/chromedriver/mksnapshot"
-	@${RM} -r ${WRKDIR}/electron-dist
-	@${MKDIR} ${WRKDIR}/electron-dist
-	@${TAR} -cf - -C ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} . | \
-		${TAR} -xf - -C ${WRKDIR}/electron-dist
-	@cd ${WRKDIR}/electron-dist && \
-		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'
-	@${MKDIR} ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}
-	@cd ${WRKDIR}/electron-dist && \
-		zip -q -r ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}/electron-v${UPSTREAM_ELECTRON_VER}-linux-${ELECTRON_ARCH}.zip .
-	@cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
+	@if [ -d ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} ]; then \
+		${ECHO_MSG} "===>  Preparing distribution files of electron/chromedriver/mksnapshot"; \
+		${RM} -r ${WRKDIR}/electron-dist; \
+		${MKDIR} ${WRKDIR}/electron-dist; \
+		${TAR} -cf - -C ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} . | \
+			${TAR} -xf - -C ${WRKDIR}/electron-dist; \
+		cd ${WRKDIR}/electron-dist && \
+		${FIND} . -type f -perm ${BINMODE} -exec ${CHMOD} 755 {} ';'; \
+		${MKDIR} ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}; \
+		cd ${WRKDIR}/electron-dist && \
+		zip -q -r ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR}/electron-v${UPSTREAM_ELECTRON_VER}-linux-${ELECTRON_ARCH}.zip .; \
+		cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
-		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}
-	@cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
+			${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_ELECTRON_VER}; \
+		cd ${WRKDIR}/${ELECTRON_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
-		${SED} -e 's/ / */' > SHASUMS256.txt
+			${SED} -e 's/ / */' > SHASUMS256.txt; \
+	fi
 .if defined(UPSTREAM_CHROMEDRIVER_VER) && !empty(UPSTREAM_CHROMEDRIVER_VER)
-	@${MKDIR} ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}
-	@cd ${WRKDIR}/electron-dist && \
-		zip -q -r ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${ELECTRON_ARCH}.zip .
-	@cd ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR} && \
+	@if [ -d ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} ]; then \
+		${MKDIR} ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}; \
+		cd ${WRKDIR}/electron-dist && \
+		zip -q -r ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}/chromedriver-v${UPSTREAM_CHROMEDRIVER_VER}-freebsd-${ELECTRON_ARCH}.zip .; \
+		cd ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
-		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_CHROMEDRIVER_VER}
-	@cd ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR} && \
+			${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_CHROMEDRIVER_VER}; \
+		cd ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
-		${SED} -e 's/ / */' > SHASUMS256.txt
+			${SED} -e 's/ / */' > SHASUMS256.txt; \
+	fi
 .endif
 .if defined(UPSTREAM_MKSNAPSHOT_VER) && !empty(UPSTREAM_MKSNAPSHOT_VER)
-	@${MKDIR} ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}
-	@cd ${WRKDIR}/electron-dist && \
-		zip -q -r ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}/mksnapshot-v${UPSTREAM_MKSNAPSHOT_VER}-freebsd-${ELECTRON_ARCH}.zip .
-	@cd ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR} && \
+	@if [ -d ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} ]; then \
+		${MKDIR} ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}; \
+		cd ${WRKDIR}/electron-dist && \
+		zip -q -r ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}/mksnapshot-v${UPSTREAM_MKSNAPSHOT_VER}-freebsd-${ELECTRON_ARCH}.zip .; \
+		cd ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
-		${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_MKSNAPSHOT_VER}
-	@cd ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR} && \
+			${SED} -e 's/ / */' > SHASUMS256.txt-${UPSTREAM_MKSNAPSHOT_VER}; \
+		cd ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR} && \
 		${SHA256} -r *.zip | \
-		${SED} -e 's/ / */' > SHASUMS256.txt
+			${SED} -e 's/ / */' > SHASUMS256.txt; \
+	fi
 .endif
 
 # When rebuild feature is used, rebuilds native node modules against nodejs or
