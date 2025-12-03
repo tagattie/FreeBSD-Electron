@@ -594,8 +594,8 @@ BUILD_DEPENDS+=	${YQ_CMD}:textproc/yq
 .endif
 
 .if !defined(UPSTREAM_ELECTRON_VER)
-.   if ${_EXISTS_NPM_PKGFILE} == 1 && exists(${JQ_CMD})
-.	if ${_NODEJS_NPM} == npm
+.   if ${_EXISTS_NPM_PKGFILE} == 1
+.	if ${_NODEJS_NPM} == npm && exists(${JQ_CMD})
 UPSTREAM_ELECTRON_VER!=	${JQ_CMD} -r \
 				'.packages | \
 				to_entries | \
@@ -609,7 +609,7 @@ UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${NPM_L
 			${SED} -E 's/\.[a-z]+.*$$//' | \
 			${SORT} -n | \
 			${TAIL} -n 1
-.	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4
+.	elif (${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4) && exists(${YQ_CMD})
 UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				'. | \
 				to_entries | \
@@ -617,7 +617,7 @@ UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 			${SORT} -n | \
 			${TAIL} -n 1
-.	elif ${_NODEJS_NPM} == pnpm
+.	elif ${_NODEJS_NPM} == pnpm && exists(${YQ_CMD})
 UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				'.packages | \
 				to_entries | \
