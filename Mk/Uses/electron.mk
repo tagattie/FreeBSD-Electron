@@ -93,7 +93,7 @@
 #			argument. Supported arguments are:
 #
 #		builder:	Uses electron-builder for packaging.
-#		forge:		Uses electron-forge for packageing.
+#		forge:		Uses electron-forge for packaging.
 #		packager:	Uses electron-packager for packaging.
 #
 #		NOTE: The port must specify exactly a single argument. Multiple
@@ -581,7 +581,7 @@ electron-install-node-modules:
 .   endif
 .endif # _ELECTRON_FEATURE_EXTRACT
 
-# Always generates distribution zip files from installed electron package
+# Always generate distribution zip files from installed electron package
 # directory. This is necessary to prevent the build phase from downloading
 # binary distribution files from GitHub.
 _USES_build+=	290:electron-generate-electron-zip
