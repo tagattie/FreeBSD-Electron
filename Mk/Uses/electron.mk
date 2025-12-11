@@ -146,11 +146,11 @@ _VALID_ELECTRON_FEATURES_APPBUILDER=release devel
 _VALID_ELECTRON_FEATURES_REBUILD=nodejs electron
 _VALID_ELECTRON_FEATURES_BUILD=	builder forge packager
 
-_ELECTRON_BASE_CMD=	electron
-_ELECTRON_RELPORTDIR=	devel/electron
+_ELECTRON_CMD_BASE=	electron
+_ELECTRON_PORT_BASE=	devel/electron
 _ELECTRON_DOWNLOAD_URL_BASE=	https://github.com/electron/electron/releases/download
 _NODEJS_PKGNAME=	node${NODEJS_VERSION}
-_NODEJS_PORTDIR=	www/node${NODEJS_VERSION}
+_NODEJS_PORT=		www/node${NODEJS_VERSION}
 
 # Process USES=electron[:ARGS]
 # Detect build, run, test, or env dependency
@@ -182,7 +182,7 @@ _ELECTRON_TEST_DEP=	yes
 .if !defined(_ELECTRON_NO_DEP)
 .   if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
 _ELECTRON_VERSION=	${_ELECTRON_ARGS}
-_ELECTRON_PORTDIR=	${_ELECTRON_RELPORTDIR}${_ELECTRON_VERSION}
+_ELECTRON_PORTDIR=	${_ELECTRON_PORT_BASE}${_ELECTRON_VERSION}
 .   include "${PORTSDIR}/${_ELECTRON_PORTDIR}/Makefile.version"
 .   elif empty(_ELECTRON_ARGS)
 IGNORE=	does not specify a major version of electron with USES=electron
@@ -313,7 +313,7 @@ IGNORE=	specifies unknown USE_ELECTRON=build arguments: ${_ELECTRON_FEATURE_BUIL
 # Setup dependencies
 .for stage in BUILD RUN TEST
 .   if defined(_ELECTRON_${stage}_DEP) && ${_ELECTRON_${stage}_DEP} == yes
-${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDIR}
+${stage}_DEPENDS+=	${_ELECTRON_CMD_BASE}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDIR}
 .   endif
 .endfor
 .for stage in FETCH EXTRACT BUILD RUN TEST
@@ -321,7 +321,7 @@ ${stage}_DEPENDS+=	${_ELECTRON_BASE_CMD}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDI
 .	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 ${stage}_DEPENDS+=	${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
+${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
 .	endif
 .   endif
 .endfor
@@ -424,7 +424,7 @@ IGNORE=	does not specity version of ${NPM_CMDNAME} used for prefetching node mod
 _USES_fetch+=	490:electron-fetch-node-package-manager
 
 DISTFILES+=	${NPM_CMDNAME}-${NPM_VER}.tgz:prefetch
-FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
+FETCH_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
 
 electron-fetch-node-package-manager:
 	@${ECHO_MSG} "===>  Fetching and setting up ${NPM_CMDNAME} version ${NPM_VER}"
@@ -524,7 +524,7 @@ _USES_extract+=	600:electron-extract-node-package-manager \
 .   if ${_NODEJS_NPM} == yarn1
 EXTRACT_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .   elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
+EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
 .   endif
 
 electron-extract-node-package-manager:
@@ -708,7 +708,7 @@ _USES_build+=	291:electron-rebuild-native-node-modules-for-node \
 .   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .   elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORTDIR}
+BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
 .   endif
 .   if ${_NODEJS_NPM} == yarn1
 # jq is needed for detecting native node modules needing build
