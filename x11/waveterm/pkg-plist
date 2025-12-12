@@ -13,14 +13,16 @@ share/icons/hicolor/64x64/apps/waveterm.png
 @(,,0555) %%DATADIR%%/resources/app.asar.unpacked/dist/bin/wavesrv.%%ARCH%%
 @(,,0555) %%DATADIR%%/resources/app.asar.unpacked/dist/bin/wsh-%%DISTVERSION%%-freebsd.%%ARCH%%
 %%DATADIR%%/resources/app.asar.unpacked/dist/schema/aipresets.json
+%%DATADIR%%/resources/app.asar.unpacked/dist/schema/bgpresets.json
 %%DATADIR%%/resources/app.asar.unpacked/dist/schema/connections.json
 %%DATADIR%%/resources/app.asar.unpacked/dist/schema/settings.json
+%%DATADIR%%/resources/app.asar.unpacked/dist/schema/waveai.json
 %%DATADIR%%/resources/app.asar.unpacked/dist/schema/widgets.json
 %%DATADIR%%/resources/tsunamiscaffold/.gitignore
 %%DATADIR%%/resources/tsunamiscaffold/app-init.go.tmpl
 %%DATADIR%%/resources/tsunamiscaffold/app-main.go.tmpl
 %%DATADIR%%/resources/tsunamiscaffold/dist/assets/index--f3-IlxP.css
-%%DATADIR%%/resources/tsunamiscaffold/dist/assets/index-BtzCONjg.js
+%%DATADIR%%/resources/tsunamiscaffold/dist/assets/index-BX_Deaa4.js
 %%DATADIR%%/resources/tsunamiscaffold/dist/assets/wave-logo-256-C_-lEXjS.png
 %%DATADIR%%/resources/tsunamiscaffold/dist/fonts/hack-bold.woff2
 %%DATADIR%%/resources/tsunamiscaffold/dist/fonts/hack-regular.woff2
@@ -463,9 +465,9 @@ share/icons/hicolor/64x64/apps/waveterm.png
 %%DATADIR%%/resources/tsunamiscaffold/nm/source-map-js/source-map.js
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/LICENSE
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/README.md
+%%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/chunk-CT46QCH7.mjs
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/chunk-GFBUASX3.mjs
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/chunk-HTB5LLOP.mjs
-%%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/chunk-MEY3PWYT.mjs
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/colors-b_6i0Oi7.d.ts
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/colors.d.mts
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/colors.d.ts
@@ -489,7 +491,7 @@ share/icons/hicolor/64x64/apps/waveterm.png
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/plugin.mjs
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/resolve-config-BIFUA2FY.d.ts
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/resolve-config-QUZ9b-Gn.d.mts
-%%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/types-WlZgYgM8.d.mts
+%%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/dist/types-CJYAW1ql.d.mts
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/index.css
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/package.json
 %%DATADIR%%/resources/tsunamiscaffold/nm/tailwindcss/preflight.css
