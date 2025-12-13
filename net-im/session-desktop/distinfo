@@ -1,7 +1,7 @@
-TIMESTAMP = 1764337050
+TIMESTAMP = 1765610802
 SHA256 (sqlcipher-v2-4.6.1-signal-patch2--0.2.1-asm2-6253f886c40e49bf892d5cdc92b2eb200b12cd8d80c48ce5b05967cfd01ee8c7.tar.gz) = 6253f886c40e49bf892d5cdc92b2eb200b12cd8d80c48ce5b05967cfd01ee8c7
 SIZE (sqlcipher-v2-4.6.1-signal-patch2--0.2.1-asm2-6253f886c40e49bf892d5cdc92b2eb200b12cd8d80c48ce5b05967cfd01ee8c7.tar.gz) = 10849572
-SHA256 (session-desktop-1.17.3-node-modules.tar.gz) = 2f9ff3237238097d8e08db64fa28ac123c2866ae0d7ea403c340ba03bc335f35
-SIZE (session-desktop-1.17.3-node-modules.tar.gz) = 260191685
-SHA256 (session-foundation-session-desktop-v1.17.3_GH0.tar.gz) = 6dea0c9498e7cb9887aa90e8e8ccc27f3ea70af644a94bfb7fa1fd4527ad664f
-SIZE (session-foundation-session-desktop-v1.17.3_GH0.tar.gz) = 12048217
+SHA256 (session-desktop-1.17.4-node-modules.tar.gz) = 289b7a2dfcbbcc0dce777470fa2bfc945c6ae2cc8c4398e2c692a9ce6811a362
+SIZE (session-desktop-1.17.4-node-modules.tar.gz) = 348027106
+SHA256 (session-foundation-session-desktop-v1.17.4_GH0.tar.gz) = 11f9de497091aad7e86a1961641b1b82f04c8e0f57a67f488d9ba3fb0a4dc3d7
+SIZE (session-foundation-session-desktop-v1.17.4_GH0.tar.gz) = 12048628
