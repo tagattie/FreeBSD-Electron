@@ -497,7 +497,9 @@ electron-archive-node-modules:
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} \
 			-C ${WRKDIR} @node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
+		if [ ${TMPDIR} != ${WRKDIR} ]; then \
+			${RM} -r ${WRKDIR}; \
+		fi; \
 	fi
 .   elif ${_NODEJS_NPM:Myarn*}
 	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
@@ -509,7 +511,9 @@ electron-archive-node-modules:
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} @node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
+		if [ ${TMPDIR} != ${WRKDIR} ]; then \
+			${RM} -r ${WRKDIR}; \
+		fi; \
 	fi
 .   endif
 .endif # _FEATURE_ELECTRON_PREFETCH
