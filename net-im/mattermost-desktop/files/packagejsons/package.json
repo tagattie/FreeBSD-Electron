@@ -1,7 +1,7 @@
 {
   "name": "mattermost-desktop",
   "productName": "Mattermost",
-  "version": "6.0.1",
+  "version": "6.0.2",
   "description": "Mattermost",
   "main": "dist/index.js",
   "author": "Mattermost, Inc. <feedback@mattermost.com>",
@@ -130,7 +130,7 @@
     "copy-webpack-plugin": "10.2.4",
     "cross-env": "7.0.3",
     "css-loader": "6.7.1",
-    "electron": "38.2.1",
+    "electron": "38.7.2",
     "electron-builder": "24.13.3",
     "eslint": "8.57.0",
     "eslint-import-resolver-webpack": "0.13.8",
