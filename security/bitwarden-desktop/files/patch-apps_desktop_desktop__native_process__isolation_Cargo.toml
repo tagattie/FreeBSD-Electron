@@ -1,0 +1,11 @@
+--- apps/desktop/desktop_native/process_isolation/Cargo.toml.orig	2025-12-17 04:53:05 UTC
++++ apps/desktop/desktop_native/process_isolation/Cargo.toml
+@@ -8,7 +8,7 @@ crate-type = ["cdylib"]
+ [lib]
+ crate-type = ["cdylib"]
+ 
+-[target.'cfg(target_os = "linux")'.dependencies]
++[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
+ ctor = { workspace = true }
+ desktop_core = { path = "../core" }
+ libc = { workspace = true }

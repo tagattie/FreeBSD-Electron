@@ -1,11 +1,11 @@
---- apps/desktop/desktop_native/chromium_importer/Cargo.toml.orig	2025-11-18 13:14:37 UTC
+--- apps/desktop/desktop_native/chromium_importer/Cargo.toml.orig	2025-12-11 21:15:41 UTC
 +++ apps/desktop/desktop_native/chromium_importer/Cargo.toml
-@@ -45,7 +45,7 @@ verifysign = "=0.2.4"
- ] }
- verifysign = "=0.2.4"
+@@ -34,7 +34,7 @@ tracing = { workspace = true }
+ tokio = { workspace = true, features = ["full"] }
+ tracing = { workspace = true }
  
 -[target.'cfg(target_os = "linux")'.dependencies]
 +[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
+ cbc = { workspace = true, features = ["alloc"] }
  oo7 = { workspace = true }
- 
- [lints]
+ pbkdf2 = "=0.12.2"

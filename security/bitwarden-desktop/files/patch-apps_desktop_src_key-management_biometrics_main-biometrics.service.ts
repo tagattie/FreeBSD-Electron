@@ -1,6 +1,6 @@
---- apps/desktop/src/key-management/biometrics/main-biometrics.service.ts.orig	2025-11-07 19:32:19 UTC
+--- apps/desktop/src/key-management/biometrics/main-biometrics.service.ts.orig	2025-12-11 21:15:41 UTC
 +++ apps/desktop/src/key-management/biometrics/main-biometrics.service.ts
-@@ -44,7 +44,7 @@ export class MainBiometricsService extends DesktopBiom
+@@ -38,7 +38,7 @@ export class MainBiometricsService extends DesktopBiom
        // eslint-disable-next-line
        const OsBiometricsServiceMac = require("./os-biometrics-mac.service").default;
        this.osBiometricsService = new OsBiometricsServiceMac(this.i18nService, this.logService);
