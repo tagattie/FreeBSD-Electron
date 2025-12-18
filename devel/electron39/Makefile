@@ -4,7 +4,7 @@ DISTVERSION=	${ELECTRON_VER}
 PULSEMV=	16
 PULSEV=		${PULSEMV}.1
 CATEGORIES=	devel
-MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v39.2.6/:chromium \
+MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v39.2.7/:chromium \
 		https://freedesktop.org/software/pulseaudio/releases/:pulseaudio
 PKGNAMESUFFIX=	${ELECTRON_VER_MAJOR}
 DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}.0:chromium \
@@ -223,7 +223,7 @@ SNDIO_VARS=		GN_ARGS+=use_sndio=true
 SNDIO_VARS_OFF=		GN_ARGS+=use_sndio=false
 
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=			142.0.7444.226
+CHROMIUM_VER=			142.0.7444.235
 # See ${WRKSRC}/electron/DEPS for NODE_VER
 NODE_VER=			22.21.1
 # See ${WRKSRC}/electron/DEPS for NAN_VER
@@ -236,8 +236,6 @@ REACTIVEOBJC_VER=		74ab5baccc6f7202c8ac69a8d1e152c29dc1ea76
 MANTLE_VER=			78d3966b3c331292ea29ec38661b25df0a245948
 # See ${WRKSRC}/electron/DEPS for ENGFLOW_RECLIENT_CONFIGS_VER
 ENGFLOW_RECLIENT_CONFIGS_VER=	955335c30a752e9ef7bff375baab5e0819b6c00d
-
-YARN_TIMESTAMP=	61171200
 
 .include "Makefile.version"
 .include <bsd.port.pre.mk>
