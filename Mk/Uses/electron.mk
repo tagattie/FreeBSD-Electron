@@ -155,181 +155,181 @@ _NODEJS_PORT=		www/node${NODEJS_VERSION}
 # Process USES=electron[:ARGS]
 # Detect build, run, test, or env dependency
 _ELECTRON_ARGS=		${electron_ARGS:S/,/ /g}
-.if ${_ELECTRON_ARGS:Mbuild}
+.   if ${_ELECTRON_ARGS:Mbuild}
 _ELECTRON_BUILD_DEP=	yes
 _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Nbuild}
-.endif
-.if ${_ELECTRON_ARGS:Mrun}
+.   endif
+.   if ${_ELECTRON_ARGS:Mrun}
 _ELECTRON_RUN_DEP=	yes
 _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Nrun}
-.endif
-.if ${_ELECTRON_ARGS:Mtest}
+.   endif
+.   if ${_ELECTRON_ARGS:Mtest}
 _ELECTRON_TEST_DEP=	yes
 _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Ntest}
-.endif
-.if ${_ELECTRON_ARGS:Menv}
+.   endif
+.   if ${_ELECTRON_ARGS:Menv}
 _ELECTRON_NO_DEP=	yes
 _ELECTRON_ARGS:=	${_ELECTRON_ARGS:Nenv}
-.endif
+.   endif
 # If no dependencies are specified, assume build, run, and test are required
-.if !defined(_ELECTRON_BUILD_DEP) && !defined(_ELECTRON_RUN_DEP) && \
-    !defined(_ELECTRON_TEST_DEP) && !defined(_ELECTRON_NO_DEP)
+.   if !defined(_ELECTRON_BUILD_DEP) && !defined(_ELECTRON_RUN_DEP) && \
+       !defined(_ELECTRON_TEST_DEP) && !defined(_ELECTRON_NO_DEP)
 _ELECTRON_BUILD_DEP=	yes
 _ELECTRON_RUN_DEP=	yes
 _ELECTRON_TEST_DEP=	yes
-.endif
+.   endif
 # Now _ELECTRON_ARGS should contain a single major version unless env is set
-.if !defined(_ELECTRON_NO_DEP)
-.   if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
+.   if !defined(_ELECTRON_NO_DEP)
+.	if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
 _ELECTRON_VERSION=	${_ELECTRON_ARGS}
 _ELECTRON_PORTDIR=	${_ELECTRON_PORT_BASE}${_ELECTRON_VERSION}
-.   include "${PORTSDIR}/${_ELECTRON_PORTDIR}/Makefile.version"
-.   elif empty(_ELECTRON_ARGS)
+.	include "${PORTSDIR}/${_ELECTRON_PORTDIR}/Makefile.version"
+.	elif empty(_ELECTRON_ARGS)
 IGNORE=	does not specify a major version of electron with USES=electron
-.   else
+.	else
 IGNORE= specifies unknown USES=electron arguments: ${_ELECTRON_ARGS}
+.	endif
 .   endif
-.endif
 
 # Detect features used with USE_ELECTRON
-.for var in ${USE_ELECTRON}
-.   if empty(_VALID_ELECTRON_FEATURES:M${var:C/\:.*//})
+.   for var in ${USE_ELECTRON}
+.	if empty(_VALID_ELECTRON_FEATURES:M${var:C/\:.*//})
 _INVALID_ELECTRON_FEATURES+=	${var}
-.   endif
-.endfor
-.if !empty(_INVALID_ELECTRON_FEATURES)
+.	endif
+.   endfor
+.   if !empty(_INVALID_ELECTRON_FEATURES)
 IGNORE=	uses unknown USE_ELECTRON features: ${_INVALID_ELECTRON_FEATURES}
-.endif
+.   endif
 # Make each individual feature available as _ELECTRON_FEATURE_<FEATURENAME>
-.for var in ${USE_ELECTRON}
+.   for var in ${USE_ELECTRON}
 _ELECTRON_FEATURE_${var:C/\:.*//:tu}=	${var}
-.endfor
-.if !defined(_ELECTRON_FEATURE_NPM)
+.   endfor
+.   if !defined(_ELECTRON_FEATURE_NPM)
 IGNORE=	does not specify a single node package manager with USE_ELECTRON=npm
-.endif
+.   endif
 
 # Process USE_ELECTRON=npm[:ARGS]
 # Detect fetch, extract, build, run, or test dependency
 _NODEJS_NPM?=
-.if defined(_ELECTRON_FEATURE_NPM)
+.   if defined(_ELECTRON_FEATURE_NPM)
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:S/,/ /g}
-.   if ${_ELECTRON_FEATURE_NPM:Mfetch}
+.	if ${_ELECTRON_FEATURE_NPM:Mfetch}
 _ELECTRON_FEATURE_NPM_FETCH=	yes
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:Nfetch}
-.   endif
-.   if ${_ELECTRON_FEATURE_NPM:Mextract}
+.	endif
+.	if ${_ELECTRON_FEATURE_NPM:Mextract}
 _ELECTRON_FEATURE_NPM_EXTRACT=	yes
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:Nextract}
-.   endif
-.   if ${_ELECTRON_FEATURE_NPM:Mbuild}
+.	endif
+.	if ${_ELECTRON_FEATURE_NPM:Mbuild}
 _ELECTRON_FEATURE_NPM_BUILD=	yes
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:Nbuild}
-.   endif
-.   if ${_ELECTRON_FEATURE_NPM:Mrun}
+.	endif
+.	if ${_ELECTRON_FEATURE_NPM:Mrun}
 _ELECTRON_FEATURE_NPM_RUN=	yes
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:Nrun}
-.   endif
-.   if ${_ELECTRON_FEATURE_NPM:Mtest}
+.	endif
+.	if ${_ELECTRON_FEATURE_NPM:Mtest}
 _ELECTRON_FEATURE_NPM_TEST=	yes
 _ELECTRON_FEATURE_NPM:=		${_ELECTRON_FEATURE_NPM:Ntest}
-.   endif
+.	endif
 # If no dependencies are specified, we assume only build dep is required
-.   if !defined(_ELECTRON_FEATURE_NPM_FETCH) && !defined(_ELECTRON_FEATURE_NPM_EXTRACT) && \
-       !defined(_ELECTRON_FEATURE_NPM_BUILD) && !defined(_ELECTRON_FEATURE_NPM_RUN) && \
-       !defined(_ELECTRON_FEATURE_NPM_TEST)
+.	if !defined(_ELECTRON_FEATURE_NPM_FETCH) && !defined(_ELECTRON_FEATURE_NPM_EXTRACT) && \
+	   !defined(_ELECTRON_FEATURE_NPM_BUILD) && !defined(_ELECTRON_FEATURE_NPM_RUN) && \
+	   !defined(_ELECTRON_FEATURE_NPM_TEST)
 _ELECTRON_FEATURE_NPM_BUILD=	yes
-.   endif
+.	endif
 # Now _ELECTRON_FEATURE_NPM should contain a single package manager
-.   if ${_VALID_ELECTRON_FEATURES_NPM:M${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}}
+.	if ${_VALID_ELECTRON_FEATURES_NPM:M${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}}
 _NODEJS_NPM=		${_ELECTRON_FEATURE_NPM:C/^[^\:]*(\:|\$)//}
-.	if ${_NODEJS_NPM} == npm
+.	    if ${_NODEJS_NPM} == npm
 _NPM_PKGNAME=	${_NODEJS_NPM}${NODEJS_SUFFIX}
 _NPM_PORTDIR=	www/${_NODEJS_NPM}${NODEJS_SUFFIX}
-.	elif ${_NODEJS_NPM} == yarn1
+.	    elif ${_NODEJS_NPM} == yarn1
 _NPM_PKGNAME=	yarn${NODEJS_SUFFIX}
 _NPM_PORTDIR=	www/yarn${NODEJS_SUFFIX}
-.	endif
-.   elif empty(_ELECTRON_FEATURES_NPM)
+.	    endif
+.	elif empty(_ELECTRON_FEATURES_NPM)
 IGNORE=	does not specify a single node package manager with USE_ELECTRON=npm
-.   else
+.	else
 IGNORE=	specifies unknown USE_ELECTRON=npm arguments: ${_ELECTRON_FEATURE_NPM}
+.	endif
 .   endif
-.endif
 
 # Process USE_ELECTRON=appbuilder[:ARGS]
 # Detect stable or devel argument of appbuilder feature
-.if defined(_ELECTRON_FEATURE_APPBUILDER)
+.   if defined(_ELECTRON_FEATURE_APPBUILDER)
 _ELECTRON_FEATURE_APPBUILDER:=	${_ELECTRON_FEATURE_APPBUILDER:C/^[^\:]*(\:|\$)//}
-.   if ${_ELECTRON_FEATURE_APPBUILDER:Mrelease}
+.	if ${_ELECTRON_FEATURE_APPBUILDER:Mrelease}
 _ELECTRON_FEATURE_APPBUILDER_RELEASE=	yes
 _ELECTRON_FEATURE_APPBUILDER:=	${_ELECTRON_FEATURE_APPBUILDER:Nrelease}
-.   endif
-.   if ${_ELECTRON_FEATURE_APPBUILDER:Mdevel}
+.	endif
+.	if ${_ELECTRON_FEATURE_APPBUILDER:Mdevel}
 _ELECTRON_FEATURE_APPBUILDER_DEVEL=	yes
 _ELECTRON_FEATURE_APPBUILDER:=	${_ELECTRON_FEATURE_APPBUILDER:Ndevel}
-.   endif
+.	endif
 # If no arguments are specified, we assume release is specified
-.   if !defined(_ELECTRON_FEATURE_APPBUILDER_RELEASE) && \
-       !defined(_ELECTRON_FEATURE_APPBUILDER_DEVEL)
+.	if !defined(_ELECTRON_FEATURE_APPBUILDER_RELEASE) && \
+           !defined(_ELECTRON_FEATURE_APPBUILDER_DEVEL)
 _ELECTRON_FEATURE_APPBUILDER_RELEASE=	yes
-.   endif
-.   if !empty(_ELECTRON_FEATURE_APPBUILDER)
+.	endif
+.	if !empty(_ELECTRON_FEATURE_APPBUILDER)
 IGNORE=	specifies unknown USE_ELECTRON=appbuilder arguments: ${_ELECTRON_FEATURE_APPBUILDER}
+.	endif
 .   endif
-.endif
 
 # Process USE_ELECTRON=rebuild[:ARGS]
 # Detect nodejs or electron argument of rebuild feature
-.if defined(_ELECTRON_FEATURE_REBUILD)
+.   if defined(_ELECTRON_FEATURE_REBUILD)
 _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:C/^[^\:]*(\:|\$)//:S/,/ /g}
-.   if ${_ELECTRON_FEATURE_REBUILD:Mnodejs}
+.	if ${_ELECTRON_FEATURE_REBUILD:Mnodejs}
 _ELECTRON_FEATURE_REBUILD_NODEJS=	yes
 _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:Nnodejs}
-.   endif
-.   if ${_ELECTRON_FEATURE_REBUILD:Melectron}
+.	endif
+.	if ${_ELECTRON_FEATURE_REBUILD:Melectron}
 _ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
 _ELECTRON_FEATURE_REBUILD:=	${_ELECTRON_FEATURE_REBUILD:Nelectron}
-.   endif
+.	endif
 # If no arguments are specified, we assume electron is specified
-.   if !defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
-       !defined(_ELECTRON_FEATURE_REBUILD_ELECTRON)
+.	if !defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
+	   !defined(_ELECTRON_FEATURE_REBUILD_ELECTRON)
 _ELECTRON_FEATURE_REBUILD_ELECTRON=	yes
-.   endif
-.   if !empty(_ELECTRON_FEATURE_REBUILD)
+.	endif
+.	if !empty(_ELECTRON_FEATURE_REBUILD)
 IGNORE=	specifies unknown USE_ELECTRON=rebuild arguments: ${_ELECTRON_FEATURE_REBUILD}
+.	endif
 .   endif
-.endif
 
 # Process USE_ELECTRON=build:ARG
 # Detect builder used with USE_ELECTRON=builder
-.if defined(_ELECTRON_FEATURE_BUILD)
-.   if ${_VALID_ELECTRON_FEATURES_BUILD:M${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}}
+.   if defined(_ELECTRON_FEATURE_BUILD)
+.	if ${_VALID_ELECTRON_FEATURES_BUILD:M${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}}
 _ELECTRON_FEATURE_BUILD:=	${_ELECTRON_FEATURE_BUILD:C/^[^\:]*(\:|\$)//}
-.   else
+.	else
 IGNORE=	specifies unknown USE_ELECTRON=build arguments: ${_ELECTRON_FEATURE_BUILD}
-.   endif
-.endif
-
-# Setup dependencies
-.for stage in BUILD RUN TEST
-.   if defined(_ELECTRON_${stage}_DEP) && ${_ELECTRON_${stage}_DEP} == yes
-${stage}_DEPENDS+=	${_ELECTRON_CMD_BASE}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDIR}
-.   endif
-.endfor
-.for stage in FETCH EXTRACT BUILD RUN TEST
-.   if defined(_ELECTRON_FEATURE_NPM_${stage}) && ${_ELECTRON_FEATURE_NPM_${stage}} == yes
-.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
-${stage}_DEPENDS+=	${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
 .	endif
 .   endif
-.endfor
-.if defined(_ELECTRON_FEATURE_APPBUILDER_RELEASE) && ${_ELECTRON_FEATURE_APPBUILDER_RELEASE} == yes
+
+# Setup dependencies
+.   for stage in BUILD RUN TEST
+.	if defined(_ELECTRON_${stage}_DEP) && ${_ELECTRON_${stage}_DEP} == yes
+${stage}_DEPENDS+=	${_ELECTRON_CMD_BASE}${ELECTRON_VER_MAJOR}:${_ELECTRON_PORTDIR}
+.	endif
+.   endfor
+.   for stage in FETCH EXTRACT BUILD RUN TEST
+.	if defined(_ELECTRON_FEATURE_NPM_${stage}) && ${_ELECTRON_FEATURE_NPM_${stage}} == yes
+.	    if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
+${stage}_DEPENDS+=	${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
+.	    elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
+${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
+.	    endif
+.	endif
+.   endfor
+.   if defined(_ELECTRON_FEATURE_APPBUILDER_RELEASE) && ${_ELECTRON_FEATURE_APPBUILDER_RELEASE} == yes
 BUILD_DEPENDS+=	app-builder:devel/app-builder
-.elif defined(_ELECTRON_FEATURE_APPBUILDER_DEVEL) && ${_ELECTRON_FEATURE_APPBUILDER_DEVEL} == yes
+.   elif defined(_ELECTRON_FEATURE_APPBUILDER_DEVEL) && ${_ELECTRON_FEATURE_APPBUILDER_DEVEL} == yes
 BUILD_DEPENDS+=	app-builder:devel/app-builder-devel
-.endif
+.   endif
 
 # Define variables related to node package manager
 NPM_FETCH_FLAGS?=
@@ -338,7 +338,7 @@ NPM_EXEC_FLAGS?=
 NPM_REBUILD_FLAGS?=
 
 NPM_PKGFILE?=		package.json
-.if ${_NODEJS_NPM} == npm
+.   if ${_NODEJS_NPM} == npm
 NPM_LOCKFILE?=		package-lock.json
 NPM_MODULE_CACHE?=	node_modules
 NPM_CMDNAME?=		npm
@@ -349,25 +349,25 @@ NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 NPM_EXEC_FLAGS+=	--no-update-notifier
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 NPM_REBUILD_FLAGS+=	--no-update-notifier
-.elif ${_NODEJS_NPM:Myarn*}
+.   elif ${_NODEJS_NPM:Myarn*}
 NPM_LOCKFILE?=		yarn.lock
 NPM_MODULE_CACHE?=	yarn-offline-cache
 NPM_CMDNAME?=		yarn
 NPM_FETCH_CMD?=		${NPM_CMDNAME} install
 NPM_EXTRACT_CMD?=	${NPM_CMDNAME} install
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
-.   if ${_NODEJS_NPM} == yarn1
+.	if ${_NODEJS_NPM} == yarn1
 NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${NPM_MODULE_CACHE}"' >> .yarnrc
 NPM_FETCH_FLAGS+=	--frozen-lockfile --ignore-scripts --silent
 NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --offline
-.   elif ${_NODEJS_NPM} == yarn2
+.	elif ${_NODEJS_NPM} == yarn2
 NPM_CACHE_SETUP_CMD?=	${NPM_CMDNAME} config set cacheFolder "./${NPM_MODULE_CACHE}"
 NPM_FETCH_FLAGS+=	--immutable --mode=skip-build --silent
 NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false; \
 			${NPM_CMDNAME} config set enableInlineBuilds true"
 NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --immutable-cache
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
-.   elif ${_NODEJS_NPM} == yarn4
+.	elif ${_NODEJS_NPM} == yarn4
 NPM_CACHE_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableGlobalCache false; \
 			${NPM_CMDNAME} config set cacheFolder \"./${NPM_MODULE_CACHE}\""
 NPM_FETCH_FLAGS+=	--immutable --mode=skip-build --silent
@@ -375,8 +375,8 @@ NPM_EXTRACT_SETUP_CMD?=	${SH} -c "${NPM_CMDNAME} config set enableNetwork false;
 			${NPM_CMDNAME} config set enableInlineBuilds true"
 NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --immutable-cache
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
-.   endif
-.elif ${_NODEJS_NPM} == pnpm
+.	endif
+.   elif ${_NODEJS_NPM} == pnpm
 NPM_LOCKFILE?=		pnpm-lock.yaml
 NPM_MODULE_CACHE?=	node_modules
 NPM_CMDNAME?=		pnpm
@@ -385,7 +385,7 @@ NPM_FETCH_CMD?=		${NPM_CMDNAME} install
 NPM_FETCH_FLAGS+=	--frozen-lockfile --ignore-scripts --loglevel=error
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
-.endif
+.   endif
 
 # Define user-accessible variables
 JQ_CMD?=		${LOCALBASE}/bin/jq
@@ -402,24 +402,24 @@ NPM_REBUILD_WRKSRC_ELECTRON?=	${WRKSRC}
 
 # Check existence of package.json
 _EXISTS_NPM_PKGFILE?=
-.if exists(${PKGJSONSDIR}/${NPM_PKGFILE})
+.   if exists(${PKGJSONSDIR}/${NPM_PKGFILE})
 _EXISTS_NPM_PKGFILE=	1
-.endif
+.   endif
 
 # If yarn 2+ or pnpm is used, we need to know the version of node package
 # manager. It is usually specified as the key "packageManager", so try to
 # automatically detect the version.
-.if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
-.   if ${_EXISTS_NPM_PKGFILE} == 1 && empty(NPM_VER)
+.   if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
+.	if ${_EXISTS_NPM_PKGFILE} == 1 && empty(NPM_VER)
 NPM_VER!=	${GREP} packageManager ${PKGJSONSDIR}/${NPM_PKGFILE} | \
 		${AWK} -F ':' '{print $$NF}' | \
 		${SED} -e 's/[",]//g' | \
 		${CUT} -f 2 -d '@' | \
 		${CUT} -f 1 -d '+'
-.   endif
-.   if empty(NPM_VER)
+.	endif
+.	if empty(NPM_VER)
 IGNORE=	does not specity version of ${NPM_CMDNAME} used for prefetching node modules
-.   endif
+.	endif
 
 _USES_fetch+=	490:electron-fetch-node-package-manager
 
@@ -442,14 +442,14 @@ electron-fetch-node-package-manager:
 			-f ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz @${NPM_CMDNAME}.mtree; \
 	fi
 	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz
-.endif
+.   endif
 
 # When prefetch feature is used, downloads node modules the port uses according
 # to the pre-stored package.json.
-.if defined(_ELECTRON_FEATURE_PREFETCH)
-.   if empty(_EXISTS_NPM_PKGFILE)
+.   if defined(_ELECTRON_FEATURE_PREFETCH)
+.	if empty(_EXISTS_NPM_PKGFILE)
 IGNORE=	does not store ${NPM_PKGFILE} in ${PKGJSONSDIR} for prefetching node modules
-.   endif
+.	endif
 
 _USES_fetch+=	491:electron-fetch-node-modules \
 		492:electron-archive-node-modules
@@ -457,11 +457,11 @@ _USES_fetch+=	491:electron-fetch-node-modules \
 _DISTFILE_prefetch=	${PKGNAMEPREFIX}${PORTNAME}${PKGNAMESUFFIX}-${DISTVERSION}-node-modules${EXTRACT_SUFX}
 DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 
-.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
+.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 FETCH_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.   elif ${_NODEJS_NPM} == pnpm
+.	elif ${_NODEJS_NPM} == pnpm
 FETCH_DEPENDS+=	${YQ_CMD}:textproc/yq
-.   endif
+.	endif
 
 electron-fetch-node-modules:
 	@${MKDIR} ${DISTDIR}/${DIST_SUBDIR}
@@ -484,7 +484,7 @@ electron-fetch-node-modules:
 	fi
 
 electron-archive-node-modules:
-.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
+.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
 	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		for dir in `${FIND} -s ${WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
@@ -501,7 +501,7 @@ electron-archive-node-modules:
 			${RM} -r ${WRKDIR}; \
 		fi; \
 	fi
-.   elif ${_NODEJS_NPM:Myarn*}
+.	elif ${_NODEJS_NPM:Myarn*}
 	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
@@ -515,34 +515,34 @@ electron-archive-node-modules:
 			${RM} -r ${WRKDIR}; \
 		fi; \
 	fi
-.   endif
-.endif # _FEATURE_ELECTRON_PREFETCH
+.	endif
+.   endif # _FEATURE_ELECTRON_PREFETCH
 
 # When extract feature is used, installs the prefetched node modules into the
 # port's working source directory.
-.if defined(_ELECTRON_FEATURE_EXTRACT)
+.   if defined(_ELECTRON_FEATURE_EXTRACT)
 _USES_extract+=	600:electron-extract-node-package-manager \
 		601:electron-copy-package-file \
 		602:electron-install-node-modules
 
-.   if ${_NODEJS_NPM} == yarn1
+.	if ${_NODEJS_NPM} == yarn1
 EXTRACT_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.   elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
+.	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
-.   endif
+.	endif
 
 electron-extract-node-package-manager:
-.   if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
+.	if ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 	@${ECHO_MSG} "===>  Setting up ${NPM_CMDNAME} version ${NPM_VER}"
 	@${MKDIR}  ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${DIST_SUBDIR}/${NPM_CMDNAME}-${NPM_VER}.tgz
-.   else
+.	else
 	@${DO_NADA}
-.   endif
+.	endif
 
 electron-copy-package-file:
-.if ${_EXISTS_NPM_PKGFILE} == 1
+.	if ${_EXISTS_NPM_PKGFILE} == 1
 	@${ECHO_MSG} "===>  Copying ${NPM_PKGFILE} and ${NPM_LOCKFILE} to ${NPM_EXTRACT_WRKSRC}"
 	@for f in `${FIND} ${PKGJSONSDIR} -type f \( -name ${NPM_PKGFILE} -o -name ${NPM_LOCKFILE} \) -print | ${SED} -e 's|${PKGJSONSDIR}/||'`; do \
 		${MKDIR} -p `${DIRNAME} ${NPM_EXTRACT_WRKSRC}/$${f}`; \
@@ -551,10 +551,10 @@ electron-copy-package-file:
 		fi; \
 		${CP} ${PKGJSONSDIR}/$${f} ${NPM_EXTRACT_WRKSRC}/$${f}; \
 	done
-.endif
+.	endif
 
 electron-install-node-modules:
-.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
+.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == pnpm
 	@${ECHO_MSG} "===>  Moving prefetched node modules to ${NPM_EXTRACT_WRKSRC}"
 	@if [ -d ${EXTRACT_WRKDIR}/node-modules-cache ]; then \
 		for dir in `${FIND} -s ${EXTRACT_WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
@@ -562,16 +562,16 @@ electron-install-node-modules:
 			${MV} $${dir} `${ECHO_CMD} $${dir} | sed -e 's|${EXTRACT_WRKDIR}/node-modules-cache|${NPM_EXTRACT_WRKSRC}|'`; \
 		done; \
 	fi
-.   elif ${_NODEJS_NPM:Myarn*}
+.	elif ${_NODEJS_NPM:Myarn*}
 	@${ECHO_MSG} "===>  Installing node modules from prefetched cache"
 	@if [ -d ${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE} ]; then \
 		${MV} ${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE} ${NPM_EXTRACT_WRKSRC}; \
 	fi
 	@cd ${NPM_EXTRACT_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_CACHE_SETUP_CMD}
-.	if defined(NPM_EXTRACT_SETUP_CMD) && !empty(NPM_EXTRACT_SETUP_CMD)
+.	    if defined(NPM_EXTRACT_SETUP_CMD) && !empty(NPM_EXTRACT_SETUP_CMD)
 	@${ECHO_MSG} "===>  Setting up ${NPM_CMDNAME} command options"
 	@cd ${NPM_EXTRACT_WRKSRC} && ${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_SETUP_CMD}
-.	endif
+.	    endif
 	@if [ -d ${PKGJSONSDIR} ]; then \
 		cd ${PKGJSONSDIR} && \
 		for dir in `${FIND} . -type f -name ${NPM_LOCKFILE} -exec ${DIRNAME} {} ';'`; do \
@@ -582,8 +582,8 @@ electron-install-node-modules:
 		cd ${NPM_EXTRACT_WRKSRC} && \
 		${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}; \
 	fi
-.   endif
-.endif # _ELECTRON_FEATURE_EXTRACT
+.	endif
+.   endif # _ELECTRON_FEATURE_EXTRACT
 
 # Always generate distribution zip files from installed electron package
 # directory. This is necessary to prevent the build phase from downloading
@@ -591,15 +591,15 @@ electron-install-node-modules:
 _USES_build+=	290:electron-generate-electron-zip
 
 BUILD_DEPENDS+=	zip:archivers/zip
-.if ${_NODEJS_NPM} == npm
+.   if ${_NODEJS_NPM} == npm
 BUILD_DEPENDS+=	${JQ_CMD}:textproc/jq
-.elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
+.   elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 BUILD_DEPENDS+=	${YQ_CMD}:textproc/yq
-.endif
+.   endif
 
-.if !defined(UPSTREAM_ELECTRON_VER)
-.   if ${_EXISTS_NPM_PKGFILE} == 1
-.	if ${_NODEJS_NPM} == npm && exists(${JQ_CMD})
+.   if !defined(UPSTREAM_ELECTRON_VER)
+.	if ${_EXISTS_NPM_PKGFILE} == 1
+.	    if ${_NODEJS_NPM} == npm && exists(${JQ_CMD})
 UPSTREAM_ELECTRON_VER!=	${JQ_CMD} -r \
 				'.packages | \
 				to_entries | \
@@ -607,13 +607,13 @@ UPSTREAM_ELECTRON_VER!=	${JQ_CMD} -r \
 				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 			${SORT} -n | \
 			${TAIL} -n 1
-.	elif ${_NODEJS_NPM} == yarn1
+.	    elif ${_NODEJS_NPM} == yarn1
 UPSTREAM_ELECTRON_VER!=	${GREP} -e 'resolved.*/electron/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 			${AWK} -F- '{print $$NF}' | \
 			${SED} -E 's/\.[a-z]+.*$$//' | \
 			${SORT} -n | \
 			${TAIL} -n 1
-.	elif (${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4) && exists(${YQ_CMD})
+.	    elif (${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4) && exists(${YQ_CMD})
 UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				'. | \
 				to_entries | \
@@ -621,7 +621,7 @@ UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				.[]' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 			${SORT} -n | \
 			${TAIL} -n 1
-.	elif ${_NODEJS_NPM} == pnpm && exists(${YQ_CMD})
+.	    elif ${_NODEJS_NPM} == pnpm && exists(${YQ_CMD})
 UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 				'.packages | \
 				to_entries | \
@@ -630,29 +630,29 @@ UPSTREAM_ELECTRON_VER!=	${YQ_CMD} -r \
 			${CUT} -f 2 -d '@' | \
 			${SORT} -n | \
 			${TAIL} -n 1
+.	    endif
 .	endif
 .   endif
-.endif
 ELECTRON_DOWNLOAD_URL=		${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_ELECTRON_VER}
 ELECTRON_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${ELECTRON_DOWNLOAD_URL}
 ELECTRON_DOWNLOAD_CACHE_DIR=	.cache/electron/${ELECTRON_DOWNLOAD_URL_HASH}
 
-.if !defined(UPSTREAM_CHROMEDRIVER_VER)
-.   if ${_EXISTS_NPM_PKGFILE} == 1
+.   if !defined(UPSTREAM_CHROMEDRIVER_VER)
+.	if ${_EXISTS_NPM_PKGFILE} == 1
 UPSTREAM_CHROMEDRIVER_VER!=	${GREP} -e 'resolved.*/electron-chromedriver/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
+.	endif
 .   endif
-.endif
 CHROMEDRIVER_DOWNLOAD_URL=	${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_CHROMEDRIVER_VER}
 CHROMEDRIVER_DOWNLOAD_URL_HASH!=${SHA256} -q -s ${CHROMEDRIVER_DOWNLOAD_URL}
 CHROMEDRIVER_DOWNLOAD_CACHE_DIR=.cache/electron/${CHROMEDRIVER_DOWNLOAD_URL_HASH}
 
-.if !defined(UPSTREAM_MKSNAPSHOT_VER)
-.   if ${_EXISTS_NPM_PKGFILE} == 1
+.   if !defined(UPSTREAM_MKSNAPSHOT_VER)
+.	if ${_EXISTS_NPM_PKGFILE} == 1
 UPSTREAM_MKSNAPSHOT_VER!=	${GREP} -e 'resolved.*/electron-mksnapshot/' ${PKGJSONSDIR}/${NPM_LOCKFILE} | \
 				${HEAD} -n 1 | ${AWK} -F- '{print $$NF}' | ${SED} -E 's/\.[a-z]+.*$$//'
+.	endif
 .   endif
-.endif
 MKSNAPSHOT_DOWNLOAD_URL=	${_ELECTRON_DOWNLOAD_URL_BASE}/v${UPSTREAM_MKSNAPSHOT_VER}
 MKSNAPSHOT_DOWNLOAD_URL_HASH!=	${SHA256} -q -s ${MKSNAPSHOT_DOWNLOAD_URL}
 MKSNAPSHOT_DOWNLOAD_CACHE_DIR=	.cache/electron/${MKSNAPSHOT_DOWNLOAD_URL_HASH}
@@ -676,7 +676,7 @@ electron-generate-electron-zip:
 		${SHA256} -r *.zip | \
 			${SED} -e 's/ / */' > SHASUMS256.txt; \
 	fi
-.if defined(UPSTREAM_CHROMEDRIVER_VER) && !empty(UPSTREAM_CHROMEDRIVER_VER)
+.   if defined(UPSTREAM_CHROMEDRIVER_VER) && !empty(UPSTREAM_CHROMEDRIVER_VER)
 	@if [ -d ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} ]; then \
 		${MKDIR} ${WRKDIR}/${CHROMEDRIVER_DOWNLOAD_CACHE_DIR}; \
 		cd ${WRKDIR}/electron-dist && \
@@ -688,8 +688,8 @@ electron-generate-electron-zip:
 		${SHA256} -r *.zip | \
 			${SED} -e 's/ / */' > SHASUMS256.txt; \
 	fi
-.endif
-.if defined(UPSTREAM_MKSNAPSHOT_VER) && !empty(UPSTREAM_MKSNAPSHOT_VER)
+.   endif
+.   if defined(UPSTREAM_MKSNAPSHOT_VER) && !empty(UPSTREAM_MKSNAPSHOT_VER)
 	@if [ -d ${LOCALBASE}/share/electron${ELECTRON_VER_MAJOR} ]; then \
 		${MKDIR} ${WRKDIR}/${MKSNAPSHOT_DOWNLOAD_CACHE_DIR}; \
 		cd ${WRKDIR}/electron-dist && \
@@ -701,45 +701,45 @@ electron-generate-electron-zip:
 		${SHA256} -r *.zip | \
 			${SED} -e 's/ / */' > SHASUMS256.txt; \
 	fi
-.endif
+.   endif
 
 # When rebuild feature is used, rebuilds native node modules against nodejs or
 # electron.
-.if defined(_ELECTRON_FEATURE_REBUILD)
+.   if defined(_ELECTRON_FEATURE_REBUILD)
 _USES_build+=	291:electron-rebuild-native-node-modules-for-node \
 		490:electron-rebuild-native-node-modules-for-electron
 
-.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
+.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 BUILD_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
-.   elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
+.	elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 BUILD_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
-.   endif
-.   if ${_NODEJS_NPM} == yarn1
+.	endif
+.	if ${_NODEJS_NPM} == yarn1
 # jq is needed for detecting native node modules needing build
 BUILD_DEPENDS+=	${JQ_CMD}:textproc/jq
 # npm is needed for executing "npm rebuild" command
 BUILD_DEPENDS+=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
-.   endif
+.	endif
 
 electron-rebuild-native-node-modules-for-node:
-.   if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
-       ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
+.	if defined(_ELECTRON_FEATURE_REBUILD_NODEJS) && \
+           ${_ELECTRON_FEATURE_REBUILD_NODEJS} == yes
 	@${ECHO_MSG} "===>  Rebuilding native node modules for nodejs"
-.	if ${_NODEJS_NPM} == yarn1
+.	    if ${_NODEJS_NPM} == yarn1
 		@cd ${NPM_REBUILD_WRKSRC_NODEJS} && \
 		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm rebuild
-.	else
+.	    else
 		@cd ${NPM_REBUILD_WRKSRC_NODEJS} && \
 		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} ${NPM_CMDNAME} rebuild
-.	endif
-.   else
+.	    endif
+.	else
 	@${DO_NADA}
-.   endif
+.	endif
 
 electron-rebuild-native-node-modules-for-electron:
-.   if defined(_ELECTRON_FEATURE_REBUILD_ELECTRON) && \
+.	if defined(_ELECTRON_FEATURE_REBUILD_ELECTRON) && \
        ${_ELECTRON_FEATURE_REBUILD_ELECTRON} == yes
-.	if ${_NODEJS_NPM} == pnpm
+.	    if ${_NODEJS_NPM} == pnpm
 	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${NPM_REBUILD_WRKSRC_ELECTRON} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
 			cd $${subdir} && \
@@ -747,7 +747,7 @@ electron-rebuild-native-node-modules-for-electron:
 			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_REBUILD_CMD} ${NPM_REBUILD_FLAGS}; \
 		done \
 	done
-.	else
+.	    else
 	@for dir in `${APP_BUILDER_CMD} node-dep-tree --dir ${NPM_REBUILD_WRKSRC_ELECTRON} | ${JQ_CMD} -r '.[] | { dir: .dir, name: .deps[].name } | .dir + "/" + .name'`; do \
 		for subdir in `${FIND} $${dir} -type f -name binding.gyp -exec ${DIRNAME} {} ';' 2> /dev/null`; do \
 			cd $${subdir} && \
@@ -755,11 +755,11 @@ electron-rebuild-native-node-modules-for-electron:
 			${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} ${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} node-gyp rebuild; \
 		done \
 	done
-.	endif
-.   else
+.	    endif
+.	else
 	@${DO_NADA}
-.   endif
-.endif # _ELECTRON_FEATURE_REBUILD
+.	endif
+.   endif # _ELECTRON_FEATURE_REBUILD
 
 _USES_build+=	499:clean-up-backup-files
 
@@ -769,10 +769,10 @@ clean-up-backup-files:
 
 # When build feature is used, prepares an electron application in a
 # distributable format using the specified package builder.
-.if defined(_ELECTRON_FEATURE_BUILD)
+.   if defined(_ELECTRON_FEATURE_BUILD)
 ELECTRON_MAKE_FLAGS?=
 
-.   if ${_ELECTRON_FEATURE_BUILD} == builder
+.	if ${_ELECTRON_FEATURE_BUILD} == builder
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} electron-builder
 ELECTRON_MAKE_FLAGS+=	--linux \
 			--dir \
@@ -782,7 +782,7 @@ ELECTRON_MAKE_FLAGS+=	--linux \
 			--config.electronDist=${WRKDIR}/electron-dist
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
 ELECTRON_BUILDER_APP_OUT_DIR=	linux-${ARCH:S/aarch64/arm64-/:S/amd64//:S/i386/ia32-/}unpacked
-.   elif ${_ELECTRON_FEATURE_BUILD} == packager
+.	elif ${_ELECTRON_FEATURE_BUILD} == packager
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} electron-packager
 ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--no-download \
@@ -791,16 +791,16 @@ ELECTRON_MAKE_FLAGS+=	--platform=linux \
 			--prune \
 			--overwrite
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} . ${ELECTRON_MAKE_FLAGS}
-.   elif ${_ELECTRON_FEATURE_BUILD} == forge
+.	elif ${_ELECTRON_FEATURE_BUILD} == forge
 ELECTRON_MAKE_CMD?=	${NPM_EXEC_CMD} ${NPM_EXEC_FLAGS} electron-forge package
 ELECTRON_MAKE_FLAGS+=	--platform=linux
 DO_MAKE_BUILD=		${SETENV} ${MAKE_ENV} ${ELECTRON_MAKE_CMD} ${ELECTRON_MAKE_FLAGS}
-.   endif
-.   if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
+.	endif
+.	if ${_NODEJS_NPM} == npm || ${_NODEJS_NPM} == yarn1
 ELECTRON_MAKE_CMD+=	--
-.   endif
+.	endif
 ALL_TARGET=	# empty
-.endif
+.   endif
 
 NODEJS_REBUILD_ENV+=	npm_config_nodedir=${LOCALBASE}
 ELECTRON_REBUILD_ENV+=	npm_config_runtime=electron
