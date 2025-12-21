@@ -1,6 +1,6 @@
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.0-preview.39-fix-776
+DISTVERSION=	3.0.1
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://github.com/digimezzo/dopamine
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:26 nodejs:20,build python:build
+USES=		electron:37 nodejs:22,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	digimezzo
