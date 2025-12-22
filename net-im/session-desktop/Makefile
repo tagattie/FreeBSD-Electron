@@ -11,7 +11,7 @@
 
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.4
+DISTVERSION=	1.17.5
 CATEGORIES=	net-im
 MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
 DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher
