@@ -1,6 +1,6 @@
---- Taskfile.yml.orig	2025-11-25 01:32:59 UTC
+--- Taskfile.yml.orig	2025-12-17 04:59:41 UTC
 +++ Taskfile.yml
-@@ -146,8 +146,8 @@ tasks:
+@@ -161,8 +161,8 @@ tasks:
              - task: build:server:linux
              - task: build:server:macos
              - task: build:server:windows
@@ -10,7 +10,7 @@
              - generate
          sources:
              - "cmd/server/*.go"
-@@ -212,6 +212,17 @@ tasks:
+@@ -246,6 +246,17 @@ tasks:
                    GO_ENV_VARS:
                        sh: echo "{{if eq "amd64" ARCH}}CC=\"zig cc -target x86_64-linux-gnu.2.28\"{{else}}CC=\"zig cc -target aarch64-linux-gnu.2.28\"{{end}}"
  
@@ -28,7 +28,7 @@
      build:server:internal:
          requires:
              vars:
-@@ -231,38 +242,9 @@ tasks:
+@@ -265,38 +276,9 @@ tasks:
                ignore_error: true
              - task: build:wsh:internal
                vars:
@@ -68,7 +68,7 @@
              - generate
          sources:
              - "cmd/wsh/**/*.go"
-@@ -512,13 +494,13 @@ tasks:
+@@ -546,13 +528,13 @@ tasks:
          desc: Internal task to create scaffold directory structure (Unix)
          dir: tsunami/frontend
          internal: true
