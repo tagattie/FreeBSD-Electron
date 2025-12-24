@@ -1,5 +1,5 @@
-TIMESTAMP = 1766203216
-SHA256 (superproductivity-16.7.2-node-modules.tar.gz) = 94c31edabc271d51c425077684039f836228b3d8f995dfafa5928d71b8ba7b09
-SIZE (superproductivity-16.7.2-node-modules.tar.gz) = 330596287
-SHA256 (johannesjo-super-productivity-v16.7.2_GH0.tar.gz) = d319677044fa6ee7466a27c399f9681218cf00beac6e0ee33c79547d05e1e714
-SIZE (johannesjo-super-productivity-v16.7.2_GH0.tar.gz) = 16566448
+TIMESTAMP = 1766577657
+SHA256 (superproductivity-16.7.3-node-modules.tar.gz) = 44ecdcc5954fd1c83de271dbf73c8113a3a759c8326256f4660f63d9f65f87c6
+SIZE (superproductivity-16.7.3-node-modules.tar.gz) = 330596287
+SHA256 (johannesjo-super-productivity-v16.7.3_GH0.tar.gz) = 29ab3b4e1b1e2f0d233e39e381f0d0e4e04cc45187cb4e9f7f9db7ece491971d
+SIZE (johannesjo-super-productivity-v16.7.3_GH0.tar.gz) = 16567806
