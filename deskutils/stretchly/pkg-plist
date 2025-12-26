@@ -12,7 +12,6 @@ share/icons/hicolor/64x64/apps/stretchly.png
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/LICENSE
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/build/Release/focusassist.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/build/node_gyp_bins/python3
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/lib/Note.txt
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/lib/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/windows-focus-assist/lib/quiethours.idl
