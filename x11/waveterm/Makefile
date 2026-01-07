@@ -22,8 +22,7 @@ WWW=		https://www.waveterm.dev/
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	task:devel/task \
-		rust188>0:lang/rust188
+BUILD_DEPENDS=	task:devel/task
 LIB_DEPENDS=	libvips.so:graphics/vips
 
 USES=		cargo electron:38 gmake go:modules,no_targets nodejs:22,build \
@@ -35,7 +34,6 @@ GH_TUPLE=	swc-project:swc:v1.13.5:swc/swc
 
 CARGO_CARGOTOML=${WRKSRC}/swc/bindings/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/swc/bindings/Cargo.lock
-CARGO_BUILDDEP=	no
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
