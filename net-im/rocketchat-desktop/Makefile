@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	4.10.1
+DISTVERSION=	4.11.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -50,7 +50,7 @@ do-install:
 .endfor
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
-		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
 do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
