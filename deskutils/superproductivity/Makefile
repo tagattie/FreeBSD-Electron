@@ -1,6 +1,6 @@
 PORTNAME=	superproductivity
 DISTVERSIONPREFIX=	v
-DISTVERSION=	16.7.3
+DISTVERSION=	16.8.3
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 USES=		electron:37 nodejs:22,build
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	johannesjo
+GH_ACCOUNT=	super-productivity
 GH_PROJECT=	super-productivity
 
 SUB_FILES=	${PORTNAME}
@@ -38,7 +38,7 @@ do-install:
 .endfor
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/.tmp/app-builds/${ELECTRON_BUILDER_APP_OUT_DIR} && \
-		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
 do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
