@@ -11,7 +11,7 @@
 
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.5
+DISTVERSION=	1.17.6
 CATEGORIES=	net-im
 MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
 DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher
@@ -57,7 +57,7 @@ post-extract:
 
 pre-build:
 	cd ${WRKSRC}/node_modules/libsession_util_nodejs && \
-		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn run install
+	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn run install
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run patch-package
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 
@@ -71,7 +71,7 @@ do-install:
 .endfor
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
-		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
