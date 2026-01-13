@@ -1,6 +1,6 @@
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.4.12
+DISTVERSION=	3.5.11
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch \
@@ -21,7 +21,7 @@ BUILD_DEPENDS=	7zz:archivers/7-zip \
 LIB_DEPENDS=	libvips.so:graphics/vips \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo electron:35 gmake localbase:ldflags nodejs:22,build \
+USES=		cargo electron:39 gmake localbase:ldflags nodejs:22,build \
 		python:build
 
 USE_GITHUB=	yes
@@ -29,8 +29,7 @@ GH_ACCOUNT=	laurent22
 GH_TUPLE=	rollup:rollup:v4.9.1:rollup/rollup \
 		rustwasm:wasm-pack:v0.13.1:wasm_pack/wasm-pack
 # See ${WRKSRC}/packages/default-plugins/pluginRepositories.json for GH_TUPLEs for default plugins
-GH_TUPLE+=	JackGruber:joplin-plugin-backup:abb58175e2d2bf34899f1b32cb74137e5c788bf9:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup \
-		personalizedrefrigerator:joplin-plugin-freehand-drawing:63b6d3f185b5b3664632e498df7c7ad7824038d0:joplin_plugin_freehand_drawing/packages/default-plugins/plugin-sources/io.github.personalizedrefrigerator.js-draw
+GH_TUPLE+=	JackGruber:joplin-plugin-backup:2c3da7056e7ac39c86c2051a4fdb99d9534dd0a1:joplin_plugin_backup/packages/default-plugins/plugin-sources/io.github.jackgruber.backup
 
 CARGO_CARGOTOML_ROLLUP=	${WRKSRC}/rollup/rust/Cargo.toml
 CARGO_CARGOLOCK_ROLLUP=	${WRKSRC}/rollup/rust/Cargo.lock
@@ -43,7 +42,6 @@ CARGO_CARGOLOCKS=	${CARGO_CARGOLOCK_ROLLUP} \
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
-CARGO_ENV=	CARGO_PROFILE_RELEASE_LTO=false
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}

@@ -1,4 +1,4 @@
---- packages/default-plugins/buildDefaultPlugins.ts.orig	2025-09-01 11:50:43 UTC
+--- packages/default-plugins/buildDefaultPlugins.ts.orig	2026-01-10 10:01:41 UTC
 +++ packages/default-plugins/buildDefaultPlugins.ts
 @@ -1,7 +1,7 @@
  
@@ -11,66 +11,61 @@
  import { chdir, cwd } from 'process';
 @@ -9,7 +9,6 @@ import getPathToPatchFileFor from './utils/getPathToPa
  import { glob } from 'glob';
- import readRepositoryJson from './utils/readRepositoryJson';
+ import readRepositoryJson, { BuiltInPluginType, RepositoryData } from './utils/readRepositoryJson';
  import getPathToPatchFileFor from './utils/getPathToPatchFileFor';
 -import getCurrentCommitHash from './utils/getCurrentCommitHash';
  import { waitForCliInput } from '@joplin/utils/cli';
  
  interface Options {
-@@ -30,7 +29,7 @@ const buildDefaultPlugins = async (outputParentDir: st
- 	};
+@@ -53,32 +52,33 @@ const buildPlugin = async (pluginId: string, repositor
+ 	const buildDir = await mkdtemp(join(tmpdir(), 'default-plugin-build'));
+ 	try {
+ 		logStatus('Building plugin', pluginId, 'at', buildDir);
++		logStatus(`Repository is at ${repositoryData.cloneUrl}`);
+ 		const pluginDir = resolve(join(pluginSourcesDir, pluginId));
  
- 	for (const pluginId in pluginRepositoryData) {
--		const repositoryData = pluginRepositoryData[pluginId];
-+		// const repositoryData = pluginRepositoryData[pluginId];
+ 		// Clone the repository if not done yet
+-		if (!(await exists(pluginDir)) || (await readdir(pluginDir)).length === 0) {
+-			logStatus(`Cloning from repository ${repositoryData.cloneUrl}`);
+-			await execCommand(['git', 'clone', '--', repositoryData.cloneUrl, pluginDir]);
+-			chdir(pluginDir);
+-		}
++		// if (!(await exists(pluginDir)) || (await readdir(pluginDir)).length === 0) {
++		// 	logStatus(`Cloning from repository ${repositoryData.cloneUrl}`);
++		// 	await execCommand(['git', 'clone', '--', repositoryData.cloneUrl, pluginDir]);
++		// 	chdir(pluginDir);
++		// }
  
- 		const buildDir = await mkdtemp(join(tmpdir(), 'default-plugin-build'));
- 		try {
-@@ -38,29 +37,29 @@ const buildDefaultPlugins = async (outputParentDir: st
- 			const pluginDir = resolve(join(pluginSourcesDir, pluginId));
+ 		chdir(pluginDir);
+-		const expectedCommitHash = repositoryData.commit;
++		// const expectedCommitHash = repositoryData.commit;
  
- 			// Clone the repository if not done yet
--			if (!(await exists(pluginDir)) || (await readdir(pluginDir)).length === 0) {
--				logStatus(`Cloning from repository ${repositoryData.cloneUrl}`);
--				await execCommand(['git', 'clone', '--', repositoryData.cloneUrl, pluginDir]);
--				chdir(pluginDir);
--			}
-+			// if (!(await exists(pluginDir)) || (await readdir(pluginDir)).length === 0) {
-+			// 	logStatus(`Cloning from repository ${repositoryData.cloneUrl}`);
-+			// 	await execCommand(['git', 'clone', '--', repositoryData.cloneUrl, pluginDir]);
-+			// 	chdir(pluginDir);
-+			// }
+-		logStatus(`Switching to commit ${expectedCommitHash}`);
+-		await execCommand(['git', 'switch', repositoryData.branch]);
++		// logStatus(`Switching to commit ${expectedCommitHash}`);
++		// await execCommand(['git', 'switch', repositoryData.branch]);
  
- 			chdir(pluginDir);
--			const expectedCommitHash = repositoryData.commit;
-+			// const expectedCommitHash = repositoryData.commit;
+-		try {
+-			await execCommand(['git', 'checkout', expectedCommitHash]);
+-		} catch (error) {
+-			logStatus(`git checkout failed with error ${error}. Fetching...`);
+-			await execCommand(['git', 'fetch']);
+-			await execCommand(['git', 'checkout', expectedCommitHash]);
+-		}
++		// try {
++		// 	await execCommand(['git', 'checkout', expectedCommitHash]);
++		// } catch (error) {
++		// 	logStatus(`git checkout failed with error ${error}. Fetching...`);
++		// 	await execCommand(['git', 'fetch']);
++		// 	await execCommand(['git', 'checkout', expectedCommitHash]);
++		// }
  
--			logStatus(`Switching to commit ${expectedCommitHash}`);
--			await execCommand(['git', 'switch', repositoryData.branch]);
-+			// logStatus(`Switching to commit ${expectedCommitHash}`);
-+			// await execCommand(['git', 'switch', repositoryData.branch]);
+-		if (await getCurrentCommitHash() !== expectedCommitHash) {
+-			throw new Error(`Unable to checkout commit ${expectedCommitHash}`);
+-		}
++		// if (await getCurrentCommitHash() !== expectedCommitHash) {
++		// 	throw new Error(`Unable to checkout commit ${expectedCommitHash}`);
++		// }
  
--			try {
--				await execCommand(['git', 'checkout', expectedCommitHash]);
--			} catch (error) {
--				logStatus(`git checkout failed with error ${error}. Fetching...`);
--				await execCommand(['git', 'fetch']);
--				await execCommand(['git', 'checkout', expectedCommitHash]);
--			}
-+			// try {
-+			// 	await execCommand(['git', 'checkout', expectedCommitHash]);
-+			// } catch (error) {
-+			// 	logStatus(`git checkout failed with error ${error}. Fetching...`);
-+			// 	await execCommand(['git', 'fetch']);
-+			// 	await execCommand(['git', 'checkout', expectedCommitHash]);
-+			// }
- 
--			if (await getCurrentCommitHash() !== expectedCommitHash) {
--				throw new Error(`Unable to checkout commit ${expectedCommitHash}`);
--			}
-+			// if (await getCurrentCommitHash() !== expectedCommitHash) {
-+			// 	throw new Error(`Unable to checkout commit ${expectedCommitHash}`);
-+			// }
- 
- 			logStatus('Copying repository files...');
- 			await copy(pluginDir, buildDir, {
+ 		logStatus('Copying repository files...');
+ 		await copy(pluginDir, buildDir, {
