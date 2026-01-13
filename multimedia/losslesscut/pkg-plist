@@ -247,7 +247,6 @@ share/icons/hicolor/64x64/apps/losslesscut.png
 %%DATADIR%%/resources/locales/cs/translation.json
 %%DATADIR%%/resources/locales/de/translation.json
 %%DATADIR%%/resources/locales/en/translation.json
-%%DATADIR%%/resources/locales/en/translation_old.json
 %%DATADIR%%/resources/locales/es/translation.json
 %%DATADIR%%/resources/locales/et/translation.json
 %%DATADIR%%/resources/locales/fa/translation.json

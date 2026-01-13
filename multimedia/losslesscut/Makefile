@@ -1,6 +1,6 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.67.1
+DISTVERSION=	3.67.2
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -42,8 +42,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	ffmpeg:multimedia/ffmpeg
 
-USES=		desktop-file-utils electron:38 gettext-runtime gl gmake gnome \
-		iconv:wchar_t jpeg nodejs:22,build python:build xorg
+USES=		desktop-file-utils electron:38,build,test gettext-runtime gl \
+		gmake gnome iconv:wchar_t jpeg nodejs:22,build python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mifi

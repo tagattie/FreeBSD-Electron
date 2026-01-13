@@ -3,7 +3,7 @@
   "productName": "LosslessCut",
   "description": "The swiss army knife of lossless video/audio editing",
   "copyright": "Copyright © 2021 ${author}",
-  "version": "3.67.1",
+  "version": "3.67.2",
   "main": "./out/main/index.js",
   "homepage": "./",
   "scripts": {
@@ -25,7 +25,7 @@
     "postinstall": "electron-builder install-app-deps",
     "version": "tsx script/postversion.mts && git add no.mifi.losslesscut.appdata.xml",
     "pack-linux": "yarn build && electron-builder --linux",
-    "scan-i18n": "i18next-cli extract",
+    "scan-i18n": "i18next-cli -c i18next.config.scan.ts extract",
     "generate-licenses": "yarn licenses generate-disclaimer > licenses.txt && echo '\n\nffmpeg is licensed under GPL v2+:\n\nhttp://www.gnu.org/licenses/old-licenses/gpl-2.0.html' >> licenses.txt"
   },
   "author": {
@@ -109,7 +109,7 @@
     "nanoid": "^5.0.9",
     "p-map": "^5.5.0",
     "p-retry": "^6.2.0",
-    "pretty-bytes": "^6.0.0",
+    "pretty-bytes": "^7.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-i18next": "^16.2.4",
@@ -453,6 +453,10 @@
           "target": "snap"
         },
         {
+          "arch": "x64",
+          "target": "flatpak"
+        },
+        {
           "arch": "arm64",
           "target": "tar.bz2"
         },
@@ -466,6 +470,22 @@
       "plugs": [
         "default",
         "removable-media"
+      ]
+    },
+    "flatpak": {
+      "runtime": "org.freedesktop.Platform",
+      "runtimeVersion": "23.08",
+      "sdk": "org.freedesktop.Sdk",
+      "base": "org.electronjs.Electron2.BaseApp",
+      "baseVersion": "23.08",
+      "finishArgs": [
+        "--share=network",
+        "--socket=x11",
+        "--socket=wayland",
+        "--device=dri",
+        "--socket=pulseaudio",
+        "--filesystem=home",
+        "--talk-name=org.freedesktop.Notifications"
       ]
     }
   },

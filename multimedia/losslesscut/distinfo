@@ -1,7 +1,7 @@
-TIMESTAMP = 1763501714
+TIMESTAMP = 1768287548
 SHA256 (yarn-4.11.0.tgz) = b7ade59ec8008b325eb4bed4360659e33c97942ab292d139c495dd6bdc0ad28c
 SIZE (yarn-4.11.0.tgz) = 1056157
-SHA256 (losslesscut-3.67.1-node-modules.tar.gz) = e6b84b45302ea38e169bcdb975c9310cc0810c1230762acbabc494a48c0e3cac
-SIZE (losslesscut-3.67.1-node-modules.tar.gz) = 172364679
-SHA256 (mifi-lossless-cut-v3.67.1_GH0.tar.gz) = ab660ed960e03fc7da27cd47e52f750e857a85dfe965921be354a8e3f1d4ff6f
-SIZE (mifi-lossless-cut-v3.67.1_GH0.tar.gz) = 2534650
+SHA256 (losslesscut-3.67.2-node-modules.tar.gz) = ade3fae17900ab4df4221c8901df2fc02138a74bcb745bff6f280240dc0a9b47
+SIZE (losslesscut-3.67.2-node-modules.tar.gz) = 172372263
+SHA256 (mifi-lossless-cut-v3.67.2_GH0.tar.gz) = 5649135a99a7e3d7712ae1ba6f2085d33c24aca2bfa98aa5e7780a035cf1fe82
+SIZE (mifi-lossless-cut-v3.67.2_GH0.tar.gz) = 2536042
