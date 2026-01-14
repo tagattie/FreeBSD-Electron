@@ -1,6 +1,6 @@
---- apps/desktop/src/main/tray.main.ts.orig	2025-04-28 18:52:32 UTC
+--- apps/desktop/src/main/tray.main.ts.orig	2026-01-07 19:48:19 UTC
 +++ apps/desktop/src/main/tray.main.ts
-@@ -108,7 +108,7 @@ export class TrayMain {
+@@ -113,7 +113,7 @@ export class TrayMain {
    removeTray(showWindow = true) {
      // Due to https://github.com/electron/electron/issues/17622
      // we cannot destroy the tray icon on linux.
@@ -9,7 +9,7 @@
        this.tray.destroy();
        this.tray = null;
      }
-@@ -175,7 +175,7 @@ export class TrayMain {
+@@ -180,7 +180,7 @@ export class TrayMain {
    }
  
    private isLinux() {
