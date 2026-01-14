@@ -2,14 +2,14 @@
 #
 # Before copying package.json and yarn.lock to ${PKGJSONSDIR},
 # do the following steps:
-# 1. Downgrade electron-builder to 26.0.0 in ${WRKSRC}
-#    (Later versions of electron-builder 26 appears to have
+# 1. Upgrade electron-builder to latest version in ${WRKSRC}
+#    (Earlier versions of electron-builder 26 appears to have
 #    some issues with packaging node_modules)
-#    $ yarn upgrade --ignore-scripts 'electron-builder@26.0.0'
+#    $ yarn upgrade --ignore-scripts 'electron-builder@latest'
 
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.229
+DISTVERSION=	1.0.230
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -22,7 +22,6 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 FETCH_DEPENDS=	git:devel/git
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
-		libsnappy.so:archivers/snappy \
 		libasound.so:audio/alsa-lib \
 		libFLAC.so:audio/flac \
 		libopus.so:audio/opus \
@@ -38,7 +37,6 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libpng.so:graphics/png \
 		libwayland-client.so:graphics/wayland \
 		libwebp.so:graphics/webp \
-		libpython${PYTHON_VER}.so:lang/python${PYTHON_SUFFIX} \
 		libdav1d.so:multimedia/dav1d \
 		libopenh264.so:multimedia/openh264 \
 		libpipewire-0.3.so:multimedia/pipewire \
@@ -52,17 +50,20 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence
 
 USES=		cargo electron:38 gl gmake gnome iconv:wchar_t jpeg \
-		localbase:ldflags nodejs:22,build pkgconfig python:build xorg
+		localbase:ldflags nodejs:22,build pkgconfig python:build \
+		shebangfix xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
 # For GH_TUPLE, look for version in ${WRKSRC}/app/node_modules/russh/package.json,
 # and search corresponding commit hash at https://github.com/Eugeny/russh-napi
-GH_TUPLE=	Eugeny:russh-napi:727dced7a1186a44433c76428e87518002181527:russh_napi/russh-napi
+GH_TUPLE=	Eugeny:russh-napi:f67ed4ce59aa2d553e7528d4e50b250460267773:russh_napi/russh-napi
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf gtk30 libxml2 libxslt pango
+
+SHEBANG_FILES=	app/node_modules/x11/lib/keysyms.update.sh
 
 CARGO_CARGOTOML=${WRKSRC}/russh-napi/Cargo.toml
 CARGO_CARGOLOCK=${WRKSRC}/russh-napi/Cargo.lock
