@@ -76,7 +76,7 @@ pre-fetch:
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${DEFAULT_PLUGINS_NODE_MODULES_FILE} @node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}; \
+		${RM} -r ${WRKDIR}/node-modules-cache; \
 	fi
 	@if [ ! -f ${DISTDIR}/${APP_CLIPPER_NODE_MODULES_FILE} ]; then \
 		${ECHO_MSG} "===>  Prefetching and archiving node modules for app-clipper"; \
@@ -93,7 +93,7 @@ pre-fetch:
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
 			-f ${DISTDIR}/${APP_CLIPPER_NODE_MODULES_FILE} @node-modules-cache-app-clipper.mtree; \
-		${RM} -r ${WRKDIR}; \
+		${RM} -r ${WRKDIR}/node-modules-cache-app-clipper; \
 	fi
 
 post-extract:
