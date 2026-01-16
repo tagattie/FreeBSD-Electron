@@ -1,0 +1,4 @@
+Gerbil provides a graphical interface for running Large Language
+Models locally. It handles the technical complexity of managing
+backends, model downloads, and hardware acceleration - letting you
+focus on using AI rather than configuring it.

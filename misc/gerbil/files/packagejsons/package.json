@@ -1,0 +1,202 @@
+{
+  "name": "gerbil",
+  "productName": "Gerbil",
+  "version": "1.18.5",
+  "description": "Run Large Language Models locally",
+  "main": "out/main/index.js",
+  "homepage": "./",
+  "engines": {
+    "node": ">=22.0.0",
+    "yarn": "^4.0.0"
+  },
+  "packageManager": "yarn@4.12.0",
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "package": "electron-vite build && electron-builder --publish=never",
+    "analyze": "cross-env ANALYZE=true electron-vite build && yarn dlx open-cli dist/stats.html",
+    "format": "prettier --write . --ignore-path .gitignore | grep -v '(unchanged)' || true",
+    "format:check": "prettier --check . --ignore-path .gitignore",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "compile": "tsc --noEmit",
+    "check": "yarn format:check && yarn lint && yarn compile",
+    "release": "yarn dlx tsx scripts/release.ts"
+  },
+  "keywords": [
+    "llm",
+    "ai",
+    "local-ai",
+    "language-model",
+    "koboldcpp",
+    "electron",
+    "privacy",
+    "offline"
+  ],
+  "author": {
+    "name": "lone-cloud",
+    "email": "lonecloud604@proton.me"
+  },
+  "license": "AGPL-3.0-or-later",
+  "dependencies": {
+    "@codemirror/search": "^6.5.11",
+    "@codemirror/theme-one-dark": "^6.1.3",
+    "@codemirror/view": "^6.39.9",
+    "@fontsource/inter": "^5.2.8",
+    "@huggingface/gguf": "^0.3.2",
+    "@mantine/core": "^8.3.12",
+    "@mantine/hooks": "^8.3.12",
+    "@uiw/react-codemirror": "^4.25.4",
+    "electron-updater": "^6.7.3",
+    "execa": "^9.6.1",
+    "lucide-react": "^0.562.0",
+    "mime-types": "^3.0.2",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
+    "react-error-boundary": "^6.0.3",
+    "react-markdown": "^10.1.0",
+    "rehype-raw": "^7.0.0",
+    "rehype-sanitize": "^6.0.0",
+    "remark-gfm": "^4.0.1",
+    "systeminformation": "^5.30.3",
+    "winston": "^3.19.0",
+    "winston-daily-rotate-file": "^5.0.0",
+    "yauzl": "^3.2.0",
+    "zustand": "^5.0.10"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.2",
+    "@types/mime-types": "^3.0.1",
+    "@types/node": "^25.0.6",
+    "@types/react": "^19.2.8",
+    "@types/react-dom": "^19.2.3",
+    "@types/yauzl": "^2.10.3",
+    "@typescript-eslint/eslint-plugin": "^8.53.0",
+    "@typescript-eslint/parser": "^8.53.0",
+    "@vitejs/plugin-react": "^5.1.2",
+    "cross-env": "^10.1.0",
+    "electron": "^38.7.2",
+    "electron-builder": "^26.4.0",
+    "electron-vite": "^5.0.0",
+    "eslint": "^9.39.2",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-no-comments": "^1.1.10",
+    "eslint-plugin-promise": "^7.2.1",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-sonarjs": "^3.0.5",
+    "globals": "^17.0.0",
+    "jiti": "^2.6.1",
+    "prettier": "^3.7.4",
+    "rollup-plugin-visualizer": "^6.0.5",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1"
+  },
+  "build": {
+    "appId": "com.gerbil.app",
+    "productName": "Gerbil",
+    "compression": "normal",
+    "publish": {
+      "provider": "github",
+      "owner": "lone-cloud",
+      "repo": "gerbil"
+    },
+    "electronLanguages": [
+      "en-US"
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*",
+      "dist/**/*"
+    ],
+    "extraFiles": [
+      {
+        "from": "assets/kcpp_sdui.embd",
+        "to": "assets/kcpp_sdui.embd"
+      },
+      {
+        "from": "assets/lcpp.gz.embd",
+        "to": "assets/lcpp.gz.embd"
+      }
+    ],
+    "extraResources": [
+      {
+        "from": "src/assets/icon.png",
+        "to": "icon.png"
+      }
+    ],
+    "mac": {
+      "compression": "maximum",
+      "category": "public.app-category.productivity",
+      "icon": "assets/icon.icns",
+      "hardenedRuntime": true,
+      "gatekeeperAssess": false,
+      "entitlements": "assets/entitlements.mac.plist",
+      "entitlementsInherit": "assets/entitlements.mac.plist",
+      "extraFiles": [
+        {
+          "from": "assets/entitlements.mac.plist",
+          "to": "assets/entitlements.mac.plist"
+        }
+      ],
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "compression": "normal",
+      "icon": "assets/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Gerbil"
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable-${version}.${ext}"
+    },
+    "linux": {
+      "compression": "store",
+      "category": "Utility",
+      "icon": "src/assets/icon.png",
+      "extraFiles": [
+        {
+          "from": "assets/gerbil.desktop",
+          "to": "assets/gerbil.desktop"
+        }
+      ],
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+bin/gerbil
+share/applications/gerbil.desktop
+%%DATADIR%%/resources/app-update.yml
+%%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/default_app.asar
+%%DATADIR%%/resources/icon.png
+share/icons/hicolor/128x128/apps/gerbil.png
+share/icons/hicolor/16x16/apps/gerbil.png
+share/icons/hicolor/256x256/apps/gerbil.png
+share/icons/hicolor/32x32/apps/gerbil.png
+share/icons/hicolor/48x48/apps/gerbil.png
+share/icons/hicolor/512x512/apps/gerbil.png
+share/icons/hicolor/64x64/apps/gerbil.png
