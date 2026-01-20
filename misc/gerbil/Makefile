@@ -1,6 +1,6 @@
 PORTNAME=	gerbil
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.18.5
+DISTVERSION=	1.18.6
 CATEGORIES=	misc
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -45,7 +45,7 @@ do-install:
 .endfor
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
-		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
 
 do-install-DOCS-on:
 	@${MKDIR} ${STAGEDIR}${DOCSDIR}
