@@ -25,6 +25,7 @@ LICENSE_FILE=	${WRKSRC}/electron/LICENSE
 BROKEN_i386=	fetch fails: node process stalls during fetch phase and eats up all CPUs
 ONLY_FOR_ARCHS=	aarch64 amd64 i386
 
+FETCH_DEPENDS=	git:devel/git
 PATCH_DEPENDS=	git:devel/git \
 		jq:textproc/jq
 BUILD_DEPENDS=	gperf:devel/gperf \
