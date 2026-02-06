@@ -1,4 +1,4 @@
---- electron/shell/common/node_bindings.cc.orig	2026-01-15 18:39:20 UTC
+--- electron/shell/common/node_bindings.cc.orig	2026-02-04 19:30:54 UTC
 +++ electron/shell/common/node_bindings.cc
 @@ -51,7 +51,7 @@
  #include "third_party/electron_node/src/debug_utils.h"
@@ -9,7 +9,7 @@
  #include "shell/common/crash_keys.h"
  #endif
  
-@@ -167,7 +167,7 @@ void V8FatalErrorCallback(const char* location, const 
+@@ -168,7 +168,7 @@ void V8FatalErrorCallback(const char* location, const 
  void V8FatalErrorCallback(const char* location, const char* message) {
    LOG(ERROR) << "Fatal error in V8: " << location << " " << message;
  
@@ -18,7 +18,7 @@
    electron::crash_keys::SetCrashKey("electron.v8-fatal.message", message);
    electron::crash_keys::SetCrashKey("electron.v8-fatal.location", location);
  #endif
-@@ -189,7 +189,7 @@ void V8OOMErrorCallback(const char* location, const v8
+@@ -190,7 +190,7 @@ void V8OOMErrorCallback(const char* location, const v8
      LOG(ERROR) << "OOM detail: " << details.detail;
    }
  
@@ -27,7 +27,7 @@
    electron::crash_keys::SetCrashKey("electron.v8-oom.is_heap_oom",
                                      std::to_string(details.is_heap_oom));
    if (location) {
-@@ -637,7 +637,7 @@ void NodeBindings::Initialize(v8::Isolate* const isola
+@@ -638,7 +638,7 @@ void NodeBindings::Initialize(v8::Isolate* const isola
    TRACE_EVENT0("electron", "NodeBindings::Initialize");
    // Open node's error reporting system for browser process.
  

@@ -1,6 +1,6 @@
---- electron/shell/browser/ui/inspectable_web_contents.cc.orig	2025-11-13 22:50:46 UTC
+--- electron/shell/browser/ui/inspectable_web_contents.cc.orig	2026-02-04 19:30:54 UTC
 +++ electron/shell/browser/ui/inspectable_web_contents.cc
-@@ -555,7 +555,7 @@ void InspectableWebContents::LoadCompleted() {
+@@ -556,7 +556,7 @@ void InspectableWebContents::LoadCompleted() {
            prefs.FindString("currentDockState");
        base::RemoveChars(*current_dock_state, "\"", &dock_state_);
      }

@@ -1,4 +1,4 @@
---- electron/shell/common/api/electron_api_shared_texture.cc.orig	2026-01-15 18:39:20 UTC
+--- electron/shell/common/api/electron_api_shared_texture.cc.orig	2026-02-04 19:30:54 UTC
 +++ electron/shell/common/api/electron_api_shared_texture.cc
 @@ -27,7 +27,7 @@
  #include "third_party/blink/renderer/platform/graphics/gpu/shared_gpu_context.h"  // nogncheck
@@ -9,7 +9,7 @@
  #include "base/posix/eintr_wrapper.h"
  #include "base/strings/string_number_conversions.h"
  #endif
-@@ -536,7 +536,7 @@ struct ImportSharedTextureInfo {
+@@ -538,7 +538,7 @@ struct ImportSharedTextureInfo {
    // On macOS, it is an IOSurfaceRef, this must be a valid IOSurface at the
    // current process.
    uintptr_t io_surface = 0;
@@ -18,7 +18,7 @@
    // On Linux, to be implemented.
    std::vector<ImportSharedTextureInfoPlane> planes;
    uint64_t modifier = gfx::NativePixmapHandle::kNoModifier;
-@@ -600,7 +600,7 @@ struct Converter<ImportSharedTextureInfo> {
+@@ -604,7 +604,7 @@ struct Converter<ImportSharedTextureInfo> {
      GetNativeHandle("ntHandle", &out->nt_handle);
  #elif BUILDFLAG(IS_APPLE)
      GetNativeHandle("ioSurface", &out->io_surface);
@@ -27,7 +27,7 @@
      v8::Local<v8::Object> native_pixmap;
      if (shared_texture.Get("nativePixmap", &native_pixmap)) {
        gin::Dictionary v8_native_pixmap(isolate, native_pixmap);
-@@ -676,7 +676,7 @@ v8::Local<v8::Value> ImportSharedTexture(v8::Isolate* 
+@@ -680,7 +680,7 @@ v8::Local<v8::Value> ImportSharedTexture(v8::Isolate* 
    auto io_surface_scoped = base::apple::ScopedCFTypeRef<IOSurfaceRef>(
        io_surface, base::scoped_policy::RETAIN);
    gmb_handle = gfx::GpuMemoryBufferHandle(std::move(io_surface_scoped));
