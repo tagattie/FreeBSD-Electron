@@ -1,6 +1,6 @@
---- src/main/downloadsManager.ts.orig	2025-11-18 12:31:15 UTC
+--- src/main/downloadsManager.ts.orig	2026-01-20 15:37:19 UTC
 +++ src/main/downloadsManager.ts
-@@ -647,7 +647,7 @@ export class DownloadsManager extends JsonFileManager<
+@@ -697,7 +697,7 @@ export class DownloadsManager extends JsonFileManager<
              };
  
              // Linux doesn't support the thumbnail creation so we have to use the base function
