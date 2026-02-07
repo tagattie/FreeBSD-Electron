@@ -1,7 +1,7 @@
---- apps/desktop/desktop_native/autotype/src/lib.rs.orig	2025-11-07 19:32:19 UTC
+--- apps/desktop/desktop_native/autotype/src/lib.rs.orig	2026-02-02 09:34:46 UTC
 +++ apps/desktop/desktop_native/autotype/src/lib.rs
-@@ -1,6 +1,7 @@ use anyhow::Result;
- use anyhow::Result;
+@@ -7,6 +7,7 @@ pub(crate) use modifier_keys::*;
+ pub(crate) use modifier_keys::*;
  
  #[cfg_attr(target_os = "linux", path = "linux.rs")]
 +#[cfg_attr(target_os = "freebsd", path = "freebsd.rs")]

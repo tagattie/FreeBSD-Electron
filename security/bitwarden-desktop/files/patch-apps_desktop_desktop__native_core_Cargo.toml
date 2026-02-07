@@ -1,8 +1,8 @@
---- apps/desktop/desktop_native/core/Cargo.toml.orig	2025-12-11 21:15:41 UTC
+--- apps/desktop/desktop_native/core/Cargo.toml.orig	2026-02-02 09:34:46 UTC
 +++ apps/desktop/desktop_native/core/Cargo.toml
-@@ -76,14 +76,16 @@ desktop_objc = { path = "../objc" }
- security-framework-sys = { workspace = true, optional = true }
- desktop_objc = { path = "../objc" }
+@@ -46,14 +46,16 @@ zeroizing-alloc = { workspace = true }
+ typenum = { workspace = true }
+ zeroizing-alloc = { workspace = true }
  
 -[target.'cfg(target_os = "linux")'.dependencies]
 +[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
@@ -17,5 +17,5 @@
 +[target.'cfg(target_os = "linux")'.dependencies]
 +linux-keyutils = { workspace = true }
  
- [lints]
- workspace = true
+ [target.'cfg(target_os = "macos")'.dependencies]
+ core-foundation = { workspace = true, optional = true }

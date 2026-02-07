@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/chromium_importer/src/metadata.rs.orig	2026-01-07 19:48:19 UTC
+--- apps/desktop/desktop_native/chromium_importer/src/metadata.rs.orig	2026-02-02 09:34:46 UTC
 +++ apps/desktop/desktop_native/chromium_importer/src/metadata.rs
-@@ -127,7 +127,7 @@ mod tests {
+@@ -130,7 +130,7 @@ mod tests {
          }
      }
  
@@ -9,7 +9,7 @@
      #[test]
      fn returns_all_known_importers() {
          let map = get_supported_importers::<MockInstalledBrowserRetriever>();
-@@ -148,7 +148,7 @@ mod tests {
+@@ -151,7 +151,7 @@ mod tests {
          }
      }
  
