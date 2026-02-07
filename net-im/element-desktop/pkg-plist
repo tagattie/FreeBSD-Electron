@@ -3,15 +3,8 @@ share/applications/element-desktop.desktop
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/matrix-seshat/index.node
-%%DATADIR%%/resources/build/icon.icns
 %%DATADIR%%/resources/build/icon.ico
 %%DATADIR%%/resources/build/icon.png
 %%DATADIR%%/resources/default_app.asar
 %%DATADIR%%/resources/webapp.asar
-share/icons/hicolor/1024x1024/apps/element-desktop.png
-share/icons/hicolor/128x128/apps/element-desktop.png
-share/icons/hicolor/16x16/apps/element-desktop.png
-share/icons/hicolor/256x256/apps/element-desktop.png
-share/icons/hicolor/32x32/apps/element-desktop.png
-share/icons/hicolor/48x48/apps/element-desktop.png
-share/icons/hicolor/64x64/apps/element-desktop.png
+share/pixmaps/element-desktop.png
