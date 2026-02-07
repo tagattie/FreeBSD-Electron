@@ -1,6 +1,6 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.67.2
+DISTVERSION=	3.68.0
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -55,16 +55,17 @@ USE_GNOME=	cairo gdkpixbuf glib20 gtk30 libxml2 libxslt pango
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 
-PORTDOCS=	CONTRIBUTING.md README.md api.md batch.md cli.md docs.md \
-		import-export.md issues.md
+PORTDOCS=	CONTRIBUTING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:builder
 
 pre-build:
-	cd ${WRKSRC}/node_modules/sharp && \
+.for subdir in icon-gen/node_modules/sharp sharp
+	cd ${WRKSRC}/node_modules/${subdir} && \
 	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm rebuild
+.endfor
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \

@@ -1,8 +1,11 @@
---- src/main/util.ts.orig	2024-06-26 19:24:18 UTC
+--- src/main/util.ts.orig	2026-01-29 16:07:12 UTC
 +++ src/main/util.ts
-@@ -5,4 +5,4 @@ export const isMac = platform === 'darwin';
+@@ -6,7 +6,7 @@ export const isMac = platform === 'darwin';
  
  export const isWindows = platform === 'win32';
  export const isMac = platform === 'darwin';
 -export const isLinux = platform === 'linux';
 +export const isLinux = (platform === 'linux' || platform === 'freebsd');
+ 
+ export async function pathExists(path: string) {
+   try {
