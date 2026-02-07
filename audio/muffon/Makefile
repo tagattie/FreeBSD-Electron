@@ -1,6 +1,6 @@
 PORTNAME=	muffon
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.3.0
+DISTVERSION=	2.4.0
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://muffon.netlify.app/
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		desktop-file-utils electron:37 gmake nodejs:22,build \
+USES=		desktop-file-utils electron:39 gmake nodejs:22,build \
 		python:build
 
 USE_GITHUB=	yes
