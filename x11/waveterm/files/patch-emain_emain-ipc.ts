@@ -1,6 +1,6 @@
---- emain/emain-ipc.ts.orig	2025-12-22 08:37:34 UTC
+--- emain/emain-ipc.ts.orig	2026-02-11 23:55:44 UTC
 +++ emain/emain-ipc.ts
-@@ -332,7 +332,7 @@ export function initIpcHandlers() {
+@@ -337,7 +337,7 @@ export function initIpcHandlers() {
              const color = fac.prepareResult(fac.getColorFromArray4(png.data));
              const ww = getWaveWindowByWebContentsId(event.sender.id);
              ww.setTitleBarOverlay({

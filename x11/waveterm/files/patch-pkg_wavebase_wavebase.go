@@ -1,4 +1,4 @@
---- pkg/wavebase/wavebase.go.orig	2025-12-17 04:59:41 UTC
+--- pkg/wavebase/wavebase.go.orig	2026-02-11 23:55:44 UTC
 +++ pkg/wavebase/wavebase.go
 @@ -81,6 +81,8 @@ var SupportedWshBinaries = map[string]bool{
  	"linux-arm64":   true,
@@ -9,7 +9,7 @@
  }
  
  type FDLock interface {
-@@ -210,6 +212,7 @@ func resolveWaveCachesDir() string {
+@@ -217,6 +219,7 @@ func resolveWaveCachesDir() string {
  		homeDir := GetHomeDir()
  		cacheDir = filepath.Join(homeDir, "Library", "Caches", appBundle)
  	case "linux":
@@ -17,7 +17,7 @@
  		xdgCache := os.Getenv("XDG_CACHE_HOME")
  		if xdgCache != "" {
  			cacheDir = filepath.Join(xdgCache, appBundle)
-@@ -424,6 +427,25 @@ func getSystemSummary(ctx context.Context) string {
+@@ -431,6 +434,25 @@ func getSystemSummary(ctx context.Context) string {
  			details = "Windows"
  		}
  		return fmt.Sprintf("%s (%s)", details, runtime.GOARCH)

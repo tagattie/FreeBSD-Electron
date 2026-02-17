@@ -11,7 +11,7 @@
 
 PORTNAME=	waveterm
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.13.1
+DISTVERSION=	0.14.0
 CATEGORIES=	x11
 DISTFILES=	tsunami/go.mod:prefetch
 
@@ -25,8 +25,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	task:devel/task
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		cargo electron:38 gmake go:modules,no_targets nodejs:22,build \
-		python:build
+USES=		cargo electron:38 gmake go:1.25+,modules,no_targets \
+		nodejs:22,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	wavetermdev
