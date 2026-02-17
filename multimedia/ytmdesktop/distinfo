@@ -1,7 +1,7 @@
-TIMESTAMP = 1761860124
+TIMESTAMP = 1771288413
 SHA256 (yarn-4.5.1.tgz) = 27a6874933e089772c610baa42e33e4a0db88ad251257030d8a73b1ef412e421
 SIZE (yarn-4.5.1.tgz) = 993709
-SHA256 (ytmdesktop-2.0.10-node-modules.tar.gz) = 31cb5b42104699c38d7a7b833e4a9b8568fb069d1a4bc8edf6361719c5c56978
-SIZE (ytmdesktop-2.0.10-node-modules.tar.gz) = 59240656
-SHA256 (ytmdesktop-ytmdesktop-v2.0.10_GH0.tar.gz) = 5ebf7577b5ff64c108a6afc70b32f4cf63d8d7836a4c8e83f150ff02302fdec0
-SIZE (ytmdesktop-ytmdesktop-v2.0.10_GH0.tar.gz) = 3004746
+SHA256 (ytmdesktop-2.0.11-node-modules.tar.gz) = 3447e4392616f495f81498399d07920665b415585325423279615d4b776d3f45
+SIZE (ytmdesktop-2.0.11-node-modules.tar.gz) = 76053106
+SHA256 (ytmdesktop-ytmdesktop-v2.0.11_GH0.tar.gz) = d05d6e4259e615d6b5f0cd7e13a0e4f35e02dee657cb31a160b2535224b755ec
+SIZE (ytmdesktop-ytmdesktop-v2.0.11_GH0.tar.gz) = 3024455

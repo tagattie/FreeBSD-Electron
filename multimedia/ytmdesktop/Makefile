@@ -1,6 +1,6 @@
 PORTNAME=	ytmdesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	2.0.10
+DISTVERSION=	2.0.11
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://ytmdesktop.app/
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:38 localbase:ldflags nodejs:22,build python:build
+USES=		electron:40 localbase:ldflags nodejs:24,build python:build
 
 USE_GITHUB=	yes
 
@@ -23,7 +23,7 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:forge
 
 GIT_BRANCH=	HEAD
-GIT_COMMIT_HASH=68d3e5db645a70cb0258baf4a59fbe77b53a88ce
+GIT_COMMIT_HASH=3d49f521344879492f0d9f250f4e3b21720b24b9
 
 post-patch:
 	@${REINPLACE_CMD} -e 's/%%GIT_BRANCH%%/${GIT_BRANCH}/; \
