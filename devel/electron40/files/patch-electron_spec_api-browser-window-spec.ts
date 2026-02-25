@@ -1,4 +1,4 @@
---- electron/spec/api-browser-window-spec.ts.orig	2025-11-13 22:50:46 UTC
+--- electron/spec/api-browser-window-spec.ts.orig	2026-02-24 02:09:51 UTC
 +++ electron/spec/api-browser-window-spec.ts
 @@ -69,7 +69,7 @@ describe('BrowserWindow module', () => {
        }).not.to.throw();
@@ -108,7 +108,7 @@
            const maximize = once(w, 'maximize');
            w.show();
            w.maximize();
-@@ -4098,7 +4098,7 @@ describe('BrowserWindow module', () => {
+@@ -4120,7 +4120,7 @@ describe('BrowserWindow module', () => {
          expect(test.nodeTimers).to.equal(true);
          expect(test.nodeUrl).to.equal(true);
  
@@ -117,7 +117,7 @@
            expect(test.creationTime).to.be.null('creation time');
            expect(test.systemMemoryInfo).to.be.null('system memory info');
          } else {
-@@ -4603,7 +4603,7 @@ describe('BrowserWindow module', () => {
+@@ -4625,7 +4625,7 @@ describe('BrowserWindow module', () => {
      });
    });
  
@@ -126,7 +126,7 @@
      afterEach(closeAllWindows);
      it('emits an event when window is maximized', async () => {
        const w = new BrowserWindow({ show: false });
-@@ -4874,7 +4874,7 @@ describe('BrowserWindow module', () => {
+@@ -4896,7 +4896,7 @@ describe('BrowserWindow module', () => {
      // TODO(zcbenz):
      // This test does not run on Linux CI. See:
      // https://github.com/electron/electron/issues/28699
@@ -135,7 +135,16 @@
        const w = new BrowserWindow({});
        const maximize = once(w, 'maximize');
        w.maximize();
-@@ -4891,7 +4891,7 @@ describe('BrowserWindow module', () => {
+@@ -4911,7 +4911,7 @@ describe('BrowserWindow module', () => {
+       expect(w.isMaximized()).to.equal(true);
+     });
+ 
+-    ifit(process.platform !== 'linux')('should not break fullscreen state', async () => {
++    ifit(process.platform !== 'linux' && process.platform !== 'freebsd')('should not break fullscreen state', async () => {
+       const w = new BrowserWindow({ show: false });
+       w.show();
+ 
+@@ -4934,7 +4934,7 @@ describe('BrowserWindow module', () => {
    });
  
    // TODO(dsanders11): Enable once maximize event works on Linux again on CI
@@ -144,7 +153,7 @@
      afterEach(closeAllWindows);
      it('should show the window if it is not currently shown', async () => {
        const w = new BrowserWindow({ show: false });
-@@ -4928,7 +4928,7 @@ describe('BrowserWindow module', () => {
+@@ -4971,7 +4971,7 @@ describe('BrowserWindow module', () => {
  
      // TODO(dsanders11): Enable once minimize event works on Linux again.
      //                   See https://github.com/electron/electron/issues/28699
@@ -153,7 +162,7 @@
        const w = new BrowserWindow();
        const minimize = once(w, 'minimize');
        w.minimize();
-@@ -5414,7 +5414,7 @@ describe('BrowserWindow module', () => {
+@@ -5457,7 +5457,7 @@ describe('BrowserWindow module', () => {
        });
  
        // On Linux there is no "resizable" property of a window.
@@ -162,7 +171,7 @@
          const w = new BrowserWindow({ show: false });
          expect(w.resizable).to.be.true('resizable');
  
-@@ -5654,7 +5654,7 @@ describe('BrowserWindow module', () => {
+@@ -5697,7 +5697,7 @@ describe('BrowserWindow module', () => {
      });
    });
  
@@ -171,7 +180,16 @@
      // Not implemented on Linux.
      afterEach(closeAllWindows);
  
-@@ -6825,7 +6825,7 @@ describe('BrowserWindow module', () => {
+@@ -5931,7 +5931,7 @@ describe('BrowserWindow module', () => {
+       });
+     });
+ 
+-    ifdescribe(process.platform === 'linux')('menu bar AltGr behavior', () => {
++    ifdescribe(process.platform === 'linux' || process.platform === 'freebsd')('menu bar AltGr behavior', () => {
+       it('does not toggle auto-hide menu bar visibility', async () => {
+         const w = new BrowserWindow({ show: false, autoHideMenuBar: true });
+         w.setMenuBarVisibility(false);
+@@ -6885,7 +6885,7 @@ describe('BrowserWindow module', () => {
    describe('"transparent" option', () => {
      afterEach(closeAllWindows);
  
