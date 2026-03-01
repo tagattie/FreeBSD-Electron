@@ -16,7 +16,7 @@ CATEGORIES=	x11
 DISTFILES=	tsunami/go.mod:prefetch
 
 MAINTAINER=	tagattie@FreeBSD.org
-COMMENT=	Open-source, cross-platform terminal for seamless workflows
+COMMENT=	Open source, AI-native terminal that sees your entire workspace
 WWW=		https://www.waveterm.dev/
 
 LICENSE=	APACHE20
