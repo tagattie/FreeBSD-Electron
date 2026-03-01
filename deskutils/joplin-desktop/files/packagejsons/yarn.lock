@@ -10537,11 +10537,11 @@ __metadata:
     "@react-native-community/netinfo": "npm:11.4.1"
     "@react-native-community/push-notification-ios": "npm:1.11.0"
     "@react-native-documents/picker": "npm:10.1.7"
-    "@react-native-vector-icons/fontawesome5": "npm:12.3.0"
+    "@react-native-vector-icons/fontawesome5": "patch:@react-native-vector-icons/fontawesome5@npm%3A12.3.0#~/.yarn/patches/@react-native-vector-icons-fontawesome5-npm-12.3.0-a1ca46610f.patch"
     "@react-native-vector-icons/get-image": "npm:12.3.0"
-    "@react-native-vector-icons/ionicons": "npm:12.3.0"
-    "@react-native-vector-icons/material-design-icons": "npm:12.4.0"
-    "@react-native-vector-icons/material-icons": "npm:12.4.0"
+    "@react-native-vector-icons/ionicons": "patch:@react-native-vector-icons/ionicons@npm%3A12.3.0#~/.yarn/patches/@react-native-vector-icons-ionicons-npm-12.3.0-9bd4746f3f.patch"
+    "@react-native-vector-icons/material-design-icons": "patch:@react-native-vector-icons/material-design-icons@npm%3A12.4.0#~/.yarn/patches/@react-native-vector-icons-material-design-icons-npm-12.4.0-890f7f618b.patch"
+    "@react-native-vector-icons/material-icons": "patch:@react-native-vector-icons/material-icons@npm%3A12.4.0#~/.yarn/patches/@react-native-vector-icons-material-icons-npm-12.4.0-94138e627b.patch"
     "@react-native/babel-preset": "npm:0.80.1"
     "@react-native/metro-config": "npm:0.79.5"
     "@react-native/typescript-config": "npm:0.80.2"
@@ -10860,7 +10860,7 @@ __metadata:
     sqlite3: "npm:5.1.6"
     string-padding: "npm:1.0.2"
     string-to-stream: "npm:3.0.1"
-    tar: "npm:6.2.1"
+    tar: "npm:7.5.8"
     tcp-port-used: "npm:1.0.2"
     tesseract.js: "npm:6.0.1"
     typescript: "npm:5.8.3"
@@ -13636,6 +13636,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-vector-icons/fontawesome5@patch:@react-native-vector-icons/fontawesome5@npm%3A12.3.0#~/.yarn/patches/@react-native-vector-icons-fontawesome5-npm-12.3.0-a1ca46610f.patch":
+  version: 12.3.0
+  resolution: "@react-native-vector-icons/fontawesome5@patch:@react-native-vector-icons/fontawesome5@npm%3A12.3.0#~/.yarn/patches/@react-native-vector-icons-fontawesome5-npm-12.3.0-a1ca46610f.patch::version=12.3.0&hash=8ed269"
+  dependencies:
+    "@react-native-vector-icons/common": "npm:^12.4.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/1bfe068fdf6b9edf4608d02acf2c329fe186bbee70e7949a781f56024f386d192ac00967463afc099bc43cca162e3711a884cf7dad01e40a50cea0b612f72f5e
+  languageName: node
+  linkType: hard
+
 "@react-native-vector-icons/get-image@npm:12.3.0":
   version: 12.3.0
   resolution: "@react-native-vector-icons/get-image@npm:12.3.0"
@@ -13658,6 +13670,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-vector-icons/ionicons@patch:@react-native-vector-icons/ionicons@npm%3A12.3.0#~/.yarn/patches/@react-native-vector-icons-ionicons-npm-12.3.0-9bd4746f3f.patch":
+  version: 12.3.0
+  resolution: "@react-native-vector-icons/ionicons@patch:@react-native-vector-icons/ionicons@npm%3A12.3.0#~/.yarn/patches/@react-native-vector-icons-ionicons-npm-12.3.0-9bd4746f3f.patch::version=12.3.0&hash=e0b183"
+  dependencies:
+    "@react-native-vector-icons/common": "npm:^12.3.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/f94852e0f4973e2e695e0413d69349ae1145b46253f73963f253fc83a6fdf43e39329dee1f6535b9675170e7e4e1def679ea9c2550e70d67a669434fe9a0f08f
+  languageName: node
+  linkType: hard
+
 "@react-native-vector-icons/material-design-icons@npm:12.4.0":
   version: 12.4.0
   resolution: "@react-native-vector-icons/material-design-icons@npm:12.4.0"
@@ -13670,6 +13694,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@react-native-vector-icons/material-design-icons@patch:@react-native-vector-icons/material-design-icons@npm%3A12.4.0#~/.yarn/patches/@react-native-vector-icons-material-design-icons-npm-12.4.0-890f7f618b.patch":
+  version: 12.4.0
+  resolution: "@react-native-vector-icons/material-design-icons@patch:@react-native-vector-icons/material-design-icons@npm%3A12.4.0#~/.yarn/patches/@react-native-vector-icons-material-design-icons-npm-12.4.0-890f7f618b.patch::version=12.4.0&hash=23abfd"
+  dependencies:
+    "@react-native-vector-icons/common": "npm:^12.4.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/75335f9e595ca314d93ef8760cca760fe64c36673841237b119e91ddd76b16bb194060471c79c1007d0920d2b703b1c19abd24bafbee09200f52cbf2357907c5
+  languageName: node
+  linkType: hard
+
 "@react-native-vector-icons/material-icons@npm:12.4.0":
   version: 12.4.0
   resolution: "@react-native-vector-icons/material-icons@npm:12.4.0"
@@ -13679,6 +13715,18 @@ __metadata:
     react: "*"
     react-native: "*"
   checksum: 10/472eb93fe551716558e4178707e08c854c05861acb2f7baff53222f13e0d0c0a02f790cfa20fcfb20eb8df1a5562f87380480b02419019c388db223d9a78779b
+  languageName: node
+  linkType: hard
+
+"@react-native-vector-icons/material-icons@patch:@react-native-vector-icons/material-icons@npm%3A12.4.0#~/.yarn/patches/@react-native-vector-icons-material-icons-npm-12.4.0-94138e627b.patch":
+  version: 12.4.0
+  resolution: "@react-native-vector-icons/material-icons@patch:@react-native-vector-icons/material-icons@npm%3A12.4.0#~/.yarn/patches/@react-native-vector-icons-material-icons-npm-12.4.0-94138e627b.patch::version=12.4.0&hash=81fbb4"
+  dependencies:
+    "@react-native-vector-icons/common": "npm:^12.4.0"
+  peerDependencies:
+    react: "*"
+    react-native: "*"
+  checksum: 10/64ff8df53e5a339635278b0fc6cce6a16620d404cad1d97dfb8a5e25542654bbd30fc20ece1cfdce7cd9382a1d999b938c1554122743ee0f2193d5bbcb08c151
   languageName: node
   linkType: hard
 
@@ -38684,6 +38732,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"minizlib@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "minizlib@npm:3.1.0"
+  dependencies:
+    minipass: "npm:^7.1.2"
+  checksum: 10/f47365cc2cb7f078cbe7e046eb52655e2e7e97f8c0a9a674f4da60d94fb0624edfcec9b5db32e8ba5a99a5f036f595680ae6fe02a262beaa73026e505cc52f99
+  languageName: node
+  linkType: hard
+
 "mississippi@npm:^3.0.0":
   version: 3.0.0
   resolution: "mississippi@npm:3.0.0"
@@ -49541,17 +49598,16 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tar@npm:6.2.1, tar@npm:^6.2.1":
-  version: 6.2.1
-  resolution: "tar@npm:6.2.1"
+"tar@npm:7.5.8":
+  version: 7.5.8
+  resolution: "tar@npm:7.5.8"
   dependencies:
-    chownr: "npm:^2.0.0"
-    fs-minipass: "npm:^2.0.0"
-    minipass: "npm:^5.0.0"
-    minizlib: "npm:^2.1.1"
-    mkdirp: "npm:^1.0.3"
-    yallist: "npm:^4.0.0"
-  checksum: 10/bfbfbb2861888077fc1130b84029cdc2721efb93d1d1fb80f22a7ac3a98ec6f8972f29e564103bbebf5e97be67ebc356d37fa48dbc4960600a1eb7230fbd1ea0
+    "@isaacs/fs-minipass": "npm:^4.0.0"
+    chownr: "npm:^3.0.0"
+    minipass: "npm:^7.1.2"
+    minizlib: "npm:^3.1.0"
+    yallist: "npm:^5.0.0"
+  checksum: 10/5fddc22e0fd03e73d5e9e922e71d8681f85443dee4f21403059a757e186ae4004abc9a709cdc7f4143d7d75758a2935f7306b3cc193123d46b6f786dd2b99c2a
   languageName: node
   linkType: hard
 
@@ -49595,6 +49651,20 @@ __metadata:
     mkdirp: "npm:^1.0.3"
     yallist: "npm:^4.0.0"
   checksum: 10/4848b92da8581e64ce4d8a760b47468dd9d212a4612846d8dd75b5c224a42c66ed5bcf8cfa9e9cd2eb64ebe1351413fb3eac93324a4eee536f0941beefa1f2eb
+  languageName: node
+  linkType: hard
+
+"tar@npm:^6.2.1":
+  version: 6.2.1
+  resolution: "tar@npm:6.2.1"
+  dependencies:
+    chownr: "npm:^2.0.0"
+    fs-minipass: "npm:^2.0.0"
+    minipass: "npm:^5.0.0"
+    minizlib: "npm:^2.1.1"
+    mkdirp: "npm:^1.0.3"
+    yallist: "npm:^4.0.0"
+  checksum: 10/bfbfbb2861888077fc1130b84029cdc2721efb93d1d1fb80f22a7ac3a98ec6f8972f29e564103bbebf5e97be67ebc356d37fa48dbc4960600a1eb7230fbd1ea0
   languageName: node
   linkType: hard
 
