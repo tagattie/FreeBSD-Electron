@@ -1,6 +1,6 @@
 PORTNAME=	gerbil
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.19.2
+DISTVERSION=	1.20.0
 CATEGORIES=	misc
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,7 +13,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 RUN_DEPENDS=	koboldcpp:misc/koboldcpp
 
-USES=		electron:38 nodejs:22,build
+USES=		electron:40 nodejs:24,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	lone-cloud

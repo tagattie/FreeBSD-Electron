@@ -1,7 +1,7 @@
-TIMESTAMP = 1771750793
+TIMESTAMP = 1772367592
 SHA256 (yarn-4.12.0.tgz) = bd58d06826ce9542c4cd904fe10bab7bc718ea2cc39a45d9fbd15f2edb45761c
 SIZE (yarn-4.12.0.tgz) = 1056794
-SHA256 (gerbil-1.19.2-node-modules.tar.gz) = a17d3425d05699009523bfbe940284623afca9feaecd7878acbdf8eea13e480e
-SIZE (gerbil-1.19.2-node-modules.tar.gz) = 123192215
-SHA256 (lone-cloud-gerbil-v1.19.2_GH0.tar.gz) = fbb313f6ca7ecc91ad9a888b74a49c3a7bf24ff37ed5f951457ce625b62e2f70
-SIZE (lone-cloud-gerbil-v1.19.2_GH0.tar.gz) = 31760165
+SHA256 (gerbil-1.20.0-node-modules.tar.gz) = 1eab35414c5df7744dbf3280ba728cfb0f4b7f7004f7c89deb47f6777eb104b1
+SIZE (gerbil-1.20.0-node-modules.tar.gz) = 123541136
+SHA256 (lone-cloud-gerbil-v1.20.0_GH0.tar.gz) = 173b04e6a9269e7eb9624ad029896aa89e8b6719d5fc41d091f80415356fd730
+SIZE (lone-cloud-gerbil-v1.20.0_GH0.tar.gz) = 31761898
