@@ -1,6 +1,6 @@
---- src/main/CriticalErrorHandler.ts.orig	2024-05-16 20:45:52 UTC
+--- src/main/CriticalErrorHandler.ts.orig	2026-02-24 16:38:27 UTC
 +++ src/main/CriticalErrorHandler.ts
-@@ -98,7 +98,7 @@ export class CriticalErrorHandler {
+@@ -101,7 +101,7 @@ export class CriticalErrorHandler {
              return spawn('cmd', ['/C', 'start', url], spawnOption);
          case 'darwin':
              return spawn('open', [url], spawnOption);

@@ -1,6 +1,6 @@
---- src/app/windows/baseWindow.test.js.orig	2025-12-10 14:05:35 UTC
+--- src/app/windows/baseWindow.test.js.orig	2026-02-24 16:38:27 UTC
 +++ src/app/windows/baseWindow.test.js
-@@ -129,7 +129,7 @@ describe('BaseWindow', () => {
+@@ -132,7 +132,7 @@ describe('BaseWindow', () => {
  
              expect(baseWindow).toBeDefined();
              expect(BrowserWindow).toHaveBeenCalledWith(expect.objectContaining({
