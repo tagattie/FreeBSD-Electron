@@ -1,6 +1,6 @@
 {
   "name": "superProductivity",
-  "version": "17.2.1",
+  "version": "17.2.4",
   "description": "ToDo list and Time Tracking",
   "keywords": [
     "ToDo",
@@ -22,7 +22,7 @@
     "assemble:android:prod": "cd android && ./gradlew assembleRelease && cd ..",
     "assemble:android:stage": "cd android && ./gradlew assembleDebug && cd ..",
     "prebuild": "npm run env && node ./tools/git-version.js && npm run build:packages",
-    "prepare": "husky && ts-patch install && npm run shared-schema:build && npm run plugin-api:build",
+    "prepare": "husky && ts-patch install && npm run env && npm run shared-schema:build && npm run plugin-api:build",
     "build": "npm run buildAllElectron:noTests:prod",
     "build:packages": "node ./packages/build-packages.js",
     "buildAllElectron:noTests:prod": "npm run lint && npm run buildFrontend:prod:es6 && npm run electron:build",
@@ -280,7 +280,10 @@
     "typia": "^11.0.0"
   },
   "overrides": {
-    "@conventional-changelog/git-client": "^2.5.1"
+    "@conventional-changelog/git-client": "^2.5.1",
+    "app-builder-lib": {
+      "minimatch": "10.1.1"
+    }
   },
   "optionalDependencies": {
     "@lmdb/lmdb-darwin-x64": "^3.2.0",
