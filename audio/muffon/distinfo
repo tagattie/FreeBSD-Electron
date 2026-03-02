@@ -1,7 +1,7 @@
-TIMESTAMP = 1770450664
+TIMESTAMP = 1772454087
 SHA256 (pnpm-10.28.0.tgz) = 2c2a6347bef3f8cc8fed41152a6291056266bd16acd18338ac53948b6d8d1e66
 SIZE (pnpm-10.28.0.tgz) = 4358501
-SHA256 (muffon-2.4.0-node-modules.tar.gz) = 314b46657c6631e80847003e8a3a40ea4f09fcb51eb6439a2bc7d56ece78f895
-SIZE (muffon-2.4.0-node-modules.tar.gz) = 204145314
+SHA256 (muffon-2.4.0-node-modules.tar.gz) = 983cea6cd42f6b4fe7d1b742341ac3005e941a3ffe99f296f208b468f287c215
+SIZE (muffon-2.4.0-node-modules.tar.gz) = 211146387
 SHA256 (staniel359-muffon-v2.4.0_GH0.tar.gz) = d37496a516a22d536b1a8134627e2b351f9c624f0115bb2e86750fe2ae165c57
 SIZE (staniel359-muffon-v2.4.0_GH0.tar.gz) = 6341955
