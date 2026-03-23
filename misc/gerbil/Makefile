@@ -1,6 +1,6 @@
 PORTNAME=	gerbil
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.20.2
+DISTVERSION=	1.20.6
 CATEGORIES=	misc
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -13,12 +13,12 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 RUN_DEPENDS=	koboldcpp:misc/koboldcpp
 
-USES=		electron:40 nodejs:24,build
+USES=		electron:41 nodejs:24,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	lone-cloud
 
-USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract build:builder
+USE_ELECTRON=	npm:pnpm appbuilder prefetch extract build:builder
 
 SUB_FILES=	${PORTNAME}
 
@@ -27,7 +27,7 @@ PORTDOCS=	README.md
 OPTIONS_DEFINE=	DOCS
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
 	# generate icons
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=assets
