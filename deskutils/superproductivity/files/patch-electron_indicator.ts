@@ -1,6 +1,6 @@
---- electron/indicator.ts.orig	2026-02-28 23:19:19 UTC
+--- electron/indicator.ts.orig	2026-03-26 18:58:29 UTC
 +++ electron/indicator.ts
-@@ -41,7 +41,7 @@ const IS_MAC = process.platform === 'darwin';
+@@ -42,7 +42,7 @@ const IS_MAC = process.platform === 'darwin';
  let _lastFocusModeMode: string;
  
  const IS_MAC = process.platform === 'darwin';
