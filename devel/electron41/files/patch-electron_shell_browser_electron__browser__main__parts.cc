@@ -1,4 +1,4 @@
---- electron/shell/browser/electron_browser_main_parts.cc.orig	2026-03-17 08:46:52 UTC
+--- electron/shell/browser/electron_browser_main_parts.cc.orig	2026-03-31 13:26:31 UTC
 +++ electron/shell/browser/electron_browser_main_parts.cc
 @@ -78,7 +78,7 @@
  #include "ui/wm/core/wm_state.h"
@@ -9,7 +9,7 @@
  #include "base/environment.h"
  #include "chrome/browser/ui/views/dark_mode_manager_linux.h"
  #include "device/bluetooth/bluetooth_adapter_factory.h"
-@@ -131,7 +131,7 @@ namespace {
+@@ -135,7 +135,7 @@ namespace {
  
  namespace {
  
@@ -18,7 +18,7 @@
  class LinuxUiGetterImpl : public ui::LinuxUiGetter {
   public:
    LinuxUiGetterImpl() = default;
-@@ -213,7 +213,7 @@ int ElectronBrowserMainParts::PreEarlyInitialization()
+@@ -217,7 +217,7 @@ int ElectronBrowserMainParts::PreEarlyInitialization()
  #if BUILDFLAG(IS_OZONE)
    // Initialize Ozone platform and add required feature flags as per platform's
    // properties.
@@ -27,7 +27,7 @@
    ui::SetOzonePlatformForLinuxIfNeeded(*base::CommandLine::ForCurrentProcess());
  #endif
    ui::OzonePlatform::PreEarlyInitialization();
-@@ -315,7 +315,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
+@@ -319,7 +319,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
    // happen before the ResourceBundle is loaded
    if (locale.empty())
      l10n_util::OverrideLocaleWithCocoaLocale();
@@ -36,7 +36,7 @@
    // l10n_util::GetApplicationLocaleInternal uses g_get_language_names(),
    // which keys off of getenv("LC_ALL").
    // We must set this env first to make ui::ResourceBundle accept the custom
-@@ -344,7 +344,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
+@@ -348,7 +348,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
    ElectronBrowserClient::SetApplicationLocale(app_locale);
    fake_browser_process_->SetApplicationLocale(app_locale);
  
@@ -45,7 +45,7 @@
    // Reset to the original LC_ALL since we should not be changing it.
    if (!locale.empty()) {
      if (lc_all)
-@@ -400,7 +400,7 @@ void ElectronBrowserMainParts::ToolkitInitialized() {
+@@ -404,7 +404,7 @@ void ElectronBrowserMainParts::ToolkitInitialized() {
  }
  
  void ElectronBrowserMainParts::ToolkitInitialized() {
@@ -54,7 +54,7 @@
    auto* linux_ui = ui::GetDefaultLinuxUi();
    CHECK(linux_ui);
    linux_ui_getter_ = std::make_unique<LinuxUiGetterImpl>();
-@@ -507,7 +507,7 @@ void ElectronBrowserMainParts::PostCreateMainMessageLo
+@@ -515,7 +515,7 @@ void ElectronBrowserMainParts::PostCreateMainMessageLo
  }
  
  void ElectronBrowserMainParts::PostCreateMainMessageLoop() {
@@ -63,7 +63,7 @@
    std::string app_name = electron::Browser::Get()->GetName();
  #endif
  #if BUILDFLAG(IS_LINUX)
-@@ -519,7 +519,9 @@ void ElectronBrowserMainParts::PostCreateMainMessageLo
+@@ -527,7 +527,9 @@ void ElectronBrowserMainParts::PostCreateMainMessageLo
  
    if (!bluez::BluezDBusManager::IsInitialized())
      bluez::DBusBluezManagerWrapperLinux::Initialize();
@@ -73,7 +73,7 @@
    // Set up crypt config. This needs to be done before anything starts the
    // network service, as the raw encryption key needs to be shared with the
    // network service for encrypted cookie storage.
-@@ -614,7 +616,7 @@ void ElectronBrowserMainParts::PostMainMessageLoopRun(
+@@ -622,7 +624,7 @@ void ElectronBrowserMainParts::PostMainMessageLoopRun(
    fake_browser_process_->PostMainMessageLoopRun();
    content::DevToolsAgentHost::StopRemoteDebuggingPipeHandler();
  

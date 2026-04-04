@@ -1,6 +1,6 @@
---- electron/shell/browser/electron_browser_main_parts.h.orig	2025-10-27 17:58:27 UTC
+--- electron/shell/browser/electron_browser_main_parts.h.orig	2026-03-31 13:26:31 UTC
 +++ electron/shell/browser/electron_browser_main_parts.h
-@@ -138,7 +138,7 @@ class ElectronBrowserMainParts : public content::Brows
+@@ -143,7 +143,7 @@ class ElectronBrowserMainParts : public content::Brows
    std::unique_ptr<display::Screen> screen_;
  #endif
  
