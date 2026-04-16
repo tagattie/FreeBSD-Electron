@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/core/src/biometric_v2/mod.rs.orig	2025-11-18 13:40:25 UTC
+--- apps/desktop/desktop_native/core/src/biometric_v2/mod.rs.orig	2026-03-27 19:20:46 UTC
 +++ apps/desktop/desktop_native/core/src/biometric_v2/mod.rs
-@@ -1,7 +1,7 @@ use anyhow::Result;
+@@ -6,7 +6,7 @@ use anyhow::Result;
  use anyhow::Result;
  
  #[allow(clippy::module_inception)]

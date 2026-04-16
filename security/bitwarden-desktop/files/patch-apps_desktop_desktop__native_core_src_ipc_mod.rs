@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/core/src/ipc/mod.rs.orig	2025-12-11 21:15:41 UTC
+--- apps/desktop/desktop_native/core/src/ipc/mod.rs.orig	2026-03-27 19:20:46 UTC
 +++ apps/desktop/desktop_native/core/src/ipc/mod.rs
-@@ -75,7 +75,7 @@ pub fn path(name: &str) -> std::path::PathBuf {
+@@ -77,7 +77,7 @@ pub fn path(name: &str) -> std::path::PathBuf {
          }
      }
  

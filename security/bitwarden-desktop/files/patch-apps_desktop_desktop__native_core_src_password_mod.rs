@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/core/src/password/mod.rs.orig	2025-07-18 15:50:12 UTC
+--- apps/desktop/desktop_native/core/src/password/mod.rs.orig	2026-03-27 19:20:46 UTC
 +++ apps/desktop/desktop_native/core/src/password/mod.rs
-@@ -1,7 +1,7 @@ pub const PASSWORD_NOT_FOUND: &str = "Password not fou
+@@ -4,7 +4,7 @@ pub const PASSWORD_NOT_FOUND: &str = "Password not fou
  pub const PASSWORD_NOT_FOUND: &str = "Password not found.";
  
  #[allow(clippy::module_inception)]
