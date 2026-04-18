@@ -1,8 +1,8 @@
---- emain/emain-ipc.ts.orig	2026-03-12 23:29:48 UTC
+--- emain/emain-ipc.ts.orig	2026-04-16 15:33:19 UTC
 +++ emain/emain-ipc.ts
-@@ -354,7 +354,7 @@ export function initIpcHandlers() {
-             const color = fac.prepareResult(fac.getColorFromArray4(png.data));
+@@ -363,7 +363,7 @@ export function initIpcHandlers() {
              const ww = getWaveWindowByWebContentsId(event.sender.id);
+             if (ww == null) return;
              ww.setTitleBarOverlay({
 -                color: unamePlatform === "linux" ? color.rgba : "#00000000",
 +                color: unamePlatform === "linux" || unamePlatform === "freebsd" ? color.rgba : "#00000000",
