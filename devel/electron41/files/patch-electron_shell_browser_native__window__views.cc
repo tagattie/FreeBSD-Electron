@@ -1,4 +1,4 @@
---- electron/shell/browser/native_window_views.cc.orig	2026-03-17 08:46:52 UTC
+--- electron/shell/browser/native_window_views.cc.orig	2026-04-15 14:10:25 UTC
 +++ electron/shell/browser/native_window_views.cc
 @@ -58,7 +58,7 @@
  #include "ui/wm/core/shadow_types.h"
@@ -31,12 +31,12 @@
    if (window)
      window->AddPreTargetHandler(this);
  
--#if BUILDFLAG(IS_LINUX)
-+#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_BSD)
-   // We need to set bounds again after widget init for two reasons:
-   // 1. For CSD windows, user-specified bounds need  to be inflated by frame
-   //    insets, but the frame view isn't available at first.
-@@ -516,7 +516,7 @@ void NativeWindowViews::SetGTKDarkThemeEnabled(bool us
+-#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_WIN)
++#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_WIN) || BUILDFLAG(IS_BSD)
+   // The initial params.bounds was applied before the frame view existed, so
+   // non-client insets weren't accounted for and bounds need to be set again.
+   if (!GetRestoredFrameBorderInsets().IsEmpty())
+@@ -514,7 +514,7 @@ void NativeWindowViews::SetGTKDarkThemeEnabled(bool us
  }
  
  void NativeWindowViews::SetGTKDarkThemeEnabled(bool use_dark_theme) {
@@ -45,7 +45,7 @@
    if (x11_util::IsX11()) {
      const std::string color = use_dark_theme ? "dark" : "light";
      auto* connection = x11::Connection::Get();
-@@ -577,7 +577,7 @@ void NativeWindowViews::Show() {
+@@ -575,7 +575,7 @@ void NativeWindowViews::Show() {
  
    NotifyWindowShow();
  
@@ -54,7 +54,7 @@
    if (global_menu_bar_)
      global_menu_bar_->OnWindowMapped();
  
-@@ -593,7 +593,7 @@ void NativeWindowViews::ShowInactive() {
+@@ -591,7 +591,7 @@ void NativeWindowViews::ShowInactive() {
  
    NotifyWindowShow();
  
@@ -63,7 +63,7 @@
    if (global_menu_bar_)
      global_menu_bar_->OnWindowMapped();
  
-@@ -612,7 +612,7 @@ void NativeWindowViews::Hide() {
+@@ -610,7 +610,7 @@ void NativeWindowViews::Hide() {
  
    NotifyWindowHide();
  
@@ -72,7 +72,7 @@
    if (global_menu_bar_)
      global_menu_bar_->OnWindowUnmapped();
  #endif
-@@ -643,7 +643,7 @@ bool NativeWindowViews::IsEnabled() const {
+@@ -641,7 +641,7 @@ bool NativeWindowViews::IsEnabled() const {
  bool NativeWindowViews::IsEnabled() const {
  #if BUILDFLAG(IS_WIN)
    return ::IsWindowEnabled(GetAcceleratedWidget());
@@ -81,7 +81,7 @@
    if (x11_util::IsX11())
      return !event_disabler_.get();
    NOTIMPLEMENTED();
-@@ -868,7 +868,7 @@ void NativeWindowViews::SetBounds(const gfx::Rect& bou
+@@ -866,7 +866,7 @@ void NativeWindowViews::SetBounds(const gfx::Rect& bou
    }
  #endif
  
@@ -162,7 +162,7 @@
    window_handle = static_cast<uint32_t>(accelerated_widget);
  #endif
    aura::WindowTreeHost* const host =
-@@ -1761,7 +1761,7 @@ void NativeWindowViews::SetIcon(HICON window_icon, HIC
+@@ -1768,7 +1768,7 @@ void NativeWindowViews::SetIcon(HICON window_icon, HIC
    SendMessage(hwnd, WM_SETICON, ICON_BIG,
                reinterpret_cast<LPARAM>(app_icon_.get()));
  }
@@ -171,7 +171,7 @@
  void NativeWindowViews::SetIcon(const gfx::ImageSkia& icon) {
    auto* tree_host = views::DesktopWindowTreeHostLinux::GetHostForWidget(
        GetAcceleratedWidget());
-@@ -1882,7 +1882,7 @@ bool NativeWindowViews::CanMinimize() const {
+@@ -1889,7 +1889,7 @@ bool NativeWindowViews::CanMinimize() const {
  bool NativeWindowViews::CanMinimize() const {
  #if BUILDFLAG(IS_WIN)
    return minimizable_;
@@ -180,7 +180,7 @@
    return true;
  #endif
  }
-@@ -1924,7 +1924,7 @@ std::unique_ptr<views::FrameView> NativeWindowViews::C
+@@ -1931,7 +1931,7 @@ std::unique_ptr<views::FrameView> NativeWindowViews::C
  #endif
  }
  
@@ -189,7 +189,7 @@
  LinuxFrameLayout* NativeWindowViews::GetLinuxFrameLayout() {
    auto* ncv = widget()->non_client_view();
    if (!ncv)
-@@ -1944,7 +1944,7 @@ void NativeWindowViews::HandleKeyboardEvent(
+@@ -1951,7 +1951,7 @@ void NativeWindowViews::HandleKeyboardEvent(
    if (widget_destroyed_)
      return;
  
@@ -198,7 +198,7 @@
    if (event.windows_key_code == ui::VKEY_BROWSER_BACK)
      NotifyWindowExecuteAppCommand(kBrowserBackward);
    else if (event.windows_key_code == ui::VKEY_BROWSER_FORWARD)
-@@ -1963,7 +1963,7 @@ void NativeWindowViews::OnMouseEvent(ui::MouseEvent* e
+@@ -1970,7 +1970,7 @@ void NativeWindowViews::OnMouseEvent(ui::MouseEvent* e
    // Alt+Click should not toggle menu bar.
    root_view_.ResetAltState();
  

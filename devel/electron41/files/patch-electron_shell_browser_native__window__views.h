@@ -1,4 +1,4 @@
---- electron/shell/browser/native_window_views.h.orig	2026-03-17 08:46:52 UTC
+--- electron/shell/browser/native_window_views.h.orig	2026-04-15 14:10:25 UTC
 +++ electron/shell/browser/native_window_views.h
 @@ -32,7 +32,7 @@ namespace electron {
  
@@ -18,7 +18,7 @@
    void SetIcon(const gfx::ImageSkia& icon);
  #endif
  
-@@ -198,7 +198,7 @@ class NativeWindowViews : public NativeWindow,
+@@ -199,7 +199,7 @@ class NativeWindowViews : public NativeWindow,
    SkColor overlay_button_color() const { return overlay_button_color_; }
    SkColor overlay_symbol_color() const { return overlay_symbol_color_; }
  
@@ -27,7 +27,7 @@
    LinuxFrameLayout* GetLinuxFrameLayout();
  #endif
  
-@@ -276,7 +276,7 @@ class NativeWindowViews : public NativeWindow,
+@@ -277,7 +277,7 @@ class NativeWindowViews : public NativeWindow,
    // events from resizing the window.
    extensions::SizeConstraints old_size_constraints_;
  

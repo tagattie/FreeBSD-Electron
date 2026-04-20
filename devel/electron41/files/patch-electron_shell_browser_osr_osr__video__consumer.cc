@@ -1,6 +1,6 @@
---- electron/shell/browser/osr/osr_video_consumer.cc.orig	2026-03-17 08:46:52 UTC
+--- electron/shell/browser/osr/osr_video_consumer.cc.orig	2026-04-15 14:10:25 UTC
 +++ electron/shell/browser/osr/osr_video_consumer.cc
-@@ -129,7 +129,7 @@ void OffScreenVideoConsumer::OnFrameCaptured(
+@@ -130,7 +130,7 @@ void OffScreenVideoConsumer::OnFrameCaptured(
  #elif BUILDFLAG(IS_APPLE)
      texture.shared_texture_handle =
          reinterpret_cast<uintptr_t>(gmb_handle.io_surface().get());

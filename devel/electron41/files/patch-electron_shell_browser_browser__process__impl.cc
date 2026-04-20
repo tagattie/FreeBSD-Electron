@@ -1,6 +1,6 @@
---- electron/shell/browser/browser_process_impl.cc.orig	2026-03-17 08:46:52 UTC
+--- electron/shell/browser/browser_process_impl.cc.orig	2026-04-15 14:10:25 UTC
 +++ electron/shell/browser/browser_process_impl.cc
-@@ -356,7 +356,7 @@ electron::ResolveProxyHelper* BrowserProcessImpl::GetR
+@@ -368,7 +368,7 @@ electron::ResolveProxyHelper* BrowserProcessImpl::GetR
    return resolve_proxy_helper_.get();
  }
  
@@ -9,7 +9,7 @@
  void BrowserProcessImpl::SetLinuxStorageBackend(
      os_crypt::SelectedLinuxBackend selected_backend) {
    switch (selected_backend) {
-@@ -379,7 +379,7 @@ void BrowserProcessImpl::SetLinuxStorageBackend(
+@@ -391,7 +391,7 @@ void BrowserProcessImpl::SetLinuxStorageBackend(
        NOTREACHED();
    }
  }

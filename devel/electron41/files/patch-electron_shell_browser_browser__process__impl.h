@@ -1,4 +1,4 @@
---- electron/shell/browser/browser_process_impl.h.orig	2026-03-17 08:46:52 UTC
+--- electron/shell/browser/browser_process_impl.h.orig	2026-04-15 14:10:25 UTC
 +++ electron/shell/browser/browser_process_impl.h
 @@ -22,7 +22,7 @@
  #include "shell/browser/net/system_network_context_manager.h"
@@ -9,7 +9,7 @@
  #include "components/os_crypt/sync/key_storage_util_linux.h"
  #endif
  
-@@ -61,7 +61,7 @@ class BrowserProcessImpl : public BrowserProcess {
+@@ -65,7 +65,7 @@ class BrowserProcessImpl : public BrowserProcess {
    const std::string& GetSystemLocale() const;
    electron::ResolveProxyHelper* GetResolveProxyHelper();
  
@@ -18,7 +18,7 @@
    void SetLinuxStorageBackend(os_crypt::SelectedLinuxBackend selected_backend);
    [[nodiscard]] const std::string& linux_storage_backend() const {
      return selected_linux_storage_backend_;
-@@ -153,7 +153,7 @@ class BrowserProcessImpl : public BrowserProcess {
+@@ -158,7 +158,7 @@ class BrowserProcessImpl : public BrowserProcess {
    std::unique_ptr<PrefService> local_state_;
    std::string locale_;
    std::string system_locale_;
