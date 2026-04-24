@@ -1,6 +1,6 @@
 diff -audpNr third_party/rust/bytemuck.orig/v1/BUILD.gn third_party/rust/bytemuck/v1/BUILD.gn
 --- third_party/rust/bytemuck.orig/v1/BUILD.gn	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/bytemuck/v1/BUILD.gn	2026-04-23 05:02:44.610423000 +0900
++++ third_party/rust/bytemuck/v1/BUILD.gn	2026-04-24 20:41:57.730845000 +0900
 @@ -19,6 +19,7 @@ cargo_crate("lib") {
      "//third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/anybitpattern.rs",
      "//third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/checked.rs",
@@ -9,7 +9,7 @@ diff -audpNr third_party/rust/bytemuck.orig/v1/BUILD.gn third_party/rust/bytemuc
      "//third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/internal.rs",
      "//third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/lib.rs",
      "//third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/must.rs",
-@@ -38,16 +39,21 @@ cargo_crate("lib") {
+@@ -38,16 +39,20 @@ cargo_crate("lib") {
    cargo_pkg_name = "bytemuck"
    cargo_pkg_description = "A crate for mucking around with piles of bytes."
    cargo_pkg_repository = "https://github.com/Lokathor/bytemuck"
@@ -28,14 +28,14 @@ diff -audpNr third_party/rust/bytemuck.orig/v1/BUILD.gn third_party/rust/bytemuc
      "derive",
 +    "extern_crate_alloc",
      "min_const_generics",
-     "nightly_portable_simd",
+-    "nightly_portable_simd",
 +    "rustversion",
    ]
  
    # `gnrt_config.toml` for this crate specifies `allow_unstable_features`.
 diff -audpNr third_party/rust/bytemuck.orig/v1/README.chromium third_party/rust/bytemuck/v1/README.chromium
 --- third_party/rust/bytemuck.orig/v1/README.chromium	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/bytemuck/v1/README.chromium	2026-04-23 05:02:44.610433000 +0900
++++ third_party/rust/bytemuck/v1/README.chromium	2026-04-24 20:41:57.730915000 +0900
 @@ -1,8 +1,8 @@ URL: https://crates.io/crates/bytemuck
  Name: bytemuck
  URL: https://crates.io/crates/bytemuck
@@ -50,7 +50,7 @@ diff -audpNr third_party/rust/bytemuck.orig/v1/README.chromium third_party/rust/
  Shipped: yes
 diff -audpNr third_party/rust/rustversion.orig/v1/BUILD.gn third_party/rust/rustversion/v1/BUILD.gn
 --- third_party/rust/rustversion.orig/v1/BUILD.gn	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/rustversion/v1/BUILD.gn	2026-04-23 05:02:50.667271000 +0900
++++ third_party/rust/rustversion/v1/BUILD.gn	2026-04-24 20:42:01.668464000 +0900
 @@ -38,13 +38,13 @@ cargo_crate("lib") {
    cargo_pkg_description =
        "Conditional compilation according to rustc compiler version"
@@ -69,7 +69,7 @@ diff -audpNr third_party/rust/rustversion.orig/v1/BUILD.gn third_party/rust/rust
    # Only for usage from third-party crates. Add the crate to
 diff -audpNr third_party/rust/rustversion.orig/v1/README.chromium third_party/rust/rustversion/v1/README.chromium
 --- third_party/rust/rustversion.orig/v1/README.chromium	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/rustversion/v1/README.chromium	2026-04-23 05:02:50.667281000 +0900
++++ third_party/rust/rustversion/v1/README.chromium	2026-04-24 20:42:01.668472000 +0900
 @@ -1,8 +1,8 @@ URL: https://crates.io/crates/rustversion
  Name: rustversion
  URL: https://crates.io/crates/rustversion
@@ -84,7 +84,7 @@ diff -audpNr third_party/rust/rustversion.orig/v1/README.chromium third_party/ru
  Shipped: yes
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.cargo_vcs_info.json third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.cargo_vcs_info.json
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.cargo_vcs_info.json	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.cargo_vcs_info.json	2026-04-23 05:03:23.026400000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.cargo_vcs_info.json	2026-04-24 20:42:20.313218000 +0900
 @@ -1,6 +1,6 @@
  {
    "git": {
@@ -96,7 +96,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.cargo_
 \ No newline at end of file
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.github/workflows/rust.yml third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.github/workflows/rust.yml
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.github/workflows/rust.yml	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.github/workflows/rust.yml	2026-04-23 05:03:23.027718000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.github/workflows/rust.yml	2026-04-24 20:42:20.313390000 +0900
 @@ -19,7 +19,7 @@ jobs:
          include:
          # versions (all on linux-x86_64)
@@ -140,7 +140,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.github
      - run: cross test --verbose --target=${{ matrix.target }} --manifest-path=derive/Cargo.toml --all-features
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.gitignore third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.gitignore
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.gitignore	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.gitignore	2026-04-23 05:03:23.026221000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.gitignore	2026-04-24 20:42:20.313195000 +0900
 @@ -1,10 +1,6 @@ Cargo.lock
  
  Cargo.lock
@@ -156,7 +156,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.gitign
 +**/.vscode/
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.lock third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.lock
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.lock	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.lock	2026-04-23 05:03:23.027377000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.lock	2026-04-24 20:42:20.313351000 +0900
 @@ -4,16 +4,17 @@ name = "bytemuck"
  
  [[package]]
@@ -193,7 +193,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.l
  name = "syn"
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.toml third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.toml
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.toml	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.toml	2026-04-23 05:03:23.026286000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.toml	2026-04-24 20:42:20.313203000 +0900
 @@ -12,10 +12,14 @@ name = "bytemuck"
  [package]
  edition = "2018"
@@ -235,7 +235,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.t
  [lints.rust.unexpected_cfgs]
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/changelog.md third_party/rust/chromium_crates_io/vendor/bytemuck-v1/changelog.md
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/changelog.md	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/changelog.md	2026-04-23 05:03:23.026477000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/changelog.md	2026-04-24 20:42:20.313231000 +0900
 @@ -1,5 +1,20 @@
  # `bytemuck` changelog
  
@@ -259,7 +259,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/changel
  * Added a windows-only `ZeroableInOption` impl for "stdcall" functions.
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/rustfmt.toml third_party/rust/chromium_crates_io/vendor/bytemuck-v1/rustfmt.toml
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/rustfmt.toml	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/rustfmt.toml	2026-04-23 05:03:23.027221000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/rustfmt.toml	2026-04-24 20:42:20.313331000 +0900
 @@ -3,7 +3,7 @@ edition = "2018"
  
  # Stable
@@ -271,7 +271,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/rustfmt
  use_field_init_shorthand = true
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/anybitpattern.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/anybitpattern.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/anybitpattern.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/anybitpattern.rs	2026-04-23 05:03:23.028323000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/anybitpattern.rs	2026-04-24 20:42:20.313473000 +0900
 @@ -62,3 +62,16 @@ unsafe impl<T> AnyBitPattern for core::mem::MaybeUnini
  )]
  unsafe impl<T> AnyBitPattern for core::mem::MaybeUninit<T> where T: AnyBitPattern
@@ -291,7 +291,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/any
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/derive.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/derive.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/derive.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/derive.rs	2026-04-23 05:03:23.028675000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/derive.rs	2026-04-24 20:42:20.313517000 +0900
 @@ -0,0 +1,19 @@
 +//! This module contains some helpers for the derive macros.
 +
@@ -314,7 +314,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/der
 +enum_tag_integer_impls!(u8, u16, u32, u64, u128);
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/lib.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/lib.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/lib.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/lib.rs	2026-04-23 05:03:23.028563000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/lib.rs	2026-04-24 20:42:20.313502000 +0900
 @@ -5,16 +5,10 @@
  #![allow(clippy::uninlined_format_args)]
  #![allow(clippy::result_unit_err)]
@@ -359,7 +359,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/lib
    }
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/must.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/must.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/must.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/must.rs	2026-04-23 05:03:23.028622000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/must.rs	2026-04-24 20:42:20.313511000 +0900
 @@ -114,7 +114,7 @@ maybe_const_fn! {
  /// ## Failure
  ///
@@ -371,7 +371,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/mus
  ///   to a ZST (e.g. 3 `u8` values is not any number of `()` values).
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/no_uninit.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/no_uninit.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/no_uninit.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/no_uninit.rs	2026-04-23 05:03:23.028388000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/no_uninit.rs	2026-04-24 20:42:20.313480000 +0900
 @@ -21,6 +21,9 @@ use core::num::{
  /// for a type that is only [`NoUninit`], consider also implementing
  /// [`CheckedBitPattern`][crate::CheckedBitPattern].
@@ -408,24 +408,20 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/no_
  unsafe impl<T: Pod> NoUninit for T {}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/pod.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/pod.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/pod.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/pod.rs	2026-04-23 05:03:23.028270000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/pod.rs	2026-04-24 20:43:08.508932000 +0900
 @@ -143,6 +143,7 @@ impl_unsafe_marker_for_simd!(
    }
  );
  
-+#[rustversion::before(2026-01-27)] // See https://github.com/Lokathor/bytemuck/issues/343
++#[rustversion::before(1.95)] // See https://github.com/Lokathor/bytemuck/issues/343
  #[cfg(feature = "nightly_portable_simd")]
  #[cfg_attr(
    feature = "nightly_docs",
-@@ -151,33 +152,44 @@ where
- unsafe impl<T, const N: usize> Pod for core::simd::Simd<T, N>
- where
-   T: core::simd::SimdElement + Pod,
--  core::simd::LaneCount<N>: core::simd::SupportedLaneCount,
+@@ -155,29 +156,41 @@ where
  {
  }
  
-+#[rustversion::since(2026-01-27)] // See https://github.com/Lokathor/bytemuck/issues/343
++#[rustversion::since(1.95)] // See https://github.com/Lokathor/bytemuck/issues/343
 +#[cfg(feature = "nightly_portable_simd")]
 +#[cfg_attr(
 +  feature = "nightly_docs",
@@ -469,24 +465,20 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/pod
    }
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zeroable.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zeroable.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable.rs	2026-04-23 05:03:23.028856000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable.rs	2026-04-24 20:43:28.311780000 +0900
 @@ -222,6 +222,7 @@ impl_unsafe_marker_for_simd!(
      }
  );
  
-+#[rustversion::before(2026-01-27)] // See https://github.com/Lokathor/bytemuck/issues/343
++#[rustversion::before(1.95)] // See https://github.com/Lokathor/bytemuck/issues/343
  #[cfg(feature = "nightly_portable_simd")]
  #[cfg_attr(
    feature = "nightly_docs",
-@@ -230,33 +231,44 @@ where
- unsafe impl<T, const N: usize> Zeroable for core::simd::Simd<T, N>
- where
-   T: core::simd::SimdElement + Zeroable,
--  core::simd::LaneCount<N>: core::simd::SupportedLaneCount,
+@@ -234,29 +235,41 @@ where
  {
  }
  
-+#[rustversion::since(2026-01-27)] // See https://github.com/Lokathor/bytemuck/issues/343
++#[rustversion::since(1.95)] // See https://github.com/Lokathor/bytemuck/issues/343
 +#[cfg(feature = "nightly_portable_simd")]
 +#[cfg_attr(
 +  feature = "nightly_docs",
@@ -530,7 +522,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zer
    }
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zeroable_in_option.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable_in_option.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zeroable_in_option.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable_in_option.rs	2026-04-23 05:03:23.028794000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable_in_option.rs	2026-04-24 20:42:20.313535000 +0900
 @@ -52,9 +52,9 @@ macro_rules! impl_for_fn {
          unsafe impl<$($ArgTy,)* R> ZeroableInOption for unsafe extern "C" fn($($ArgTy,)*) -> R {}
          unsafe impl<$($ArgTy,)* R> ZeroableInOption for extern "system" fn($($ArgTy,)*) -> R {}
@@ -545,7 +537,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zer
          impl_for_unwind_fn!($($ArgTy),*);
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/tests/std_tests.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/tests/std_tests.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/tests/std_tests.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/tests/std_tests.rs	2026-04-23 05:03:23.026644000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/tests/std_tests.rs	2026-04-24 20:42:20.313255000 +0900
 @@ -58,7 +58,7 @@ fn test_try_from_box_bytes() {
  
    // Different layout: target alignment is less than source alignment.
@@ -557,7 +549,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/tests/s
  
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.cargo_vcs_info.json third_party/rust/chromium_crates_io/vendor/rustversion-v1/.cargo_vcs_info.json
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.cargo_vcs_info.json	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.cargo_vcs_info.json	2026-04-23 05:03:27.220858000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.cargo_vcs_info.json	2026-04-24 20:42:24.057880000 +0900
 @@ -1,6 +1,6 @@
  {
    "git": {
@@ -569,7 +561,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.car
 \ No newline at end of file
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.github/workflows/ci.yml third_party/rust/chromium_crates_io/vendor/rustversion-v1/.github/workflows/ci.yml
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.github/workflows/ci.yml	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.github/workflows/ci.yml	2026-04-23 05:03:27.222745000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.github/workflows/ci.yml	2026-04-24 20:42:24.059495000 +0900
 @@ -35,6 +35,9 @@ jobs:
          run: echo RUSTFLAGS=${RUSTFLAGS}\ -Zrandomize-layout >> $GITHUB_ENV
          if: matrix.rust == 'nightly'
@@ -594,7 +586,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.git
          env:
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Cargo.lock third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.lock
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Cargo.lock	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.lock	2026-04-23 05:03:27.222405000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.lock	2026-04-24 20:42:24.059215000 +0900
 @@ -22,15 +22,15 @@ name = "hashbrown"
  
  [[package]]
@@ -752,7 +744,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Carg
 +checksum = "f3edebf492c8125044983378ecb5766203ad3b4c2f7a922bd7dd207f6d443e95"
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Cargo.toml third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.toml
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Cargo.toml	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.toml	2026-04-23 05:03:27.220742000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.toml	2026-04-24 20:42:24.057769000 +0900
 @@ -13,7 +13,7 @@ name = "rustversion"
  edition = "2018"
  rust-version = "1.31"
@@ -780,7 +772,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Carg
  name = "rustversion"
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/expand.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/expand.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/expand.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/expand.rs	2026-04-23 05:03:27.223299000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/expand.rs	2026-04-24 20:42:24.060050000 +0900
 @@ -24,7 +24,7 @@ fn try_cfg(introducer: &str, args: TokenStream, input:
      token::parse_end(full_args)?;
  
@@ -846,7 +838,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
  }
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/lib.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/lib.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/lib.rs	2025-10-14 06:25:57.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/lib.rs	2026-04-23 05:03:27.223189000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/lib.rs	2026-04-24 20:42:24.059903000 +0900
 @@ -175,7 +175,7 @@
  //!
  //! <br>
