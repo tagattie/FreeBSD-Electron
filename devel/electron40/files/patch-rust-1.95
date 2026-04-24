@@ -1,7 +1,7 @@
 diff -audpNr third_party/rust/bytemuck.orig/v1/BUILD.gn third_party/rust/bytemuck/v1/BUILD.gn
 --- third_party/rust/bytemuck.orig/v1/BUILD.gn	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/bytemuck/v1/BUILD.gn	2026-04-23 04:05:07.702231000 +0900
-@@ -39,16 +39,21 @@ cargo_crate("lib") {
++++ third_party/rust/bytemuck/v1/BUILD.gn	2026-04-24 18:51:59.059816000 +0900
+@@ -39,16 +39,20 @@ cargo_crate("lib") {
    cargo_pkg_name = "bytemuck"
    cargo_pkg_description = "A crate for mucking around with piles of bytes."
    cargo_pkg_repository = "https://github.com/Lokathor/bytemuck"
@@ -20,14 +20,14 @@ diff -audpNr third_party/rust/bytemuck.orig/v1/BUILD.gn third_party/rust/bytemuc
      "derive",
 +    "extern_crate_alloc",
      "min_const_generics",
-     "nightly_portable_simd",
+-    "nightly_portable_simd",
 +    "rustversion",
    ]
  
    # `gnrt_config.toml` for this crate specifies `allow_unstable_features`.
 diff -audpNr third_party/rust/bytemuck.orig/v1/README.chromium third_party/rust/bytemuck/v1/README.chromium
 --- third_party/rust/bytemuck.orig/v1/README.chromium	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/bytemuck/v1/README.chromium	2026-04-23 04:05:07.702363000 +0900
++++ third_party/rust/bytemuck/v1/README.chromium	2026-04-24 18:51:59.059824000 +0900
 @@ -1,7 +1,7 @@ URL: https://crates.io/crates/bytemuck
  Name: bytemuck
  URL: https://crates.io/crates/bytemuck
@@ -40,7 +40,7 @@ diff -audpNr third_party/rust/bytemuck.orig/v1/README.chromium third_party/rust/
  License File: //third_party/rust/chromium_crates_io/vendor/bytemuck-v1/LICENSE-APACHE
 diff -audpNr third_party/rust/rustversion.orig/v1/BUILD.gn third_party/rust/rustversion/v1/BUILD.gn
 --- third_party/rust/rustversion.orig/v1/BUILD.gn	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/rustversion/v1/BUILD.gn	2026-04-23 04:05:12.588960000 +0900
++++ third_party/rust/rustversion/v1/BUILD.gn	2026-04-24 18:52:04.333938000 +0900
 @@ -0,0 +1,84 @@
 +# Copyright 2023 The Chromium Authors
 +# Use of this source code is governed by a BSD-style license that can be
@@ -128,7 +128,7 @@ diff -audpNr third_party/rust/rustversion.orig/v1/BUILD.gn third_party/rust/rust
 +}
 diff -audpNr third_party/rust/rustversion.orig/v1/README.chromium third_party/rust/rustversion/v1/README.chromium
 --- third_party/rust/rustversion.orig/v1/README.chromium	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/rustversion/v1/README.chromium	2026-04-23 04:05:12.589030000 +0900
++++ third_party/rust/rustversion/v1/README.chromium	2026-04-24 18:52:04.334011000 +0900
 @@ -0,0 +1,11 @@
 +Name: rustversion
 +URL: https://crates.io/crates/rustversion
@@ -143,7 +143,7 @@ diff -audpNr third_party/rust/rustversion.orig/v1/README.chromium third_party/ru
 +Description: Conditional compilation according to rustc compiler version
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.cargo_vcs_info.json third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.cargo_vcs_info.json
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.cargo_vcs_info.json	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.cargo_vcs_info.json	2026-04-23 04:06:06.287523000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.cargo_vcs_info.json	2026-04-24 18:52:36.296103000 +0900
 @@ -1,6 +1,6 @@
  {
    "git": {
@@ -155,7 +155,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.cargo_
 \ No newline at end of file
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.github/workflows/rust.yml third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.github/workflows/rust.yml
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.github/workflows/rust.yml	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.github/workflows/rust.yml	2026-04-23 04:06:06.288859000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/.github/workflows/rust.yml	2026-04-24 18:52:36.297419000 +0900
 @@ -19,7 +19,7 @@ jobs:
          include:
          # versions (all on linux-x86_64)
@@ -194,7 +194,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/.github
      - run: cross test --verbose --target=${{ matrix.target }} --manifest-path=derive/Cargo.toml --all-features
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.lock third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.lock
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.lock	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.lock	2026-04-23 04:06:06.288491000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.lock	2026-04-24 18:52:36.297141000 +0900
 @@ -4,9 +4,10 @@ name = "bytemuck"
  
  [[package]]
@@ -258,7 +258,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.l
 +checksum = "5a5f39404a5da50712a4c1eecf25e90dd62b613502b7e925fd4e4d19b5c96512"
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.toml third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.toml
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.toml	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.toml	2026-04-23 04:06:06.287399000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/Cargo.toml	2026-04-24 18:52:36.295995000 +0900
 @@ -12,7 +12,7 @@ name = "bytemuck"
  [package]
  edition = "2018"
@@ -290,7 +290,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/Cargo.t
  [lints.rust.unexpected_cfgs]
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/changelog.md third_party/rust/chromium_crates_io/vendor/bytemuck-v1/changelog.md
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/changelog.md	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/changelog.md	2026-04-23 04:06:06.287600000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/changelog.md	2026-04-24 18:52:36.296214000 +0900
 @@ -1,5 +1,10 @@
  # `bytemuck` changelog
  
@@ -304,7 +304,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/changel
  * [use new stable avx512 types from rust 1.89](https://github.com/Lokathor/bytemuck/pull/322)
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/must.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/must.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/must.rs	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/must.rs	2026-04-23 04:06:06.289727000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/must.rs	2026-04-24 18:52:36.298235000 +0900
 @@ -114,7 +114,7 @@ maybe_const_fn! {
  /// ## Failure
  ///
@@ -316,24 +316,23 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/mus
  ///   to a ZST (e.g. 3 `u8` values is not any number of `()` values).
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/pod.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/pod.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/pod.rs	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/pod.rs	2026-04-23 04:06:06.289401000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/pod.rs	2026-04-24 18:53:47.136049000 +0900
 @@ -143,6 +143,7 @@ impl_unsafe_marker_for_simd!(
    }
  );
  
-+#[rustversion::before(2026-01-27)] // See https://github.com/Lokathor/bytemuck/issues/343
++#[rustversion::before(1.95)] // See https://github.com/Lokathor/bytemuck/issues/343
  #[cfg(feature = "nightly_portable_simd")]
  #[cfg_attr(
    feature = "nightly_docs",
-@@ -151,7 +152,18 @@ where
- unsafe impl<T, const N: usize> Pod for core::simd::Simd<T, N>
+@@ -152,6 +153,18 @@ where
  where
    T: core::simd::SimdElement + Pod,
--  core::simd::LaneCount<N>: core::simd::SupportedLaneCount,
+   core::simd::LaneCount<N>: core::simd::SupportedLaneCount,
 +{
 +}
 +
-+#[rustversion::since(2026-01-27)] // See https://github.com/Lokathor/bytemuck/issues/343
++#[rustversion::since(1.95)] // See https://github.com/Lokathor/bytemuck/issues/343
 +#[cfg(feature = "nightly_portable_simd")]
 +#[cfg_attr(
 +  feature = "nightly_docs",
@@ -347,24 +346,25 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/pod
  
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zeroable.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zeroable.rs	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable.rs	2026-04-23 04:06:06.289961000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable.rs	2026-04-24 18:54:39.442606000 +0900
 @@ -222,6 +222,7 @@ impl_unsafe_marker_for_simd!(
      }
  );
  
-+#[rustversion::before(2026-01-27)] // See https://github.com/Lokathor/bytemuck/issues/343
++#[rustversion::before(1.95)] // See https://github.com/Lokathor/bytemuck/issues/343
  #[cfg(feature = "nightly_portable_simd")]
  #[cfg_attr(
    feature = "nightly_docs",
-@@ -230,7 +231,18 @@ where
+@@ -230,7 +231,19 @@ where
  unsafe impl<T, const N: usize> Zeroable for core::simd::Simd<T, N>
  where
    T: core::simd::SimdElement + Zeroable,
 -  core::simd::LaneCount<N>: core::simd::SupportedLaneCount,
++  core::simd::LaneCount<N>: core::simd::SupportedLaneCount, 
 +{
 +}
 +
-+#[rustversion::since(2026-01-27)] // See https://github.com/Lokathor/bytemuck/issues/343
++#[rustversion::since(1.95)] // See https://github.com/Lokathor/bytemuck/issues/343
 +#[cfg(feature = "nightly_portable_simd")]
 +#[cfg_attr(
 +  feature = "nightly_docs",
@@ -378,7 +378,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zer
  
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zeroable_in_option.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable_in_option.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zeroable_in_option.rs	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable_in_option.rs	2026-04-23 04:06:06.289899000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/src/zeroable_in_option.rs	2026-04-24 18:52:36.298405000 +0900
 @@ -52,9 +52,9 @@ macro_rules! impl_for_fn {
          unsafe impl<$($ArgTy,)* R> ZeroableInOption for unsafe extern "C" fn($($ArgTy,)*) -> R {}
          unsafe impl<$($ArgTy,)* R> ZeroableInOption for extern "system" fn($($ArgTy,)*) -> R {}
@@ -393,7 +393,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/src/zer
          impl_for_unwind_fn!($($ArgTy),*);
 diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/tests/std_tests.rs third_party/rust/chromium_crates_io/vendor/bytemuck-v1/tests/std_tests.rs
 --- third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/tests/std_tests.rs	2026-03-03 07:10:33.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/tests/std_tests.rs	2026-04-23 04:06:06.287768000 +0900
++++ third_party/rust/chromium_crates_io/vendor/bytemuck-v1/tests/std_tests.rs	2026-04-24 18:52:36.296437000 +0900
 @@ -58,7 +58,7 @@ fn test_try_from_box_bytes() {
  
    // Different layout: target alignment is less than source alignment.
@@ -405,12 +405,12 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/bytemuck-v1.orig/tests/s
  
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.cargo-checksum.json third_party/rust/chromium_crates_io/vendor/rustversion-v1/.cargo-checksum.json
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.cargo-checksum.json	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.cargo-checksum.json	2026-04-23 04:06:10.650728000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.cargo-checksum.json	2026-04-24 18:52:41.796730000 +0900
 @@ -0,0 +1 @@
 +{"files":{}}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.cargo_vcs_info.json third_party/rust/chromium_crates_io/vendor/rustversion-v1/.cargo_vcs_info.json
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.cargo_vcs_info.json	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.cargo_vcs_info.json	2026-04-23 04:06:10.650735000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.cargo_vcs_info.json	2026-04-24 18:52:41.796780000 +0900
 @@ -0,0 +1,6 @@
 +{
 +  "git": {
@@ -421,12 +421,12 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.car
 \ No newline at end of file
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.github/FUNDING.yml third_party/rust/chromium_crates_io/vendor/rustversion-v1/.github/FUNDING.yml
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.github/FUNDING.yml	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.github/FUNDING.yml	2026-04-23 04:06:10.650959000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.github/FUNDING.yml	2026-04-24 18:52:41.798222000 +0900
 @@ -0,0 +1 @@
 +github: dtolnay
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.github/workflows/ci.yml third_party/rust/chromium_crates_io/vendor/rustversion-v1/.github/workflows/ci.yml
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.github/workflows/ci.yml	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.github/workflows/ci.yml	2026-04-23 04:06:10.650975000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.github/workflows/ci.yml	2026-04-24 18:52:41.798326000 +0900
 @@ -0,0 +1,117 @@
 +name: CI
 +
@@ -547,13 +547,13 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.git
 +      - run: cargo outdated --workspace --exit-code 1
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.gitignore third_party/rust/chromium_crates_io/vendor/rustversion-v1/.gitignore
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/.gitignore	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.gitignore	2026-04-23 04:06:10.650710000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/.gitignore	2026-04-24 18:52:41.796543000 +0900
 @@ -0,0 +1,2 @@
 +/target/
 +/Cargo.lock
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Cargo.lock third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.lock
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Cargo.lock	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.lock	2026-04-23 04:06:10.650923000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.lock	2026-04-24 18:52:41.798054000 +0900
 @@ -0,0 +1,296 @@
 +# This file is automatically @generated by Cargo.
 +# It is not intended for manual editing.
@@ -853,7 +853,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Carg
 +checksum = "f3edebf492c8125044983378ecb5766203ad3b4c2f7a922bd7dd207f6d443e95"
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Cargo.toml third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.toml
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Cargo.toml	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.toml	2026-04-23 04:06:10.650718000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/Cargo.toml	2026-04-24 18:52:41.796670000 +0900
 @@ -0,0 +1,68 @@
 +# THIS FILE IS AUTOMATICALLY GENERATED BY CARGO
 +#
@@ -925,7 +925,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/Carg
 +features = ["diff"]
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/LICENSE-APACHE third_party/rust/chromium_crates_io/vendor/rustversion-v1/LICENSE-APACHE
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/LICENSE-APACHE	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/LICENSE-APACHE	2026-04-23 04:06:10.650944000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/LICENSE-APACHE	2026-04-24 18:52:41.798115000 +0900
 @@ -0,0 +1,176 @@
 +                              Apache License
 +                        Version 2.0, January 2004
@@ -1105,7 +1105,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/LICE
 +END OF TERMS AND CONDITIONS
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/LICENSE-MIT third_party/rust/chromium_crates_io/vendor/rustversion-v1/LICENSE-MIT
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/LICENSE-MIT	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/LICENSE-MIT	2026-04-23 04:06:10.650889000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/LICENSE-MIT	2026-04-24 18:52:41.797828000 +0900
 @@ -0,0 +1,23 @@
 +Permission is hereby granted, free of charge, to any
 +person obtaining a copy of this software and associated
@@ -1132,7 +1132,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/LICE
 +DEALINGS IN THE SOFTWARE.
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/README.md third_party/rust/chromium_crates_io/vendor/rustversion-v1/README.md
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/README.md	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/README.md	2026-04-23 04:06:10.650985000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/README.md	2026-04-24 18:52:41.798393000 +0900
 @@ -0,0 +1,167 @@
 +Compiler version cfg
 +====================
@@ -1303,7 +1303,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/READ
 +</sub>
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/build/build.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/build/build.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/build/build.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/build/build.rs	2026-04-23 04:06:10.650905000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/build/build.rs	2026-04-24 18:52:41.797936000 +0900
 @@ -0,0 +1,114 @@
 +#![allow(
 +    clippy::elidable_lifetime_names,
@@ -1421,7 +1421,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/buil
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/build/rustc.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/build/rustc.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/build/rustc.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/build/rustc.rs	2026-04-23 04:06:10.650912000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/build/rustc.rs	2026-04-24 18:52:41.797988000 +0900
 @@ -0,0 +1,126 @@
 +use self::Channel::*;
 +use std::fmt::{self, Debug};
@@ -1551,7 +1551,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/buil
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/attr.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/attr.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/attr.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/attr.rs	2026-04-23 04:06:10.651048000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/attr.rs	2026-04-24 18:52:41.798807000 +0900
 @@ -0,0 +1,35 @@
 +use crate::error::{Error, Result};
 +use crate::expr::{self, Expr};
@@ -1590,7 +1590,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/bound.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/bound.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/bound.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/bound.rs	2026-04-23 04:06:10.651071000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/bound.rs	2026-04-24 18:52:41.798959000 +0900
 @@ -0,0 +1,63 @@
 +use crate::date::{self, Date};
 +use crate::error::{Error, Result};
@@ -1657,7 +1657,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/constfn.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/constfn.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/constfn.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/constfn.rs	2026-04-23 04:06:10.651015000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/constfn.rs	2026-04-24 18:52:41.798559000 +0900
 @@ -0,0 +1,58 @@
 +use crate::error::{Error, Result};
 +use proc_macro::{Ident, Span, TokenStream, TokenTree};
@@ -1719,7 +1719,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/date.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/date.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/date.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/date.rs	2026-04-23 04:06:10.651078000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/date.rs	2026-04-24 18:52:41.799010000 +0900
 @@ -0,0 +1,50 @@
 +use crate::error::{Error, Result};
 +use crate::iter::Iter;
@@ -1773,7 +1773,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/error.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/error.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/error.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/error.rs	2026-04-23 04:06:10.651094000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/error.rs	2026-04-24 18:52:41.799097000 +0900
 @@ -0,0 +1,56 @@
 +use proc_macro::{Delimiter, Group, Ident, Literal, Punct, Spacing, Span, TokenStream, TokenTree};
 +use std::fmt::Display;
@@ -1833,7 +1833,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/expand.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/expand.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/expand.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/expand.rs	2026-04-23 04:06:10.651055000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/expand.rs	2026-04-24 18:52:41.798858000 +0900
 @@ -0,0 +1,100 @@
 +use crate::attr::{self, Then};
 +use crate::error::{Error, Result};
@@ -1937,7 +1937,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/expr.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/expr.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/expr.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/expr.rs	2026-04-23 04:06:10.651087000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/expr.rs	2026-04-24 18:52:41.799064000 +0900
 @@ -0,0 +1,163 @@
 +use crate::bound::{self, Bound};
 +use crate::date::{self, Date};
@@ -2104,7 +2104,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/iter.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/iter.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/iter.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/iter.rs	2026-04-23 04:06:10.651101000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/iter.rs	2026-04-24 18:52:41.799103000 +0900
 @@ -0,0 +1,42 @@
 +use proc_macro::{token_stream, Delimiter, TokenStream, TokenTree};
 +
@@ -2150,7 +2150,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/lib.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/lib.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/lib.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/lib.rs	2026-04-23 04:06:10.651041000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/lib.rs	2026-04-24 18:52:41.798755000 +0900
 @@ -0,0 +1,282 @@
 +//! [![github]](https://github.com/dtolnay/rustversion)&ensp;[![crates-io]](https://crates.io/crates/rustversion)&ensp;[![docs-rs]](https://docs.rs/rustversion)
 +//!
@@ -2436,7 +2436,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/release.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/release.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/release.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/release.rs	2026-04-23 04:06:10.651030000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/release.rs	2026-04-24 18:52:41.798687000 +0900
 @@ -0,0 +1,34 @@
 +use crate::error::{Error, Result};
 +use crate::iter::Iter;
@@ -2474,7 +2474,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/time.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/time.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/time.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/time.rs	2026-04-23 04:06:10.651063000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/time.rs	2026-04-24 18:52:41.798908000 +0900
 @@ -0,0 +1,51 @@
 +use crate::date::Date;
 +use std::env;
@@ -2529,7 +2529,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/token.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/token.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/token.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/token.rs	2026-04-23 04:06:10.651107000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/token.rs	2026-04-24 18:52:41.799108000 +0900
 @@ -0,0 +1,78 @@
 +use crate::error::{Error, Result};
 +use crate::iter::Iter;
@@ -2611,7 +2611,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/version.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/version.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/version.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/version.rs	2026-04-23 04:06:10.651022000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/src/version.rs	2026-04-24 18:52:41.798638000 +0900
 @@ -0,0 +1,18 @@
 +#![allow(dead_code)]
 +
@@ -2633,7 +2633,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/src/
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/compiletest.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/compiletest.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/compiletest.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/compiletest.rs	2026-04-23 04:06:10.650859000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/compiletest.rs	2026-04-24 18:52:41.797587000 +0900
 @@ -0,0 +1,7 @@
 +#[rustversion::attr(not(nightly), ignore = "requires nightly")]
 +#[cfg_attr(miri, ignore = "incompatible with miri")]
@@ -2644,7 +2644,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/test_const.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/test_const.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/test_const.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/test_const.rs	2026-04-23 04:06:10.650873000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/test_const.rs	2026-04-24 18:52:41.797720000 +0900
 @@ -0,0 +1,42 @@
 +#![allow(
 +    clippy::semicolon_if_nothing_returned, // https://github.com/rust-lang/rust-clippy/issues/7324
@@ -2690,7 +2690,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +const _DOC_ABOVE: () = _doc_above();
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/test_eval.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/test_eval.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/test_eval.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/test_eval.rs	2026-04-23 04:06:10.650866000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/test_eval.rs	2026-04-24 18:52:41.797668000 +0900
 @@ -0,0 +1,20 @@
 +#[rustversion::any(
 +    stable,
@@ -2714,7 +2714,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/test_parse.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/test_parse.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/test_parse.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/test_parse.rs	2026-04-23 04:06:10.650881000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/test_parse.rs	2026-04-24 18:52:41.797771000 +0900
 @@ -0,0 +1,103 @@
 +#![allow(
 +    clippy::derive_partial_eq_without_eq,
@@ -2821,7 +2821,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-bound.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-bound.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-bound.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-bound.rs	2026-04-23 04:06:10.650848000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-bound.rs	2026-04-24 18:52:41.797516000 +0900
 @@ -0,0 +1,7 @@
 +#[rustversion::since(stable)]
 +struct S;
@@ -2832,7 +2832,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +fn main() {}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-bound.stderr third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-bound.stderr
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-bound.stderr	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-bound.stderr	2026-04-23 04:06:10.650809000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-bound.stderr	2026-04-24 18:52:41.797251000 +0900
 @@ -0,0 +1,11 @@
 +error: expected rustc release number like 1.85, or nightly date like 2025-02-25
 + --> tests/ui/bad-bound.rs:1:22
@@ -2847,7 +2847,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +  |                          ^^^^^^
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-date.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-date.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-date.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-date.rs	2026-04-23 04:06:10.650801000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-date.rs	2026-04-24 18:52:41.797197000 +0900
 @@ -0,0 +1,7 @@
 +#[rustversion::nightly(stable)]
 +struct S;
@@ -2858,7 +2858,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +fn main() {}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-date.stderr third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-date.stderr
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-date.stderr	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-date.stderr	2026-04-23 04:06:10.650842000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-date.stderr	2026-04-24 18:52:41.797464000 +0900
 @@ -0,0 +1,11 @@
 +error: expected nightly date, like 2025-02-25
 + --> tests/ui/bad-date.rs:1:24
@@ -2873,7 +2873,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +  |                            ^^^^^^
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-not.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-not.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-not.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-not.rs	2026-04-23 04:06:10.650816000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-not.rs	2026-04-24 18:52:41.797303000 +0900
 @@ -0,0 +1,7 @@
 +#[rustversion::any(not)]
 +struct S;
@@ -2884,7 +2884,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +fn main() {}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-not.stderr third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-not.stderr
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-not.stderr	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-not.stderr	2026-04-23 04:06:10.650787000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-not.stderr	2026-04-24 18:52:41.797087000 +0900
 @@ -0,0 +1,11 @@
 +error: expected `(` after `not`
 + --> tests/ui/bad-not.rs:1:20
@@ -2899,7 +2899,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +  |                       ^
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-version.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-version.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-version.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-version.rs	2026-04-23 04:06:10.650780000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-version.rs	2026-04-24 18:52:41.797033000 +0900
 @@ -0,0 +1,7 @@
 +#[rustversion::stable(nightly)]
 +struct S;
@@ -2910,7 +2910,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +fn main() {}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-version.stderr third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-version.stderr
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/bad-version.stderr	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-version.stderr	2026-04-23 04:06:10.650827000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/bad-version.stderr	2026-04-24 18:52:41.797357000 +0900
 @@ -0,0 +1,11 @@
 +error: expected rustc release number, like 1.31
 + --> tests/ui/bad-version.rs:1:23
@@ -2925,7 +2925,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +  |                           ^^^^^^^
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/const-not-fn.rs third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/const-not-fn.rs
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/const-not-fn.rs	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/const-not-fn.rs	2026-04-23 04:06:10.650794000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/const-not-fn.rs	2026-04-24 18:52:41.797140000 +0900
 @@ -0,0 +1,4 @@
 +#[rustversion::attr(all(), const)]
 +pub struct S;
@@ -2933,7 +2933,7 @@ diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/test
 +fn main() {}
 diff -audpNr third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/const-not-fn.stderr third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/const-not-fn.stderr
 --- third_party/rust/chromium_crates_io/vendor/rustversion-v1.orig/tests/ui/const-not-fn.stderr	1970-01-01 09:00:00.000000000 +0900
-+++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/const-not-fn.stderr	2026-04-23 04:06:10.650835000 +0900
++++ third_party/rust/chromium_crates_io/vendor/rustversion-v1/tests/ui/const-not-fn.stderr	2026-04-24 18:52:41.797412000 +0900
 @@ -0,0 +1,5 @@
 +error: only allowed on a fn item
 + --> tests/ui/const-not-fn.rs:1:28
