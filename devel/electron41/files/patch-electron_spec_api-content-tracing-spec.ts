@@ -1,7 +1,7 @@
---- electron/spec/api-content-tracing-spec.ts.orig	2025-04-04 05:26:44 UTC
+--- electron/spec/api-content-tracing-spec.ts.orig	2026-05-01 21:06:40 UTC
 +++ electron/spec/api-content-tracing-spec.ts
-@@ -9,7 +9,7 @@ import { ifdescribe } from './lib/spec-helpers';
- import { ifdescribe } from './lib/spec-helpers';
+@@ -13,7 +13,7 @@ const fixturesPath = path.resolve(__dirname, 'fixtures
+ const fixturesPath = path.resolve(__dirname, 'fixtures');
  
  // FIXME: The tests are skipped on linux arm/arm64
 -ifdescribe(!(['arm', 'arm64'].includes(process.arch)) || (process.platform !== 'linux'))('contentTracing', () => {
@@ -9,7 +9,7 @@
    const record = async (options: TraceConfig | TraceCategoriesAndOptions, outputFilePath: string | undefined, recordTimeInMilliseconds = 1e1) => {
      await app.whenReady();
  
-@@ -91,7 +91,7 @@ ifdescribe(!(['arm', 'arm64'].includes(process.arch)) 
+@@ -95,7 +95,7 @@ ifdescribe(!(['arm', 'arm64'].includes(process.arch)) 
      });
    });
  
