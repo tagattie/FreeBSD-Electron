@@ -1,6 +1,6 @@
 PORTNAME=	superproductivity
 DISTVERSIONPREFIX=	v
-DISTVERSION=	18.1.3
+DISTVERSION=	18.4.4
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://super-productivity.com/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:37 nodejs:22,build
+USES=		electron:41 nodejs:24,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	super-productivity

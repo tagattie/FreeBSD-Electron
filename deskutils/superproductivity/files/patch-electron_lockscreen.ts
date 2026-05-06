@@ -1,6 +1,6 @@
---- electron/lockscreen.ts.orig	2025-11-22 08:31:14 UTC
+--- electron/lockscreen.ts.orig	2026-05-02 18:20:10 UTC
 +++ electron/lockscreen.ts
-@@ -7,10 +7,12 @@ export const lockscreen = (cb?: (err: unknown, stdout:
+@@ -13,10 +13,12 @@ export const lockscreen = (cb?: (err: unknown, stdout:
      win32: 'rundll32.exe user32.dll, LockWorkStation',
      linux:
        '(hash gnome-screensaver-command 2>/dev/null && gnome-screensaver-command -l) || (hash dm-tool 2>/dev/null && dm-tool lock) || (qdbus org.freedesktop.ScreenSaver /ScreenSaver Lock)',
