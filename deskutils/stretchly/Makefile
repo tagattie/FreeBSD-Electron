@@ -1,6 +1,6 @@
 PORTNAME=	stretchly
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.20.0
+DISTVERSION=	1.21.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://hovancik.net/stretchly
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:39 localbase:ldconfig nodejs:22,build python:build
+USES=		electron:41 localbase:ldconfig nodejs:24,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	hovancik
@@ -22,6 +22,7 @@ PORTDOCS=	CHANGELOG.md CONTRIBUTING.md README.md
 OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	npm:npm appbuilder:devel prefetch extract rebuild build:builder
+NPM_FETCH_FLAGS+=	--force
 
 pre-build:
 	# generate icon files
