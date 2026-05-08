@@ -10,7 +10,8 @@ WWW=		https://hovancik.net/stretchly
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:41 localbase:ldconfig nodejs:24,build python:build
+USES=		electron:41 localbase:ldconfig nodejs:24,build pkgconfig \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	hovancik
