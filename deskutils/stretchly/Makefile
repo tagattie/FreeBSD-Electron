@@ -10,6 +10,9 @@ WWW=		https://hovancik.net/stretchly
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+LIB_DEPENDS=	libudev.so:devel/libudev-devd \
+		libinput.so:x11/libinput
+
 USES=		electron:41 localbase:ldconfig nodejs:24,build pkgconfig \
 		python:build
 
