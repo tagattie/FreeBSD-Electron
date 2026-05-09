@@ -10,6 +10,7 @@ WWW=		https://hovancik.net/stretchly
 LICENSE=	BSD2CLAUSE
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BUILD_DEPENDS=	${LOCALBASE}/include/linux/input.h:devel/evdev-proto
 LIB_DEPENDS=	libudev.so:devel/libudev-devd \
 		libinput.so:x11/libinput
 
