@@ -26,6 +26,7 @@ USES=		electron:41 localbase:ldflags nodejs:24,build python:build
 USE_GITHUB=	yes
 GH_ACCOUNT=	oliverschwendener
 
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CONTRIBUTING.md PRIVACY_STATEMENT README.md
