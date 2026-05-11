@@ -15,6 +15,7 @@ USES=		electron:37 nodejs:22,build python:build
 USE_GITHUB=	yes
 GH_ACCOUNT=	digimezzo
 
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CHANGELOG.md README.md
