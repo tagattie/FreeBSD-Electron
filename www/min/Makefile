@@ -18,6 +18,7 @@ USES=		desktop-file-utils electron:41 nodejs:24,build pkgconfig \
 USE_GITHUB=	yes
 GH_ACCOUNT=	minbrowser
 
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	README.md SECURITY.md
