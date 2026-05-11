@@ -20,6 +20,7 @@ USES=		electron:41 localbase:ldconfig nodejs:24,build pkgconfig \
 USE_GITHUB=	yes
 GH_ACCOUNT=	hovancik
 
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CHANGELOG.md CONTRIBUTING.md README.md
