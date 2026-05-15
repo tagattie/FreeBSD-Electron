@@ -3023,10 +3023,10 @@ node-gyp@^10.0.0, node-gyp@^5.0.2, node-gyp@^5.1.1:
     tar "^6.1.2"
     which "^4.0.0"
 
-node-pty@^1.2.0-beta.3:
-  version "1.2.0-beta.3"
-  resolved "https://registry.yarnpkg.com/node-pty/-/node-pty-1.2.0-beta.3.tgz#0a773dcc49d4342aada73636fc5639d924055fe0"
-  integrity sha512-SeAwG9LgWijWLtWldBWPwUUA1rAg2OKBG37dtSGOTYvBkUstWxAi2hXS0pX9JXbHPDxs0DnVc5tXrXsY821E+w==
+node-pty@^1.2.0-beta.8:
+  version "1.2.0-beta.8"
+  resolved "https://registry.yarnpkg.com/node-pty/-/node-pty-1.2.0-beta.8.tgz#f23f0d69885bf521e57a3f7abc2de80764b88163"
+  integrity sha512-2gDjTGB/VaMV8cmFMg0d7IfLcWkxtyekn9VSqpq+tUOiu5+nnLfVXYHZbjZCq1kXhnxbdlBjaKLvvVWIbFkicw==
   dependencies:
     node-addon-api "^7.1.0"
 
@@ -3975,10 +3975,10 @@ run-queue@^1.0.0, run-queue@^1.0.3:
   dependencies:
     aproba "^1.1.1"
 
-russh@0.1.34:
-  version "0.1.34"
-  resolved "https://registry.yarnpkg.com/russh/-/russh-0.1.34.tgz#d6246dc74eb61a74ee34fef64bb3bb8d4f251701"
-  integrity sha512-hHUdP/Wai1UydUzVi7jbzwoagZAHujd/+V76VDVxfEVYo0pU1De3CPe920e01nQRdUTIFdatRwODXqvaI6Ma4A==
+russh@0.1.37:
+  version "0.1.37"
+  resolved "https://registry.yarnpkg.com/russh/-/russh-0.1.37.tgz#ad5c5b842e58dc9044664d96b789d0e369e72e9f"
+  integrity sha512-t6DQyuht+kmG57FX09vPT6tBL8rL7g5UdBiOLc+JPZNE/CMRuZqEo5JE1WmNEUcI6kjwwhmL0nw/BfDKrwb+jg==
   dependencies:
     "@napi-rs/cli" "^2.18.3"
 

@@ -1,15 +1,6 @@
-# Notes for port maintainer(s)
-#
-# Before copying package.json and yarn.lock to ${PKGJSONSDIR},
-# do the following steps:
-# 1. Upgrade electron-builder to latest version in ${WRKSRC}
-#    (Earlier versions of electron-builder 26 appears to have
-#    some issues with packaging node_modules)
-#    $ yarn upgrade --ignore-scripts 'electron-builder@latest'
-
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.230
+DISTVERSION=	1.0.233
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -57,7 +48,7 @@ USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
 # For GH_TUPLE, look for version in ${WRKSRC}/app/node_modules/russh/package.json,
 # and search corresponding commit hash at https://github.com/Eugeny/russh-napi
-GH_TUPLE=	Eugeny:russh-napi:f67ed4ce59aa2d553e7528d4e50b250460267773:russh_napi/russh-napi
+GH_TUPLE=	Eugeny:russh-napi:f7ef764e8d60b2d388983c22a9f38fbc929678a9:russh_napi/russh-napi
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl

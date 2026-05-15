@@ -1,6 +1,6 @@
---- app/lib/app.ts.orig	2024-06-22 19:43:37 UTC
+--- app/lib/app.ts.orig	2026-05-07 21:46:23 UTC
 +++ app/lib/app.ts
-@@ -63,7 +63,7 @@ export class Application {
+@@ -68,7 +68,7 @@ export class Application {
              }
          })
  
@@ -9,7 +9,7 @@
              app.commandLine.appendSwitch('no-sandbox')
              if ((this.configStore.appearance?.opacity || 1) !== 1) {
                  app.commandLine.appendSwitch('enable-transparent-visuals')
-@@ -183,7 +183,7 @@ export class Application {
+@@ -188,7 +188,7 @@ export class Application {
      }
  
      enableTray (): void {
@@ -18,7 +18,7 @@
              return
          }
  
-@@ -209,7 +209,7 @@ export class Application {
+@@ -214,7 +214,7 @@ export class Application {
      }
  
      disableTray (): void {
