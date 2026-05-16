@@ -1,4 +1,4 @@
---- electron/preload.ts.orig	2026-05-02 18:20:10 UTC
+--- electron/preload.ts.orig	2026-05-09 18:27:05 UTC
 +++ electron/preload.ts
 @@ -86,7 +86,7 @@ const ea: ElectronAPI = {
      webFrame.setZoomFactor(zoomFactor);
@@ -8,4 +8,4 @@
 +  isLinux: () => process.platform === 'linux' || process.platform === 'freebsd',
    isGnomeDesktop,
    isMacOS: () => process.platform === 'darwin',
-   isSnap: () => process && process.env && !!process.env.SNAP,
+   isAppleSilicon: () => process.platform === 'darwin' && process.arch === 'arm64',
