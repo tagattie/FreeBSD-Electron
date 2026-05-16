@@ -1,15 +1,18 @@
---- src/app/windows/baseWindow.ts.orig	2026-02-24 16:38:27 UTC
+--- src/app/windows/baseWindow.ts.orig	2026-05-05 05:14:08 UTC
 +++ src/app/windows/baseWindow.ts
-@@ -40,7 +40,7 @@ export default class BaseWindow {
+@@ -37,9 +37,9 @@ export default class BaseWindow {
+         this.ready = false;
          this.altPressStatus = false;
  
+-        const useNativeTitleBar = process.platform === 'linux' && Config.useNativeTitleBar;
++        const useNativeTitleBar = (process.platform === 'linux' || process.platform === 'freebsd') && Config.useNativeTitleBar;
          const windowOptions: BrowserWindowConstructorOptions = Object.assign({}, {
 -            fullscreenable: process.platform !== 'linux',
 +            fullscreenable: (process.platform !== 'linux' && process.platform !== 'freebsd'),
              show: false, // don't start the window until it is ready and only if it isn't hidden
              paintWhenInitiallyHidden: true, // we want it to start painting to get info from the webapp
              minWidth: MINIMUM_WINDOW_WIDTH,
-@@ -60,7 +60,7 @@ export default class BaseWindow {
+@@ -59,7 +59,7 @@ export default class BaseWindow {
          }, options);
          log.debug('main window options', {windowOptions});
  
@@ -18,12 +21,12 @@
              windowOptions.icon = path.join(path.resolve(app.getAppPath(), 'assets'), 'linux', 'app_icon.png');
          }
  
-@@ -112,7 +112,7 @@ export default class BaseWindow {
-         // Workaround for linux maximizing/minimizing, which doesn't work properly because of these bugs:
-         // https://github.com/electron/electron/issues/28699
-         // https://github.com/electron/electron/issues/28106
--        if (process.platform === 'linux') {
-+        if (process.platform === 'linux' || process.platform === 'freebsd') {
-             const size = this.win.getSize();
-             return {...this.win.getContentBounds(), width: size[0], height: size[1]};
-         }
+@@ -227,7 +227,7 @@ export default class BaseWindow {
+     private onEmitConfiguration = () => {
+         this.win.webContents.send(RELOAD_CONFIGURATION);
+         if (process.platform !== 'darwin') {
+-            const useNativeTitleBar = process.platform === 'linux' && Config.useNativeTitleBar;
++            const useNativeTitleBar = (process.platform === 'linux' || process.platform === 'freebsd') && Config.useNativeTitleBar;
+             if (!useNativeTitleBar) {
+                 this.win.setTitleBarOverlay(this.getTitleBarOverlay());
+             }

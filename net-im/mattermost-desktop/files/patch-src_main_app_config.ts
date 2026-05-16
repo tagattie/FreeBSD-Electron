@@ -1,6 +1,6 @@
---- src/main/app/config.ts.orig	2025-11-18 12:31:15 UTC
+--- src/main/app/config.ts.orig	2026-05-05 05:14:08 UTC
 +++ src/main/app/config.ts
-@@ -80,7 +80,7 @@ export function handleConfigUpdate(newConfig: Combined
+@@ -81,7 +81,7 @@ export function handleConfigUpdate(newConfig: Combined
          }
      }
  
