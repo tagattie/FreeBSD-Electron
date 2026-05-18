@@ -43,8 +43,9 @@ CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
 
-BINARY_ALIAS=	python3=${PYTHON_CMD}
-SUB_FILES=	${PORTNAME}${PKGNAMESUFFIX}
+BINARY_ALIAS=		python3=${PYTHON_CMD}
+SUB_FILES=		${PORTNAME}${PKGNAMESUFFIX}
+TARGET_ORDER_OVERRIDE=	750:electron-install-node-modules
 
 BUILD_WRKSRC=	${WRKSRC}/packages/app-desktop
 TEST_WRKSRC=	${WRKSRC}/packages/app-desktop
@@ -105,6 +106,9 @@ post-extract:
 	@${ECHO_MSG} "===>  Moving prefetched node modules for app-clipper to ${WRKSRC}"
 	@${MV} ${WRKDIR}/node-modules-cache-app-clipper/node_modules \
 		${WRKSRC}/packages/app-clipper/popup
+	@for patch_file in `${FIND} ${WRKSRC}/.yarn/patches -type f -name '*@*'`; do \
+		${MV} $${patch_file} `${ECHO_CMD} $${patch_file} | ${SED} -e 's/@/_at_/g'`; \
+	done
 
 post-configure:
 	@${ECHO_MSG} "===>   Updating Cargo.lock for ${CARGO_CARGOTOML_WASM_PACK}"

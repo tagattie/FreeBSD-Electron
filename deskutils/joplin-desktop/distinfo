@@ -1,4 +1,4 @@
-TIMESTAMP = 1779080046
+TIMESTAMP = 1779106279
 SHA256 (joplin-desktop-3.6.13-default-plugins-node-modules.tar.gz) = 063585740fe4e5e75c2ef911c29d5979be8c4c78bdcc668ec647e9ae3f1e0d0f
 SIZE (joplin-desktop-3.6.13-default-plugins-node-modules.tar.gz) = 76625897
 SHA256 (joplin-desktop-3.6.13-app-clipper-node-modules.tar.gz) = d15f189048d5233189e683abb8d90eb348b448532d5a508466abd1b48f420512
@@ -739,7 +739,7 @@ SHA256 (rust/crates/zstd-sys-2.0.13+zstd.1.5.6.crate) = 38ff0f21cfee8f97d94cef41
 SIZE (rust/crates/zstd-sys-2.0.13+zstd.1.5.6.crate) = 749090
 SHA256 (yarn-4.9.2.tgz) = 86e5440c104ff93d37100e112ffcf003c84d81bed326e57236bfa671fd8e8ad0
 SIZE (yarn-4.9.2.tgz) = 1062102
-SHA256 (joplin-desktop-3.6.13-node-modules.tar.gz) = 25521b1b867922dabb3efed8015b367bfffc1153e7cd00b36b1c82fa1a4674df
+SHA256 (joplin-desktop-3.6.13-node-modules.tar.gz) = 2c4cdbfd0bffcaaa59ea9f8afe40405639955609baaa36b1cda3164176647ae8
 SIZE (joplin-desktop-3.6.13-node-modules.tar.gz) = 658141336
 SHA256 (laurent22-joplin-v3.6.13_GH0.tar.gz) = eae8fd4fd23f860c0f6937c6ae1d872c05898e1bc4fe8240e45f333ccec3918f
 SIZE (laurent22-joplin-v3.6.13_GH0.tar.gz) = 148173586
