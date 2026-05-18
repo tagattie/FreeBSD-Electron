@@ -723,6 +723,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/shells/windowsStock.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/shells/wsl.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/src/sshImporters.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-electron/src/terminalContextMenu.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/tsconfig.json
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/tsconfig.typings.json
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/app/lib/config.d.ts
@@ -760,6 +761,7 @@ share/icons/hicolor/64x64/apps/tabby.png
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/shells/windowsStock.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/shells/wsl.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/sshImporters.d.ts
+%%DATADIR%%/resources/builtin-plugins/tabby-electron/typings/tabby-electron/src/terminalContextMenu.d.ts
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/webpack.config.mjs
 %%DATADIR%%/resources/builtin-plugins/tabby-electron/yarn.lock
 %%DATADIR%%/resources/builtin-plugins/tabby-linkifier/README.md
