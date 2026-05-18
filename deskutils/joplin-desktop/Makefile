@@ -1,6 +1,6 @@
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.5.13
+DISTVERSION=	3.6.13
 CATEGORIES=	deskutils
 PKGNAMESUFFIX=	-desktop
 DISTFILES=	${DEFAULT_PLUGINS_NODE_MODULES_FILE}:prefetch \
@@ -21,7 +21,7 @@ BUILD_DEPENDS=	7zz:archivers/7-zip \
 LIB_DEPENDS=	libvips.so:graphics/vips \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo electron:39 gmake localbase:ldflags nodejs:22,build \
+USES=		cargo electron:40 gmake localbase:ldflags nodejs:24,build \
 		python:build
 
 USE_GITHUB=	yes
