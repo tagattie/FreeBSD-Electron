@@ -1,10 +1,11 @@
 {
-  "name": "@sp/shared-schema",
+  "name": "@sp/sync-core",
   "version": "1.0.0",
-  "description": "Shared schema versioning and migrations for Super Productivity sync",
+  "description": "Framework-agnostic core types and utilities for Super Productivity sync",
   "main": "dist/index.js",
   "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "sideEffects": false,
   "exports": {
     ".": {
       "import": {
@@ -17,15 +18,16 @@
       }
     }
   },
-  "dependencies": {
-    "@sp/sync-core": "*",
-    "zod": "^4.4.3"
-  },
   "scripts": {
     "build": "tsup",
     "build:tsc": "tsc",
-    "test": "vitest run",
+    "test": "npm run test:typecheck && vitest run",
+    "test:typecheck": "tsc --noEmit -p tsconfig.spec.json",
     "test:watch": "vitest"
+  },
+  "dependencies": {
+    "@noble/ciphers": "^2.2.0",
+    "hash-wasm": "^4.12.0"
   },
   "devDependencies": {
     "tsup": "^8.0.0",

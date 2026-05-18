@@ -1,6 +1,6 @@
 PORTNAME=	superproductivity
 DISTVERSIONPREFIX=	v
-DISTVERSION=	18.5.0
+DISTVERSION=	18.6.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,11 +10,17 @@ WWW=		https://super-productivity.com/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:41 nodejs:24,build
+USES=		cargo electron:41 nodejs:24,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	super-productivity
 GH_PROJECT=	super-productivity
+
+CARGO_CARGOTOML=${WRKSRC}/electron/wayland-idle-helper/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/electron/wayland-idle-helper/Cargo.lock
+CARGO_BUILD=	no
+CARGO_INSTALL=	no
+CARGO_TEST=	no
 
 SUB_FILES=	${PORTNAME}
 
@@ -25,8 +31,14 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:npm appbuilder prefetch extract build:builder
 
 pre-build:
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run env
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run buildAllElectron:noTests:prod
+	cd ${WRKSRC} && \
+	${SETENV} ${MAKE_ENV} npm exec ts-patch install && \
+	${SETENV} ${MAKE_ENV} npm run env && \
+	${SETENV} ${MAKE_ENV} npm run sync-core:build && \
+	${SETENV} ${MAKE_ENV} npm run sync-providers:build && \
+	${SETENV} ${MAKE_ENV} npm run shared-schema:build && \
+	${SETENV} ${MAKE_ENV} npm run plugin-api:build && \
+	${SETENV} ${MAKE_ENV} npm run buildAllElectron:noTests:prod
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin

@@ -1,6 +1,6 @@
---- electron/preload.ts.orig	2026-05-09 18:27:05 UTC
+--- electron/preload.ts.orig	2026-05-16 12:26:17 UTC
 +++ electron/preload.ts
-@@ -86,7 +86,7 @@ const ea: ElectronAPI = {
+@@ -91,7 +91,7 @@ const ea: ElectronAPI = {
      webFrame.setZoomFactor(zoomFactor);
    },
    getZoomFactor: () => webFrame.getZoomFactor(),
