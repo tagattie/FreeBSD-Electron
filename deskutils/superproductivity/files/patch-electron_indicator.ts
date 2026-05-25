@@ -1,6 +1,6 @@
---- electron/indicator.ts.orig	2026-05-02 18:20:10 UTC
+--- electron/indicator.ts.orig	2026-05-23 10:53:32 UTC
 +++ electron/indicator.ts
-@@ -58,7 +58,7 @@ const IS_MAC = process.platform === 'darwin';
+@@ -59,7 +59,7 @@ const IS_MAC = process.platform === 'darwin';
  let _isListenersInitialized = false;
  
  const IS_MAC = process.platform === 'darwin';
