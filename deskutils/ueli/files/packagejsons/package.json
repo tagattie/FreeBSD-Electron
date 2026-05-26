@@ -1,7 +1,7 @@
 {
     "name": "ueli",
     "description": "Cross-Platform Keystroke Launcher",
-    "version": "9.28.0",
+    "version": "9.28.1",
     "license": "MIT",
     "author": {
         "email": "oliver.schwendener@proton.me",
@@ -44,7 +44,7 @@
         "eslint": "^10.2.0",
         "globals": "^17.0.0",
         "node-abi": "^4.26.0",
-        "node-addon-api": "^8.7.0",
+        "node-addon-api": "^8.8.0",
         "node-gyp": "^12.3.0",
         "prettier": "^3.8.0",
         "prettier-plugin-organize-imports": "^4.3.0",
