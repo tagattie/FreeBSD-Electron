@@ -501,7 +501,93 @@ electron-archive-node-modules:
 	fi
 .    elif ${_NODEJS_NPM:Myarn*} || ${_NODEJS_NPM} == pnpm
 .      if ${_NODEJS_NPM} == pnpm
+.        if ${NPM_VER:R:R} >= 11
 	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
+		${ECHO_MSG} "===>  Normalizing timestamps and permissions of prefetched node modules"; \
+		tmpdir=${WRKDIR}/pnpm_tmp; \
+		input_db=${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/v11/index.db; \
+		output_db=$${tmpdir}/index.db; \
+		${MKDIR} $${tmpdir}; \
+		cd $${tmpdir} && ${SETENV} ${MAKE_ENV} ${NPM_CMDNAME} add --ignore-scripts --silent msgpackr; \
+		sqlite3 $${input_db} \
+			"SELECT writefile('$${tmpdir}/' || row_number() OVER (ORDER BY key ASC) || '.msgpack', data) FROM package_index;" > /dev/null; \
+		sqlite3 $${input_db} \
+			"SELECT key FROM package_index ORDER BY key ASC;" > $${tmpdir}/keys_list.txt; \
+		counter=1; \
+		while IFS= read -r key; do \
+			${PRINTF} "%s" "$${key}" > $${tmpdir}/$${counter}.key; \
+			counter=$$((counter + 1)); \
+		done < $${tmpdir}/keys_list.txt; \
+		for file in $${tmpdir}/*.msgpack; do \
+			base=$${file%.msgpack}; \
+			node -e " \
+				const fs = require('fs'); \
+				const { Unpackr } = require('msgpackr'); \
+				const unpackr = new Unpackr({}); \
+				const buf = fs.readFileSync(0); \
+				const data = unpackr.unpack(buf); \
+				console.log(JSON.stringify(data, (key, value) => { \
+					if (value instanceof Map) { \
+						return { __type: 'Map', data: Array.from(value.entries()) }; \
+					} \
+					return value; \
+				})); \
+			" < $${file} > $${base}.msgpack.json; \
+			${JQ_CMD} -S ' \
+				walk( \
+					if type == "object" then \
+						if has("checkedAt") then .checkedAt = 0 else . end | \
+						if has("mode") then \
+							if (.mode / 16 | floor) % 2 == 1 then .mode = .mode - 16 else . end \
+						else \
+							. \
+						end \
+					else \
+						. \
+					end \
+				) \
+			' $${base}.msgpack.json > $${base}.normalized.json; \
+			node -e " \
+				const fs = require('fs'); \
+				const { Packr } = require('msgpackr'); \
+				const packr = new Packr({ structuredClone: true }); \
+				const rawJson = JSON.parse(fs.readFileSync(0, 'utf-8')); \
+				const restoreMaps = (obj) => { \
+					if (obj && typeof obj === 'object') { \
+						if (obj.__type === 'Map') { \
+							return new Map(obj.data.map(([k, v]) => [k, restoreMaps(v)])); \
+						} \
+						for (let k in obj) { \
+							obj[k] = restoreMaps(obj[k]); \
+						} \
+					} \
+					return obj; \
+				}; \
+				const restoredData = restoreMaps(rawJson); \
+				process.stdout.write(packr.pack(restoredData)); \
+			" < $${base}.normalized.json > $${base}.normalized.msgpack; \
+		done; \
+		sqlite3 $${output_db} \
+			"CREATE TABLE package_index (key TEXT PRIMARY KEY, data BLOB) WITHOUT ROWID;" > /dev/null 2>&1; \
+		sqlite3 $${output_db} \
+			"PRAGMA page_size = 4096; PRAGMA journal_mode = DELETE; PRAGMA auto_vacuum = NONE; PRAGMA secure_delete = ON;" > /dev/null 2>&1; \
+		total_files=$$((counter - 1)); \
+		i=1; \
+		while [ $${i} -le $${total_files} ]; do \
+			real_key=`${CAT} $${tmpdir}/$${i}.key`; \
+			{ \
+				${PRINTF} "INSERT INTO package_index (key, data) VALUES ('%s', x'" "$${real_key}"; \
+				hexdump -v -e '/1 "%02x"' $${tmpdir}/$${i}.normalized.msgpack; \
+				${PRINTF} "');\n"; \
+			} | sqlite3 $${output_db}; \
+			i=$$((i + 1)); \
+		done; \
+		sqlite3 $${output_db} "REINDEX; VACUUM;"; \
+		${MV} -f $${output_db} $${input_db}; \
+	fi
+.        else
+	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
+		${ECHO_MSG} "===>  Normalizing timestamps and permissions of prefetched node modules"; \
 		${FIND} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE} \
 			-type f -name '*.json' -exec ${SH} -c ' \
 			for f do \
@@ -512,6 +598,7 @@ electron-archive-node-modules:
 			${RM} -r ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/*/$${dir}; \
 		done; \
 	fi
+.        endif
 .      endif
 	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
