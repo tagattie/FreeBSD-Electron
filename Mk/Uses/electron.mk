@@ -464,6 +464,9 @@ DISTFILES+=		${_DISTFILE_prefetch}:prefetch
 FETCH_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .    elif ${_NODEJS_NPM} == pnpm
 FETCH_DEPENDS+=	${JQ_CMD}:textproc/jq
+.      if ${NPM_VER:R:R} >= 11
+FETCH_DEPENDS+=	sqlite3:databases/sqlite3
+.      endif
 .    endif
 
 electron-fetch-node-modules:
