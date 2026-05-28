@@ -510,6 +510,7 @@ electron-archive-node-modules:
 		tmpdir=${WRKDIR}/pnpm_tmp; \
 		input_db=${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/v11/index.db; \
 		output_db=$${tmpdir}/index.db; \
+		output_db_dump=${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/v11/index_dump.sql; \
 		${MKDIR} $${tmpdir}; \
 		cd $${tmpdir} && ${SETENV} ${MAKE_ENV} ${NPM_CMDNAME} add --ignore-scripts --silent msgpackr; \
 		sqlite3 $${input_db} \
@@ -586,7 +587,8 @@ electron-archive-node-modules:
 			i=$$((i + 1)); \
 		done; \
 		sqlite3 $${output_db} "REINDEX; VACUUM;"; \
-		${MV} -f $${output_db} $${input_db}; \
+		sqlite3 $${output_db} ".dump" > $${output_db_dump}; \
+		${RM} $${input_db}; \
 	fi
 .        else
 	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
@@ -630,6 +632,9 @@ _USES_extract+=	600:electron-extract-node-package-manager \
 EXTRACT_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 .    elif ${_NODEJS_NPM} == yarn2 || ${_NODEJS_NPM} == yarn4 || ${_NODEJS_NPM} == pnpm
 EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
+.    endif
+.    if ${_NODEJS_NPM} == pnpm && ${NPM_VER:R:R} >= 11
+EXTRACT_DEPENDS+= sqlite3:databases/sqlite3
 .    endif
 
 electron-extract-node-package-manager:
@@ -684,7 +689,14 @@ electron-install-node-modules:
 		${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}; \
 	fi
 .    elif ${_NODEJS_NPM} == pnpm
+.      if ${NPM_VER:R:R} >= 11
 	@${ECHO_MSG} "===>  Installing node modules from prefetched cache"
+	@if [ -d ${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE} ]; then \
+		normalized_db_dump=${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE}/v11/index_dump.sql; \
+		index_db=${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE}/v11/index.db; \
+		sqlite3 $${index_db} < $${normalized_db_dump}; \
+	fi
+.      endif
 	@if [ -d ${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE} ]; then \
 		${MKDIR} ${WRKDIR}/node-modules-cache; \
 		${MV} ${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE} ${WRKDIR}/node-modules-cache; \
