@@ -689,8 +689,8 @@ electron-install-node-modules:
 		${SETENV} ${MAKE_ENV} ${NPM_EXTRACT_CMD} ${NPM_EXTRACT_FLAGS}; \
 	fi
 .    elif ${_NODEJS_NPM} == pnpm
-.      if ${NPM_VER:R:R} >= 11
 	@${ECHO_MSG} "===>  Installing node modules from prefetched cache"
+.      if ${NPM_VER:R:R} >= 11
 	@if [ -d ${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE} ]; then \
 		normalized_db_dump=${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE}/v11/index_dump.sql; \
 		index_db=${EXTRACT_WRKDIR}/${NPM_MODULE_CACHE}/v11/index.db; \
