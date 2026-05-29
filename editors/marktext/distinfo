@@ -1,5 +1,7 @@
-TIMESTAMP = 1613203354
-SHA256 (marktext-node-modules-0.16.3.tar.gz) = 7a5763818c29bbd70d54de8e1775ea1d019606cb7944527329de2cc18738711e
-SIZE (marktext-node-modules-0.16.3.tar.gz) = 155266921
-SHA256 (marktext-marktext-v0.16.3_GH0.tar.gz) = ab7702558a09f9be5326a03ad56249378fad67138dd21261458b60d4b37191ce
-SIZE (marktext-marktext-v0.16.3_GH0.tar.gz) = 16500646
+TIMESTAMP = 1780055480
+SHA256 (pnpm-10.33.4.tgz) = 6510633f4f72cc0a0b3abfa9e08753be5740e0c8f57d127dd36d00ef59fef37e
+SIZE (pnpm-10.33.4.tgz) = 4732798
+SHA256 (marktext-0.19.0-node-modules.tar.gz) = e9c9cac8ad1d83557ab6f95844de33c317265da6ff11d1b0401d78c4827ee524
+SIZE (marktext-0.19.0-node-modules.tar.gz) = 210906721
+SHA256 (marktext-marktext-v0.19.0_GH0.tar.gz) = 11cbf280f28dcf71b993717ca4205e5fe54138af76943749e5da4d0ec20504d3
+SIZE (marktext-marktext-v0.19.0_GH0.tar.gz) = 21509920
