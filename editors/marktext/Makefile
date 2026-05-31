@@ -37,7 +37,7 @@ pre-build:
 		${WRKSRC}/node_modules/@vscode/ripgrep-${OPSYS:tl}-${ELECTRON_ARCH}/bin
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm exec patch-package
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run minify-locales
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm exec electron-rebuild
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} pnpm exec electron-rebuild
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm exec electron-vite build
 
 do-install:
