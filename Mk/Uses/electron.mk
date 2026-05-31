@@ -587,7 +587,7 @@ electron-archive-node-modules:
 			i=$$((i + 1)); \
 		done; \
 		sqlite3 $${output_db} "REINDEX; VACUUM;"; \
-		sqlite3 $${output_db} ".dump" | ${SED} -e "s/X'/x'/" > $${output_db_dump}; \
+		sqlite3 $${output_db} ".dump" > $${output_db_dump}; \
 		${RM} $${input_db}; \
 	fi
 .        else
