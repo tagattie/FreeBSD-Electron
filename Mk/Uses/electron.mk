@@ -386,9 +386,6 @@ NPM_FETCH_FLAGS+=	--frozen-lockfile --ignore-scripts --loglevel=error \
 			--store-dir ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}
 NPM_EXTRACT_CMD?=	${NPM_CMDNAME} install
 NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --offline --trust-lockfile
-.    if ${NPM_VER:R:R} >= 11
-NPM_EXTRACT_FLAGS+=	--trust-lockfile
-.    endif
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .  endif
@@ -638,6 +635,7 @@ EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
 .    endif
 .    if ${_NODEJS_NPM} == pnpm && ${NPM_VER:R:R} >= 11
 EXTRACT_DEPENDS+= sqlite3:databases/sqlite3
+NPM_EXTRACT_FLAGS+=	--trust-lockfile
 .    endif
 
 electron-extract-node-package-manager:
