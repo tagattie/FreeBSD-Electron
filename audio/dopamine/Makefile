@@ -1,6 +1,6 @@
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.4
+DISTVERSION=	3.0.5
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://github.com/digimezzo/dopamine
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:37 nodejs:22,build python:build
+USES=		electron:38 nodejs:22,build python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	digimezzo
@@ -31,6 +31,7 @@ post-patch:
 		${WRKSRC}/node_modules/register-scheme/binding.gyp
 
 pre-build:
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} node patch-discord-rpc.js
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build:prod
 
 do-install:
