@@ -14,8 +14,8 @@ BUILD_DEPENDS=	rg:textproc/ripgrep
 LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:42 gnome nodejs:24,build pkgconfig \
-		python:build xorg
+USES=		gmake desktop-file-utils electron:42 gnome nodejs:24,build \
+		pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 
