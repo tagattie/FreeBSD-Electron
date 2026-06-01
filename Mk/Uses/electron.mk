@@ -385,7 +385,7 @@ NPM_FETCH_CMD?=		${NPM_CMDNAME} fetch
 NPM_FETCH_FLAGS+=	--frozen-lockfile --ignore-scripts --loglevel=error \
 			--store-dir ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}
 NPM_EXTRACT_CMD?=	${NPM_CMDNAME} install
-NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --offline --trust-lockfile
+NPM_EXTRACT_FLAGS+=	${NPM_FETCH_FLAGS} --offline
 NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 NPM_REBUILD_CMD?=	${NPM_CMDNAME} rebuild
 .  endif
