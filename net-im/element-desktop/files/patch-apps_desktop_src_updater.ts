@@ -1,6 +1,6 @@
---- src/updater.ts.orig	2025-09-16 12:26:45 UTC
-+++ src/updater.ts
-@@ -121,7 +121,7 @@ async function available(): Promise<boolean> {
+--- apps/desktop/src/updater.ts.orig	2026-05-27 13:46:37 UTC
++++ apps/desktop/src/updater.ts
+@@ -122,7 +122,7 @@ async function available(): Promise<boolean> {
   * @returns True if auto update is available
   */
  async function available(): Promise<boolean> {

@@ -1,5 +1,5 @@
---- src/store.ts.orig	2025-12-16 14:54:33 UTC
-+++ src/store.ts
+--- apps/desktop/src/store.ts.orig	2026-05-27 13:46:37 UTC
++++ apps/desktop/src/store.ts
 @@ -157,7 +157,7 @@ class Store extends ElectronStore<StoreData> {
          Store.internalInstance = store;
  
