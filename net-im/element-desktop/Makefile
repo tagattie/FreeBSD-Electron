@@ -127,9 +127,9 @@ pre-build:
 	${RLN} ${BUILD_WRKSRC}/.hak/hakModules/matrix-seshat \
 		${WRKSRC}/node_modules/matrix-seshat
 	cd ${BUILD_WRKSRC} && \
-	${SETENV} ${MAKE_ENV} NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:res
+	${SETENV} ${MAKE_ENV} NX_DAEMON=false NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:res
 	cd ${BUILD_WRKSRC} && \
-	${SETENV} ${MAKE_ENV} NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:ts
+	${SETENV} ${MAKE_ENV} NX_DAEMON=false NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:ts
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
