@@ -1,0 +1,11 @@
+packages: []
+minimumReleaseAge: 2880
+onlyBuiltDependencies:
+  - classic-level
+  - electron
+  - electron-mksnapshot
+  - electron-winstaller
+  - leveldown
+  - unrs-resolver
+ignoredBuiltDependencies:
+  - core-js

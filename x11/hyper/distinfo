@@ -1,5 +1,7 @@
-TIMESTAMP = 1762859321
-SHA256 (hyper-4.0.0-q-canary.8-node-modules.tar.gz) = 2bc6e3da2458529b32226c06b984d253468bfb4c9c46fdff7d75f8dd91ecd28c
-SIZE (hyper-4.0.0-q-canary.8-node-modules.tar.gz) = 166315533
-SHA256 (quine-global-hyper-v4.0.0-q-canary.8_GH0.tar.gz) = fb6573012cbf0fa63f3fbc13c55fce51400d8bb67e29a4b489e1ca5d388a467b
-SIZE (quine-global-hyper-v4.0.0-q-canary.8_GH0.tar.gz) = 4054341
+TIMESTAMP = 1780474546
+SHA256 (pnpm-10.33.0.tgz) = 19d2150e0db652e84397d54f995e7601236bc665ad8ae2a4d6e41b8778b603c7
+SIZE (pnpm-10.33.0.tgz) = 4696813
+SHA256 (hyper-4.0.0-q-canary.14-node-modules.tar.gz) = 2943eec1db713f413f1d1aba2036e8b9aebeb61d3b070e60bf45658ab3e054fa
+SIZE (hyper-4.0.0-q-canary.14-node-modules.tar.gz) = 168757680
+SHA256 (quine-global-hyper-v4.0.0-q-canary.14_GH0.tar.gz) = 5d77e91694aa13975714954f73f7665514fa572e7e7afdf6fec26a18eca25a47
+SIZE (quine-global-hyper-v4.0.0-q-canary.14_GH0.tar.gz) = 2933629

@@ -1,6 +1,6 @@
 PORTNAME=	hyper
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.0.0-q-canary.8
+DISTVERSION=	4.0.0-q-canary.14
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -40,8 +40,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence
 RUN_DEPENDS=	bash:shells/bash
 
-USES=		desktop-file-utils electron:34 gettext-runtime gl gnome iconv \
-		jpeg localbase:ldflags nodejs:20,build python:build shebangfix \
+USES=		desktop-file-utils electron:38 gettext-runtime gl gnome iconv \
+		jpeg localbase:ldflags nodejs:22,build python:build shebangfix \
 		xorg
 
 USE_GITHUB=	yes
@@ -57,27 +57,30 @@ PORTDOCS=	PLUGINS.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1 appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
+UPSTREAM_MKSNAPSHOT_VER=	38.6.0
+
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 
 post-extract:
 	@${MKDIR} ${WRKSRC}/target
 	@${CP} -R ${WRKSRC}/app/node_modules ${WRKSRC}/target
 
 pre-build:
-	cd ${WRKSRC}/node_modules/leveldown && \
-		${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm rebuild
+	cd ${WRKSRC}/node_modules/classic-level && \
+	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} pnpm rebuild
 	cd ${WRKSRC} && \
-		${SETENV} ${MAKE_ENV} yarn exec cross-env npm_config_arch=x64 yarn run v8-snapshot:arch
+	${SETENV} ${MAKE_ENV} pnpm exec cross-env SNAPSHOT_TARGET_ARCH=${ELECTRON_ARCH} pnpm run v8-snapshot:arch
 	cd ${WRKSRC} && \
-		${SETENV} ${MAKE_ENV} yarn exec webpack --config-name hyper-app
+	${SETENV} ${MAKE_ENV} pnpm exec webpack --config-name hyper-app
 	cd ${WRKSRC} && \
-		${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} yarn run rebuild-node-pty
+	${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} pnpm run rebuild-node-pty
 	cd ${WRKSRC} && \
-		${SETENV} ${MAKE_ENV} yarn run cpy --cwd=target node_modules "../../app/"
+	${SETENV} ${MAKE_ENV} pnpm exec cpy --cwd=target node_modules "../../app/"
 	cd ${WRKSRC} && \
-		${SETENV} ${MAKE_ENV} yarn run generate-schema
+	${SETENV} ${MAKE_ENV} pnpm run generate-schema
 	cd ${WRKSRC} && \
-		${SETENV} ${MAKE_ENV} yarn run build
+	${SETENV} ${MAKE_ENV} pnpm run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
 		--input=icon.icns --out=icons --format=set --root=build
@@ -109,6 +112,6 @@ do-install-DOCS-on:
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test:unit
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} pnpm run test
 
 .include <bsd.port.mk>
