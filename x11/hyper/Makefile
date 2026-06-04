@@ -40,9 +40,9 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence
 RUN_DEPENDS=	bash:shells/bash
 
-USES=		desktop-file-utils electron:38 gettext-runtime gl gnome iconv \
-		jpeg localbase:ldflags nodejs:22,build python:build shebangfix \
-		xorg
+USES=		desktop-file-utils electron:38 gettext-runtime gl gmake gnome \
+		iconv jpeg localbase:ldflags nodejs:22,build python:build \
+		shebangfix xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	quine-global
