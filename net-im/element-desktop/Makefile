@@ -55,6 +55,10 @@ MATRIX_SESHAT_NODE_MODULES_FILE=	${PORTNAME}-${DISTVERSION}-matrix-seshat-node-m
 MATRIX_SESHAT_VER=	4.3.0
 RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
 
+.if ${OSVERSION} >= 1500000
+BUILD_DEPENDS+=	${LOCALBASE}/lib/compat/libutil.so.9:misc/compat14x
+.endif
+
 pre-fetch:
 	@if [ ! -f ${DISTDIR}/${YARN_FILE} ]; then \
 		${MKDIR} ${WRKDIR}/.bin; \
@@ -127,9 +131,9 @@ pre-build:
 	${RLN} ${BUILD_WRKSRC}/.hak/hakModules/matrix-seshat \
 		${WRKSRC}/node_modules/matrix-seshat
 	cd ${BUILD_WRKSRC} && \
-	${SETENV} ${MAKE_ENV} NX_DAEMON=false NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:res
+	${SETENV} ${MAKE_ENV} NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:res
 	cd ${BUILD_WRKSRC} && \
-	${SETENV} ${MAKE_ENV} NX_DAEMON=false NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:ts
+	${SETENV} ${MAKE_ENV} NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:ts
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
