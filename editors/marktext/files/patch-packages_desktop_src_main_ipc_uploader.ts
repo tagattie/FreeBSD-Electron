@@ -1,5 +1,5 @@
---- src/main/ipc/uploader.ts.orig	2026-05-29 12:04:08 UTC
-+++ src/main/ipc/uploader.ts
+--- packages/desktop/src/main/ipc/uploader.ts.orig	2026-06-05 03:43:05 UTC
++++ packages/desktop/src/main/ipc/uploader.ts
 @@ -10,7 +10,7 @@ const buildPreferredPathEnv = (): string => {
    const extras =
      process.platform === 'darwin'

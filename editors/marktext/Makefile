@@ -1,6 +1,6 @@
 PORTNAME=	marktext
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.19.0
+DISTVERSION=	0.19.1
 CATEGORIES=	editors
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -25,29 +25,32 @@ USE_GNOME=	glib20
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
+BUILD_WRKSRC=	${WRKSRC}/packages/desktop
+
 PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:pnpm appbuilder prefetch extract build:builder
 
 pre-build:
 	@${MKDIR} ${WRKSRC}/node_modules/@vscode/ripgrep-${OPSYS:tl}-${ELECTRON_ARCH}/bin
 	${CP} ${LOCALBASE}/bin/rg \
 		${WRKSRC}/node_modules/@vscode/ripgrep-${OPSYS:tl}-${ELECTRON_ARCH}/bin
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm exec patch-package
+	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm exec patch-package
+	cd ${BUILD_WRKSRC} && \
+	${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} pnpm exec electron-rebuild
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run minify-locales
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} pnpm exec electron-rebuild
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm exec electron-vite build
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME}${PKGNAMESUFFIX} \
 		${STAGEDIR}${PREFIX}/bin
-	${INSTALL_DATA} ${WRKSRC}/build/linux/${PORTNAME}.desktop \
+	${INSTALL_DATA} ${BUILD_WRKSRC}/build/linux/${PORTNAME}.desktop \
 		${STAGEDIR}${DESKTOPDIR}
 .for size in 16 24 32 48 64 128 256 512
 	@${MKDIR} ${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps
-	${INSTALL_DATA} ${WRKSRC}/build/icons/${size}x${size}/${PORTNAME}.png \
+	${INSTALL_DATA} ${BUILD_WRKSRC}/build/icons/${size}x${size}/${PORTNAME}.png \
 		${STAGEDIR}${PREFIX}/share/icons/hicolor/${size}x${size}/apps/${PORTNAME}.png
 .endfor
 	@${MKDIR} ${STAGEDIR}${DATADIR}

@@ -8,6 +8,7 @@ share/icons/hicolor/32x32/apps/marktext.png
 share/icons/hicolor/48x48/apps/marktext.png
 share/icons/hicolor/512x512/apps/marktext.png
 share/icons/hicolor/64x64/apps/marktext.png
+%%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/ced/LICENSE
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/ced/bin/freebsd-x64-146/ced.node
