@@ -1,6 +1,6 @@
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.68.0
+DISTVERSION=	3.69.0
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -42,8 +42,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 		libfontconfig.so:x11-fonts/fontconfig
 RUN_DEPENDS=	ffmpeg:multimedia/ffmpeg
 
-USES=		desktop-file-utils electron:38,build,test gettext-runtime gl \
-		gmake gnome iconv:wchar_t jpeg nodejs:22,build python:build xorg
+USES=		desktop-file-utils electron:42,build,test gettext-runtime gl \
+		gmake gnome iconv:wchar_t jpeg nodejs:24,build python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mifi
@@ -62,10 +62,8 @@ OPTIONS_DEFINE=	DOCS
 USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:builder
 
 pre-build:
-.for subdir in icon-gen/node_modules/sharp sharp
-	cd ${WRKSRC}/node_modules/${subdir} && \
+	cd ${WRKSRC}/node_modules/sharp && \
 	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm rebuild
-.endfor
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
