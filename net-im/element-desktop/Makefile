@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.12.20
+DISTVERSION=	1.12.21
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
@@ -54,6 +54,8 @@ YARN_VER=		1.22.22
 MATRIX_SESHAT_NODE_MODULES_FILE=	${PORTNAME}-${DISTVERSION}-matrix-seshat-node-modules${EXTRACT_SUFX}
 MATRIX_SESHAT_VER=	4.3.0
 RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
+
+.include <bsd.port.options.mk>
 
 .if ${OSVERSION} >= 1500000
 BUILD_DEPENDS+=	${LOCALBASE}/lib/compat/libutil.so.9:misc/compat14x
