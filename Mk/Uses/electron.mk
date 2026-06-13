@@ -635,7 +635,9 @@ EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
 .    endif
 .    if ${_NODEJS_NPM} == pnpm && ${NPM_VER:R:R} >= 11
 EXTRACT_DEPENDS+= sqlite3:databases/sqlite3
+.      if ${NPM_VER:R} >= 11.3
 NPM_EXTRACT_FLAGS+=	--trust-lockfile
+.      endif
 .    endif
 
 electron-extract-node-package-manager:
