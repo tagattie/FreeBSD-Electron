@@ -496,7 +496,7 @@ electron-fetch-node-modules:
 
 electron-archive-node-modules:
 .    if ${_NODEJS_NPM} == npm
-	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
+	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ] && [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		for dir in `${FIND} -s ${WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
 			${GREP} -ve '${NPM_MODULE_CACHE}/.*/${NPM_MODULE_CACHE}'`; do \
@@ -515,7 +515,7 @@ electron-archive-node-modules:
 .    elif ${_NODEJS_NPM:Myarn*} || ${_NODEJS_NPM} == pnpm
 .      if ${_NODEJS_NPM} == pnpm
 .        if ${NPM_VER:R:R} >= 11
-	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
+	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ] && [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Normalizing timestamps and permissions of prefetched node modules"; \
 		tmpdir=${WRKDIR}/pnpm_tmp; \
 		input_db=${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/v11/index.db; \
@@ -601,7 +601,7 @@ electron-archive-node-modules:
 		${RM} $${input_db}; \
 	fi
 .        else
-	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
+	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ] && [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Normalizing timestamps and permissions of prefetched node modules"; \
 		${FIND} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE} \
 			-type f -name '*.json' -exec ${SH} -c ' \
@@ -615,7 +615,7 @@ electron-archive-node-modules:
 	fi
 .        endif
 .      endif
-	@if [ -d ${WRKDIR}/node-modules-cache ]; then \
+	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ] && [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
