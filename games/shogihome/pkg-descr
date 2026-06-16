@@ -1,0 +1,5 @@
+ShogiHome is a desktop shogi app running on Windows, macOS, and Linux.
+
+Most shogi AIs use the USI protocol for integrating with the GUI
+app. ShogiHome is a front-end app that makes it possible to
+communicate with USI-compatible AIs.

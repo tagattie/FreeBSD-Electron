@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Shogi Home
+Comment=Shogi Frontend Application
+Icon=shogihome
+Exec=shogihome %U
+Categories=Utility;
+Terminal=false
+StartupWMClass=Shogi Home

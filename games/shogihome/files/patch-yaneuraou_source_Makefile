@@ -1,0 +1,11 @@
+--- yaneuraou/source/Makefile.orig	2026-06-16 19:57:13 UTC
++++ yaneuraou/source/Makefile
+@@ -159,7 +159,7 @@ else
+ ifneq (,$(findstring em++,$(COMPILER)))
+ 	CPPFLAGS += -O2
+ else
+-	CPPFLAGS += -O3 -ffast-math
++	CPPFLAGS += -O2 -ffast-math
+ endif
+ 
+ # デバッガーを使わないなら、NDEBUGをdefineする。
