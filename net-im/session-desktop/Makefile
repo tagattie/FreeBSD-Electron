@@ -11,10 +11,8 @@
 
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.17.6
+DISTVERSION=	1.18.0
 CATEGORIES=	net-im
-MASTER_SITES=	https://build-artifacts.signal.org/desktop/:sqlcipher
-DISTFILES=	sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX}:sqlcipher
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Decentralized, Onion routed, private messenger
@@ -24,16 +22,17 @@ LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
 FETCH_DEPENDS=	git:devel/git
-BUILD_DEPENDS=	${LOCALBASE}/lib/cmake/fmt/fmt-config.cmake:devel/libfmt \
-		${LOCALBASE}/lib/libsignal_sqlcipher_extension.a:devel/signal-sqlcipher-extension
+BUILD_DEPENDS=	${LOCALBASE}/lib/node_sqlcipher.node:security/node-sqlcipher
 LIB_DEPENDS=	libinotify.so:devel/libinotify \
 		libvips.so:graphics/vips
 
-USES=		cmake:indirect electron:34 localbase:ldflags nodejs:20,build \
+USES=		cmake:indirect electron:40 localbase:ldflags nodejs:24,build \
 		python:3.12+,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	session-foundation
+GH_TUPLE=	session-foundation:session-desktop-dynamic-assets:740155b3085f683fa74d46118f860ca79b166144:dynamic_assets/dynamic_assets \
+		session-foundation:session-localization:ceffc446039c90ea1b85b9d6c83df9f282113045:localization/ts/localization
 
 MAKE_ENV=	SIGNAL_ENV=production
 
@@ -44,22 +43,19 @@ PORTDOCS=	CONTRIBUTING.md README.md THEMES.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1 appbuilder:devel prefetch extract rebuild build:builder
+USE_ELECTRON=	npm:pnpm appbuilder:devel prefetch extract rebuild build:builder
 
-# See ${WRKSRC}/node_modules/@signalapp/better-sqlite3/deps/download.js for SQLCIPHER_VER
-SQLCIPHER_VER=	v2-4.6.1-signal-patch2--0.2.1-asm2-6253f886c40e49bf892d5cdc92b2eb200b12cd8d80c48ce5b05967cfd01ee8c7
 ELECTRON_MAKE_FLAGS+=	--config.extraMetadata.environment=production \
 			--config.directories.output=release
 
-post-extract:
-	@${CP} ${DISTDIR}/sqlcipher-${SQLCIPHER_VER}${EXTRACT_SUFX} \
-		${WRKSRC}/node_modules/@signalapp/better-sqlite3/deps/sqlcipher.tar.gz
-
 pre-build:
+	@${MKDIR} ${WRKSRC}/node_modules/@signalapp/sqlcipher/prebuilds/freebsd-${ELECTRON_ARCH}
+	${CP} ${LOCALBASE}/lib/node_sqlcipher.node \
+		${WRKSRC}/node_modules/@signalapp/sqlcipher/prebuilds/freebsd-${ELECTRON_ARCH}
 	cd ${WRKSRC}/node_modules/libsession_util_nodejs && \
-	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn run install
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run patch-package
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
+	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} pnpm run install
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm exec patch-package
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
 
 do-install:
 	${INSTALL_SCRIPT} ${WRKDIR}/${PORTNAME} ${STAGEDIR}${PREFIX}/bin
@@ -80,6 +76,6 @@ do-install-DOCS-on:
 	${INSTALL_MAN} ${PORTDOCS:S|^|${WRKSRC}/|} ${STAGEDIR}${DOCSDIR}
 
 do-test:
-	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} yarn run test
+	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} pnpm run test
 
 .include <bsd.port.mk>

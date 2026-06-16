@@ -1,7 +1,7 @@
---- ts/OS.ts.orig	2022-01-08 06:34:10 UTC
+--- ts/OS.ts.orig	2026-04-09 02:30:11 UTC
 +++ ts/OS.ts
-@@ -3,7 +3,7 @@ import os from 'os';
- import semver from 'semver';
+@@ -4,7 +4,7 @@ export const isMacOS = () => process.platform === 'dar
+ import { existsSync, readFileSync } from 'fs';
  
  export const isMacOS = () => process.platform === 'darwin';
 -export const isLinux = () => process.platform === 'linux';
