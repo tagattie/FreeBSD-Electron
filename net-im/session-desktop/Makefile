@@ -1,13 +1,9 @@
 # Notes for port maintainer(s)
 #
-# Don't need the following step. It builds fine without it.
-#
-# Before copying package.json and yarn.lock to ${PKGJSONSDIR},
-# do the following steps:
-# 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
-#    $ yarn add --dev --ignore-scripts node-addon-api node-gyp
-# This is required for building sharp node module from source.
-# https://sharp.pixelplumbing.com/install/#building-from-source
+# Before copying package.json, pnpm-lock.yaml and pnpm-workspace.yaml to
+# ${PKGJSONSDIR}, do the following steps:
+# 1. Add tsx to devDependencies in ${WRKSRC}
+#    $ corepack pnpm add --save-dev --ignore-scripts tsx
 
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v

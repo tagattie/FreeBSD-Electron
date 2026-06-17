@@ -1,8 +1,8 @@
-TIMESTAMP = 1780319670
+TIMESTAMP = 1781662023
 SHA256 (pnpm-10.28.1.tgz) = 8fe1ae8c9f4cb05a4fa37fdb467753588c9db58f98934395075395acd03698cc
 SIZE (pnpm-10.28.1.tgz) = 4365187
-SHA256 (session-desktop-1.18.0-node-modules.tar.gz) = 556b7b9afe4105cd57747bf87e273cbad048803f1bf9e02d66a7323fc2c1c68d
-SIZE (session-desktop-1.18.0-node-modules.tar.gz) = 185422993
+SHA256 (session-desktop-1.18.0-node-modules.tar.gz) = 6ed5dc3bc4c1c9a5ceaa43a230527d4623406fec1aedf6cbf150b099ab74486f
+SIZE (session-desktop-1.18.0-node-modules.tar.gz) = 190320015
 SHA256 (session-foundation-session-desktop-v1.18.0_GH0.tar.gz) = fb90e4859106e1182251b17321220eb54a37e9d54b4bef70b76806f0eb19e4d8
 SIZE (session-foundation-session-desktop-v1.18.0_GH0.tar.gz) = 15484423
 SHA256 (session-foundation-session-desktop-dynamic-assets-740155b3085f683fa74d46118f860ca79b166144_GH0.tar.gz) = 4a55a0c1366987edb3d3c854e4d6768b14d7132700cd42f0dc3f463e4afc908e

@@ -214,6 +214,7 @@
     "source-map": "^0.7.6",
     "terser": "^5.44.1",
     "ts-loader": "^9.5.2",
+    "tsx": "^4.22.4",
     "typescript": "5.8.2",
     "typescript-eslint": "8.53.1",
     "webpack": "5.103.0",
