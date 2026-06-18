@@ -1,7 +1,7 @@
 {
   "name": "mattermost-desktop",
   "productName": "Mattermost",
-  "version": "6.2.0",
+  "version": "6.2.1",
   "description": "Mattermost",
   "main": "dist/index.js",
   "author": "Mattermost, Inc. <feedback@mattermost.com>",
@@ -181,5 +181,8 @@
     "valid-url": "1.0.9",
     "windows-focus-assist": "1.4.0",
     "yargs": "17.7.2"
+  },
+  "overrides": {
+    "yauzl": "3.3.1"
   }
 }
