@@ -1,6 +1,6 @@
 PORTNAME=	gerbil
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.25.2
+DISTVERSION=	1.25.4
 CATEGORIES=	misc
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,6 @@ WWW=		https://github.com/lone-cloud/gerbil
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 RUN_DEPENDS=	koboldcpp:misc/koboldcpp
 
 USES=		electron:42 nodejs:24,build
