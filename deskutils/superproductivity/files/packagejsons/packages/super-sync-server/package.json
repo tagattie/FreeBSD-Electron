@@ -42,15 +42,17 @@
     "@simplewebauthn/server": "^13.2.2",
     "@simplewebauthn/types": "^12.0.0",
     "@sp/shared-schema": "*",
+    "@sp/sync-core": "*",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
     "fastify": "^5.8.5",
     "jsonwebtoken": "^9.0.2",
-    "nodemailer": "^8.0.5",
+    "nodemailer": "^9.0.1",
     "uuidv7": "^1.1.0",
     "zod": "^4.4.3"
   },
   "devDependencies": {
+    "@electric-sql/pglite": "^0.5.2",
     "@types/bcryptjs": "^2.4.6",
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^20.0.0",

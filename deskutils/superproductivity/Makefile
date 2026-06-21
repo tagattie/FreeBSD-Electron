@@ -1,6 +1,6 @@
 PORTNAME=	superproductivity
 DISTVERSIONPREFIX=	v
-DISTVERSION=	18.10.0
+DISTVERSION=	18.12.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -32,6 +32,7 @@ USE_ELECTRON=	npm:npm appbuilder prefetch extract build:builder
 
 pre-build:
 	cd ${WRKSRC} && \
+	${SETENV} ${MAKE_ENV} npm exec patch-package && \
 	${SETENV} ${MAKE_ENV} npm exec ts-patch install && \
 	${SETENV} ${MAKE_ENV} npm run env && \
 	${SETENV} ${MAKE_ENV} npm run sync-core:build && \
