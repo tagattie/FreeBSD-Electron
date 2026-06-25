@@ -448,7 +448,7 @@ electron-fetch-node-package-manager:
 		${SETENV} ${MAKE_ENV} corepack pack ${NPM_CMDNAME}@${NPM_VER} && \
 		${TAR} -xzf corepack.tgz && \
 		${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
-			${SH} ${SCRIPTSDIR}/electron-create-mtree.sh ${NPM_CMDNAME} > \
+			${SH} ${SCRIPTSDIR}/npm-create-mtree.sh ${NPM_CMDNAME} > \
 			${NPM_CMDNAME}.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
@@ -501,7 +501,7 @@ electron-archive-node-modules:
 		for dir in `${FIND} -s ${WRKDIR}/node-modules-cache -type d -name ${NPM_MODULE_CACHE} -print | \
 			${GREP} -ve '${NPM_MODULE_CACHE}/.*/${NPM_MODULE_CACHE}'`; do \
 			${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
-				${SH} ${SCRIPTSDIR}/electron-create-mtree.sh $${dir} >> \
+				${SH} ${SCRIPTSDIR}/npm-create-mtree.sh $${dir} >> \
 				${WRKDIR}/node-modules-cache.mtree; \
 		done; \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
@@ -619,7 +619,7 @@ electron-archive-node-modules:
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
-			${SH} ${SCRIPTSDIR}/electron-create-mtree.sh ${NPM_MODULE_CACHE} > \
+			${SH} ${SCRIPTSDIR}/npm-create-mtree.sh ${NPM_MODULE_CACHE} > \
 			node-modules-cache.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
