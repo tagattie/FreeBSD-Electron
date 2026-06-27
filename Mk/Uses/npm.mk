@@ -301,7 +301,7 @@ npm-archive-node-modules:
 	fi
 .    elif ${_NPM_NAME:Myarn*} || ${_NPM_NAME} == pnpm
 .      if ${_NPM_NAME} == pnpm
-.	 if ${NPM_VER:R:R} >= 11
+.        if ${NPM_VER:R:R} >= 11
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ] && [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Normalizing timestamps and permissions of prefetched node modules"; \
 		tmpdir=${WRKDIR}/pnpm_tmp; \
@@ -387,7 +387,7 @@ npm-archive-node-modules:
 		sqlite3 $${output_db} ".dump" > $${output_db_dump}; \
 		${RM} $${input_db}; \
 	fi
-.	 else
+.        else
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ] && [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Normalizing timestamps and permissions of prefetched node modules"; \
 		${FIND} ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE} \
@@ -400,7 +400,7 @@ npm-archive-node-modules:
 			${RM} -r ${WRKDIR}/node-modules-cache/${NPM_MODULE_CACHE}/*/$${dir}; \
 		done; \
 	fi
-.	 endif
+.        endif
 .      endif
 	@if [ ! -f ${DISTDIR}/${DIST_SUBDIR}/${_DISTFILE_prefetch} ] && [ -d ${WRKDIR}/node-modules-cache ]; then \
 		${ECHO_MSG} "===>  Archiving prefetched node modules"; \
@@ -429,9 +429,9 @@ EXTRACT_DEPENDS+= ${_NPM_PKGNAME}>0:${_NPM_PORTDIR}
 EXTRACT_DEPENDS+= ${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
 .      if ${_NPM_NAME} == pnpm && ${NPM_VER:R:R} >= 11
 EXTRACT_DEPENDS+= sqlite3:databases/sqlite3
-.	 if ${NPM_VER:R} >= 11.3
+.        if ${NPM_VER:R} >= 11.3
 NPM_EXTRACT_FLAGS+=	--trust-lockfile
-.	 endif
+.        endif
 .      endif
 .    endif
 
