@@ -21,7 +21,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		electron:41 localbase:ldflags nodejs:24,build python:build
+USES=		electron:41 localbase:ldflags nodejs:24,build npm:npm \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	oliverschwendener
@@ -33,7 +34,7 @@ PORTDOCS=	CONTRIBUTING.md PRIVACY_STATEMENT README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm appbuilder:devel prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder:devel rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
