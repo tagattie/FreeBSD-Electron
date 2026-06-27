@@ -41,8 +41,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 RUN_DEPENDS=	bash:shells/bash
 
 USES=		desktop-file-utils electron:38 gettext-runtime gl gmake gnome \
-		iconv jpeg localbase:ldflags nodejs:22,build python:build \
-		shebangfix xorg
+		iconv jpeg localbase:ldflags nodejs:22,build npm:pnpm \
+		python:build shebangfix xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	quine-global
@@ -57,7 +57,7 @@ PORTDOCS=	PLUGINS.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder rebuild build:builder
 UPSTREAM_MKSNAPSHOT_VER=	38.6.0
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
