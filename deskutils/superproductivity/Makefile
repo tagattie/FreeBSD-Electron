@@ -10,7 +10,7 @@ WWW=		https://super-productivity.com/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		cargo electron:41 nodejs:24,build
+USES=		cargo electron:41 nodejs:24,build npm:npm
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	super-productivity
@@ -28,7 +28,7 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm appbuilder prefetch extract build:builder
+USE_ELECTRON=	appbuilder build:builder
 
 pre-build:
 	cd ${WRKSRC} && \
