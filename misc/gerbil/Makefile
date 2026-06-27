@@ -12,12 +12,12 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 RUN_DEPENDS=	koboldcpp:misc/koboldcpp
 
-USES=		electron:42 nodejs:24,build
+USES=		electron:42 nodejs:24,build npm:pnpm
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	lone-cloud
 
-USE_ELECTRON=	npm:pnpm appbuilder prefetch extract build:builder
+USE_ELECTRON=	appbuilder build:builder
 
 SUB_FILES=	${PORTNAME}
 
