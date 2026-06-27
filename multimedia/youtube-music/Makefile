@@ -10,7 +10,7 @@ WWW=		https://th-ch.github.io/youtube-music
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/license
 
-USES=		electron:38 nodejs:22,build
+USES=		electron:38 nodejs:22,build npm:pnpm
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	th-ch
@@ -21,7 +21,7 @@ PORTDOCS=	README.md changelog.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder rebuild build:builder
 
 NPM_VER=	10.15.1
 
