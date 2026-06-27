@@ -10,7 +10,7 @@ WWW=		https://github.com/SpacingBat3/WebCord
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:41 nodejs:24,build
+USES=		electron:41 nodejs:24,build npm:npm
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	SpacingBat3
@@ -18,7 +18,7 @@ GH_PROJECT=	WebCord
 
 SUB_FILES=	${PORTNAME}
 
-USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:forge
+USE_ELECTRON=	appbuilder rebuild build:forge
 
 MAKE_ENV+=	WEBCORD_BUILD=release \
 		WEBCORD_UPDATE_NOTIFICATIONS=false
