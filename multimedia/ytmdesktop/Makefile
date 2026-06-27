@@ -10,7 +10,8 @@ WWW=		https://ytmdesktop.app/
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:40 localbase:ldflags nodejs:24,build python:build
+USES=		electron:40 localbase:ldflags nodejs:24,build npm:yarn4 \
+		python:build
 
 USE_GITHUB=	yes
 
@@ -20,7 +21,7 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:forge
+USE_ELECTRON=	appbuilder rebuild build:forge
 
 GIT_BRANCH=	HEAD
 GIT_COMMIT_HASH=3d49f521344879492f0d9f250f4e3b21720b24b9
