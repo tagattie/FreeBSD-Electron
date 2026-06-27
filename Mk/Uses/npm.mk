@@ -182,6 +182,7 @@ NPM_MODULE_CACHE?=	yarn-offline-cache
 NPM_CMDNAME?=		yarn
 NPM_FETCH_CMD?=		${NPM_CMDNAME} install
 NPM_EXTRACT_CMD?=	${NPM_CMDNAME} install
+NPM_EXEC_CMD?=		${NPM_CMDNAME} exec
 .    if ${_NPM_NAME} == yarn1
 NPM_CACHE_SETUP_CMD?=	${ECHO_CMD} 'yarn-offline-mirror "./${NPM_MODULE_CACHE}"' >> .yarnrc
 NPM_FETCH_FLAGS+=	--frozen-lockfile --ignore-scripts --silent
