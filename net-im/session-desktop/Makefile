@@ -23,7 +23,7 @@ LIB_DEPENDS=	libinotify.so:devel/libinotify \
 		libvips.so:graphics/vips
 
 USES=		cmake:indirect electron:40 localbase:ldflags nodejs:24,build \
-		python:3.12+,build
+		npm:pnpm python:3.12+,build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	session-foundation
@@ -39,7 +39,7 @@ PORTDOCS=	CONTRIBUTING.md README.md THEMES.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:pnpm appbuilder:devel prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder:devel rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config.extraMetadata.environment=production \
 			--config.directories.output=release
