@@ -12,8 +12,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:41 nodejs:24,build pkgconfig \
-		python:build
+USES=		desktop-file-utils electron:41 nodejs:24,build npm:npm \
+		pkgconfig python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	minbrowser
@@ -25,7 +25,7 @@ PORTDOCS=	README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild:nodejs build:builder
+USE_ELECTRON=	appbuilder rebuild:nodejs build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
