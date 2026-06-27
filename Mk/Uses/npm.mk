@@ -130,13 +130,14 @@ ${stage}_DEPENDS+=	${_NODEJS_PKGNAME}>0:${_NODEJS_PORT}
 # Try to detect the version of package manager from the pre-stored package.json
 # if it is not specified by a port. (If yarn >2 or pnpm is used, the framework
 # needs to know the version for correctly boostrap the package manager.)
+PKGJSONSDIR?=	${FILESDIR}/packagejsons
+NPM_PKGFILE?=	package.json
+NPM_VER?=
+
 _NPM_EXISTS_PKGFILE?=	no
 .  if exists(${PKGJSONSDIR}/${NPM_PKGFILE})
 _NPM_EXISTS_PKGFILE=	yes
 .  endif
-PKGJSONSDIR?=	${FILESDIR}/packagejsons
-NPM_PKGFILE?=	package.json
-NPM_VER?=
 .  if (${_NPM_NAME} == yarn2 || ${_NPM_NAME} == yarn4 || ${_NPM_NAME} == pnpm) && \
 	${_NPM_EXISTS_PKGFILE} == yes && empty(NPM_VER)
 NPM_VER!=	${CAT} ${PKGJSONSDIR}/${NPM_PKGFILE} | \
