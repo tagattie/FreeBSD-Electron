@@ -15,7 +15,7 @@ LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
 USES=		gmake desktop-file-utils electron:42 gnome nodejs:24,build \
-		pkgconfig python:build xorg
+		npm:pnpm pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 
@@ -31,7 +31,7 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:pnpm appbuilder prefetch extract build:builder
+USE_ELECTRON=	appbuilder build:builder
 
 pre-build:
 	@${MKDIR} ${WRKSRC}/node_modules/@vscode/ripgrep-${OPSYS:tl}-${ELECTRON_ARCH}/bin
