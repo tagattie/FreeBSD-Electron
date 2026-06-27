@@ -154,9 +154,9 @@ NPM_VER!=	${CAT} ${PKGJSONSDIR}/${NPM_PKGFILE} | \
 				s/.*packageManager:([^+,}]+).*/\1/p; d; \
 			}' | \
 		${CUT} -f 2 -d '@'
-.  endif
-.  if empty(NPM_VER)
+.    if empty(NPM_VER)
 IGNORE=	does not specity version of ${NPM_CMDNAME} used for prefetching node modules
+.    endif
 .  endif
 
 # Define variables related to node package manager
