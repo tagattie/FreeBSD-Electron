@@ -10,7 +10,7 @@ WWW=		https://github.com/digimezzo/dopamine
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:38 nodejs:22,build python:build
+USES=		electron:38 nodejs:22,build npm:npm python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	digimezzo
@@ -22,7 +22,7 @@ PORTDOCS=	CHANGELOG.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
