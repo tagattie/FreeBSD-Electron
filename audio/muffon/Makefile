@@ -10,7 +10,7 @@ WWW=		https://muffon.netlify.app/
 LICENSE=	AGPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		desktop-file-utils electron:39 gmake nodejs:22,build \
+USES=		desktop-file-utils electron:39 gmake nodejs:22,build npm:pnpm \
 		python:build
 
 USE_GITHUB=	yes
@@ -23,7 +23,7 @@ PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder rebuild build:builder
 
 post-extract:
 	@if [ -f ${FILESDIR}/dot.env ]; then \
