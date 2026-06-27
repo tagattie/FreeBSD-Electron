@@ -37,7 +37,7 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence \
 		libfontconfig.so:x11-fonts/fontconfig
 
-USES=		electron:40 gl gmake gnome jpeg nodejs:24,build xorg
+USES=		electron:40 gl gmake gnome jpeg nodejs:24,build npm:npm xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	sunfish-shogi
@@ -47,7 +47,7 @@ USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf gtk30 libxslt libxml2 pango
 
-USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config .electron-builder.config.mjs
 
