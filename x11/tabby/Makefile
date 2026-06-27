@@ -41,8 +41,8 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence
 
 USES=		cargo electron:38 gl gmake gnome iconv:wchar_t jpeg \
-		localbase:ldflags nodejs:22,build pkgconfig python:build \
-		shebangfix xorg
+		localbase:ldflags nodejs:22,build pkgconfig npm:yarn1 \
+		python:build shebangfix xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
@@ -68,7 +68,7 @@ PORTDOCS=	HACKING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn1 appbuilder:devel prefetch extract build:builder
+USE_ELECTRON=	appbuilder:devel build:builder
 
 post-patch:
 	@${REINPLACE_CMD} -e 's/OS=="linux"/& or OS=="freebsd"/' \
