@@ -10,7 +10,8 @@ WWW=		https://mattermost.com
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-USES=		desktop-file-utils electron:41 nodejs:24,build python:build
+USES=		desktop-file-utils electron:41 nodejs:24,build npm:npm \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mattermost
@@ -23,7 +24,7 @@ PORTDOCS=	CONTRIBUTING.md NOTICE.txt README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder rebuild build:builder
 
 # git ls-remote --tags https://github.com/mattermost/desktop 'refs/tags/${GH_TAGNAME}^{}'
 COMMIT_HASH=	9569d76bd8de2f8255fe80f0b9379dc429198c82
