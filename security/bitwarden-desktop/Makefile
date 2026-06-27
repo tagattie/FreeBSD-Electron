@@ -18,7 +18,7 @@ LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
 USES=		cargo electron:39 gmake gnome localbase:ldflags \
-		nodejs:22,build pkgconfig python:build xorg
+		nodejs:22,build npm:npm pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	bitwarden
@@ -42,7 +42,7 @@ PORTDOCS=	CONTRIBUTING.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:npm appbuilder:devel prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder:devel rebuild build:builder
 
 pre-build:
 	cd ${BUILD_WRKSRC} && ${SETENV} ${MAKE_ENV} ${CARGO_ENV:C/^CARGO_TARGET_DIR=.*$//} \
