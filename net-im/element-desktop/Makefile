@@ -25,7 +25,7 @@ LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
 USES=		cargo desktop-file-utils electron:42 gmake nodejs:24,build \
-		pkgconfig python:build
+		npm:pnpm pkgconfig python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	element-hq
@@ -47,7 +47,7 @@ PORTDOCS=	CHANGELOG.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:pnpm appbuilder:devel prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder:devel rebuild build:builder
 
 YARN_FILE=		yarn-${YARN_VER}.tgz
 YARN_VER=		1.22.22
