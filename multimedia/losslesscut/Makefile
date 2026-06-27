@@ -43,7 +43,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 RUN_DEPENDS=	ffmpeg:multimedia/ffmpeg
 
 USES=		desktop-file-utils electron:42,build,test gettext-runtime gl \
-		gmake gnome iconv:wchar_t jpeg nodejs:24,build python:build xorg
+		gmake gnome iconv:wchar_t jpeg nodejs:24,build npm:yarn4 \
+		python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mifi
@@ -59,7 +60,7 @@ PORTDOCS=	CONTRIBUTING.md README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC}/node_modules/sharp && \
