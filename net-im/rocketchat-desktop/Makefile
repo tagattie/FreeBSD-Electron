@@ -9,7 +9,8 @@ WWW=		https://rocket.chat
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		desktop-file-utils electron:40 nodejs:24,build python:build
+USES=		desktop-file-utils electron:40 nodejs:24,build npm:yarn4 \
+		python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	RocketChat
@@ -21,7 +22,7 @@ PORTDOCS=	CHANGELOG.md README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:yarn4 appbuilder prefetch extract rebuild build:builder
+USE_ELECTRON=	appbuilder rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn exec patch-package
