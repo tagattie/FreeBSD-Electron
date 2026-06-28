@@ -1,6 +1,6 @@
 PORTNAME=	shogihome
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.27.3
+DISTVERSION=	1.28.0
 CATEGORIES=	games
 MASTER_SITES=	https://github.com/yaneurao/YaneuraOu/releases/download/suisho5/:evalfunc
 DISTFILES=	Suisho5.7z:evalfunc
@@ -11,8 +11,8 @@ WWW=		https://sunfish-shogi.github.io/shogihome/index.en.html
 
 LICENSE=		GPLv3 MIT
 LICENSE_COMB=		multi
-LICENSE_FILE_MIT=	${WRKSRC}/LICENSE
 LICENSE_FILE_GPLv3=	${WRKSRC}/yaneuraou/Copying.txt
+LICENSE_FILE_MIT=	${WRKSRC}/LICENSE
 
 LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libasound.so:audio/alsa-lib \
@@ -37,21 +37,34 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence \
 		libfontconfig.so:x11-fonts/fontconfig
 
-USES=		electron:40 gl gmake gnome jpeg nodejs:24,build npm:npm xorg
+USES=		cargo electron:42 gl gmake gnome jpeg nodejs:24,build npm:npm xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	sunfish-shogi
-GH_TUPLE=	yaneurao:YaneuraOu:V9.00:yaneuraou/yaneuraou
+GH_TUPLE=	electron:extract-zip:v1.0.3:extract_zip/extract-zip \
+		yaneurao:YaneuraOu:V9.00:yaneuraou/yaneuraou
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf gtk30 libxslt libxml2 pango
+
+CARGO_CARGOTOML=${WRKSRC}/extract-zip/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/extract-zip/Cargo.lock
+CARGO_BUILD=	no
+CARGO_INSTALL=	no
+CARGO_TEST=	no
 
 USE_ELECTRON=	appbuilder rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config .electron-builder.config.mjs
 
 pre-build:
+	cd ${WRKSRC}/extract-zip && \
+	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
+		--manifest-path ${CARGO_CARGOTOML} \
+		--release --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/*/libextract_zip.so \
+		${WRKSRC}/node_modules/@electron-internal/extract-zip/index.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run electron:pack
 
 post-build:
@@ -72,7 +85,7 @@ do-install:
 .endfor
 	@${RM} -r ${STAGEDIR}${DATADIR}/gen
 	@${RM} -r ${STAGEDIR}${DATADIR}/node_headers
-	${RLN} ${STAGEDIR}${DATADIR}/electron-shogi \
+	${RLN} ${STAGEDIR}${DATADIR}/${PORTNAME} \
 		${STAGEDIR}${PREFIX}/bin/${PORTNAME}
 	@${MKDIR} ${STAGEDIR}${DATADIR}/resources/engines \
 		${STAGEDIR}${DATADIR}/resources/engines/eval

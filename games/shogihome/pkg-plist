@@ -5,7 +5,6 @@ share/pixmaps/shogihome.png
 %%DATADIR%%/LICENSES.chromium.html
 %%DATADIR%%/chrome_100_percent.pak
 %%DATADIR%%/chrome_200_percent.pak
-%%DATADIR%%/electron-shogi
 %%DATADIR%%/libEGL.so
 %%DATADIR%%/libGLESv2.so
 %%DATADIR%%/libffmpeg.so
@@ -18,6 +17,7 @@ share/pixmaps/shogihome.png
 %%DATADIR%%/resources/default_app.asar
 %%DATADIR%%/resources/engines/YaneuraOu
 %%DATADIR%%/resources/engines/eval/nn.bin
+%%DATADIR%%/shogihome
 %%DATADIR%%/snapshot_blob.bin
 %%DATADIR%%/v8_context_snapshot.bin
 %%DATADIR%%/version
