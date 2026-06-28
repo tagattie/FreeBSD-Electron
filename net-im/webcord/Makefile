@@ -1,6 +1,18 @@
+# Notes for port maintainer(s)
+#
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR},
+# do the following steps:
+# 1. Add the following overrides at the end of package.json
+#    "overrides": {
+#      "yauzl": "3.4.0"
+#    }
+# 2. Update package-lock.json
+#    $ npm install --ignore-scripts
+# For more details, see https://github.com/electron/forge/issues/4277
+
 PORTNAME=	webcord
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.13.0
+DISTVERSION=	4.13.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +22,7 @@ WWW=		https://github.com/SpacingBat3/WebCord
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:41 nodejs:24,build npm:npm
+USES=		electron:42 nodejs:24,build npm:npm
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	SpacingBat3
