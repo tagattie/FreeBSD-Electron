@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.12.21
+DISTVERSION=	1.12.22
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
@@ -38,6 +38,8 @@ CARGO_INSTALL=	no
 CARGO_TEST=	no
 CARGO_ENV=	OPENSSL_NO_VENDOR=1
 
+MAKE_ENV=	CI=true
+
 BINARY_ALIAS=	python=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
@@ -68,7 +70,7 @@ pre-fetch:
 		${SETENV} ${MAKE_ENV} corepack pack yarn@${YARN_VER} && \
 		${TAR} -xzf corepack.tgz && \
 		${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
-			${SH} ${SCRIPTSDIR}/electron-create-mtree.sh yarn > \
+			${SH} ${SCRIPTSDIR}/npm-create-mtree.sh yarn > \
 			yarn.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
@@ -85,7 +87,7 @@ pre-fetch:
 			yarn install --frozen-lockfile --ignore-scripts --silent; \
 		cd ${WRKDIR}/node-modules-cache && \
 		${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
-			${SH} ${SCRIPTSDIR}/electron-create-mtree.sh yarn-offline-cache > \
+			${SH} ${SCRIPTSDIR}/npm-create-mtree.sh yarn-offline-cache > \
 			node-modules-cache.mtree && \
 		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
 			${TAR} -cz --options 'gzip:!timestamp' \
