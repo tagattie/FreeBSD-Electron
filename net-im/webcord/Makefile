@@ -1,18 +1,6 @@
-# Notes for port maintainer(s)
-#
-# Before copying package.json and package-lock.json to ${PKGJSONSDIR},
-# do the following steps:
-# 1. Add the following overrides at the end of package.json
-#    "overrides": {
-#      "yauzl": "3.4.0"
-#    }
-# 2. Update package-lock.json
-#    $ npm install --ignore-scripts
-# For more details, see https://github.com/electron/forge/issues/4277
-
 PORTNAME=	webcord
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.13.1
+DISTVERSION=	4.13.2
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -22,20 +10,33 @@ WWW=		https://github.com/SpacingBat3/WebCord
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		electron:42 nodejs:24,build npm:npm
+USES=		cargo electron:42 nodejs:24,build npm:npm
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	SpacingBat3
 GH_PROJECT=	WebCord
+GH_TUPLE=	electron:extract-zip:v1.0.4:extract_zip/extract-zip
+
+CARGO_CARGOTOML=${WRKSRC}/extract-zip/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/extract-zip/Cargo.lock
+CARGO_BUILD=	no
+CARGO_INSTALL=	no
+CARGO_TEST=	no
+
+MAKE_ENV+=	WEBCORD_BUILD=release \
+		WEBCORD_UPDATE_NOTIFICATIONS=false
 
 SUB_FILES=	${PORTNAME}
 
 USE_ELECTRON=	appbuilder rebuild build:forge
 
-MAKE_ENV+=	WEBCORD_BUILD=release \
-		WEBCORD_UPDATE_NOTIFICATIONS=false
-
 pre-build:
+	cd ${WRKSRC}/extract-zip && \
+	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
+		--manifest-path ${CARGO_CARGOTOML} \
+		--release --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/*/libextract_zip.so \
+		${WRKSRC}/node_modules/extract-zip/index.freebsd-${ELECTRON_ARCH}.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 	# generate icons
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \

@@ -2,7 +2,7 @@
   "$schema": "./schemas/meta/package.json",
   "name": "webcord",
   "productName": "WebCord",
-  "version": "4.13.1",
+  "version": "4.13.2",
   "description": "A Discord made with the Electron API.",
   "main": "app/code/common/main.js",
   "scripts": {
@@ -86,6 +86,6 @@
     "electron-winstaller@5.4.0": true
   },
   "overrides": {
-    "yauzl": "3.4.0"
+    "extract-zip": "npm:@electron-internal/extract-zip@latest"
   }
 }
