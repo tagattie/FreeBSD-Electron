@@ -1,19 +1,19 @@
-PORTNAME=	youtube-music
+PORTNAME=	pear-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.11.0
+DISTVERSION=	3.12.0
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
-COMMENT=	YouTube Music desktop app bundled with custom plugins
-WWW=		https://th-ch.github.io/youtube-music
+COMMENT=	Extension for music player
+WWW=		https://github.com/pear-devs/pear-desktop
 
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/license
 
-USES=		electron:38 nodejs:22,build npm:pnpm
+USES=		electron:42 nodejs:24,build npm:pnpm
 
 USE_GITHUB=	yes
-GH_ACCOUNT=	th-ch
+GH_ACCOUNT=	pear-devs
 
 SUB_FILES=	${PORTNAME}
 
@@ -23,7 +23,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	appbuilder rebuild build:builder
 
-NPM_VER=	10.15.1
+NPM_VER=	11.9.0
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build

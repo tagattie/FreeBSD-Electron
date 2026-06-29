@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Pear Desktop
+Comment=Extension for music player
+Icon=pear-desktop
+Exec=pear-desktop %U
+Categories=AudioVideo;
+Terminal=false
+StartupWMClass=Pear Desktop

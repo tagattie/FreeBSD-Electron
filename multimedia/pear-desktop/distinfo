@@ -1,7 +1,7 @@
-TIMESTAMP = 1772455196
-SHA256 (pnpm-10.15.1.tgz) = 2590cfc6e54d59d3e733863cb41d0bde578c9322194786ed4fd50d7b202b67fa
-SIZE (pnpm-10.15.1.tgz) = 4365671
-SHA256 (youtube-music-3.11.0-node-modules.tar.gz) = ddcaf3d536fedf7b85da7bee7e20ad156e4cfde798d2a781550023c0a2827cbc
-SIZE (youtube-music-3.11.0-node-modules.tar.gz) = 215658268
-SHA256 (th-ch-youtube-music-v3.11.0_GH0.tar.gz) = 595b5283720cbdaaa67907c2773f6eeb890e57e1244dce98481d47ecf42ffac0
-SIZE (th-ch-youtube-music-v3.11.0_GH0.tar.gz) = 2696324
+TIMESTAMP = 1782737944
+SHA256 (pnpm-11.9.0.tgz) = 2d29be26a7265fb24bc71ca9ac7af62df398df4b9855d804c70a49db5f8c3fa1
+SIZE (pnpm-11.9.0.tgz) = 4608011
+SHA256 (pear-desktop-3.12.0-node-modules.tar.gz) = acda3f6da856f7992ea434ee26f5fc78ff7a77dddf7e195d3423188fe5b26d4f
+SIZE (pear-desktop-3.12.0-node-modules.tar.gz) = 156430485
+SHA256 (pear-devs-pear-desktop-v3.12.0_GH0.tar.gz) = 2f6a4948ba3c8c00ed43a6c014cd18430f2f1509ea4115dd6a8d538c45eb3107
+SIZE (pear-devs-pear-desktop-v3.12.0_GH0.tar.gz) = 3614991
