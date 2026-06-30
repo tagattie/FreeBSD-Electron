@@ -1,5 +1,5 @@
 PORTNAME=	rocketchat-desktop
-DISTVERSION=	4.14.1
+DISTVERSION=	4.15.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -9,7 +9,7 @@ WWW=		https://rocket.chat
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		desktop-file-utils electron:40 nodejs:24,build npm:yarn4 \
+USES=		desktop-file-utils electron:42 nodejs:24,build npm:yarn4 \
 		python:build
 
 USE_GITHUB=	yes
