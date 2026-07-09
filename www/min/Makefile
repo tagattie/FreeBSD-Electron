@@ -1,6 +1,6 @@
 PORTNAME=	min
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.35.5
+DISTVERSION=	1.35.6
 CATEGORIES=	www
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:41 nodejs:24,build npm:npm \
+USES=		desktop-file-utils electron:42 nodejs:24,build npm:npm \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
