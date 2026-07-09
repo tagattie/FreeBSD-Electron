@@ -1,6 +1,6 @@
 {
   "name": "superProductivity",
-  "version": "18.12.0",
+  "version": "18.13.1",
   "description": "ToDo list and Time Tracking",
   "keywords": [
     "ToDo",
@@ -160,7 +160,7 @@
     "release-notes:generate:codex": "cross-env SP_RELEASE_NOTES_AI=codex node ./tools/release-notes.js generate",
     "release-notes:generate:claude": "cross-env SP_RELEASE_NOTES_AI=claude node ./tools/release-notes.js generate",
     "release-notes:prepare-play-store": "node ./tools/release-notes.js prepare-play-store",
-    "release-notes:test": "node --test tools/release-notes.test.js",
+    "release-notes:test": "node --test tools/release-notes.test.js tools/prepare-appstore-release-notes.test.js",
     "clean:translations": "node ./tools/clean-translations.js",
     "plugin-api:build": "cd packages/plugin-api && npm run build",
     "packages:test": "npm run sync-core:test && npm run sync-providers:test",
@@ -180,11 +180,10 @@
   },
   "dependencies": {
     "@capacitor/browser": "^8.0.3",
-    "@capacitor/ios": "^8.3.4",
-    "@capacitor/keyboard": "8.0.1",
+    "@capacitor/ios": "^8.4.1",
+    "@capacitor/keyboard": "8.0.5",
     "@capacitor/status-bar": "^8.0.2",
-    "@capawesome/capacitor-android-edge-to-edge-support": "^8.0.8",
-    "@material-symbols/font-400": "^0.44.10",
+    "@material-symbols/font-400": "^0.45.5",
     "@noble/ciphers": "^2.2.0",
     "capacitor-plugin-safe-area": "^5.0.0",
     "electron-dl": "^3.5.2",
@@ -197,7 +196,7 @@
     "uuidv7": "^1.2.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^21.2.15",
+    "@angular-devkit/build-angular": "^21.2.17",
     "@angular-eslint/builder": "^21.3.1",
     "@angular-eslint/eslint-plugin": "^21.3.1",
     "@angular-eslint/eslint-plugin-template": "^21.3.1",
@@ -205,7 +204,7 @@
     "@angular-eslint/template-parser": "^21.3.1",
     "@angular/animations": "^21.2.17",
     "@angular/cdk": "^21.2.9",
-    "@angular/cli": "^21.2.15",
+    "@angular/cli": "^21.2.17",
     "@angular/common": "^21.2.17",
     "@angular/compiler": "^21.2.17",
     "@angular/compiler-cli": "^21.2.17",
@@ -218,10 +217,10 @@
     "@angular/platform-server": "^21.2.17",
     "@angular/router": "^21.2.17",
     "@angular/service-worker": "^21.2.17",
-    "@capacitor/android": "^8.3.4",
+    "@capacitor/android": "^8.4.1",
     "@capacitor/app": "^8.1.0",
-    "@capacitor/cli": "^8.3.4",
-    "@capacitor/core": "^8.3.4",
+    "@capacitor/cli": "^8.4.1",
+    "@capacitor/core": "^8.4.1",
     "@capacitor/filesystem": "^8.1.2",
     "@capacitor/local-notifications": "^8.2.0",
     "@capacitor/share": "^8.0.1",
@@ -233,17 +232,17 @@
     "@eslint/js": "^9.39.2",
     "@fontsource/open-sans": "^5.2.7",
     "@nextcloud/cdav-library": "^1.5.3",
-    "@ngrx/effects": "^21.1.0",
-    "@ngrx/entity": "^21.1.0",
-    "@ngrx/schematics": "^21.1.0",
-    "@ngrx/store": "21.1.0",
-    "@ngrx/store-devtools": "^21.1.0",
+    "@ngrx/effects": "^21.1.1",
+    "@ngrx/entity": "^21.1.1",
+    "@ngrx/schematics": "^21.1.1",
+    "@ngrx/store": "21.1.1",
+    "@ngrx/store-devtools": "^21.1.1",
     "@ngx-formly/core": "^7.1.0",
     "@ngx-formly/material": "^7.1.0",
     "@ngx-translate/core": "^17.0.0",
     "@ngx-translate/http-loader": "^17.0.0",
     "@playwright/test": "^1.59.1",
-    "@schematics/angular": "^21.2.13",
+    "@schematics/angular": "^21.2.17",
     "@types/electron": "^1.6.12",
     "@types/electron-localshortcut": "^3.1.3",
     "@types/file-saver": "^2.0.7",
@@ -271,7 +270,7 @@
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-jsdoc": "62.9.0",
+    "eslint-plugin-jsdoc": "63.0.10",
     "eslint-plugin-local-rules": "^3.0.2",
     "eslint-plugin-prefer-arrow": "1.2.3",
     "eslint-plugin-prettier": "^5.5.5",
@@ -294,7 +293,7 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "^2.2.0",
     "karma-spec-reporter": "^0.0.36",
-    "marked": "^17.0.1",
+    "marked": "^18.0.5",
     "nanoid": "^5.1.11",
     "new-github-issue-url": "^1.1.0",
     "ng2-charts": "^10.0.0",
@@ -323,9 +322,25 @@
       "minimatch": "10.2.5"
     },
     "@electron/asar": {
-      "minimatch": "3.1.2"
+      "minimatch": "3.1.5"
     },
-    "webpack-dev-server": "5.2.4"
+    "@angular-devkit/build-angular": {
+      "http-proxy-middleware": "3.0.7"
+    },
+    "webpack-dev-server": {
+      "http-proxy-middleware": "2.0.10"
+    },
+    "@angular/build": {
+      "undici": "7.28.0"
+    },
+    "node-gyp": {
+      "undici": "6.27.0"
+    },
+    "sockjs": {
+      "uuid": "11.1.1"
+    },
+    "@babel/core": "7.29.7",
+    "ws": "8.21.0"
   },
   "optionalDependencies": {
     "@lmdb/lmdb-darwin-x64": "^3.5.4",
