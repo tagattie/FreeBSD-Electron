@@ -1,0 +1,283 @@
+{
+  "name": "astra",
+  "version": "0.6.1-beta",
+  "description": "Audiophile music player with advanced visualization",
+  "main": "./out/main/index.js",
+  "scripts": {
+    "dev": "node ./scripts/build/writeAppBuildMetadata.cjs && electron-vite dev",
+    "build": "electron-vite build && node ./scripts/build/writeAppBuildMetadata.cjs",
+    "build:icons": "node scripts/build/generate-astra-icons.mjs",
+    "preview": "electron-vite preview",
+    "check:packaging-config": "node ./scripts/electron-builder/validate-config.cjs",
+    "test": "node ./scripts/node/run-tests.cjs",
+    "test:node": "node ./scripts/node/run-tests.cjs --node",
+    "test:electron": "node ./scripts/node/run-tests.cjs --electron",
+    "test:album-eligibility": "node --experimental-strip-types --experimental-default-type=module --test src/shared/library/albumEligibility.test.ts",
+    "test:album-grouping": "node --experimental-strip-types --experimental-default-type=module --test src/shared/library/albumGrouping.test.ts",
+    "test:artist-images": "node --experimental-strip-types --experimental-default-type=module --test src/shared/library/artistImages.test.ts",
+    "test:library-latest-sync": "node --experimental-strip-types --experimental-default-type=module --test src/main/services/libraryLatestSync.test.ts",
+    "test:library-sqlite": "ELECTRON_RUN_AS_NODE=1 electron --experimental-strip-types --loader ./scripts/node/electron-test-loader.mjs --test src/main/services/library.test.ts",
+    "test:library-integrity": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/libraryIntegrity.test.ts",
+    "test:lyrics-sidecar": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/lyricsSidecar.test.ts",
+    "test:library-graph": "node --experimental-strip-types --experimental-default-type=module --experimental-specifier-resolution=node --test src/renderer/utils/libraryGraph.test.ts",
+    "test:renderer-library-store": "node --experimental-strip-types --experimental-default-type=module --experimental-specifier-resolution=node --test src/renderer/stores/libraryStore.test.ts",
+    "test:renderer-player-store": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/renderer/stores/playerStore.test.ts",
+    "test:local-api": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/localApi.test.ts",
+    "test:lastfm": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/lastFm.test.ts",
+    "test:phone-remote": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/phoneRemote.test.ts",
+    "test:activity-indicator": "node --experimental-strip-types --experimental-default-type=module --experimental-specifier-resolution=node --test src/renderer/utils/astraActivity.test.ts",
+    "test:audio-loudness": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/renderer/audio/loudness.test.ts",
+    "typecheck": "tsc --noEmit",
+    "build:native": "cd native && node-gyp rebuild",
+    "rebuild:astra-native": "node -e \"const e=require('electron/package.json').version;const a=process.arch;const{execSync}=require('child_process');execSync('node-gyp rebuild --target='+e+' --arch='+a+' --dist-url=https://electronjs.org/headers',{stdio:'inherit',cwd:'native'})\"",
+    "rebuild:better-sqlite3": "electron-rebuild -f -w better-sqlite3",
+    "rebuild:native": "npm run rebuild:astra-native && npm run rebuild:better-sqlite3",
+    "postinstall": "npm run rebuild:native || echo 'Native rebuild failed, app may use fallbacks or database access may fail'",
+    "dist": "npm run build && electron-builder --publish never",
+    "dist:win": "npm run build && electron-builder --win --publish never",
+    "dist:mac": "npm run build && electron-builder --mac --publish never",
+    "dist:linux": "npm run build && electron-builder --linux --publish never"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Boof2015/astra"
+  },
+  "keywords": [
+    "music",
+    "player",
+    "audio",
+    "visualizer",
+    "electron"
+  ],
+  "author": {
+    "name": "Boof2015",
+    "email": "contact@novaml.ai"
+  },
+  "license": "GPL-3.0-only",
+  "dependencies": {
+    "@boof2015/xlrc": "^0.2.0",
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/jetbrains-mono": "^5.2.8",
+    "better-sqlite3": "^12.10.0",
+    "ffmpeg-static": "^5.2.0",
+    "ffprobe-static": "^3.1.0",
+    "music-metadata": "^11.12.3",
+    "node-addon-api": "^8.7.0",
+    "react": "^19.2.6",
+    "react-dom": "^19.2.6",
+    "react-window": "^2.2.7",
+    "zustand": "^5.0.13"
+  },
+  "devDependencies": {
+    "@electron/rebuild": "^4.0.4",
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.2.0",
+    "autoprefixer": "^10.5.0",
+    "electron": "^40.10.0",
+    "electron-builder": "^26.8.1",
+    "electron-vite": "^5.0.0",
+    "node-gyp": "^12.3.0",
+    "postcss": "^8.5.14",
+    "tailwindcss": "^4.3.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.3"
+  },
+  "build": {
+    "appId": "com.astra.musicplayer",
+    "productName": "Astra",
+    "directories": {
+      "output": "dist"
+    },
+    "afterPack": "./scripts/electron-builder/afterPack-prune-ffprobe.cjs",
+    "asarUnpack": [
+      "node_modules/ffmpeg-static/**",
+      "node_modules/ffprobe-static/**",
+      "node_modules/better-sqlite3/**"
+    ],
+    "files": [
+      "out/**/*",
+      ".env.local",
+      "native/build/Release/*.node",
+      "node_modules/ffmpeg-static/**/*",
+      "node_modules/ffprobe-static/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "native/build/Release/",
+        "to": "native/",
+        "filter": [
+          "*.node"
+        ]
+      }
+    ],
+    "win": {
+      "fileAssociations": [
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "role": "Viewer",
+          "ext": [
+            "mp3",
+            "flac",
+            "wav",
+            "ogg",
+            "aac",
+            "m4a",
+            "opus",
+            "wma",
+            "aiff",
+            "alac",
+            "ape",
+            "wv"
+          ]
+        }
+      ],
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "resources/icon.ico"
+    },
+    "mac": {
+      "fileAssociations": [
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "role": "Viewer",
+          "ext": [
+            "mp3",
+            "flac",
+            "wav",
+            "ogg",
+            "aac",
+            "m4a",
+            "opus",
+            "wma",
+            "aiff",
+            "alac",
+            "ape",
+            "wv"
+          ]
+        }
+      ],
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "artifactName": "Astra-${version}-Mac-${arch}.${ext}",
+      "icon": "resources/icon.icns",
+      "category": "public.app-category.music",
+      "hardenedRuntime": true,
+      "entitlements": "resources/entitlements.mac.plist",
+      "entitlementsInherit": "resources/entitlements.mac.inherit.plist"
+    },
+    "linux": {
+      "fileAssociations": [
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "mp3"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "flac"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "wav"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "ogg"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "aac"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "m4a"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "opus"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "wma"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "aiff"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "alac"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "ape"
+        },
+        {
+          "name": "Astra Audio File",
+          "description": "Audio file",
+          "ext": "wv"
+        }
+      ],
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm",
+        "tar.gz"
+      ],
+      "artifactName": "Astra-${version}-Linux-${arch}.${ext}",
+      "category": "Audio"
+    },
+    "appImage": {
+      "artifactName": "Astra-${version}-Linux.${ext}"
+    },
+    "dmg": {
+      "background": "resources/background.png",
+      "iconSize": 80,
+      "iconTextSize": 12,
+      "window": {
+        "width": 540,
+        "height": 440
+      },
+      "contents": [
+        { "x": 130, "y": 220, "type": "file" },
+        { "x": 410, "y": 220, "type": "link", "path": "/Applications" }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "artifactName": "Astra.Setup.${version}.Windows.${ext}"
+    },
+    "portable": {
+      "artifactName": "Astra.Portable.${version}.Windows.${ext}"
+    }
+  }
+}

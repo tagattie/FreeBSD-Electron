@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Encoding=UTF-8
+Name=Astra
+Comment=Audiophile music player with advanced visualization
+Icon=astra
+Exec=astra %U
+Categories=Audio;
+Terminal=false
+StartupWMClass=Astra
