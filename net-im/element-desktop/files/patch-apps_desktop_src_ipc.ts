@@ -1,6 +1,6 @@
---- apps/desktop/src/ipc.ts.orig	2026-05-27 13:46:37 UTC
+--- apps/desktop/src/ipc.ts.orig	2026-07-07 12:56:48 UTC
 +++ apps/desktop/src/ipc.ts
-@@ -14,7 +14,7 @@ ipcMain.on("loudNotification", function (): void {
+@@ -15,7 +15,7 @@ ipcMain.on("loudNotification", function (): void {
  
  let focusHandlerAttached = false;
  ipcMain.on("loudNotification", function (): void {
