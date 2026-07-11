@@ -4,7 +4,7 @@
   "name": "session-desktop",
   "productName": "Session",
   "description": "Private messaging from your desktop",
-  "version": "1.18.0",
+  "version": "1.18.1",
   "license": "GPL-3.0",
   "author": {
     "name": "Session Foundation",
@@ -214,7 +214,7 @@
     "source-map": "^0.7.6",
     "terser": "^5.44.1",
     "ts-loader": "^9.5.2",
-    "tsx": "^4.22.4",
+    "tsx": "^4.23.0",
     "typescript": "5.8.2",
     "typescript-eslint": "8.53.1",
     "webpack": "5.103.0",

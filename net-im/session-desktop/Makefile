@@ -4,10 +4,11 @@
 # ${PKGJSONSDIR}, do the following steps:
 # 1. Add tsx to devDependencies in ${WRKSRC}
 #    $ corepack pnpm add --save-dev --ignore-scripts tsx
+# 2. Replace all occurences of "pnpx" with "pnpm exec" in ${WRKSRC}/package.json
 
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.18.0
+DISTVERSION=	1.18.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -23,12 +24,12 @@ LIB_DEPENDS=	libinotify.so:devel/libinotify \
 		libvips.so:graphics/vips
 
 USES=		cmake:indirect electron:40 localbase:ldflags nodejs:24,build \
-		npm:pnpm python:3.12+,build
+		npm:pnpm python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	session-foundation
 GH_TUPLE=	session-foundation:session-desktop-dynamic-assets:740155b3085f683fa74d46118f860ca79b166144:dynamic_assets/dynamic_assets \
-		session-foundation:session-localization:ceffc446039c90ea1b85b9d6c83df9f282113045:localization/ts/localization
+		session-foundation:session-localization:f824751eba28e98843e082c08672393224e6b939:localization/ts/localization
 
 MAKE_ENV=	SIGNAL_ENV=production
 
