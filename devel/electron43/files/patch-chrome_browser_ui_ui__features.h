@@ -1,4 +1,4 @@
---- chrome/browser/ui/ui_features.h.orig	2026-06-23 23:37:18 UTC
+--- chrome/browser/ui/ui_features.h.orig	2026-07-07 17:43:50 UTC
 +++ chrome/browser/ui/ui_features.h
 @@ -28,7 +28,7 @@ BASE_DECLARE_FEATURE(kCtrlTabMru);
  
@@ -9,7 +9,7 @@
  BASE_DECLARE_FEATURE(kDseIntegrity);
  BASE_DECLARE_FEATURE(kFewerUpdateConfirmations);
  #endif
-@@ -74,7 +74,7 @@ BASE_DECLARE_FEATURE_PARAM(int, kSeparateDefaultAndPin
+@@ -78,7 +78,7 @@ BASE_DECLARE_FEATURE_PARAM(int, kSeparateDefaultAndPin
  BASE_DECLARE_FEATURE_PARAM(int, kSeparateDefaultAndPinPromptMessageVersion);
  #endif  // BUILDFLAG(IS_WIN) || BUILDFLAG(IS_MAC)
  
@@ -18,7 +18,7 @@
  // When enabled, user may see the session restore UI flow.
  BASE_DECLARE_FEATURE(kSessionRestoreInfobar);
  
-@@ -260,7 +260,7 @@ BASE_DECLARE_FEATURE(kViewsJSAppModalDialog);
+@@ -264,7 +264,7 @@ BASE_DECLARE_FEATURE(kViewsJSAppModalDialog);
  BASE_DECLARE_FEATURE(kViewsJSAppModalDialog);
  #endif
  

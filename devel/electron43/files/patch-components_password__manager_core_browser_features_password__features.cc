@@ -1,4 +1,4 @@
---- components/password_manager/core/browser/features/password_features.cc.orig	2026-06-23 23:37:18 UTC
+--- components/password_manager/core/browser/features/password_features.cc.orig	2026-07-07 17:43:50 UTC
 +++ components/password_manager/core/browser/features/password_features.cc
 @@ -78,7 +78,7 @@ BASE_FEATURE(kClearUndecryptablePasswordsOnSync,
  BASE_FEATURE(kClearUndecryptablePasswordsOnSync,
@@ -9,16 +9,7 @@
               base::FEATURE_ENABLED_BY_DEFAULT
  #else
               base::FEATURE_DISABLED_BY_DEFAULT
-@@ -115,7 +115,7 @@ BASE_FEATURE(kFillOnAccountSelect,
- BASE_FEATURE(kFillOnAccountSelect,
-              "fill-on-account-select",
- // TODO(504600482): Disable the feature again upon fixing the bug.
--#if BUILDFLAG(IS_LINUX)
-+#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_BSD)
-              base::FEATURE_ENABLED_BY_DEFAULT
- #else
-              base::FEATURE_DISABLED_BY_DEFAULT
-@@ -181,7 +181,7 @@ BASE_FEATURE(kPasswordCheckupPrototype, base::FEATURE_
+@@ -175,7 +175,7 @@ BASE_FEATURE(kPasswordCheckupPrototype, base::FEATURE_
  
  BASE_FEATURE(kPasswordCheckupPrototype, base::FEATURE_DISABLED_BY_DEFAULT);
  

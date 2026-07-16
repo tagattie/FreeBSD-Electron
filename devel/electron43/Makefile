@@ -222,7 +222,7 @@ SNDIO_VARS=		GN_ARGS+=use_sndio=true
 SNDIO_VARS_OFF=		GN_ARGS+=use_sndio=false
 
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=			150.0.7871.47
+CHROMIUM_VER=			150.0.7871.114
 # See ${WRKSRC}/electron/DEPS for NODE_VER
 NODE_VER=			24.18.0
 # See ${WRKSRC}/electron/DEPS for NAN_VER
@@ -238,7 +238,7 @@ ENGFLOW_RECLIENT_CONFIGS_VER=	955335c30a752e9ef7bff375baab5e0819b6c00d
 # See ${WRKSRC}/third_party/devtools-frontend/src/node_modules/rollup/package.json
 ROLLUP_VER=			4.60.4
 # Keep in sync with devel/esbuild
-ESBUILD_VER=			0.28.0
+ESBUILD_VER=			0.28.1
 
 .include "Makefile.version"
 .include <bsd.port.pre.mk>
