@@ -96,6 +96,11 @@ pre-fetch:
 	fi
 
 post-extract:
+	@${ECHO_CMD} "trustLockfile: true" >> ${WRKSRC}/pnpm-workspace.yaml
+	@${ECHO_CMD} "storeDir: ${WRKDIR}/node-modules-cache/pnpm-store" >> \
+		${WRKSRC}/pnpm-workspace.yaml
+	@${ECHO_CMD} "frozenStore: true" >> ${WRKSRC}/pnpm-workspace.yaml
+	@${ECHO_CMD} "preferFrozenLockfile: true" >> ${WRKSRC}/pnpm-workspace.yaml
 	@${MKDIR} ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
 	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${YARN_FILE}
