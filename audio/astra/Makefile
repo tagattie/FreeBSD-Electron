@@ -28,6 +28,11 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	appbuilder rebuild build:builder
 
+post-extract:
+	@if [ -f ${FILESDIR}/dot.env.local ]; then \
+		${CP} ${FILESDIR}/dot.env.local ${WRKSRC}/.env.local; \
+	fi
+
 post-patch:
 	@${REINPLACE_CMD} 's|/run/user|/var&|' \
 		${WRKSRC}/src/main/services/discordRpc.ts
