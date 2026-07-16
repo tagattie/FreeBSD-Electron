@@ -121,7 +121,11 @@ _ELECTRON_TEST_DEP=	yes
 .  if ${_VALID_ELECTRON_VERSIONS:M${_ELECTRON_ARGS}}
 _ELECTRON_VERSION=	${_ELECTRON_ARGS}
 _ELECTRON_PORTDIR=	${_ELECTRON_PORT_BASE}${_ELECTRON_VERSION}
+.    if exists(${PORTSDIR}/${_ELECTRON_PORTDIR}/Makefile.version)
 .	include "${PORTSDIR}/${_ELECTRON_PORTDIR}/Makefile.version"
+.    else
+IGNORE=	${_ELECTRON_PORTDIR}/Makefile.version is missing
+.    endif
 .  elif empty(_ELECTRON_ARGS)
 IGNORE=	does not specify a major version of electron with USES=electron
 .  else
