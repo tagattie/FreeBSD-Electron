@@ -1,6 +1,6 @@
 PORTNAME=	stretchly
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.21.0
+DISTVERSION=	1.22.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ BUILD_DEPENDS=	${LOCALBASE}/include/linux/input.h:devel/evdev-proto
 LIB_DEPENDS=	libudev.so:devel/libudev-devd \
 		libinput.so:x11/libinput
 
-USES=		electron:41 localbase:ldconfig nodejs:24,build npm:npm \
+USES=		electron:43 localbase:ldconfig nodejs:24,build npm:npm \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
