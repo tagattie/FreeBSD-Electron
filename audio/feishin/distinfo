@@ -1,0 +1,7 @@
+TIMESTAMP = 1784469094
+SHA256 (pnpm-11.5.2.tgz) = dcb351dd85fa4b7ebe5c96b5b5c101dcd5858057e072a25a4e55f131f36c1d10
+SIZE (pnpm-11.5.2.tgz) = 4289883
+SHA256 (feishin-1.15.0-node-modules.tar.gz) = 0a65dac4aa7c0c7e59562150dcf711f33b4ca12d9b8fff1a13d9577e0b008d59
+SIZE (feishin-1.15.0-node-modules.tar.gz) = 145007580
+SHA256 (jeffvli-feishin-v1.15.0_GH0.tar.gz) = 59cfddb25ae49f6a304ab9d76a272aba06c8ffa10d5d525701c56acd48fc1549
+SIZE (jeffvli-feishin-v1.15.0_GH0.tar.gz) = 11933508
