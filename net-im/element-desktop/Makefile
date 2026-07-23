@@ -1,6 +1,6 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.12.23
+DISTVERSION=	1.12.24
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
@@ -24,7 +24,7 @@ EXTRACT_DEPENDS=jq:textproc/jq
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo desktop-file-utils electron:42 gmake nodejs:24,build \
+USES=		cargo desktop-file-utils electron:43 gmake nodejs:24,build \
 		npm:pnpm pkgconfig python:build
 
 USE_GITHUB=	yes
