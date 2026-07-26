@@ -1,29 +1,15 @@
---- apps/desktop/src/main/messaging.main.ts.orig	2026-06-25 01:41:32 UTC
+--- apps/desktop/src/main/messaging.main.ts.orig	2026-07-15 09:46:59 UTC
 +++ apps/desktop/src/main/messaging.main.ts
-@@ -129,7 +129,7 @@ export class MessagingMain {
-   }
- 
-   private addOpenAtLogin() {
+@@ -116,10 +116,10 @@ export class MessagingMain {
+   // management) is handled by the Rust native module; here we only gather the values Electron
+   // knows and delegate. macOS/Windows use Electron's login-item API, which has no Rust equivalent.
+   private setOpenAtLogin(enabled: boolean) {
 -    if (process.platform === "linux") {
 +    if (process.platform === "linux" || process.platform === "freebsd") {
-       if (isFlatpak()) {
-         autostart.setAutostart(true, ["bitwarden.sh", AUTOSTART_FLAG, "%U"]).catch((e) => {});
-       } else if (isSnapStore()) {
-@@ -140,7 +140,7 @@ export class MessagingMain {
-   Version=${app.getVersion()}
-   Name=Bitwarden
-   Comment=Bitwarden startup script
--  Exec=${app.getPath("exe")} ${AUTOSTART_FLAG}
-+  Exec=bitwarden-desktop ${AUTOSTART_FLAG}
-   StartupNotify=false
-   Terminal=false`;
- 
-@@ -201,7 +201,7 @@ export class MessagingMain {
-   }
- 
-   private removeOpenAtLogin() {
--    if (process.platform === "linux") {
-+    if (process.platform === "linux" || process.platform === "freebsd") {
-       if (isFlatpak()) {
-         autostart.setAutostart(false, []).catch((e) => {});
-       } else {
+       autostart
+         .setAutostart(enabled, {
+-          execPath: app.getPath("exe"),
++          execPath: "bitwarden-desktop",
+           autostartFlag: AUTOSTART_FLAG,
+         })
+         .catch((e) => {
