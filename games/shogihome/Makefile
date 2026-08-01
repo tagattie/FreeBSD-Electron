@@ -1,6 +1,13 @@
+# Notes for port maintainer(s)
+#
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR},
+# do the following steps:
+# 1. Remove "npm run install:electron" from "electron:compile" and "test"
+#    scripts in ${WRKSRC}/package.json
+
 PORTNAME=	shogihome
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.28.0
+DISTVERSION=	1.29.0
 CATEGORIES=	games
 MASTER_SITES=	https://github.com/yaneurao/YaneuraOu/releases/download/suisho5/:evalfunc
 DISTFILES=	Suisho5.7z:evalfunc
