@@ -1,6 +1,6 @@
 {
   "name": "astra",
-  "version": "0.6.1-beta",
+  "version": "0.7.0-beta",
   "description": "Audiophile music player with advanced visualization",
   "main": "./out/main/index.js",
   "scripts": {
@@ -17,17 +17,26 @@
     "test:artist-images": "node --experimental-strip-types --experimental-default-type=module --test src/shared/library/artistImages.test.ts",
     "test:library-latest-sync": "node --experimental-strip-types --experimental-default-type=module --test src/main/services/libraryLatestSync.test.ts",
     "test:library-sqlite": "ELECTRON_RUN_AS_NODE=1 electron --experimental-strip-types --loader ./scripts/node/electron-test-loader.mjs --test src/main/services/library.test.ts",
+    "test:track-rating": "node --experimental-strip-types --test src/shared/ratings/trackRating.test.ts",
+    "test:rating-calibration": "node --experimental-strip-types --test src/renderer/utils/ratingCalibration.test.ts",
     "test:library-integrity": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/libraryIntegrity.test.ts",
     "test:lyrics-sidecar": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/lyricsSidecar.test.ts",
     "test:library-graph": "node --experimental-strip-types --experimental-default-type=module --experimental-specifier-resolution=node --test src/renderer/utils/libraryGraph.test.ts",
-    "test:renderer-library-store": "node --experimental-strip-types --experimental-default-type=module --experimental-specifier-resolution=node --test src/renderer/stores/libraryStore.test.ts",
-    "test:renderer-player-store": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/renderer/stores/playerStore.test.ts",
-    "test:local-api": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/localApi.test.ts",
+    "test:renderer-library-store": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/renderer/stores/libraryStore.test.ts",
+    "test:renderer-player-store": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs --test src/renderer/stores/playerStore.test.ts",
+    "test:local-api": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/localApi.test.ts",
+    "test:companion-api": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/companionApiRefs.test.ts src/main/services/companionApiContract.test.ts src/renderer/hooks/useCompanionApiBridge.test.ts",
+    "test:companion-api-examples": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/companionApiExamples.test.ts",
     "test:lastfm": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/lastFm.test.ts",
-    "test:phone-remote": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/phoneRemote.test.ts",
+    "test:phone-remote": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/phoneRemote.test.ts src/shared/sync/conflictPreview.test.ts",
     "test:activity-indicator": "node --experimental-strip-types --experimental-default-type=module --experimental-specifier-resolution=node --test src/renderer/utils/astraActivity.test.ts",
     "test:audio-loudness": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/renderer/audio/loudness.test.ts",
+    "test:spectrum-native": "node --test native/test/spectrum-bars.test.mjs",
     "typecheck": "tsc --noEmit",
+    "typecheck:receiver": "tsc --noEmit -p receiver/tsconfig.json",
+    "receiver:dev": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs receiver/src/main.ts",
+    "receiver:build": "vite build --config receiver/vite.config.ts",
+    "receiver:native": "cd receiver/native && node-gyp rebuild",
     "build:native": "cd native && node-gyp rebuild",
     "rebuild:astra-native": "node -e \"const e=require('electron/package.json').version;const a=process.arch;const{execSync}=require('child_process');execSync('node-gyp rebuild --target='+e+' --arch='+a+' --dist-url=https://electronjs.org/headers',{stdio:'inherit',cwd:'native'})\"",
     "rebuild:better-sqlite3": "electron-rebuild -f -w better-sqlite3",
@@ -55,10 +64,13 @@
   },
   "license": "GPL-3.0-only",
   "dependencies": {
-    "@boof2015/xlrc": "^0.2.0",
+    "@boof2015/astra-signal": "0.3.0",
+    "@boof2015/xlrc": "^0.2.1",
     "@fontsource/inter": "^5.2.8",
     "@fontsource/jetbrains-mono": "^5.2.8",
+    "@peculiar/x509": "^2.0.0",
     "better-sqlite3": "^12.10.0",
+    "bonjour-service": "^1.4.0",
     "ffmpeg-static": "^5.2.0",
     "ffprobe-static": "^3.1.0",
     "music-metadata": "^11.12.3",
@@ -66,6 +78,8 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-window": "^2.2.7",
+    "reflect-metadata": "^0.2.2",
+    "undici": "^8.7.0",
     "zustand": "^5.0.13"
   },
   "devDependencies": {
@@ -110,6 +124,10 @@
         "filter": [
           "*.node"
         ]
+      },
+      {
+        "from": "THIRD_PARTY_LICENSES.md",
+        "to": "THIRD_PARTY_LICENSES.md"
       }
     ],
     "win": {

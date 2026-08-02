@@ -1,6 +1,6 @@
---- src/main/services/discordRpc.ts.orig	2026-07-11 07:31:23 UTC
+--- src/main/services/discordRpc.ts.orig	2026-08-01 20:55:32 UTC
 +++ src/main/services/discordRpc.ts
-@@ -477,7 +477,7 @@ export class DiscordRpcService {
+@@ -478,7 +478,7 @@ export class DiscordRpcService {
        endpointDirectories.add(normalized)
      }
  
@@ -9,7 +9,7 @@
        // AppImage builds often need XDG runtime sockets before /tmp fallbacks.
        addLinuxRuntimeRoot(process.env.XDG_RUNTIME_DIR)
  
-@@ -500,7 +500,7 @@ export class DiscordRpcService {
+@@ -501,7 +501,7 @@ export class DiscordRpcService {
      addEndpointDirectory('/tmp')
      addEndpointDirectory(tmpdir())
  
