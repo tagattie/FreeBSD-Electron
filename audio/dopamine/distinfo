@@ -1,5 +1,5 @@
-TIMESTAMP = 1783585379
-SHA256 (dopamine-3.0.7-node-modules.tar.gz) = 2f41da8f3c0152696bb5089c938639b04467777fc073682f2d6bdfaa3d66e313
-SIZE (dopamine-3.0.7-node-modules.tar.gz) = 167021003
-SHA256 (digimezzo-dopamine-v3.0.7_GH0.tar.gz) = 316da0b10a2ff98febb90bc5b7b83506cc2f932e13c831d88fa0108193418ca7
-SIZE (digimezzo-dopamine-v3.0.7_GH0.tar.gz) = 5701506
+TIMESTAMP = 1786168714
+SHA256 (dopamine-3.0.8-node-modules.tar.gz) = 17d3ae345c35a70cce9c0dc80d032f9fbb66f1793c3be415737d45f47641bf7a
+SIZE (dopamine-3.0.8-node-modules.tar.gz) = 166670711
+SHA256 (digimezzo-dopamine-v3.0.8_GH0.tar.gz) = a60ef5b223abb3034770d78a2e96b4fdbd9595d0f34813cb24448d99ee305074
+SIZE (digimezzo-dopamine-v3.0.8_GH0.tar.gz) = 5716806
