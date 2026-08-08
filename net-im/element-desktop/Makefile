@@ -1,8 +1,8 @@
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.12.24
+DISTVERSION=	1.12.25
 CATEGORIES=	net-im
-MASTER_SITES=	https://github.com/${GH_ACCOUNT}/element-web/releases/download/${DISTVERSIONFULL}/:element_web \
+MASTER_SITES=	https://github.com/${GH_ACCOUNT}/${GH_PROJECT}/releases/download/${DISTVERSIONFULL}/:element_web \
 		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
 DISTFILES=	element-${DISTVERSIONFULL}${EXTRACT_SUFX}:element_web \
 		matrix-seshat-${MATRIX_SESHAT_VER}.tgz:matrix_seshat \
@@ -53,8 +53,8 @@ USE_ELECTRON=	appbuilder:devel rebuild build:builder
 
 YARN_FILE=		yarn-${YARN_VER}.tgz
 YARN_VER=		1.22.22
-MATRIX_SESHAT_NODE_MODULES_FILE=	${PORTNAME}-${DISTVERSION}-matrix-seshat-node-modules${EXTRACT_SUFX}
-MATRIX_SESHAT_VER=	4.3.0
+MATRIX_SESHAT_NODE_MODULES_FILE=	matrix-seshat-${MATRIX_SESHAT_VER}-node-modules${EXTRACT_SUFX}
+MATRIX_SESHAT_VER=	5.0.0
 RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
 
 .include <bsd.port.options.mk>
