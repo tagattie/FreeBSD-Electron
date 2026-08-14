@@ -1,6 +1,6 @@
---- src/main/security/permissionsManager.test.js.orig	2026-05-05 05:14:08 UTC
+--- src/main/security/permissionsManager.test.js.orig	2026-08-05 10:05:33 UTC
 +++ src/main/security/permissionsManager.test.js
-@@ -77,7 +77,7 @@ describe('main/PermissionsManager', () => {
+@@ -81,7 +81,7 @@ describe('main/PermissionsManager', () => {
              systemPreferences.askForMediaAccess.mockClear();
          });
  
@@ -9,7 +9,7 @@
              it('should ask for media permission when is not granted but the user explicitly granted it', () => {
                  systemPreferences.getMediaAccessStatus.mockReturnValue('denied');
                  const permissionsManager = new PermissionsManager('anyfile.json');
-@@ -87,7 +87,7 @@ describe('main/PermissionsManager', () => {
+@@ -91,7 +91,7 @@ describe('main/PermissionsManager', () => {
              });
          }
  

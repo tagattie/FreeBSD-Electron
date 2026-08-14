@@ -1,4 +1,4 @@
---- src/app/windows/baseWindow.ts.orig	2026-05-05 05:14:08 UTC
+--- src/app/windows/baseWindow.ts.orig	2026-08-05 10:05:33 UTC
 +++ src/app/windows/baseWindow.ts
 @@ -37,9 +37,9 @@ export default class BaseWindow {
          this.ready = false;
@@ -21,7 +21,7 @@
              windowOptions.icon = path.join(path.resolve(app.getAppPath(), 'assets'), 'linux', 'app_icon.png');
          }
  
-@@ -227,7 +227,7 @@ export default class BaseWindow {
+@@ -230,7 +230,7 @@ export default class BaseWindow {
      private onEmitConfiguration = () => {
          this.win.webContents.send(RELOAD_CONFIGURATION);
          if (process.platform !== 'darwin') {

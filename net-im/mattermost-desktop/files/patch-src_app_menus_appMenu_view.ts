@@ -1,6 +1,6 @@
---- src/app/menus/appMenu/view.ts.orig	2026-02-24 16:38:27 UTC
+--- src/app/menus/appMenu/view.ts.orig	2026-08-05 10:05:33 UTC
 +++ src/app/menus/appMenu/view.ts
-@@ -126,7 +126,7 @@ export default function createViewMenu() {
+@@ -129,7 +129,7 @@ export default function createViewMenu() {
          },
      }];
  
@@ -9,7 +9,7 @@
          viewSubMenu.push({
              role: 'togglefullscreen',
              label: localizeMessage('main.menus.app.view.fullscreen', 'Toggle Full Screen'),
-@@ -193,7 +193,7 @@ export default function createViewMenu() {
+@@ -196,7 +196,7 @@ export default function createViewMenu() {
          submenu: devToolsSubMenu,
      });
  

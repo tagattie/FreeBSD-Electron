@@ -10,6 +10,13 @@ share/icons/hicolor/512x512/apps/mattermost-desktop.png
 share/icons/hicolor/64x64/apps/mattermost-desktop.png
 %%DATADIR%%/resources/app-update.yml
 %%DATADIR%%/resources/app.asar
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@koromix/koffi-freebsd-x64/freebsd_x64/koffi.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@koromix/koffi-freebsd-x64/index.js
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@koromix/koffi-freebsd-x64/package.json
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@koromix/koffi-linux-x64/index.js
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@koromix/koffi-linux-x64/linux_x64/koffi.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@koromix/koffi-linux-x64/musl_x64/koffi.node
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/@koromix/koffi-linux-x64/package.json
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/cf-prefs/LICENSE
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/cf-prefs/build/Release/cf-prefs.node
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/cf-prefs/index.js

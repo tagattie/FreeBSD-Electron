@@ -1,6 +1,6 @@
---- src/app/mainWindow/mainWindow.ts.orig	2025-11-18 22:07:00 UTC
+--- src/app/mainWindow/mainWindow.ts.orig	2026-08-05 10:05:33 UTC
 +++ src/app/mainWindow/mainWindow.ts
-@@ -162,7 +162,7 @@ export class MainWindow extends EventEmitter {
+@@ -165,7 +165,7 @@ export class MainWindow extends EventEmitter {
      };
  
      private shouldStartFullScreen = () => {
@@ -9,7 +9,7 @@
              return false;
          }
  
-@@ -242,7 +242,7 @@ export class MainWindow extends EventEmitter {
+@@ -245,7 +245,7 @@ export class MainWindow extends EventEmitter {
  
      private onFocus = () => {
          // Only add shortcuts when window is in focus
@@ -18,7 +18,7 @@
              // check if KDE + windows is minimized to prevent unwanted focus event
              // that was causing an error not allowing minimization (MM-60233)
              if ((!this.win || this.win.browserWindow.isMinimized()) && isKDE()) {
-@@ -288,7 +288,7 @@ export class MainWindow extends EventEmitter {
+@@ -291,7 +291,7 @@ export class MainWindow extends EventEmitter {
              }
              switch (process.platform) {
              case 'win32':
