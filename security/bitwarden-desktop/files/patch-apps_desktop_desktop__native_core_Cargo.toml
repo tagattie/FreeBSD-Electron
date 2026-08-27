@@ -1,7 +1,7 @@
---- apps/desktop/desktop_native/core/Cargo.toml.orig	2026-07-15 09:46:59 UTC
+--- apps/desktop/desktop_native/core/Cargo.toml.orig	2026-08-10 20:48:17 UTC
 +++ apps/desktop/desktop_native/core/Cargo.toml
-@@ -46,15 +46,17 @@ zeroizing-alloc = { workspace = true }
- typenum = { workspace = true }
+@@ -45,7 +45,7 @@ zeroizing-alloc = { workspace = true }
+ [target.'cfg(not(windows))'.dependencies]
  zeroizing-alloc = { workspace = true }
  
 -[target.'cfg(target_os = "linux")'.dependencies]
@@ -9,15 +9,3 @@
  ashpd = { workspace = true, features = ["background", "clipboard", "remote_desktop", "screencast"] }
  homedir = { workspace = true }
  libc = { workspace = true }
--linux-keyutils = { workspace = true }
- oo7 = { workspace = true }
--secure_memory = { path = "../secure_memory" }
- zbus = { workspace = true, optional = true }
- zbus_polkit = { workspace = true, optional = true }
-+
-+[target.'cfg(target_os = "linux")'.dependencies]
-+linux-keyutils = { workspace = true }
-+secure_memory = { path = "../secure_memory" }
- 
- [target.'cfg(target_os = "macos")'.dependencies]
- core-foundation = { workspace = true, optional = true }

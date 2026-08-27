@@ -1,0 +1,11 @@
+--- apps/desktop/desktop_native/biometric/Cargo.toml.orig	2026-08-27 03:53:01 UTC
++++ apps/desktop/desktop_native/biometric/Cargo.toml
+@@ -8,7 +8,7 @@ anyhow = { workspace = true }
+ [dependencies]
+ anyhow = { workspace = true }
+ 
+-[target.'cfg(target_os = "linux")'.dependencies]
++[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
+ secure_memory = { path = "../secure_memory" }
+ tokio = { workspace = true, features = ["sync"] }
+ tracing = { workspace = true }

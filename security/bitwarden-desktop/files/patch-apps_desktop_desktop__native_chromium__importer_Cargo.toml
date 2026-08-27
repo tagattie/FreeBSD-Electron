@@ -1,11 +1,11 @@
---- apps/desktop/desktop_native/chromium_importer/Cargo.toml.orig	2026-07-15 09:46:59 UTC
+--- apps/desktop/desktop_native/chromium_importer/Cargo.toml.orig	2026-08-10 20:48:17 UTC
 +++ apps/desktop/desktop_native/chromium_importer/Cargo.toml
-@@ -16,7 +16,7 @@ serde_json = { workspace = true }
+@@ -15,7 +15,7 @@ serde_json = { workspace = true }
  serde = { workspace = true, features = ["derive"] }
  serde_json = { workspace = true }
  
 -[target.'cfg(target_os = "linux")'.dependencies]
 +[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
+ aes = { workspace = true }
  cbc = { workspace = true, features = ["alloc"] }
  oo7 = { workspace = true }
- pbkdf2 = "=0.13.0"

@@ -1,6 +1,6 @@
 PORTNAME=	bitwarden-desktop
 DISTVERSIONPREFIX=	desktop-v
-DISTVERSION=	2026.7.0
+DISTVERSION=	2026.8.0
 CATEGORIES=	security
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -17,7 +17,7 @@ LICENSE_PERMS_BITWARDEN=none
 LIB_DEPENDS=	libpcre2-8.so:devel/pcre2 \
 		libsecret-1.so:security/libsecret
 
-USES=		cargo electron:41 gmake gnome localbase:ldflags \
+USES=		cargo electron:43 gmake gnome localbase:ldflags \
 		nodejs:24,build npm:npm pkgconfig python:build xorg
 
 USE_GITHUB=	yes
