@@ -1,7 +1,7 @@
-TIMESTAMP = 1785661611
-SHA256 (pnpm-11.18.0.tgz) = 2dd711b9997e865e602807167498abb1251bd46cbc7f92ab4c9c3853578fbf0c
-SIZE (pnpm-11.18.0.tgz) = 8741943
-SHA256 (gerbil-1.27.1-node-modules.tar.gz) = 0f7250344168d532d51e908ded00a4b8c298d051d2121a1130a7359996a3ee13
-SIZE (gerbil-1.27.1-node-modules.tar.gz) = 121381764
-SHA256 (lone-cloud-gerbil-v1.27.1_GH0.tar.gz) = 31c8ef19e58fa3bd1e268fd9a4f43219b9aaa77de5ed736716746222db994355
-SIZE (lone-cloud-gerbil-v1.27.1_GH0.tar.gz) = 31992260
+TIMESTAMP = 1787806347
+SHA256 (pnpm-11.24.0.tgz) = de42427967350778e36b5424a79a5207d41a27d6a6053afecba1e9e45813b525
+SIZE (pnpm-11.24.0.tgz) = 5034204
+SHA256 (gerbil-1.28.1-node-modules.tar.gz) = fdc6615ff6a7a1a019ef1a72d82dd32f90edda139c0c80deb3f899fface41195
+SIZE (gerbil-1.28.1-node-modules.tar.gz) = 117466696
+SHA256 (lone-cloud-gerbil-v1.28.1_GH0.tar.gz) = fc50a50098bb2024930dea419526a9ea836eea8926b69b0b954a846778727342
+SIZE (lone-cloud-gerbil-v1.28.1_GH0.tar.gz) = 31995089
