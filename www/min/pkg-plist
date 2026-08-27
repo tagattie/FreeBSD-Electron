@@ -519,13 +519,7 @@ share/icons/hicolor/64x64/apps/min.png
 %%DATADIR%%/resources/app/node_modules/glob/LICENSE
 %%DATADIR%%/resources/app/node_modules/glob/common.js
 %%DATADIR%%/resources/app/node_modules/glob/glob.js
-%%DATADIR%%/resources/app/node_modules/glob/node_modules/brace-expansion/.tap/coverage/8b906b8c-e21f-40b5-8c0d-214d8c2682c5.json
-%%DATADIR%%/resources/app/node_modules/glob/node_modules/brace-expansion/.tap/processinfo/8b906b8c-e21f-40b5-8c0d-214d8c2682c5.json
 %%DATADIR%%/resources/app/node_modules/glob/node_modules/brace-expansion/LICENSE
-%%DATADIR%%/resources/app/node_modules/glob/node_modules/brace-expansion/dist/commonjs/index.js
-%%DATADIR%%/resources/app/node_modules/glob/node_modules/brace-expansion/dist/commonjs/package.json
-%%DATADIR%%/resources/app/node_modules/glob/node_modules/brace-expansion/dist/esm/index.js
-%%DATADIR%%/resources/app/node_modules/glob/node_modules/brace-expansion/dist/esm/package.json
 %%DATADIR%%/resources/app/node_modules/glob/node_modules/brace-expansion/index.js
 %%DATADIR%%/resources/app/node_modules/glob/node_modules/brace-expansion/package.json
 %%DATADIR%%/resources/app/node_modules/glob/node_modules/minimatch/LICENSE
