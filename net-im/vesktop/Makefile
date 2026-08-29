@@ -1,6 +1,6 @@
 PORTNAME=	vesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.6.5
+DISTVERSION=	1.6.7
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,8 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 # So we have to add npm as build-time dependency.
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
-USES=		desktop-file-utils electron:40 gnome nodejs:24,build pkgconfig
+USES=		desktop-file-utils electron:43 gnome nodejs:24,build npm:pnpm \
+		pkgconfig python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Vencord
@@ -22,13 +23,15 @@ GH_PROJECT=	Vesktop
 
 USE_GNOME=	glib20
 
+BINARY_ALIAS=	python3=${PYTHON_CMD}
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	README.md
 
 OPTIONS_DEFINE=	DOCS
 
-USE_ELECTRON=	npm:pnpm appbuilder prefetch extract rebuild build:builder
+NPM_FETCH_CMD=	${NPM_CMDNAME} install
+USE_ELECTRON=	appbuilder rebuild build:builder
 
 post-extract:
 	@if [ -r ${FILESDIR}/detectable.json ]; then \
