@@ -1,6 +1,6 @@
 PORTNAME=	superproductivity
 DISTVERSIONPREFIX=	v
-DISTVERSION=	18.19.0
+DISTVERSION=	18.21.1
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://super-productivity.com/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
-USES=		cargo electron:41 nodejs:24,build npm:npm
+USES=		cargo electron:43 nodejs:24,build npm:npm
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	super-productivity
