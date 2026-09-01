@@ -1,11 +1,11 @@
---- src/ui/main/icons.ts.orig	2022-01-02 03:59:54 UTC
+--- src/ui/main/icons.ts.orig	2026-08-31 19:36:42 UTC
 +++ src/ui/main/icons.ts
-@@ -54,7 +54,7 @@ export const getTrayIconPath = ({
+@@ -100,7 +100,7 @@ export const getTrayIconPath = ({
      case 'win32':
-       return getWindowsTrayIconPath(badge);
+       return getWindowsTrayIconPath(badge, presence, disconnected);
  
 -    case 'linux':
 +    case 'linux': case 'freebsd':
-       return getLinuxTrayIconPath(badge);
+       return getLinuxTrayIconPath(badge, presence, disconnected);
  
      default:
