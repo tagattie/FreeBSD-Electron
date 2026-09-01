@@ -1,6 +1,6 @@
 PORTNAME=	superproductivity
 DISTVERSIONPREFIX=	v
-DISTVERSION=	18.21.1
+DISTVERSION=	18.21.2
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
