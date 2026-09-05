@@ -1,4 +1,4 @@
---- electron/shell/browser/api/electron_api_app.cc.orig	2026-08-31 00:54:19 UTC
+--- electron/shell/browser/api/electron_api_app.cc.orig	2026-09-03 23:27:50 UTC
 +++ electron/shell/browser/api/electron_api_app.cc
 @@ -110,7 +110,7 @@
  #include "ui/base/resource/resource_bundle.h"
@@ -45,7 +45,7 @@
    // Read the xdg-activation token and set it in the command line for the
    // duration of the notification in order to ensure this is propagated to an
    // already running electron app instance if it exists.
-@@ -1477,7 +1477,7 @@ std::vector<gin_helper::Dictionary> App::GetAppMetrics
+@@ -1478,7 +1478,7 @@ std::vector<gin_helper::Dictionary> App::GetAppMetrics
        pid_dict.Set("name", process_metric.second->name);
      }
  
