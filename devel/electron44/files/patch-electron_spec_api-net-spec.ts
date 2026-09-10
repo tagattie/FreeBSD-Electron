@@ -1,6 +1,6 @@
---- electron/spec/api-net-spec.ts.orig	2026-09-03 23:27:50 UTC
+--- electron/spec/api-net-spec.ts.orig	2026-09-08 02:42:44 UTC
 +++ electron/spec/api-net-spec.ts
-@@ -2010,7 +2010,7 @@ describe('net module', () => {
+@@ -2066,7 +2066,7 @@ describe('net module', () => {
    // The select-client-certificate event only fires when the platform cert
    // store yields at least one matching identity, which the test suite cannot
    // guarantee on Linux (NSS) without app.importCertificate.
