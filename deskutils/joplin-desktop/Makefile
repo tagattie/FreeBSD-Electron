@@ -11,7 +11,7 @@
 
 PORTNAME=	joplin
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.7.16
+DISTVERSION=	3.7.18
 CATEGORIES=	deskutils
 MASTER_SITES=	https://www.sqlite.org/2024/:sqlite
 PKGNAMESUFFIX=	-desktop
