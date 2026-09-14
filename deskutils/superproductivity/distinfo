@@ -1,4 +1,4 @@
-TIMESTAMP = 1788240996
+TIMESTAMP = 1789388951
 SHA256 (rust/crates/bitflags-2.11.1.crate) = c4512299f36f043ab09a583e57bceb5a5aab7a73db1805848e8fef3c9e8c78b3
 SIZE (rust/crates/bitflags-2.11.1.crate) = 49082
 SHA256 (rust/crates/cc-1.2.60.crate) = 43c5703da9466b66a946814e1adf53ea2c90f10063b86290cc9eb67ce3478a20
@@ -45,7 +45,7 @@ SHA256 (rust/crates/windows-link-0.2.1.crate) = f0805222e57f7521d6a62e36fa9163bc
 SIZE (rust/crates/windows-link-0.2.1.crate) = 6133
 SHA256 (rust/crates/windows-sys-0.61.2.crate) = ae137229bcbd6cdf0f7b80a31df61766145077ddf49416a728b02cb3921ff3fc
 SIZE (rust/crates/windows-sys-0.61.2.crate) = 2517186
-SHA256 (superproductivity-18.21.2-node-modules.tar.gz) = 7d1c192af815b5bc5e79fccad24c08accf92c4f8fd22a04b83936dc5217b7336
-SIZE (superproductivity-18.21.2-node-modules.tar.gz) = 527735633
-SHA256 (super-productivity-super-productivity-v18.21.2_GH0.tar.gz) = 2e783f40638f22ee42987004806a764c4b98dc5ad0c2836f19a7f072effeaaa8
-SIZE (super-productivity-super-productivity-v18.21.2_GH0.tar.gz) = 23336377
+SHA256 (superproductivity-19.0.1-node-modules.tar.gz) = ff3cf22df22418e9f258523a6154160e09ec5c3d0b0a4b1c0b5ce474c79400b4
+SIZE (superproductivity-19.0.1-node-modules.tar.gz) = 443971411
+SHA256 (super-productivity-super-productivity-v19.0.1_GH0.tar.gz) = fe1b5905db28500e91757ab1c3bfa85b2b2f1a69c8c1023b8f0188f52e532946
+SIZE (super-productivity-super-productivity-v19.0.1_GH0.tar.gz) = 23791549
