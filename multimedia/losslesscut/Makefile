@@ -64,7 +64,7 @@ USE_ELECTRON=	appbuilder rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC}/node_modules/sharp && \
-	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} npm rebuild
+	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn run install
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
