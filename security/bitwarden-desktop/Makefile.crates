@@ -39,6 +39,7 @@ CARGO_CRATES=	aead-0.5.2 \
 		basic-toml-0.1.10 \
 		bcrypt-pbkdf-0.10.0 \
 		bincode-1.3.3 \
+		bitflags-1.3.2 \
 		bitflags-2.13.0 \
 		blake2-0.11.0-rc.6 \
 		block-buffer-0.10.4 \
@@ -117,6 +118,9 @@ CARGO_CRATES=	aead-0.5.2 \
 		data-encoding-2.11.0 \
 		data-encoding-macro-0.1.20 \
 		data-encoding-macro-internal-0.1.18 \
+		defmt-1.1.1 \
+		defmt-macros-1.1.1 \
+		defmt-parser-1.0.0 \
 		der-0.7.10 \
 		der-0.8.0 \
 		deranged-0.5.8 \
@@ -185,7 +189,7 @@ CARGO_CRATES=	aead-0.5.2 \
 		glob-0.3.3 \
 		goblin-0.8.2 \
 		group-0.13.0 \
-		h2-0.4.15 \
+		h2-0.4.16 \
 		half-2.7.1 \
 		hashbrown-0.12.3 \
 		hashbrown-0.15.5 \
@@ -229,6 +233,11 @@ CARGO_CRATES=	aead-0.5.2 \
 		is_terminal_polyfill-1.70.2 \
 		itertools-0.15.0 \
 		itoa-1.0.18 \
+		jiff-0.2.35 \
+		jiff-core-0.1.0 \
+		jiff-static-0.2.35 \
+		jiff-tzdb-0.1.8 \
+		jiff-tzdb-platform-0.1.3 \
 		jni-0.21.1 \
 		jni-0.22.4 \
 		jni-macros-0.22.4 \
@@ -332,6 +341,8 @@ CARGO_CRATES=	aead-0.5.2 \
 		poly1305-0.9.0 \
 		polyval-0.6.2 \
 		polyval-0.7.1 \
+		portable-atomic-1.15.0 \
+		portable-atomic-util-0.2.7 \
 		potential_utf-0.1.5 \
 		powerfmt-0.2.0 \
 		ppv-lite86-0.2.21 \
@@ -412,11 +423,11 @@ CARGO_CRATES=	aead-0.5.2 \
 		serde_repr-0.1.20 \
 		serde_spanned-1.1.1 \
 		serde_urlencoded-0.7.1 \
-		serde_with-3.21.0 \
-		serde_with_macros-3.21.0 \
+		serde_with-3.22.0 \
+		serde_with_macros-3.22.0 \
 		serdect-0.4.3 \
-		serial_test-3.5.0 \
-		serial_test_derive-3.5.0 \
+		serial_test-4.0.1 \
+		serial_test_derive-4.0.1 \
 		sha1-0.10.7 \
 		sha1-0.11.0 \
 		sha2-0.10.9 \
@@ -447,6 +458,7 @@ CARGO_CRATES=	aead-0.5.2 \
 		strsim-0.11.1 \
 		subtle-2.6.1 \
 		syn-2.0.118 \
+		syn-3.0.3 \
 		sync_wrapper-1.0.2 \
 		synstructure-0.13.2 \
 		sysinfo-0.38.2 \
