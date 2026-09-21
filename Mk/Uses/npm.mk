@@ -484,8 +484,6 @@ NPM_EXTRACT_FLAGS+=	--trust-lockfile
 .      endif
 .    endif
 
-EXTRACT_ONLY?=	${DISTFILES:C/:[^:]+$//:C/${NPM_CMDNAME}-.*\.tgz$//}
-
 npm-extract-node-package-manager:
 .    if ${_NPM_NAME} == yarn2 || ${_NPM_NAME} == yarn4 || ${_NPM_NAME} == pnpm
 	@${ECHO_MSG} "===>  Setting up ${NPM_CMDNAME} version ${NPM_VER}"
