@@ -29,6 +29,9 @@ USE_ELECTRON=	appbuilder rebuild:nodejs build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
+post-patch:
+	@${ECHO_CMD} "allow-scripts=canvas" >> ${WRKSRC}/.npmrc
+
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build
 	# generate icon files
@@ -49,7 +52,7 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/dist/app/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} + | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
