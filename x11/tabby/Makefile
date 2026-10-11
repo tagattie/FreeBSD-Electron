@@ -1,6 +1,13 @@
+# Notes for port maintainer(s)
+#
+# Before copying package.json and yarn.lock to ${PKGJSONSDIR},
+# do the following steps:
+# 1. Remove the following entry from resolutions in package.json
+#    "eslint/strip-ansi": "6.0.0"
+
 PORTNAME=	tabby
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.0.235
+DISTVERSION=	1.0.238
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -40,15 +47,15 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxkbcommon.so:x11/libxkbcommon \
 		libxshmfence.so:x11/libxshmfence
 
-USES=		cargo electron:38 gl gmake gnome iconv:wchar_t jpeg \
-		localbase:ldflags nodejs:22,build pkgconfig npm:yarn1 \
+USES=		cargo electron:43 gl gmake gnome iconv:wchar_t jpeg \
+		localbase:ldflags nodejs:24,build pkgconfig npm:yarn1 \
 		python:build shebangfix xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	Eugeny
 # For GH_TUPLE, look for version in ${WRKSRC}/app/node_modules/russh/package.json,
 # and search corresponding commit hash at https://github.com/Eugeny/russh-napi
-GH_TUPLE=	Eugeny:russh-napi:f7ef764e8d60b2d388983c22a9f38fbc929678a9:russh_napi/russh-napi
+GH_TUPLE=	Eugeny:russh-napi:e61c5444e6128211ba028e252948cc8da9ea2235:russh_napi/russh-napi
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
@@ -104,7 +111,7 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	${TAR} -cf - -C ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} . | \
 		${TAR} -xf - -C ${STAGEDIR}${DATADIR}
-	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -perm 755 -exec ${FILE} {} ';' | \
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -perm 755 -exec ${FILE} {} + | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 .for f in chromedriver mksnapshot v8_context_snapshot_generator
 	${RM} ${STAGEDIR}${DATADIR}/${f}
