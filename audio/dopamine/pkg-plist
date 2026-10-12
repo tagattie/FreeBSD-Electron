@@ -56,13 +56,6 @@ share/applications/dopamine.desktop
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/src/util/macros.cpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/src/util/query-macros.cpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/better-sqlite3/src/util/row-builder.cpp
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/build/Release/register-protocol-handler.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/index.js
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/package.json
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/src/register.h
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/src/register_linux.cpp
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/src/register_mac.m
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/register-scheme/src/register_win.cpp
 %%DATADIR%%/resources/default_app.asar
 share/icons/hicolor/128x128/apps/dopamine.png
 share/icons/hicolor/16x16/apps/dopamine.png

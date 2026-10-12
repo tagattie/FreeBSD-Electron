@@ -1,6 +1,6 @@
 PORTNAME=	dopamine
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.0.10
+DISTVERSION=	3.0.11
 CATEGORIES=	audio
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -26,12 +26,9 @@ USE_ELECTRON=	appbuilder rebuild build:builder
 
 ELECTRON_MAKE_FLAGS+=	--config electron-builder.config.js
 
-post-patch:
-	@${REINPLACE_CMD} -e 's/OS == "linux"/& or OS == "freebsd"/' \
-		${WRKSRC}/node_modules/register-scheme/binding.gyp
-
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} node patch-discord-rpc.js
+	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} node patch-taglib-sharp.js
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} npm run build:prod
 
 do-install:
@@ -45,7 +42,7 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} + | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
