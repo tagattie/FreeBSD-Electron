@@ -1,6 +1,6 @@
---- src/ui/main/rootWindow.ts.orig	2026-10-01 16:08:15 UTC
+--- src/ui/main/rootWindow.ts.orig	2026-10-11 02:05:54 UTC
 +++ src/ui/main/rootWindow.ts
-@@ -459,7 +459,7 @@ export const setupRootWindow = (): void => {
+@@ -460,7 +460,7 @@ export const setupRootWindow = (): void => {
            rootWindow.setFullScreen(false);
          }
  
@@ -9,7 +9,7 @@
            rootWindow.blur();
          }
  
-@@ -522,7 +522,7 @@ export const setupRootWindow = (): void => {
+@@ -523,7 +523,7 @@ export const setupRootWindow = (): void => {
      });
    });
  
@@ -18,7 +18,7 @@
      const selectRootWindowIcon = createStructuredSelector({
        globalBadge: selectGlobalBadge,
        rootWindowIcon: ({ rootWindowIcon }: RootState) => rootWindowIcon,
-@@ -546,7 +546,7 @@ export const setupRootWindow = (): void => {
+@@ -547,7 +547,7 @@ export const setupRootWindow = (): void => {
            const icon = nativeImage.createEmpty();
            const { scaleFactor } = screen.getPrimaryDisplay();
  
