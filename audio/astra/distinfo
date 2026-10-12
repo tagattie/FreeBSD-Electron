@@ -1,5 +1,5 @@
-TIMESTAMP = 1785671548
-SHA256 (astra-0.7.0-beta-node-modules.tar.gz) = 58918fc7942eed0fd9c458154cb6d108591ed73b826c9ea0cef0b9461a3f612a
-SIZE (astra-0.7.0-beta-node-modules.tar.gz) = 248094021
-SHA256 (Boof2015-astra-v0.7.0-beta_GH0.tar.gz) = 8a1e6dec335defdc34723702f2f1c315e4f97606282d9ed73c1e34915ba5024e
-SIZE (Boof2015-astra-v0.7.0-beta_GH0.tar.gz) = 5811832
+TIMESTAMP = 1791793331
+SHA256 (astra-0.8.0-beta-node-modules.tar.gz) = a0b8b7c0c2ac79ec6a3e7fd43f622e08c8d8d506e64b2388d4cfbe066149d178
+SIZE (astra-0.8.0-beta-node-modules.tar.gz) = 248094020
+SHA256 (Boof2015-astra-v0.8.0-beta_GH0.tar.gz) = da491f327579918eafcd095ee1201cdbaf911e451a26b4273902c29170431f0e
+SIZE (Boof2015-astra-v0.8.0-beta_GH0.tar.gz) = 29716059

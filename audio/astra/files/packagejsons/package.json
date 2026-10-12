@@ -1,6 +1,6 @@
 {
   "name": "astra",
-  "version": "0.7.0-beta",
+  "version": "0.8.0-beta",
   "description": "Audiophile music player with advanced visualization",
   "main": "./out/main/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "test:node": "node ./scripts/node/run-tests.cjs --node",
     "test:electron": "node ./scripts/node/run-tests.cjs --electron",
     "test:album-eligibility": "node --experimental-strip-types --experimental-default-type=module --test src/shared/library/albumEligibility.test.ts",
-    "test:album-grouping": "node --experimental-strip-types --experimental-default-type=module --test src/shared/library/albumGrouping.test.ts",
+    "test:album-grouping": "node --experimental-strip-types --test src/shared/library/albumGrouping.test.ts src/shared/library/albumGrouping.regression.test.ts",
     "test:artist-images": "node --experimental-strip-types --experimental-default-type=module --test src/shared/library/artistImages.test.ts",
     "test:library-latest-sync": "node --experimental-strip-types --experimental-default-type=module --test src/main/services/libraryLatestSync.test.ts",
     "test:library-sqlite": "ELECTRON_RUN_AS_NODE=1 electron --experimental-strip-types --loader ./scripts/node/electron-test-loader.mjs --test src/main/services/library.test.ts",
@@ -24,6 +24,8 @@
     "test:library-graph": "node --experimental-strip-types --experimental-default-type=module --experimental-specifier-resolution=node --test src/renderer/utils/libraryGraph.test.ts",
     "test:renderer-library-store": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/renderer/stores/libraryStore.test.ts",
     "test:renderer-player-store": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs --test src/renderer/stores/playerStore.test.ts",
+    "test:quick-search": "node ./scripts/research/quick-search.electron.cjs",
+    "test:ui-scaling": "node ./scripts/research/ui-scaling.electron.cjs",
     "test:local-api": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/localApi.test.ts",
     "test:companion-api": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/companionApiRefs.test.ts src/main/services/companionApiContract.test.ts src/renderer/hooks/useCompanionApiBridge.test.ts",
     "test:companion-api-examples": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs --test src/main/services/companionApiExamples.test.ts",
@@ -32,6 +34,13 @@
     "test:activity-indicator": "node --experimental-strip-types --experimental-default-type=module --experimental-specifier-resolution=node --test src/renderer/utils/astraActivity.test.ts",
     "test:audio-loudness": "node --experimental-strip-types --experimental-default-type=module --loader ./scripts/node/resolve-ts-loader.mjs --test src/renderer/audio/loudness.test.ts",
     "test:spectrum-native": "node --test native/test/spectrum-bars.test.mjs",
+    "test:native-dsp": "node --test native/test/spectrum-bars.test.mjs native/test/spectrogram-reassigned.test.mjs native/test/process-memory.test.mjs",
+    "test:track-waveform": "node ./scripts/node/run-track-waveform-tests.cjs",
+    "test:native-playback": "node ./scripts/node/run-native-playback-state-tests.cjs",
+    "test:adaptive-upmixer": "c++ -std=c++17 -O3 -fno-fast-math native/src/dsp_utils.cpp native/src/adaptive_upmixer.cpp native/test/adaptive_upmixer_test.cpp -I native/src -o /tmp/astra-adaptive-upmixer-tests && /tmp/astra-adaptive-upmixer-tests",
+    "benchmark:adaptive-upmixer": "c++ -std=c++17 -O3 -fno-fast-math native/src/dsp_utils.cpp native/src/adaptive_upmixer.cpp native/test/adaptive_upmixer_benchmark.cpp -I native/src -o /tmp/astra-adaptive-upmixer-benchmark && /tmp/astra-adaptive-upmixer-benchmark",
+    "research:upmix": "node ./scripts/research/upmix.cjs",
+    "test:research-upmix": "node --test scripts/research/upmix.test.cjs",
     "typecheck": "tsc --noEmit",
     "typecheck:receiver": "tsc --noEmit -p receiver/tsconfig.json",
     "receiver:dev": "node --experimental-strip-types --loader ./scripts/node/resolve-ts-loader.mjs receiver/src/main.ts",
@@ -128,6 +137,20 @@
       {
         "from": "THIRD_PARTY_LICENSES.md",
         "to": "THIRD_PARTY_LICENSES.md"
+      },
+      {
+        "from": "resources/tray/",
+        "to": "tray/",
+        "filter": [
+          "*"
+        ]
+      },
+      {
+        "from": "resources/hrtf/",
+        "to": "hrtf/",
+        "filter": [
+          "*"
+        ]
       }
     ],
     "win": {

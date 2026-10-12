@@ -1,6 +1,6 @@
---- native/binding.gyp.orig	2026-08-01 20:55:32 UTC
+--- native/binding.gyp.orig	2026-10-04 19:13:25 UTC
 +++ native/binding.gyp
-@@ -60,7 +60,7 @@
+@@ -224,7 +224,7 @@
              ]
            }
          }],

@@ -299,7 +299,17 @@ share/applications/astra.desktop
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/ffprobe-static/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/ffprobe-static/package.json
 %%DATADIR%%/resources/default_app.asar
+%%DATADIR%%/resources/hrtf/ATTRIBUTION.md
+%%DATADIR%%/resources/hrtf/LICENSE.SADIE-II.txt
+%%DATADIR%%/resources/hrtf/LICENSE.SOUND-SPHERE-2.txt
+%%DATADIR%%/resources/hrtf/sadie-ii-d1-ku100.sofa
+%%DATADIR%%/resources/hrtf/sound-sphere-2-ako.sofa
+%%DATADIR%%/resources/native/track_waveform.node
 %%DATADIR%%/resources/native/visualizer_dsp.node
+%%DATADIR%%/resources/tray/astra-tray.ico
+%%DATADIR%%/resources/tray/astra-tray.png
+%%DATADIR%%/resources/tray/astraTrayTemplate.png
+%%DATADIR%%/resources/tray/astraTrayTemplate@2x.png
 %%DATADIR%%/snapshot_blob.bin
 %%DATADIR%%/v8_context_snapshot.bin
 %%DATADIR%%/version
