@@ -1,6 +1,6 @@
---- apps/desktop/desktop_native/core/Cargo.toml.orig	2026-08-10 20:48:17 UTC
+--- apps/desktop/desktop_native/core/Cargo.toml.orig	2026-09-29 12:16:34 UTC
 +++ apps/desktop/desktop_native/core/Cargo.toml
-@@ -45,7 +45,7 @@ zeroizing-alloc = { workspace = true }
+@@ -32,7 +32,7 @@ zeroizing-alloc = { workspace = true }
  [target.'cfg(not(windows))'.dependencies]
  zeroizing-alloc = { workspace = true }
  

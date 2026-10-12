@@ -1,4 +1,4 @@
---- apps/desktop/desktop_native/core/src/ipc/mod.rs.orig	2026-05-29 16:42:52 UTC
+--- apps/desktop/desktop_native/core/src/ipc/mod.rs.orig	2026-09-29 12:16:34 UTC
 +++ apps/desktop/desktop_native/core/src/ipc/mod.rs
 @@ -34,7 +34,7 @@ pub const FLATPAK_PATHS: [&str; 4] = [
  
@@ -9,7 +9,7 @@
  pub const UNSANDBOXED_PATHS: [&str; 4] = [
      ".config/chromium/NativeMessagingHosts",
      ".config/google-chrome/NativeMessagingHosts",
-@@ -96,7 +96,7 @@ pub fn path(name: &str) -> std::path::PathBuf {
+@@ -134,7 +134,7 @@ pub fn path(name: &str) -> std::path::PathBuf {
          }
      }
  
