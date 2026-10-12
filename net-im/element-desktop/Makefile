@@ -1,13 +1,16 @@
+# Notes for port maintainer(s)
+#
+# Before copying package.json and package-lock.json to ${PKGJSONSDIR},
+# do the following steps:
+# 1. Remove "pnpm run -r sane-postinstall" from postinstall script in
+#    ${WRKSRC}/package.json
+
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.12.28
+DISTVERSION=	1.12.30
 CATEGORIES=	net-im
-MASTER_SITES=	https://github.com/${GH_ACCOUNT}/${GH_PROJECT}/releases/download/${DISTVERSIONFULL}/:element_web \
-		https://registry.npmjs.org/matrix-seshat/-/:matrix_seshat
-DISTFILES=	element-${DISTVERSIONFULL}${EXTRACT_SUFX}:element_web \
-		matrix-seshat-${MATRIX_SESHAT_VER}.tgz:matrix_seshat \
-		${YARN_FILE}:prefetch \
-		${MATRIX_SESHAT_NODE_MODULES_FILE}:prefetch
+MASTER_SITES=	https://github.com/${GH_ACCOUNT}/${GH_PROJECT}/releases/download/${DISTVERSIONFULL}/:element_web
+DISTFILES=	element-${DISTVERSIONFULL}${EXTRACT_SUFX}:element_web
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Glossy Matrix collaboration client for desktop
@@ -18,9 +21,7 @@ LICENSE_COMB=	dual
 LICENSE_FILE_AGPLv3+ =	${WRKSRC}/LICENSE-AGPL-3.0
 LICENSE_FILE_GPLv3+ =	${WRKSRC}/LICENSE-GPL-3.0
 
-FETCH_DEPENDS=	git:devel/git \
-		yarn${NODEJS_SUFFIX}>0:www/yarn${NODEJS_SUFFIX}
-EXTRACT_DEPENDS=jq:textproc/jq
+FETCH_DEPENDS=	git:devel/git
 LIB_DEPENDS=	libsqlcipher.so:databases/sqlcipher \
 		libsecret-1.so:security/libsecret
 
@@ -30,9 +31,10 @@ USES=		cargo desktop-file-utils electron:44 gmake nodejs:24,build \
 USE_GITHUB=	yes
 GH_ACCOUNT=	element-hq
 GH_PROJECT=	element-web
+GH_TUPLE=	matrix-org:seshat:6.0.1:seshat/seshat
 
-CARGO_CARGOTOML=${BUILD_WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build/Cargo.toml
-CARGO_CARGOLOCK=${BUILD_WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build/Cargo.lock
+CARGO_CARGOTOML=${WRKSRC}/seshat/seshat-node/Cargo.toml
+CARGO_CARGOLOCK=${WRKSRC}/seshat/seshat-node/Cargo.lock
 CARGO_BUILD=	no
 CARGO_INSTALL=	no
 CARGO_TEST=	no
@@ -51,49 +53,11 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	appbuilder:devel rebuild build:builder
 
-YARN_FILE=		yarn-${YARN_VER}.tgz
-YARN_VER=		1.22.22
-MATRIX_SESHAT_NODE_MODULES_FILE=	matrix-seshat-${MATRIX_SESHAT_VER}-node-modules${EXTRACT_SUFX}
-MATRIX_SESHAT_VER=	5.0.0
-RUST_ARCH=		${ARCH:S/amd64/x86_64/:S/i386/i686/}
-
 .include <bsd.port.options.mk>
 
 .if ${OSVERSION} >= 1500000
 BUILD_DEPENDS+=	${LOCALBASE}/lib/compat/libutil.so.9:misc/compat14x
 .endif
-
-pre-fetch:
-	@if [ ! -f ${DISTDIR}/${YARN_FILE} ]; then \
-		${MKDIR} ${WRKDIR}/.bin; \
-		cd ${WRKDIR} && \
-		${SETENV} ${MAKE_ENV} corepack pack yarn@${YARN_VER} && \
-		${TAR} -xzf corepack.tgz && \
-		${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
-			${SH} ${SCRIPTSDIR}/npm-create-mtree.sh yarn > \
-			yarn.mtree && \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${YARN_FILE} @yarn.mtree; \
-	fi
-	@if [ ! -f ${DISTDIR}/${MATRIX_SESHAT_NODE_MODULES_FILE} ]; then \
-		${ECHO_MSG} "===>  Prefetching and archiving node modules for matrix-seshat"; \
-		${MKDIR} ${WRKDIR}/node-modules-cache; \
-		${CP} ${FILESDIR}/matrix-seshat/* ${WRKDIR}/node-modules-cache; \
-		${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
-			${WRKDIR}/node-modules-cache/.yarnrc; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${SETENV} HOME=${WRKDIR} XDG_CACHE_HOME=${WRKDIR}/.cache \
-			yarn install --frozen-lockfile --ignore-scripts --silent; \
-		cd ${WRKDIR}/node-modules-cache && \
-		${SETENV} SCRIPTSDIR=${SCRIPTSDIR} WRKDIR=${WRKDIR} \
-			${SH} ${SCRIPTSDIR}/npm-create-mtree.sh yarn-offline-cache > \
-			node-modules-cache.mtree && \
-		${SETENV} LANG=en_US.UTF-8 LC_ALL=en_US.UTF-8 \
-			${TAR} -cz --options 'gzip:!timestamp' \
-			-f ${DISTDIR}/${MATRIX_SESHAT_NODE_MODULES_FILE} @node-modules-cache.mtree; \
-		${RM} -r ${WRKDIR}/node-modules-cache; \
-	fi
 
 post-extract:
 	@${ECHO_CMD} "trustLockfile: true" >> ${WRKSRC}/pnpm-workspace.yaml
@@ -101,44 +65,21 @@ post-extract:
 		${WRKSRC}/pnpm-workspace.yaml
 	@${ECHO_CMD} "frozenStore: true" >> ${WRKSRC}/pnpm-workspace.yaml
 	@${ECHO_CMD} "preferFrozenLockfile: true" >> ${WRKSRC}/pnpm-workspace.yaml
-	@${MKDIR} ${WRKDIR}/.bin
-	@${SETENV} ${MAKE_ENV} corepack enable --install-directory ${WRKDIR}/.bin
-	@${SETENV} ${MAKE_ENV} corepack install -g ${DISTDIR}/${YARN_FILE}
-	@${MKDIR} ${WRKSRC}/matrix-seshat
-	@${TAR} -xf ${DISTDIR}/matrix-seshat-${MATRIX_SESHAT_VER}.tgz \
-		--strip-components 1 \
-		-C ${WRKSRC}/matrix-seshat
-	@${MKDIR} ${BUILD_WRKSRC}/.hak/hakModules/matrix-seshat \
-		${BUILD_WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
-	@cd ${WRKSRC}/matrix-seshat && \
-	${COPYTREE_SHARE} . ${BUILD_WRKSRC}/.hak/hakModules/matrix-seshat
-	@cd ${WRKSRC}/matrix-seshat && \
-	${COPYTREE_SHARE} . ${BUILD_WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build
-.for f in package.json yarn.lock
-	@${CP} ${FILESDIR}/matrix-seshat/${f} \
-		${BUILD_WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build
-.endfor
-	@${MV} ${WRKDIR}/yarn-offline-cache \
-		${BUILD_WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build
-	@${ECHO_CMD} 'yarn-offline-mirror "./yarn-offline-cache"' >> \
-		${BUILD_WRKSRC}/.hak/matrix-seshat/x86_64-unknown-freebsd/build/.yarnrc
 	@${MKDIR} ${BUILD_WRKSRC}/deploys
 	@${MV} ${WRKDIR}/element-${DISTVERSIONFULL} ${BUILD_WRKSRC}/deploys
 	cd ${BUILD_WRKSRC} && \
 	${SETENV} ${MAKE_ENV} pnpm run fetch --noverify --cfgdir "element.io/release"
-	@${REINPLACE_CMD} -e "/sane-postinstall/s/install-app-deps/& --platform linux/" \
-		${BUILD_WRKSRC}/package.json
-	@${ECHO_CMD} "$$(jq '. += { "packageManager": "yarn@${YARN_VER}" }' ${BUILD_WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build/package.json)" > \
-		${BUILD_WRKSRC}/.hak/matrix-seshat/${RUST_ARCH}-unknown-freebsd/build/package.json
 
 pre-build:
+	cd ${WRKSRC}/seshat/seshat-node && \
+	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${CARGO} build \
+		--manifest-path ${CARGO_CARGOTOML} \
+		--release --verbose --verbose
+	${CP} ${CARGO_TARGET_DIR}/*/libmatrix_seshat.so \
+		${BUILD_WRKSRC}/node_modules/@matrix-org/seshat/index.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run postinstall
-	cd ${BUILD_WRKSRC} && \
-	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${ELECTRON_REBUILD_ENV} pnpm run build:native check && \
-	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${ELECTRON_REBUILD_ENV} pnpm run build:native build && \
-	${SETENV} ${MAKE_ENV} ${CARGO_ENV} ${ELECTRON_REBUILD_ENV} pnpm run build:native copy
-	${RLN} ${BUILD_WRKSRC}/.hak/hakModules/matrix-seshat \
-		${WRKSRC}/node_modules/matrix-seshat
+	cd ${BUILD_WRKSRC}/node_modules/pkcs11js && \
+	${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} pnpm rebuild
 	cd ${BUILD_WRKSRC} && \
 	${SETENV} ${MAKE_ENV} NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:res
 	cd ${BUILD_WRKSRC} && \
@@ -152,7 +93,7 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${BUILD_WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} + | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
