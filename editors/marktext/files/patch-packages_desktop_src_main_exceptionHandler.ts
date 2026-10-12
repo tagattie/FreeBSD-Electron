@@ -1,4 +1,4 @@
---- packages/desktop/src/main/exceptionHandler.ts.orig	2026-06-05 03:43:05 UTC
+--- packages/desktop/src/main/exceptionHandler.ts.orig	2026-10-11 11:54:43 UTC
 +++ packages/desktop/src/main/exceptionHandler.ts
 @@ -6,7 +6,7 @@
  // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -8,20 +8,25 @@
 +import { app, clipboard, dialog, ipcMain } from 'electron'
  import os from 'os'
  import log from 'electron-log'
- import { createAndOpenGitHubIssueUrl } from './utils/createGitHubIssue'
-@@ -123,15 +123,6 @@ const setupExceptionHandler = (): void => {
-   // renderer process error handler
-   ipcMain.on('mt::handle-renderer-error', (_e, error: Error) => {
-     handleError(ERROR_MSG_RENDERER(), error, 'renderer')
--  })
--
--  // start crashReporter to save core dumps to temporary folder
+ // import { createAndOpenGitHubIssueUrl } from './utils/createGitHubIssue'
+@@ -134,13 +134,13 @@ const setupExceptionHandler = (): void => {
+   })
+ 
+   // start crashReporter to save core dumps to temporary folder
 -  crashReporter.start({
--    companyName: 'marktext',
--    productName: 'marktext',
+-    companyName: 'MarkText',
+-    productName: 'MarkText',
 -    submitURL: 'http://0.0.0.0/',
 -    uploadToServer: false,
 -    compress: true
-   })
+-  })
++  // crashReporter.start({
++  //   companyName: 'MarkText',
++  //   productName: 'MarkText',
++  //   submitURL: 'http://0.0.0.0/',
++  //   uploadToServer: false,
++  //   compress: true
++  // })
  }
  
+ export const initExceptionLogger = (): void => {

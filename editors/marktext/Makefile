@@ -1,6 +1,6 @@
 PORTNAME=	marktext
 DISTVERSIONPREFIX=	v
-DISTVERSION=	0.19.1
+DISTVERSION=	0.21.2
 CATEGORIES=	editors
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -56,6 +56,8 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} + | \
+		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
 	${MKDIR} ${STAGEDIR}${DOCSDIR}
