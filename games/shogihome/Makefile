@@ -7,7 +7,7 @@
 
 PORTNAME=	shogihome
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.29.0
+DISTVERSION=	1.29.1
 CATEGORIES=	games
 MASTER_SITES=	https://github.com/yaneurao/YaneuraOu/releases/download/suisho5/:evalfunc
 DISTFILES=	Suisho5.7z:evalfunc
