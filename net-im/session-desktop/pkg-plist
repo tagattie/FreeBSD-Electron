@@ -20,7 +20,6 @@ share/icons/hicolor/64x64/apps/session-desktop.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/BUILDING.md
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/CMakeLists.txt
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/build/Release/libsession_util_nodejs.node
-%%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/build_release_archive.py
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/base_config.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/blinding/blinding.hpp
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/include/community.hpp
@@ -40,6 +39,8 @@ share/icons/hicolor/64x64/apps/session-desktop.png
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/index.js
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/package.json
 %%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/prepare_release.sh
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/requirements.txt
+%%DATADIR%%/resources/app.asar.unpacked/node_modules/libsession_util_nodejs/scripts/install.js
 %%DATADIR%%/resources/default_app.asar
 %%DATADIR%%/resources/dynamic_assets/GeoLite2-Country.mmdb
 %%DATADIR%%/resources/dynamic_assets/service-nodes-cache.json

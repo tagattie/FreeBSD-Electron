@@ -1,5 +1,5 @@
---- node_modules/.pnpm/libsession_util_nodejs@https+++github.com+session-foundation+libsession-util-nodejs+rel_ef23e2c58425e6467dc0a125433d0f1b/node_modules/libsession_util_nodejs/libsession-util/external/session-router/external/oxen-libquic/external/oxen-logging/fmt/include/fmt/format.h.orig	2026-06-01 22:17:06.102363000 +0900
-+++ node_modules/.pnpm/libsession_util_nodejs@https+++github.com+session-foundation+libsession-util-nodejs+rel_ef23e2c58425e6467dc0a125433d0f1b/node_modules/libsession_util_nodejs/libsession-util/external/session-router/external/oxen-libquic/external/oxen-logging/fmt/include/fmt/format.h	2026-06-01 22:19:55.463302000 +0900
+--- node_modules/.pnpm/libsession_util_nodejs@https+++github.com+session-foundation+libsession-util-nodejs+rel_4a7b88f06dbdd5cdb2009d39e34d12b3/node_modules/libsession_util_nodejs/libsession-util/external/session-router/external/oxen-libquic/external/oxen-logging/fmt/include/fmt/format.h.orig	2026-10-13 20:34:14.209358000 +0900
++++ node_modules/.pnpm/libsession_util_nodejs@https+++github.com+session-foundation+libsession-util-nodejs+rel_4a7b88f06dbdd5cdb2009d39e34d12b3/node_modules/libsession_util_nodejs/libsession-util/external/session-router/external/oxen-libquic/external/oxen-logging/fmt/include/fmt/format.h	2026-10-13 20:34:42.321373000 +0900
 @@ -1943,7 +1943,10 @@
    int num_digits = 0;
    auto buffer = memory_buffer();

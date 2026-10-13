@@ -1,14 +1,6 @@
-# Notes for port maintainer(s)
-#
-# Before copying package.json, pnpm-lock.yaml and pnpm-workspace.yaml to
-# ${PKGJSONSDIR}, do the following steps:
-# 1. Add tsx to devDependencies in ${WRKSRC}
-#    $ corepack pnpm add --save-dev --ignore-scripts tsx
-# 2. Replace all occurences of "pnpx" with "pnpm exec" in ${WRKSRC}/package.json
-
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.18.1
+DISTVERSION=	1.18.2
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -28,8 +20,8 @@ USES=		cmake:indirect electron:40 localbase:ldflags nodejs:24,build \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	session-foundation
-GH_TUPLE=	session-foundation:session-desktop-dynamic-assets:740155b3085f683fa74d46118f860ca79b166144:dynamic_assets/dynamic_assets \
-		session-foundation:session-localization:f824751eba28e98843e082c08672393224e6b939:localization/ts/localization
+GH_TUPLE=	session-foundation:session-desktop-dynamic-assets:315a4bb2fd91a70d664cba561378fb78ca298619:dynamic_assets/dynamic_assets \
+		session-foundation:session-localization:b5baa7fb06f71e2ead67df55d035b07d9a77d44c:localization/ts/localization
 
 MAKE_ENV=	SIGNAL_ENV=production
 
@@ -65,7 +57,7 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 	${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} + | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
