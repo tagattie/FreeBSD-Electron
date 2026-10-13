@@ -1,6 +1,6 @@
 {
   "name": "hyper-root",
-  "version": "4.0.0-q-canary.13",
+  "version": "4.0.0-q-canary.18",
   "repository": "quine-global/hyper",
   "engines": {
     "node": "22.22.2"
@@ -29,7 +29,8 @@
     "mk-snapshot": "node bin/download-mksnapshot.js && node bin/mk-snapshot.js",
     "cp-snapshot": "node bin/cp-snapshot.js",
     "generate-schema": "typescript-json-schema ./typings/config.d.ts rawConfig -o ./app/config/schema.json --required",
-    "uuaw": "uuaw"
+    "uuaw": "uuaw",
+    "bump-version": "node bin/bump-version.js"
   },
   "license": "MIT",
   "author": {
@@ -161,11 +162,13 @@
     "@types/react": "18.3.12",
     "@types/retry": "0.12.5",
     "electron-link": "https://github.com/quine-global/electron-link#10fc13cb91f08e3b2a2f791125509db4d84530ff",
-    "node-abi": "^3.81.0"
+    "node-abi": "^3.81.0",
+    "node-gyp": "^12.3.0"
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "18.3.12"
+      "@types/react": "18.3.12",
+      "node-gyp": "^12.3.0"
     }
   },
   "packageManager": "pnpm@10.33.0+sha512.10568bb4a6afb58c9eb3630da90cc9516417abebd3fabbe6739f0ae795728da1491e9db5a544c76ad8eb7570f5c4bb3d6c637b2cb41bfdcdb47fa823c8649319"

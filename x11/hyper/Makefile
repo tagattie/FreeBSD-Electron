@@ -1,6 +1,6 @@
 PORTNAME=	hyper
 DISTVERSIONPREFIX=	v
-DISTVERSION=	4.0.0-q-canary.14
+DISTVERSION=	4.0.0-q-canary.18
 CATEGORIES=	x11
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -98,7 +98,7 @@ do-install:
 	${MKDIR} ${STAGEDIR}${DATADIR}
 	${TAR} -cf - -C ${WRKSRC}/dist/${ELECTRON_BUILDER_APP_OUT_DIR} . | \
 		${TAR} -xf - -C ${STAGEDIR}${DATADIR}
-	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} + | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 .for f in chromedriver mksnapshot v8_context_snapshot_generator
 	${RM} ${STAGEDIR}${DATADIR}/${f}
