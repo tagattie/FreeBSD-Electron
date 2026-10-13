@@ -10,6 +10,8 @@ WWW=		https://super-productivity.com/
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/LICENSE
 
+BUILD_DEPENDS=	git:devel/git
+
 USES=		cargo electron:43 nodejs:24,build npm:npm
 
 USE_GITHUB=	yes
