@@ -1,6 +1,6 @@
---- apps/desktop/webpack.base.js.orig	2026-09-29 12:16:34 UTC
+--- apps/desktop/webpack.base.js.orig	2026-10-14 14:08:31 UTC
 +++ apps/desktop/webpack.base.js
-@@ -313,6 +313,8 @@ module.exports.buildConfig = function buildConfig(para
+@@ -315,6 +315,8 @@ module.exports.buildConfig = function buildConfig(para
              {
                loader: "sass-loader",
                options: {
