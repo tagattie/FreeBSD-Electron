@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	6.3.0
+DISTVERSION=	6.3.1
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -24,10 +24,11 @@ PORTDOCS=	CONTRIBUTING.md NOTICE.txt README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
+NPM_FETCH_FLAGS=	--allow-git=all
 USE_ELECTRON=	appbuilder rebuild build:builder
 
 # git ls-remote --tags https://github.com/mattermost/desktop 'refs/tags/${GH_TAGNAME}^{}'
-COMMIT_HASH=	274602892a4391ac8c455cc09bdb52632ab282a9
+COMMIT_HASH=	45944fb07a70f08587b25719c8c88c71f16ff920
 
 post-patch:
 	@${REINPLACE_CMD} -e 's/%%COMMIT_HASH%%/${COMMIT_HASH}/' \
@@ -56,7 +57,7 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} + | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
