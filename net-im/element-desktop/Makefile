@@ -7,7 +7,7 @@
 
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.12.31
+DISTVERSION=	1.12.32
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/${GH_PROJECT}/releases/download/${DISTVERSIONFULL}/:element_web
 DISTFILES=	element-${DISTVERSIONFULL}${EXTRACT_SUFX}:element_web
