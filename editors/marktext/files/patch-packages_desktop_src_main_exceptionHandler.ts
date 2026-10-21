@@ -1,4 +1,4 @@
---- packages/desktop/src/main/exceptionHandler.ts.orig	2026-10-11 11:54:43 UTC
+--- packages/desktop/src/main/exceptionHandler.ts.orig	2026-10-21 04:24:51 UTC
 +++ packages/desktop/src/main/exceptionHandler.ts
 @@ -6,7 +6,7 @@
  // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
@@ -8,11 +8,11 @@
 +import { app, clipboard, dialog, ipcMain } from 'electron'
  import os from 'os'
  import log from 'electron-log'
- // import { createAndOpenGitHubIssueUrl } from './utils/createGitHubIssue'
-@@ -134,13 +134,13 @@ const setupExceptionHandler = (): void => {
+ import { t } from './i18n'
+@@ -100,13 +100,13 @@ const setupExceptionHandler = (): void => {
+     handleError(ERROR_MSG_RENDERER(), error, 'renderer')
    })
  
-   // start crashReporter to save core dumps to temporary folder
 -  crashReporter.start({
 -    companyName: 'MarkText',
 -    productName: 'MarkText',
