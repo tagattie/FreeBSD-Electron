@@ -1,7 +1,7 @@
-TIMESTAMP = 1788010242
+TIMESTAMP = 1792829191
 SHA256 (pnpm-11.9.0.tgz) = 2d29be26a7265fb24bc71ca9ac7af62df398df4b9855d804c70a49db5f8c3fa1
 SIZE (pnpm-11.9.0.tgz) = 4608011
-SHA256 (vesktop-1.6.7-node-modules.tar.gz) = 39e538766355207e966329e1d4fa73f356cb9af3c089f82da3f15aa0aa37ef83
-SIZE (vesktop-1.6.7-node-modules.tar.gz) = 51321817
-SHA256 (Vencord-Vesktop-v1.6.7_GH0.tar.gz) = 8c0dbd65e85f46797bc89591a92f8677e2565ea51cd96f661f1dd5da74c819d1
-SIZE (Vencord-Vesktop-v1.6.7_GH0.tar.gz) = 3160586
+SHA256 (vesktop-1.6.8-node-modules.tar.gz) = 00a336d1182dfebdd98d84b259f7edc4b821e74e4f64adf3692849819b5aae20
+SIZE (vesktop-1.6.8-node-modules.tar.gz) = 52299489
+SHA256 (Vencord-Vesktop-v1.6.8_GH0.tar.gz) = 91dd4630fb5fff153586056451a9587f4c5fbeb048c6d570a35056460415f22f
+SIZE (Vencord-Vesktop-v1.6.8_GH0.tar.gz) = 3163260

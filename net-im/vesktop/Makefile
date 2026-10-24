@@ -1,6 +1,6 @@
 PORTNAME=	vesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.6.7
+DISTVERSION=	1.6.8
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 # So we have to add npm as build-time dependency.
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
-USES=		desktop-file-utils electron:43 gnome nodejs:24,build npm:pnpm \
+USES=		desktop-file-utils electron:44 gnome nodejs:24,build npm:pnpm \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
@@ -32,12 +32,6 @@ OPTIONS_DEFINE=	DOCS
 
 NPM_FETCH_CMD=	${NPM_CMDNAME} install
 USE_ELECTRON=	appbuilder rebuild build:builder
-
-post-extract:
-	@if [ -r ${FILESDIR}/detectable.json ]; then \
-		${CP} ${FILESDIR}/detectable.json \
-			${WRKSRC}/node_modules/arrpc/src/process/detectable.json; \
-	fi
 
 pre-build:
 	cd ${WRKSRC}/packages/libvesktop && \
@@ -68,11 +62,5 @@ do-install-DOCS-on:
 
 do-test:
 	cd ${TEST_WRKSRC} && ${SETENV} ${TEST_ENV} pnpm run test
-
-# target for port maintainer(s)
-fetch-detectable-db: extract
-	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run postinstall
-	${CP} ${WRKSRC}/node_modules/arrpc/src/process/detectable.json \
-		${FILESDIR}
 
 .include <bsd.port.mk>
