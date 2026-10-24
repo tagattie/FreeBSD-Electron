@@ -1,6 +1,6 @@
 PORTNAME=	superproductivity
 DISTVERSIONPREFIX=	v
-DISTVERSION=	19.2.0
+DISTVERSION=	19.3.0
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -12,7 +12,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 BUILD_DEPENDS=	git:devel/git
 
-USES=		cargo electron:43 nodejs:24,build npm:npm
+USES=		cargo electron:44 nodejs:24,build npm:npm
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	super-productivity
