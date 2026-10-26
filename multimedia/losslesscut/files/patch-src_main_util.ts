@@ -1,6 +1,6 @@
---- src/main/util.ts.orig	2026-01-29 16:07:12 UTC
+--- src/main/util.ts.orig	2026-10-19 12:17:39 UTC
 +++ src/main/util.ts
-@@ -6,7 +6,7 @@ export const isMac = platform === 'darwin';
+@@ -11,7 +11,7 @@ export const isMac = platform === 'darwin';
  
  export const isWindows = platform === 'win32';
  export const isMac = platform === 'darwin';

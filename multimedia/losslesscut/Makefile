@@ -1,6 +1,16 @@
+# Notes for port maintainer(s)
+#
+# Before copying package.json and yarn.lock to ${PKGJSONSDIR},
+# do the following steps:
+# 1. Add node-addon-api and node-gyp to devDependencies in ${WRKSRC}
+#    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
+# This is required for building sharp node module from source.
+# https://sharp.pixelplumbing.com/install/#building-from-source
+# 2. Remove build.afterpack from package.json in ${WRKSRC}
+
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.69.0
+DISTVERSION=	3.70.1
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -43,8 +53,8 @@ LIB_DEPENDS=	libatk-bridge-2.0.so:accessibility/at-spi2-core \
 RUN_DEPENDS=	ffmpeg:multimedia/ffmpeg
 
 USES=		desktop-file-utils electron:42,build,test gettext-runtime gl \
-		gmake gnome iconv:wchar_t jpeg nodejs:24,build npm:yarn4 \
-		python:build xorg
+		gmake gnome iconv:wchar_t jpeg localbase:ldflags \
+		nodejs:24,build npm:yarn4 pkgconfig python:build xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	mifi
@@ -53,6 +63,9 @@ GH_PROJECT=	lossless-cut
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
 USE_GL=		gbm gl
 USE_GNOME=	cairo gdkpixbuf glib20 gtk30 libxml2 libxslt pango
+
+GLIB_INCLUDES=	pkgconf --cflags glib-2.0
+CFLAGS=		${GLIB_INCLUDES:sh}
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 
@@ -64,7 +77,7 @@ USE_ELECTRON=	appbuilder rebuild build:builder
 
 pre-build:
 	cd ${WRKSRC}/node_modules/sharp && \
-	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn run install
+	${SETENV} ${MAKE_ENV} ${NODEJS_REBUILD_ENV} yarn run build
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} yarn run build
 	# generate icon files
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} app-builder icon \
