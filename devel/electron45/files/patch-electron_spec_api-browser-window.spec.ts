@@ -1,0 +1,173 @@
+--- electron/spec/api-browser-window.spec.ts.orig	2026-10-26 21:12:45 UTC
++++ electron/spec/api-browser-window.spec.ts
+@@ -118,7 +118,7 @@ describe('BrowserWindow module', () => {
+       }).not.toThrow();
+     });
+ 
+-    ifit(process.platform === 'linux')('does not crash when setting large window icons', async () => {
++    ifit(process.platform === 'linux' || process.platform === 'freebsd')('does not crash when setting large window icons', async () => {
+       const appPath = path.join(fixtures, 'apps', 'xwindow-icon');
+       const appProcess = childProcess.spawn(process.execPath, [appPath]);
+       await once(appProcess, 'exit');
+@@ -445,7 +445,7 @@ describe('BrowserWindow module', () => {
+     });
+   });
+ 
+-  ifdescribe(process.platform !== 'linux')('BrowserWindow.getContentProtection', () => {
++  ifdescribe(process.platform !== 'linux' && process.platform !== 'freebsd')('BrowserWindow.getContentProtection', () => {
+     afterEach(closeAllWindows);
+     it('can set content protection', async () => {
+       const w = new BrowserWindow({ show: false });
+@@ -1454,7 +1454,7 @@ describe('BrowserWindow module', () => {
+ 
+     describe('BrowserWindow.minimize()', () => {
+       // TODO(codebytere): Enable for Linux once maximize/minimize events work in CI.
+-      ifit(process.platform !== 'linux')('should not be visible when the window is minimized', async () => {
++      ifit(process.platform !== 'linux' && process.platform !== 'freebsd')('should not be visible when the window is minimized', async () => {
+         const minimize = once(w, 'minimize');
+         w.minimize();
+         await minimize;
+@@ -1471,7 +1471,7 @@ describe('BrowserWindow module', () => {
+       });
+ 
+       // TODO(dsanders11): Enable for Linux once CI plays nice with these kinds of tests
+-      ifit(process.platform !== 'linux')('should not restore maximized windows', async () => {
++      ifit(process.platform !== 'linux' && process.platform !== 'freebsd')('should not restore maximized windows', async () => {
+         const maximize = once(w, 'maximize');
+         const shown = once(w, 'show');
+         w.maximize();
+@@ -1568,7 +1568,7 @@ describe('BrowserWindow module', () => {
+         }
+       );
+ 
+-      ifit(process.platform !== 'linux')('acquires focus status from the other windows', async () => {
++      ifit(process.platform !== 'linux' && process.platform !== 'freebsd')('acquires focus status from the other windows', async () => {
+         const w1 = new BrowserWindow({ show: false });
+         const w2 = new BrowserWindow({ show: false });
+         const w3 = new BrowserWindow({ show: false });
+@@ -1673,7 +1673,7 @@ describe('BrowserWindow module', () => {
+         expect(w.isFocused()).toBe(false);
+       });
+ 
+-      ifit(process.platform !== 'linux')('transfers focus status to the next window', async () => {
++      ifit(process.platform !== 'linux' && process.platform !== 'freebsd')('transfers focus status to the next window', async () => {
+         const w1 = new BrowserWindow({ show: false });
+         const w2 = new BrowserWindow({ show: false });
+         const w3 = new BrowserWindow({ show: false });
+@@ -2247,7 +2247,7 @@ describe('BrowserWindow module', () => {
+         });
+       });
+ 
+-      ifdescribe(process.platform !== 'linux')('Maximized state', () => {
++      ifdescribe(process.platform !== 'linux' && process.platform !== 'freebsd')('Maximized state', () => {
+         it('checks normal bounds when maximized', async () => {
+           const bounds = w.getBounds();
+           const maximize = once(w, 'maximize');
+@@ -2466,7 +2466,7 @@ describe('BrowserWindow module', () => {
+         });
+       });
+ 
+-      ifdescribe(process.platform !== 'linux')('Minimized state', () => {
++      ifdescribe(process.platform !== 'linux' && process.platform !== 'freebsd')('Minimized state', () => {
+         it('checks normal bounds when minimized', async () => {
+           const bounds = w.getBounds();
+           const minimize = once(w, 'minimize');
+@@ -3828,7 +3828,7 @@ describe('BrowserWindow module', () => {
+       expect(overlayRectPreMax.height).toBe(size);
+ 
+       // 'maximize' event is not emitted on Linux in CI.
+-      if (process.platform !== 'linux' && !w.isMaximized()) {
++      if ((process.platform !== 'linux' && process.platform !== 'freebsd') && !w.isMaximized()) {
+         const maximize = once(w, 'maximize');
+         w.show();
+         w.maximize();
+@@ -4003,7 +4003,7 @@ describe('BrowserWindow module', () => {
+         expect(preMaxHeight).toBe(size);
+ 
+         // 'maximize' event is not emitted on Linux in CI.
+-        if (process.platform !== 'linux' && !w.isMaximized()) {
++        if ((process.platform !== 'linux' && process.platform !== 'freebsd') && !w.isMaximized()) {
+           const maximize = once(w, 'maximize');
+           w.show();
+           w.maximize();
+@@ -5453,7 +5453,7 @@ describe('BrowserWindow module', () => {
+         expect(test.typeofClearImmediate).toBe('undefined');
+         expect(test.typeofGlobal).toBe('object');
+ 
+-        if (process.platform === 'linux' && test.osSandbox) {
++        if ((process.platform === 'linux' || process.platform === 'freebsd') && test.osSandbox) {
+           expect(test.creationTime, 'creation time').toBeNull();
+           expect(test.systemMemoryInfo, 'system memory info').toBeNull();
+         } else {
+@@ -5977,7 +5977,7 @@ describe('BrowserWindow module', () => {
+     });
+   });
+ 
+-  ifdescribe(process.platform !== 'linux')('max/minimize events', () => {
++  ifdescribe(process.platform !== 'linux' && process.platform !== 'freebsd')('max/minimize events', () => {
+     afterEach(closeAllWindows);
+     it('emits an event when window is maximized', async () => {
+       const w = new BrowserWindow({ show: false });
+@@ -6253,7 +6253,7 @@ describe('BrowserWindow module', () => {
+     // TODO(zcbenz):
+     // This test does not run on Linux CI. See:
+     // https://github.com/electron/electron/issues/28699
+-    ifit(process.platform === 'linux' && !process.env.CI)(
++    ifit((process.platform === 'linux' || process.platform === 'freebsd') && !process.env.CI)(
+       'should bring a minimized maximized window back to maximized state',
+       async () => {
+         const w = new BrowserWindow({});
+@@ -6271,7 +6271,7 @@ describe('BrowserWindow module', () => {
+       }
+     );
+ 
+-    ifit(process.platform !== 'linux')('should not break fullscreen state', { tags: ['serial'] }, async () => {
++    ifit(process.platform !== 'linux' && process.platform !== 'freebsd')('should not break fullscreen state', { tags: ['serial'] }, async () => {
+       const w = new BrowserWindow({ show: false });
+       w.show();
+ 
+@@ -6294,7 +6294,7 @@ describe('BrowserWindow module', () => {
+   });
+ 
+   // TODO(dsanders11): Enable once maximize event works on Linux again on CI
+-  ifdescribe(process.platform !== 'linux')('BrowserWindow.maximize()', () => {
++  ifdescribe(process.platform !== 'linux' && process.platform !== 'freebsd')('BrowserWindow.maximize()', () => {
+     afterEach(closeAllWindows);
+     it('should show the window if it is not currently shown', async () => {
+       const w = new BrowserWindow({ show: false });
+@@ -6331,7 +6331,7 @@ describe('BrowserWindow module', () => {
+ 
+     // TODO(dsanders11): Enable once minimize event works on Linux again.
+     //                   See https://github.com/electron/electron/issues/28699
+-    ifit(process.platform !== 'linux')('should not restore a minimized window', async () => {
++    ifit(process.platform !== 'linux' && process.platform !== 'freebsd')('should not restore a minimized window', async () => {
+       const w = new BrowserWindow();
+       const minimize = once(w, 'minimize');
+       w.minimize();
+@@ -6851,7 +6851,7 @@ describe('BrowserWindow module', () => {
+       });
+ 
+       // On Linux there is no "resizable" property of a window.
+-      ifit(process.platform !== 'linux')('does affect maximizability when disabled and enabled', () => {
++      ifit(process.platform !== 'linux' && process.platform !== 'freebsd')('does affect maximizability when disabled and enabled', () => {
+         const w = new BrowserWindow({ show: false });
+         expect(w.resizable, 'resizable').toBe(true);
+ 
+@@ -7092,7 +7092,7 @@ describe('BrowserWindow module', () => {
+     });
+   });
+ 
+-  ifdescribe(process.platform !== 'linux')('window states (excluding Linux)', () => {
++  ifdescribe(process.platform !== 'linux' && process.platform !== 'freebsd')('window states (excluding Linux)', () => {
+     // Not implemented on Linux.
+     afterEach(closeAllWindows);
+ 
+@@ -8483,7 +8483,7 @@ describe('BrowserWindow module', () => {
+   describe('"transparent" option', { tags: ['serial'] }, () => {
+     afterEach(closeAllWindows);
+ 
+-    ifit(process.platform !== 'linux')(
++    ifit(process.platform !== 'linux' && process.platform !== 'freebsd')(
+       'correctly returns isMaximized() when the window is maximized then minimized',
+       async () => {
+         const w = new BrowserWindow({
