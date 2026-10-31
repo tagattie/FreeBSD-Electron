@@ -9,7 +9,7 @@
 
 PORTNAME=	ueli
 DISTVERSIONPREFIX=	v
-DISTVERSION=	9.29.0
+DISTVERSION=	9.29.1
 CATEGORIES=	deskutils
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -21,7 +21,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 
 LIB_DEPENDS=	libvips.so:graphics/vips
 
-USES=		electron:41 localbase:ldflags nodejs:24,build npm:npm \
+USES=		electron:45 localbase:ldflags nodejs:24,build npm:npm \
 		python:build
 
 USE_GITHUB=	yes
@@ -50,7 +50,7 @@ do-install:
 	@${MKDIR} ${STAGEDIR}${DATADIR}
 	cd ${WRKSRC}/release/${ELECTRON_BUILDER_APP_OUT_DIR} && \
 		${COPYTREE_SHARE} resources ${STAGEDIR}${DATADIR}
-	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} ';' | \
+	${FIND} ${STAGEDIR}${DATADIR}/resources -type f -exec ${FILE} {} + | \
 		${GREP} 'ELF.*FreeBSD' | ${AWK} -F ': ' '{print $$1}' | ${XARGS} ${STRIP_CMD}
 
 do-install-DOCS-on:
