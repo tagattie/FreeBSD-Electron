@@ -111,8 +111,6 @@ CARGO_INSTALL=		no
 CARGO_TEST=		no
 
 MAKE_ARGS=	-C out/${BUILDTYPE}
-MAKE_ENV+=	C_INCLUDE_PATH=${LOCALBASE}/include \
-		CPLUS_INCLUDE_PATH=${LOCALBASE}/include
 ALL_TARGET=	electron electron:node_headers
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=electron_dist_zip electron_chromedriver_zip \
@@ -300,6 +298,11 @@ GN_ARGS+=	enable_rust=true \
 
 # go
 MAKE_ENV+=	GOCACHE=${WRKDIR}/go-cache
+
+# python
+# Don't create __pycache__ directory when executing python codes
+# This is a workaround to avoid filesystem violations during poudriere build
+MAKE_ENV+=	PYTHONDONTWRITEBYTECODE=1
 
 TEST_ENV+=	${MAKE_ENV} \
 		ELECTRON_OUT_DIR=${BUILDTYPE} \
