@@ -6,11 +6,11 @@
 #    $ corepack yarn add --dev --mode=skip-build node-addon-api node-gyp
 # This is required for building sharp node module from source.
 # https://sharp.pixelplumbing.com/install/#building-from-source
-# 2. Remove build.afterpack from package.json in ${WRKSRC}
+# 2. Remove build.afterPack from package.json in ${WRKSRC}
 
 PORTNAME=	losslesscut
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.70.1
+DISTVERSION=	3.70.2
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
