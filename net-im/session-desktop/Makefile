@@ -1,6 +1,6 @@
 PORTNAME=	session-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.18.2
+DISTVERSION=	1.18.3
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -20,8 +20,8 @@ USES=		cmake:indirect electron:40 localbase:ldflags nodejs:24,build \
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	session-foundation
-GH_TUPLE=	session-foundation:session-desktop-dynamic-assets:315a4bb2fd91a70d664cba561378fb78ca298619:dynamic_assets/dynamic_assets \
-		session-foundation:session-localization:b5baa7fb06f71e2ead67df55d035b07d9a77d44c:localization/ts/localization
+GH_TUPLE=	session-foundation:session-desktop-dynamic-assets:eab413fd012a7fc96c2813483ae7aff82773504c:dynamic_assets/dynamic_assets \
+		session-foundation:session-localization:cb7374cff34729bd47386c4452f3dc41a0c47fbe:localization/ts/localization
 
 MAKE_ENV=	SIGNAL_ENV=production
 
