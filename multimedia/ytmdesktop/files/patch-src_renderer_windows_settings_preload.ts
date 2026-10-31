@@ -1,8 +1,8 @@
---- src/renderer/windows/settings/preload.ts.orig	2024-01-31 08:57:45 UTC
+--- src/renderer/windows/settings/preload.ts.orig	2026-10-28 22:31:39 UTC
 +++ src/renderer/windows/settings/preload.ts
-@@ -12,7 +12,7 @@ contextBridge.exposeInMainWorld("ytmd", {
+@@ -22,7 +22,7 @@ contextBridge.exposeInMainWorld("ytmd", {
+   requestWindowState: () => ipcRenderer.send("windowControls:requestState"),
  
- contextBridge.exposeInMainWorld("ytmd", {
    isDarwin: process.platform === "darwin",
 -  isLinux: process.platform === "linux",
 +  isLinux: (process.platform === "linux" || process.platform === "freebsd"),

@@ -1,0 +1,11 @@
+--- xosms/Cargo.toml.orig	2026-10-31 13:13:01 UTC
++++ xosms/Cargo.toml
+@@ -15,7 +15,7 @@ features = ["napi5", "async"]
+ version = "3.14"
+ features = ["napi5", "async"]
+ 
+-[target.'cfg(target_os = "linux")'.dependencies]
++[target.'cfg(any(target_os = "linux", target_os = "freebsd"))'.dependencies]
+ zbus = { version = "5.19.0", features = ["tokio"] }
+ 
+ [target.'cfg(target_os = "windows")'.dependencies]
