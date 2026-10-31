@@ -7,7 +7,7 @@
 
 PORTNAME=	element-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.12.32
+DISTVERSION=	1.12.33
 CATEGORIES=	net-im
 MASTER_SITES=	https://github.com/${GH_ACCOUNT}/${GH_PROJECT}/releases/download/${DISTVERSIONFULL}/:element_web
 DISTFILES=	element-${DISTVERSIONFULL}${EXTRACT_SUFX}:element_web
@@ -80,7 +80,8 @@ pre-build:
 		${BUILD_WRKSRC}/node_modules/@matrix-org/seshat/index.node
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run postinstall
 	cd ${BUILD_WRKSRC}/node_modules/pkcs11js && \
-	${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} pnpm rebuild
+	${SETENV} ${MAKE_ENV} ${ELECTRON_REBUILD_ENV} \
+		node-gyp --jobs ${MAKE_JOBS_NUMBER} rebuild
 	cd ${BUILD_WRKSRC} && \
 	${SETENV} ${MAKE_ENV} NX_SOCKET_DIR=/tmp/nx-tmp pnpm exec nx build:res
 	cd ${BUILD_WRKSRC} && \
