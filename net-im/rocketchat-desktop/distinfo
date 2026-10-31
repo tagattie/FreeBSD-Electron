@@ -1,7 +1,7 @@
-TIMESTAMP = 1792828239
+TIMESTAMP = 1793449129
 SHA256 (yarn-4.6.0.tgz) = 3535ac31a60fb63af81b2edd8c6861ff5b781b76f718c51e0956cd294d34658a
 SIZE (yarn-4.6.0.tgz) = 994320
-SHA256 (rocketchat-desktop-4.18.5-node-modules.tar.gz) = bb2705286e17fdd810997e02ace8fd7a87daa8f43481ff5929ca7c09be5eff24
-SIZE (rocketchat-desktop-4.18.5-node-modules.tar.gz) = 191485695
-SHA256 (RocketChat-Rocket.Chat.Electron-4.18.5_GH0.tar.gz) = dd26c35aa65e345f0bbbddb8dc38c504d41cd5c244cd3ff9f41c27c9c1860384
-SIZE (RocketChat-Rocket.Chat.Electron-4.18.5_GH0.tar.gz) = 3626987
+SHA256 (rocketchat-desktop-4.19.0-node-modules.tar.gz) = 1970c7d9e01e0d1c8506f033b08b800ff8daf403af473e0ca33873b80c0498ac
+SIZE (rocketchat-desktop-4.19.0-node-modules.tar.gz) = 191489362
+SHA256 (RocketChat-Rocket.Chat.Electron-4.19.0_GH0.tar.gz) = 7f6d8df4c1a2307ec40c63f6c98b80bd1d60a61d5ca832d8d739734de0dbe868
+SIZE (RocketChat-Rocket.Chat.Electron-4.19.0_GH0.tar.gz) = 3682959
