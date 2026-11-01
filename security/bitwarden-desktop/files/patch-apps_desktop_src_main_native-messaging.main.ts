@@ -1,6 +1,6 @@
---- apps/desktop/src/main/native-messaging.main.ts.orig	2026-10-14 14:08:31 UTC
+--- apps/desktop/src/main/native-messaging.main.ts.orig	2026-10-26 11:20:46 UTC
 +++ apps/desktop/src/main/native-messaging.main.ts
-@@ -216,7 +216,7 @@ export class NativeMessagingMain {
+@@ -240,7 +240,7 @@ export class NativeMessagingMain {
          }
          break;
        }
@@ -9,7 +9,7 @@
          // Because on linux, the path inside the sandbox is different, and we want to support:
          // Flatpak App, Unsandboxed App, Flatpak Browser, Unsandboxed Browser, Snap App, Unsandboxed App
          // and any combination of the above, we copy the binary to the applications native-messaging-hosts path
-@@ -372,7 +372,7 @@ export class NativeMessagingMain {
+@@ -403,7 +403,7 @@ export class NativeMessagingMain {
          }
          break;
        }
@@ -18,7 +18,7 @@
          for (const [key, value] of Object.entries(this.getLinuxNMHS())) {
            if (key === "Firefox") {
              await this.removeIfExists(
-@@ -517,7 +517,7 @@ export class NativeMessagingMain {
+@@ -562,7 +562,7 @@ export class NativeMessagingMain {
            .map(([, value]) => value);
          break;
        }
