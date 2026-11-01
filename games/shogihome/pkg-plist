@@ -5,8 +5,6 @@ share/pixmaps/shogihome.png
 %%DATADIR%%/LICENSES.chromium.html
 %%DATADIR%%/chrome_100_percent.pak
 %%DATADIR%%/chrome_200_percent.pak
-%%DATADIR%%/libEGL.so
-%%DATADIR%%/libGLESv2.so
 %%DATADIR%%/libffmpeg.so
 %%DATADIR%%/libvk_swiftshader.so
 %%DATADIR%%/libvulkan.so

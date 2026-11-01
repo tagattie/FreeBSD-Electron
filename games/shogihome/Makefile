@@ -7,7 +7,7 @@
 
 PORTNAME=	shogihome
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.29.1
+DISTVERSION=	1.30.0
 CATEGORIES=	games
 MASTER_SITES=	https://github.com/yaneurao/YaneuraOu/releases/download/suisho5/:evalfunc
 DISTFILES=	Suisho5.7z:evalfunc
@@ -44,11 +44,11 @@ LIB_DEPENDS=	libatspi.so:accessibility/at-spi2-core \
 		libxshmfence.so:x11/libxshmfence \
 		libfontconfig.so:x11-fonts/fontconfig
 
-USES=		cargo electron:42 gl gmake gnome jpeg nodejs:24,build npm:npm xorg
+USES=		cargo electron:44 gl gmake gnome jpeg nodejs:24,build npm:npm xorg
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	sunfish-shogi
-GH_TUPLE=	electron:extract-zip:v1.0.3:extract_zip/extract-zip \
+GH_TUPLE=	electron:extract-zip:v1.0.5:extract_zip/extract-zip \
 		yaneurao:YaneuraOu:V9.00:yaneuraou/yaneuraou
 
 USE_XORG=	x11 xcb xcomposite xdamage xext xfixes xi xrandr xrender xtst
