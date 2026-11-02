@@ -1,6 +1,6 @@
---- electron/shell/browser/electron_browser_main_parts.cc.orig	2026-10-26 21:12:45 UTC
+--- electron/shell/browser/electron_browser_main_parts.cc.orig	2026-10-30 20:58:17 UTC
 +++ electron/shell/browser/electron_browser_main_parts.cc
-@@ -77,7 +77,7 @@
+@@ -78,7 +78,7 @@
  #include "ui/wm/core/wm_state.h"
  #endif
  
@@ -9,7 +9,7 @@
  #include <dlfcn.h>
  
  #include "base/environment.h"
-@@ -138,7 +138,7 @@ namespace {
+@@ -139,7 +139,7 @@ namespace {
  
  namespace {
  
@@ -18,7 +18,7 @@
  // The display server connection or the session bus is gone: exit like
  // Chrome's SessionEnding(), with an off-thread watchdog that crashes us if
  // exiting hangs on the dead connection.
-@@ -210,13 +210,17 @@ ElectronBrowserMainParts::ElectronBrowserMainParts()
+@@ -211,13 +211,17 @@ ElectronBrowserMainParts::ElectronBrowserMainParts()
    self_ = this;
  }
  
@@ -37,7 +37,7 @@
    return lib ? dlsym(lib, name) : nullptr;
  }
  
-@@ -247,10 +251,10 @@ std::vector<std::optional<std::string>> SnapshotFontCo
+@@ -248,10 +252,10 @@ std::vector<std::optional<std::string>> SnapshotFontCo
  }
  
  }  // namespace
@@ -50,7 +50,7 @@
    JoinSystemFontConfigInit();
  #endif
  }
-@@ -317,7 +321,7 @@ void ElectronBrowserMainParts::PostEarlyInitialization
+@@ -323,7 +327,7 @@ void ElectronBrowserMainParts::PostEarlyInitialization
  
    node_bindings_->Initialize(isolate, context);
  
@@ -59,7 +59,7 @@
    // Runs during Node.js environment creation and is joined before any app
    // code can run, so nothing else touches FontConfig or the environment.
    const auto fontconfig_env = SnapshotFontConfigEnv();
-@@ -371,7 +375,7 @@ void ElectronBrowserMainParts::PostEarlyInitialization
+@@ -377,7 +381,7 @@ void ElectronBrowserMainParts::PostEarlyInitialization
    // Wrap the uv loop with global env.
    node_bindings_->set_uv_env(node_env_.get());
  
@@ -68,7 +68,7 @@
    JoinSystemFontConfigInit();
  #endif
  
-@@ -381,7 +385,7 @@ void ElectronBrowserMainParts::PostEarlyInitialization
+@@ -387,7 +391,7 @@ void ElectronBrowserMainParts::PostEarlyInitialization
    // Wait for app
    node_bindings_->JoinAppCode();
  
@@ -77,7 +77,7 @@
    // Reload if the app's main script changed the FontConfig environment.
    if (fontconfig_env != SnapshotFontConfigEnv()) {
      if (auto fc_reinit = reinterpret_cast<int (*)()>(
-@@ -446,7 +450,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
+@@ -452,7 +456,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
    // happen before the ResourceBundle is loaded
    if (locale.empty())
      l10n_util::OverrideLocaleWithCocoaLocale();
@@ -86,7 +86,7 @@
    // l10n_util::GetApplicationLocaleInternal uses g_get_language_names(),
    // which keys off of getenv("LC_ALL").
    // We must set this env first to make ui::ResourceBundle accept the custom
-@@ -475,7 +479,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
+@@ -481,7 +485,7 @@ int ElectronBrowserMainParts::PreCreateThreads() {
    ElectronBrowserClient::SetApplicationLocale(app_locale);
    fake_browser_process_->SetApplicationLocale(app_locale);
  
@@ -95,7 +95,7 @@
    // Reset to the original LC_ALL since we should not be changing it.
    if (!locale.empty()) {
      if (lc_all)
-@@ -532,7 +536,7 @@ void ElectronBrowserMainParts::ToolkitInitialized() {
+@@ -538,7 +542,7 @@ void ElectronBrowserMainParts::ToolkitInitialized() {
  }
  
  void ElectronBrowserMainParts::ToolkitInitialized() {
@@ -104,7 +104,7 @@
    // GTK3's gtk_init() probes the display for OpenGL and loads the GL driver
    // into this process; nothing here uses GdkGLContext. GDK_GL is read once at
    // init and only by GTK3 (GTK4 renders with GL itself and ignores it).
-@@ -582,14 +586,14 @@ void ElectronBrowserMainParts::ToolkitInitialized() {
+@@ -588,14 +592,14 @@ void ElectronBrowserMainParts::ToolkitInitialized() {
  #endif
  }
  
@@ -121,7 +121,7 @@
  
  int ElectronBrowserMainParts::PreMainMessageLoopRun() {
    // Run user's main script before most things get initialized, so we can have
-@@ -662,19 +666,23 @@ void ElectronBrowserMainParts::PostCreateMainMessageLo
+@@ -668,19 +672,23 @@ void ElectronBrowserMainParts::PostCreateMainMessageLo
  }
  
  void ElectronBrowserMainParts::PostCreateMainMessageLoop() {
@@ -147,7 +147,7 @@
    // Set up crypt config. This needs to be done before anything starts the
    // network service, as the raw encryption key needs to be shared with the
    // network service for encrypted cookie storage.
-@@ -754,7 +762,7 @@ void ElectronBrowserMainParts::PostMainMessageLoopRun(
+@@ -760,7 +768,7 @@ void ElectronBrowserMainParts::PostMainMessageLoopRun(
    fake_browser_process_->PostMainMessageLoopRun();
    content::DevToolsAgentHost::StopRemoteDebuggingPipeHandler();
  

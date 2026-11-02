@@ -239,7 +239,7 @@ SNDIO_VARS=		GN_ARGS+=use_sndio=true
 SNDIO_VARS_OFF=		GN_ARGS+=use_sndio=false
 
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=			156.0.8078.49
+CHROMIUM_VER=			156.0.8078.75
 # See ${WRKSRC}/electron/DEPS for NODE_VER
 NODE_VER=			24.22.1
 # See ${WRKSRC}/electron/DEPS for NAN_VER
