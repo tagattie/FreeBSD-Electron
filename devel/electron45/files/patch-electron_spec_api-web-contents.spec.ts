@@ -1,4 +1,4 @@
---- electron/spec/api-web-contents.spec.ts.orig	2026-10-30 20:58:17 UTC
+--- electron/spec/api-web-contents.spec.ts.orig	2026-11-04 16:52:38 UTC
 +++ electron/spec/api-web-contents.spec.ts
 @@ -1676,7 +1676,7 @@ describe('webContents module', () => {
      // back to OpenFolder() which does a blocking DirectoryExists() on the UI
@@ -18,7 +18,7 @@
        process.arch !== 'ia32' &&
        !process.arch.startsWith('arm') &&
        !!process.env.DBUS_SESSION_BUS_ADDRESS
-@@ -5507,7 +5507,7 @@ describe('webContents module', () => {
+@@ -5535,7 +5535,7 @@ describe('webContents module', () => {
      });
  
      // TODO(codebytere): OOPIF printing is disabled on Linux at the moment due to crashes.
