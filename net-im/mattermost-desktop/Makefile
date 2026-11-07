@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	6.3.1
+DISTVERSION=	6.3.2
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -28,7 +28,7 @@ NPM_FETCH_FLAGS=	--allow-git=all
 USE_ELECTRON=	appbuilder rebuild build:builder
 
 # git ls-remote --tags https://github.com/mattermost/desktop 'refs/tags/${GH_TAGNAME}^{}'
-COMMIT_HASH=	45944fb07a70f08587b25719c8c88c71f16ff920
+COMMIT_HASH=	c2ca0cac022c3c8fa502d7a9d964640d348bdcad
 
 post-patch:
 	@${REINPLACE_CMD} -e 's/%%COMMIT_HASH%%/${COMMIT_HASH}/' \
