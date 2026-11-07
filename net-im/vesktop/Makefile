@@ -1,6 +1,6 @@
 PORTNAME=	vesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.6.8
+DISTVERSION=	1.6.9
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -14,7 +14,7 @@ LICENSE_FILE=	${WRKSRC}/LICENSE
 # So we have to add npm as build-time dependency.
 BUILD_DEPENDS=	npm${NODEJS_SUFFIX}>0:www/npm${NODEJS_SUFFIX}
 
-USES=		desktop-file-utils electron:44 gnome nodejs:24,build npm:pnpm \
+USES=		desktop-file-utils electron:45 gnome nodejs:24,build npm:pnpm \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
