@@ -118,6 +118,8 @@ POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=electron_dist_zip electron_chromedriver_zip \
 			electron_mksnapshot_zip
 
+LDFLAGS+=	${INOTIFY_LIB}
+
 DATADIR=	${PREFIX}/share/${PORTNAME}${PKGNAMESUFFIX}
 BINARY_ALIAS=	python3=${PYTHON_CMD}
 BUNDLE_LIBS=	yes
