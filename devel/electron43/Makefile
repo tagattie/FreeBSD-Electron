@@ -79,9 +79,9 @@ TEST_DEPENDS=	git:devel/git \
 		sentry-cli:devel/sentry-cli
 
 USES=		bison cargo compiler:c++17-lang cpe display:test gettext-tools \
-		gl gmake gnome iconv:wchar_t jpeg localbase:ldflags ninja \
-		nodejs:24,build npm:yarn4 pkgconfig python:build,test qt:5 \
-		shebangfix tar:xz xorg
+		gl gmake gnome iconv:wchar_t inotify jpeg localbase:ldflags \
+		ninja nodejs:24,build npm:yarn4 pkgconfig python:build,test \
+		qt:5 shebangfix tar:xz xorg
 
 CPE_VENDOR=	electronjs
 USE_GITHUB=	nodefault
