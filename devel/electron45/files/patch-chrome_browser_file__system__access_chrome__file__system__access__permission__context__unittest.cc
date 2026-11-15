@@ -1,4 +1,4 @@
---- chrome/browser/file_system_access/chrome_file_system_access_permission_context_unittest.cc.orig	2026-11-05 12:28:42 UTC
+--- chrome/browser/file_system_access/chrome_file_system_access_permission_context_unittest.cc.orig	2026-11-10 20:19:00 UTC
 +++ chrome/browser/file_system_access/chrome_file_system_access_permission_context_unittest.cc
 @@ -711,7 +711,7 @@ TEST_F(ChromeFileSystemAccessPermissionContextTest,
        IsOpenAbort(app_data_dir.AppendASCII("foo"), HandleType::kDirectory));
@@ -36,7 +36,7 @@
    // Custom $XDG_CACHE_HOME / Android cache directory remains blocked too.
    EXPECT_TRUE(IsOpenAbort(xdg_cache_dir, HandleType::kDirectory));
    EXPECT_TRUE(IsOpenAbort(xdg_cache_dir.AppendASCII("foo"), HandleType::kFile));
-@@ -893,7 +893,7 @@ TEST_F(ChromeFileSystemAccessPermissionContextTest,
+@@ -996,7 +996,7 @@ TEST_F(ChromeFileSystemAccessPermissionContextTest,
  TEST_F(ChromeFileSystemAccessPermissionContextTest,
         ConfirmSensitiveEntryAccess_ExplicitPathBlock) {
  #if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS) || BUILDFLAG(IS_ANDROID) || \
@@ -45,7 +45,25 @@
    // /dev should be blocked.
    EXPECT_EQ(ConfirmSensitiveEntryAccessSync(
                  permission_context(), PathInfo(FILE_PATH_LITERAL("/dev")),
-@@ -2188,7 +2188,7 @@ TEST_F(ChromeFileSystemAccessPermissionContextTest,
+@@ -1020,7 +1020,7 @@ TEST_F(ChromeFileSystemAccessPermissionContextTest,
+                 permission_context(), PathInfo(FILE_PATH_LITERAL("/dev")),
+                 HandleType::kDirectory, AccessTrigger::kProgrammaticWrite),
+             SensitiveDirectoryResult::kAbort);
+-#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS) || BUILDFLAG(IS_ANDROID)
++#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS) || BUILDFLAG(IS_ANDROID) || BUILDFLAG(IS_BSD)
+   // /run and its children should be blocked across access triggers.
+   EXPECT_EQ(ConfirmSensitiveEntryAccessSync(
+                 permission_context(), PathInfo(FILE_PATH_LITERAL("/run")),
+@@ -1042,7 +1042,7 @@ TEST_F(ChromeFileSystemAccessPermissionContextTest,
+                 HandleType::kDirectory, AccessTrigger::kOpen),
+             SensitiveDirectoryResult::kAllowed);
+ #endif  // BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS) ||
+-        // BUILDFLAG(IS_ANDROID)
++        // BUILDFLAG(IS_ANDROID) || BUILDFLAG(IS_BSD)
+ #elif BUILDFLAG(IS_WIN)
+   EXPECT_EQ(ConfirmSensitiveEntryAccessSync(
+                 permission_context(),
+@@ -2366,7 +2366,7 @@ TEST_F(ChromeFileSystemAccessPermissionContextTest,
         false},
  #endif
  

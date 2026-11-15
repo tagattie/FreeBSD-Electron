@@ -1,6 +1,6 @@
---- electron/shell/browser/browser_process_impl.cc.orig	2026-10-26 21:12:45 UTC
+--- electron/shell/browser/browser_process_impl.cc.orig	2026-11-13 20:10:41 UTC
 +++ electron/shell/browser/browser_process_impl.cc
-@@ -51,7 +51,7 @@
+@@ -56,7 +56,7 @@
  #include "chrome/browser/printing/print_job_manager.h"
  #endif
  
@@ -9,7 +9,7 @@
  #include "chrome/browser/browser_features.h"
  #include "components/os_crypt/async/browser/freedesktop_secret_key_provider.h"
  #include "components/os_crypt/async/browser/secret_portal_key_provider.h"
-@@ -150,7 +150,7 @@ void BrowserProcessImpl::PostEarlyInitialization() {
+@@ -155,7 +155,7 @@ void BrowserProcessImpl::PostEarlyInitialization() {
    OSCrypt::RegisterLocalPrefs(pref_registry.get());
  #endif
  
@@ -18,7 +18,7 @@
    os_crypt_async::SecretPortalKeyProvider::RegisterLocalPrefs(
        pref_registry.get());
  #endif
-@@ -412,7 +412,7 @@ electron::ResolveProxyHelper* BrowserProcessImpl::GetR
+@@ -428,7 +428,7 @@ electron::ResolveProxyHelper* BrowserProcessImpl::GetR
    return resolve_proxy_helper_.get();
  }
  
@@ -27,7 +27,7 @@
  void BrowserProcessImpl::SetLinuxStorageBackend(
      os_crypt::SelectedLinuxBackend selected_backend) {
    switch (selected_backend) {
-@@ -435,7 +435,7 @@ void BrowserProcessImpl::SetLinuxStorageBackend(
+@@ -451,7 +451,7 @@ void BrowserProcessImpl::SetLinuxStorageBackend(
        NOTREACHED();
    }
  }
@@ -36,7 +36,7 @@
  
  void BrowserProcessImpl::SetApplicationLocale(const std::string& locale) {
    locale_ = locale;
-@@ -487,7 +487,7 @@ void BrowserProcessImpl::CreateOSCryptAsync() {
+@@ -503,7 +503,7 @@ void BrowserProcessImpl::CreateOSCryptAsync() {
        std::make_unique<os_crypt_async::DPAPIKeyProvider>(local_state()));
  #endif  // BUILDFLAG(IS_WIN)
  
@@ -45,7 +45,7 @@
    base::CommandLine* cmd_line = base::CommandLine::ForCurrentProcess();
    const auto password_store =
        cmd_line->GetSwitchValueASCII(password_manager::kPasswordStore);
-@@ -515,7 +515,7 @@ void BrowserProcessImpl::CreateOSCryptAsync() {
+@@ -531,7 +531,7 @@ void BrowserProcessImpl::CreateOSCryptAsync() {
        std::make_unique<os_crypt_async::FreedesktopSecretKeyProvider>(
            password_store, electron::GetApplicationName(), freedesktop_config,
            nullptr));

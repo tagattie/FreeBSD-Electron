@@ -4,12 +4,14 @@ DISTVERSION=	${ELECTRON_VER}
 PULSEMV=	16
 PULSEV=		${PULSEMV}.1
 CATEGORIES=	devel
-MASTER_SITES=	https://commondatastorage.googleapis.com/chromium-browser-official/:chromium \
+MASTER_SITES=	https://github.com/tagattie/FreeBSD-Electron/releases/download/v45.3.3/:chromium \
 		https://freedesktop.org/software/pulseaudio/releases/:pulseaudio
 PKGNAMESUFFIX=	${ELECTRON_VER_MAJOR}
-DISTFILES=	chromium-${CHROMIUM_VER}-lite${EXTRACT_SUFX}:chromium \
+DISTFILES=	chromium-${CHROMIUM_VER}${EXTRACT_SUFX}.0:chromium \
+		chromium-${CHROMIUM_VER}${EXTRACT_SUFX}.1:chromium \
 		pulseaudio-${PULSEV}.tar.gz:pulseaudio
 DIST_SUBDIR=	${PORTNAME}
+EXTRACT_ONLY=	${DISTFILES:C/:[^:]+$//:C/chromium-${CHROMIUM_VER}${EXTRACT_SUFX}\.[0-9]//}
 
 .if make(makesum)
 MASTER_SITES+=	https://registry.npmjs.org/@esbuild/freebsd-arm64/-/freebsd-arm64-${ESBUILD_VER}.tgz?dummy=/:esbuild_arm64 \
@@ -82,7 +84,7 @@ TEST_DEPENDS=	git:devel/git \
 		sentry-cli:devel/sentry-cli
 
 USES=		bison cargo compiler:c++17-lang cpe display:test gettext-tools \
-		gl gmake gnome go:no_targets iconv:wchar_t jpeg \
+		gl gmake gnome go:no_targets iconv:wchar_t inotify jpeg \
 		localbase:ldflags ninja nodejs:24,build npm:yarn4 pkgconfig \
 		python:build,test qt:6 shebangfix tar:xz xorg
 
@@ -115,6 +117,8 @@ ALL_TARGET=	electron electron:node_headers
 POST_BUILD_TARGETS=	licenses version
 POST_BUILD_DIST_TARGETS=electron_dist_zip electron_chromedriver_zip \
 			electron_mksnapshot_zip
+
+LDFLAGS+=	${INOTIFY_LIB}
 
 DATADIR=	${PREFIX}/share/${PORTNAME}${PKGNAMESUFFIX}
 BINARY_ALIAS=	python3=${PYTHON_CMD}
@@ -239,9 +243,9 @@ SNDIO_VARS=		GN_ARGS+=use_sndio=true
 SNDIO_VARS_OFF=		GN_ARGS+=use_sndio=false
 
 # See ${WRKSRC}/electron/DEPS for CHROMIUM_VER
-CHROMIUM_VER=			156.0.8078.80
+CHROMIUM_VER=			156.0.8078.100
 # See ${WRKSRC}/electron/DEPS for NODE_VER
-NODE_VER=			24.22.2
+NODE_VER=			24.22.3
 # See ${WRKSRC}/electron/DEPS for NAN_VER
 NAN_VER=			675cefebca42410733da8a454c8d9391fcebfbc2
 # See ${WRKSRC}/electron/DEPS for SQUIRREL_MAC_VER
@@ -318,6 +322,15 @@ pre-everything::
 	@${ECHO_MSG} "To build electron, you should have around 2GB of memory"
 	@${ECHO_MSG} "and around ${WANTSPACE} of free disk space."
 	@${ECHO_MSG}
+
+pre-extract:
+# Chromium source tarball is splitted into multiple fragments. Concatenate them
+# into a single one and manually extract it into WRKDIR.
+	@${CAT} ${DISTDIR}/${DIST_SUBDIR}/chromium-${CHROMIUM_VER}${EXTRACT_SUFX}.? > \
+		${WRKDIR}/chromium-${CHROMIUM_VER}${EXTRACT_SUFX}
+	@cd ${WRKDIR} && \
+	${EXTRACT_CMD} ${EXTRACT_BEFORE_ARGS} \
+		chromium-${CHROMIUM_VER}${EXTRACT_SUFX} ${EXTRACT_AFTER_ARGS}
 
 post-extract:
 	# Move extracted sources to appropriate locations

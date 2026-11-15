@@ -1,4 +1,4 @@
---- base/process/process_metrics_openbsd.cc.orig	2026-10-19 21:50:55 UTC
+--- base/process/process_metrics_openbsd.cc.orig	2026-11-10 20:19:00 UTC
 +++ base/process/process_metrics_openbsd.cc
 @@ -6,73 +6,83 @@
  
@@ -120,7 +120,7 @@
    struct vmtotal vmtotal;
    unsigned long mem_total, mem_free, mem_inactive;
    size_t len = sizeof(vmtotal);
-@@ -85,9 +95,60 @@ size_t GetSystemCommitCharge() {
+@@ -85,9 +95,65 @@ size_t GetSystemCommitCharge() {
    mem_free = vmtotal.t_free;
    mem_inactive = vmtotal.t_vm - vmtotal.t_avm;
  
@@ -161,6 +161,11 @@
 +int ProcessMetrics::GetIdleWakeupsPerSecond() {
 +  NOTIMPLEMENTED();
 +  return 0;
++}
++
++ByteSize SystemMemoryInfo::GetAvailablePhysicalMemory() const {
++  NOTIMPLEMENTED();
++  return ByteSize(0);
 +}
 +
 +SystemDiskInfo::SystemDiskInfo() {

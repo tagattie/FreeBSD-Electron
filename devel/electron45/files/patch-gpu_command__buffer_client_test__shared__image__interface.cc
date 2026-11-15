@@ -1,15 +1,15 @@
---- gpu/command_buffer/client/test_shared_image_interface.cc.orig	2026-10-19 21:50:55 UTC
+--- gpu/command_buffer/client/test_shared_image_interface.cc.orig	2026-11-10 20:19:00 UTC
 +++ gpu/command_buffer/client/test_shared_image_interface.cc
-@@ -28,7 +28,7 @@
- #include "ui/gfx/gpu_fence.h"
- #include "ui/gfx/gpu_memory_buffer_handle.h"
+@@ -30,6 +30,8 @@
  
--#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS)
-+#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS) || BUILDFLAG(IS_BSD)
+ #if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS)
  #include <linux/memfd.h>
++#endif
++#if BUILDFLAG(IS_LINUX) || BUILDFLAG(IS_CHROMEOS) || BUILDFLAG(IS_BSD)
  #include <sys/mman.h>
  #include <unistd.h>
-@@ -437,7 +437,7 @@ TestSharedImageInterface::CreateSharedImageWithAsyncMa
+ #endif
+@@ -437,7 +439,7 @@ TestSharedImageInterface::CreateSharedImageWithAsyncMa
    return image;
  }
  
