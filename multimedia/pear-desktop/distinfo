@@ -1,7 +1,9 @@
-TIMESTAMP = 1782737944
-SHA256 (pnpm-11.9.0.tgz) = 2d29be26a7265fb24bc71ca9ac7af62df398df4b9855d804c70a49db5f8c3fa1
-SIZE (pnpm-11.9.0.tgz) = 4608011
-SHA256 (pear-desktop-3.12.0-node-modules.tar.gz) = acda3f6da856f7992ea434ee26f5fc78ff7a77dddf7e195d3423188fe5b26d4f
-SIZE (pear-desktop-3.12.0-node-modules.tar.gz) = 156430485
-SHA256 (pear-devs-pear-desktop-v3.12.0_GH0.tar.gz) = 2f6a4948ba3c8c00ed43a6c014cd18430f2f1509ea4115dd6a8d538c45eb3107
-SIZE (pear-devs-pear-desktop-v3.12.0_GH0.tar.gz) = 3614991
+TIMESTAMP = 1795231835
+SHA256 (pnpm-12.21.0.tgz) = 3d3d074913c2a23329c947b72842ae16b3ea60c00a0ad80fe052431f156cd2ee
+SIZE (pnpm-12.21.0.tgz) = 1248266
+SHA256 (pnpm-exe.freebsd-x64-12.21.0.tgz) = 666dc6ec5c17427e34d0f208fbec7de310dde0095e7bb77117c4c334e79b0bc4
+SIZE (pnpm-exe.freebsd-x64-12.21.0.tgz) = 28330304
+SHA256 (pear-desktop-3.12.1-node-modules.tar.gz) = 3e7f3be4562bd17e75c4bbdf10c4e19dd541f74d216f88ec6efc254ddac0994c
+SIZE (pear-desktop-3.12.1-node-modules.tar.gz) = 160654971
+SHA256 (pear-devs-pear-desktop-v3.12.1_GH0.tar.gz) = 06a3cead59a5db35bb0ae6fc99dccfdf72dbc5f7d4e598c3b7fd9a80dcb1c8f0
+SIZE (pear-devs-pear-desktop-v3.12.1_GH0.tar.gz) = 3655269

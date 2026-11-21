@@ -1,6 +1,6 @@
 PORTNAME=	pear-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	3.12.0
+DISTVERSION=	3.12.1
 CATEGORIES=	multimedia
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://github.com/pear-devs/pear-desktop
 LICENSE=	MIT
 LICENSE_FILE=	${WRKSRC}/license
 
-USES=		electron:42 nodejs:24,build npm:pnpm
+USES=		electron:45 nodejs:24,build npm:pnpm
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	pear-devs
@@ -23,7 +23,7 @@ OPTIONS_DEFINE=	DOCS
 
 USE_ELECTRON=	appbuilder rebuild build:builder
 
-NPM_VER=	11.9.0
+NPM_VER=	12.21.0
 
 pre-build:
 	cd ${WRKSRC} && ${SETENV} ${MAKE_ENV} pnpm run build
