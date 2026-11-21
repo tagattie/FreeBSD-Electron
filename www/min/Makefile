@@ -1,6 +1,6 @@
 PORTNAME=	min
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.35.7
+DISTVERSION=	1.35.8
 CATEGORIES=	www
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,15 +10,17 @@ WWW=		https://minbrowser.org
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
+FETCH_DEPENDS=	git:devel/git
 LIB_DEPENDS=	libsecret-1.so:security/libsecret
 
-USES=		desktop-file-utils electron:43 nodejs:24,build npm:npm \
+USES=		desktop-file-utils electron:45 nodejs:24,build npm:npm \
 		pkgconfig python:build
 
 USE_GITHUB=	yes
 GH_ACCOUNT=	minbrowser
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
+FETCH_ENV+=	npm_config_allow_git=root
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	README.md SECURITY.md

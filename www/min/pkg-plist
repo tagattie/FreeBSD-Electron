@@ -93,6 +93,7 @@ share/icons/hicolor/64x64/apps/min.png
 %%DATADIR%%/resources/app/js/passwordManager/onePassword.js
 %%DATADIR%%/resources/app/js/passwordManager/passwordCapture.js
 %%DATADIR%%/resources/app/js/passwordManager/passwordManager.js
+%%DATADIR%%/resources/app/js/passwordManager/passwordUrlUtils.js
 %%DATADIR%%/resources/app/js/passwordManager/passwordViewer.js
 %%DATADIR%%/resources/app/js/pdfViewer.js
 %%DATADIR%%/resources/app/js/places/fullTextSearch.js
@@ -527,7 +528,6 @@ share/icons/hicolor/64x64/apps/min.png
 %%DATADIR%%/resources/app/node_modules/glob/node_modules/minimatch/package.json
 %%DATADIR%%/resources/app/node_modules/glob/package.json
 %%DATADIR%%/resources/app/node_modules/glob/sync.js
-%%DATADIR%%/resources/app/node_modules/graceful-fs/LICENSE
 %%DATADIR%%/resources/app/node_modules/graceful-fs/clone.js
 %%DATADIR%%/resources/app/node_modules/graceful-fs/graceful-fs.js
 %%DATADIR%%/resources/app/node_modules/graceful-fs/legacy-streams.js
@@ -557,6 +557,9 @@ share/icons/hicolor/64x64/apps/min.png
 %%DATADIR%%/resources/app/node_modules/inherits/inherits.js
 %%DATADIR%%/resources/app/node_modules/inherits/inherits_browser.js
 %%DATADIR%%/resources/app/node_modules/inherits/package.json
+%%DATADIR%%/resources/app/node_modules/ipaddr.js/LICENSE
+%%DATADIR%%/resources/app/node_modules/ipaddr.js/lib/ipaddr.js
+%%DATADIR%%/resources/app/node_modules/ipaddr.js/package.json
 %%DATADIR%%/resources/app/node_modules/is-binary-path/index.js
 %%DATADIR%%/resources/app/node_modules/is-binary-path/license
 %%DATADIR%%/resources/app/node_modules/is-binary-path/package.json
@@ -1031,6 +1034,7 @@ share/icons/hicolor/64x64/apps/min.png
 %%DATADIR%%/resources/app/node_modules/semver/internal/lrucache.js
 %%DATADIR%%/resources/app/node_modules/semver/internal/parse-options.js
 %%DATADIR%%/resources/app/node_modules/semver/internal/re.js
+%%DATADIR%%/resources/app/node_modules/semver/internal/trim-comparator-whitespace.js
 %%DATADIR%%/resources/app/node_modules/semver/package.json
 %%DATADIR%%/resources/app/node_modules/semver/preload.js
 %%DATADIR%%/resources/app/node_modules/semver/range.bnf
@@ -1190,10 +1194,6 @@ share/icons/hicolor/64x64/apps/min.png
 %%DATADIR%%/resources/app/pages/pdfViewer/pdfThemeSelector.js
 %%DATADIR%%/resources/app/pages/pdfViewer/viewer.css
 %%DATADIR%%/resources/app/pages/pdfViewer/viewer.js
-%%DATADIR%%/resources/app/pages/phishing/index.html
-%%DATADIR%%/resources/app/pages/phishing/phishingError.css
-%%DATADIR%%/resources/app/pages/phishing/phishingError.js
-%%DATADIR%%/resources/app/pages/phishing/redFavicon.png
 %%DATADIR%%/resources/app/pages/prompt/index.html
 %%DATADIR%%/resources/app/pages/prompt/prompt.css
 %%DATADIR%%/resources/app/pages/prompt/prompt.js
