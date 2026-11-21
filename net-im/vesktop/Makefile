@@ -1,11 +1,12 @@
 PORTNAME=	vesktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	1.6.9
+DISTVERSION=	1.7.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
 COMMENT=	Custom Discord app aiming to give you better performance
-WWW=		https://github.com/Vencord/Vesktop
+WWW=		https://vesktop.dev/ \
+		https://github.com/Vencord/Vesktop
 
 LICENSE=	GPLv3
 LICENSE_FILE=	${WRKSRC}/LICENSE

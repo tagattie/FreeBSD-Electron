@@ -1,6 +1,6 @@
---- src/main/cli.ts.orig	2026-11-05 17:23:08 UTC
+--- src/main/cli.ts.orig	2026-11-19 18:38:38 UTC
 +++ src/main/cli.ts
-@@ -63,7 +63,7 @@ const extraOptions = {
+@@ -69,7 +69,7 @@ const extraOptions = {
          argumentName: "feature1,feature2,…"
      },
      "ozone-platform": {
