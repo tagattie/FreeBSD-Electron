@@ -1,6 +1,6 @@
 PORTNAME=	mattermost-desktop
 DISTVERSIONPREFIX=	v
-DISTVERSION=	6.3.2
+DISTVERSION=	6.4.0
 CATEGORIES=	net-im
 
 MAINTAINER=	tagattie@FreeBSD.org
@@ -10,7 +10,7 @@ WWW=		https://mattermost.com
 LICENSE=	APACHE20
 LICENSE_FILE=	${WRKSRC}/LICENSE.txt
 
-USES=		desktop-file-utils electron:43 nodejs:24,build npm:npm \
+USES=		desktop-file-utils electron:45 nodejs:24,build npm:npm \
 		python:build
 
 USE_GITHUB=	yes
@@ -18,17 +18,17 @@ GH_ACCOUNT=	mattermost
 GH_PROJECT=	desktop
 
 BINARY_ALIAS=	python3=${PYTHON_CMD}
+FETCH_ENV+=	npm_config_allow_git=root
 SUB_FILES=	${PORTNAME}
 
 PORTDOCS=	CONTRIBUTING.md NOTICE.txt README.md SECURITY.md
 
 OPTIONS_DEFINE=	DOCS
 
-NPM_FETCH_FLAGS=	--allow-git=all
 USE_ELECTRON=	appbuilder rebuild build:builder
 
 # git ls-remote --tags https://github.com/mattermost/desktop 'refs/tags/${GH_TAGNAME}^{}'
-COMMIT_HASH=	c2ca0cac022c3c8fa502d7a9d964640d348bdcad
+COMMIT_HASH=	8bc5c9cad01007142b1a851f59a18508aec0e4e9
 
 post-patch:
 	@${REINPLACE_CMD} -e 's/%%COMMIT_HASH%%/${COMMIT_HASH}/' \

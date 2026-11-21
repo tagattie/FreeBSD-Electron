@@ -1,6 +1,6 @@
---- src/app/views/webContentsManager.ts.orig	2026-06-08 13:42:42 UTC
+--- src/app/views/webContentsManager.ts.orig	2026-11-05 06:34:20 UTC
 +++ src/app/views/webContentsManager.ts
-@@ -69,7 +69,7 @@ export class WebContentsManager {
+@@ -70,7 +70,7 @@ export class WebContentsManager {
          ipcMain.on(UPDATE_SERVER_THEME, ipcValidate(this.handleUpdateServerTheme, [themeSchema.required()]));
          ipcMain.on(UPDATE_THEME, ipcValidate(this.handleUpdateTheme, [themeSchema.required()]));
  

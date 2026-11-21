@@ -1,6 +1,6 @@
---- src/renderer/components/MainPage.tsx.orig	2026-05-05 05:14:08 UTC
+--- src/renderer/components/MainPage.tsx.orig	2026-11-05 06:34:20 UTC
 +++ src/renderer/components/MainPage.tsx
-@@ -502,7 +502,7 @@ class MainPage extends React.PureComponent<Props, Stat
+@@ -513,7 +513,7 @@ class MainPage extends React.PureComponent<Props, Stat
              <BasePage
                  appName={this.props.appName}
                  openMenu={this.props.openMenu}

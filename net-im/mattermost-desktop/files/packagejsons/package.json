@@ -1,12 +1,12 @@
 {
   "name": "mattermost-desktop",
   "productName": "Mattermost",
-  "version": "6.3.2",
+  "version": "6.4.0",
   "description": "Mattermost",
   "main": "dist/index.js",
   "author": "Mattermost, Inc. <feedback@mattermost.com>",
   "license": "Apache-2.0",
-  "desktopName": "Mattermost.Desktop",
+  "desktopName": "com.Mattermost.Desktop",
   "homepage": "https://mattermost.com",
   "engines": {
     "node": ">=24.0.0"
@@ -16,7 +16,7 @@
     "url": "git://github.com/mattermost/desktop.git"
   },
   "scripts": {
-    "postinstall": "patch-package && electron-builder install-app-deps",
+    "postinstall": "patch-package && electron-builder install-app-deps && node node_modules/electron/install.js",
     "clean": "rm -rf release/ node_modules/ src/node_modules/ dist/ && cd e2e && npm run clean && cd -",
     "clean-install": "npm run clean && npm install",
     "clean-dist": "rm -rf dist/",
@@ -31,6 +31,7 @@
     "test": "run-s lint:js test:unit",
     "test:unit": "jest",
     "test:unit-coverage": "jest --coverage",
+    "test:ci-utils": "node --test \"e2e/utils/*.test.js\" \"e2e/helpers/*.test.js\"",
     "e2e": "npm run build-test && npm --prefix e2e test",
     "build": "run-p build:*",
     "build:main": "webpack-cli --config webpack.config.main.js",
@@ -130,7 +131,7 @@
     "copy-webpack-plugin": "10.2.4",
     "cross-env": "7.0.3",
     "css-loader": "6.7.1",
-    "electron": "43.8.3",
+    "electron": "45.2.1",
     "electron-builder": "26.6.0",
     "eslint": "8.57.0",
     "eslint-import-resolver-webpack": "0.13.8",
@@ -166,7 +167,7 @@
     "auto-launch": "5.0.6",
     "cf-prefs": "2.0.1",
     "classnames": "2.5.1",
-    "electron-context-menu": "4.0.4",
+    "electron-context-menu": "5.1.0",
     "electron-devtools-installer": "4.0.0",
     "electron-is-dev": "2.0.0",
     "electron-log": "5.2.0",

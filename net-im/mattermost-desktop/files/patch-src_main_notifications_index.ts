@@ -1,6 +1,6 @@
---- src/main/notifications/index.ts.orig	2025-11-18 12:31:15 UTC
+--- src/main/notifications/index.ts.orig	2026-11-05 06:34:20 UTC
 +++ src/main/notifications/index.ts
-@@ -260,7 +260,7 @@ export async function getDoNotDisturb() {
+@@ -306,7 +306,7 @@ export async function getDoNotDisturb() {
          }
      }
  
@@ -9,10 +9,10 @@
          return getLinuxDoNotDisturb();
      }
  
-@@ -268,7 +268,7 @@ function flashFrame(flash: boolean) {
+@@ -314,7 +314,7 @@ export function flashFrame(flash: boolean) {
  }
  
- function flashFrame(flash: boolean) {
+ export function flashFrame(flash: boolean) {
 -    if (process.platform === 'linux' || process.platform === 'win32') {
 +    if (process.platform === 'linux' || process.platform === 'freebsd' || process.platform === 'win32') {
          if (Config.notifications.flashWindow) {

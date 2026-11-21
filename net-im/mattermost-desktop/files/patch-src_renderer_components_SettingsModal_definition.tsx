@@ -1,14 +1,14 @@
---- src/renderer/components/SettingsModal/definition.tsx.orig	2025-11-18 12:31:15 UTC
+--- src/renderer/components/SettingsModal/definition.tsx.orig	2026-11-05 06:34:20 UTC
 +++ src/renderer/components/SettingsModal/definition.tsx
-@@ -18,6 +18,7 @@ import UpdatesSetting from './components/UpdatesSettin
- import ServerSetting from './components/ServerSetting';
+@@ -19,6 +19,7 @@ import UpdatesSetting from './components/UpdatesSettin
+ import SessionAttributesSetting from './components/SessionAttributesSetting';
  import SpellCheckerSetting from './components/SpellCheckerSetting';
  import UpdatesSetting from './components/UpdatesSetting';
 +import { windowsStore } from 'process';
  
  const getLanguages = async (func: () => Promise<string[]>) => {
      return (await func()).filter((language) => localeTranslations[language]).
-@@ -48,7 +49,7 @@ const definition: (intl: IntlShape) => Promise<Setting
+@@ -49,7 +50,7 @@ const definition: (intl: IntlShape) => Promise<Setting
                  {
                      id: 'autostart',
                      component: CheckSetting,
@@ -17,7 +17,7 @@
                      props: {
                          label: (
                              <FormattedMessage
-@@ -67,7 +68,7 @@ const definition: (intl: IntlShape) => Promise<Setting
+@@ -68,7 +69,7 @@ const definition: (intl: IntlShape) => Promise<Setting
                  {
                      id: 'hideOnStart',
                      component: CheckSetting,
@@ -26,7 +26,7 @@
                      props: {
                          label: (
                              <FormattedMessage
-@@ -86,7 +87,7 @@ const definition: (intl: IntlShape) => Promise<Setting
+@@ -87,7 +88,7 @@ const definition: (intl: IntlShape) => Promise<Setting
                  {
                      id: 'showTrayIcon',
                      component: CheckSetting,
@@ -35,7 +35,7 @@
                      props: {
                          label: (
                              <FormattedMessage
-@@ -105,7 +106,7 @@ const definition: (intl: IntlShape) => Promise<Setting
+@@ -106,7 +107,7 @@ const definition: (intl: IntlShape) => Promise<Setting
                  {
                      id: 'trayIconTheme',
                      component: RadioSetting,
@@ -44,7 +44,7 @@
                      props: {
                          label: (
                              <FormattedMessage
-@@ -165,7 +166,7 @@ const definition: (intl: IntlShape) => Promise<Setting
+@@ -166,7 +167,7 @@ const definition: (intl: IntlShape) => Promise<Setting
                  {
                      id: 'minimizeToTray',
                      component: CheckSetting,
@@ -53,7 +53,7 @@
                      props: {
                          label: (
                              <FormattedMessage
-@@ -191,7 +192,7 @@ const definition: (intl: IntlShape) => Promise<Setting
+@@ -192,7 +193,7 @@ const definition: (intl: IntlShape) => Promise<Setting
                  {
                      id: 'startInFullscreen',
                      component: CheckSetting,
