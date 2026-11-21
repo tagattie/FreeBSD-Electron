@@ -1,4 +1,4 @@
---- apps/desktop/desktop_native/build.js.orig	2026-09-07 14:06:16 UTC
+--- apps/desktop/desktop_native/build.js.orig	2026-11-17 15:45:14 UTC
 +++ apps/desktop/desktop_native/build.js
 @@ -13,6 +13,8 @@ const rustTargetsMap = {
      "aarch64-apple-darwin":       { nodeArch: 'arm64', platform: 'darwin' },
@@ -9,7 +9,7 @@
  }
  
  // Ensure the dist directory exists
-@@ -128,7 +130,7 @@ function buildProcessIsolation() {
+@@ -130,7 +132,7 @@ function buildProcessIsolation() {
  }
  
  function buildProcessIsolation() {
